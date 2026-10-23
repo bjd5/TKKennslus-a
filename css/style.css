@@ -320,15 +320,19 @@ p.small { font-size: 0.9rem; }
 .sheet p, .sheet li { font-size: 0.95rem; margin-bottom: 0.4rem; }
 @media screen and (max-width: 880px) { .sheet { columns: 1; } }
 @media print {
-  @page { size: A4; margin: 8mm; }
-  .sheet-title { font-size: 13pt; margin: 0 0 2mm; }
-  .sheet { column-gap: 5mm; font-size: 8.2pt; line-height: 1.25; }
-  .sheet > section { margin-bottom: 1.5mm; }
-  .sheet h3 { font-size: 8.5pt; margin-bottom: 0.8mm; padding-bottom: 0.3mm; }
-  .sheet p, .sheet li { font-size: 8.2pt; margin-bottom: 0.6mm; }
+  /* --fs er stillt svo blaðið fylli nákvæmlega eina A4-síðu */
+  @page { size: A4; margin: 6mm; }
+  .page.wide { --fs: 9.1pt; }
+  .sheet-title { font-size: calc(var(--fs) * 1.5); margin: 0 0 1.5mm; }
+  .sheet { column-gap: 5mm; font-size: var(--fs); line-height: 1.25; }
+  .sheet > section { margin-bottom: 1.5mm; break-inside: auto; }
+  .sheet h3 { break-after: avoid; }
+  .sheet p, .sheet .katex-display, .sheet tr { break-inside: avoid; }
+  .sheet h3 { font-size: calc(var(--fs) * 1.05); margin-bottom: 0.8mm; padding-bottom: 0.3mm; }
+  .sheet p, .sheet li { font-size: var(--fs); margin-bottom: 0.6mm; }
   .sheet .katex-display { margin: 0.3mm 0; padding: 0; }
   .sheet .tablewrap { margin: 0.6mm 0; }
-  .sheet th, .sheet td { padding: 0.2mm 1.5mm; font-size: 8.2pt; }
+  .sheet th, .sheet td { padding: 0.2mm 1.5mm; font-size: var(--fs); }
 }
 
 .pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 4rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--sans); font-weight: 600; }
