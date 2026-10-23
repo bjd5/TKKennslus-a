@@ -15,7 +15,6 @@
 <div class="shell">
 <aside class="side" id="side">
 <a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
-<button type="button" class="theme-btn">Þema</button>
 <nav aria-label="Efnisyfirlit">
 <h2>Efni</h2><ul>
 <li><a class="nav" href="index.html">Yfirlit</a></li>
@@ -34,6 +33,7 @@
 <li><a class="nav" href="formulublad.html">Formúlublað</a></li>
 </ul>
 </nav>
+<button type="button" class="theme-btn">Þema</button>
 </aside>
 <main id="main">
 <div class="page">
@@ -54,7 +54,7 @@
 <tr><td>Tímastuðull</td><td>2,0 s</td><td>2,5 s</td></tr>
 <tr><td>Frávik frá línuleika</td><td>1 %</td><td>2 %</td></tr>
 </tbody></table>
-<p>(a) Hvor neminn er heppilegri til að mæla 90-130 °C? (b) Hvor er hraðari? (c) Úttak nema A við 75 °C (án fráviks frá línuleika)? (d) Frávik frá línuleika nema B í °C?</p>
+<p class="parts"><span class="part"><b>(a)</b> Hvor neminn er heppilegri til að mæla 90-130 °C?</span><span class="part"><b>(b)</b> Hvor er hraðari?</span><span class="part"><b>(c)</b> Úttak nema A við 75 °C (án fráviks frá línuleika)?</span><span class="part"><b>(d)</b> Frávik frá línuleika nema B í °C?</span></p>
 <details class="reveal"><summary></summary><div class="sol">
 <p><b>(a)</b> Neminn þarf að ná yfir allt bilið. A nær aðeins upp í 100 °C, svo <span class="ans">nemi B</span>.</p>
 <p><b>(b)</b> Fyrsta stigs kerfi: minni tímastuðull er hraðari. $\tau_A = 2{,}0 < \tau_B = 2{,}5$, svo <span class="ans">nemi A</span>.</p>
@@ -64,7 +64,7 @@
 
 <div class="ex"><div class="ex-head">Spurning 2 <span>Tankur, sínustruflun, P-stýring</span></div><div class="ex-body">
 <p>Blokkrit blöndunar í tanki: hitari $\dfrac{0{,}5}{1+s}$ gefur varma inn í tank $\dfrac{1}{1+10s}$. Hitastig $T_1$ inn í tankinn bætist við á milli. Tímastuðlar í mín. $T_1$ sveiflast sem sínusbylgja með sveiflutíma 4,5 mín. Hugmynd: afturvirkni með P-stýringu, $K = 37$, sem gefur fasaöryggi 45°.</p>
-<p>(a) Hversu mikil eru áhrif $T_1$ á úttakið $T_2$ í upprunalega kerfinu? (b) Hversu betri eða verri er niðurstaðan með $K = 37$?</p>
+<p class="parts"><span class="part"><b>(a)</b> Hversu mikil eru áhrif $T_1$ á úttakið $T_2$ í upprunalega kerfinu?</span><span class="part"><b>(b)</b> Hversu betri eða verri er niðurstaðan með $K = 37$?</span></p>
 <details class="reveal"><summary></summary><div class="sol">
 <p>Horntíðni truflunar: $\omega = 2\pi/T = 2\pi/4{,}5 = 1{,}396$ rad/mín.</p>
 <p><b>(a)</b> $T_1$ kemur inn <i>eftir</i> hitarann, svo leiðin að úttaki er bara tankurinn:</p>
@@ -80,7 +80,7 @@ $$|G_{VY}(j\omega)| = \frac{1{,}717}{15{,}36} = 0{,}112$$
 
 <div class="ex"><div class="ex-head">Spurning 3 <span>Jafnstraumshreyfill, P-stýring á hraða</span></div><div class="ex-body">
 <p>$K_\tau = 0{,}15$ Nm/A, $K_f = 11$ V/1000 RPM, $R = 1{,}25\ \Omega$, $I = 0{,}7$ kg·m², $c = 0{,}5$ Nms/rad, inngangsspenna 0-15 V, $L \approx 0$. Blokkrit hreyfilsins: $U \to (+,-) \to G_1 \to T \to G_2 \to \Theta$, með $K_f s$ í afturvirkni ($V_f$).</p>
-<p>(a) Finndu $G_1(s)$ og $G_2(s)$. (b) P-stýring með $K = 10$ þar sem úttak og óskgildi eru snúningshraði: hver er skekkja í jafnvægi við breytingu á óskgildi um 10 rad/s?</p>
+<p class="parts"><span class="part"><b>(a)</b> Finndu $G_1(s)$ og $G_2(s)$.</span><span class="part"><b>(b)</b> P-stýring með $K = 10$ þar sem úttak og óskgildi eru snúningshraði: hver er skekkja í jafnvægi við breytingu á óskgildi um 10 rad/s?</span></p>
 <details class="reveal"><summary></summary><div class="sol">
 <p><b>(a)</b> Með $L = 0$: $u - v_f = R\,i$ og $\tau = K_\tau i$, svo $\tau = \dfrac{K_\tau}{R}(u - v_f)$:</p>
 $$G_1 = \frac{K_\tau}{R} = \frac{0{,}15}{1{,}25} = \text{0,12}$$
@@ -97,7 +97,7 @@ $$e_{ss} = \frac{\Delta r}{1+K\,G_P(0)} = \frac{10}{1+10\cdot0{,}2341}$$
 
 <div class="ex"><div class="ex-head">Spurning 4 <span>Gervihnöttur: seinkun í lykkju</span></div><div class="ex-body">
 <p>P-stýring með $K = 2$ stýrir kerfi í gervihnetti frá jörðu. Seinkun $L$ er jafn mikil í báðar áttir. Blokkrit: $R \to (+,-) \to 2 \to e^{-Ls} \to \dfrac{1}{1+s} \to Y$, og $e^{-Ls}$ í afturvirkninni.</p>
-<p>(a) Finndu yfirfærslufall lykkjunnar. (b) Hvert er hæsta gildið á $L$ áður en kerfið verður óstöðugt?</p>
+<p class="parts"><span class="part"><b>(a)</b> Finndu yfirfærslufall lykkjunnar.</span><span class="part"><b>(b)</b> Hvert er hæsta gildið á $L$ áður en kerfið verður óstöðugt?</span></p>
 <details class="reveal"><summary></summary><div class="sol">
 <p><b>(a)</b> Margfaldaðu allt sem merkið fer í gegnum í hring:</p>
 $$G_K = 2\,e^{-Ls}\,\frac{1}{1+s}\,e^{-Ls} = \frac{2\,e^{-2Ls}}{1+s}$$
@@ -124,7 +124,7 @@ $$P_{max} = \frac{\tau_s\,\omega_0}{4} = \frac{0{,}60\cdot47{,}6}{4}$$
 
 <div class="ex"><div class="ex-head">Spurning 2 <span>Tankur með seinkun og P-stýring</span></div><div class="ex-body">
 <p>Blokkrit: $R \to (+,-) \to K = 25 \to 2e^{-2s} \to (+) \to \dfrac{1}{1+10s} \to T_2$. $T_1$ bætist við á undan tankinum. Tímastuðlar í mín. Hitaneminn er mjög hraður með mögnun 1. Hitastig $T_1$ breytist annað hvort mjög hægt eða snögglega (þrep).</p>
-<p>(a) Hvert er yfirfærslufall lykkjunnar? (b) Hver verður skekkjan milli óskgildis og $T_2$ í jafnvægi eftir að $T_1$ hækkar skyndilega um 2 °C?</p>
+<p class="parts"><span class="part"><b>(a)</b> Hvert er yfirfærslufall lykkjunnar?</span><span class="part"><b>(b)</b> Hver verður skekkjan milli óskgildis og $T_2$ í jafnvægi eftir að $T_1$ hækkar skyndilega um 2 °C?</span></p>
 <details class="reveal"><summary></summary><div class="sol">
 <p><b>(a)</b> $G_K = G_C\,G_H\,G_P\,G_S = 25\cdot2e^{-2s}\cdot\dfrac{1}{1+10s}\cdot1 = $ <span class="ans">$\dfrac{50\,e^{-2s}}{1+10s}$</span>. Truflunin $T_1$ er <i>ekki</i> hluti af lykkjunni.</p>
 <p><b>(b)</b> $E/T_1 = -\dfrac{G_P}{1+G_K}$. Með $T_1 = 2/s$ og $s\to0$ (þar sem $e^{-2s}\to1$):</p>
@@ -146,7 +146,7 @@ $$G(s) = \frac{0{,}16}{12s+1}\ \text{[mA/°C]}$$
 <p>Hraðastýring á færibandi: $G_P = \dfrac{1}{(0{,}5s+1)(0{,}2s+1)}$, PI-stýring $G_C = K\bigl(1 + \tfrac{1}{T_Is}\bigr)$. Báðar tillögur eru stöðugar.</p>
 <table><thead><tr><th></th><th class="num">Tillaga 1</th><th class="num">Tillaga 2</th></tr></thead>
 <tbody><tr><td>$K$</td><td class="num">3</td><td class="num">13</td></tr><tr><td>$T_I$</td><td class="num">1</td><td class="num">1</td></tr><tr><td>$\omega_c$</td><td class="num">4,2</td><td class="num">11,2</td></tr></tbody></table>
-<p>(a) Hvora myndirðu velja ef hraði svörunar skiptir mestu máli? (b) Hvor gefur meira fasaöryggi?</p>
+<p class="parts"><span class="part"><b>(a)</b> Hvora myndirðu velja ef hraði svörunar skiptir mestu máli?</span><span class="part"><b>(b)</b> Hvor gefur meira fasaöryggi?</span></p>
 <details class="reveal"><summary></summary><div class="sol">
 <p><b>(a)</b> Hærri skurðtíðni þýðir hraðari svörun ($t_r \approx 1{,}4/\omega_c$): $11{,}2 > 4{,}2$, svo <span class="ans">Tillaga 2</span> ($t_r \approx 0{,}13$ s gegn 0,33 s).</p>
 <p><b>(b)</b> Fasaöryggi: $\varphi_m = 180^\circ + \angle G_K(j\omega_c)$. Með $T_I = 1$ er $G_K = K\dfrac{s+1}{s}\cdot\dfrac{1}{(0{,}5s+1)(0{,}2s+1)}$:</p>
@@ -187,7 +187,7 @@ $$G_{VY} = \frac{G_P}{1+G_K} = \frac{\frac{1}{1+10s}}{1+\frac{50}{1+10s}} = \fra
 <p>Ferli $G_P = \dfrac{2}{(s+1)^2}$ með truflun $V$ sem leggst við á eftir stýringunni. Óskað er eftir fasaöryggi 45°.</p>
 <table><thead><tr><th></th><th class="num">Tillaga 1 (P)</th><th class="num">Tillaga 2 (PI)</th></tr></thead>
 <tbody><tr><td>$K$</td><td class="num">3,4</td><td class="num">2,2</td></tr><tr><td>$T_I$</td><td class="num">–</td><td class="num">2,7 s</td></tr><tr><td>$\omega_c$</td><td class="num">2,4 rad/s</td><td class="num">1,9 rad/s</td></tr></tbody></table>
-<p>(a) Hvora stýringu myndirðu velja ef hraði skiptir mestu máli? Ef deyfing truflana af lágum tíðnum skiptir mestu máli? (b) Hvor stýringin deyfir betur truflun $v$ sem er sínusbylgja af tíðni $\omega = 1$ rad/s?</p>
+<p class="parts"><span class="part"><b>(a)</b> Hvora stýringu myndirðu velja ef hraði skiptir mestu máli? Ef deyfing truflana af lágum tíðnum skiptir mestu máli?</span><span class="part"><b>(b)</b> Hvor stýringin deyfir betur truflun $v$ sem er sínusbylgja af tíðni $\omega = 1$ rad/s?</span></p>
 <details class="reveal"><summary></summary><div class="sol">
 <p><b>(a)</b> Hraði: hærri $\omega_c$, svo <span class="ans">Tillaga 1 (P)</span> (2,4 > 1,9). Lágtíðnitruflanir: PI-stýringin hefur heildun sem gerir mögnun lykkjunnar mjög háa við lágar tíðnir, svo <span class="ans">Tillaga 2 (PI)</span>.</p>
 <p><b>(b)</b> Þetta er önnur spurning: nú þarf að reikna $|G_P/(1+G_K)|$ nákvæmlega við $\omega = 1$. Fyrst $G_P(j) = \dfrac{2}{(1+j)^2} = \dfrac{2}{2j} = -j$, með stærð 1.</p>
