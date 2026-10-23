@@ -43,10 +43,10 @@ TEMPLATE = """<!doctype html>
 <div class="shell">
 <aside class="side" id="side">
 <a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
-<button type="button" class="theme-btn">Þema</button>
 <nav aria-label="Efnisyfirlit">
 {nav}
 </nav>
+<button type="button" class="theme-btn">Þema</button>
 </aside>
 <main id="main">
 <div class="{pageclass}">

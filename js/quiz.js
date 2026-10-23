@@ -486,16 +486,28 @@
   var state = { topic: "allt", mode: "reikna", cur: null, answered: false };
   var stats = window.store.get("tk-quiz-stats", { n: 0, ok: 0, streak: 0, best: 0 });
 
+  function scoreHtml() {
+    return "<span>Svarað <b>" + stats.n + "</b></span><span>Rétt <b>" + stats.ok + "</b>" + (stats.n ? " (" + Math.round((100 * stats.ok) / stats.n) + " %)" : "") + "</span><span>Röð <b>" + stats.streak + "</b></span><span>Best <b>" + stats.best + '</b></span><button type="button" class="linkbtn" id="q-reset">Núllstilla</button>';
+  }
+
+  function bindReset() {
+    document.getElementById("q-reset").addEventListener("click", function () {
+      stats = { n: 0, ok: 0, streak: 0, best: 0 };
+      window.store.set("tk-quiz-stats", stats);
+      render(); next();
+    });
+  }
+
   function render() {
-    var h = '<div class="chips" role="group" aria-label="Efni">';
+    var h = '<div class="toolbar"><span class="tl" id="q-tl-topic">Efni</span><div class="chips" role="group" aria-labelledby="q-tl-topic">';
     TOPICS.forEach(function (t) {
       h += '<button type="button" class="chip" data-topic="' + t.id + '" aria-pressed="' + (state.topic === t.id) + '">' + t.label + "</button>";
     });
-    h += '</div><div class="chips" role="group" aria-label="Tegund">';
+    h += '</div><span class="tl" id="q-tl-mode">Tegund</span><div class="chips" role="group" aria-labelledby="q-tl-mode">';
     MODES.forEach(function (t) {
       h += '<button type="button" class="chip" data-mode="' + t.id + '" aria-pressed="' + (state.mode === t.id) + '">' + t.label + "</button>";
     });
-    h += '</div><div class="scorebar" aria-live="polite"><span>Svarað: <b>' + stats.n + "</b></span><span>Rétt: <b>" + stats.ok + "</b>" + (stats.n ? " (" + Math.round((100 * stats.ok) / stats.n) + " %)" : "") + "</b></span><span>Röð réttra: <b>" + stats.streak + "</b></span><span>Best: <b>" + stats.best + '</b></span><button type="button" class="chip" id="q-reset">Núllstilla</button></div>';
+    h += '</div></div><div class="scorebar" aria-live="polite">' + scoreHtml() + "</div>";
     h += '<div id="q-area"></div>';
     root.innerHTML = h;
     root.querySelectorAll("[data-topic]").forEach(function (b) {
@@ -504,11 +516,7 @@
     root.querySelectorAll("[data-mode]").forEach(function (b) {
       b.addEventListener("click", function () { state.mode = b.getAttribute("data-mode"); render(); next(); });
     });
-    document.getElementById("q-reset").addEventListener("click", function () {
-      stats = { n: 0, ok: 0, streak: 0, best: 0 };
-      window.store.set("tk-quiz-stats", stats);
-      render(); next();
-    });
+    bindReset();
   }
 
   function record(ok) {
@@ -517,12 +525,8 @@
     window.store.set("tk-quiz-stats", stats);
     var sb = root.querySelector(".scorebar");
     if (sb) {
-      sb.innerHTML = '<span>Svarað: <b>' + stats.n + "</b></span><span>Rétt: <b>" + stats.ok + "</b> (" + Math.round((100 * stats.ok) / stats.n) + " %)</span><span>Röð réttra: <b>" + stats.streak + "</b></span><span>Best: <b>" + stats.best + '</b></span><button type="button" class="chip" id="q-reset">Núllstilla</button>';
-      document.getElementById("q-reset").addEventListener("click", function () {
-        stats = { n: 0, ok: 0, streak: 0, best: 0 };
-        window.store.set("tk-quiz-stats", stats);
-        render(); next();
-      });
+      sb.innerHTML = scoreHtml();
+      bindReset();
     }
   }
 
@@ -576,7 +580,7 @@
     var h = '<div class="qcard"><div class="qmeta">' + topicLabel(q.d.topic) + (q.kind === "num" ? " · " + q.d.title : " · Skilningur") + "</div>";
     if (q.kind === "num") {
       h += '<div class="qtext">' + q.d.text + "</div>";
-      h += '<form id="q-form" class="row" style="margin-top:1rem" autocomplete="off"><div><label class="f" for="q-in">Svar' + (q.d.unit ? " (" + q.d.unit + ")" : "") + '</label><input id="q-in" type="text" inputmode="decimal" autocapitalize="off" spellcheck="false" placeholder="t.d. 2,5 eða 2/51"></div><div class="fixed"><button class="btn" type="submit">Athuga</button></div><div class="fixed"><button class="btn ghost" type="button" id="q-show">Sýna lausn</button></div></form>';
+      h += '<form id="q-form" class="row" style="margin-top:1rem" autocomplete="off"><div><label class="f" for="q-in">Svar' + (q.d.unit ? " (" + q.d.unit + ")" : "") + '</label><input id="q-in" type="text" inputmode="decimal" autocapitalize="off" spellcheck="false" placeholder="t.d. 2,5 eða 2/51"></div><div class="fixed"><button class="btn" type="submit">Athuga</button></div><div class="fixed"><button class="btn ghost" type="button" id="q-show">Sýna lausn</button></div></form><p class="qhint">Tala með kommu eða punkti (2,5) eða brot (2/51). Skekkjumörk um 2 %. „Sýna lausn“ telst sem rangt svar.</p>';
     } else {
       var order = q.d.o.map(function (_, i) { return i; });
       for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = order[i]; order[i] = order[j]; order[j] = t; }
@@ -585,7 +589,7 @@
       order.forEach(function (oi, k) { h += '<button type="button" class="opt" data-i="' + oi + '">' + q.d.o[oi] + "</button>"; });
       h += "</div>";
     }
-    h += '<div class="result" id="q-res" aria-live="polite"></div><div id="q-sol"></div><div style="margin-top:0.8rem"><button type="button" class="btn ghost" id="q-next">Næsta spurning</button></div></div>';
+    h += '<div class="result" id="q-res" aria-live="polite"></div><div id="q-sol"></div><div class="qnext"><button type="button" class="btn ghost" id="q-next">Næsta spurning →</button></div></div>';
     area.innerHTML = h;
     window.renderMath(area);
     document.getElementById("q-next").addEventListener("click", next);
@@ -607,7 +611,7 @@
     var ans = q.kind === "num"
       ? '<p><b>Svar:</b> <span class="ans">' + is(q.d.answer, 4) + (q.d.unit ? " " + q.d.unit : "") + "</span></p>"
       : "";
-    sol.innerHTML = '<div class="sol" style="border-top:1px dashed var(--rule);margin-top:1rem;padding-top:0.8rem">' + ans + (q.kind === "num" ? q.d.sol : "<p>" + q.d.e + "</p>") + "</div>";
+    sol.innerHTML = '<div class="sol" style="border-top:1px solid var(--rule);margin-top:1rem;padding-top:0.8rem">' + ans + (q.kind === "num" ? q.d.sol : "<p>" + q.d.e + "</p>") + "</div>";
     window.renderMath(sol);
     if (!state.answered) { state.answered = true; record(ok); }
   }

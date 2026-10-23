@@ -102,14 +102,14 @@
   }
 
   function frame() {
-    var h = '<div class="chips" role="group" aria-label="Flokkur">';
+    var h = '<div class="toolbar"><span class="tl" id="c-tl-cat">Flokkur</span><div class="chips" role="group" aria-labelledby="c-tl-cat">';
     CATS.forEach(function (t) {
       h += '<button type="button" class="chip" data-cat="' + t.id + '" aria-pressed="' + (st.cat === t.id) + '">' + t.label + "</button>";
     });
-    h += '</div><div class="chips" role="group" aria-label="Val">';
+    h += '</div><span class="tl" id="c-tl-opt">Val</span><div class="chips" role="group" aria-labelledby="c-tl-opt">';
     h += '<button type="button" class="chip" id="c-unknown" aria-pressed="' + st.onlyUnknown + '">Bara þau sem ég kann ekki</button>';
     h += '<button type="button" class="chip" id="c-shuffle">Stokka</button>';
-    h += '<button type="button" class="chip" id="c-reset">Núllstilla framvindu</button></div>';
+    h += '<button type="button" class="chip" id="c-reset">Núllstilla framvindu</button></div></div>';
     h += '<div class="scorebar" id="c-stat" aria-live="polite"></div>';
     h += '<div class="progress" aria-hidden="true"><i id="c-bar"></i></div>';
     h += '<div class="card-stage" id="c-stage"></div>';
