@@ -21,15 +21,27 @@
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
 
-  var tb = document.getElementById("theme-btn");
-  if (tb) {
-    tb.addEventListener("click", function () {
+  var themeBtns = document.querySelectorAll(".theme-btn");
+
+  function labelThemeBtns() {
+    var dark = currentTheme() === "dark";
+    for (var i = 0; i < themeBtns.length; i++) {
+      themeBtns[i].textContent = dark ? "\u2600 Ljóst" : "\u263E Dökkt";
+      themeBtns[i].setAttribute("aria-label", dark ? "Skipta yfir í ljóst þema" : "Skipta yfir í dökkt þema");
+    }
+  }
+
+  for (var i = 0; i < themeBtns.length; i++) {
+    themeBtns[i].addEventListener("click", function () {
       var next = currentTheme() === "dark" ? "light" : "dark";
       doc.setAttribute("data-theme", next);
       try { localStorage.setItem("tk-theme", next); } catch (e) {}
+      labelThemeBtns();
       window.dispatchEvent(new Event("themechange"));
     });
   }
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", labelThemeBtns);
+  labelThemeBtns();
 
   var mb = document.getElementById("menu-btn");
   var side = document.getElementById("side");
