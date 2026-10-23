@@ -113,8 +113,8 @@ a:hover { text-decoration-thickness: 2px; }
 .side a.nav { display: block; padding: 0.38rem 0.7rem; margin: 0 -0.7rem; font-family: var(--sans); font-size: 0.97rem; text-decoration: none; color: var(--ink); border-left: 3px solid transparent; }
 .side a.nav:hover { background: var(--paper-2); }
 .side a.nav[aria-current="page"] { border-left-color: var(--mag); background: var(--paper-2); font-weight: 700; }
-.theme-btn { margin-top: 1.8rem; font: 600 0.85rem var(--sans); color: var(--muted); background: none; border: 1px solid var(--rule); padding: 0.4rem 0.7rem; cursor: pointer; border-radius: 4px; }
-.theme-btn:hover { color: var(--ink); border-color: var(--muted); }
+.side .theme-btn { margin-top: 1rem; font: 600 0.85rem var(--sans); color: var(--muted); background: none; border: 1px solid var(--rule); padding: 0.4rem 0.7rem; cursor: pointer; border-radius: 4px; }
+.side .theme-btn:hover { color: var(--ink); border-color: var(--muted); }
 
 .topbar { display: none; }
 
@@ -136,6 +136,8 @@ main {
   .side.open { display: block; }
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--rule); background: var(--paper); position: sticky; top: 0; z-index: 20; }
   .topbar a { font: 800 1.05rem var(--sans); color: var(--ink); text-decoration: none; }
+  .topbar-btns { display: flex; gap: 0.5rem; }
+  .side .theme-btn { display: none; }
   .topbar button { font: 700 0.9rem var(--sans); padding: 0.45rem 0.8rem; border: 1px solid var(--rule); background: var(--raised); color: var(--ink); border-radius: 4px; cursor: pointer; }
   main { padding-top: 1.5rem; }
 }

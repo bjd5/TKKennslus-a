@@ -39,14 +39,14 @@ TEMPLATE = """<!doctype html>
 <script>try{{var t=localStorage.getItem("tk-theme");if(t)document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
 </head>
 <body>
-<div class="topbar"><a href="index.html">Tæknileg kerfi</a><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div>
+<div class="topbar"><a href="index.html">Tæknileg kerfi</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
 <div class="shell">
 <aside class="side" id="side">
 <a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
+<button type="button" class="theme-btn">Þema</button>
 <nav aria-label="Efnisyfirlit">
 {nav}
 </nav>
-<button type="button" class="theme-btn" id="theme-btn">Skipta um þema</button>
 </aside>
 <main id="main">
 <div class="{pageclass}">
