@@ -38,8 +38,8 @@
 <main id="main">
 <div class="page wide">
 <!--wide-->
-<h1>Formúlublað</h1>
-<p class="lede">Allar formúlur úr hönnunarhlutanum á einum stað. Hentar til að fara yfir rétt fyrir prófið. Prentaðu blaðið (tvídálka á A4) ef prófið leyfir hjálpargögn, en athugaðu fyrst hvað kennarinn heimilar.</p>
+<h1 class="sheet-title">Formúlublað</h1>
+<p class="lede noprint">Allar formúlur úr hönnunarhlutanum á einum stað. Hentar til að fara yfir rétt fyrir prófið. Prentaðu blaðið (tvídálka á A4) ef prófið leyfir hjálpargögn, en athugaðu fyrst hvað kennarinn heimilar.</p>
 <p class="noprint"><button type="button" class="btn" onclick="window.print()">Prenta blaðið</button></p>
 
 <div class="sheet">
@@ -63,7 +63,8 @@ $$v_a = L\frac{di}{dt} + R\,i + K_f\omega,\qquad \tau = K_\tau i,\qquad I\dot\om
 <p>$P_{max} = \dfrac{\tau_s\omega_0}{4}$ við $\omega_0/2$. &nbsp; $\tau_e = \dfrac{L}{R}$.</p>
 <p>Blokkrit ($L = 0$): $G_1 = \dfrac{T}{V_a - V_f} = \dfrac{K_\tau}{R}$, &nbsp; $G_2 = \dfrac{\Theta}{T} = \dfrac{1}{Is^2 + cs}$, &nbsp; $V_f = K_f s\Theta$, &nbsp; $\Omega = s\Theta$.</p>
 <p>$L = 0$, spenna → hraði:</p>
-$$G_P = \frac{K_\tau}{R(Is+c) + K_\tau K_f} = \frac{K_p}{\tau s+1},\quad K_p = \frac{K_\tau}{Rc + K_\tau K_f},\ \ \tau = \frac{RI}{Rc + K_\tau K_f}$$
+$$G_P = \frac{K_\tau}{R(Is+c) + K_\tau K_f} = \frac{K_p}{\tau s+1}$$
+$$K_p = \frac{K_\tau}{Rc + K_\tau K_f},\qquad \tau = \frac{RI}{Rc + K_\tau K_f}$$
 <p>Spenna → vægi með spani: $\dfrac{T}{V_a} = \dfrac{K_\tau/R}{\tau_e s + 1}$, jafnvægi eftir $4\tau_e$-$5\tau_e$.</p>
 <p>Gír: $I_{eff} = I_1 + I_2/N^2$. Lyfta: $\tau = \tau_n + m g r$ (+ $m a r$).</p>
 <p>$\omega = \dfrac{2\pi}{60}n$ (RPM → rad/s). V/1000 RPM í V·s/rad: deila með 104,72. Með $K_f$ í V/1000 RPM: $n_0 = \dfrac{v_a}{K_f}\cdot1000$ RPM.</p>
