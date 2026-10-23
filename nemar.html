@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nemar (vika 7) · Tæknileg kerfi</title>
+<meta name="description" content="Kennslusíða fyrir hönnunarhluta IÐN303G Tæknileg kerfi (vika 7-9): nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("tk-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tæknileg kerfi</a><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div>
+<div class="shell">
+<aside class="side" id="side">
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
+<nav aria-label="Efnisyfirlit">
+<h2>Efni</h2><ul>
+<li><a class="nav" href="index.html">Yfirlit</a></li>
+<li><a class="nav" href="nemar.html" aria-current="page">Nemar</a></li>
+<li><a class="nav" href="hreyflar.html">Hreyflar</a></li>
+<li><a class="nav" href="stjornkerfi.html">Sjálfvirk stýrikerfi</a></li>
+<li><a class="nav" href="styringar.html">P, PI, PD og PID</a></li>
+</ul>
+<h2>Æfa</h2><ul>
+<li><a class="nav" href="prof.html">Gömul próf</a></li>
+<li><a class="nav" href="aefingar.html">Æfingaspurningar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn" id="theme-btn">Skipta um þema</button>
+</aside>
+<main id="main">
+<div class="page">
+<h1>Nemar</h1>
+<p class="lede">Nemi breytir því sem á að mæla (hita, kraft, hraða) í lágspennt rafmerki sem tölva getur lesið. Á prófinu er spurt um að velja nema, reikna úttak hans og meta hversu hratt hann svarar.</p>
+
+<h2>Hvað er nemi?</h2>
+<ul>
+  <li>Nemi er <b>tæknilegt kerfi</b> með yfirfærslufall. Mæligildið er jafnvægisgildi kerfisins.</li>
+  <li>Hann er <b>ferjald</b> (e. transducer): orku er breytt úr einu formi í annað, t.d. hita í spennu.</li>
+  <li>Í véleindakerfum viljum við lágspennt rafmerki. Oft er rafrás í nemanum sjálfum sem meðhöndlar merkið.</li>
+</ul>
+<div class="tablewrap"><table>
+<thead><tr><th>Skipting</th><th>Lýsing</th></tr></thead>
+<tbody>
+<tr><td><b>Hliðrænn</b> (analog)</td><td>Samfellt merki. Fer í gegnum <b>stafsetjara</b> (A/D-breyti) á leið í tölvuna.</td></tr>
+<tr><td><b>Stafrænn</b> (digital)</td><td>Púlsar, t.d. kóðaskífa. Fer beint í tölvuna.</td></tr>
+<tr><td><b>Óvirkur</b> (passive)</td><td>Orkan sem knýr fram mælinguna kemur frá mælistærðinni sjálfri, t.d. þrýstingur.</td></tr>
+<tr><td><b>Virkur</b> (active)</td><td>Þarf utanaðkomandi orkugjafa. Ef úttakið er rafmerki eru flestir nemar virkir.</td></tr>
+</tbody></table></div>
+
+<h2>Mælitæknileg hugtök</h2>
+<p>Þessi hugtök eru á glæru 21 og koma fyrir í orðadæmum. Lærðu íslensku og ensku heitin saman.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Hugtak</th><th>Hvað það þýðir</th></tr></thead>
+<tbody>
+<tr><td>Mælisvið (range)</td><td>Lægsta og hæsta gildi sem nemi getur mælt.</td></tr>
+<tr><td>Nákvæmni (accuracy)</td><td>Hversu nálægt mælt gildi er því rétta. Oft gefið sem hlutfall af mælisviði.</td></tr>
+<tr><td>Endurtekningarhæfni (repeatability, precision)</td><td>Sama mæling við sömu aðstæður gefur sömu niðurstöðu.</td></tr>
+<tr><td>Samkvæmni mælinga (reproducibility)</td><td>Sambærileg niðurstaða þótt aðstæður breytist, t.d. annar búnaður eða annar mælingamaður.</td></tr>
+<tr><td>Frávik frá línuleika (non-linearity)</td><td>Hversu langt raunverulegt samband inntaks og úttaks er frá beinni línu. Oft gefið sem hlutfall af mælisviði.</td></tr>
+<tr><td>Næmni (sensitivity)</td><td>Breyting í úttaki fyrir tiltekna breytingu í inntaki: $S = \Delta \text{úttak} / \Delta \text{inntak}$.</td></tr>
+<tr><td>Upplausn (resolution)</td><td>Minnsta breyting í inntaki sem veldur greinanlegri breytingu í úttaki.</td></tr>
+<tr><td>Deyðubil (dead band)</td><td>Bil þar sem inntaksbreyting veldur engri úttaksbreytingu. Ná þarf ákveðnum þröskuldi.</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> nákvæmni og endurtekningarhæfni eru ekki það sama. Nemi getur gefið alltaf sömu niðurstöðu (góð endurtekningarhæfni) en alltaf rangt gildi (léleg nákvæmni).</p></div>
+
+<h2>Val á nema</h2>
+<p>Þrír hópar þátta ráða vali, í þessari röð á prófinu:</p>
+<ol>
+  <li><b>Mælitæknilegir þættir.</b> Fyrst: nær mælisviðið yfir allt bilið sem á að mæla? Ef ekki er neminn úr leik, sama hversu góður hann er að öðru leyti.</li>
+  <li><b>Tíma- og tíðnisvörun.</b> Neminn þarf að svara hraðar en aðrar einingar kerfisins. Nákvæmni skiptir sérstaklega miklu ef notuð er afturvirkni.</li>
+  <li><b>Aðrir þættir:</b> líftími, kostnaður, afhendingartími.</li>
+</ol>
+
+<h2>Línulegur nemi: úttak og frávik</h2>
+<p>Línulegur nemi með mælisvið $[x_{min}, x_{max}]$ og úttak $[y_{min}, y_{max}]$ gefur</p>
+<div class="key">
+$$y = y_{min} + S\,(x - x_{min}), \qquad S = \frac{y_{max}-y_{min}}{x_{max}-x_{min}}$$
+<p>Frávik frá línuleika í einingum mælistærðar: $\;\Delta x_{lin} = p \cdot (x_{max} - x_{min})$, þar sem $p$ er hlutfallið af mælisviði.</p>
+</div>
+<p>Ef mælisviðið byrjar í núlli og úttakið líka er $y = S\,x$. Ef úttakið er 4-20 mA þarf að muna <b>4 mA hliðrunina</b>: við neðri mörk mælisviðsins er straumurinn 4 mA, ekki 0.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Próf 2021 S1 og 2025 S1</span></div><div class="ex-body">
+<p>Nemi A: 0-100 °C, 0-5 V, $\tau = 2{,}0$ s, frávik 1 %. Nemi B: 0-150 °C, 0-10 V, $\tau = 2{,}5$ s, frávik 2 %.</p>
+<p>(a) Hvor hentar til að mæla 90-130 °C? (c) Úttak nema A við 75 °C? (d) Frávik frá línuleika nema B í °C?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) A nær bara upp í 100 °C, svo <b>nemi B</b>. Hraði og línuleiki A skipta ekki máli þegar mælisviðið dugar ekki.</p>
+<p>(c) $S_A = 5/100 = 0{,}05$ V/°C, svo $V = 0{,}05\cdot 75 = $ <span class="ans">3,75 V</span>.</p>
+<p>(d) $0{,}02 \cdot 150 = $ <span class="ans">3 °C</span>.</p>
+</div></details></div></div>
+
+<h2>Tímasvörun nema</h2>
+<p>Flestir nemar haga sér eins og <b>fyrstu gerðar kerfi</b>:</p>
+<div class="key">
+$$G(s) = \frac{K}{\tau s + 1}, \qquad y(t) = K\,\Delta x\,\bigl(1 - e^{-t/\tau}\bigr)\ \text{við þrep } \Delta x$$
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th>Tími</th><th class="num">$\tau$</th><th class="num">$2\tau$</th><th class="num">$3\tau$</th><th class="num">$4\tau$</th><th class="num">$5\tau$</th></tr></thead>
+<tbody><tr><td>Hlutfall af lokagildi</td><td class="num">63,2 %</td><td class="num">86,5 %</td><td class="num">95,0 %</td><td class="num">98,2 %</td><td class="num">99,3 %</td></tr></tbody>
+</table></div>
+<ul>
+  <li><b>Minni tímastuðull = hraðari nemi.</b> Tímastuðullinn segir til um hraða en ekkert um nákvæmni.</li>
+  <li>&ldquo;Kominn í jafnvægi&rdquo; þýðir venjulega eftir $4\tau$ (98 %).</li>
+</ul>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Próf 2023 S3: nemi með 4-20 mA úttak</span></div><div class="ex-body">
+<p>Hitanemi: mælisvið 100-200 °C, úttak 4-20 mA, fyrstu gerðar, $\tau = 12$ s. (a) Finndu yfirfærslufallið. (b) Hvert er úttakið í jafnvægi við 120 °C?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) Mögnun: $K = \dfrac{20-4}{200-100} = 0{,}16$ mA/°C.</p>
+$$G(s) = \frac{0{,}16}{12s+1}$$
+<p>Þetta lýsir <i>breytingum</i> frá vinnupunkti. 4 mA hliðrunin er ekki í yfirfærslufallinu.</p>
+<p>(b) Hitastigið er 20 °C yfir neðri mörkum: $I = 4 + 0{,}16\cdot 20 = $ <span class="ans">7,2 mA</span>. Tímastuðullinn skiptir engu máli fyrir jafnvægisgildi.</p>
+</div></details></div></div>
+
+<h2>Truflanir og síur</h2>
+<p>Ef merkið frá nemanum inniheldur suð (háar tíðnir) má bæta <b>síu</b> aftan við nemann eða í stýringuna. Glæra 25 sýnir fjórar gerðir eftir mögnun sem fall af tíðni:</p>
+<ul>
+  <li><b>Lághleypisía</b> hleypir lágum tíðnum í gegn og eyðir hátíðnitruflunum (algengust).</li>
+  <li><b>Háhleypisía</b> eyðir lágtíðnitruflunum, t.d. reki.</li>
+  <li><b>Bandhleypisía</b> hleypir ákveðnu tíðnibili í gegn.</li>
+  <li><b>Bandstoppsía</b> hleypir ekki ákveðnu tíðnibili í gegn, t.d. 50 Hz suði.</li>
+</ul>
+
+<h2>Sýnidæmi úr viku 7</h2>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 1 <span>Stillivíðnám og álagsskekkja</span></div><div class="ex-body">
+<p>Stillivíðnám mælir línulega færslu. Heildarviðnám $R_P = 500\ \Omega$, fæðispenna $V_s = 4$ V, 1000 stillingar (upplausn 1/1000). Hver er skekkjan í mælingunni ef innviðnám tölvunnar er $R_L = 10\ \mathrm{k}\Omega$ og mælt er á miðju ($x = 0{,}5$)?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Skekkjan verður af því að $R_L$ er endanlegt og hliðtengt neðri hluta víðnámsins. Úr heftinu (jafna 16.3):</p>
+$$e = V_s \frac{R_P}{R_L}\,(x^2 - x^3) = 4 \cdot \frac{500}{10000}\,(0{,}25 - 0{,}125) = \text{0,025 V}$$
+<p>Mælisviðið er jafnt fæðispennunni (4 V), svo skekkjan er $0{,}025/4 = $ <span class="ans">0,625 % af mælisviði</span>.</p>
+<p>Skekkjan er mest þegar $x = 2/3$ og núll í endapunktum. Hærra $R_L$ gefur minni skekkju.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 2 <span>Kóðaskífa: upplausn</span></div><div class="ex-body">
+<p>Kóðaskífa mælir snúningsfærslu. Á skífunni eru 60 raufar og radíus hennar er 10 cm. Hver er upplausn kóðarans í mm?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Upplausn er minnsta breyting sem greinist: bilið milli raufa á jaðri skífunnar.</p>
+$$\frac{2\pi r}{N} = \frac{2\pi\cdot 0{,}1}{60} = \text{0,0105 m} \approx \text{10 mm}$$
+<p>Almennt: <b>upplausn = ummál / fjöldi raufa</b>. Fleiri raufar gefa betri upplausn.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 3 <span>Álagsnemi (strain gauge)</span></div><div class="ex-body">
+<p>Álagsnemi hefur viðnám $R = 100\ \Omega$ og næmnistuðul (gauge factor) $G = 2{,}0$. Hver er breytingin á viðnámi þegar nemi verður fyrir aflögun $\varepsilon = 0{,}001$?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Aflögun er $\varepsilon = \Delta l / l$ og fyrir álagsnema gildir $\Delta R / R = G\,\varepsilon$:</p>
+$$\Delta R = R\,G\,\varepsilon = 100 \cdot 2 \cdot 0{,}001 = \text{0,2 }\Omega$$
+</div></details></div></div>
+
+<div class="note"><p><b class="t">Næst:</b> <a href="hreyflar.html">Hreyflar</a>. Reiknaðu úttak nema og frávik í <a href="reiknivelar.html">reiknivélinni</a> til að æfa þig.</p></div>
+<div class="pager noprint"><a href="index.html"><span>Fyrri</span>Yfirlit</a><a href="hreyflar.html" style="text-align:right"><span>Næsta</span>Hreyflar</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+
+</body>
+</html>

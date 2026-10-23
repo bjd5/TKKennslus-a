@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stýringar (vika 9) · Tæknileg kerfi</title>
+<meta name="description" content="Kennslusíða fyrir hönnunarhluta IÐN303G Tæknileg kerfi (vika 7-9): nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("tk-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tæknileg kerfi</a><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div>
+<div class="shell">
+<aside class="side" id="side">
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
+<nav aria-label="Efnisyfirlit">
+<h2>Efni</h2><ul>
+<li><a class="nav" href="index.html">Yfirlit</a></li>
+<li><a class="nav" href="nemar.html">Nemar</a></li>
+<li><a class="nav" href="hreyflar.html">Hreyflar</a></li>
+<li><a class="nav" href="stjornkerfi.html">Sjálfvirk stýrikerfi</a></li>
+<li><a class="nav" href="styringar.html" aria-current="page">P, PI, PD og PID</a></li>
+</ul>
+<h2>Æfa</h2><ul>
+<li><a class="nav" href="prof.html">Gömul próf</a></li>
+<li><a class="nav" href="aefingar.html">Æfingaspurningar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn" id="theme-btn">Skipta um þema</button>
+</aside>
+<main id="main">
+<div class="page">
+<h1>P, PI, PD og PID</h1>
+<p class="lede">Hlutverk stýringar er að búa til stýrimerki út frá stærð skekkjunnar með það markmið að eyða henni. PID-stýringar eru líklega algengustu stýringar í iðnaði. Þær eru línulegar og stýrimerkið er samfellt.</p>
+
+<h2>Bode-rit í stuttu máli</h2>
+<p>Yfirfærsluföll eru margfölduð saman, svo mögnun (í dB) og fasi <b>leggjast saman</b>. Með þessum byggingareiningum geturðu teiknað og lesið hvaða Bode-rit sem er:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Þáttur</th><th>Mögnun</th><th>Fasi</th></tr></thead>
+<tbody>
+<tr><td>$K$</td><td>flöt, $20\log_{10}K$ dB</td><td>0°</td></tr>
+<tr><td>$\dfrac1s$ (heildun)</td><td>fellur 20 dB/dekar, 0 dB við $\omega = 1$</td><td>−90°</td></tr>
+<tr><td>$\dfrac{1}{1+\tau s}$</td><td>flöt upp að horntíðni $1/\tau$, síðan −20 dB/dekar. Við horntíðni: −3 dB</td><td>0° í −90°, −45° við horntíðni</td></tr>
+<tr><td>$1 + T s$</td><td>flöt upp að $1/T$, síðan +20 dB/dekar</td><td>0° í +90°, +45° við $1/T$</td></tr>
+<tr><td>$e^{-Ls}$ (seinkun)</td><td>0 dB alls staðar</td><td>$-\omega L$ (fellur sífellt)</td></tr>
+</tbody></table></div>
+<p>$\mathrm{dB} = 20\log_{10}|G|$, $0\ \mathrm{dB} = 1$, $3\ \mathrm{dB}\approx 2^{1/2}$, $-3\ \mathrm{dB} = 1/\sqrt2$. Horntíðni er sú tíðni þar sem beinu línurnar skerast.</p>
+
+<h2>P-stýring</h2>
+<div class="key">$$G_C = \frac{U}{E} = K$$</div>
+<p>Bode-rit lykkjunnar færist upp um $20\log_{10}K$ dB. Engin fasabreyting. Með hækkandi $K$:</p>
+<ul>
+  <li>$\omega_c$ færist til hægri: <b>óstöðugt</b> þegar $\omega_c = \omega_\pi$.</li>
+  <li>Minni skekkja í jafnvægi (ef $G_P$ er tegund 0).</li>
+  <li>Hraðari svörun ($t_r \approx 1{,}4/\omega_c$).</li>
+  <li>Meiri deyfing truflana og minni næmni.</li>
+  <li>Sterkara stýrimerki á öllum tíðnum.</li>
+</ul>
+<p><b>Veldu $K$ eins hátt og hægt er</b> miðað við kröfur um stöðugleika og stýrimerki.</p>
+
+<h2>PI-stýring</h2>
+<div class="key">$$G_C = K\Bigl(1 + \frac{1}{T_I s}\Bigr) = K\,\frac{1+T_I s}{T_I s},\qquad \omega_I = \frac{1}{T_I}$$</div>
+<ul>
+  <li><b>Eyðir skekkju í jafnvægi</b> (heildunarþátturinn gerir lykkjuna eina gerð hærri, sbr. tegund $N$).</li>
+  <li>Hærri mögnun á lágum tíðnum: betri deyfing lágtíðnitruflana og minni næmni. Mælikvarði: $K/T_I$.</li>
+  <li>Færir kerfið nær óstöðugleika, sérstaklega ef $T_I$ er lágt ($\omega_I$ hátt): heildunin lækkar fasann á lágum tíðnum.</li>
+  <li>Á háum tíðnum hagar PI-stýring sér eins og P-stýring: $|G_C| \to K$.</li>
+</ul>
+<div class="key">
+<p><b>Val á stikum</b> (með $G_S = 1$):</p>
+<ol style="margin-bottom:0">
+  <li>Skoðaðu $K\,G_P(s)$ ($\omega_c$ og $\omega_\pi$).</li>
+  <li>Veldu $K$ þannig að $\varphi_m = \varphi_{min} + 0{,}06\pi$ (um 11° meira en lágmarkið).</li>
+  <li>Veldu $\omega_I = 0{,}2\,\omega_c$, þ.e. $T_I = \dfrac{1}{0{,}2\,\omega_c}$.</li>
+</ol>
+</div>
+
+<h2>PD-stýring</h2>
+<div class="key">$$G_C = K(1 + T_D s),\qquad \omega_D = \frac{1}{T_D}$$</div>
+<ul>
+  <li><b>Jákvæð fasahliðrun</b>: eykur stöðugleika.</li>
+  <li>Hærri mögnun á háum tíðnum: betri deyfing hátíðnitruflana, <b>en</b> sterkara stýrimerki á háum tíðnum.</li>
+  <li>Getur fært $\omega_c$ til hægri og þannig gefið hraðari svörun.</li>
+</ul>
+<div class="key">
+<p><b>Val á stikum</b> (með $G_S = 1$):</p>
+<ol style="margin-bottom:0">
+  <li>Skoðaðu $G_P(s)$ ($\omega_c$ og $\omega_\pi$).</li>
+  <li>Veldu $0{,}8\,\omega_\pi < \omega_D < 1{,}5\,\omega_\pi$.</li>
+  <li>Skoðaðu $G_C(s)G_P(s)$.</li>
+  <li>Veldu $K$ sem gefur viðunandi fasaöryggi.</li>
+</ol>
+</div>
+
+<h2>PID-stýring</h2>
+<div class="key">$$G_C = K\,\frac{1+T_I s}{T_I s}\cdot\frac{1+T_D s}{1+T_F s}$$</div>
+<p>Samsett úr þremur stýringum. Ekki alltaf þörf á öllum, svo hafðu stýringuna eins einfalda og hægt er. Algengar útgáfur: P, PI, PD, PID. Hrein diffrun ($T_D s$) magnar suð óendanlega, svo hún er sett fyrir aftan <b>lághleypisíu</b> með tímastuðli $T_F$.</p>
+<div class="key">
+<p><b>Val á stikum</b> (með $G_S = 1$):</p>
+<ol style="margin-bottom:0">
+  <li>Skoðaðu $G_P(s)$ ($\omega_c$ og $\omega_\pi$).</li>
+  <li>Veldu $T_D$ eins og fyrir PD-stýringu.</li>
+  <li>Veldu $0{,}2\,T_D < T_F < 0{,}4\,T_D$.</li>
+  <li>Skoðaðu $G_C(s)G_P(s)$ með $G_C(s) = \dfrac{1+T_Ds}{1+T_Fs}$.</li>
+  <li>Veldu $T_I$ og $K$ eins og fyrir PI-stýringu.</li>
+</ol>
+</div>
+<p>Hátíðnimögnun PID-stýringar: $\displaystyle\lim_{\omega\to\infty}|G_C| = K\,\frac{T_D}{T_F}$ (með $T_F = 0{,}2\,T_D$ er það $5K$). Þetta er mælikvarðinn á stýrimerki af háum tíðnum.</p>
+
+<h2>Samanburður</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>P</th><th>PI</th><th>PD</th><th>PID</th></tr></thead>
+<tbody>
+<tr><td>Skekkja í jafnvægi</td><td>$1/(1+K_p)$</td><td>0 (þrep)</td><td>eins og P</td><td>0 (þrep)</td></tr>
+<tr><td>Stöðugleiki</td><td>miðlungs</td><td>verri</td><td>betri (fasahækkun)</td><td>stilla með $T_I$, $T_D$</td></tr>
+<tr><td>Hraði</td><td>miðlungs</td><td>aðeins hægari</td><td>hraðari ($\omega_c$ hærra)</td><td>stilla</td></tr>
+<tr><td>Lágtíðnitruflanir</td><td>miðlungs</td><td>best</td><td>eins og P</td><td>best</td></tr>
+<tr><td>Stýrimerki, háar tíðnir</td><td>$K$</td><td>$K$</td><td>sterkara</td><td>$K T_D/T_F$</td></tr>
+</tbody></table></div>
+
+<h2>Sýnidæmi úr viku 9-10</h2>
+<p>Hvert dæmi byggir á því að skoða Bode-rit lykkjunnar í Matlab (Control System Designer) eða Python. Tölurnar hér eru endurreiknaðar og stemma við handskrifuðu lausnirnar innan námundunar. Prófaðu sjálf(ur) í <a href="reiknivelar.html">lykkjugreiningunni</a>.</p>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 1 <span>P-stýring með fasaöryggi 45°</span></div><div class="ex-body">
+<p>$G_C = K$, $G_P = \dfrac{2{,}5}{(1+2s)(1+0{,}5s)}$, $G_S = 1$. Finndu $K$ sem gefur fasaöryggi $\pi/4$. Hver er rístíminn og skekkjan í jafnvægi?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Fasi lykkjunnar: $\varphi_K = -\arctan 2\omega - \arctan 0{,}5\omega$. Fasaöryggi $\pi/4$ þýðir $\varphi_K(\omega_c) = -\pi + \pi/4 = -3\pi/4$. Það gefur (tölulega) $\omega_c \approx 2{,}85$ rad/s.</p>
+<p>$K$ er valið þannig að $|G_K(j\omega_c)| = 1$:  $K = \dfrac{\sqrt{1+4\omega_c^2}\sqrt{1+0{,}25\omega_c^2}}{2{,}5} \approx$ <span class="ans">4</span>.</p>
+<p>Rístími: $t_r = 1{,}4/2{,}85 = $ <span class="ans">0,49 s</span>.</p>
+<p>Skekkja: kerfið er tegund 0, $K_p = 2{,}5\cdot 4 = 10$, svo $e_{ss} = \dfrac{1}{1+10} \approx $ <span class="ans">0,1</span>.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 2 <span>PI-stýring á sama ferli</span></div><div class="ex-body">
+<p>Sama ferli og í sýnidæmi 1. Hannaðu PI-stýringu með sama fasaöryggi ($\pi/4$). Skoðaðu rístíma og skekkju á ný.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ol>
+  <li>Skoðaðu Bode-rit $K\,G_P$.</li>
+  <li>Veldu $K$ með $\varphi_m = \dfrac\pi4 + 0{,}06\pi = 45^\circ + 11^\circ = 56^\circ$. Það gefur $K \approx 2{,}6$ og $\omega_c \approx 2{,}15$ rad/s.</li>
+  <li>$\omega_I = 0{,}2\,\omega_c$, svo $T_I = \dfrac{1}{0{,}2\cdot 2{,}15} = $ <span class="ans">2,33 s</span>.</li>
+</ol>
+<p>Rístími: $t_r = 1{,}4/2{,}15 = $ <span class="ans">0,65 s</span>. Hægari en með P (0,49 s). Skekkjan í jafnvægi er <span class="ans">0</span> því lykkjan er nú tegund 1.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 3 <span>P gegn PD</span></div><div class="ex-body">
+<p>$G_P = \dfrac{2}{s(1+0{,}5s)^2}$. Óskað er eftir fasaöryggi $\pi/4$. Hversu hátt getur $\omega_c$ orðið (a) með P-stýringu, (b) með PD-stýringu ef $T_D = 0{,}5$?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) $G_K = \dfrac{2K}{s(1+0{,}5s)^2}$. Með $\varphi_m = \pi/4$: $\omega_c = 0{,}83$ rad/s við $K = 0{,}49$. Rístími $t_r = 1{,}4/0{,}83 = 1{,}7$ s.</p>
+<p>(b) PD með $T_D = 0{,}5$: núllið $(1+0{,}5s)$ styttir út annan pólinn, svo $G_K = \dfrac{2K}{s(1+0{,}5s)}$. Fasinn $-90^\circ - \arctan0{,}5\omega = -135^\circ$ gefur $\omega_c = $ <span class="ans">2 rad/s</span> við $K = 1{,}41$ (handskrifað: 1,43). $t_r = 1{,}4/2 = 0{,}7$ s.</p>
+<p>PD-stýringin gefur um það bil <b>2,4 sinnum hærri $\omega_c$</b> og því hraðari svörun, en hærra $|G_C|$ á háum tíðnum.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 4 <span>PID-stýring</span></div><div class="ex-body">
+<p>$G_P = \dfrac{1}{s(s+5)(s+1)}$, $G_S = 1$. Hannaðu PID-stýringu með fasaöryggi $\pi/4$ (og 11° aukalega fyrir PI-hlutann).</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ol>
+  <li>Bode-rit $G_P G_S$: $\omega_\pi = 2{,}24$ rad/s.</li>
+  <li>$T_D$ eins og fyrir PD: veldu $\omega_D = \omega_\pi = 2{,}24$, svo $T_D = 1/2{,}24 = $ <span class="ans">0,45</span>.</li>
+  <li>$T_F$ á bilinu $0{,}2T_D$ til $0{,}4T_D$: veldu $T_F = 0{,}3\,T_D \approx $ <span class="ans">0,14</span>.</li>
+  <li>Skoðaðu $G_{PD}\,G_P$ með $G_{PD} = \dfrac{1+T_Ds}{1+T_Fs}$.</li>
+  <li>Veldu $K$ með $\varphi_m = 45^\circ + 11^\circ = 56^\circ$: handskrifað $K \approx 4{,}5$ við $\omega_c = 0{,}78$ rad/s (endurreiknað: $K \approx 4{,}9$, $\omega_c \approx 0{,}80$). Veldu $\omega_I = 0{,}2\,\omega_c \approx 0{,}16$, þ.e. $T_I \approx $ <span class="ans">6,3</span>.</li>
+</ol>
+<p>Rístími $t_r \approx 1{,}4/0{,}78 = 1{,}8$ s.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Tengidæmi 0.2 <span>Tvær PID-tillögur fyrir $G_P = 1/(s+1)^3$</span></div><div class="ex-body">
+<p>PID: $G_C = K\dfrac{1+T_Is}{T_Is}\dfrac{1+T_Ds}{1+T_Fs}$ með $T_F = 0{,}2\,T_D$. $G_S = 1$.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th class="num">$K$</th><th class="num">$T_I$</th><th class="num">$T_D$</th><th class="num">$\omega_c$</th><th class="num">$\omega_\pi$</th></tr></thead>
+<tbody>
+<tr><td>Tillaga 1</td><td class="num">2,5</td><td class="num">2,6</td><td class="num">0,65</td><td class="num">1,08</td><td class="num">2,97</td></tr>
+<tr><td>Tillaga 2</td><td class="num">4,0</td><td class="num">2,2</td><td class="num">0,75</td><td class="num">1,54</td><td class="num">2,90</td></tr>
+</tbody></table></div>
+<p>Hvor tillagan (1) deyfir betur lágtíðnitruflanir, (2) býr til lægra stýrimerki af hárri tíðni, (3) gerir kerfið stöðugra, (4) gefur hraðari svörun?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(1) Lágar tíðnir:</b> stýringarnar hafa sama form á lágum tíðnum, svo mælikvarðinn er $K/T_I$: Tillaga 1 gefur 0,96 og Tillaga 2 gefur 1,8. <span class="ans">Tillaga 2</span>.</p>
+<p><b>(2) Háar tíðnir:</b> $|G_C| \to K T_D/T_F = 5K$: 12,5 gegn 20. <span class="ans">Tillaga 1</span> gefur lægra stýrimerki.</p>
+<p><b>(3) Stöðugleiki:</b> reiknaðu $\varphi_m$ og $A_m$ úr uppgefnum $\omega_c$ og $\omega_\pi$.</p>
+$$\varphi_K(\omega) = -\frac\pi2 + \arctan T_I\omega + \arctan T_D\omega - \arctan T_F\omega - 3\arctan\omega$$
+$$|G_K(j\omega)| = K\,\frac{\sqrt{1+T_I^2\omega^2}}{T_I\omega}\cdot\frac{\sqrt{1+T_D^2\omega^2}}{\sqrt{1+T_F^2\omega^2}}\cdot\frac{1}{(1+\omega^2)^{3/2}}$$
+<p>Tillaga 1: $\varphi_m = 180^\circ + \varphi_K(1{,}08) = 45{,}8^\circ$; $|G_K(j2{,}97)| = 0{,}166$, $A_m = 6{,}02 = 15{,}6$ dB. Tillaga 2: $\varphi_m = 28{,}7^\circ$; $|G_K(j2{,}90)| = 0{,}308$, $A_m = 3{,}25 = 10{,}2$ dB. <span class="ans">Tillaga 1</span> er stöðugri.</p>
+<p><b>(4) Hraði:</b> $t_r = 1{,}4/\omega_c$: 1,29 s gegn 0,91 s. <span class="ans">Tillaga 2</span>.</p>
+<p>Niðurstaða: Tillaga 2 er hraðari og deyfir lágtíðnitruflanir betur, en er óstöðugri og gefur sterkara stýrimerki. Þetta er dæmigerð málamiðlun.</p>
+</div></details></div></div>
+
+<div class="note tip"><p><b class="t">Næst:</b> <a href="prof.html">gömul próf</a> þar sem P gegn PI kemur fyrir í bæði 2023 (S4) og 2025 (S4).</p></div>
+<div class="pager noprint"><a href="stjornkerfi.html"><span>Fyrri</span>Sjálfvirk stýrikerfi</a><a href="prof.html" style="text-align:right"><span>Næsta</span>Gömul próf</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sjálfvirk stýrikerfi (vika 8-9) · Tæknileg kerfi</title>
+<meta name="description" content="Kennslusíða fyrir hönnunarhluta IÐN303G Tæknileg kerfi (vika 7-9): nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("tk-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tæknileg kerfi</a><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div>
+<div class="shell">
+<aside class="side" id="side">
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
+<nav aria-label="Efnisyfirlit">
+<h2>Efni</h2><ul>
+<li><a class="nav" href="index.html">Yfirlit</a></li>
+<li><a class="nav" href="nemar.html">Nemar</a></li>
+<li><a class="nav" href="hreyflar.html">Hreyflar</a></li>
+<li><a class="nav" href="stjornkerfi.html" aria-current="page">Sjálfvirk stýrikerfi</a></li>
+<li><a class="nav" href="styringar.html">P, PI, PD og PID</a></li>
+</ul>
+<h2>Æfa</h2><ul>
+<li><a class="nav" href="prof.html">Gömul próf</a></li>
+<li><a class="nav" href="aefingar.html">Æfingaspurningar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn" id="theme-btn">Skipta um þema</button>
+</aside>
+<main id="main">
+<div class="page">
+<h1>Sjálfvirk stýrikerfi</h1>
+<p class="lede">Stýringin les skekkjuna, býr til stýrimerki og vill eyða skekkjunni. Hér lærir þú að meta sex eiginleika lykkjunnar út frá yfirfærslufalli hennar. Þetta er sá hluti sem flestar spurningar á prófinu snúast um.</p>
+
+<h2>Blokkritið</h2>
+<svg class="diagram" viewBox="0 0 760 270" role="img" aria-label="Blokkrit sjálfvirks stýrikerfis með truflunum">
+  <text x="8" y="105" font-weight="700">R</text>
+  <line class="ln" x1="30" y1="100" x2="66" y2="100"/><path class="ah" d="M68 100 l-9 -4.5 v9z"/>
+  <circle class="sum" cx="80" cy="100" r="14"/><text x="62" y="90" class="small">+</text><text x="86" y="128" class="small">−</text>
+  <line class="ln" x1="94" y1="100" x2="150" y2="100"/><path class="ah" d="M152 100 l-9 -4.5 v9z"/><text x="112" y="92">E</text>
+  <rect class="box" x="152" y="75" width="80" height="50"/><text x="192" y="105" text-anchor="middle">G<tspan class="sub" dy="4">C</tspan></text>
+  <line class="ln" x1="232" y1="100" x2="286" y2="100"/><path class="ah" d="M288 100 l-9 -4.5 v9z"/><text x="252" y="92">U</text>
+  <circle class="sum" cx="302" cy="100" r="14"/>
+  <line class="ln dis" x1="302" y1="38" x2="302" y2="84"/><path class="ah dis" d="M302 86 l-4.5 -9 h9z"/><text x="314" y="52" class="lbl-dis">V<tspan class="sub" dy="3">1</tspan></text>
+  <line class="ln" x1="316" y1="100" x2="372" y2="100"/><path class="ah" d="M374 100 l-9 -4.5 v9z"/>
+  <rect class="box" x="374" y="75" width="80" height="50"/><text x="414" y="105" text-anchor="middle">G<tspan class="sub" dy="4">P</tspan></text>
+  <line class="ln" x1="454" y1="100" x2="506" y2="100"/><path class="ah" d="M508 100 l-9 -4.5 v9z"/>
+  <circle class="sum" cx="522" cy="100" r="14"/>
+  <line class="ln dis" x1="522" y1="38" x2="522" y2="84"/><path class="ah dis" d="M522 86 l-4.5 -9 h9z"/><text x="534" y="52" class="lbl-dis">V<tspan class="sub" dy="3">2</tspan></text>
+  <line class="ln" x1="536" y1="100" x2="700" y2="100"/><path class="ah" d="M702 100 l-9 -4.5 v9z"/><text x="714" y="105" font-weight="700">Y</text>
+  <circle class="dot" cx="630" cy="100" r="3.5"/>
+  <line class="ln" x1="630" y1="100" x2="630" y2="215"/>
+  <line class="ln" x1="630" y1="215" x2="574" y2="215"/><path class="ah" d="M572 215 l9 -4.5 v9z"/>
+  <circle class="sum" cx="558" cy="215" r="14"/>
+  <line class="ln dis" x1="558" y1="268" x2="558" y2="231"/><path class="ah dis" d="M558 229 l-4.5 9 h9z"/><text x="570" y="258" class="lbl-dis">W</text>
+  <line class="ln" x1="544" y1="215" x2="490" y2="215"/><path class="ah" d="M488 215 l9 -4.5 v9z"/>
+  <rect class="box" x="400" y="190" width="90" height="50"/><text x="445" y="220" text-anchor="middle">G<tspan class="sub" dy="4">S</tspan></text>
+  <line class="ln" x1="400" y1="215" x2="80" y2="215"/><line class="ln" x1="80" y1="215" x2="80" y2="116"/><path class="ah" d="M80 114 l-4.5 9 h9z"/>
+</svg>
+<ul style="margin-top:0.8rem">
+  <li>$R$ óskgildi, $E$ skekkja, $U$ stýrimerki, $Y$ úttak.</li>
+  <li>$V_1$, $V_2$ og $W$ eru truflanir. $V_1$ kemur á milli stýringar og ferlis, $V_2$ á úttak ferlis og $W$ á mælingu (suð í nema).</li>
+  <li>$G_C$ stýring, $G_P$ ferli (t.d. hreyfill), $G_S$ nemi.</li>
+</ul>
+<p>Kerfið er línulegt, svo úttakið er summa áhrifa allra inntaka. Hvert yfirfærslufall hefur <b>sama nefnara</b>, $1 + G_K$:</p>
+<div class="key">
+$$G_K = G_C\,G_P\,G_S \quad\text{(lykkjan)}$$
+$$Y = \frac{G_C G_P}{1+G_K}R + \frac{G_P}{1+G_K}V_1 + \frac{1}{1+G_K}V_2 - \frac{G_C G_P}{1+G_K}W$$
+$$E = R - G_S Y\ \Rightarrow\ \frac{E}{R} = \frac{1}{1+G_K}\qquad \frac{E}{V_1} = \frac{-G_P G_S}{1+G_K}$$
+</div>
+<div class="note tip"><p><b class="t">Aðferð:</b> til að finna áhrif einnar truflunar setur þú öll hin inntökin í núll og lest yfirfærslufallið beint úr blokkritinu. Línuleikinn leyfir það.</p></div>
+<p>Tilgangur stýrivandans er að <b>deyfa áhrif truflana og breytileika</b> þegar óskgildið er fast, og að <b>fylgja eftir breytingum</b> í óskgildinu. Algengar truflanir: þrep eða impúls, rek (hægar sínusbylgjur eða fláafall) og suð (háar tíðnir).</p>
+
+<h2>Sex eiginleikar</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Eiginleiki</th><th>Hvað er skoðað</th></tr></thead>
+<tbody>
+<tr><td><a href="#stod">1. Stöðugleiki</a></td><td>$\omega_c$, $\omega_\pi$, fasaöryggi $\varphi_m$, mögnunaröryggi $A_m$</td></tr>
+<tr><td><a href="#skekkja">2. Skekkja í jafnvægi</a></td><td>tegund kerfis $N$ og lokagildissetningin</td></tr>
+<tr><td><a href="#hradi">3. Hraði svörunar</a></td><td>$t_r \approx 1{,}4/\omega_c$</td></tr>
+<tr><td><a href="#truflun">4. Deyfing truflana</a></td><td>$|G_P/(1+G_K)|$ við tíðni truflunarinnar</td></tr>
+<tr><td><a href="#namni">5. Næmni gagnvart breytileika</a></td><td>$1/(1+G_K)$ og $-G_K/(1+G_K)$</td></tr>
+<tr><td><a href="#stjornmerki">6. Stærð stýrimerkis</a></td><td>$|G_C|$ við háar tíðnir</td></tr>
+</tbody></table></div>
+
+<h2 id="stod">1. Stöðugleiki</h2>
+<p>Skoðaðu Bode-rit lykkjunnar $G_K(j\omega)$. Tvær tíðnir skipta máli:</p>
+<ul>
+  <li><b>Skurðtíðni $\omega_c$:</b> þar sem mögnunin er 1 (0 dB), $|G_K(j\omega_c)| = 1$.</li>
+  <li><b>Tíðni $\omega_\pi$:</b> þar sem fasinn er $-\pi$ ($-180^\circ$). Sinusbylgja hliðrast þá um hálfa bylgju og afturvirknin verður jákvæð.</li>
+</ul>
+<div class="key">
+<p>Kerfið er <b>óstöðugt</b> ef $|G_K(j\omega_\pi)| \ge 1$.</p>
+$$A_m = \frac{1}{|G_K(j\omega_\pi)|}\ \ (\text{heppilegt: } 2\text{-}5),\qquad \varphi_m = \pi + \varphi_K(\omega_c)\ \ (\text{heppilegt: } 30^\circ\text{-}60^\circ)$$
+</div>
+<ul>
+  <li>Í dB: $0\ \mathrm{dB} = 1$, $3\ \mathrm{dB} \approx \sqrt2$, $20\ \mathrm{dB} = 10$, $\mathrm{dB} = 20\log_{10}|G|$. Mögnunaröryggi í dB er mínus mögnun lykkjunnar við $\omega_\pi$.</li>
+  <li>Fasi margfeldis er summa fasa: þáttur $1/(1+\tau s)$ gefur $-\arctan(\omega\tau)$, þáttur $1/s$ gefur $-90^\circ$, þáttur $(1+T s)$ gefur $+\arctan(\omega T)$.</li>
+  <li><b>Pólar:</b> kerfið er stöðugt ef allir pólar lokaða kerfisins (rætur $1+G_K = 0$) hafa neikvæðan rauntöluhluta.</li>
+</ul>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 2 (V9) <span>Pólar</span></div><div class="ex-body">
+<p>Er kerfið $G(s) = \dfrac{s+2}{s^2+2s+5}$ stöðugt?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Pólarnir eru rætur nefnarans: $s = \dfrac{-2 \pm \sqrt{4-20}}{2} = -1 \pm 2j$. Rauntöluhlutinn er $-1 < 0$ svo pólarnir eru í vinstra hálfplani: <span class="ans">stöðugt</span>.</p>
+</div></details></div></div>
+
+<h3>Seinkun í lykkjunni</h3>
+<p>Hrein seinkun $e^{-Ls}$ hefur mögnun <b>1</b> á öllum tíðnum og fasa $-\omega L$. Hún breytir því <b>ekki $\omega_c$</b> en minnkar fasaöryggið. Mesta leyfilega seinkun er þegar $\varphi_m = 0$:</p>
+<div class="key">
+$$\varphi_{m} = \varphi_{m,0} - \omega_c L\ \ \Rightarrow\ \ L_{max} = \frac{\varphi_{m,0}}{\omega_c}\ \ (\varphi_{m,0}\ \text{í radíönum})$$
+</div>
+<p>Ef seinkunin er í báðar áttir (gervihnöttur, prófið 2021 S4) er heildarseinkun $2L$ og $G_K = \dfrac{2e^{-2Ls}}{1+s}$. Þá er $\omega_c = \sqrt3$ rad/s, $\varphi_{m,0} = \pi - \pi/3 = 2\pi/3$ og $2L\omega_c = 2\pi/3$, sem gefur $L_{max} = \dfrac{\pi}{3\sqrt3} \approx 0{,}605$. Öll lausnin er í <a href="prof.html">gömlu prófunum</a>.</p>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 1 (V9) <span>Mögnunar- og fasaöryggi með seinkun</span></div><div class="ex-body">
+<p>$G_K = \dfrac{2e^{-s}}{1+2s}$. Finndu $A_m$, $\omega_\pi$, $\varphi_m$ og $\omega_c$.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Mögnun: $|G_K(j\omega)| = \dfrac{2}{\sqrt{1+4\omega^2}}$. Fasi: $\varphi_K = -\omega - \arctan 2\omega$.</p>
+<p>$|G_K| = 1 \Rightarrow 4\omega_c^2 = 3 \Rightarrow \omega_c = $ <span class="ans">0,87 rad/s</span>. Þá er $\varphi_K(\omega_c) = -0{,}866 - \arctan(1{,}732) = -0{,}866 - 1{,}047 = -1{,}913$ rad $= -109{,}6^\circ$, svo $\varphi_m = 180^\circ - 109{,}6^\circ = $ <span class="ans">70,4°</span>.</p>
+<p>$\varphi_K(\omega_\pi) = -\pi$ gefur $\omega_\pi \approx $ <span class="ans">1,84 rad/s</span> (leyst tölulega, t.d. í Matlab/Python). Þar er $|G_K| = 0{,}525$, svo $A_m = 1/0{,}525 = 1{,}90 = $ <span class="ans">5,6 dB</span>.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi 17.8.4 <span>Hvað má $\tau$ nemans vera stórt?</span></div><div class="ex-body">
+<p>$G_C = K = 3$, $G_P = \dfrac{1}{s(s+1)}$, $G_S = \dfrac{1}{\tau s+1}$. Hvað má $\tau$ vera stórt til að $A_m \ge 2$?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$G_K = \dfrac{3}{s(s+1)(\tau s+1)}$. Fasinn er $-90^\circ - \arctan\omega - \arctan\tau\omega$. Hann er $-180^\circ$ þegar $\arctan\omega + \arctan\tau\omega = 90^\circ$, þ.e. $\tau\omega^2 = 1$, $\omega_\pi = 1/\sqrt\tau$.</p>
+<p>Þar er $|G_K(j\omega_\pi)| = \dfrac{3}{\omega_\pi\sqrt{1+\omega_\pi^2}\sqrt{1+\tau^2\omega_\pi^2}} = \dfrac{3\tau}{1+\tau}$, svo $A_m = \dfrac{1+\tau}{3\tau} \ge 2 \iff \tau \le $ <span class="ans">0,2</span>.</p>
+<p>Á glærunni er mælt með Control-safninu í Colab: reiknaðu stöðugleikamörk fyrir ýmis $\tau$ og lestu af. Þú getur gert það sama í <a href="reiknivelar.html">lykkjugreiningunni</a> hér á síðunni með formúlunni <code>3/(s(s+1)(tau*s+1))</code>.</p>
+</div></details></div></div>
+
+<h2 id="skekkja">2. Skekkja í jafnvægi</h2>
+<p>Skekkjan $e(t) = r(t) - y_{\text{mælt}}(t)$ þegar öll tímaháð svörun er dáin út. Lokagildissetningin:</p>
+<div class="key">
+$$e_{ss} = \lim_{t\to\infty} e(t) = \lim_{s\to 0} s\,E(s)$$
+</div>
+<div class="note warn"><p><b class="t">Gildir aðeins ef kerfið er stöðugt.</b> Ef lokaða kerfið er óstöðugt gefur formúlan tölu sem enginn raunverulegur ferill nálgast. (Dæmi: prófið 2023 S2 er með 2 mín. seinkun og er í raun óstöðugt.)</p></div>
+<p><b>Tegund kerfis $N$</b> er fjöldi heildunarþátta ($1/s$) í lykkjunni $G_K$:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Tegund $N$</th><th>Einingaþrep ($1/s$)</th><th>Einingaflái ($1/s^2$)</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>fasti: $\dfrac{1}{1+K_p}$</td><td>óendanleg</td></tr>
+<tr><td>1</td><td>0</td><td>fasti: $\dfrac{1}{K_v}$</td></tr>
+<tr><td>≥ 2</td><td>0</td><td>0</td></tr>
+</tbody></table></div>
+<p>Hér er $K_p = \lim_{s\to0} G_K(s)$ og $K_v = \lim_{s\to0} s\,G_K(s)$.</p>
+<ul>
+  <li><b>Breyting á óskgildi:</b> $E = \dfrac{1}{1+G_K}R$.</li>
+  <li><b>Truflun $V_1$:</b> $E = \dfrac{-G_P G_S}{1+G_K}V_1$. Skekkjan verður núll fyrir þrepatruflun aðeins ef <b>stýringin</b> $G_C$ (á undan truflunni) hefur heildunarþátt. Heildun í ferlinu eftir truflunina hjálpar ekki.</li>
+</ul>
+
+<div class="ex"><div class="ex-head">Dæmi 17.8.6 <span>P-stýring á fyrstu gerðar ferli</span></div><div class="ex-body">
+<p>$G_C = 5$, $G_P = \dfrac{3}{10s+1}$, $G_S = 1$, $V_1 = V$. Skekkja í jafnvægi ef: (a) þrep í $R$, (b) flái í $R$, (c) þrep í $V$?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$G_K = \dfrac{15}{10s+1}$, tegund 0, $K_p = 15$.</p>
+<p>(a) $e_{ss} = \dfrac{1}{1+15} = $ <span class="ans">1/16</span> = 0,0625.</p>
+<p>(b) Flái í tegund 0: <span class="ans">∞</span> (skekkjan vex án takmarka).</p>
+<p>(c) $e_{ss} = \lim_{s\to0} s\cdot\dfrac{-G_PG_S}{1+G_K}\cdot\dfrac1s = \dfrac{-3}{1+15} = $ <span class="ans">−3/16</span> = −0,1875.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 3 (V9) <span>Tegund 1</span></div><div class="ex-body">
+<p>$G_C = 3$, $G_P = \dfrac{1}{s(s+1)}$, $G_S = 1$. Skekkja fyrir (a) þrep í $R$, (b) flái í $R$, (c) þrep í $V$ (á milli stýringar og ferlis)?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$G_K = \dfrac{3}{s(s+1)}$, <b>tegund 1</b> (einn heildunarþáttur).</p>
+<p>(a) Þrep: <span class="ans">0</span>.</p>
+<p>(b) Flái: $e_{ss} = \lim_{s\to0}\dfrac{s}{1+\frac{3}{s(s+1)}}\cdot\dfrac{1}{s^2} = \lim\dfrac{s+1}{s(s+1)+3} = $ <span class="ans">1/3</span>.</p>
+<p>(c) Þrep í $V$: $e_{ss} = \lim_{s\to0}\dfrac{-1/(s(s+1))}{1+3/(s(s+1))} = \lim\dfrac{-1}{s(s+1)+3} = $ <span class="ans">−1/3</span>. Skekkjan er ekki núll því <b>stýringin</b> er tegund 0 (heildunin er í ferlinu, eftir truflunina).</p>
+</div></details></div></div>
+
+<h2 id="hradi">3. Hraði svörunar</h2>
+<div class="key">
+$$t_r \approx \frac{1{,}4}{\omega_c}$$
+</div>
+<p>Rístími $t_r$ (tímastuðull heildarkerfisins) er í öfugu hlutfalli við skurðtíðnina. Hærri $\omega_c$ þýðir hraðari svörun. Þumalputtareglan gildir fyrir &ldquo;eðlileg öryggismörk&rdquo; (fasaöryggi á bilinu 30-60°). Á prófinu: berðu saman $\omega_c$ tveggja stýringa.</p>
+<p>Dæmi: $\omega_c = 2{,}85$ rad/s gefur $t_r = 1{,}4/2{,}85 = 0{,}49$ s. $\omega_c = 0{,}83$ gefur 1,7 s.</p>
+
+<h2 id="truflun">4. Deyfing truflana</h2>
+<p>Fyrir sínustruflun með útslag $A$ og horntíðni $\omega$ (stöðugt kerfi) verður útslagið á úttaki:</p>
+<div class="key">
+$$A_{\text{út}} = |G_{VY}(j\omega)|\cdot A,\qquad G_{VY} = \frac{G_P}{1+G_K}\ \text{með afturvirkni},\quad G_{VY} = G_P\ \text{án afturvirkni}$$
+$$\omega = \frac{2\pi}{T}\ \ (T \text{ er sveiflutími})$$
+</div>
+<ul>
+  <li>Þar sem $|G_K| \gg 1$ (lágar tíðnir) er $G_{VY} \approx 1/(G_CG_S)$: afturvirknin deyfir mikið og því meira sem $G_C$ er stærri.</li>
+  <li>Þar sem $|G_K| \ll 1$ (háar tíðnir) er $G_{VY} \approx G_P$: afturvirknin gerir ekkert.</li>
+  <li>Í kringum $\omega_c$ getur afturvirknin <b>aukið</b> truflunina. Mögnunarferlarnir með og án afturvirkni skerast (sýnidæmi 4 hér að neðan).</li>
+  <li>Reiknaðu alltaf $|G_{VY}(j\omega)|$ við tíðni truflunarinnar. Ekki giska út frá $K$ eða $\omega_c$.</li>
+</ul>
+
+<div class="ex"><div class="ex-head">Dæmi 17.8.7 <span>Sínustruflun $2{,}5\sin(0{,}5t)$</span></div><div class="ex-body">
+<p>$G_C = 3$, $G_P = \dfrac{2}{(s+1)^2}$, $G_S = 1$, $V_1 = 2{,}5\sin(0{,}5t)$. Útslag á $Y$ (a) án afturvirkni, (b) með afturvirkni?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) $|G_{VY}(j0{,}5)| = \dfrac{2}{1+0{,}25} = 1{,}6$, svo $|y_v| = 2{,}5\cdot1{,}6 = $ <span class="ans">4</span>.</p>
+<p>(b) $G_{VY} = \dfrac{G_P}{1+G_K} = \dfrac{2}{(s+1)^2 + 6}$. Við $s = j\omega$: $\dfrac{2}{7 - \omega^2 + 2j\omega}$, og $|\cdot| = \dfrac{2}{\sqrt{(7-0{,}25)^2 + 1}} = 0{,}293$. $|y_v| = 2{,}5\cdot 0{,}293 = $ <span class="ans">0,733</span>.</p>
+<p>Afturvirkni deyfir truflunina um þáttinn 5,5.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 4 (V9) <span>Hvar hættir afturvirknin að hjálpa?</span></div><div class="ex-body">
+<p>$K = 16$, $G_P = \dfrac{1}{(s+1)^2}$. Upp að hvaða tíðni deyfir afturvirknin áhrif truflunar $V$ á $Y$ miðað við $K = 0$?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Án afturvirkni: $|S_1| = \dfrac{1}{1+\omega^2}$. Með: $\dfrac{1}{(j\omega+1)^2+16}$, svo $|S_1^F| = \dfrac{1}{\sqrt{4\omega^2 + (17-\omega^2)^2}}$.</p>
+<p>Ferlarnir skerast þegar $(1+\omega_c^2)^2 = 4\omega_c^2 + (17-\omega_c^2)^2$. Þá hverfa $\omega^4$ liðirnir og eftir verður $32\,\omega_c^2 = 17^2 - 1 = 288$, svo $\omega_c^2 = 9$:</p>
+<p>$\omega_c = $ <span class="ans">3 rad/s</span>. Fyrir neðan 3 rad/s deyfir afturvirknin truflanir, fyrir ofan hana gerir hún lítið eða magnar þær.</p>
+</div></details></div></div>
+
+<h2 id="namni">5. Næmni gagnvart breytileika</h2>
+<p>Einingar breytast (öldrun, hitastig). Næmni segir hversu mikið heildarkerfið $G_T = \dfrac{G_CG_P}{1+G_K}$ breytist:</p>
+<div class="key">
+$$S^{G_T}_{G_P} = \frac{1}{1+G_K}\quad(\text{ferli}),\qquad S^{G_T}_{G_S} = \frac{-G_K}{1+G_K}\quad(\text{nemi})$$
+</div>
+<ul>
+  <li>Hærri $|G_C|$ minnkar áhrif breytileika í <b>ferlinu</b>.</li>
+  <li>Lægri $|G_C|$ minnkar áhrif breytileika í <b>nemanum</b>. Nemi þarf því að vera nákvæmur: afturvirknin bætir ekki upp skekkjur í honum.</li>
+</ul>
+
+<div class="ex"><div class="ex-head">Sýnidæmi 5 (V9) <span>Tvær leiðir að sama yfirfærslufalli</span></div><div class="ex-body">
+<p>$G_P = \dfrac{K}{s+1}$ með $K = 1$. Leið A: án afturvirkni, $G_T = \dfrac{K}{s+1}$. Leið B: með afturvirkni og PI-stýringu $G_C = 1 + \dfrac1s$, sem gefur $G_T = \dfrac{K}{s+K}$. Hvað gerist ef $K$ fellur í 0,8 vegna öldrunar?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Með $K = 1$ eru bæði kerfin $\dfrac{1}{s+1}$.</p>
+<p>A: $|G_T(j\omega)| = \dfrac{0{,}8}{\sqrt{1+\omega^2}}$, lágtíðnimögnun $\to 0{,}8$: <b>breyttist</b> (var 1).</p>
+<p>B: $|G_T(j\omega)| = \dfrac{0{,}8}{\sqrt{0{,}8^2+\omega^2}} \to 1$ þegar $\omega\to0$: <span class="ans">breyttist ekki</span>.</p>
+<p>Afturvirknin (með heildun) verndar lágtíðnimögnunina. Athugaðu samt að breytileikinn getur haft áhrif á stöðugleikann.</p>
+</div></details></div></div>
+
+<h2 id="stjornmerki">6. Stærð og tíðni stýrimerkis</h2>
+<p>Stýrimerkið $U$ má ekki vera of stórt eða of hraðbreytilegt (hreyfillinn mettast). Þú getur alltaf skoðað yfirfærslufallið frá inntaki til $U$. <b>Háatíðnihegðun stýringarinnar ræður mestu</b>: $|G_C(j\omega)|$ fyrir stórt $\omega$.</p>
+<div class="ex"><div class="ex-head">Dæmi 17.8.9 <span>Þrjár PI-stillingar</span></div><div class="ex-body">
+<p>$G_C = K\bigl(1 + \tfrac{1}{T_Is}\bigr)$, $G_P = \dfrac{1}{(s+1)^2}$. Þrjár samsetningar með svipaðan stöðugleika: (1) $K = 2{,}2$, $T_I = 5$; (2) $K = 1{,}35$, $T_I = 2{,}1$; (3) $K = 0{,}48$, $T_I = 1{,}0$. Hver gefur lægst stýrimerki af háum tíðnum?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$|G_C(j\omega)| = K\dfrac{\sqrt{T_I^2\omega^2+1}}{T_I\omega} \approx K$ þegar $T_I^2\omega^2 \gg 1$. Stýrimerkið á háum tíðnum ræðst af $K$.</p>
+<p>Lægsta $K$ er $0{,}48$: <span class="ans">samsetning 3</span> gefur veikasta stýrimerkið. (Allar þrjár hafa fasaöryggi 66-74°.)</p>
+</div></details></div></div>
+
+<h2>Samantekt: hvað gerist þegar $K$ hækkar (P-stýring)?</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Eiginleiki</th><th>Áhrif þegar $K$ hækkar</th></tr></thead>
+<tbody>
+<tr><td>Skurðtíðni $\omega_c$</td><td>færist til hægri</td></tr>
+<tr><td>Hraði</td><td>meiri ($t_r \approx 1{,}4/\omega_c$ styttist)</td></tr>
+<tr><td>Skekkja í jafnvægi (tegund 0)</td><td>minni ($1/(1+K_p)$)</td></tr>
+<tr><td>Deyfing truflana, næmni</td><td>betri á lágum tíðnum</td></tr>
+<tr><td>Stöðugleiki ($\varphi_m$, $A_m$)</td><td><b>verri</b>: óstöðugt þegar $\omega_c = \omega_\pi$</td></tr>
+<tr><td>Stýrimerki</td><td>sterkara á öllum tíðnum</td></tr>
+</tbody></table></div>
+<p>Veldu $K$ eins hátt og stöðugleiki og stýrimerki leyfa.</p>
+
+<h2>Hvernig á að svara &ldquo;hvor stýringin?&rdquo;</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Spurt er um</th><th>Berðu saman</th></tr></thead>
+<tbody>
+<tr><td>Hraða</td><td>$\omega_c$ (hærri er hraðari)</td></tr>
+<tr><td>Stöðugleika</td><td>$\varphi_m = 180^\circ + \varphi_K(\omega_c)$, reiknað úr uppgefnu $\omega_c$</td></tr>
+<tr><td>Lágtíðnitruflanir</td><td>heildun (PI) og $K/T_I$. Hærra gildi gefur meiri deyfingu.</td></tr>
+<tr><td>Truflun við tiltekna tíðni</td><td>$|G_P/(1+G_K)|$ reiknað við þá tíðni</td></tr>
+<tr><td>Stýrimerki á háum tíðnum</td><td>$|G_C|$ fyrir $\omega\to\infty$ (P/PI: $K$, PID: $K T_D/T_F$)</td></tr>
+</tbody></table></div>
+<p>Dæmi um allt þetta eru í <a href="prof.html">gömlu prófunum</a>, og næsti kafli sýnir hvernig <a href="styringar.html">P, PI, PD og PID</a> breyta Bode-ritinu.</p>
+<div class="pager noprint"><a href="hreyflar.html"><span>Fyrri</span>Hreyflar</a><a href="styringar.html" style="text-align:right"><span>Næsta</span>P, PI, PD og PID</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+
+</body>
+</html>

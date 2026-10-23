@@ -1,0 +1,87 @@
+<!--wide-->
+<h1>Formúlublað</h1>
+<p class="lede">Allar formúlur úr hönnunarhlutanum á einum stað. Hentar til að fara yfir rétt fyrir prófið. Prentaðu blaðið (tvídálka á A4) ef prófið leyfir hjálpargögn, en athugaðu fyrst hvað kennarinn heimilar.</p>
+<p class="noprint"><button type="button" class="btn" onclick="window.print()">Prenta blaðið</button></p>
+
+<div class="sheet">
+
+<section>
+<h3>Nemar</h3>
+<p>Næmni: $S = \dfrac{\Delta y}{\Delta x}$. Línulegur nemi:</p>
+$$y = y_{min} + \frac{y_{max}-y_{min}}{x_{max}-x_{min}}(x - x_{min})$$
+<p>4-20 mA: $x_{min}$ gefur 4 mA. Frávik frá línuleika: % af <b>mælisviði</b>.</p>
+<p>Fyrstu gerðar: $y(t) = \Delta x\,(1 - e^{-t/\tau})$. 63,2 % við $\tau$, 98,2 % við $4\tau$.</p>
+<p>Álagsnemi: $\Delta R = R\,G\,\varepsilon$. Kóðaskífa: upplausn $\dfrac{2\pi r}{N}$.</p>
+<p>Stillivíðnám með álagi: $e = V_s\dfrac{R_P}{R_L}(x^2 - x^3)$.</p>
+</section>
+
+<section>
+<h3>Jafnstraumshreyfill</h3>
+$$v_a = L\frac{di}{dt} + R\,i + K_f\omega,\qquad \tau = K_\tau i,\qquad I\dot\omega + c\,\omega = \tau$$
+<p>$\tau_s = \dfrac{K_\tau}{R}v_a$, &nbsp; $\omega_0 = \dfrac{v_a}{K_f}$, &nbsp; $\tau = \tau_s\Bigl(1-\dfrac{\omega}{\omega_0}\Bigr)$</p>
+<p>$P_{max} = \dfrac{\tau_s\omega_0}{4}$ við $\omega_0/2$. &nbsp; $\tau_e = \dfrac{L}{R}$.</p>
+<p>$L = 0$: $G_P = \dfrac{K_\tau/R}{Is + c + K_\tau K_f/R}$.</p>
+<p>Gír: $I_{eff} = I_1 + I_2/N^2$. Lyfta: $\tau = \tau_n + m g r$ (+ $m a r$).</p>
+<p>V/1000 RPM í V·s/rad: deila með 104,72.</p>
+</section>
+
+<section>
+<h3>Lykkjan og stöðugleiki</h3>
+$$G_K = G_CG_PG_S,\qquad G_T = \frac{G_CG_P}{1+G_K}$$
+<p>$\omega_c$: $|G_K| = 1$. &nbsp; $\omega_\pi$: $\angle G_K = -180^\circ$.</p>
+<p>$\varphi_m = 180^\circ + \angle G_K(j\omega_c)$, &nbsp; $A_m = \dfrac{1}{|G_K(j\omega_\pi)|}$.</p>
+<p>Óstöðugt ef $|G_K(j\omega_\pi)| \ge 1$. Heppilegt: $\varphi_m$ 30°-60°, $A_m$ 2-5.</p>
+<p>Rístími $t_r \approx 1{,}4/\omega_c$. Seinkun $e^{-Ls}$: mögnun 1, fasi $-\omega L$; $L_{max} = \varphi_m/\omega_c$.</p>
+<p>$\mathrm{dB} = 20\log_{10}|G|$; $3\ \mathrm{dB}\approx\sqrt2$, $6\ \mathrm{dB}\approx2$, $20\ \mathrm{dB}=10$.</p>
+</section>
+
+<section>
+<h3>Skekkja í jafnvægi</h3>
+<p>Tegund $N$ = fjöldi $1/s$ í $G_K$. $K_p = G_K(0)$, $K_v = \lim sG_K$. Aðeins ef kerfið er stöðugt.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>$N$</th><th>Þrep</th><th>Flái</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>$\dfrac{1}{1+K_p}$</td><td>$\infty$</td></tr>
+<tr><td>1</td><td>0</td><td>$\dfrac{1}{K_v}$</td></tr>
+<tr><td>2</td><td>0</td><td>0</td></tr>
+</tbody></table></div>
+<p>Skekkja vegna þrepatruflunar verður 0 aðeins ef heildunarþáttur er í $G_C$, þ.e. á milli skekkjumerkisins og staðarins þar sem truflunin kemur inn. Heildun í ferlinu eftir truflunina dugar ekki.</p>
+</section>
+
+<section>
+<h3>Truflanir og næmni</h3>
+<p>Truflun $v$ fyrir framan ferlið: $G_{VY} = \dfrac{G_P}{1+G_K}$. Meta við tíðni truflunar: mögnun $|G_{VY}(j\omega)|$, margfalda með útslagi.</p>
+<p>Næmni: $S^{G_T}_{G_P} = \dfrac{1}{1+G_K}$, &nbsp; $S^{G_T}_{G_S} = \dfrac{-G_K}{1+G_K}\approx-1$.</p>
+<p>Stýrimerki $U$: hátíðnihegðun $|G_C(j\omega)|$ ræður mestu.</p>
+</section>
+
+<section>
+<h3>Bode-byggingareiningar</h3>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Mögnun</th><th>Fasi</th></tr></thead>
+<tbody>
+<tr><td>$K$</td><td>$20\log K$</td><td>0°</td></tr>
+<tr><td>$1/s$</td><td>−20 dB/dek.</td><td>−90°</td></tr>
+<tr><td>$\frac{1}{1+\tau s}$</td><td>−20 dB/dek. frá $1/\tau$</td><td>0° → −90°</td></tr>
+<tr><td>$1+Ts$</td><td>+20 dB/dek. frá $1/T$</td><td>0° → +90°</td></tr>
+<tr><td>$e^{-Ls}$</td><td>0 dB</td><td>$-\omega L$</td></tr>
+</tbody></table></div>
+<p>Margfalda yfirfærsluföll = leggja saman dB og fasa.</p>
+</section>
+
+<section>
+<h3>P, PI, PD, PID</h3>
+<p>P: $G_C = K$. &nbsp; PI: $K\dfrac{1+T_Is}{T_Is}$, &nbsp; $\omega_I = 1/T_I$. &nbsp; PD: $K(1+T_Ds)$, $\omega_D = 1/T_D$.</p>
+$$\text{PID: } G_C = K\,\frac{1+T_Is}{T_Is}\,\frac{1+T_Ds}{1+T_Fs},\qquad |G_C(j\infty)| = K\frac{T_D}{T_F}$$
+<p>PI eyðir skekkju en lækkar fasann. PD hækkar fasann en magnar hátíðni.</p>
+</section>
+
+<section>
+<h3>Hönnunaruppskriftir</h3>
+<p><b>PI:</b> $K$ svo $\varphi_m = \varphi_{min}+0{,}06\pi$; $\omega_I = 0{,}2\omega_c$, $T_I = \dfrac{1}{0{,}2\omega_c}$.</p>
+<p><b>PD:</b> $0{,}8\omega_\pi < \omega_D < 1{,}5\omega_\pi$; skoðaðu $G_CG_P$; veldu $K$ fyrir viðunandi $\varphi_m$.</p>
+<p><b>PID:</b> $T_D$ eins og PD; $0{,}2T_D < T_F < 0{,}4T_D$; skoðaðu $\dfrac{1+T_Ds}{1+T_Fs}G_P$; síðan $T_I$ og $K$ eins og PI.</p>
+<p>Hafðu stýringuna eins einfalda og hægt er.</p>
+</section>
+
+</div>
