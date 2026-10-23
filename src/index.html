@@ -1,0 +1,53 @@
+<!--scripts: js/ctrl.js js/hero.js -->
+<!--wide-->
+<h1>Hönnun véleindakerfa</h1>
+<p class="lede">Efni til að læra fyrir könnun 2 í IÐN303G (vika 7-9): nemar, hreyflar, sjálfvirk stýrikerfi og stýringar. Allt er byggt á glærum, sýnidæmum og gömlu prófunum frá 2021, 2023 og 2025.</p>
+
+<section aria-labelledby="hero-t">
+  <h2 id="hero-t" style="border-top:0;margin-top:1.6rem;padding-top:0">Færðu K og sjáðu hvað gerist</h2>
+  <p style="max-width:40rem">Lykkjan hér að neðan er sýnidæmi 1 úr stýringum: P-stýring á ferli með yfirfærslufallið $G_P = \dfrac{2{,}5}{(1+2s)(1+0{,}5s)}$. Þegar K hækkar færist $\omega_c$ til hægri (hraðari svörun, minni skekkja), en fasaöryggið $\varphi_m$ minnkar og svörunin fer að sveiflast.</p>
+  <div class="panel hero-fig">
+    <div class="row" style="align-items:center">
+      <div style="flex:1 1 16rem">
+        <label class="f" for="hero-k">K = <output id="hero-kv">4,0</output></label>
+        <input type="range" id="hero-k" min="0.5" max="30" step="0.1" value="4">
+      </div>
+      <div class="fixed"><button class="btn ghost" type="button" id="hero-45">Stilla á 45° fasaöryggi</button></div>
+    </div>
+    <div class="hero-readout" aria-live="polite">
+      <div class="hl"><b id="r-pm">–</b><span>fasaöryggi $\varphi_m$</span></div>
+      <div><b id="r-wc">–</b><span>skurðtíðni $\omega_c$ [rad/s]</span></div>
+      <div><b id="r-tr">–</b><span>rístími $t_r \approx 1{,}4/\omega_c$ [s]</span></div>
+      <div><b id="r-ess">–</b><span>skekkja í jafnvægi (þrep)</span></div>
+    </div>
+    <div class="legend" style="margin-top:1rem"><span><i style="background:var(--mag)"></i>mögnun</span><span><i style="background:var(--phase)"></i>fasi</span></div>
+    <canvas class="plot" id="hero-bode" role="img" aria-label="Bode-rit lykkjunnar"></canvas>
+    <p style="margin:1rem 0 0.3rem;font-family:var(--sans);font-weight:700">Þrepasvörun lokaðs kerfis</p>
+    <canvas class="plot" id="hero-step" role="img" aria-label="Þrepasvörun lokaða kerfisins"></canvas>
+    <p style="margin:0.8rem 0 0;color:var(--muted);font-size:0.95rem">Í handskrifuðu lausninni er K ≈ 4 sem gefur $\varphi_m = 45^\circ$, $\omega_c \approx 2{,}85$ rad/s og $e_{ss} = 1/(1+K_p) \approx 0{,}1$.</p>
+  </div>
+</section>
+
+<h2>Hvað hefur komið á prófum</h2>
+<p>Í gögnunum eru þrjú hönnunarpróf (2021, 2023 og 2025). Sama kjarnaefni kemur aftur og aftur, stundum með nákvæmlega sömu tölum.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Efni</th><th>2021</th><th>2023</th><th>2025</th></tr></thead>
+<tbody>
+<tr><td><a href="nemar.html">Nemar</a></td><td>S1: tveir hitanemar</td><td>S3: 4-20 mA nemi</td><td>S1: tveir hitanemar (<b>sama og 2021</b>)</td></tr>
+<tr><td><a href="hreyflar.html">Hreyfill</a></td><td>S3: $G_1$, $G_2$ og skekkja með P</td><td>S1: $\tau_s$, $\omega_0$, $P_{max}$</td><td>S2: $\tau_s$, $\omega_0$, $P_{max}$ og $L/R$</td></tr>
+<tr><td><a href="stjornkerfi.html">Truflun og afturvirkni</a></td><td>S2: tankur, sínustruflun</td><td>S2: tankur með seinkun, skekkja</td><td>S3: tankur, sínustruflun (<b>nær sama og 2021</b>)</td></tr>
+<tr><td><a href="stjornkerfi.html">Stöðugleiki</a></td><td>S4: seinkun $L$ í lykkju</td><td>S4: PI, fasaöryggi og hraði</td><td>S4: P gegn PI, truflun</td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Mynstur:</b> hvert próf hefur eina nemaspurningu eða tvær, eina hreyfilspurningu, eina spurningu um truflun með afturvirkni og eina um val á stýringu eða stöðugleika. Allir liðir kalla á stuttan útreikning. Þess vegna eru <a href="aefingar.html">æfingaspurningarnar</a> búnar til með slembitölum, svo þú getur æft sömu gerð aftur og aftur.</p></div>
+
+<h2>Hvar á að byrja</h2>
+<ol>
+  <li><b><a href="prof.html">Gömul próf</a></b>: reyndu hverja spurningu án þess að opna lausnina, eins og Rúnar mælir með. Lausnirnar hér eru allar fullreiknaðar skref fyrir skref.</li>
+  <li><b><a href="hreyflar.html">Hreyflar</a> og <a href="nemar.html">nemar</a></b>: stuttir kaflar með fáum formúlum. Þetta eru auðveldustu stigin á prófinu.</li>
+  <li><b><a href="stjornkerfi.html">Sjálfvirk stýrikerfi</a></b>: sex eiginleikar lykkjunnar. Hér tapast flest stig.</li>
+  <li><b><a href="spjold.html">Flashcards</a></b> fyrir hugtök og formúlur, og <a href="formulublad.html">formúlublaðið</a> sem má prenta út eða skrifa upp í höndunum (leyft á prófinu).</li>
+</ol>
+
+<h2>Um síðuna</h2>
+<p>Allar tölur í lausnum eru endurreiknaðar í kóða og bornar saman við lausnir kennarans. Þar sem handskrifuðu lausnirnar námunda öðruvísi (t.d. $\tau_s = 0{,}43$ gegn $0{,}44$ Nm) er það tekið fram. Reiknivélarnar og Bode-ritin eru skrifuð fyrir þessa síðu og keyra í vafranum.</p>
+<p style="color:var(--muted);font-size:0.95rem">Heimildir: glærur V7, V8 og V9 (Rúnar Unnþórsson), sýnidæmi vikna 7-10, lausnir á tengidæmum kafla 16-19 og prófin frá 2021, 2023 og 2025.</p>

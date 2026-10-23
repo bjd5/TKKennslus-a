@@ -1,0 +1,178 @@
+<h1>Gömul próf með lausnum</h1>
+<p class="lede">Prófin frá 2021, 2023 og 2025. Rúnar mælir með að þú farir fyrst í gegnum prófin án þess að kíkja á lausnirnar. Hver spurning hér er því með lausn sem er falin þar til þú opnar hana. Allar tölur eru endurreiknaðar.</p>
+<div class="note"><p><b class="t">Leyfileg hjálpargögn</b> á prófunum 2023 og 2025: vasareiknir og handskrifað formúlublað (skila þarf blaðinu). Sjá <a href="formulublad.html">formúlublaðið</a>. Prófið er einstaklingspróf með fjórum jafnþungum spurningum (25 % hver). Rökstyðja skal svör með útreikningum.</p></div>
+
+<p class="noprint"><b>Flýtileiðir:</b> <a href="#p2021">2021</a> · <a href="#p2023">2023</a> · <a href="#p2025">2025</a> · <a href="#tengi">Tengidæmi 16-19</a></p>
+
+<h2 id="p2021">Próf 29. október 2021</h2>
+
+<div class="ex"><div class="ex-head">Spurning 1 <span>Hitanemar</span></div><div class="ex-body">
+<table>
+<thead><tr><th></th><th>Nemi A</th><th>Nemi B</th></tr></thead>
+<tbody>
+<tr><td>Mælisvið</td><td>0-100 °C</td><td>0-150 °C</td></tr>
+<tr><td>Úttak</td><td>0-5 V</td><td>0-10 V</td></tr>
+<tr><td>Tímastuðull</td><td>2,0 s</td><td>2,5 s</td></tr>
+<tr><td>Frávik frá línuleika</td><td>1 %</td><td>2 %</td></tr>
+</tbody></table>
+<p>(a) Hvor neminn er heppilegri til að mæla 90-130 °C? (b) Hvor er hraðari? (c) Úttak nema A við 75 °C (án fráviks frá línuleika)? (d) Frávik frá línuleika nema B í °C?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> Neminn þarf að ná yfir allt bilið. A nær aðeins upp í 100 °C, svo <span class="ans">nemi B</span>.</p>
+<p><b>(b)</b> Fyrsta stigs kerfi: minni tímastuðull er hraðari. $\tau_A = 2{,}0 < \tau_B = 2{,}5$, svo <span class="ans">nemi A</span>.</p>
+<p><b>(c)</b> $S_A = 5\ \mathrm{V}/100\ ^\circ\mathrm{C} = 0{,}05$ V/°C, svo $V_A = 0{,}05\cdot75 = $ <span class="ans">3,75 V</span>.</p>
+<p><b>(d)</b> Frávikið er 2 % af mælisviði: $0{,}02\cdot150 = $ <span class="ans">3 °C</span>.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 2 <span>Tankur, sínustruflun, P-stýring</span></div><div class="ex-body">
+<p>Blokkrit blöndunar í tanki: hitari $\dfrac{0{,}5}{1+s}$ gefur varma inn í tank $\dfrac{1}{1+10s}$. Hitastig $T_1$ inn í tankinn bætist við á milli. Tímastuðlar í mín. $T_1$ sveiflast sem sínusbylgja með sveiflutíma 4,5 mín. Hugmynd: afturvirkni með P-stýringu, $K = 37$, sem gefur fasaöryggi 45°.</p>
+<p>(a) Hversu mikil eru áhrif $T_1$ á úttakið $T_2$ í upprunalega kerfinu? (b) Hversu betri eða verri er niðurstaðan með $K = 37$?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Horntíðni truflunar: $\omega = 2\pi/T = 2\pi/4{,}5 = 1{,}396$ rad/mín.</p>
+<p><b>(a)</b> $T_1$ kemur inn <i>eftir</i> hitarann, svo leiðin að úttaki er bara tankurinn:</p>
+$$|G(j\omega)| = \frac{1}{\sqrt{1+(10\omega)^2}} = \frac{1}{\sqrt{1+13{,}96^2}} = 0{,}0714$$
+<p>Útslag úttaks er <span class="ans">7,1 %</span> af útslagi truflunarinnar.</p>
+<p><b>(b)</b> Lykkjan: $G_K = 37\cdot\dfrac{0{,}5}{1+s}\cdot\dfrac{1}{1+10s} = \dfrac{18{,}5}{(1+s)(1+10s)}$.</p>
+$$G_{VY} = \frac{G_P}{1+G_K} = \frac{\frac{1}{1+10s}}{1+\frac{18{,}5}{(1+s)(1+10s)}} = \frac{1+s}{10s^2 + 11s + 19{,}5}$$
+<p>Við $s = j\omega$, $\omega = 1{,}396$: teljari $\sqrt{1+\omega^2} = 1{,}717$. Nefnari: $19{,}5 - 10\omega^2 = 19{,}5 - 19{,}49 = 0{,}01$ og $11\omega = 15{,}36$, svo $|\cdot| = 15{,}36$.</p>
+$$|G_{VY}(j\omega)| = \frac{1{,}717}{15{,}36} = 0{,}112$$
+<p>Með afturvirkni er útslagið <span class="ans">11,2 %</span>, eða <b>1,57 sinnum meira</b> (um 56 % <i>verra</i>).</p>
+<div class="note warn"><p>Þetta er gildra: sveiflutími truflunarinnar er svo nálægt eiginsveiflutíðni lokaða kerfisins ($\sqrt{19{,}5/10} = 1{,}40$ rad/mín) að afturvirknin magnar truflunina. Við mjög lágar tíðnir deyfir hún vel: $G_{VY}(0) = 1/19{,}5 = 0{,}051$ gegn 1 án afturvirkni.</p></div>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 3 <span>Jafnstraumshreyfill, P-stýring á hraða</span></div><div class="ex-body">
+<p>$K_\tau = 0{,}15$ Nm/A, $K_f = 11$ V/1000 RPM, $R = 1{,}25\ \Omega$, $I = 0{,}7$ kg·m², $c = 0{,}5$ Nms/rad, inngangsspenna 0-15 V, $L \approx 0$. Blokkrit hreyfilsins: $U \to (+,-) \to G_1 \to T \to G_2 \to \Theta$, með $K_f s$ í afturvirkni ($V_f$).</p>
+<p>(a) Finndu $G_1(s)$ og $G_2(s)$. (b) P-stýring með $K = 10$ þar sem úttak og óskgildi eru snúningshraði: hver er skekkja í jafnvægi við breytingu á óskgildi um 10 rad/s?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> Með $L = 0$: $u - v_f = R\,i$ og $\tau = K_\tau i$, svo $\tau = \dfrac{K_\tau}{R}(u - v_f)$:</p>
+$$G_1 = \frac{K_\tau}{R} = \frac{0{,}15}{1{,}25} = \text{0,12}$$
+<p>Snúningsjafnan $I\ddot\theta + c\dot\theta = \tau$ gefur</p>
+$$G_2 = \frac{\Theta}{T} = \frac{1}{Is^2 + cs} = \frac{1}{0{,}7s^2 + 0{,}5s} = \frac{2}{s(1{,}4s+1)}$$
+<p><b>(b)</b> Hraði: $\Omega = s\Theta$. Innri afturvirkni (bakspenna) gefur yfirfærslufall frá spennu til hraða:</p>
+$$G_P = \frac{sG_1G_2}{1 + K_f\,sG_1G_2} = \frac{0{,}12}{0{,}7s + 0{,}5 + 0{,}12K_f}$$
+<p>$K_f$ í SI: $11/(1000\cdot2\pi/60) = 11/104{,}72 = 0{,}105$ V·s/rad, svo $0{,}12K_f = 0{,}0126$ og $G_P(0) = \dfrac{0{,}12}{0{,}5126} = 0{,}2341$.</p>
+<p>Þrepabreyting $\Delta r = 10$ rad/s í tegund 0:</p>
+$$e_{ss} = \frac{\Delta r}{1+K\,G_P(0)} = \frac{10}{1+10\cdot0{,}2341}$$
+<p>Þá fæst <span class="ans">2,99 rad/s</span></p>
+<p>Skekkjan er því um 30 % af breytingunni. P-stýring á fyrstu gerðar kerfi skilar aldrei núllskekkju.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 4 <span>Gervihnöttur: seinkun í lykkju</span></div><div class="ex-body">
+<p>P-stýring með $K = 2$ stýrir kerfi í gervihnetti frá jörðu. Seinkun $L$ er jafn mikil í báðar áttir. Blokkrit: $R \to (+,-) \to 2 \to e^{-Ls} \to \dfrac{1}{1+s} \to Y$, og $e^{-Ls}$ í afturvirkninni.</p>
+<p>(a) Finndu yfirfærslufall lykkjunnar. (b) Hvert er hæsta gildið á $L$ áður en kerfið verður óstöðugt?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> Margfaldaðu allt sem merkið fer í gegnum í hring:</p>
+$$G_K = 2\,e^{-Ls}\,\frac{1}{1+s}\,e^{-Ls} = \frac{2\,e^{-2Ls}}{1+s}$$
+<p><b>(b)</b> Mörk stöðugleika: fasaöryggi núll, þ.e. fasi lykkjunnar er $-\pi$ við $\omega_c$. Seinkun hefur mögnun 1, svo $\omega_c$ breytist ekki:</p>
+$$|G_K| = \frac{2}{\sqrt{1+\omega_c^2}} = 1 \;\Rightarrow\; \omega_c = \sqrt3\ \text{rad/s}$$
+<p>Fasinn: $\varphi_K = -\arctan\omega - 2L\omega$. Sett í $\varphi_K(\omega_c) = -\pi$:</p>
+$$-\frac\pi3 - 2L\sqrt3 = -\pi \;\Rightarrow\; 2L\sqrt3 = \frac{2\pi}{3} \;\Rightarrow\; L_{max} = \frac{\pi}{3\sqrt3}$$
+<p>Þá fæst <span class="ans">0,605 s</span></p>
+<p>(í hvora átt, svo heildarseinkun lykkjunnar er 1,21 s). Til að hafa jákvætt fasaöryggi þarf $L < 0{,}605$ s.</p>
+</div></details></div></div>
+
+<h2 id="p2023">Próf 25. október 2023</h2>
+
+<div class="ex"><div class="ex-head">Spurning 1 <span>Hreyfill: $\tau_s$, $\omega_0$, $P_{max}$</span></div><div class="ex-body">
+<p>$K_\tau = 0{,}15$ Nm/A, $K_f = 11$ V/1000 RPM, $R = 1{,}25\ \Omega$. Hver eru upphafsvægi, snúningshraði í lausagangi og hámarksafl ef inngangsspennan er 5 V?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Upphafsvægi ($\omega = 0$, engin bakspenna): $\tau_s = \dfrac{K_\tau}{R}v_a = \dfrac{0{,}15}{1{,}25}\cdot5 = $ <span class="ans">0,60 Nm</span> (straumur 4 A).</p>
+<p>Lausagangur ($\tau = 0$): $v_a = K_f\omega_0$. Með 11 V á hverja 1000 RPM: $n_0 = \dfrac{5}{11}\cdot1000 = $ <span class="ans">454,5 RPM</span> $= 47{,}6$ rad/s.</p>
+<p>Hámarksafl við helming lausagangshraða og helming upphafsvægis:</p>
+$$P_{max} = \frac{\tau_s\,\omega_0}{4} = \frac{0{,}60\cdot47{,}6}{4}$$
+<p>Þá fæst <span class="ans">7,14 W</span></p>
+<p>(við 227 RPM og 0,30 Nm).</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 2 <span>Tankur með seinkun og P-stýring</span></div><div class="ex-body">
+<p>Blokkrit: $R \to (+,-) \to K = 25 \to 2e^{-2s} \to (+) \to \dfrac{1}{1+10s} \to T_2$. $T_1$ bætist við á undan tankinum. Tímastuðlar í mín. Hitaneminn er mjög hraður með mögnun 1. Hitastig $T_1$ breytist annað hvort mjög hægt eða snögglega (þrep).</p>
+<p>(a) Hvert er yfirfærslufall lykkjunnar? (b) Hver verður skekkjan milli óskgildis og $T_2$ í jafnvægi eftir að $T_1$ hækkar skyndilega um 2 °C?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> $G_K = G_C\,G_H\,G_P\,G_S = 25\cdot2e^{-2s}\cdot\dfrac{1}{1+10s}\cdot1 = $ <span class="ans">$\dfrac{50\,e^{-2s}}{1+10s}$</span>. Truflunin $T_1$ er <i>ekki</i> hluti af lykkjunni.</p>
+<p><b>(b)</b> $E/T_1 = -\dfrac{G_P}{1+G_K}$. Með $T_1 = 2/s$ og $s\to0$ (þar sem $e^{-2s}\to1$):</p>
+$$e_{ss} = \lim_{s\to0} s\cdot\frac{-\frac{1}{1+10s}}{1+\frac{50e^{-2s}}{1+10s}}\cdot\frac{2}{s} = -\frac{2}{1+50}$$
+<p>Þá fæst <span class="ans">−2/51 ≈ −0,039 °C</span></p>
+<div class="note warn"><p><b class="t">Athugasemd:</b> lokagildissetningin gildir aðeins fyrir stöðugt kerfi. Hér er seinkunin 2 mín. og lokaða kerfið er í raun <b>óstöðugt</b>: $\omega_c = 5{,}0$ rad/mín, fasinn þar er $-\arctan50 - 2\cdot5 = -11{,}55$ rad, og við $\omega_\pi = 0{,}84$ rad/mín er mögnun lykkjunnar $5{,}9 > 1$ ($A_m = 0{,}17$). Svarið $-2/51$ er það sem lausnalykill prófsins miðar við.</p></div>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 3 <span>Hitanemi með 4-20 mA úttak</span></div><div class="ex-body">
+<p>Mælisvið 100-200 °C, úttak 4-20 mA. Sambandið er línuleg fyrstu gerðar diffurjafna með tímastuðul 12 s. (a) Finndu yfirfærslufall nemans. (b) Hvert er úttakið í jafnvægi við 120 °C?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> Mögnun $K = \dfrac{20-4}{200-100} = 0{,}16$ mA/°C:</p>
+$$G(s) = \frac{0{,}16}{12s+1}\ \text{[mA/°C]}$$
+<p>(lýsir breytingum frá vinnupunkti, svo 4 mA hliðrunin er ekki hluti af því).</p>
+<p><b>(b)</b> $I = 4 + 0{,}16\,(120 - 100) = 4 + 3{,}2 = $ <span class="ans">7,2 mA</span>. Tímastuðullinn skiptir ekki máli í jafnvægi.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 4 <span>Færiband: tvær PI-stýringar</span></div><div class="ex-body">
+<p>Hraðastýring á færibandi: $G_P = \dfrac{1}{(0{,}5s+1)(0{,}2s+1)}$, PI-stýring $G_C = K\bigl(1 + \tfrac{1}{T_Is}\bigr)$. Báðar tillögur eru stöðugar.</p>
+<table><thead><tr><th></th><th class="num">Tillaga 1</th><th class="num">Tillaga 2</th></tr></thead>
+<tbody><tr><td>$K$</td><td class="num">3</td><td class="num">13</td></tr><tr><td>$T_I$</td><td class="num">1</td><td class="num">1</td></tr><tr><td>$\omega_c$</td><td class="num">4,2</td><td class="num">11,2</td></tr></tbody></table>
+<p>(a) Hvora myndirðu velja ef hraði svörunar skiptir mestu máli? (b) Hvor gefur meira fasaöryggi?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> Hærri skurðtíðni þýðir hraðari svörun ($t_r \approx 1{,}4/\omega_c$): $11{,}2 > 4{,}2$, svo <span class="ans">Tillaga 2</span> ($t_r \approx 0{,}13$ s gegn 0,33 s).</p>
+<p><b>(b)</b> Fasaöryggi: $\varphi_m = 180^\circ + \angle G_K(j\omega_c)$. Með $T_I = 1$ er $G_K = K\dfrac{s+1}{s}\cdot\dfrac{1}{(0{,}5s+1)(0{,}2s+1)}$:</p>
+$$\angle G_K(j\omega) = \arctan\omega - 90^\circ - \arctan0{,}5\omega - \arctan0{,}2\omega$$
+<p>Tillaga 1 ($\omega = 4{,}2$): $76{,}6^\circ - 90^\circ - 64{,}5^\circ - 40{,}0^\circ = -117{,}9^\circ$, svo $\varphi_{m1} = $ <b>62°</b>.</p>
+<p>Tillaga 2 ($\omega = 11{,}2$): $84{,}9^\circ - 90^\circ - 79{,}9^\circ - 65{,}9^\circ = -150{,}9^\circ$, svo $\varphi_{m2} = $ <b>29°</b>.</p>
+<p><span class="ans">Tillaga 1</span> gefur meira fasaöryggi. Ekki er hægt að álykta um það af $K$ einu: þarf að reikna fasann við $\omega_c$.</p>
+<p>Málamiðlun: Tillaga 2 er hraðari en nálægt stöðugleikamörkum. (Nákvæmt $\omega_c$ fyrir $K = 13$ er 10,8 rad/s og $\varphi_m = 30^\circ$, en niðurstaðan er sú sama.)</p>
+</div></details></div></div>
+
+<h2 id="p2025">Könnun 24. október 2025</h2>
+<p>Spurning 1 er <b>nákvæmlega sú sama og spurning 1 árið 2021</b> (hitanemarnir A og B). Sjá lausn hér að ofan.</p>
+
+<div class="ex"><div class="ex-head">Spurning 2 <span>Hreyfill: $\tau_s$, $\omega_0$, $P_{max}$ og $L/R$</span></div><div class="ex-body">
+<p>$K_\tau = 0{,}15$ Nm/A, $K_f = 10$ V/1000 RPM, $R = 2{,}25\ \Omega$, $L = 2{,}5$ mH. (a) Upphafsvægi, snúningshraði í lausagangi og hámarksafl ef inngangsspennan er 12 V? (b) Eftir hve langan tíma hafa bein áhrif inngangsspennunnar á vægið náð jafnvægi?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> $\tau_s = \dfrac{0{,}15}{2{,}25}\cdot12 = $ <span class="ans">0,80 Nm</span>. $n_0 = \dfrac{12}{10}\cdot1000 = $ <span class="ans">1200 RPM</span> $= 125{,}7$ rad/s.</p>
+$$P_{max} = \frac{\tau_s\omega_0}{4} = \frac{0{,}80\cdot125{,}66}{4}$$
+<p>Þá fæst <span class="ans">25,1 W</span></p>
+<p>(við 600 RPM og 0,40 Nm).</p>
+<p><b>(b)</b> Bein áhrif spennunnar á vægið fara í gegnum strauminn og spanið seinkar honum: $\dfrac{T}{V_a} = \dfrac{K_\tau/R}{\tau_e s+1}$ með</p>
+$$\tau_e = \frac{L}{R} = \frac{2{,}5\cdot10^{-3}}{2{,}25} = \text{1,11 ms}$$
+<p>Fyrstu gerðar kerfi er komið í jafnvægi eftir $4\tau_e$ (98 %) til $5\tau_e$ (99,3 %): <span class="ans">um 4,4 til 5,6 ms</span>.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 3 <span>Tankur, sínustruflun og P-stýring</span></div><div class="ex-body">
+<p>Hitari með mögnun 2 gefur varma inn í tank $\dfrac{1}{1+10s}$. $T_1$ er sínusbylgja með sveiflutíma 4,5 mín. Hugmynd: afturvirkni og P-stýring með $K = 25$. (a) Áhrif $T_1$ á $T_2$ í upprunalega kerfinu? (b) Hversu betri eða verri er niðurstaðan með $K = 25$?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$\omega = 2\pi/4{,}5 = 1{,}396$ rad/mín.</p>
+<p><b>(a)</b> $|G| = \dfrac{1}{\sqrt{1+(10\omega)^2}} = $ <span class="ans">0,0714</span> (7,1 % af útslagi truflunar).</p>
+<p><b>(b)</b> $G_K = 25\cdot2\cdot\dfrac{1}{1+10s} = \dfrac{50}{1+10s}$ og</p>
+$$G_{VY} = \frac{G_P}{1+G_K} = \frac{\frac{1}{1+10s}}{1+\frac{50}{1+10s}} = \frac{1}{51+10s},\qquad |G_{VY}(j\omega)| = \frac{1}{\sqrt{51^2+13{,}96^2}}$$
+<p>Þá fæst <span class="ans">0,0189</span></p>
+<p>Hlutfallið er $0{,}0189/0{,}0714 = 0{,}265$: truflunin minnkar um <b>73,5 %</b> (3,8 sinnum minni). Hér er ekkert vandamál með eiginsveiflu því lokaða kerfið er fyrstu gerðar. Berðu þetta saman við 2021 S2 þar sem kerfið var annarrar gerðar og afturvirknin gerði illt verra.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 4 <span>P gegn PI, truflun við $\omega = 1$</span></div><div class="ex-body">
+<p>Ferli $G_P = \dfrac{2}{(s+1)^2}$ með truflun $V$ sem leggst við á eftir stýringunni. Óskað er eftir fasaöryggi 45°.</p>
+<table><thead><tr><th></th><th class="num">Tillaga 1 (P)</th><th class="num">Tillaga 2 (PI)</th></tr></thead>
+<tbody><tr><td>$K$</td><td class="num">3,4</td><td class="num">2,2</td></tr><tr><td>$T_I$</td><td class="num">–</td><td class="num">2,7 s</td></tr><tr><td>$\omega_c$</td><td class="num">2,4 rad/s</td><td class="num">1,9 rad/s</td></tr></tbody></table>
+<p>(a) Hvora stýringu myndirðu velja ef hraði skiptir mestu máli? Ef deyfing truflana af lágum tíðnum skiptir mestu máli? (b) Hvor stýringin deyfir betur truflun $v$ sem er sínusbylgja af tíðni $\omega = 1$ rad/s?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> Hraði: hærri $\omega_c$, svo <span class="ans">Tillaga 1 (P)</span> (2,4 > 1,9). Lágtíðnitruflanir: PI-stýringin hefur heildun sem gerir mögnun lykkjunnar mjög háa við lágar tíðnir, svo <span class="ans">Tillaga 2 (PI)</span>.</p>
+<p><b>(b)</b> Þetta er önnur spurning: nú þarf að reikna $|G_P/(1+G_K)|$ nákvæmlega við $\omega = 1$. Fyrst $G_P(j) = \dfrac{2}{(1+j)^2} = \dfrac{2}{2j} = -j$, með stærð 1.</p>
+<p><i>P:</i> $G_K = 3{,}4\,(-j) = -3{,}4j$, $|1+G_K| = \sqrt{1+3{,}4^2} = 3{,}54$, svo $|G_{VY}| = 1/3{,}54 = 0{,}282$.</p>
+<p><i>PI:</i> $G_C(j) = 2{,}2\bigl(1 - \tfrac{j}{2{,}7}\bigr) = 2{,}2 - 0{,}815j$, $G_K = (2{,}2 - 0{,}815j)(-j) = -0{,}815 - 2{,}2j$, $|1+G_K| = |0{,}185 - 2{,}2j| = 2{,}21$, svo $|G_{VY}| = 1/2{,}21 = 0{,}453$.</p>
+<p>Minni gildi er betra: <span class="ans">P-stýringin (Tillaga 1)</span> deyfir betur við $\omega = 1$. Þetta stangast ekki á við (a): PI er betri við <i>mjög</i> lágar tíðnir, þar sem heildunin gerir $|G_K|$ risastórt. Við $\omega = 1$ rad/s (nálægt $\omega_c$) er mögnun lykkjunnar lítil og heildunin veldur fasatapi sem færir $G_K$ nær $-1$, svo $|1+G_K|$ verður minni og truflunin fær meira í gegn.</p>
+</div></details></div></div>
+
+<h2 id="tengi">Tengidæmi kafla 16-19</h2>
+<p>Tvö dæmi sem tengja saman hreyfla og sjálfvirk stýrikerfi. Seinna dæmið (PID-tillögurnar tvær) er leyst á <a href="styringar.html">síðunni um stýringar</a>.</p>
+
+<div class="ex"><div class="ex-head">Dæmi 0.1 <span>Hraðastýring á burstahreyfli</span></div><div class="ex-body">
+<p>Samanlögð tregða $I = 0{,}7$ kg·m², deyfing $c = 0{,}5$ Nms/rad, $R = 1{,}5\ \Omega$, $K_\tau = 0{,}12$ Nm/A, $K_f = 12$ V/1000 RPM ($= 0{,}115$ V·s/rad), $L\approx0$. Inngangsspenna 0-15 V, vinnupunktur 7,5 V (fasti sem leggst við stýrimerkið). Nemi: $G_S = 1{,}5$ V/(rad/s). Óskgildi: stillivíðnám sem mælir 5-15 RPM með 3 V fæðispennu (1,5 V við 10 RPM).</p>
+<ol>
+  <li>Blokkrit. 2. Yfirfærslufall hreyfils og lykkju. 3. Jafnvægishraði án afturvirkni og hversu hratt ($4\tau$)? 4. Skekkja eftir þrep 10 → 11 RPM með $K=1$ og $K=15$? 5. Truflun 50 Hz með útslag 0,1 V á milli stýringar og hreyfils: hversu sterk á úttaki fyrir $K = 1$ og $K = 15$? 6. Hvað gæti komið í veg fyrir að hækka $K$ enn frekar?</li>
+</ol>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>1.</b> $R \to (+,-) \to K \to (+V_1) \to G_P \to Y$, með $G_S = 1{,}5$ í afturvirkninni. $R$ er spenna (0-3 V), $Y$ er hornhraði og $V_1$ er 7,5 V þrep.</p>
+<p><b>2.</b> Með $L = 0$ (úr kaflanum um <a href="hreyflar.html">hreyfla</a>):</p>
+$$G_P = \frac{K_\tau}{R\,(Is+c) + K_\tau K_f} = \frac{K_p}{\tau s + 1},\quad K_p = \frac{0{,}12}{1{,}5\cdot0{,}5 + 0{,}12\cdot0{,}115} = 0{,}157\ \tfrac{\mathrm{rad/s}}{\mathrm V},\quad \tau = \frac{1{,}5\cdot0{,}7}{0{,}764} = 1{,}37\ \mathrm{s}$$
+$$G_K = K\cdot\frac{0{,}157}{1{,}37s+1}\cdot1{,}5 = \frac{0{,}24\,K}{1{,}37s+1}$$
+<p><b>3.</b> Jafnvægi: $y_{ss} = 7{,}5\cdot0{,}157 = 1{,}18$ rad/s <span class="ans">≈ 11 RPM</span>. Tími: $4\tau = $ <span class="ans">5,5 s</span>.</p>
+<p><b>4.</b> Stillivíðnámið gefur $3\ \mathrm V/10\ \mathrm{RPM} = 0{,}3$ V á hverja RPM, svo 1 RPM þrep er 0,3 V. Tegund 0 með $K_p = 0{,}24K$:</p>
+$$e_{ss} = \frac{0{,}3}{1+0{,}24K}:\quad K=1:\ \text{0,24 V}\ (\approx 80\ \%\text{ af þrepinu}),\qquad K=15:\ \text{0,065 V}\ (\approx 22\ \%)$$
+<p><b>5.</b> $\omega = 2\pi\cdot50 = 314$ rad/s. $|G_{VY}| = \dfrac{0{,}157}{\sqrt{(1+0{,}24K)^2 + (1{,}37\cdot314)^2}}$. Annar liðurinn undir rótinni er $430^2$ og yfirgnæfir hinn, svo $|G_{VY}| \approx 3{,}7\cdot10^{-4}$ fyrir <b>bæði</b> $K = 1$ og $K = 15$. Útslagið á úttaki er $0{,}1\cdot3{,}7\cdot10^{-4} = $ <span class="ans">3,7·10⁻⁵ rad/s</span> í báðum tilvikum. Hreyfillinn sjálfur deyfir svo háar tíðnir (lághleypissía) og afturvirknin þarf ekki að hjálpa.</p>
+<p><b>6.</b> Stöðugleiki er <i>ekki</i> vandamálið: fyrstu gerðar kerfi hefur fasa sem fer aldrei niður fyrir $-90^\circ$. Takmörkunin er <b>stýrimerkið</b>: vinnupunkturinn er 7,5 V og hreyfillinn tekur við 0-15 V. Ef $K\,|e| > 7{,}5$ V mettast stýringin og getur ekki gefið meira en 15 V eða minna en 0 V. Hátt $K$ virkar vel ef skekkjan er lítil (litlar breytingar í óskgildi og truflanir).</p>
+</div></details></div></div>

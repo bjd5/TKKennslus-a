@@ -1,0 +1,108 @@
+<!--scripts: js/ctrl.js js/calc.js -->
+<!--wide-->
+<h1>Reiknivélar</h1>
+<p class="lede">Notaðu þær til að athuga eigin útreikninga og til að sjá hvað gerist þegar þú breytir stikum. Á prófi reiknarðu þetta í höndunum, svo skoðaðu skrefin í sýnidæmunum til að læra aðferðina. Tölur má skrifa með kommu eða punkti.</p>
+
+<div class="chips noprint">
+  <a class="chip" href="#hreyfill" style="text-decoration:none">Hreyfill</a>
+  <a class="chip" href="#nemi" style="text-decoration:none">Nemar</a>
+  <a class="chip" href="#lykkja" style="text-decoration:none">Lykkjugreining (Bode, stöðugleiki, skekkja)</a>
+</div>
+
+<h2 id="hreyfill">Jafnstraumshreyfill</h2>
+<div class="panel" id="motor">
+  <div class="row">
+    <div><label class="f" for="m-kt">$K_\tau$ [Nm/A]</label><input id="m-kt" type="text" inputmode="decimal" value="0,046"></div>
+    <div><label class="f" for="m-kf">$K_f$</label><input id="m-kf" type="text" inputmode="decimal" value="0,046"></div>
+    <div><label class="f" for="m-kfu">Eining $K_f$</label><select id="m-kfu"><option value="si">V·s/rad</option><option value="rpm">V/1000 RPM</option></select></div>
+    <div><label class="f" for="m-r">$R$ [Ω]</label><input id="m-r" type="text" inputmode="decimal" value="2,49"></div>
+    <div><label class="f" for="m-l">$L$ [mH]</label><input id="m-l" type="text" inputmode="decimal" value="2,63"></div>
+    <div><label class="f" for="m-va">$v_a$ [V]</label><input id="m-va" type="text" inputmode="decimal" value="24"></div>
+  </div>
+  <div class="row" style="margin-top:0.7rem">
+    <div><label class="f" for="m-i">Tregða $I$ [kg·m²] (valfrjálst)</label><input id="m-i" type="text" inputmode="decimal" value="" placeholder="t.d. 0,0005"></div>
+    <div><label class="f" for="m-c">Deyfing $c$ [Nms/rad]</label><input id="m-c" type="text" inputmode="decimal" value="0"></div>
+    <div><label class="f" for="m-tl">Álagsvægi $\tau_L$ [Nm]</label><input id="m-tl" type="text" inputmode="decimal" value="0"></div>
+  </div>
+  <div class="out"><dl id="m-out"></dl></div>
+</div>
+
+<h2 id="nemi">Nemar</h2>
+<div class="panel" id="sens-lin">
+  <h3>Línulegur nemi</h3>
+  <div class="row">
+    <div><label class="f" for="s-xmin">$x_{min}$</label><input id="s-xmin" type="text" inputmode="decimal" value="100"></div>
+    <div><label class="f" for="s-xmax">$x_{max}$</label><input id="s-xmax" type="text" inputmode="decimal" value="200"></div>
+    <div><label class="f" for="s-ymin">$y_{min}$</label><input id="s-ymin" type="text" inputmode="decimal" value="4"></div>
+    <div><label class="f" for="s-ymax">$y_{max}$</label><input id="s-ymax" type="text" inputmode="decimal" value="20"></div>
+    <div><label class="f" for="s-x">Inntak $x$</label><input id="s-x" type="text" inputmode="decimal" value="150"></div>
+    <div><label class="f" for="s-lin">Frávik frá línuleika [% af sviði]</label><input id="s-lin" type="text" inputmode="decimal" value="1,5"></div>
+  </div>
+  <div class="out"><dl id="s-out"></dl></div>
+</div>
+<div class="panel" id="sens-time">
+  <h3>Tímasvörun (fyrstu gerðar nemi)</h3>
+  <div class="row">
+    <div><label class="f" for="t-tau">$\tau$ [s]</label><input id="t-tau" type="text" inputmode="decimal" value="2,5"></div>
+    <div><label class="f" for="t-t">Tími $t$ [s]</label><input id="t-t" type="text" inputmode="decimal" value="5"></div>
+    <div><label class="f" for="t-dx">Þrep í inntaki $\Delta x$</label><input id="t-dx" type="text" inputmode="decimal" value="40"></div>
+  </div>
+  <div class="out"><dl id="t-out"></dl></div>
+</div>
+<div class="panel" id="sens-pot">
+  <h3>Stillivíðnám, kóðaskífa og álagsnemi</h3>
+  <div class="row">
+    <div><label class="f" for="p-vs">$V_s$ [V]</label><input id="p-vs" type="text" inputmode="decimal" value="4"></div>
+    <div><label class="f" for="p-rp">$R_P$ [Ω]</label><input id="p-rp" type="text" inputmode="decimal" value="500"></div>
+    <div><label class="f" for="p-rl">$R_L$ [Ω]</label><input id="p-rl" type="text" inputmode="decimal" value="10000"></div>
+    <div><label class="f" for="p-x">Staða $x$ (0-1)</label><input id="p-x" type="text" inputmode="decimal" value="0,5"></div>
+  </div>
+  <div class="row" style="margin-top:0.7rem">
+    <div><label class="f" for="e-n">Kóðaskífa: fjöldi raufa $N$</label><input id="e-n" type="text" inputmode="decimal" value="100"></div>
+    <div><label class="f" for="e-r">Radíus $r$ [mm]</label><input id="e-r" type="text" inputmode="decimal" value="100"></div>
+    <div><label class="f" for="g-r">Álagsnemi: $R$ [Ω]</label><input id="g-r" type="text" inputmode="decimal" value="120"></div>
+    <div><label class="f" for="g-g">$G$</label><input id="g-g" type="text" inputmode="decimal" value="2"></div>
+    <div><label class="f" for="g-e">Aflögun $\varepsilon$</label><input id="g-e" type="text" inputmode="decimal" value="0,001"></div>
+  </div>
+  <div class="out"><dl id="p-out"></dl></div>
+</div>
+
+<h2 id="lykkja">Lykkjugreining</h2>
+<p>Skrifaðu yfirfærslufall ferlisins (og nemans) með <code>s</code> sem breytu. Leyfilegt: <code>+ − * / ^</code>, sviga, óbeina margföldun (<code>2s</code>, <code>(1+2s)(1+0.5s)</code>), <code>exp(…)</code> og eigin breytur sem þú skilgreinir í „Breytur“.</p>
+<div class="chips noprint" id="l-presets" role="group" aria-label="Dæmi">
+  <button type="button" class="chip" data-p="hero">Forsíðudæmið (K = 4)</button>
+  <button type="button" class="chip" data-p="vp">Dæmi 17.8.7 (truflun)</button>
+  <button type="button" class="chip" data-p="pi">PI styttir út ferlið</button>
+  <button type="button" class="chip" data-p="a1">17.8.9 (1)</button>
+  <button type="button" class="chip" data-p="a2">17.8.9 (2)</button>
+  <button type="button" class="chip" data-p="a3">17.8.9 (3)</button>
+  <button type="button" class="chip" data-p="pid1">Tengidæmi 0.2, tillaga 1</button>
+  <button type="button" class="chip" data-p="pid2">Tengidæmi 0.2, tillaga 2</button>
+  <button type="button" class="chip" data-p="delay">Seinkun</button>
+  <button type="button" class="chip" data-p="p3">Þriðju gerðar ferli</button>
+</div>
+<div class="panel" id="loop">
+  <div class="row">
+    <div style="flex-basis:18rem"><label class="f" for="l-gp">Ferli $G_P(s)$</label><input id="l-gp" type="text" spellcheck="false" autocapitalize="off" value="2.5/((1+2s)(1+0.5s))"></div>
+    <div style="flex-basis:12rem"><label class="f" for="l-gs">Nemi $G_S(s)$</label><input id="l-gs" type="text" spellcheck="false" autocapitalize="off" value="1"></div>
+    <div style="flex-basis:12rem"><label class="f" for="l-vars">Breytur (t.d. <code>tau=0.2; a=3</code>)</label><input id="l-vars" type="text" spellcheck="false" autocapitalize="off" value=""></div>
+    <div style="flex-basis:8rem"><label class="f" for="l-delay">Seinkun $L$ [s]</label><input id="l-delay" type="text" inputmode="decimal" value="0"></div>
+  </div>
+  <div class="row" style="margin-top:0.7rem">
+    <div style="flex-basis:9rem"><label class="f" for="l-type">Stýring</label>
+      <select id="l-type"><option value="P">P</option><option value="PI">PI</option><option value="PD">PD</option><option value="PID">PID</option></select></div>
+    <div style="flex-basis:7rem"><label class="f" for="l-k">$K$</label><input id="l-k" type="text" inputmode="decimal" value="4"></div>
+    <div style="flex-basis:7rem" id="l-ti-w"><label class="f" for="l-ti">$T_I$ [s]</label><input id="l-ti" type="text" inputmode="decimal" value="1"></div>
+    <div style="flex-basis:7rem" id="l-td-w"><label class="f" for="l-td">$T_D$ [s]</label><input id="l-td" type="text" inputmode="decimal" value="0,5"></div>
+    <div style="flex-basis:7rem" id="l-tf-w"><label class="f" for="l-tf">$T_F$ [s]</label><input id="l-tf" type="text" inputmode="decimal" value="0,1"></div>
+    <div style="flex-basis:9rem"><label class="f" for="l-wv">Truflun: $\omega_v$ [rad/s]</label><input id="l-wv" type="text" inputmode="decimal" value="" placeholder="valfrjálst"></div>
+    <div style="flex-basis:8rem"><label class="f" for="l-tmax">Sýna upp í $t$ [s]</label><input id="l-tmax" type="text" inputmode="decimal" value="" placeholder="sjálfvirkt"></div>
+  </div>
+  <p class="result" id="l-msg" role="alert"></p>
+  <div class="out"><dl id="l-out"></dl></div>
+  <div class="grid2 plots" style="margin-top:1.2rem">
+    <figure style="margin:0"><canvas class="plot" id="l-bode"></canvas><figcaption>Bode-rit lykkjunnar $G_K = G_C\,G_P\,G_S\,e^{-Ls}$. Strikalína: 0 dB og −180°.</figcaption></figure>
+    <figure style="margin:0"><canvas class="plot" id="l-step"></canvas><figcaption>Þrepasvörun lokaða kerfisins $G_T = \dfrac{G_C\,G_P\,e^{-Ls}}{1+G_K}$ við þrep í óskgildi.</figcaption></figure>
+  </div>
+  <p class="small" style="color:var(--muted)">Skekkjan er reiknuð sem $e = r - y_{\text{mælt}}$. Lokagildissetningin gildir aðeins ef kerfið er stöðugt, svo skekkjan er ekki sýnd fyrir óstöðug kerfi. Tölulegu gildin ($\omega_c$, $\omega_\pi$, …) eru fundin með tölulegri leit á tíðnibilinu $10^{-4}$ til $10^{4}$ rad/s.</p>
+</div>
