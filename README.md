@@ -1,41 +1,31 @@
-# Tæknileg kerfi: kennslusíða fyrir hönnunarhlutann (vika 7-9)
+# Kennsluvefir
 
-Kennslusíða á íslensku fyrir könnun 2 í IÐN303G Tæknileg kerfi. Hún er ósköp venjuleg vefsíða (HTML, CSS og JavaScript) án uppsetningar, svo hún virkar beint á GitHub Pages.
+Kennsluvefir á íslensku fyrir áfangana í skólanum. Forsíðan (`index.html`) sýnir eina möppu fyrir hvern áfanga og hver áfangi á sína eigin möppu í repo-inu. Allt er venjuleg HTML, CSS og JavaScript án uppsetningar, svo það virkar beint á GitHub Pages.
 
-## Efni
+## Kennsluvefir
 
-| Síða | Innihald |
+| Mappa | Áfangi |
 |---|---|
-| `index.html` | Yfirlit, gagnvirkt dæmi (færðu `K` og sjáðu Bode-rit og þrepasvörun) og hvaða dæmi koma oftast á prófum |
-| `nemar.html` | Nemar: mælisvið, næmni, tímasvörun, stillivíðnám, kóðaskífa og álagsnemi |
-| `hreyflar.html` | Jafnstraumshreyflar: jöfnur, upphafsvægi, lausagangur, hámarksafl, tímastuðlar og gír |
-| `stjornkerfi.html` | Sjálfvirk stýrikerfi: stöðugleiki, skekkja í jafnvægi, hraði, truflanir, næmni og stýrimerki |
-| `styringar.html` | P, PI, PD og PID með hönnunaruppskriftum |
-| `prof.html` | Prófin frá 2021, 2023 og 2025 ásamt tengidæmum, með lausnum sem hægt er að fela |
-| `aefingar.html` | Reiknidæmi með slembitölum og skilningsspurningar |
-| `spjold.html` | Flashcards með „kunni / kunni ekki“ |
-| `reiknivelar.html` | Reiknivélar fyrir hreyfil, nema og lykkjugreiningu |
-| `formulublad.html` | Formúlublað sem hægt er að prenta |
+| [`idn303g/`](idn303g/) | IÐN303G Tæknileg kerfi, hönnunarhlutinn (vika 7-9) |
 
 ## Uppbygging
 
-- `src/*.html` eru efnissíðurnar (aðeins efnið sjálft).
-- `tools/build.py` setur haus, valmynd og skriftur utan um þær og býr til `*.html` í rót.
-- `js/ctrl.js` er reiknisafn fyrir yfirfærsluföll (Bode-rit, stöðugleikamörk, þrepasvörun).
-- `js/quiz.js`, `js/cards.js` og `js/calc.js` eru æfingaspurningar, flashcards og reiknivélar.
-- `vendor/katex/` er KaTeX (stærðfræðibirting) og `fonts/` leturgerðir, svo ekkert er sótt af netinu.
+- `index.html` er forsíðan með möppunum, `assets/forsida.css` og `assets/forsida.js` útlit hennar og þema.
+- `assets/fonts/` eru leturgerðir sem allir kennsluvefirnir nota.
+- `<áfangi>/` er kennsluvefur eins áfanga, með eigin `index.html`, README og byggingarskriftu.
 
-Eftir breytingar í `src/` eða `tools/build.py`:
+## Nýr kennsluvefur
+
+1. Búðu til möppu með heiti áfangans í lágstöfum og án íslenskra stafa, t.d. `sta203g/`, með `index.html` í.
+2. Afritaðu eitt `<li>` í `index.html` í rótinni og breyttu tenglinum, flipanum (áfanganúmerinu), heitinu og lýsingunni. Litinn á möppunni má breyta með `style="--f: #b0521d"` á `<a class="folder">`.
+3. Settu tengil til baka á forsíðuna (`../index.html`) inn á nýja vefinn, eins og „← Allir kennsluvefir“ í `idn303g/`.
+
+Leitarreitur birtist sjálfkrafa á forsíðunni þegar möppurnar eru orðnar sex eða fleiri.
+
+## Skoða og birta
 
 ```sh
-python3 tools/build.py
 python3 -m http.server 8000   # skoða á http://localhost:8000
 ```
 
-## Birta á GitHub Pages
-
-Settings → Pages → Source: „Deploy from a branch“, veldu greinina (`main`) og möppuna `/ (root)`.
-
-## Heimildir og athugasemdir
-
-Efnið er byggt á glærum, sýnidæmum og gömlum prófum úr námskeiðinu IÐN303G (Háskóli Íslands). Útreikningar voru yfirfarnir með tölulegum forritum. Þar sem handskrifaðar lausnir kennarans námunda eða víkja lítillega frá nákvæmum útreikningi er það tekið fram á viðkomandi stað.
+Á GitHub Pages: Settings → Pages → Source: „Deploy from a branch“, veldu greinina (`main`) og möppuna `/ (root)`.
