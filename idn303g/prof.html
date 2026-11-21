@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gömul próf með lausnum · Tæknileg kerfi</title>
-<meta name="description" content="Kennslusíða fyrir hönnunarhluta IÐN303G Tæknileg kerfi (vika 7-9): nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar.">
+<title>Kannanir í hönnun með lausnum · Tæknileg kerfi</title>
+<meta name="description" content="Kennsluvefur fyrir lokaprófið í IÐN303G Tæknileg kerfi: líkanagerð, Laplace, tíma- og tíðnisvörun, nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar, með lausnum á gömlum prófum.">
 <link rel="stylesheet" href="vendor/katex/katex.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
@@ -15,17 +15,26 @@
 <div class="shell">
 <aside class="side" id="side">
 <a class="home" href="../index.html">← Allir kennsluvefir</a>
-<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Undirbúningur fyrir lokapróf</small></a>
 <nav aria-label="Efnisyfirlit">
-<h2>Efni</h2><ul>
+<h2>Byrja hér</h2><ul>
 <li><a class="nav" href="index.html">Yfirlit</a></li>
+<li><a class="nav" href="lokaprof.html">Lokapróf 2024 og 2025</a></li>
+</ul>
+<h2>Efni: líkön og svörun</h2><ul>
+<li><a class="nav" href="likanagerd.html">Líkanagerð</a></li>
+<li><a class="nav" href="laplace.html">Laplace og blokkrit</a></li>
+<li><a class="nav" href="svorun.html">Tíma- og tíðnisvörun</a></li>
+</ul>
+<h2>Efni: hönnun</h2><ul>
 <li><a class="nav" href="nemar.html">Nemar</a></li>
 <li><a class="nav" href="hreyflar.html">Hreyflar</a></li>
 <li><a class="nav" href="stjornkerfi.html">Sjálfvirk stýrikerfi</a></li>
 <li><a class="nav" href="styringar.html">P, PI, PD og PID</a></li>
+<li><a class="nav" href="honnun.html">Vinnuferli og spurningar 5-6</a></li>
 </ul>
 <h2>Æfa</h2><ul>
-<li><a class="nav" href="prof.html" aria-current="page">Gömul próf</a></li>
+<li><a class="nav" href="prof.html" aria-current="page">Kannanir í hönnun</a></li>
 <li><a class="nav" href="aefingar.html">Æfingaspurningar</a></li>
 <li><a class="nav" href="spjold.html">Flashcards</a></li>
 </ul>
@@ -38,8 +47,8 @@
 </aside>
 <main id="main">
 <div class="page">
-<h1>Gömul próf með lausnum</h1>
-<p class="lede">Prófin frá 2021, 2023 og 2025. Rúnar mælir með að þú farir fyrst í gegnum prófin án þess að kíkja á lausnirnar. Hver spurning hér er því með lausn sem er falin þar til þú opnar hana. Allar tölur eru endurreiknaðar.</p>
+<h1>Kannanir í hönnun með lausnum</h1>
+<p class="lede">Kannanirnar í hönnun (K2) frá 2021, 2023 og 2025. Sama efni kemur í spurningum 3, 4 og 6 á lokaprófinu, svo þetta er góð æfing fyrir það. <a href="lokaprof.html">Lokaprófin sjálf eru hér</a>. Rúnar mælir með að þú farir fyrst í gegnum prófin án þess að kíkja á lausnirnar. Hver spurning hér er því með lausn sem er falin þar til þú opnar hana. Allar tölur eru endurreiknaðar.</p>
 <div class="note"><p><b class="t">Leyfileg hjálpargögn</b> á prófunum 2023 og 2025: vasareiknir og handskrifað formúlublað (skila þarf blaðinu). Sjá <a href="formulublad.html">formúlublaðið</a>. Prófið er einstaklingspróf með fjórum jafnþungum spurningum (25 % hver). Rökstyðja skal svör með útreikningum.</p></div>
 
 <p class="noprint"><b>Flýtileiðir:</b> <a href="#p2021">2021</a> · <a href="#p2023">2023</a> · <a href="#p2025">2025</a> · <a href="#tengi">Tengidæmi 16-19</a></p>
@@ -216,7 +225,7 @@ $$e_{ss} = \frac{0{,}3}{1+0{,}24K}:\quad K=1:\ \text{0,24 V}\ (\approx 80\ \%\te
 <p><b>5.</b> $\omega = 2\pi\cdot50 = 314$ rad/s. $|G_{VY}| = \dfrac{0{,}157}{\sqrt{(1+0{,}24K)^2 + (1{,}37\cdot314)^2}}$. Annar liðurinn undir rótinni er $430^2$ og yfirgnæfir hinn, svo $|G_{VY}| \approx 3{,}7\cdot10^{-4}$ fyrir <b>bæði</b> $K = 1$ og $K = 15$. Útslagið á úttaki er $0{,}1\cdot3{,}7\cdot10^{-4} = $ <span class="ans">3,7·10⁻⁵ rad/s</span> í báðum tilvikum. Hreyfillinn sjálfur deyfir svo háar tíðnir (lághleypissía) og afturvirknin þarf ekki að hjálpa.</p>
 <p><b>6.</b> Stöðugleiki er <i>ekki</i> vandamálið: fyrstu gerðar kerfi hefur fasa sem fer aldrei niður fyrir $-90^\circ$. Takmörkunin er <b>stýrimerkið</b>: vinnupunkturinn er 7,5 V og hreyfillinn tekur við 0-15 V. Ef $K\,|e| > 7{,}5$ V mettast stýringin og getur ekki gefið meira en 15 V eða minna en 0 V. Hátt $K$ virkar vel ef skekkjan er lítil (litlar breytingar í óskgildi og truflanir).</p>
 </div></details></div></div>
-<div class="pager noprint"><a href="styringar.html"><span>Fyrri</span>P, PI, PD og PID</a><a href="aefingar.html" style="text-align:right"><span>Næsta</span>Æfingaspurningar</a></div>
+<div class="pager noprint"><a href="honnun.html"><span>Fyrri</span>Vinnuferli og spurningar 5-6</a><a href="aefingar.html" style="text-align:right"><span>Næsta</span>Æfingaspurningar</a></div>
 </div>
 </main>
 </div>

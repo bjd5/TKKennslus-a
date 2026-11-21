@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hönnun véleindakerfa · Tæknileg kerfi</title>
-<meta name="description" content="Kennslusíða fyrir hönnunarhluta IÐN303G Tæknileg kerfi (vika 7-9): nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar.">
+<title>Undirbúningur fyrir lokapróf · Tæknileg kerfi</title>
+<meta name="description" content="Kennsluvefur fyrir lokaprófið í IÐN303G Tæknileg kerfi: líkanagerð, Laplace, tíma- og tíðnisvörun, nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar, með lausnum á gömlum prófum.">
 <link rel="stylesheet" href="vendor/katex/katex.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
@@ -15,17 +15,26 @@
 <div class="shell">
 <aside class="side" id="side">
 <a class="home" href="../index.html">← Allir kennsluvefir</a>
-<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Undirbúningur fyrir lokapróf</small></a>
 <nav aria-label="Efnisyfirlit">
-<h2>Efni</h2><ul>
+<h2>Byrja hér</h2><ul>
 <li><a class="nav" href="index.html" aria-current="page">Yfirlit</a></li>
+<li><a class="nav" href="lokaprof.html">Lokapróf 2024 og 2025</a></li>
+</ul>
+<h2>Efni: líkön og svörun</h2><ul>
+<li><a class="nav" href="likanagerd.html">Líkanagerð</a></li>
+<li><a class="nav" href="laplace.html">Laplace og blokkrit</a></li>
+<li><a class="nav" href="svorun.html">Tíma- og tíðnisvörun</a></li>
+</ul>
+<h2>Efni: hönnun</h2><ul>
 <li><a class="nav" href="nemar.html">Nemar</a></li>
 <li><a class="nav" href="hreyflar.html">Hreyflar</a></li>
 <li><a class="nav" href="stjornkerfi.html">Sjálfvirk stýrikerfi</a></li>
 <li><a class="nav" href="styringar.html">P, PI, PD og PID</a></li>
+<li><a class="nav" href="honnun.html">Vinnuferli og spurningar 5-6</a></li>
 </ul>
 <h2>Æfa</h2><ul>
-<li><a class="nav" href="prof.html">Gömul próf</a></li>
+<li><a class="nav" href="prof.html">Kannanir í hönnun</a></li>
 <li><a class="nav" href="aefingar.html">Æfingaspurningar</a></li>
 <li><a class="nav" href="spjold.html">Flashcards</a></li>
 </ul>
@@ -39,12 +48,58 @@
 <main id="main">
 <div class="page wide">
 <!--wide-->
-<h1>Hönnun véleindakerfa</h1>
-<p class="lede">Efni til að læra fyrir könnun 2 í IÐN303G (vika 7-9): nemar, hreyflar, sjálfvirk stýrikerfi og stýringar. Allt er byggt á glærum, sýnidæmum og gömlu prófunum frá 2021, 2023 og 2025.</p>
+<h1>Tæknileg kerfi: undirbúningur fyrir lokapróf</h1>
+<p class="lede">Allur áfanginn IÐN303G á einum stað: líkanagerð, Laplace, tíma- og tíðnisvörun, nemar, hreyflar, sjálfvirk stýrikerfi og stýringar. Lokaprófin frá 2024 og 2025 eru leyst skref fyrir skref og æfingarnar ná yfir allt efnið sem kemur á prófinu.</p>
+
+<h2 id="profid" style="border-top:0;margin-top:1.6rem;padding-top:0">Svona er lokaprófið</h2>
+<div class="grid2">
+  <div class="key"><p><b>3 klukkustundir, 6 spurningar.</b> Spurningar 1-4 gilda 15 % hver og eru reiknidæmi. Rökstyðja skal svör með útreikningum (og efni úr hefti).</p></div>
+  <div class="key"><p><b>Spurningar 5 og 6 gilda 20 % hvor.</b> Þær eru skriflegar og á að rökstyðja með efni úr heftinu og eigin reynslu úr hönnunarverkefninu.</p></div>
+  <div class="key"><p><b>Hjálpargögn:</b> vasareiknir og handskrifað formúlublað sem er skilað með prófinu. Sjá <a href="formulublad.html">formúlublaðið</a> sem grunn að þínu eigin.</p></div>
+</div>
+
+<h2>Hvað hefur komið á lokaprófunum</h2>
+<p>Lokaprófin 2024 og 2025 fylgja nákvæmlega sama mynstri. Hver spurning er úr ákveðnum hluta námskeiðsins, og spurning 3 var nær orðrétt sú sama bæði árin.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Spurning</th><th>2024</th><th>2025</th><th>Lærðu</th></tr></thead>
+<tbody>
+<tr><td>1 (15 %)</td><td>$y''+2y'+2y=u$: yfirfærslufall og þrepasvörun (annarrar gerðar)</td><td>$2y'+5y=u$: yfirfærslufall og þrepasvörun (fyrstu gerðar)</td><td><a href="svorun.html">Tímasvörun</a></td></tr>
+<tr><td>2 (15 %)</td><td>Líkan af vatnstanki, jafnvægishæð og $4\tau$</td><td>RC-rás með rofa: upphafsgildi, diffurjafna og jafnvægi</td><td><a href="likanagerd.html">Líkanagerð</a></td></tr>
+<tr><td>3 (15 %)</td><td>Velja hreyfil ($P_{max} \ge 40$ W) og nema</td><td>Velja hreyfil ($\tau_s \ge 0{,}7$ Nm) og nema (<b>sama tafla</b>)</td><td><a href="hreyflar.html">Hreyflar</a>, <a href="nemar.html">nemar</a></td></tr>
+<tr><td>4 (15 %)</td><td>Blokkrit hreyfils, $G_1$, $G_2$ og skekkja með P-stýringu</td><td>Blokkrit tanks, skekkja með P-stýringu og áhrif seinkunar</td><td><a href="laplace.html">Blokkrit</a>, <a href="stjornkerfi.html">stýrikerfi</a></td></tr>
+<tr><td>5 (20 %)</td><td>Hvernig hlutar námskeiðsins tengjast; verkaskipting í hönnunarverkefninu</td><td>Verklegar æfingar gegn skilaverkefnum; notkun líkana í hönnunarverkefninu</td><td><a href="honnun.html#s5">Spurning 5</a></td></tr>
+<tr><td>6 (20 %)</td><td>Velja P/PD/PI/PID út frá Bode-riti og sannprófa</td><td>Velja P/PD/PI/PID út frá þrepasvörun og sannprófa</td><td><a href="honnun.html#s6">Spurning 6</a>, <a href="styringar.html">stýringar</a></td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Mynstur:</b> fyrstu fjórar spurningarnar eru stuttir, staðlaðir útreikningar sem þú getur æft upp í sjálfvirkni. Það eru 60 % af prófinu. Spurningar 5 og 6 verðlauna skipuleg svör sem nota hugtök heftisins (kröfur, sannprófun, líkön, vinnupunktur, fasaöryggi o.s.frv.), svo gott er að hafa beinagrind að svari tilbúna fyrirfram.</p></div>
+
+<h2>Hvar á að byrja</h2>
+<ol>
+  <li><b><a href="lokaprof.html">Lokaprófin 2024 og 2025</a></b>: reyndu hverja spurningu fyrst án þess að opna lausnina. Þá sérðu strax hvar þú stendur.</li>
+  <li><b>Fyrri hlutinn</b> (spurningar 1 og 2): <a href="likanagerd.html">líkanagerð</a>, <a href="laplace.html">Laplace og blokkrit</a> og <a href="svorun.html">tímasvörun</a>. Lærðu að þekkja $K$, $\tau$, $\zeta$, $\omega_n$, $T_p$ og $M_p$ úr hvaða diffurjöfnu sem er.</li>
+  <li><b>Seinni hlutinn</b> (spurningar 3 og 4): <a href="hreyflar.html">hreyflar</a>, <a href="nemar.html">nemar</a> og <a href="stjornkerfi.html">skekkja í jafnvægi og stöðugleiki</a>.</li>
+  <li><b>Spurningar 5 og 6</b>: lestu <a href="honnun.html">vinnuferli hönnunar</a> og skrifaðu þína eigin punkta um hönnunarverkefnið áður en þú mætir.</li>
+  <li><b><a href="aefingar.html">Æfingaspurningar</a></b> með slembitölum og <a href="spjold.html">flashcards</a> til að festa formúlur og hugtök.</li>
+</ol>
+
+<h2>Efni áfangans eftir vikum</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Vika</th><th>Efni</th><th>Kaflar í hefti</th><th>Síða</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Tæknileg kerfi og véleindakerfi</td><td>1-3</td><td><a href="honnun.html#kerfi">Vinnuferli</a></td></tr>
+<tr><td>2-3</td><td>Líkön: vélar, rafrásir, straumefni og varmi</td><td>4-9</td><td><a href="likanagerd.html">Líkanagerð</a></td></tr>
+<tr><td>4</td><td>Lausnir diffurjafna, Laplace, yfirfærsluföll og blokkrit</td><td>10-11</td><td><a href="laplace.html">Laplace og blokkrit</a></td></tr>
+<tr><td>5</td><td>Tímasvörun, pólar og tíðnisvörun (Bode)</td><td>12-13</td><td><a href="svorun.html">Svörun</a></td></tr>
+<tr><td>6</td><td>Könnun 1 (líkanagerð og svörun)</td><td>2-13</td><td><a href="lokaprof.html#k1">Könnun 2020</a></td></tr>
+<tr><td>7</td><td>Mæling og nemar, hreyfing</td><td>14-16</td><td><a href="nemar.html">Nemar</a>, <a href="hreyflar.html">hreyflar</a></td></tr>
+<tr><td>8</td><td>Sjálfvirk stýrikerfi</td><td>17</td><td><a href="stjornkerfi.html">Stýrikerfi</a></td></tr>
+<tr><td>9</td><td>Stýringar: P, PI, PD og PID</td><td>18</td><td><a href="styringar.html">Stýringar</a></td></tr>
+<tr><td>10</td><td>Könnun 2 (hönnun)</td><td>14-18</td><td><a href="prof.html">Kannanir</a></td></tr>
+<tr><td>10-14</td><td>Hönnunarverkefni: hitastýring með hitagjafa og viftu</td><td>14, 17-18</td><td><a href="honnun.html#hv">Hönnunarverkefnið</a></td></tr>
+</tbody></table></div>
 
 <section aria-labelledby="hero-t">
-  <h2 id="hero-t" style="border-top:0;margin-top:1.6rem;padding-top:0">Færðu K og sjáðu hvað gerist</h2>
-  <p style="max-width:40rem">Lykkjan hér að neðan er sýnidæmi 1 úr stýringum: P-stýring á ferli með yfirfærslufallið $G_P = \dfrac{2{,}5}{(1+2s)(1+0{,}5s)}$. Þegar K hækkar færist $\omega_c$ til hægri (hraðari svörun, minni skekkja), en fasaöryggið $\varphi_m$ minnkar og svörunin fer að sveiflast.</p>
+  <h2 id="hero-t">Gagnvirkt: færðu K og sjáðu hvað gerist</h2>
+  <p style="max-width:40rem">Lykkjan hér að neðan er sýnidæmi 1 úr stýringum: P-stýring á ferli með yfirfærslufallið $G_P = \dfrac{2{,}5}{(1+2s)(1+0{,}5s)}$. Þegar K hækkar færist $\omega_c$ til hægri (hraðari svörun, minni skekkja), en fasaöryggið $\varphi_m$ minnkar og svörunin fer að sveiflast. Þetta er sama samspil og spurning 6 á lokaprófinu snýst um.</p>
   <div class="panel hero-fig">
     <div class="row" style="align-items:center">
       <div style="flex:1 1 16rem">
@@ -67,30 +122,10 @@
   </div>
 </section>
 
-<h2>Hvað hefur komið á prófum</h2>
-<p>Í gögnunum eru þrjú hönnunarpróf (2021, 2023 og 2025). Sama kjarnaefni kemur aftur og aftur, stundum með nákvæmlega sömu tölum.</p>
-<div class="tablewrap"><table>
-<thead><tr><th>Efni</th><th>2021</th><th>2023</th><th>2025</th></tr></thead>
-<tbody>
-<tr><td><a href="nemar.html">Nemar</a></td><td>S1: tveir hitanemar</td><td>S3: 4-20 mA nemi</td><td>S1: tveir hitanemar (<b>sama og 2021</b>)</td></tr>
-<tr><td><a href="hreyflar.html">Hreyfill</a></td><td>S3: $G_1$, $G_2$ og skekkja með P</td><td>S1: $\tau_s$, $\omega_0$, $P_{max}$</td><td>S2: $\tau_s$, $\omega_0$, $P_{max}$ og $L/R$</td></tr>
-<tr><td><a href="stjornkerfi.html">Truflun og afturvirkni</a></td><td>S2: tankur, sínustruflun</td><td>S2: tankur með seinkun, skekkja</td><td>S3: tankur, sínustruflun (<b>nær sama og 2021</b>)</td></tr>
-<tr><td><a href="stjornkerfi.html">Stöðugleiki</a></td><td>S4: seinkun $L$ í lykkju</td><td>S4: PI, fasaöryggi og hraði</td><td>S4: P gegn PI, truflun</td></tr>
-</tbody></table></div>
-<div class="note tip"><p><b class="t">Mynstur:</b> hvert próf hefur eina nemaspurningu eða tvær, eina hreyfilspurningu, eina spurningu um truflun með afturvirkni og eina um val á stýringu eða stöðugleika. Allir liðir kalla á stuttan útreikning. Þess vegna eru <a href="aefingar.html">æfingaspurningarnar</a> búnar til með slembitölum, svo þú getur æft sömu gerð aftur og aftur.</p></div>
-
-<h2>Hvar á að byrja</h2>
-<ol>
-  <li><b><a href="prof.html">Gömul próf</a></b>: reyndu hverja spurningu án þess að opna lausnina, eins og Rúnar mælir með. Lausnirnar hér eru allar fullreiknaðar skref fyrir skref.</li>
-  <li><b><a href="hreyflar.html">Hreyflar</a> og <a href="nemar.html">nemar</a></b>: stuttir kaflar með fáum formúlum. Þetta eru auðveldustu stigin á prófinu.</li>
-  <li><b><a href="stjornkerfi.html">Sjálfvirk stýrikerfi</a></b>: sex eiginleikar lykkjunnar. Hér tapast flest stig.</li>
-  <li><b><a href="spjold.html">Flashcards</a></b> fyrir hugtök og formúlur, og <a href="formulublad.html">formúlublaðið</a> sem má prenta út eða skrifa upp í höndunum (leyft á prófinu).</li>
-</ol>
-
 <h2>Um síðuna</h2>
-<p>Allar tölur í lausnum eru endurreiknaðar í kóða og bornar saman við lausnir kennarans. Þar sem handskrifuðu lausnirnar námunda öðruvísi (t.d. $\tau_s = 0{,}43$ gegn $0{,}44$ Nm) er það tekið fram. Reiknivélarnar og Bode-ritin eru skrifuð fyrir þessa síðu og keyra í vafranum.</p>
-<p style="color:var(--muted);font-size:0.95rem">Heimildir: glærur V7, V8 og V9 (Rúnar Unnþórsson), sýnidæmi vikna 7-10, lausnir á tengidæmum kafla 16-19 og prófin frá 2021, 2023 og 2025.</p>
-<div class="pager noprint"><i></i><a href="nemar.html" style="text-align:right"><span>Næsta</span>Nemar</a></div>
+<p>Allar tölur í lausnum eru endurreiknaðar í kóða og bornar saman við lausnir kennarans. Þar sem handskrifuðu lausnirnar námunda öðruvísi er það tekið fram. Reiknivélarnar og gröfin eru skrifuð fyrir þessa síðu og keyra í vafranum.</p>
+<p style="color:var(--muted);font-size:0.95rem">Heimildir: kennsluheftið <i>IÐN303 Tæknileg kerfi</i> (Rögnvaldur J. Sæmundsson, útg. 1.0.6), glærur V1-V9 (Rúnar Unnþórsson), sýnidæmi og lausnir vikna 2-10, kannanir 2020-2025 og lokaprófin 2024 og 2025.</p>
+<div class="pager noprint"><i></i><a href="lokaprof.html" style="text-align:right"><span>Næsta</span>Lokapróf 2024 og 2025</a></div>
 </div>
 </main>
 </div>

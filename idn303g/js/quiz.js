@@ -418,6 +418,214 @@
     };
   });
 
+  /* ---------- Líkanagerð og svörun kerfa (fyrri hluti) ---------- */
+  G.push(function firstOrderKT() {
+    var a = pick([1, 2, 3, 4, 5, 8, 10]), b = pick([1, 2, 4, 5, 10]), c = pick([1, 2, 3, 5]);
+    var ask = pick(["K", "tau"]);
+    var K = c / b, tau = a / b;
+    return {
+      topic: "svorun",
+      title: ask === "K" ? "Jafnvægisgildi fyrstu gerðar kerfis" : "Tímastuðull fyrstu gerðar kerfis",
+      text: "Kerfi er lýst með $" + a + "y' + " + b + "y = " + (c === 1 ? "" : c) + "u$. Hvert er " + (ask === "K" ? "jafnvægisgildi svörunarinnar við einingarþrepi ($K$)?" : "tímastuðullinn $\\tau$ (í s)?"),
+      answer: ask === "K" ? K : tau, unit: ask === "K" ? "" : "s", tol: 0.01,
+      sol: "<p>Laplace: $G(s) = \\dfrac{" + c + "}{" + a + "s + " + b + "} = \\dfrac{" + tx(K) + "}{" + tx(tau) + "s + 1}$ (deila í gegn með " + b + ").</p><p>Staðalform $\\dfrac{K}{\\tau s+1}$: $K = " + tx(K) + "$ og $\\tau = " + tx(tau) + "$ s.</p>",
+    };
+  });
+
+  G.push(function secondOrder() {
+    // undirdempað: veljum zeta og wn svo stuðlar verði snyrtilegir
+    var c = pick([
+      { a1: 2, a2: 2 }, { a1: 2, a2: 5 }, { a1: 4, a2: 8 }, { a1: 1, a2: 4 }, { a1: 2, a2: 10 },
+      { a1: 3, a2: 9 }, { a1: 4, a2: 13 }, { a1: 6, a2: 25 }, { a1: 1, a2: 1 }, { a1: 2, a2: 4 },
+    ]);
+    var b = pick([1, 2, 4, 5, 10]);
+    var wn = Math.sqrt(c.a2), z = c.a1 / (2 * wn), wd = wn * Math.sqrt(1 - z * z);
+    var Tp = Math.PI / wd, Mp = 100 * Math.exp((-z * Math.PI) / Math.sqrt(1 - z * z)), tau = 1 / (z * wn), K = b / c.a2;
+    var q = pick([
+      { k: "z", t: "dempunarhlutfallið $\\zeta$", v: z, u: "" },
+      { k: "wn", t: "náttúrulega tíðnin $\\omega_n$ (rad/s)", v: wn, u: "rad/s" },
+      { k: "Tp", t: "tími hæsta yfirskots $T_p$ (s)", v: Tp, u: "s" },
+      { k: "Mp", t: "hæsta yfirskot sem hlutfall af jafnvægisgildi (%)", v: Mp, u: "%" },
+      { k: "tau", t: "tímastuðullinn $\\tau = 1/(\\zeta\\omega_n)$ (s)", v: tau, u: "s" },
+      { k: "K", t: "jafnvægisgildi svörunar við einingarþrepi", v: K, u: "" },
+    ]);
+    return {
+      topic: "svorun",
+      title: "Annarrar gerðar kerfi",
+      text: "Kerfi er lýst með $y'' + " + (c.a1 === 1 ? "" : c.a1) + "y' + " + c.a2 + "y = " + (b === 1 ? "" : b) + "u$ og er í hvíld í upphafi. Hvert er " + q.t + "?",
+      answer: q.v, unit: q.u, tol: 0.015,
+      sol: "<p>$G(s) = \\dfrac{" + b + "}{s^2 + " + (c.a1 === 1 ? "" : c.a1) + "s + " + c.a2 + "}$, borið saman við $\\dfrac{K\\omega_n^2}{s^2 + 2\\zeta\\omega_ns + \\omega_n^2}$:</p>" +
+        "<p>$\\omega_n = \\sqrt{" + c.a2 + "} = " + tx(wn) + "$ rad/s, $\\zeta = \\dfrac{" + c.a1 + "}{2\\cdot" + tx(wn) + "} = " + tx(z) + "$, $K = " + b + "/" + c.a2 + " = " + tx(K) + "$.</p>" +
+        "<p>$\\omega_d = \\omega_n\\sqrt{1-\\zeta^2} = " + tx(wd) + "$ rad/s, $T_p = \\pi/\\omega_d = " + tx(Tp) + "$ s, $M_p = e^{-\\zeta\\pi/\\sqrt{1-\\zeta^2}} = " + tx(Mp) + "\\,\\%$, $\\tau = 1/(\\zeta\\omega_n) = " + tx(tau) + "$ s.</p>",
+    };
+  });
+
+  G.push(function stepAtTime() {
+    var K = pick([0.5, 1, 2, 4, 5]), tau = pick([0.2, 0.5, 1, 2, 5, 10]), k = pick([0.5, 1, 2, 3]);
+    var t = round(k * tau, 3), y = K * (1 - Math.exp(-t / tau));
+    return {
+      topic: "svorun",
+      title: "Þrepasvörun fyrstu gerðar",
+      text: "Kerfi hefur yfirfærslufallið $G(s) = \\dfrac{" + tx(K) + "}{" + tx(tau) + "s + 1}$. Hvert er úttakið $t = " + tx(t) + "$ s eftir einingarþrep í inntaki?",
+      answer: y, unit: "", tol: 0.015,
+      sol: "<p>$y(t) = K(1 - e^{-t/\\tau}) = " + tx(K) + "\\,(1 - e^{-" + tx(t) + "/" + tx(tau) + "}) = " + tx(K) + "\\cdot" + tx(1 - Math.exp(-t / tau)) + " = " + tx(y) + "$.</p>",
+    };
+  });
+
+  G.push(function finalValue() {
+    var b0 = pick([1, 2, 3, 4, 5]), a1 = pick([2, 3, 4, 5, 6]), a0 = pick([2, 4, 5, 8, 10]), A = pick([1, 2, 3, 5]);
+    var v = (A * b0) / a0;
+    return {
+      topic: "svorun",
+      title: "Lokagildisreglan",
+      text: "Stöðugt kerfi hefur $G(s) = \\dfrac{" + b0 + "}{s^2 + " + a1 + "s + " + a0 + "}$. Inntakið er þrep með stærð $" + A + "$. Hvert er lokagildi úttaksins?",
+      answer: v, unit: "", tol: 0.01,
+      sol: "<p>$\\lim_{t\\to\\infty} y(t) = \\lim_{s\\to0} s\\,G(s)\\,\\dfrac{" + A + "}{s} = " + A + "\\,G(0) = " + A + "\\cdot\\dfrac{" + b0 + "}{" + a0 + "} = " + tx(v) + "$.</p>",
+    };
+  });
+
+  G.push(function freqFirst() {
+    var K = pick([1, 2, 5, 10]), tau = pick([0.1, 0.5, 1, 2, 5]), w = pick([0.2, 0.5, 1, 2, 4, 10]);
+    var m = K / Math.sqrt(1 + tau * tau * w * w), ph = -deg(Math.atan(tau * w));
+    var ask = pick(["m", "ph"]);
+    return {
+      topic: "svorun",
+      title: ask === "m" ? "Tíðnisvörun: mögnun" : "Tíðnisvörun: fasi",
+      text: "Inntakið $u = \\sin(" + tx(w) + "t)$ fer í kerfið $G(s) = \\dfrac{" + K + "}{" + tx(tau) + "s + 1}$. " + (ask === "m" ? "Hvert er útslag úttaksins í sístæðu ástandi?" : "Hver er fasahliðrun úttaksins (í gráðum)?"),
+      answer: ask === "m" ? m : ph, unit: ask === "m" ? "" : "°", tol: 0.015,
+      sol: "<p>$|G(j\\omega)| = \\dfrac{K}{\\sqrt{1 + \\tau^2\\omega^2}} = \\dfrac{" + K + "}{\\sqrt{1 + (" + tx(tau) + "\\cdot" + tx(w) + ")^2}} = " + tx(m) + "$.</p><p>$\\varphi = -\\arctan(\\tau\\omega) = -\\arctan(" + tx(tau * w) + ") = " + tx(ph) + "^\\circ$ (úttakið er á eftir).</p>",
+    };
+  });
+
+  G.push(function tankModel() {
+    var A = pick([2, 5, 10, 20, 30]), R = pick([5, 10, 15, 20, 40]), h0 = pick([1, 2, 3, 4]), dq = pick([0.01, 0.02, 0.05, 0.1]);
+    var ask = pick(["h", "t"]);
+    var h = h0 + R * dq, t4 = 4 * A * R;
+    return {
+      topic: "likan",
+      title: "Vatnstankur (lokapróf 2024 S2)",
+      text: "Tankur hefur botnflöt $A = " + A + "\\ \\mathrm{m^2}$ og jafnvægishæð $h_0 = " + h0 + "$ m. Nálægt henni gildir $q_2 = h/R$ með $R = " + R + "\\ \\mathrm{s/m^2}$. Innflæðið er skyndilega aukið um $" + tx(dq) + "\\ \\mathrm{m^3/s}$. " + (ask === "h" ? "Hver verður ný jafnvægishæð (m)?" : "Eftir hve langan tíma (s) næst jafnvægi ($4\\tau$)?"),
+      answer: ask === "h" ? h : t4, unit: ask === "h" ? "m" : "s", tol: 0.01,
+      sol: "<p>$A\\dot h = q_1 - h/R \\Rightarrow AR\\,\\dot h + h = R\\,q_1$: $\\tau = AR = " + (A * R) + "$ s og mögnun $R$.</p><p>$\\Delta h = R\\,\\Delta q = " + R + "\\cdot" + tx(dq) + " = " + tx(R * dq) + "$ m, svo $h = " + tx(h) + "$ m. $4\\tau = " + t4 + "$ s.</p>",
+    };
+  });
+
+  G.push(function rcSwitch() {
+    var R1 = pick([2, 4, 6, 8, 10]), R2 = pick([1, 2, 4, 5]), C = pick([0.5, 1, 2, 10]), V = pick([10, 12, 20, 30]);
+    var Rth = (R1 * R2) / (R1 + R2), uinf = (V * R2) / (R1 + R2), tau = Rth * C; // kΩ*µF = ms
+    var ask = pick(["u", "t"]);
+    return {
+      topic: "likan",
+      title: "RC-rás eftir rofa (lokapróf 2025 S2)",
+      text: "Spennulind $V_1 = " + V + "$ V tengist hnút í gegnum $R_1 = " + R1 + "\\ \\mathrm{k\\Omega}$. Frá hnútnum til jarðar liggja $R_2 = " + R2 + "\\ \\mathrm{k\\Omega}$ og þéttir $C = " + tx(C) + "\\ \\mu\\mathrm F$ hliðtengd. Rofi sem tengdi aðra spennulind við hnútinn er opnaður við $t = 0$. " + (ask === "u" ? "Hvert er jafnvægisgildi spennunnar $u$ yfir þéttinn (V)?" : "Hver er tímastuðull rásarinnar (ms)?"),
+      answer: ask === "u" ? uinf : tau, unit: ask === "u" ? "V" : "ms", tol: 0.01,
+      sol: "<p>Kirchhoff: $\\dfrac{V_1 - u}{R_1} = \\dfrac{u}{R_2} + C\\dot u \\Rightarrow R_{th}C\\,\\dot u + u = \\dfrac{R_2}{R_1+R_2}V_1$.</p><p>$R_{th} = R_1\\parallel R_2 = " + tx(Rth) + "\\ \\mathrm{k\\Omega}$, $\\tau = R_{th}C = " + tx(tau) + "$ ms, $u_\\infty = " + tx(uinf) + "$ V.</p>",
+    };
+  });
+
+  G.push(function rcLowpass() {
+    var R = pick([1, 2.2, 4.7, 10, 47, 100]), C = pick([0.1, 0.47, 1, 10, 100]); // kΩ, µF
+    var tau = R * C; // ms
+    return {
+      topic: "likan",
+      title: "RC-sía",
+      text: "Inntaksspenna $u$ fer í gegnum viðnám $R = " + tx(R) + "\\ \\mathrm{k\\Omega}$ og úttakið $y$ er spennan yfir þétti $C = " + tx(C) + "\\ \\mu\\mathrm F$. Hver er tímastuðullinn (ms)?",
+      answer: tau, unit: "ms", tol: 0.01,
+      sol: "<p>$\\dfrac{u - y}{R} = C\\dot y \\Rightarrow RC\\,\\dot y + y = u$, svo $\\tau = RC = " + tx(R) + "\\cdot10^3\\cdot" + tx(C) + "\\cdot10^{-6} = " + tx(tau) + "$ ms.</p>",
+    };
+  });
+
+  G.push(function thermal() {
+    var m = pick([0.5, 1, 2, 5]), c = pick([450, 900, 4180]), R = pick([0.05, 0.1, 0.2, 0.5]), P = pick([100, 200, 500, 1000]);
+    var Ct = m * c, tau = R * Ct, dT = R * P;
+    var ask = pick(["t", "d"]);
+    return {
+      topic: "likan",
+      title: "Varmakerfi",
+      text: "Hlutur með massa $" + tx(m) + "$ kg og eðlisvarma $" + c + "$ J/(kg·°C) er hitaður með $P = " + P + "$ W. Varmaviðnámið til umhverfisins er $R = " + tx(R) + "$ °C/W. " + (ask === "t" ? "Hver er tímastuðullinn (s)?" : "Hversu mikið hækkar hitinn umfram umhverfið í jafnvægi (°C)?"),
+      answer: ask === "t" ? tau : dT, unit: ask === "t" ? "s" : "°C", tol: 0.01,
+      sol: "<p>$P - \\dfrac{T - T_u}{R} = C\\dot T \\Rightarrow RC\\,\\dot T + T = T_u + RP$, með $C = mc = " + tx(Ct) + "$ J/°C.</p><p>$\\tau = RC = " + tx(tau) + "$ s. Í jafnvægi: $T - T_u = RP = " + tx(dT) + "$ °C.</p>",
+    };
+  });
+
+  G.push(function springs() {
+    var k1 = pick([100, 200, 300, 400, 600]), k2 = pick([100, 200, 300, 600]);
+    var ser = pick([true, false]);
+    var k = ser ? (k1 * k2) / (k1 + k2) : k1 + k2;
+    return {
+      topic: "likan",
+      title: "Jafngildisfjöður",
+      text: "Tvær fjaðrir með $k_1 = " + k1 + "$ N/m og $k_2 = " + k2 + "$ N/m eru " + (ser ? "raðtengdar" : "hliðtengdar") + ". Hver er jafngildisstífnin (N/m)?",
+      answer: k, unit: "N/m", tol: 0.01,
+      sol: ser ? "<p>Raðtengdar: sami kraftur, færslur leggjast saman: $\\dfrac1k = \\dfrac1{k_1} + \\dfrac1{k_2} \\Rightarrow k = \\dfrac{k_1k_2}{k_1+k_2} = " + tx(k) + "$ N/m.</p>"
+        : "<p>Hliðtengdar: sama færsla, kraftar leggjast saman: $k = k_1 + k_2 = " + k + "$ N/m.</p>",
+    };
+  });
+
+  G.push(function massSpring() {
+    var m = pick([1, 2, 4, 5]), c = pick([2, 4, 6, 8]), k = pick([8, 16, 32, 50, 100]);
+    var wn = Math.sqrt(k / m), z = c / (2 * Math.sqrt(k * m));
+    var ask = pick(["wn", "z"]);
+    return {
+      topic: "likan",
+      title: "Massi, fjöður og dempari",
+      text: "Massi $m = " + m + "$ kg er tengdur vegg með fjöður $k = " + k + "$ N/m og dempara $c = " + c + "$ Ns/m. Krafturinn $F$ er inntak og færslan $x$ úttak. Hver er " + (ask === "wn" ? "náttúrulega tíðnin $\\omega_n$ (rad/s)?" : "dempunarhlutfallið $\\zeta$?"),
+      answer: ask === "wn" ? wn : z, unit: ask === "wn" ? "rad/s" : "", tol: 0.01,
+      sol: "<p>$m\\ddot x + c\\dot x + kx = F \\Rightarrow G = \\dfrac{1/m}{s^2 + \\frac{c}{m}s + \\frac{k}{m}}$.</p><p>$\\omega_n = \\sqrt{k/m} = " + tx(wn) + "$ rad/s, $\\zeta = \\dfrac{c}{2\\sqrt{km}} = " + tx(z) + "$.</p>",
+    };
+  });
+
+  G.push(function pType0() {
+    var Kp = pick([0.5, 1, 2, 2.5, 4]), K = pick([1, 2, 4, 5, 10, 20]), r = pick([1, 2, 5, 10]);
+    var e = r / (1 + K * Kp);
+    return {
+      topic: "stjornkerfi",
+      title: "Skekkja með P-stýringu (tegund 0)",
+      text: "Ferli $G_P = \\dfrac{" + tx(Kp) + "}{(1+2s)(1+s)}$ er stýrt með P-stýringu $K = " + K + "$ og nema $G_S = 1$. Hver er skekkjan í jafnvægi eftir þrep um $" + r + "$ í óskgildi?",
+      answer: e, unit: "", tol: 0.01,
+      sol: "<p>Tegund 0: $K_p = \\lim_{s\\to0}G_K = " + K + "\\cdot" + tx(Kp) + " = " + tx(K * Kp) + "$.</p><p>$e_{ss} = \\dfrac{" + r + "}{1 + K_p} = " + tx(e) + "$.</p>",
+    };
+  });
+
+  G.push(function delayMargin() {
+    var pm = pick([30, 35, 40, 45, 50, 60]), wc = pick([0.05, 0.2, 0.5, 1, 2, 5]);
+    var L = (pm * Math.PI) / 180 / wc;
+    return {
+      topic: "stjornkerfi",
+      title: "Leyfileg seinkun",
+      text: "Lykkja hefur fasaöryggi $\\varphi_m = " + pm + "^\\circ$ við $\\omega_c = " + tx(wc) + "$ rad/s. Hversu löng má hrein seinkun $e^{-Ls}$ í lykkjunni vera áður en kerfið verður óstöðugt (s)?",
+      answer: L, unit: "s", tol: 0.015,
+      sol: "<p>Seinkunin breytir ekki mögnuninni en lækkar fasann um $\\omega L$ rad. Óstöðugt þegar $\\omega_cL \\ge \\varphi_m$:</p><p>$L_{max} = \\dfrac{" + pm + "\\cdot\\pi/180}{" + tx(wc) + "} = " + tx(L) + "$ s.</p>",
+    };
+  });
+
+  G.push(function motorSelect() {
+    var va = pick([10, 12, 24]), kt = pick([0.08, 0.1, 0.15, 0.2]), R = pick([1, 1.5, 2, 2.5]), kfk = pick([8, 10, 12, 15]);
+    var ts = (kt / R) * va, w0 = va / KF_SI(kfk), P = (ts * w0) / 4;
+    var ask = pick(["ts", "P"]);
+    return {
+      topic: "hreyflar",
+      title: ask === "ts" ? "Val á hreyfli: upphafsvægi" : "Val á hreyfli: hámarksafl",
+      text: "Jafnstraumshreyfill: $v_a = " + va + "$ V, $K_\\tau = " + tx(kt) + "$ Nm/A, $K_f = " + kfk + "$ V/1000 RPM, $R = " + tx(R) + "\\ \\Omega$, span óverulegt. " + (ask === "ts" ? "Hvert er upphafsvægið (Nm)?" : "Hvert er hámarksaflið (W)?"),
+      answer: ask === "ts" ? ts : P, unit: ask === "ts" ? "Nm" : "W", tol: 0.015,
+      sol: "<p>$\\tau_s = \\dfrac{K_\\tau}{R}v_a = " + tx(ts) + "$ Nm. $K_f = " + kfk + "/104{,}72 = " + tx(KF_SI(kfk)) + "$ V·s/rad, $\\omega_0 = v_a/K_f = " + tx(w0) + "$ rad/s.</p><p>$P_{max} = \\dfrac{\\tau_s\\omega_0}{4} = " + tx(P) + "$ W.</p>",
+    };
+  });
+
+  G.push(function partialFrac() {
+    var a = pick([1, 2, 3]), b = a + pick([1, 2, 3]), A = pick([1, 2, 3, 4]);
+    // Y = A / ((s+a)(s+b)) -> k1 e^{-at} + k2 e^{-bt}, k1 = A/(b-a)
+    var t = pick([0.2, 0.5, 1]);
+    var y = (A / (b - a)) * (Math.exp(-a * t) - Math.exp(-b * t));
+    return {
+      topic: "svorun",
+      title: "Andhverf Laplace-vörpun",
+      text: "Finndu $y(t)$ fyrir $Y(s) = \\dfrac{" + A + "}{(s+" + a + ")(s+" + b + ")}$ og reiknaðu $y(" + tx(t) + ")$.",
+      answer: y, unit: "", tol: 0.015,
+      sol: "<p>Stofnbrot: $k_1 = \\dfrac{" + A + "}{-" + a + "+" + b + "} = " + tx(A / (b - a)) + "$, $k_2 = \\dfrac{" + A + "}{-" + b + "+" + a + "} = " + tx(-A / (b - a)) + "$.</p><p>$y(t) = " + tx(A / (b - a)) + "\\,(e^{-" + a + "t} - e^{-" + b + "t})$, svo $y(" + tx(t) + ") = " + tx(y) + "$.</p>",
+    };
+  });
+
   /* ---------- Skilningsspurningar (val) ---------- */
   var MC = [
     { topic: "nemar", q: "Nemi gefur alltaf 25,3 °C þegar hitinn er í raun 24,0 °C, en gildið breytist ekkert milli endurtekinna mælinga. Hvað lýsir þessu best?",
@@ -465,15 +673,48 @@
     { topic: "styringar", q: "Hvaða stærð mælir deyfingu lágtíðnitruflana hjá PI/PID-stýringu?", o: ["$K/T_I$", "$K\\,T_D$", "$T_F$", "$\\omega_\\pi$"], c: 0, e: "Við lágar tíðnir er $|G_C| \\approx K/(T_I\\omega)$, svo hærra $K/T_I$ gefur meiri mögnun lykkjunnar." },
     { topic: "styringar", q: "Á bilinu hvað á $T_F$ að vera í PID-stýringu?", o: ["$0{,}2\\,T_D < T_F < 0{,}4\\,T_D$", "$T_F > 2\\,T_D$", "$T_F = T_I$", "$T_F < 0{,}01\\,T_D$"], c: 0, e: "Skref 3 í hönnunaruppskriftinni." },
     { topic: "styringar", q: "Þú ber saman tvær PI-stýringar með $T_I = 1$, önnur með $K = 3$ og hin með $K = 13$. Hvað segir $K$ eitt og sér um fasaöryggið?", o: ["Ekkert öruggt: þarf að reikna fasann við $\\omega_c$ hvorrar", "Hærra $K$ gefur alltaf meira fasaöryggi", "Lægra $K$ gefur alltaf minna fasaöryggi", "Fasaöryggið er óháð $K$"], c: 0, e: "Próf 2023 S4: $\\varphi_m \\approx 62^\\circ$ fyrir $K = 3$ og $\\approx 29^\\circ$ fyrir $K = 13$." },
+    { topic: "likan", q: "Hvað þýðir að líkan sé línulegt?", o: ["Samlagningar- og einsleitniregla gilda: $au_1 + bu_2$ gefur $ay_1 + by_2$", "Úttakið er bein lína í tíma", "Það hefur aðeins eina breytu", "Það er fyrstu gerðar"], c: 0, e: "Kafli 4: viðlegðarregla (superposition) og einsleitniregla (homogeneity)." },
+    { topic: "likan", q: "Af hverju eru líkön gerð um vinnupunkt?", o: ["Raunkerfi eru ólínuleg; frávik frá jafnvægi má nálga línulega", "Til að losna við upphafsskilyrði", "Svo kerfið verði stöðugt", "Það er krafa Laplace-vörpunar"], c: 0, e: "Fyrsta stigs Taylor-nálgun. Stikarnir verða háðir vinnupunktinum og nákvæmnin minnkar með stærra fráviki." },
+    { topic: "likan", q: "Hvaða grunneining er EKKI til í varmakerfum?", o: ["Tregða", "Rýmd", "Viðnám", "Flæði"], c: 0, e: "Tafla 9.1: varmakerfi hafa aðeins varmarýmd og varmaviðnám, svo þau sveiflast ekki af sjálfu sér." },
+    { topic: "likan", q: "Í rafrás er spenna áreynslubreyta. Hver er samsvarandi breyta í vökvakerfi?", o: ["Þrýstingur", "Rúmmálsflæði", "Hæð", "Massi"], c: 0, e: "Áreynsla: kraftur, vægi, spenna, þrýstingur, hitastig. Flæði: hraði, straumur, rúmmálsflæði, varmaflæði." },
+    { topic: "likan", q: "Hvað jafngildir spólu $L$ í vélrænu kerfi (lína)?", o: ["Massi $m$", "Fjöður $k$", "Dempari $c$", "Kraftur $F$"], c: 0, e: "RLC: $L\\ddot q + R\\dot q + q/C = v$ og $m\\ddot x + c\\dot x + kx = F$: $L\\leftrightarrow m$, $R\\leftrightarrow c$, $1/C\\leftrightarrow k$." },
+    { topic: "likan", q: "Hvernig hagar þéttir sér í jafnvægi (DC)?", o: ["Eins og opin rás (enginn straumur)", "Eins og leiðari (engin spenna)", "Eins og viðnám $1/C$", "Hann afhleðst alltaf"], c: 0, e: "$i = C\\,dv/dt = 0$ þegar spennan er föst. Spóla er öfugt: eins og leiðari." },
+    { topic: "likan", q: "Tvær jafnstífar fjaðrir $k$ eru raðtengdar. Jafngildisstífnin er:", o: ["$k/2$", "$2k$", "$k$", "$k^2$"], c: 0, e: "Sami kraftur, færslurnar leggjast saman: $1/k_{eq} = 1/k + 1/k$." },
+    { topic: "likan", q: "Hver eru þrjú skref líkanagerðar út frá náttúrulögmálum?", o: ["Afmörkun og uppskipting, grunnjöfnur, diffurjafna fyrir heildina", "Mæla, herma, hanna", "Laplace, blokkrit, Bode", "Kröfur, hönnun, sannprófun"], c: 0, e: "Kafli 4. Leiðin út frá mælingum (system identification) skiptir skrefi 2 út fyrir mælingar á svörun." },
+    { topic: "likan", q: "Tankur með útflæði $q_2 = h/R$ og botnflöt $A$. Tímastuðullinn er:", o: ["$AR$", "$A/R$", "$R/A$", "$\\sqrt{AR}$"], c: 0, e: "$A\\dot h = q_1 - h/R \\Rightarrow AR\\,\\dot h + h = Rq_1$." },
+
+    { topic: "svorun", q: "Hvar þurfa allir pólar stöðugs kerfis að vera?", o: ["Í vinstra hálfplani (neikvæður raunhluti)", "Á $j\\omega$-ásnum", "Í hægra hálfplani", "Á raunásnum"], c: 0, e: "Ein rót í hægra hálfplani nægir til að kerfið sé óstöðugt (mynd 12.1)." },
+    { topic: "svorun", q: "Pólar eru $-2 \\pm 5j$. Hvað segir þverhlutinn (5)?", o: ["Sveiflutíðnina $\\omega_d$", "Dempunina (tímastuðul)", "Jafnvægisgildið", "Stöðugleikann"], c: 0, e: "Raunhlutinn (−2) segir hversu hratt sveiflan dofnar: $\\tau = 1/2$ s. Þverhlutinn er $\\omega_d = 5$ rad/s." },
+    { topic: "svorun", q: "Hvenær hefur annarrar gerðar kerfi yfirskot í þrepasvörun?", o: ["Þegar $0 < \\zeta < 1$", "Þegar $\\zeta > 1$", "Þegar $\\zeta = 1$", "Alltaf"], c: 0, e: "Samoka tvinntölurætur. $\\zeta \\ge 1$ gefur raunrætur og ekkert yfirskot." },
+    { topic: "svorun", q: "Hversu langt er fyrstu gerðar kerfi komið eftir einn tímastuðul?", o: ["63 %", "50 %", "86 %", "98 %"], c: 0, e: "$1 - e^{-1} = 0{,}632$. Eftir $4\\tau$: 98 %." },
+    { topic: "svorun", q: "Hvað er Laplace-vörpun afleiðu $f'(t)$?", o: ["$sF(s) - f(0)$", "$F(s)/s$", "$F(s) - f(0)$", "$s^2F(s)$"], c: 0, e: "Diffrun verður margföldun með $s$; tegrun deiling með $s$." },
+    { topic: "svorun", q: "Hrein seinkun um $T$ sekúndur, $f(t-T)$, í s-rúminu:", o: ["$F(s)e^{-Ts}$", "$F(s-T)$", "$F(s)/T$", "$F(s+T)$"], c: 0, e: "Hliðrunarreglan (regla 5)." },
+    { topic: "svorun", q: "Lokagildisreglan segir $\\lim_{t\\to\\infty} f(t) =$", o: ["$\\lim_{s\\to0} sF(s)$", "$\\lim_{s\\to\\infty} sF(s)$", "$F(0)$", "$\\lim_{s\\to0} F(s)/s$"], c: 0, e: "Gildir aðeins ef markgildið er til (kerfið stöðugt)." },
+    { topic: "svorun", q: "Raðtengd blokkrit $G_1$ og $G_2$ jafngilda:", o: ["$G_1G_2$", "$G_1 + G_2$", "$\\dfrac{G_1}{1+G_1G_2}$", "$G_1/G_2$"], c: 0, e: "Hliðtengd (lögð saman) gefa $G_1 + G_2$; afturvirkni gefur $\\dfrac{G}{1 \\pm GH}$." },
+    { topic: "svorun", q: "Bode-rit fyrstu gerðar kerfis: halli mögnunar fyrir ofan $1/\\tau$?", o: ["−20 dB/dec", "−40 dB/dec", "0 dB/dec", "−3 dB/dec"], c: 0, e: "Við $\\omega = 1/\\tau$ (bandvídd) er mögnunin 3 dB undir láréttu aðfellunni og fasinn −45°." },
+    { topic: "svorun", q: "Hvað gerist í tíðnisvörun annarrar gerðar kerfis þegar $\\zeta$ er lítið?", o: ["Toppur (resonance) nálægt $\\omega_n$", "Mögnunin fellur um −20 dB/dec", "Fasinn fer í +180°", "Engin breyting"], c: 0, e: "$M_r = \\dfrac{K}{2\\zeta\\sqrt{1-\\zeta^2}}$ fyrir $\\zeta \\le 1/\\sqrt2$. Yfir $\\omega_n$ fellur mögnunin um −40 dB/dec." },
+    { topic: "svorun", q: "$G(s) = 3/s$ og inntakið er einingarþrep. Hvað gerist?", o: ["Úttakið vex línulega ($3t$) og nær ekki jafnvægi", "Úttakið verður 3", "Úttakið sveiflast", "Úttakið fer í 0"], c: 0, e: "Hreint heildi: $Y = 3/s^2 \\Rightarrow y = 3t$ (flái)." },
+
+    { topic: "vinnuferli", q: "Hver er munurinn á þörfum og kröfum?", o: ["Þarfir eru markmið notenda á þeirra máli; kröfur eru mælanleg markmið hönnuðarins", "Það er enginn munur", "Kröfur koma frá notendum, þarfir frá hönnuði", "Þarfir eru alltaf mælanlegar"], c: 0, e: "Kafli 14. Kröfur (hönnunarforsendur) skulu allar vera mælanlegar." },
+    { topic: "vinnuferli", q: "Hvað er sannprófun (verification)?", o: ["Að staðfesta að hönnun uppfylli kröfur", "Að staðfesta að hönnun uppfylli þarfir notenda", "Að gera líkan", "Að velja nema"], c: 0, e: "Réttmæti (validation) snýr að þörfum notenda. Hönnun getur staðist sannprófun en samt ekki uppfyllt þarfir." },
+    { topic: "vinnuferli", q: "Hvenær er skilgreint hvernig kerfið verður sannprófað?", o: ["Samhliða því að kröfur eru settar, áður en hannað er", "Eftir útfærslu", "Aðeins ef eitthvað bregst", "Aldrei, það er gert með tilfinningu"], c: 0, e: "Skref 1 í vinnuferli heftisins: út frá kröfum er skilgreint hvernig heildarkerfið skuli sannprófað." },
+    { topic: "vinnuferli", q: "Af hverju mælir heftið með að byrja á einfaldri stýringu?", o: ["Til að kynnast kerfinu og samsvörun líkans og raunveruleika áður en flækt er", "Einfaldar stýringar eru alltaf bestar", "Flóknar stýringar eru óstöðugar", "Til að spara tölvuafl"], c: 0, e: "Flóknari stýringar krefjast nákvæmari líkana; misræmi milli Laplace-heimsins og raunheims vex." },
+    { topic: "vinnuferli", q: "Hverjar eru fjórar dæmigerðar einingar véleindakerfis?", o: ["Vélrænt kerfi, nemi, hreyfill og tölva", "Mótor, gír, hjól og rafhlaða", "Inntak, úttak, truflun og suð", "P, I, D og sía"], c: 0, e: "Kafli 3. Tölvan les nemann og stýrir hreyflinum (afturvirkni)." },
+    { topic: "vinnuferli", q: "Hvaða tvo eiginleika hafa öll tæknileg kerfi skv. heftinu?", o: ["Þau eru samsett úr einingum sem eru sjálfar tæknileg kerfi, og þau nýta náttúrufyrirbæri", "Þau eru línuleg og tímaóháð", "Þau hafa tölvu og nema", "Þau eru stöðug og hröð"], c: 0, e: "Kafli 2.2: stigveldi eininga og nýting náttúrufyrirbæra." },
+    { topic: "vinnuferli", q: "Lykkja án stýringar hefur heildi (fasi byrjar í −90°). Krafa um enga skekkju við þrep og meiri hraða og fasaöryggi. Hvaða stýring?", o: ["PD", "PI", "P", "PID"], c: 0, e: "Lokapróf 2024 S6: heildið eyðir skekkjunni nú þegar; D-liðurinn gefur fasann sem þarf við hærri $\\omega_c$." },
+    { topic: "vinnuferli", q: "Ferli af tegund 0 (nær föstu gildi) á að verða hraðara, með lítið yfirskot og enga skekkju. Hvaða stýring?", o: ["PID", "PD", "P", "PI"], c: 0, e: "Lokapróf 2025 S6: I fyrir skekkjuna, D fyrir fasa/dempun þegar mögnunin er hækkuð." },
   ];
 
   /* ---------- Viðmót ---------- */
   var TOPICS = [
     { id: "allt", label: "Allt" },
+    { id: "likan", label: "Líkanagerð" },
+    { id: "svorun", label: "Svörun kerfa" },
     { id: "nemar", label: "Nemar" },
     { id: "hreyflar", label: "Hreyflar" },
     { id: "stjornkerfi", label: "Sjálfvirk stýrikerfi" },
     { id: "styringar", label: "Stýringar" },
+    { id: "vinnuferli", label: "Vinnuferli" },
   ];
   var MODES = [
     { id: "reikna", label: "Reikna (slembitölur)" },

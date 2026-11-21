@@ -1,0 +1,215 @@
+<h1>Vinnuferli hönnunar og ritgerðarspurningar</h1>
+<p class="lede">Spurningar 5 og 6 á lokaprófinu gilda samtals 40 %. Þær eru skriflegar og á að rökstyðja svörin með efni úr heftinu og eigin reynslu úr hönnunarverkefninu. Hér eru hugtökin sem kennarinn vill sjá (kaflar 2-4 og 14), yfirlit yfir hönnunarverkefnið og beinagrind að svörum.</p>
+
+<p class="noprint"><b>Flýtileiðir:</b> <a href="#kerfi">Tæknileg kerfi</a> · <a href="#vinnuferli">Vinnuferli (kafli 14)</a> · <a href="#likon">Hlutverk líkana</a> · <a href="#hv">Hönnunarverkefnið</a> · <a href="#s5">Spurning 5</a> · <a href="#s6">Spurning 6</a></p>
+
+<h2 id="kerfi">Tæknileg kerfi og véleindakerfi (kaflar 2-3)</h2>
+<div class="key">
+<p><b>Skilgreining heftisins:</b> tæknilegt kerfi er <b>afmarkað safn af samtengdum einingum sem eru notaðar sem leið að gefnu markmiði</b>. A.m.k. ein eining er efnisleg og fólk er ekki hluti af kerfinu, heldur hluti af umhverfi þess. Inntak eru áhrif umhverfisins á kerfið, úttak áhrif kerfisins á umhverfið.</p>
+</div>
+<p><b>Þrjú sjónarhorn á tækni</b> (Arthur):</p>
+<ol>
+<li>Tækni er <b>leið að gefnu markmiði</b>: aðferð, ferli eða tæki (t.d. tölvualgrím, hreinsiferli, bílvél).</li>
+<li>Tækni er <b>safn aðferða og eininga sem eru notaðar saman</b>, eins konar orðaforði. Heftið kallar þessi söfn <b>tæknisvið</b>, t.d. rafeindatækni, véleindatækni og líftækni.</li>
+<li>Tækni er <b>allar aðferðir og einingar</b> sem á hverjum tíma má nota til að ná markmiði, þar með talin ólík tæknisvið („tungumál“).</li>
+</ol>
+<p><b>Tveir almennir eiginleikar</b> tæknilegra kerfa:</p>
+<ol>
+<li>Öll tæknileg kerfi eru <b>samsett úr einingum sem sjálfar eru tæknileg kerfi</b>. Flókin kerfi eru því <b>stigveldi</b> (snjallsími → samskiptakerfi → farsímamóttakari → rafrásir og hugbúnaður).</li>
+<li>Öll tæknileg kerfi <b>nýta sér náttúrufyrirbæri</b> í ákveðnum tilgangi. Grunnvirknin (t.d. gufa sem þenst út) er studd af <b>stoðeiningum</b> sem útvega orku, safna upplýsingum og bregðast við breyttum aðstæðum.</li>
+</ol>
+<p><b>Þróun:</b> með reynslu byggjast upp venjur og tæknisvið. Ný tæknisvið geta náð sömu markmiðum og eldri (véleindatækni í stað vélatækni í bílum) og opna ný markmið. Mismunandi tæknisvið hafa sambærilegar grunneiningar sem lýsa má með sameiginlegu tungumáli: stærðfræðinni (sjá <a href="likanagerd.html">samanburðartöfluna í kafla 9</a>).</p>
+
+<h3>Véleindakerfi</h3>
+<p>Véleindatækni (e. mechatronics) er blanda véla-, rafeinda- og tölvutækni. Dæmigert véleindakerfi hefur fjórar einingar:</p>
+<div class="grid2">
+<div class="key"><p><b>Vélrænt kerfi</b> sem á að stýra.</p></div>
+<div class="key"><p><b>Nemi</b> sem mælir ástand eða úttak og breytir því í rafmerki.</p></div>
+<div class="key"><p><b>Hreyfill</b> sem breytir rafmerki í vélræna aðgerð.</p></div>
+<div class="key"><p><b>Tölva</b> sem les mælingar og stýrir hreyflinum.</p></div>
+</div>
+<p>Að mæla úttakið og nota mismuninn á óskgildi og mælingu til stýringar kallast <b>afturvirkni</b> (e. feedback). Í hönnunarverkefninu var vélræna kerfið rýmið (hitastig), neminn ds18b20, hreyfillinn hitagjafi og vifta, og tölvan Raspberry Pi.</p>
+
+<h2 id="vinnuferli">Vinnuferli hönnunar (kafli 14)</h2>
+<p>Verkfræðileg hönnun er <b>tilraun til að uppfylla þarfir á sem bestan hátt</b>. Hugtakapörin hér að neðan eru kjarninn í svörum við spurningum 5 og 6.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Sjónarhorn notanda</th><th>Sjónarhorn hönnuðar</th></tr></thead>
+<tbody>
+<tr><td>Markmið</td><td><b>Þarfir</b> (e. needs): á tungumáli notandans, óháðar tæknilausn, geta verið huglægar</td><td><b>Kröfur</b> / hönnunarforsendur (e. requirements, design specification): á tungumáli hönnuðar, <b>allar mælanlegar</b></td></tr>
+<tr><td>Staðfesting</td><td><b>Réttmæti</b> (e. validation): uppfyllir hönnunin þarfirnar?</td><td><b>Sannprófun</b> (e. verification): uppfyllir hönnunin kröfurnar?</td></tr>
+</tbody></table></div>
+<div class="note"><p><b class="t">Mikilvægt:</b> réttmæti er ekki tryggt þó kröfur hafi verið sannprófaðar, því ekki er öruggt að kröfurnar endurspegli þarfirnar. Kröfur mynda <b>stigveldi</b>: kröfur kerfisins skilgreina kröfur til einstakra eininga.</p></div>
+
+<h3>Heildarferlið í fimm skrefum</h3>
+<ol>
+<li>Upplýsingum um þarfir notenda er aflað og skilgreint hvernig réttmæti skuli staðfest.</li>
+<li>Þörfum er umbreytt í kröfur og skilgreint hvernig þær skuli sannprófaðar.</li>
+<li>Kerfi sem uppfyllir kröfurnar er hannað og útfært.</li>
+<li>Útfærslan er sannprófuð; hönnun og útfærsla endurbætt þar til hún stenst.</li>
+<li>Notendur staðfesta réttmæti; kröfur, hönnun og útfærsla endurbætt þar til réttmæti er staðfest.</li>
+</ol>
+
+<h3>Hönnun og útfærsla í stigveldi (fjögur skref)</h3>
+<ol>
+<li>Út frá kröfum er <b>högun</b> (e. architecture) kerfisins skilgreind: grunneiningar og hvernig þær vinna saman. Samhliða er skilgreint hvernig kerfið skal sannprófað.</li>
+<li>Kröfur til hverrar einingar skilgreindar og hvernig þær skuli sannprófaðar (endurtekið niður stigveldið).</li>
+<li>Eining er hönnuð, útfærð og sannprófuð; hönnun hennar er ekki lokið fyrr en hún stenst.</li>
+<li>Einingar settar saman og kerfið sannprófað, upp stigveldið þar til heildarkerfið stenst.</li>
+</ol>
+
+<h3>Einfaldað ferli fyrir véleindakerfi</h3>
+<div class="key">
+<ol style="margin:0">
+<li>Út frá kröfum er skilgreint hvernig heildarkerfið skuli <b>sannprófað</b>.</li>
+<li>Kröfur fyrir hverja vélbúnaðareiningu (tölvu, nema, hreyfil) eru skilgreindar og <b>einingar valdar</b>.</li>
+<li><b>Líkan</b> gert af hreyfli, kerfinu sem á að stýra og nema. Með aðstoð þess er <b>stýring hönnuð</b> sem uppfyllir kröfur um hegðun heildarkerfisins.</li>
+<li>Stýringin er <b>útfærð í tölvu</b> og heildarkerfið sannprófað. Ef hún stenst ekki er hún endurbætt og sannprófuð aftur.</li>
+</ol>
+</div>
+<p>Spurning 3 á lokaprófinu (val á hreyfli og nema) er skref 2, spurningar 4 og 6 eru skref 3 og seinni hluti spurningar 6 er skref 4.</p>
+
+<h3>Málamiðlanir og val á leiðum</h3>
+<ul>
+<li>Hönnuður getur yfirleitt valið úr nokkrum leiðum sem áður hafa verið farnar (ólíkar einingar eða högun). Verkefnið er að velja þá sem hentar best og <b>stilla</b> hana (t.d. gildi á $K$, $T_I$, $T_D$).</li>
+<li>Hönnun er nær alltaf <b>málamiðlun</b> milli æskilegra eiginleika (dæmi heftisins: ending rafhlöðu gegn stærð og þyngd). Í stýringum: hraði gegn stöðugleika, skekkja gegn yfirskoti, deyfing truflana gegn stýrimerki og suði.</li>
+<li>Tæknilegar málamiðlanir neðarlega í stigveldinu hafa áhrif á kostnað, endingu, öryggi og áreiðanleika, svo hönnuður þarf að skilja hvernig kröfur tengjast þörfum.</li>
+</ul>
+
+<h2 id="likon">Hlutverk líkana</h2>
+<ul>
+<li>Með líkönum má <b>meta og bera saman marga valkosti á skilvirkan hátt</b>, án tímafrekra og dýrra tilrauna, jafnvel áður en kerfið er til (kafli 4 og 14).</li>
+<li>Fræðileg greining leiðir til niðurstöðu, en til að staðfesta hana þarf að <b>útfæra hönnunina og sannprófa með mælingum</b>. Ef hún stenst ekki er líkanið eða útfærslan endurbætt.</li>
+<li>Líkönin eru <b>línuleg nálgun um vinnupunkt</b>: stikarnir ráðast af vinnupunktinum og líkanið verður ónákvæmara eftir því sem frávikið er stærra (sjá <a href="likanagerd.html">líkanagerð</a>).</li>
+<li>Tengja þarf saman fræðilega heiminn (Laplace-rúmið) og raunheiminn. Það er erfiðara og meiri líkur á misræmi eftir því sem stýringin er flóknari, því þá þurfa líkönin að vera nákvæmari, sem er tímafrekt og dýrt.</li>
+<li>Þess vegna mælir heftið með því að <b>byrja á einfaldri stýringu</b>, kynnast kerfinu og samsvörun líkans og raunveruleika, og fara síðan í flóknari stýringar.</li>
+<li>Algengar uppsprettur misræmis: ólínuleiki (t.d. mettun hreyfils við 0 % og 100 % duty cycle), seinkun sem er ekki í líkaninu, suð og truflanir í mælingum, breytilegar aðstæður (umhverfishiti), og að líkan sé metið við annan vinnupunkt en stýrt er við.</li>
+</ul>
+
+<h2 id="hv">Hönnunarverkefnið (vika 10-14)</h2>
+<p>Í verkefninu átti að <b>hanna, útfæra, prófa og endurbæta stýringu</b> fyrir véleindakerfi: hitastig í rými, mælt með <b>ds18b20</b>-hitanemanum (fyrir ofan hitagjafann), með <b>hitagjafa og viftu</b> sem hreyfla (viftan stýrð með PWM duty cycle) og <b>Raspberry Pi</b> með Python sem tölvu. Kröfurnar: kerfið sé stöðugt, haldi föstu óskgildi og bregðist við breytingum í óskgildi á sem bestan hátt hvað varðar hraða, skekkju í jafnvægi, næmni fyrir truflunum og breytileika, og stýrimerki.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Hluti</th><th>Verkefni</th></tr></thead>
+<tbody>
+<tr><td>Undirbúningur</td><td>Mæla jafnvægishitastig við 20 %, 50 % og 80 % duty cycle á viftunni (hitagjafi í gangi) og rökstyðja hvernig jafnvægið er ákvarðað út frá mælingum.</td></tr>
+<tr><td>1. Halda föstu óskgildi</td><td>Hanna stýringu með aðstoð líkana; óskgildi = hitastigið við 50 %; regla í 240 s.</td></tr>
+<tr><td>2. Fylgja breytingum</td><td>Óskgildi í 180 s, hækka línulega að 20 %-hitastiginu á 120 s, halda 180 s, lækka línulega að 80 %-hitastiginu á 120 s, halda 180 s.</td></tr>
+<tr><td>3. Með truflun</td><td>Eins og 2, en sínuslaga truflun bætt við mælinguna: útslag 3 % af mismun jafnvægishitastigs við 20 % og 80 %, sveiflutími 8 s.</td></tr>
+<tr><td>Í hverjum hluta</td><td>Velja <b>mælikvarða á frammistöðu</b> og rökstyðja út frá kröfunum, meta stýringuna, rökstyðja og útfæra <b>endurbætur</b>, keyra aftur og <b>bera saman</b> fyrri og seinni útgáfu.</td></tr>
+</tbody></table></div>
+<div class="note tip"><p>Verkefnið er vinnuferli kafla 14 í hnotskurn: kröfur → val á einingum → líkan → hönnun stýringar → útfærsla → sannprófun með mælikvörðum → endurbætur → sannprófun aftur.</p></div>
+
+<h3>Hvernig hlutar námskeiðsins tengjast verkefninu</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Hluti námskeiðsins</th><th>Hvað var gert</th><th>Skref í vinnuferlinu</th></tr></thead>
+<tbody>
+<tr><td>VP (Python)</td><td>Lykkjur, föll og ítrun í Python</td><td>Útfærsla stýringar í tölvu</td></tr>
+<tr><td>V1</td><td>Tengjast Raspberry Pi, flytja skrár, kveikja og slökkva á LED og lampa</td><td>Tölvan stýrir hreyfli (stafrænt úttak)</td></tr>
+<tr><td>V2</td><td>Ljósnemi og tveir hitanemar; kveikja á lampa ef dimmt, mæla hita og slökkva eftir ákveðna hækkun</td><td>Lesa nema, einföld afturvirk (af/á) stýring, skráning mælinga</td></tr>
+<tr><td>V3</td><td>Viftuhraði sem fall af duty cycle við mismunandi PWM-tíðni (125 Hz til 25 kHz)</td><td>Kynnast hreyflinum, ólínuleika og mettun hans; velja vinnusvið</td></tr>
+<tr><td>S1-S3 (Colab, GitHub <code>runson/idn_303_TS_26</code>)</td><td>Líkanagerð, svörun kerfa og hönnun stýringa í Python</td><td>Fræðilegi heimurinn: líkan og hönnun á líkani</td></tr>
+<tr><td>K1</td><td>Könnun í líkanagerð og svörun (kaflar 2-13)</td><td>Grunnur að líkönum</td></tr>
+<tr><td>K2</td><td>Könnun í hönnun (kaflar 14-18)</td><td>Val á einingum og hönnun stýringa</td></tr>
+<tr><td>HV</td><td>Hitastýring í rými</td><td>Allt ferlið, frá kröfum til sannprófunar og endurbóta</td></tr>
+</tbody></table></div>
+
+<h2 id="s5">Spurning 5: verkefnin og eigin reynsla</h2>
+<p>Spurning 5 er ígrundun um námskeiðið og hönnunarverkefnið. Það er ekkert eitt rétt svar, en gott svar <b>tengir eigin reynslu við hugtök heftisins</b> og segir <b>af hverju</b>.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Ár</th><th>Spurningin</th></tr></thead>
+<tbody>
+<tr><td>2024 (A)</td><td>Lýsið stuttlega hvernig ólíkir hlutar og verkefni námskeiðsins tengjast saman í eina heild til að hjálpa ykkur við að hanna, útfæra og prófa einfalt tæknilegt kerfi á skipulegan hátt.</td></tr>
+<tr><td>2024 (B)</td><td>Í ljósi svarsins að ofan: hversu vel eða illa gekk ykkur að skipta með ykkur verkum og samhæfa vinnuna í hönnunarverkefninu? Hver var ástæðan? Hvernig myndir þú skipta verkum ef þið ættuð að endurtaka verkefnið?</td></tr>
+<tr><td>2025 (a)</td><td>Lýsið stuttlega hvað var líkt og ólíkt með verklegum æfingum og skilaverkefnum og hvernig það sem þið lærðuð í þeim nýttist í hönnunarverkefninu.</td></tr>
+<tr><td>2025 (b)</td><td>Lýsið því hvernig þið bjugguð til og notuðuð fræðileg líkön í hönnunarverkefninu. Komu líkönin að litlum eða miklum notum við lausn verkefnisins? Af hverju?</td></tr>
+</tbody></table></div>
+
+<h3>Beinagrind að svari</h3>
+<ol>
+<li><b>Inngangur (1-2 setningar):</b> svaraðu spurningunni beint. „Verkefnin mynduðu saman vinnuferli kafla 14: ...“</li>
+<li><b>Tenging við heftið:</b> notaðu hugtökin (kröfur, sannprófun, líkan, vinnupunktur, val á einingum, högun, stigveldi, málamiðlun).</li>
+<li><b>Eigin reynsla:</b> eitt eða tvö áþreifanleg dæmi úr verkefninu, helst með tölum (t.d. „mældum $\tau \approx 120$ s og $K$ ... við 50 % duty cycle“).</li>
+<li><b>Ígrundun:</b> hvað gekk vel og illa, <b>af hverju</b>, og hvað þú myndir gera öðruvísi.</li>
+</ol>
+
+<div class="grid2">
+<div class="key"><p><b>Hugtök sem eiga heima í svarinu</b></p><p>þarfir og kröfur · sannprófun og réttmæti · högun og einingar · stigveldi · val á nema og hreyfli · líkan út frá náttúrulögmálum eða mælingum · vinnupunktur og línuleg nálgun · fasaöryggi, skekkja í jafnvægi, rístími · truflanir og suð · mettun stýrimerkis · endurbætur og ítrun · málamiðlun</p></div>
+<div class="key"><p><b>Dæmi um punkta</b></p><ul style="margin:0"><li>Verklegu æfingarnar voru á vélbúnaðinum (raunheimur), skilaverkefnin á líkönum (fræðiheimur); í HV þurfti að tengja þau saman.</li><li>V3 sýndi að viftan er ólínuleg og mettast, sem skýrir hvers vegna línulegt líkan gilti best nálægt vinnupunktinum.</li><li>Líkanið gaf góðan upphafspunkt fyrir $K$ og $T_I$, en lokastillingin þurfti tilraunir.</li><li>Verkaskipting eftir einingum (nemi, hreyfill, líkan, stýring, kóði, skýrsla) með sameiginlegum kröfum.</li></ul></div>
+</div>
+
+<div class="note warn"><p><b class="t">Algengar gryfjur:</b> (1) frásögn af því hvað var gert án nokkurra hugtaka úr heftinu; (2) ekkert „af hverju“; (3) svara bara öðrum liðnum; (4) almennt orðagjálfur án dæma úr eigin verkefni; (5) að lofa eða lasta líkönin án rökstuðnings (t.d. án þess að nefna vinnupunkt, seinkun eða truflanir).</p></div>
+
+<h3>Undirbúningsblað: svaraðu þessu um þitt eigið verkefni fyrir prófið</h3>
+<ol>
+<li>Hverjar voru kröfurnar og hvernig ákváðuð þið að sannprófa þær (hvaða mælikvarðar)?</li>
+<li>Hvernig fenguð þið líkanið (mæld þrepasvörun? fræði?) og hvaða gildi fenguð þið á $K$, $\tau$ og hugsanlega seinkun?</li>
+<li>Við hvaða vinnupunkt var líkanið metið, og passaði það við aðra vinnupunkta (20 % og 80 %)?</li>
+<li>Hvaða stýringu völduð þið fyrst og af hverju? Hvernig voru stikar hennar ákvarðaðir?</li>
+<li>Hvernig stóð fyrsta útgáfan sig miðað við mælikvarðana? Hvaða endurbætur gerðuð þið og skiluðu þær árangri?</li>
+<li>Hvernig brást stýringin við sínustrufluninni í mælingunni? Af hverju?</li>
+<li>Hvar var mest misræmi milli líkans og raunveruleika og hver var líklegasta ástæðan?</li>
+<li>Hvað lærðuð þið í V1, V2 og V3 sem nýttist beint? En í S1-S3?</li>
+<li>Hvernig skiptuð þið verkum, hvað gekk vel og illa, og hvað myndir þú gera öðruvísi?</li>
+</ol>
+
+<h2 id="s6">Spurning 6: val á stýringu og sannprófun</h2>
+<p>Gefið er líkan af kerfinu (Bode-rit 2024, þrepasvörun 2025) <b>án stýringar</b> og hönnunarforsendur. (a) Hvaða stýring: P, PD, PI eða PID? (b) Hvernig sannprófið þið?</p>
+
+<h3>Ákvörðunartafla</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Ef ...</th><th>... þá</th></tr></thead>
+<tbody>
+<tr><td>Krafa um enga skekkju í jafnvægi og ferlið er af <b>tegund 0</b> (svörunin nær föstu gildi, fasinn byrjar í 0°)</td><td>Þarf <b>I-lið</b> (PI eða PID): P gefur $e_{ss} = 1/(1+K_p)$</td></tr>
+<tr><td>Lykkjan inniheldur þegar <b>heildi</b> (fasinn byrjar í −90°, mögnunin hallar −20 dB/dec við lágar tíðnir)</td><td>Skekkja við þrep er þegar 0: <b>enginn I-liður</b> þarf (hann myndi bara lækka fasann)</td></tr>
+<tr><td>Svörunin þarf að verða <b>hraðari</b> (hærri $\omega_c$, $t_r \approx 1{,}4/\omega_c$) en fasinn við nýju $\omega_c$ gefur of lítið fasaöryggi / of mikið yfirskot</td><td>Þarf <b>D-lið</b> (PD eða PID) til fasahækkunar</td></tr>
+<tr><td>Nóg fasaöryggi er við nýju skurðtíðnina og engin krafa um skekkju umfram það sem lykkjan gefur</td><td><b>P</b> dugar: aðeins breyta mögnuninni</td></tr>
+<tr><td>Hægja má á svörun en skekkja á að hverfa</td><td><b>PI</b> (heildun töluvert neðan við $\omega_c$, $\omega_I \approx 0{,}2\omega_c$)</td></tr>
+</tbody></table></div>
+<p>Reglan: <b>hafðu stýringuna eins einfalda og hægt er</b>, og rökstyddu hvern lið út frá ákveðinni kröfu. Sjá líka <a href="styringar.html">P, PI, PD og PID</a>.</p>
+
+<div class="grid2">
+<div class="key"><p><b>Lesið af Bode-riti lykkjunnar</b></p><ul style="margin:0">
+<li><b>Tegund:</b> halli við lágar tíðnir (0 dB/dec = tegund 0, −20 dB/dec og fasi −90° = heildi).</li>
+<li><b>$\omega_c$:</b> þar sem mögnunin er 0 dB. $t_r \approx 1{,}4/\omega_c$.</li>
+<li><b>Fasaöryggi:</b> $\varphi_m = 180^\circ + \angle G_K(j\omega_c)$.</li>
+<li><b>Mögnunaröryggi:</b> $1/|G_K(j\omega_\pi)|$ þar sem fasinn er −180°.</li>
+<li><b>Hvað kostar hraði:</b> lestu fasann við þá $\omega_c$ sem krafan um rístíma kallar á.</li>
+</ul></div>
+<div class="key"><p><b>Lesið af þrepasvörun (án stýringar)</b></p><ul style="margin:0">
+<li><b>Jafnvægisgildi</b> (DC-mögnun): nær svörunin föstu gildi? Þá tegund 0.</li>
+<li><b>Yfirskot</b>: $(y_{max} - y_\infty)/y_\infty$; segir til um dempun.</li>
+<li><b>Rístími</b> (10-90 %) og tími að hámarki.</li>
+<li><b>Tími í jafnvægi</b> (um $4\tau$).</li>
+<li>Berðu hvert gildi saman við kröfuna og segðu hvaða liður stýringarinnar lagar það.</li>
+</ul></div>
+</div>
+
+<h3>Gátlisti fyrir sannprófun (b-liður)</h3>
+<div class="grid2">
+<div class="key"><p><b>Á líkaninu</b></p><ol style="margin:0">
+<li>Bode-rit $G_CG_K$: fasaöryggi og mögnunaröryggi (stöðugleiki, krafa um $\varphi_m$).</li>
+<li>Hermd þrepasvörun lokaða kerfisins: rístími, yfirskot, skekkja í jafnvægi.</li>
+<li>Stærð stýrimerkisins: mettast hreyfillinn (0-100 % duty cycle, 0-15 V)?</li>
+<li>Suð: D-liður magnar hátíðnisuð, svo þarf síu $1/(1+T_Fs)$.</li>
+<li>Næmni: breyta stikum líkansins nokkuð og athuga hvort kröfur standast enn.</li>
+</ol></div>
+<div class="key"><p><b>Á raunkerfinu</b></p><ol style="margin:0">
+<li>Útfæra stýringuna í tölvunni.</li>
+<li>Þrepabreytingar í óskgildi, skrá úttak og stýrimerki.</li>
+<li>Reikna sömu mælikvarða og á líkaninu.</li>
+<li>Endurtaka og prófa við fleiri en einn vinnupunkt (líkanið er línuleg nálgun).</li>
+<li>Bera saman við líkanið; ef krafa stenst ekki: endurbæta stýringu eða líkan og sannprófa aftur.</li>
+</ol></div>
+</div>
+<p>Muna að gera greinarmun á <b>sannprófun</b> (stenst kröfurnar) og <b>réttmæti</b> (uppfyllir þarfir notenda), og að <b>skilgreina mælikvarðana fyrirfram</b>, eins og kafli 14 segir.</p>
+
+<h3>Lausnirnar frá 2024 og 2025 í hnotskurn</h3>
+<div class="ex"><div class="ex-head">2024 <span>Bode-rit → PD</span></div><div class="ex-body">
+<p>Fasinn byrjar í −90°: lykkjan hefur heildi, svo skekkjan er þegar 0 og ekki þarf I-lið. Rístími undir 0,5 s krefst $\omega_c \gtrsim 2{,}8$ rad/s, þar sem fasinn er um −173°; P-stýring gæfi þar aðeins um 6° fasaöryggi. Það þarf um +53° fasahækkun: <b>PD</b>. Dæmi: $T_D = 0{,}5$ s og $K = 3{,}33$ gefa $\varphi_m = 60^\circ$ og rístíma um 0,46 s. <a href="lokaprof.html#p2024">Full lausn</a>.</p>
+</div></div>
+<div class="ex"><div class="ex-head">2025 <span>Þrepasvörun → PID</span></div><div class="ex-body">
+<p>Svörunin nær föstu gildi (tegund 0), svo P skilur eftir skekkju: <b>I-liður</b>. Rístíminn er um 1,4 s en á að vera undir 0,5 s, sem krefst hærri mögnunar; þá eykst yfirskotið (þegar 12 %, á að vera undir 10 %), svo það þarf <b>D-lið</b>. Niðurstaða: <b>PID</b>. Dæmi: $K = 3$, $T_I = 2$ s, $T_D = 0{,}7$ s, $T_F = 0{,}14$ s gefa rístíma 0,41 s og 4 % yfirskot. <a href="lokaprof.html#p2025">Full lausn</a>.</p>
+</div></div>
+
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>Æfðu þig:</b> lokaðu síðunni og skrifaðu á eitt blað á 10 mínútum (1) ákvörðunartöfluna og (2) gátlistann fyrir sannprófun. Berðu svo saman við það sem stendur hér að ofan.</p>
+</div></details>

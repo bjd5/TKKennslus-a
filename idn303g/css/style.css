@@ -325,8 +325,12 @@ p.small { font-size: 0.9rem; }
 @media print {
   /* --fs er stillt svo blaðið fylli nákvæmlega eina A4-síðu */
   @page { size: A4; margin: 6mm; }
+  /* Hvor síða hefur sína leturstærð svo hún fylli eina A4-síðu */
   .page.wide { --fs: 9.1pt; }
+  .page.wide .sheet-1 { --fs: 10.3pt; }
+  .page.wide .sheet-2, .page.wide .sheet-title-2 { --fs: 9.1pt; }
   .sheet-title { font-size: calc(var(--fs) * 1.5); margin: 0 0 1.5mm; }
+  .sheet-title-2 { break-before: page; }
   .sheet { column-gap: 5mm; font-size: var(--fs); line-height: 1.25; }
   .sheet > section { margin-bottom: 1.5mm; break-inside: auto; }
   .sheet h3 { break-after: avoid; }

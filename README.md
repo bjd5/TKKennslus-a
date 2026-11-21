@@ -6,19 +6,21 @@ Kennsluvefir á íslensku fyrir áfangana í skólanum. Forsíðan (`index.html`
 
 | Mappa | Áfangi |
 |---|---|
-| [`idn303g/`](idn303g/) | IÐN303G Tæknileg kerfi, hönnunarhlutinn (vika 7-9) |
+| [`idn303g/`](idn303g/) | IÐN303G Tæknileg kerfi, undirbúningur fyrir lokapróf (allur áfanginn) |
 
 ## Uppbygging
 
 - `index.html` er forsíðan með möppunum, `assets/forsida.css` og `assets/forsida.js` útlit hennar og þema.
 - `assets/fonts/` eru leturgerðir sem allir kennsluvefirnir nota.
 - `<áfangi>/` er kennsluvefur eins áfanga, með eigin `index.html`, README og byggingarskriftu.
+- `<áfangi>/namsefni/` er allt námsefni áfangans eins og það kom úr Canvas (glærur, sýnidæmi, lausnir, próf og myndbönd). Mappan er bara til á eigin tölvu: hún er í `.gitignore` því hún er um 1 GB, sumar skrár eru stærri en GitHub leyfir og efnið er höfundarréttarvarið. Opnaðu `namsefni/index.html` til að skoða það í Canvas-skoðaranum.
 
 ## Nýr kennsluvefur
 
 1. Búðu til möppu með heiti áfangans í lágstöfum og án íslenskra stafa, t.d. `sta203g/`, með `index.html` í.
-2. Afritaðu eitt `<li>` í `index.html` í rótinni og breyttu tenglinum, flipanum (áfanganúmerinu), heitinu og lýsingunni. Litinn á möppunni má breyta með `style="--f: #b0521d"` á `<a class="folder">`.
-3. Settu tengil til baka á forsíðuna (`../index.html`) inn á nýja vefinn, eins og „← Allir kennsluvefir“ í `idn303g/`.
+2. Afpakkaðu zip-skrá áfangans úr Canvas í `<áfangi>/namsefni/` og bættu möppunni við `.gitignore`.
+3. Afritaðu eitt `<li>` í `index.html` í rótinni og breyttu tenglinum, flipanum (áfanganúmerinu), heitinu og lýsingunni. Litinn á möppunni má breyta með `style="--f: #b0521d"` á `<a class="folder">`.
+4. Settu tengil til baka á forsíðuna (`../index.html`) inn á nýja vefinn, eins og „← Allir kennsluvefir“ í `idn303g/`.
 
 Leitarreitur birtist sjálfkrafa á forsíðunni þegar möppurnar eru orðnar sex eða fleiri.
 

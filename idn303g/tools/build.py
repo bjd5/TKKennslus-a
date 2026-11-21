@@ -14,12 +14,17 @@ SRC = ROOT / "src"
 
 # (skrá, valmyndartexti, hópur, titill síðu)
 PAGES = [
-    ("index", "Yfirlit", "Efni", "Hönnun véleindakerfa"),
-    ("nemar", "Nemar", "Efni", "Nemar (vika 7)"),
-    ("hreyflar", "Hreyflar", "Efni", "Jafnstraumshreyflar (vika 7-8)"),
-    ("stjornkerfi", "Sjálfvirk stýrikerfi", "Efni", "Sjálfvirk stýrikerfi (vika 8-9)"),
-    ("styringar", "P, PI, PD og PID", "Efni", "Stýringar (vika 9)"),
-    ("prof", "Gömul próf", "Æfa", "Gömul próf með lausnum"),
+    ("index", "Yfirlit", "Byrja hér", "Undirbúningur fyrir lokapróf"),
+    ("lokaprof", "Lokapróf 2024 og 2025", "Byrja hér", "Lokapróf með lausnum"),
+    ("likanagerd", "Líkanagerð", "Efni: líkön og svörun", "Líkanagerð (vika 2-3)"),
+    ("laplace", "Laplace og blokkrit", "Efni: líkön og svörun", "Diffurjöfnur, Laplace og blokkrit (vika 4)"),
+    ("svorun", "Tíma- og tíðnisvörun", "Efni: líkön og svörun", "Tímasvörun og tíðnisvörun (vika 4-5)"),
+    ("nemar", "Nemar", "Efni: hönnun", "Nemar (vika 7)"),
+    ("hreyflar", "Hreyflar", "Efni: hönnun", "Jafnstraumshreyflar (vika 7-8)"),
+    ("stjornkerfi", "Sjálfvirk stýrikerfi", "Efni: hönnun", "Sjálfvirk stýrikerfi (vika 8-9)"),
+    ("styringar", "P, PI, PD og PID", "Efni: hönnun", "Stýringar (vika 9)"),
+    ("honnun", "Vinnuferli og spurningar 5-6", "Efni: hönnun", "Vinnuferli hönnunar og ritgerðarspurningar"),
+    ("prof", "Kannanir í hönnun", "Æfa", "Kannanir í hönnun með lausnum"),
     ("aefingar", "Æfingaspurningar", "Æfa", "Æfingaspurningar"),
     ("spjold", "Flashcards", "Æfa", "Flashcards"),
     ("reiknivelar", "Reiknivélar", "Verkfæri", "Reiknivélar"),
@@ -32,7 +37,7 @@ TEMPLATE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} · Tæknileg kerfi</title>
-<meta name="description" content="Kennslusíða fyrir hönnunarhluta IÐN303G Tæknileg kerfi (vika 7-9): nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar.">
+<meta name="description" content="Kennsluvefur fyrir lokaprófið í IÐN303G Tæknileg kerfi: líkanagerð, Laplace, tíma- og tíðnisvörun, nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar, með lausnum á gömlum prófum.">
 <link rel="stylesheet" href="vendor/katex/katex.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
@@ -43,7 +48,7 @@ TEMPLATE = """<!doctype html>
 <div class="shell">
 <aside class="side" id="side">
 <a class="home" href="../index.html">← Allir kennsluvefir</a>
-<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Hönnun, vika 7-9</small></a>
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Undirbúningur fyrir lokapróf</small></a>
 <nav aria-label="Efnisyfirlit">
 {nav}
 </nav>
@@ -104,7 +109,7 @@ def main():
             title=title,
             nav=nav_html(name),
             content=content.strip(),
-            pager=pager_html(idx) if name != "formulublad" else pager_html(idx),
+            pager=pager_html(idx),
             pageclass="page wide" if wide else "page",
             scripts="\n".join(f'<script src="{s}"></script>' for s in scripts),
         )

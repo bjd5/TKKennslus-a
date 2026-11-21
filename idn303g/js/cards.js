@@ -3,6 +3,59 @@
   "use strict";
 
   var CARDS = [
+    /* ---------- Tæknileg kerfi og vinnuferli (kaflar 2, 3 og 14) ---------- */
+    { c: "vinnuferli", q: "Hvernig skilgreinir heftið tæknileg kerfi?", a: "Afmarkað safn af samtengdum einingum sem eru notaðar sem leið að gefnu markmiði. A.m.k. ein eining er efnisleg og fólk er <b>ekki</b> hluti af kerfinu (það er hluti af umhverfinu)." },
+    { c: "vinnuferli", q: "Tveir almennir eiginleikar tæknilegra kerfa (kafli 2.2)?", a: "1. Þau eru samsett úr einingum sem sjálfar eru tæknileg kerfi (<b>stigveldi</b>).<br>2. Þau nýta sér <b>náttúrufyrirbæri</b> í ákveðnum tilgangi." },
+    { c: "vinnuferli", q: "Fjórar dæmigerðar einingar véleindakerfis?", a: "<b>Vélrænt kerfi</b> sem á að stýra, <b>nemi</b> (mælir og breytir í rafmerki), <b>hreyfill</b> (rafmerki → vélræn aðgerð) og <b>tölva</b> (les mælingar, stýrir hreyflinum). Samanburður inntaks og mælds úttaks = afturvirkni." },
+    { c: "vinnuferli", q: "Þarfir gegn kröfum?", a: "<b>Þarfir</b>: markmið notenda, á þeirra máli, óháð tæknilausn, ekki endilega mælanlegar.<br><b>Kröfur</b> (hönnunarforsendur): markmið séð frá hönnuði, <b>allar mælanlegar</b>." },
+    { c: "vinnuferli", q: "Sannprófun gegn réttmæti?", a: "<b>Sannprófun</b> (verification): uppfyllir hönnunin <i>kröfurnar</i>?<br><b>Réttmæti</b> (validation): uppfyllir hún <i>þarfir notenda</i>? Kerfi getur staðist sannprófun en samt ekki uppfyllt þarfirnar." },
+    { c: "vinnuferli", q: "Vinnuferli hönnunar véleindakerfis (kafli 14, fjögur skref)?", a: "1. Út frá kröfum: skilgreina hvernig heildarkerfið er sannprófað.<br>2. Kröfur fyrir hverja vélbúnaðareiningu (tölva, nemi, hreyfill) og val á einingum.<br>3. Líkan af hreyfli, kerfi og nema; hanna stýringu með líkaninu.<br>4. Útfæra stýringu í tölvu og sannprófa; endurbæta þar til kröfur standast." },
+    { c: "vinnuferli", q: "Af hverju að byrja á einfaldri stýringu?", a: "Erfitt er að tengja fræðilega heiminn (Laplace) við raunheiminn. Flóknari stýringar krefjast nákvæmari (dýrari) líkana. Einföld stýring kennir manni á kerfið og samsvörun líkans og raunveruleika." },
+    { c: "vinnuferli", q: "Hvað er málamiðlun (trade-off) í hönnun?", a: "Góðir eiginleikar vinna oft hver gegn öðrum (t.d. ending rafhlöðu gegn stærð og þyngd; hraði gegn stöðugleika og stýrimerki). Hönnun sem uppfyllir þarfir best finnur heppilegustu málamiðlunina." },
+    { c: "vinnuferli", q: "Hvað þarf (I eða D) til að uppfylla kröfu um: enga skekkju / meiri hraða og minna yfirskot?", a: "<b>Engin skekkja</b> við þrep: heildi í lykkjunni (I-liður, nema ferlið hafi það þegar).<br><b>Meiri hraði</b>: hærra $\\omega_c$ (hærra $K$).<br><b>Halda fasaöryggi/yfirskoti</b> við hærra $\\omega_c$: D-liður (fasahækkun)." },
+
+    /* ---------- Líkanagerð (kaflar 4-9) ---------- */
+    { c: "likan", q: "Hvaða eiginleika hafa líkönin í námskeiðinu?", a: "Löggeng, kvik, samfelld, þjöppuð, línuleg og tímaóháð. Þau eru línulegar diffurjöfnur með fastastuðlum." },
+    { c: "likan", q: "Tvær leiðir að líkani?", a: "<b>Út frá náttúrulögmálum</b>: afmörkun og uppskipting → grunnjöfnur → diffurjafna fyrir heildina.<br><b>Út frá mælingum</b> (system identification): afmörkun → kerfið í vinnupunkt, breyta inntaki og mæla → meta jöfnu og stika." },
+    { c: "likan", q: "Línuleg nálgun um vinnupunkt?", a: "Taylor: $\\hat f(x) = f(x_0) + f'(x_0)(x - x_0)$. Líkanið lýsir <b>frávikum</b> frá jafnvægi; stikarnir eru háðir vinnupunktinum og nákvæmnin minnkar með stærra fráviki." },
+    { c: "likan", q: "Grunneiningar véla (lína)?", a: "Fjöður $F = kx$, dempari $F = c\\dot x$, massi $F = m\\ddot x$." },
+    { c: "likan", q: "Massi, fjöður og dempari: diffurjafna?", a: "$$m\\ddot x + c\\dot x + kx = F$$ $\\omega_n = \\sqrt{k/m}$, $\\zeta = \\dfrac{c}{2\\sqrt{km}}$." },
+    { c: "likan", q: "Raðtengdar og hliðtengdar fjaðrir?", a: "Raðtengdar: $\\dfrac1k = \\dfrac1{k_1} + \\dfrac1{k_2}$ (sami kraftur).<br>Hliðtengdar: $k = k_1 + k_2$ (sama færsla). Demparar eins." },
+    { c: "likan", q: "Grunneiningar rafrása?", a: "$v = Ri$, $i = C\\,\\dfrac{dv}{dt}$, $v = L\\,\\dfrac{di}{dt}$. Kirchhoff: straumur inn = straumur út í hnút; spennufall í lykkju = fæðispenna." },
+    { c: "likan", q: "RC-rás (R í röð, úttak yfir C)?", a: "$$RC\\,\\dot y + y = u,\\qquad \\tau = RC$$" },
+    { c: "likan", q: "Þéttir og spóla í jafnvægi?", a: "Þéttir: enginn straumur, eins og <b>opin rás</b>. Spóla: engin spenna, eins og <b>leiðari</b>." },
+    { c: "likan", q: "Þéttar raðtengdir og hliðtengdir?", a: "Öfugt við viðnám: raðtengdir $\\dfrac1C = \\dfrac1{C_1} + \\dfrac1{C_2}$, hliðtengdir $C = C_1 + C_2$." },
+    { c: "likan", q: "Tímastuðull RC-rásar með spennudeili ($R_1$ í röð, $R_2 \\parallel C$)?", a: "$\\tau = (R_1 \\parallel R_2)\\,C = \\dfrac{R_1R_2}{R_1+R_2}C$ og jafnvægi $u_\\infty = \\dfrac{R_2}{R_1+R_2}V$ (lokapróf 2025 S2)." },
+    { c: "likan", q: "Grunneiningar vökvakerfa?", a: "Viðnám $p_1 - p_2 = Rq$; rýmd (tankur) $q_1 - q_2 = A\\dot h = C\\dot p$ með $C = A/(\\rho g)$; tregða $p_1 - p_2 = I\\dot q$ með $I = L\\rho/A$." },
+    { c: "likan", q: "Tankur með $q_2 = h/R$: diffurjafna?", a: "$$AR\\,\\dot h + h = R\\,q_1,\\qquad \\tau = AR$$ Jafnvægisbreyting: $\\Delta h = R\\,\\Delta q_1$." },
+    { c: "likan", q: "Grunneiningar varmakerfa?", a: "Viðnám $q = \\dfrac{T_1 - T_2}{R}$ ($R = L/(Ak)$ leiðni, $1/(Ah)$ burður); rýmd $q_1 - q_2 = C\\dot T$, $C = mc$. <b>Engin tregða.</b>" },
+    { c: "likan", q: "Hitamælir í vökva með hita $T_L$?", a: "$$RC\\,\\dot T + T = T_L$$ Fyrstu gerðar nemi með $\\tau = RC$." },
+    { c: "likan", q: "Áreynslu- og flæðisbreytur (tafla 9.1)?", a: "Áreynsla: kraftur, vægi, spenna, þrýstingur, hitastig.<br>Flæði: hraði, hornhraði, straumur, rúmmáls-/massaflæði, varmaflæði." },
+    { c: "likan", q: "Hvað jafngildir hverju í véla- og rafkerfum?", a: "$m \\leftrightarrow L$ (tregða), $c \\leftrightarrow R$ (viðnám), $k \\leftrightarrow 1/C$ (rýmd), $F \\leftrightarrow v$, $\\dot x \\leftrightarrow i$." },
+
+    /* ---------- Laplace og blokkrit (kaflar 10-11) ---------- */
+    { c: "laplace", q: "Laplace-varpanir: $\\delta(t)$, þrep, flái, $e^{-at}$?", a: "$1$, $\\dfrac1s$, $\\dfrac1{s^2}$, $\\dfrac{1}{s+a}$." },
+    { c: "laplace", q: "$e^{-at}\\cos bt$ og $e^{-at}\\sin bt$?", a: "$$\\frac{s+a}{(s+a)^2+b^2}\\quad\\text{og}\\quad\\frac{b}{(s+a)^2+b^2}$$" },
+    { c: "laplace", q: "Laplace af afleiðu og tegri?", a: "$\\mathcal L[f'] = sF(s) - f(0)$, $\\mathcal L[f''] = s^2F - sf(0) - f'(0)$, $\\mathcal L\\left[\\int_0^t f\\right] = F(s)/s$." },
+    { c: "laplace", q: "Hliðrun og dempun?", a: "Seinkun: $\\mathcal L[f(t-T)] = F(s)e^{-Ts}$.<br>Dempun: $\\mathcal L[f(t)e^{-at}] = F(s+a)$." },
+    { c: "laplace", q: "Upphafs- og lokagildisreglur?", a: "$f(0^+) = \\lim_{s\\to\\infty} sF(s)$ og $f(\\infty) = \\lim_{s\\to0} sF(s)$ (ef markgildið er til, þ.e. kerfið stöðugt)." },
+    { c: "laplace", q: "Stofnbrotaliðun með einföldum rótum?", a: "$Y = \\sum \\dfrac{k_i}{s - p_i}$ með $k_i = (s - p_i)\\,Y(s)\\big|_{s=p_i}$." },
+    { c: "laplace", q: "Yfirfærslufall út frá diffurjöfnu?", a: "Laplace með öll upphafsgildi 0: $G(s) = \\dfrac{Y(s)}{U(s)}$. Dæmi: $y'' + 2y' + 2y = u \\Rightarrow G = \\dfrac{1}{s^2+2s+2}$." },
+    { c: "laplace", q: "Þrjár grunnreglur blokkrita?", a: "Röð: $G_1G_2$. Hliðtengt: $G_1 \\pm G_2$. Afturvirkni: $\\dfrac{G}{1 \\pm GH}$ (mínus í afturvirkni gefur plús í nefnara)." },
+    { c: "laplace", q: "Truflun $R$ milli hreyfils $H$ og kerfis $V$ (stýring $S$, nemi $N$): yfirfærslufall að úttaki?", a: "$$G_R = \\frac{V}{1 + SHVN},\\qquad Y = G\\,U + G_R\\,R$$ (samlagningarreglan: áhrifin eru reiknuð sitt í hvoru lagi)." },
+
+    /* ---------- Svörun kerfa (kaflar 12-13) ---------- */
+    { c: "svorun", q: "Fyrstu gerðar kerfi: staðalform og þrepasvörun?", a: "$$G = \\frac{K}{\\tau s+1},\\qquad y(t) = K\\bigl(1 - e^{-t/\\tau}\\bigr)$$ 63 % við $\\tau$, 86 % við $2\\tau$, 95 % við $3\\tau$, 98 % við $4\\tau$." },
+    { c: "svorun", q: "Annarrar gerðar staðalform?", a: "$$G = \\frac{K\\omega_n^2}{s^2 + 2\\zeta\\omega_ns + \\omega_n^2}$$ $K = G(0)$, $\\omega_n$ náttúruleg tíðni, $\\zeta$ dempunarhlutfall." },
+    { c: "svorun", q: "$T_p$, $M_p$ og $\\tau$ fyrir annarrar gerðar kerfi?", a: "$T_p = \\dfrac{\\pi}{\\omega_n\\sqrt{1-\\zeta^2}}$, $M_p = e^{-\\zeta\\pi/\\sqrt{1-\\zeta^2}}$, $\\tau = \\dfrac{1}{\\zeta\\omega_n}$ (jafnvægi eftir $4\\tau$)." },
+    { c: "svorun", q: "Fimm tilfelli $\\zeta$?", a: "$\\zeta &lt; 0$ óstöðugt; $\\zeta = 0$ ódempuð sveifla; $0 &lt; \\zeta &lt; 1$ undirdempað (yfirskot); $\\zeta = 1$ markdempað (tvöföld rót); $\\zeta &gt; 1$ yfirdempað (tvær raunrætur)." },
+    { c: "svorun", q: "Hvað segir staðsetning póla í s-planinu?", a: "Vinstra hálfplan = stöðugt. Fjarlægð frá $j\\omega$-ás = dempun (hraði). Fjarlægð frá raunás = sveiflutíðni. Ein rót í hægra hálfplani nægir fyrir óstöðugleika." },
+    { c: "svorun", q: "Kerfi hærri gerðar?", a: "Svörunin er summa svarana fyrstu og annarrar gerðar. Lengsti tímastuðullinn ræður hversu lengi svipula svörunin varir (ríkjandi pólar). Núll geta valdið yfirskoti." },
+    { c: "svorun", q: "Tíðnisvörun: hvað gerist við $u = A\\cos\\omega t$?", a: "Í sístæðu ástandi: $y = A\\,|G(j\\omega)|\\cos(\\omega t + \\varphi)$, $\\varphi = \\angle G(j\\omega)$. Sama tíðni, mögnuð og hliðruð." },
+    { c: "svorun", q: "Tíðnisvörun fyrstu gerðar kerfis?", a: "$|G| = \\dfrac{K}{\\sqrt{1+\\tau^2\\omega^2}}$, $\\varphi = -\\arctan(\\tau\\omega)$. Bandvídd $\\omega_B = 1/\\tau$ (−3 dB, −45°); −20 dB/dec fyrir ofan." },
+    { c: "svorun", q: "Tíðnisvörun annarrar gerðar kerfis?", a: "Toppur $M_r = \\dfrac{K}{2\\zeta\\sqrt{1-\\zeta^2}}$ við $\\omega_r = \\omega_n\\sqrt{1-2\\zeta^2}$ (ef $\\zeta \\le 1/\\sqrt2$). −40 dB/dec fyrir ofan $\\omega_n$; fasinn fer í −180°, −90° við $\\omega_n$." },
+    { c: "svorun", q: "Bode: heildi $1/s$ og seinkun $e^{-Ls}$?", a: "$1/s$: −20 dB/dec og fastur fasi −90°.<br>$e^{-Ls}$: mögnun 1 (0 dB), fasi $-\\omega L$ rad, vex með tíðni." },
+
     /* ---------- Nemar ---------- */
     { c: "nemar", q: "Hvað er næmni nema?", a: "Breyting í úttaki fyrir hverja einingu í breytingu á inntaki: $S = \\dfrac{\\Delta y}{\\Delta x}$ (t.d. V/°C). Fyrir línulegan nema er hún hallatala línunnar." },
     { c: "nemar", q: "Línulegur nemi með mælisvið $[x_{min}, x_{max}]$ og úttak $[y_{min}, y_{max}]$. Hvert er úttakið fyrir $x$?", a: "$$y = y_{min} + \\frac{y_{max}-y_{min}}{x_{max}-x_{min}}\\,(x - x_{min})$$" },
@@ -63,12 +116,17 @@
 
   var CATS = [
     { id: "allt", label: "Öll spjöld" },
+    { id: "likan", label: "Líkanagerð" },
+    { id: "laplace", label: "Laplace og blokkrit" },
+    { id: "svorun", label: "Svörun kerfa" },
     { id: "nemar", label: "Nemar" },
     { id: "hreyflar", label: "Hreyflar" },
     { id: "stýrikerfi", label: "Sjálfvirk stýrikerfi" },
     { id: "stýringar", label: "Stýringar" },
+    { id: "vinnuferli", label: "Vinnuferli" },
   ];
-  var CAT_NAME = { nemar: "Nemar", hreyflar: "Hreyflar", "stýrikerfi": "Sjálfvirk stýrikerfi", "stýringar": "Stýringar" };
+  var CAT_NAME = {};
+  CATS.forEach(function (t) { CAT_NAME[t.id] = t.label; });
 
   var root = document.getElementById("cards");
   if (!root) return;
