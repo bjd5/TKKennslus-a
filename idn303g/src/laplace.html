@@ -1,0 +1,165 @@
+<h1>Diffurjöfnur, Laplace og blokkrit</h1>
+<p class="lede">Kaflar 10-11 í heftinu (vika 4). Laplace-vörpun breytir diffurjöfnu í margliðujöfnu: þannig fæst yfirfærslufallið í spurningu 1 á lokaprófinu, og blokkritsreglurnar eru notaðar í spurningu 4.</p>
+
+<h2>Lausnir á diffurjöfnum: hefðbundin leið</h2>
+<p>Almenn lausn er $y = y_h + y_p$: almenn lausn óhliðruðu jöfnunnar (hægri hlið = 0) plús ein sérlausn hliðruðu jöfnunnar. Fastarnir ráðast af upphafsskilyrðum. Hér er inntakið einingarþrep og kerfið í hvíld í upphafi.</p>
+<div class="key">
+<p><b>Fyrstu gerðar:</b> $y' + ay = bu$, $y(0) = 0$:</p>
+$$y_h = Ce^{-at},\quad y_p = \frac ba \quad\Longrightarrow\quad y(t) = \frac ba\bigl(1 - e^{-at}\bigr)$$
+</div>
+<p><b>Annarrar gerðar:</b> $y'' + a_1y' + a_2y = bu$, $y(0) = y'(0) = 0$. Útlitið ræðst af rótum kennijöfnunnar $r^2 + a_1r + a_2 = 0$, $p_{1,2} = \dfrac{-a_1 \pm \sqrt{a_1^2 - 4a_2}}{2}$. Sérlausnin er $y_p = b/a_2$.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Rætur</th><th>Skilyrði</th><th>Þrepasvörun</th></tr></thead>
+<tbody>
+<tr><td>Tvær ólíkar rauntölur $p_1, p_2$</td><td>$a_1^2 &gt; 4a_2$</td><td>$y = \dfrac{b}{a_2}\Bigl(1 - \dfrac{p_2}{p_2 - p_1}e^{p_1t} - \dfrac{p_1}{p_1 - p_2}e^{p_2t}\Bigr)$</td></tr>
+<tr><td>Tvöföld rauntala $p$</td><td>$a_1^2 = 4a_2$</td><td>$y = \dfrac{b}{a_2}\bigl(1 - e^{pt} + pt\,e^{pt}\bigr)$</td></tr>
+<tr><td>Samoka tvinntölur $\sigma \pm j\omega$</td><td>$a_1^2 &lt; 4a_2$</td><td>$y = \dfrac{b}{a_2}\Bigl(1 - e^{\sigma t}\bigl(\cos\omega t - \tfrac{\sigma}{\omega}\sin\omega t\bigr)\Bigr)$</td></tr>
+</tbody></table></div>
+<p>Jöfnur af hærri gerð má skrifa sem samantekt af lausnum fyrstu og annarrar gerðar.</p>
+
+<h2>Laplace-vörpun</h2>
+$$F(s) = \mathcal L[f(t)] = \int_0^\infty f(t)\,e^{-st}\,dt,\qquad s = \sigma + j\omega$$
+<p>Vörpunin færir fallið úr tímarúmi yfir í tvinntölurúmið (s-rúmið). Í reynd er andhverfan aldrei reiknuð með heildi heldur lesin úr töflu.</p>
+
+<h3>Algengar varpanir (úr töflu 10.1)</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>$F(s)$</th><th>$f(t)$</th><th>$F(s)$</th><th>$f(t)$</th></tr></thead>
+<tbody>
+<tr><td>$1$</td><td>kippfall $\delta(t)$</td><td>$\dfrac{1}{(s+a)^2}$</td><td>$t\,e^{-at}$</td></tr>
+<tr><td>$\dfrac1s$</td><td>þrepafall (1)</td><td>$\dfrac{a}{s^2+a^2}$</td><td>$\sin at$</td></tr>
+<tr><td>$\dfrac{1}{s^2}$</td><td>fláafall $t$</td><td>$\dfrac{s}{s^2+a^2}$</td><td>$\cos at$</td></tr>
+<tr><td>$\dfrac{1}{s+a}$</td><td>$e^{-at}$</td><td>$\dfrac{1}{s(s^2+a^2)}$</td><td>$\dfrac{1}{a^2}(1 - \cos at)$</td></tr>
+<tr><td>$\dfrac{1}{s(1+as)}$</td><td>$1 - e^{-t/a}$</td><td>$\dfrac{s+a}{(s+a)^2+b^2}$</td><td>$e^{-at}\cos bt$</td></tr>
+<tr><td>$\dfrac{1}{(s+a)(s+b)}$</td><td>$\dfrac{e^{-at} - e^{-bt}}{b-a}$</td><td>$\dfrac{b}{(s+a)^2+b^2}$</td><td>$e^{-at}\sin bt$</td></tr>
+</tbody></table></div>
+
+<h3>Reglur</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Regla</th><th>Tímarúm</th><th>s-rúm</th></tr></thead>
+<tbody>
+<tr><td>Línuleiki</td><td>$a f_1(t) + b f_2(t)$</td><td>$aF_1(s) + bF_2(s)$</td></tr>
+<tr><td>Hliðrun (seinkun)</td><td>$f(t - T)$</td><td>$e^{-Ts}F(s)$</td></tr>
+<tr><td>Dempun</td><td>$e^{-at}f(t)$</td><td>$F(s+a)$</td></tr>
+<tr><td>Diffrun</td><td>$f'(t)$</td><td>$sF(s) - f(0)$</td></tr>
+<tr><td>Tvöföld diffrun</td><td>$f''(t)$</td><td>$s^2F(s) - sf(0) - f'(0)$</td></tr>
+<tr><td>Tegrun</td><td>$\int_0^t f\,d\tau$</td><td>$\dfrac1sF(s)$</td></tr>
+<tr><td>Földun</td><td>$\int_0^t f_1(t-\tau)f_2(\tau)\,d\tau$</td><td>$F_1(s)F_2(s)$</td></tr>
+<tr><td>Upphafsgildi</td><td>$\lim_{t\to0^+} f(t)$</td><td>$\lim_{s\to\infty} sF(s)$</td></tr>
+<tr><td>Lokagildi</td><td>$\lim_{t\to\infty} f(t)$</td><td>$\lim_{s\to0} sF(s)$</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Ath.:</b> í heftinu (regla 6) stendur $F(s-a)$ við dempun með $e^{-at}$. Rétt er $F(s+a)$, eins og sést á töflunni: $\mathcal L[e^{-at}] = \frac{1}{s+a}$ er vörpun þrepsins $\frac1s$ með $s$ skipt út fyrir $s+a$. Lokagildisreglan gildir aðeins ef markgildið er til, þ.e. kerfið er stöðugt.</p></div>
+
+<h3>Uppskrift: diffurjafna leyst með Laplace</h3>
+<ol>
+<li>Varpa báðum hliðum (diffrun verður margföldun með $s$; upphafsgildi 0).</li>
+<li>Einangra $Y(s)$ og setja inn inntakið, t.d. $U(s) = 1/s$ fyrir þrep.</li>
+<li>Stofnbrotaliða $Y(s)$.</li>
+<li>Lesa hvern lið úr töflunni og leggja saman.</li>
+<li>Prófa: $y(0)$ og $y(\infty) = \lim_{s\to0} sY(s)$.</li>
+</ol>
+
+<h3>Stofnbrotaliðun</h3>
+<p><b>Ólíkar rætur</b> $p_i$: $Y = \dfrac{k_1}{s-p_1} + \dots + \dfrac{k_n}{s-p_n}$ með</p>
+$$k_i = (s - p_i)\,Y(s)\big|_{s=p_i}$$
+<p><b>Margföld rót</b> $p$ (margfeldni $r$): $Y = \dfrac{k_{p1}}{s-p} + \dots + \dfrac{k_{pr}}{(s-p)^r}$ með $k_{pi} = \dfrac{1}{(r-i)!}\dfrac{d^{\,r-i}}{ds^{\,r-i}}\bigl[(s-p)^rY(s)\bigr]_{s=p}$. Fyrir tvöfalda rót: $k_{p2} = (s-p)^2Y|_{s=p}$ og $k_{p1} = \frac{d}{ds}\bigl[(s-p)^2Y\bigr]_{s=p}$.</p>
+<p><b>Samoka tvinnrætur</b> $\sigma \pm j\omega$: skrifa liðinn sem $\dfrac{k_1(s-\sigma) + k_2\omega}{(s-\sigma)^2 + \omega^2}$, margfalda $Y$ með $(s-\sigma)^2 + \omega^2$, setja $s = \sigma + j\omega$ og leysa fyrir raun- og þverhluta. Liðirnir verða $k_1e^{\sigma t}\cos\omega t + k_2e^{\sigma t}\sin\omega t$. Sjá dæmi í <a href="lokaprof.html#k1">könnun 2020, spurningu 2</a>.</p>
+
+<h2>Yfirfærsluföll (kafli 11)</h2>
+<p>Ef kerfi er lýst með $y^{(n)} + a_1y^{(n-1)} + \dots + a_ny = b_1u^{(n-1)} + \dots + b_nu$ og er í hvíld í upphafi, þá er yfirfærslufallið</p>
+$$G(s) = \frac{Y(s)}{U(s)} = \frac{b_1s^{n-1} + \dots + b_n}{s^n + a_1s^{n-1} + \dots + a_n}$$
+<ul>
+<li>Yfirfærslufallið lýsir kerfinu <b>óháð inntakinu</b>: $Y(s) = G(s)U(s)$.</li>
+<li><b>Pólar</b> eru rætur nefnarans (= rætur kennijöfnunnar) og ráða svipulu svöruninni og stöðugleika. <b>Núllstöðvar</b> eru rætur teljarans.</li>
+<li>$G(s)$ er líka Laplace-vörpun kippsvörunarinnar, því $\mathcal L[\delta] = 1$.</li>
+<li>Jafnvægisgildi þrepasvörunar er $G(0)$ (ef kerfið er stöðugt).</li>
+</ul>
+
+<h2>Blokkrit</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Tenging</th><th>Jafngildi</th></tr></thead>
+<tbody>
+<tr><td>Raðtenging $G_1$ og $G_2$</td><td>$G_1G_2$</td></tr>
+<tr><td>Hliðtenging (summa)</td><td>$G_1 \pm G_2$</td></tr>
+<tr><td>Afturvirkni: $G$ fram, $H$ til baka, neikvæð</td><td>$\dfrac{G}{1 + GH}$</td></tr>
+<tr><td>Afturvirkni, jákvæð</td><td>$\dfrac{G}{1 - GH}$</td></tr>
+<tr><td>Færa samlagningarpunkt aftur fyrir $G$</td><td>Hitt inntakið fær $G$ í röð</td></tr>
+<tr><td>Færa samlagningarpunkt fram fyrir $G$</td><td>Hitt inntakið fær $1/G$ í röð</td></tr>
+<tr><td>Færa greiningarpunkt aftur fyrir $G$</td><td>Greinin fær $1/G$</td></tr>
+<tr><td>Færa greiningarpunkt fram fyrir $G$</td><td>Greinin fær $G$</td></tr>
+</tbody></table></div>
+<p><b>Þumalregla fyrir eina lykkju:</b> $\dfrac{\text{úttak}}{\text{inntak}} = \dfrac{\text{framleið frá inntaki til úttaks}}{1 + \text{margfeldi allra blokka í lykkjunni}}$.</p>
+
+<h3>Véleindakerfi með truflun (myndir 11.3-11.5)</h3>
+<svg class="diagram" viewBox="0 0 760 220" role="img" aria-label="Blokkrit véleindakerfis: U, samlagning, S, H, samlagning með truflun R, V, Y, afturvirkni um N">
+  <text x="8" y="85" font-weight="700">U</text>
+  <line class="ln" x1="28" y1="80" x2="62" y2="80"/><path class="ah" d="M64 80 l-9 -4.5 v9z"/>
+  <circle class="sum" cx="78" cy="80" r="14"/><text x="58" y="70" class="small">+</text><text x="84" y="108" class="small">−</text>
+  <line class="ln" x1="92" y1="80" x2="138" y2="80"/><path class="ah" d="M140 80 l-9 -4.5 v9z"/><text x="104" y="72">E</text>
+  <rect class="box" x="140" y="55" width="90" height="50"/><text x="185" y="80" text-anchor="middle">S(s)</text><text x="185" y="97" text-anchor="middle" class="small">stýring</text>
+  <line class="ln" x1="230" y1="80" x2="278" y2="80"/><path class="ah" d="M280 80 l-9 -4.5 v9z"/>
+  <rect class="box" x="280" y="55" width="90" height="50"/><text x="325" y="80" text-anchor="middle">H(s)</text><text x="325" y="97" text-anchor="middle" class="small">hreyfill</text>
+  <line class="ln" x1="370" y1="80" x2="420" y2="80"/><path class="ah" d="M422 80 l-9 -4.5 v9z"/>
+  <circle class="sum" cx="436" cy="80" r="14"/><text x="414" y="70" class="small">+</text><text x="446" y="56" class="small">+</text>
+  <line class="ln dis" x1="436" y1="22" x2="436" y2="64"/><path class="ah dis" d="M436 66 l-4.5 -9 h9z"/><text x="448" y="32" class="lbl-dis">R (truflun)</text>
+  <line class="ln" x1="450" y1="80" x2="508" y2="80"/><path class="ah" d="M510 80 l-9 -4.5 v9z"/>
+  <rect class="box" x="510" y="55" width="90" height="50"/><text x="555" y="80" text-anchor="middle">V(s)</text><text x="555" y="97" text-anchor="middle" class="small">vélrænt kerfi</text>
+  <line class="ln" x1="600" y1="80" x2="700" y2="80"/><path class="ah" d="M702 80 l-9 -4.5 v9z"/><text x="712" y="85" font-weight="700">Y</text>
+  <circle class="dot" cx="660" cy="80" r="3.5"/>
+  <line class="ln" x1="660" y1="80" x2="660" y2="180"/><line class="ln" x1="660" y1="180" x2="420" y2="180"/><path class="ah" d="M418 180 l9 -4.5 v9z"/>
+  <rect class="box" x="330" y="155" width="88" height="50"/><text x="374" y="180" text-anchor="middle">N(s)</text><text x="374" y="197" text-anchor="middle" class="small">nemi</text>
+  <line class="ln" x1="330" y1="180" x2="78" y2="180"/><line class="ln" x1="78" y1="180" x2="78" y2="96"/><path class="ah" d="M78 94 l-4.5 9 h9z"/>
+</svg>
+<p>Líkanið er línulegt, svo áhrif inntaks og truflunar má reikna sitt í hvoru lagi og leggja saman (samlagningarreglan):</p>
+$$Y(s) = \underbrace{\frac{SHV}{1 + SHVN}}_{G(s)}\,U(s) + \underbrace{\frac{V}{1 + HSN}}_{G_R(s)}\,R(s)$$
+<p>Til að finna $G_R$ er $U$ sett = 0: frá $R$ er framleiðin bara $V$, en lykkjan er sú sama. Bæði föllin hafa því <b>sama nefnara</b> $1 + SHVN$, sem er ástæða þess að yfirfærslufall lykkjunnar $G_K = SHVN$ ræður öllum eiginleikum kerfisins (sjá <a href="stjornkerfi.html">sjálfvirk stýrikerfi</a>).</p>
+
+<h2>Dæmi úr heftinu</h2>
+
+<div class="ex"><div class="ex-head">Dæmi 10.4.3 (c) <span>Andhverf vörpun</span></div><div class="ex-body">
+<p>Finnið andhverfu Laplace-vörpunina af $Y(s) = \dfrac{5s+12}{s^2+5s+6}$.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$s^2 + 5s + 6 = (s+2)(s+3)$, svo $Y = \dfrac{k_1}{s+2} + \dfrac{k_2}{s+3}$:</p>
+$$k_1 = \frac{5s+12}{s+3}\Big|_{s=-2} = \frac{2}{1} = 2,\qquad k_2 = \frac{5s+12}{s+2}\Big|_{s=-3} = \frac{-3}{-1} = 3$$
+<p>$y(t) = $ <span class="ans">$2e^{-2t} + 3e^{-3t}$</span>. Prófun: $y(0) = 5 = \lim_{s\to\infty} sY(s)$ ✓.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi 10.4.4 (d) <span>Tvær raunrætur</span></div><div class="ex-body">
+<p>Leysið $y'' + 6y' + 8y = 3u$ með Laplace, $u$ einingarþrep og kerfið í hvíld.</p>
+<details class="reveal"><summary></summary><div class="sol">
+$$Y(s) = \frac{3}{s(s^2+6s+8)} = \frac{3}{s(s+2)(s+4)} = \frac{k_1}{s} + \frac{k_2}{s+2} + \frac{k_3}{s+4}$$
+<p>$k_1 = \dfrac{3}{2\cdot4} = \dfrac38$, $\;k_2 = \dfrac{3}{(-2)(2)} = -\dfrac34$, $\;k_3 = \dfrac{3}{(-4)(-2)} = \dfrac38$.</p>
+$$y(t) = \frac38 - \frac34e^{-2t} + \frac38e^{-4t}$$
+<p>Prófun: $y(0) = \frac38 - \frac68 + \frac38 = 0$ ✓, $y(\infty) = \frac38 = G(0)$ ✓.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi 10.4.4 (a) <span>Ódempað kerfi</span></div><div class="ex-body">
+<p>Leysið $y'' + 16y = u$ með Laplace, $u$ einingarþrep og kerfið í hvíld.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$Y(s) = \dfrac{1}{s(s^2+16)}$. Beint úr töflunni ($a = 4$):</p>
+$$y(t) = \frac{1}{16}\bigl(1 - \cos 4t\bigr)$$
+<p>Pólarnir $\pm4j$ liggja á $j\omega$-ásnum: engin dempun, svo úttakið sveiflast endalaust á milli 0 og $1/8$ og nær aldrei jafnvægi. Lokagildisreglan gildir ekki hér.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi 11.1.1 (c) og (d) <span>Yfirfærsluföll</span></div><div class="ex-body">
+<p>Finnið yfirfærslufallið fyrir (c) $y'' - 3y' + 2y = 3u' + u$ og (d) $y'' + 3y' + 2y - u' + 3u = 0$.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(c)</b> $(s^2 - 3s + 2)Y = (3s + 1)U$:</p>
+$$G(s) = \frac{3s+1}{s^2 - 3s + 2} = \frac{3s+1}{(s-1)(s-2)}$$
+<p>Pólarnir eru $s = 1$ og $s = 2$, báðir í hægra hálfplani: kerfið er <b>óstöðugt</b>.</p>
+<p><b>(d)</b> Færum $u$-liðina yfir: $y'' + 3y' + 2y = u' - 3u$, svo</p>
+$$G(s) = \frac{s-3}{s^2 + 3s + 2} = \frac{s-3}{(s+1)(s+2)}$$
+<p>Pólar $-1$ og $-2$ (stöðugt), núllstöð í $s = 3$. Gættu að formerkjunum þegar inntaksliðirnir eru vinstra megin.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Einföldun blokkrits með innri lykkju</span></div><div class="ex-body">
+<p>Óskgildið $U$ fer inn í samlagningarpunkt (+, −) með einingarafturvirkni frá úttakinu $Y$. Þaðan fer merkið í gegnum $G_1 = \dfrac{1}{s+1}$ og síðan $G_2 = \dfrac2s$, en utan um $G_2$ er innri neikvæð afturvirkni með $H = 0{,}5$. Finnið $Y/U$ og jafnvægisgildi þrepasvörunar.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>1. Innri lykkjan fyrst:</b></p>
+$$\frac{G_2}{1 + G_2H} = \frac{2/s}{1 + 1/s} = \frac{2}{s+1}$$
+<p><b>2. Raðtenging við $G_1$:</b> $\;G_{fram} = \dfrac{1}{s+1}\cdot\dfrac{2}{s+1} = \dfrac{2}{(s+1)^2}$</p>
+<p><b>3. Ytri lykkjan:</b></p>
+$$\frac YU = \frac{G_{fram}}{1 + G_{fram}} = \frac{2}{(s+1)^2 + 2} = \frac{2}{s^2 + 2s + 3}$$
+<p>Jafnvægisgildi $G(0) = $ <span class="ans">2/3</span>. Annarrar gerðar með $\omega_n = \sqrt3 = 1{,}73$ rad/s og $\zeta = 1/\sqrt3 = 0{,}577$ (sjá <a href="svorun.html">tímasvörun</a>). Innri lykkjan breytti heildinu $2/s$ í fyrstu gerðar kerfi, svo lykkjan er tegund 0 og skekkjan $1/3$.</p>
+</div></details></div></div>
+
+<p>Næsta skref: hvernig pólar og stikar yfirfærslufallsins ákvarða útlit svörunarinnar, í <a href="svorun.html">tíma- og tíðnisvörun</a>.</p>

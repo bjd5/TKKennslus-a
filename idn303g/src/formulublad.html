@@ -1,9 +1,102 @@
 <!--wide-->
-<h1 class="sheet-title">Formúlublað</h1>
-<p class="lede noprint">Allar formúlur úr hönnunarhlutanum á einum stað. Hentar til að fara yfir rétt fyrir prófið. Prentaðu blaðið (tvídálka á A4) ef prófið leyfir hjálpargögn, en athugaðu fyrst hvað kennarinn heimilar.</p>
-<p class="noprint"><button type="button" class="btn" onclick="window.print()">Prenta blaðið</button></p>
+<h1 class="sheet-title">Formúlublað · Líkanagerð og svörun</h1>
+<p class="lede noprint">Allar formúlur áfangans á tveimur síðum: fyrri síðan er líkanagerð og svörun (spurningar 1-2 á lokaprófinu), seinni síðan hönnunarhlutinn (spurningar 3-6). Á lokaprófinu má hafa handskrifað A4-blað, báðum megin, sem er skilað með prófinu. Notaðu þetta sem grunn og skrifaðu þitt eigið blað í höndunum: það er líka besta upprifjunin.</p>
+<p class="noprint"><button type="button" class="btn" onclick="window.print()">Prenta blaðið (2 síður)</button></p>
 
-<div class="sheet">
+<div class="sheet sheet-1">
+
+<section>
+<h3>Líkön og vinnupunktur</h3>
+<p>Löggeng, kvik, samfelld, þjöppuð, línuleg, tímaóháð → línuleg diffurjafna með fastastuðlum. Skref: (1) afmörkun, (2) grunnjöfnur, (3) diffurjafna. Eða út frá mælingum (þrep → $K$, $\tau$).</p>
+<p>Línuleg nálgun um vinnupunkt: $\hat f(x) = f(x_0) + f'(x_0)(x-x_0)$. Stikar háðir vinnupunkti; líkan lýsir <b>frávikum</b>.</p>
+<p>Uppskrift: jafnvægisjafna → grunnjöfnur → eyða innri breytum → $\tau\dot y + y = Ku$. Jafnvægi: allar afleiður $=0$.</p>
+</section>
+
+<section>
+<h3>Grunneiningar</h3>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Áreynsla/flæði</th><th>Tregða</th><th>Rýmd</th><th>Viðnám</th></tr></thead>
+<tbody>
+<tr><td>Lína</td><td>$F$ / $v$</td><td>$F = m\ddot x$</td><td>$F = kx$</td><td>$F = c\dot x$</td></tr>
+<tr><td>Snún.</td><td>$\tau$ / $\omega$</td><td>$\tau = I\ddot\theta$</td><td>$\tau = k\theta$</td><td>$\tau = c\omega$</td></tr>
+<tr><td>Raf</td><td>$v$ / $i$</td><td>$v = L\dot i$</td><td>$i = C\dot v$</td><td>$v = Ri$</td></tr>
+<tr><td>Vökvi</td><td>$p$ / $q$</td><td>$\Delta p = I\dot q$</td><td>$q_1-q_2 = C\dot p$</td><td>$\Delta p = Rq$</td></tr>
+<tr><td>Varmi</td><td>$T$ / $q$</td><td>engin</td><td>$q_1-q_2 = C\dot T$</td><td>$q = \Delta T/R$</td></tr>
+</tbody></table></div>
+<p>Fjaðrir/demparar raðt.: $\frac1k = \frac1{k_1}+\frac1{k_2}$; hliðt.: $k_1+k_2$. Viðnám/spólur raðt. $R_1+R_2$, hliðt. $\frac{R_1R_2}{R_1+R_2}$. Þéttar <b>öfugt</b>: hliðt. $C_1+C_2$.</p>
+<p>Orka: $\tfrac12kx^2$, $\tfrac12mv^2$, $\tfrac12Cv^2$, $\tfrac12Li^2$; tap $cv^2$, $v^2/R$.</p>
+</section>
+
+<section>
+<h3>Dæmigerð líkön</h3>
+<p>$m\ddot x + c\dot x + kx = F$. RLC: $\ddot v_C + \frac RL\dot v_C + \frac{1}{LC}v_C = \frac{1}{LC}v$. RC: $RC\dot y + y = u$.</p>
+<p>Kirchhoff: $\sum i_{inn} = \sum i_{út}$; $\sum$ spennufalla í lykkju $= 0$. Jafnvægi: þéttir = opin rás, spóla = leiðari. $\tau = R_{th}C$.</p>
+<p>Tankur: $A\dot h = q_1 - q_2$, $q_2 = h/R$ ⇒ $AR\dot h + h = Rq_1$. (Hefti: $p = \rho gh$, $C = A/\rho g$, $\tau = RC$.)</p>
+<p>Varmi: $R = \frac{L}{Ak}$ (leiðni), $\frac{1}{Ah}$ (burður); $C = mc$. Hitamælir $RC\dot T + T = T_L$. Gegnumstreymi $\tau = V/q$.</p>
+<p>Vökvi: $C = \frac{A}{\rho g}$, $I = \frac{L\rho}{A}$. Loft: $pV = \frac mM R_gT$.</p>
+</section>
+
+<section>
+<h3>Laplace</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>$f(t)$</th><th>$F(s)$</th><th>$f(t)$</th><th>$F(s)$</th></tr></thead>
+<tbody>
+<tr><td>$\delta(t)$</td><td>$1$</td><td>$e^{-at}$</td><td>$\dfrac{1}{s+a}$</td></tr>
+<tr><td>þrep $1$</td><td>$\dfrac1s$</td><td>$te^{-at}$</td><td>$\dfrac{1}{(s+a)^2}$</td></tr>
+<tr><td>$t$</td><td>$\dfrac1{s^2}$</td><td>$1 - e^{-t/a}$</td><td>$\dfrac{1}{s(1+as)}$</td></tr>
+<tr><td>$\sin at$</td><td>$\dfrac{a}{s^2+a^2}$</td><td>$\cos at$</td><td>$\dfrac{s}{s^2+a^2}$</td></tr>
+<tr><td>$e^{-at}\sin bt$</td><td>$\dfrac{b}{(s+a)^2+b^2}$</td><td>$e^{-at}\cos bt$</td><td>$\dfrac{s+a}{(s+a)^2+b^2}$</td></tr>
+<tr><td>$\dfrac{e^{-at}-e^{-bt}}{b-a}$</td><td>$\dfrac{1}{(s+a)(s+b)}$</td><td>$\dfrac1{a^2}(1-\cos at)$</td><td>$\dfrac{1}{s(s^2+a^2)}$</td></tr>
+</tbody></table></div>
+<p>Línuleg: $af_1 + bf_2 \to aF_1 + bF_2$. $f' \to sF - f(0)$, $f'' \to s^2F - sf(0) - f'(0)$. $\int_0^t f \to F/s$.</p>
+<p>Seinkun $f(t-T) \to e^{-Ts}F(s)$. Dempun $e^{-at}f(t) \to F(s+a)$. Földun ↔ margfeldi.</p>
+<p>Upphafsgildi $f(0^+) = \lim_{s\to\infty} sF$. Lokagildi $f(\infty) = \lim_{s\to0} sF$ (aðeins ef stöðugt).</p>
+</section>
+
+<section>
+<h3>Stofnbrotaliðun</h3>
+<p>Ólíkar rætur: $Y = \sum\frac{k_i}{s-p_i}$, $k_i = (s-p_i)Y\big|_{s=p_i}$.</p>
+<p>Tvöföld rót: $\frac{k_1}{s-p} + \frac{k_2}{(s-p)^2}$, $k_2 = (s-p)^2Y|_p$, $k_1 = \frac{d}{ds}[(s-p)^2Y]_p$.</p>
+<p>Tvinnrætur $\sigma\pm j\omega$: $\frac{k_1(s-\sigma) + k_2\omega}{(s-\sigma)^2+\omega^2}$, setja $s = \sigma + j\omega$, raun- og þverhluti.</p>
+<p>Diffurjöfnur (þrep, $y(0)=y'(0)=0$): $y'+ay = bu$ ⇒ $y = \frac ba(1-e^{-at})$.</p>
+</section>
+
+<section>
+<h3>Yfirfærsluföll og blokkrit</h3>
+<p>$G(s) = \frac{Y}{U}$ (upphafsgildi 0): $s^n \leftrightarrow$ $n$-ta afleiða. Pólar = rætur nefnara.</p>
+<p>Raðtengt $G_1G_2$. Hliðtengt $G_1 \pm G_2$. Afturvirkni $\dfrac{G}{1 \pm GH}$ (− afturv. gefur +).</p>
+$$\frac{Y}{U} = \frac{G_CG_PG_V}{1 + G_CG_PG_VG_N},\qquad \frac{Y}{R_{truf}} = \frac{G_V}{1 + G_K}$$
+<p>Truflun: núlla önnur inntök, leggja svörun saman. Allir nefnarar $1 + G_K$.</p>
+</section>
+
+<section>
+<h3>Fyrstu gerðar</h3>
+$$G = \frac{K}{\tau s+1},\quad y(t) = K(1 - e^{-t/\tau}),\quad \tau = \frac1a,\ K = \frac ba$$
+<p>$\tau$: 63 %, $2\tau$: 86 %, $3\tau$: 95 %, $4\tau$: 98 %, $5\tau$: 99 %. Jafnvægi ≈ $4\tau$. Rót $s = -1/\tau$.</p>
+</section>
+
+<section>
+<h3>Annarrar gerðar</h3>
+$$G = \frac{K\omega_n^2}{s^2 + 2\zeta\omega_ns + \omega_n^2},\quad p = -\zeta\omega_n \pm j\omega_n\sqrt{1-\zeta^2}$$
+<p>$y''+a_1y'+a_2y = bu$: $\omega_n = \sqrt{a_2}$, $\zeta = \frac{a_1}{2\sqrt{a_2}}$, $K = \frac{b}{a_2}$.</p>
+<p>$\tau = \frac{1}{\zeta\omega_n}$, $\omega_d = \omega_n\sqrt{1-\zeta^2}$, $T_p = \frac{\pi}{\omega_d}$, $M_p = e^{-\zeta\pi/\sqrt{1-\zeta^2}}$.</p>
+<p>$\zeta<0$ óstöð.; $0$ ódempuð; $0<\zeta<1$ undirdempuð (sveiflur); $1$ markdempuð; $>1$ yfirdempuð. $\zeta = 0{,}707$: $M_p = 4{,}3\,\%$.</p>
+<p>Hærri gerð: summa 1. og 2. gerðar; lengsti $\tau$ ræður. Rót í hægra hálfplani ⇒ óstöðugt. Núll getur valdið yfirskoti. $1/s$: heildi, ekkert jafnvægi.</p>
+</section>
+
+<section>
+<h3>Tíðnisvörun</h3>
+<p>$u = A\cos\omega t \Rightarrow y = A|G(j\omega)|\cos(\omega t + \varphi)$, $\varphi = \angle G(j\omega)$. dB $= 20\log|G|$.</p>
+<p>1. gerð: $|G| = \frac{K}{\sqrt{1+\tau^2\omega^2}}$, $\varphi = -\arctan\tau\omega$. Brot við $1/\tau$ (−3 dB, −45°), −20 dB/dec. Bandvídd $\omega_B = 1/\tau$.</p>
+<p>2. gerð: $|G| = \frac{K}{\sqrt{(1-r^2)^2 + (2\zeta r)^2}}$, $\varphi = -\arctan\frac{2\zeta r}{1-r^2}$, $r = \omega/\omega_n$. −40 dB/dec, $-90^\circ$ við $\omega_n$.</p>
+<p>Toppur ($\zeta \le 0{,}707$): $M_r = \frac{K}{2\zeta\sqrt{1-\zeta^2}}$ við $\omega_r = \omega_n\sqrt{1-2\zeta^2}$. $\omega_B \approx \omega_n$.</p>
+<p>$K/s$: −20 dB/dec, $-90^\circ$. $e^{-Ls}$: $|\cdot| = 1$, $\varphi = -\omega L$. Margfeldi: dB og fasar leggjast saman.</p>
+</section>
+
+</div>
+
+<h1 class="sheet-title sheet-title-2">Formúlublað · Hönnun</h1>
+<div class="sheet sheet-2">
 
 <section>
 <h3>Nemar</h3>
