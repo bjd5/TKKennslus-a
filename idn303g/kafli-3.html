@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 3: Tíma- og tíðnisvörun · Tæknileg kerfi</title>
+<meta name="description" content="Kennsluvefur fyrir lokaprófið í IÐN303G Tæknileg kerfi: líkanagerð, Laplace, tíma- og tíðnisvörun, nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar, með lausnum á gömlum prófum.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tæknileg kerfi</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Líkanagerð</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Laplace og blokkrit</a></li>
+<li><a class="nav" href="kafli-3.html" aria-current="page" data-gate="ch3">3. Tíma- og tíðnisvörun</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Nemar</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Hreyflar</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Sjálfvirk stýrikerfi</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. P, PI, PD og PID</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Vinnuferli og hönnun</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Prófasafn</h2><ul>
+<li><a class="nav" href="lokaprof.html" data-gate="archive">Lokapróf 2024 og 2025</a></li>
+<li><a class="nav" href="prof.html" data-gate="archive">Kannanir í hönnun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="3" data-topics="svorun">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 3: Tíma- og tíðnisvörun</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-2.html">kafla 2</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 3 af 8 · Vika 4-5 · kaflar 12-13</p>
+<h1>Tíma- og tíðnisvörun</h1>
+<p class="ch-exam"><b>Á lokaprófinu:</b> Spurning 1: K, τ, ζ, ωn, Tp og Mp</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Kaflar 12-13 í heftinu (vika 4-5). Spurning 1 á lokaprófinu er alltaf af þessu tagi: gefin er diffurjafna, finna á yfirfærslufallið og lýsa þrepasvöruninni. Hér eru pólar, kerfi fyrstu og annarrar gerðar, tíðnisvörun og Bode-rit.</p>
+
+<h2>Pólar í s-planinu</h2>
+<p>Pólar (rætur nefnarans í $G(s)$, þ.e. rætur kennijöfnunnar) ráða <b>svipulu svöruninni</b>, þ.e. hvernig kerfið bregst við þar til jafnvægi næst.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Staðsetning póla</th><th>Svörun</th></tr></thead>
+<tbody>
+<tr><td>Allir vinstra megin við $j\omega$-ásinn ($\mathrm{Re}\,p &lt; 0$)</td><td><b>Stöðugt</b>: svipula svörunin deyr út</td></tr>
+<tr><td>Einn eða fleiri hægra megin ($\mathrm{Re}\,p &gt; 0$)</td><td><b>Óstöðugt</b>: vex án takmarka (einn póll dugar)</td></tr>
+<tr><td>Á $j\omega$-ásnum</td><td>Engin dempun: ódempuð sveifla ($\pm j\omega$) eða fasti/heildi ($s = 0$)</td></tr>
+<tr><td>Á raunásnum ($\sigma$-ás)</td><td>Engin sveifla, aðeins veldisföll</td></tr>
+<tr><td>Langt frá raunásnum (stór þverhluti)</td><td>Sveiflast hratt (hærri tíðni)</td></tr>
+<tr><td>Langt frá $j\omega$-ásnum (stór neikvæður raunhluti)</td><td>Mikil dempun, kemst fljótt í jafnvægi</td></tr>
+</tbody></table></div>
+<p>Kippsvörun ($u = \delta(t)$, $U(s) = 1$) er einfaldlega $g(t) = \mathcal L^{-1}[G(s)]$. Við þrepafall bætist sístæða svörunin (jafnvægið) við svipulu svörunina.</p>
+
+<h2>Kerfi fyrstu gerðar</h2>
+<div class="key">
+$$\dot y + ay = bu \quad\Longrightarrow\quad G(s) = \frac{b}{s+a} = \frac{K}{\tau s + 1},\qquad K = \frac{b}{a},\quad \tau = \frac1a$$
+$$\text{Þrepasvörun: } y(t) = K\bigl(1 - e^{-t/\tau}\bigr)\qquad \text{Kippsvörun: } y(t) = b\,e^{-at}$$
+</div>
+<p>Tveir stikar lýsa svöruninni: <b>jafnvægisgildið</b> $K = G(0)$ (lokagildisreglan $\lim_{t\to\infty}y = \lim_{s\to0}sY(s)$) og <b>tímastuðullinn</b> $\tau$. Póllinn er í $s = -1/\tau$.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Tími</th><th class="num">$\tau$</th><th class="num">$2\tau$</th><th class="num">$3\tau$</th><th class="num">$4\tau$</th><th class="num">$5\tau$</th></tr></thead>
+<tbody><tr><td>Hlutfall af jafnvægi</td><td class="num">63 %</td><td class="num">86 %</td><td class="num">95 %</td><td class="num">98 %</td><td class="num">99 %</td></tr></tbody>
+</table></div>
+<p>Í praxís er kerfið talið komið í jafnvægi eftir $4\tau$ (frávik 2 %). Kerfi fyrstu gerðar <b>sveiflast aldrei</b> og hefur ekkert yfirskot.</p>
+
+<h2>Kerfi annarrar gerðar</h2>
+<div class="key">
+$$\ddot y + a_1\dot y + a_2y = bu \quad\Longrightarrow\quad G(s) = \frac{K\omega_n^2}{s^2 + 2\zeta\omega_ns + \omega_n^2},\qquad \omega_n = \sqrt{a_2},\quad \zeta = \frac{a_1}{2\omega_n},\quad K = \frac{b}{a_2}$$
+$$p_{1,2} = -\zeta\omega_n \pm j\omega_n\sqrt{1-\zeta^2}$$
+</div>
+<p>$\zeta$ er <b>dempunarhlutfall</b> og $\omega_n$ <b>náttúruleg tíðni</b>. Ef stuðullinn við $\ddot y$ er ekki 1, deildu fyrst í gegn með honum.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>$\zeta$</th><th>Pólar</th><th>Þrepasvörun</th></tr></thead>
+<tbody>
+<tr><td>$\zeta &lt; 0$</td><td>Hægra hálfplani</td><td>Óstöðug</td></tr>
+<tr><td>$\zeta = 0$</td><td>$\pm j\omega_n$</td><td>Ódempuð sveifla með tíðni $\omega_n$</td></tr>
+<tr><td>$0 &lt; \zeta &lt; 1$</td><td>Samoka tvinntölur, vinstra hálfplani</td><td><b>Undirdempuð</b>: dempuð sveifla með tíðni $\omega_d = \omega_n\sqrt{1-\zeta^2}$, yfirskot</td></tr>
+<tr><td>$\zeta = 1$</td><td>Tvöföld rót í $-\omega_n$</td><td><b>Markdempuð</b>: hraðasta svörun án yfirskots</td></tr>
+<tr><td>$\zeta &gt; 1$</td><td>Tvær ólíkar raunrætur</td><td><b>Yfirdempuð</b>: summa veldisfalla, hægari póllinn ræður</td></tr>
+</tbody></table></div>
+<div class="key">
+$$\tau = \frac{1}{\zeta\omega_n},\qquad T_p = \frac{\pi}{\omega_n\sqrt{1-\zeta^2}} = \frac{\pi}{\omega_d},\qquad M_p = e^{-\zeta\pi/\sqrt{1-\zeta^2}}\times100\,\%$$
+<p>$\tau$ ræðst af raunhluta pólanna (svipula svörunin horfin eftir um $4\tau$). $T_p$ er tími hæsta yfirskots og $M_p$ hæsta yfirskot sem hlutfall af jafnvægisgildinu. Hæsta gildið er $K(1 + M_p)$.</p>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th>$\zeta$</th><th class="num">0,1</th><th class="num">0,2</th><th class="num">0,3</th><th class="num">0,4</th><th class="num">0,5</th><th class="num">0,6</th><th class="num">0,707</th><th class="num">0,8</th><th class="num">1</th></tr></thead>
+<tbody><tr><td>$M_p$</td><td class="num">73 %</td><td class="num">53 %</td><td class="num">37 %</td><td class="num">25 %</td><td class="num">16 %</td><td class="num">9,5 %</td><td class="num">4,3 %</td><td class="num">1,5 %</td><td class="num">0</td></tr></tbody>
+</table></div>
+
+<h2 id="uppskrift">Uppskrift fyrir spurningu 1</h2>
+<ol>
+<li><b>Laplace</b> með núll-upphafsskilyrðum: $y' \to sY$, $y'' \to s^2Y$. Einangra $G(s) = Y/U$.</li>
+<li><b>Jafnvægisgildi:</b> $K = G(0)$.</li>
+<li><b>Gerð kerfisins:</b> stig nefnarans. Finndu pólana.</li>
+<li><b>Fyrstu gerðar:</b> skrifa $\dfrac{K}{\tau s+1}$ og lesa $\tau$. Taka fram að $\zeta$, $\omega_n$, $T_p$ og $M_p$ <b>eiga ekki við</b> (ekkert yfirskot, ein raunrót).</li>
+<li><b>Annarrar gerðar:</b> deila í gegn svo stuðullinn við $s^2$ sé 1. $\omega_n = \sqrt{a_2}$, $\zeta = a_1/(2\omega_n)$, $\tau = 1/(\zeta\omega_n)$. Ef $\zeta &lt; 1$: reikna $T_p$ og $M_p$. Ef $\zeta \ge 1$: ekkert yfirskot, tveir tímastuðlar ($-1/p_1$, $-1/p_2$) og sá stærri ræður.</li>
+<li><b>Tími í jafnvægi:</b> um $4\tau$ (stærsta $\tau$).</li>
+</ol>
+<div class="note tip"><p>Dæmi: lokaprófin <a href="lokaprof.html#p2025">2025 S1</a> ($2y'+5y=u$, fyrstu gerðar) og <a href="lokaprof.html#p2024">2024 S1</a> ($y''+2y'+2y=u$, annarrar gerðar) eru leyst skref fyrir skref.</p></div>
+
+<div class="note"><p><b class="t">Prófaðu sjálf(ur):</b> í gagnvirka skrefinu í þessum kafla stillir þú $\zeta$ og $\omega_n$ með sleðum og sérð pólana, þrepasvörunina og Bode-ritið breytast.</p></div>
+
+<h2>Kerfi hærri gerðar</h2>
+<p>Með stofnbrotaliðun má skrifa svörun kerfis hærri gerðar sem <b>summu af svörun kerfa fyrstu og annarrar gerðar</b>, t.d.</p>
+$$G(s) = \frac{K\omega_n^2}{(\tau s+1)(s^2+2\zeta\omega_ns+\omega_n^2)} = \frac{k_1}{\tau s+1} + \frac{k_{21}s + k_{22}}{s^2+2\zeta\omega_ns+\omega_n^2}$$
+<ul>
+<li>Jafnvægisgildið fæst eins og áður: $K = G(0)$.</li>
+<li>Tímalengd svipulu svörunarinnar ræðst af <b>lengsta tímastuðlinum</b> (pólnum næst $j\omega$-ásnum), ef hann hefur umtalsverð áhrif.</li>
+<li><b>Núll</b> (rætur teljarans) breyta ekki stöðugleika en geta valdið yfirskoti, jafnvel þótt allir pólar séu raunrætur. Dæmi 12.5.1 (l) hér að neðan.</li>
+<li>Rístíma og yfirskot er erfiðara að lesa beint; þar hjálpar tíðnisvörunin.</li>
+</ul>
+
+<h2>Tíðnisvörun</h2>
+<p>Ef inntakið er sínusbylgja kemur fram sínusbylgja af <b>sömu tíðni</b> í úttakinu (eftir að svipula svörunin er horfin), mögnuð og hliðruð:</p>
+<div class="key">
+$$u(t) = A\cos(\omega t) \quad\Longrightarrow\quad y(t) = A\,|G(j\omega)|\cos\bigl(\omega t + \varphi\bigr),\qquad \varphi = \angle G(j\omega)$$
+</div>
+<p>Tíðnisvörunarfallið er $G(j\omega)$: settu $s = j\omega$. Neikvætt $\varphi$ þýðir að úttakið er <i>á eftir</i> inntakinu. Þar sem flest merki eru summa sínusbylgja (Fourier) lýsir $G(j\omega)$ hvaða tíðnir komast í gegn, t.d. hvernig truflanir deyfast.</p>
+
+<h3>Fyrstu gerðar</h3>
+$$G(j\omega) = \frac{K}{1 + j\tau\omega},\qquad |G| = \frac{K}{\sqrt{1+\tau^2\omega^2}},\qquad \varphi = -\arctan(\tau\omega)$$
+<ul>
+<li><b>Mögnun:</b> lárétt aðfella $20\log K$ dB upp að $\omega = 1/\tau$, svo lína með halla <b>−20 dB/dec</b>. Í $\omega = 1/\tau$ er raungildið 3 dB undir aðfellunni.</li>
+<li><b>Bandvídd</b> $\omega_B = 1/\tau$: minni $\tau$ gefur meiri bandvídd og hraðari svörun.</li>
+<li><b>Fasi:</b> 0° upp að um $0{,}1/\tau$, −45° í $1/\tau$, −90° frá um $10/\tau$.</li>
+</ul>
+
+<h3>Annarrar gerðar</h3>
+$$|G(j\omega)| = \frac{K}{\sqrt{\bigl(1-(\omega/\omega_n)^2\bigr)^2 + \bigl(2\zeta\omega/\omega_n\bigr)^2}},\qquad \varphi = -\arctan\frac{2\zeta\,\omega/\omega_n}{1-(\omega/\omega_n)^2}$$
+<ul>
+<li><b>Mögnun:</b> lárétt $20\log K$ upp að $\omega_n$, svo <b>−40 dB/dec</b>.</li>
+<li><b>Ómun</b> fyrir $\zeta \le 1/\sqrt2$: hámark $M_r = \dfrac{K}{2\zeta\sqrt{1-\zeta^2}}$ við $\omega_r = \omega_n\sqrt{1-2\zeta^2}$. Gróf nálgun: toppur $K/(2\zeta)$ í $\omega_n$. Fyrir $\zeta &gt; 1/\sqrt2$ er enginn toppur.</li>
+<li><b>Fasi:</b> 0° → −90° í $\omega_n$ → −180°. Bandvídd um $\omega_n$ (nákvæmlega $\omega_n$ þegar $\zeta = 1/\sqrt2$).</li>
+</ul>
+
+<h3>Aðrir þættir</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Þáttur</th><th>Mögnun</th><th>Fasi</th></tr></thead>
+<tbody>
+<tr><td>Fasti $K$</td><td>$20\log K$ dB (lárétt)</td><td>0°</td></tr>
+<tr><td>Heildi $1/s$</td><td>−20 dB/dec, 0 dB í $\omega = 1$</td><td>−90° alls staðar</td></tr>
+<tr><td>Diffrun $s$</td><td>+20 dB/dec</td><td>+90°</td></tr>
+<tr><td>Núll $1 + Ts$</td><td>0 dB, svo +20 dB/dec frá $1/T$</td><td>0° → +90°</td></tr>
+<tr><td>Seinkun $e^{-Ls}$</td><td>$|e^{-j\omega L}| = 1$ (0 dB)</td><td>$-\omega L$ rad, vex án takmarka</td></tr>
+</tbody></table></div>
+
+<h3>Að rissa Bode-rit</h3>
+<ol>
+<li>Skrifa $G$ sem margfeldi þátta á formunum $K$, $s^{\pm1}$, $(1+Ts)^{\pm1}$, annarrar gerðar og $e^{-Ls}$.</li>
+<li>Mögnun í dB <b>leggst saman</b> ($20\log|G_1G_2| = 20\log|G_1| + 20\log|G_2|$) og fasarnir leggjast saman.</li>
+<li>Byrja vinstra megin: lágtíðnihallinn er $-20N$ dB/dec, þar sem $N$ er fjöldi heilda. Við hverja hornatíðni ($1/T$ eða $\omega_n$) breytist hallinn um ∓20 (eða ∓40) dB/dec.</li>
+</ol>
+
+<h2>Dæmi úr heftinu</h2>
+
+<div class="ex"><div class="ex-head">Dæmi 12.5.1 <span>Þrepasvörun tólf kerfa</span></div><div class="ex-body">
+<p>Finnið jafnvægisgildi og tímastuðla, og eftir því sem við á dempunarhlutfall, náttúrulega tíðni, tíma hæsta yfirskots og hæsta yfirskot. Eftir hve langan tíma eru áhrif svipulu svörunarinnar orðin hverfandi?</p>
+<p>(a) $\dfrac{1}{s+1}$ &nbsp; (b) $\dfrac{1}{2s+5}$ &nbsp; (c) $\dfrac{2}{2s^2+3s+1}$ &nbsp; (d) $\dfrac{1}{s^2+2s+2}$ &nbsp; (e) $\dfrac{1}{s^2+4s+4}$ &nbsp; (f) $\dfrac{1}{2s^2-4s+13}$ &nbsp; (g) $\dfrac{3}{s}$ &nbsp; (h) $\dfrac{1}{s(s+1)}$ &nbsp; (i) $\dfrac{4}{s^3+4s}$ &nbsp; (j) $\dfrac{3}{s^2+9s+14}$ &nbsp; (k) $\dfrac{s+4}{s^3+6s^2+11s+6}$ &nbsp; (l) $\dfrac{5s+1}{s^2+4s+3}$</p>
+<details class="reveal"><summary></summary><div class="sol">
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Pólar</th><th>$K$</th><th>Niðurstaða</th></tr></thead>
+<tbody>
+<tr><td>(a)</td><td>$-1$</td><td>1</td><td>Fyrstu gerðar, $\tau = 1$ s, jafnvægi eftir $4\tau = 4$ s</td></tr>
+<tr><td>(b)</td><td>$-2{,}5$</td><td>0,2</td><td>Fyrstu gerðar, $\tau = 0{,}4$ s, $4\tau = 1{,}6$ s (lokaprófið 2025 S1)</td></tr>
+<tr><td>(c)</td><td>$-0{,}5$, $-1$</td><td>2</td><td>$\omega_n = 0{,}707$, $\zeta = 1{,}06$: yfirdempað, ekkert yfirskot. $\tau = 2$ s og 1 s, $4\tau = 8$ s</td></tr>
+<tr><td>(d)</td><td>$-1 \pm j$</td><td>0,5</td><td>$\omega_n = \sqrt2$, $\zeta = 0{,}707$, $\tau = 1$ s, $T_p = \pi = 3{,}14$ s, $M_p = 4{,}3$ %, $4\tau = 4$ s (lokaprófið 2024 S1)</td></tr>
+<tr><td>(e)</td><td>$-2$ (tvöföld)</td><td>0,25</td><td>$\omega_n = 2$, $\zeta = 1$: markdempað, ekkert yfirskot. $\tau = 0{,}5$ s, $4\tau = 2$ s</td></tr>
+<tr><td>(f)</td><td>$1 \pm 2{,}35j$</td><td>–</td><td><b>Óstöðugt</b> (pólar í hægra hálfplani, $\zeta &lt; 0$): vaxandi sveifla, ekkert jafnvægi</td></tr>
+<tr><td>(g)</td><td>$0$</td><td>–</td><td>Hreint heildi: þrepasvörunin er flái $y = 3t$, ekkert jafnvægi</td></tr>
+<tr><td>(h)</td><td>$0$, $-1$</td><td>–</td><td>Heildi + fyrstu gerðar: $y = t - 1 + e^{-t}$, vex sem flái; svipuli hlutinn horfinn eftir um 4 s</td></tr>
+<tr><td>(i)</td><td>$0$, $\pm2j$</td><td>–</td><td>Heildi + ódempuð sveifla ($\zeta = 0$, $\omega_n = 2$): $y = t - \tfrac12\sin2t$, ekkert jafnvægi</td></tr>
+<tr><td>(j)</td><td>$-2$, $-7$</td><td>0,214</td><td>$\omega_n = 3{,}74$, $\zeta = 1{,}20$: yfirdempað. $\tau = 0{,}5$ s og 0,14 s, $4\tau = 2$ s</td></tr>
+<tr><td>(k)</td><td>$-1$, $-2$, $-3$</td><td>0,667</td><td>Þriðju gerðar, allt raunrætur. $\tau = 1$; 0,5; 0,33 s. Hægasti póllinn ræður: $4\tau = 4$ s</td></tr>
+<tr><td>(l)</td><td>$-1$, $-3$</td><td>0,333</td><td>$\tau = 1$ s og 0,33 s, $4\tau = 4$ s. Raunrætur, en <b>núllið í $-0{,}2$</b> veldur miklu yfirskoti: $y = \tfrac13 + 2e^{-t} - \tfrac73e^{-3t}$ nær hámarki $\approx 1{,}05$ við $t \approx 0{,}63$ s, þrefalt jafnvægisgildið</td></tr>
+</tbody></table></div>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi 13.1.1 <span>Tíðnisvörunarföll</span></div><div class="ex-body">
+<p>Finnið $|G(j\omega)|$ og $\varphi(\omega)$ fyrir: (a) $\dfrac{4}{s}$ &nbsp; (b) $\dfrac{10}{s(1+3s)}$ &nbsp; (c) $\dfrac{e^{-3s}}{1+2s}$ &nbsp; (d) $\dfrac{e^{-2s}}{(1+3s)(5+s)}$ &nbsp; (e) $\dfrac{2}{1+0{,}4s+2s^2}$</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>(a)</b> $|G| = \dfrac{4}{\omega}$, $\varphi = -90^\circ$.</p>
+<p><b>(b)</b> $|G| = \dfrac{10}{\omega\sqrt{1+9\omega^2}}$, $\varphi = -90^\circ - \arctan(3\omega)$.</p>
+<p><b>(c)</b> $|G| = \dfrac{1}{\sqrt{1+4\omega^2}}$ (seinkunin breytir ekki mögnuninni), $\varphi = -3\omega\ \mathrm{rad} - \arctan(2\omega)$.</p>
+<p><b>(d)</b> $|G| = \dfrac{1}{\sqrt{1+9\omega^2}\,\sqrt{25+\omega^2}}$, $\varphi = -2\omega\ \mathrm{rad} - \arctan(3\omega) - \arctan(\omega/5)$.</p>
+<p><b>(e)</b> $|G| = \dfrac{2}{\sqrt{(1-2\omega^2)^2 + (0{,}4\omega)^2}}$, $\varphi = -\arctan\dfrac{0{,}4\omega}{1-2\omega^2}$ (bætir við −180° þegar $\omega &gt; 1/\sqrt2$). Hér er $K = 2$, $\omega_n = 1/\sqrt2 = 0{,}707$ rad/s og $\zeta = 0{,}141$, svo kerfið hefur skarpan ómunartopp: $M_r = \dfrac{2}{2\cdot0{,}141\sqrt{1-0{,}02}} = 7{,}14$ (17 dB) við $\omega_r = 0{,}693$ rad/s.</p>
+</div></details></div></div>
+
+<p>Æfðu þig með slembitölum í <a href="aefingar.html">æfingaspurningunum</a> (flokkur „Svörun kerfa“) og prófaðu <a href="reiknivelar.html">reiknivélarnar</a>.</p>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Reiknidæmi með nýjum tölum í hvert skipti og skilningsspurningar úr kaflanum. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð lausnina eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: hittu markið</h2>
+<div class="note tip"><p><b class="t">Verkefni:</b> stilltu $\zeta$ og $\omega_n$ í annarrar gerðar kerfinu $G(s) = \dfrac{\omega_n^2}{s^2 + 2\zeta\omega_ns + \omega_n^2}$ svo það hitti tvö mörk í röð. Fyrra markið er gefið með yfirskoti og $T_p$, það seinna með staðsetningu pólanna. Reiknaðu fyrst hvaða $\zeta$ og $\omega_n$ þarf, og notaðu svo sleðana til að staðfesta.</p></div>
+<div class="panel" id="k3-goal" aria-live="polite"></div>
+<div class="panel hero-fig">
+  <div class="row" style="align-items:center">
+    <div style="flex:1 1 14rem">
+      <label class="f" for="k3-z">$\zeta$ = <output id="k3-zv">0,30</output></label>
+      <input type="range" id="k3-z" min="0" max="2" step="0.01" value="0.3">
+    </div>
+    <div style="flex:1 1 14rem">
+      <label class="f" for="k3-wn">$\omega_n$ = <output id="k3-wnv">2,00</output> rad/s</label>
+      <input type="range" id="k3-wn" min="0.2" max="5" step="0.02" value="2">
+    </div>
+    <div class="fixed"><button class="btn ghost" type="button" id="k3-new">Nýtt mark</button></div>
+  </div>
+  <div id="k3-checks" style="margin-top:0.8rem"></div>
+  <div class="hero-readout" aria-live="polite">
+    <div class="hl"><b id="k3-p">–</b><span>pólar</span></div>
+    <div><b id="k3-tau">–</b><span>$\tau$ [s]</span></div>
+    <div><b id="k3-wd">–</b><span>$\omega_d$ [rad/s]</span></div>
+    <div><b id="k3-tp">–</b><span>$T_p$ [s]</span></div>
+    <div><b id="k3-mp">–</b><span>$M_p$</span></div>
+    <div><b id="k3-4t">–</b><span>$4\tau$ [s]</span></div>
+  </div>
+  <div class="result" id="k3-res" aria-live="polite"></div>
+  <p style="margin:1rem 0 0.3rem;font-family:var(--sans);font-weight:700">Þrepasvörun</p>
+  <canvas class="plot" id="k3-step" role="img" aria-label="Þrepasvörun annarrar gerðar kerfis"></canvas>
+  <p style="margin:1rem 0 0.3rem;font-family:var(--sans);font-weight:700">Bode-rit</p>
+  <div class="legend"><span><i style="background:var(--mag)"></i>mögnun</span><span><i style="background:var(--phase)"></i>fasi</span></div>
+  <canvas class="plot" id="k3-bode" role="img" aria-label="Bode-rit annarrar gerðar kerfis"></canvas>
+  <p style="margin:0.8rem 0 0;color:var(--muted);font-size:0.95rem">Taktu eftir: lítið $\zeta$ gefur háan topp í mögnuninni (ómun) og mikið yfirskot. Við $\zeta \ge 1/\sqrt2 \approx 0{,}707$ hverfur toppurinn í Bode-ritinu, og við $\zeta \ge 1$ hverfur yfirskotið.</p>
+</div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 4"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-2.html"><span>Fyrri</span>2. Laplace og blokkrit</a><a href="kafli-4.html" style="text-align:right"><span>Næsta</span>4. Nemar</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/ctrl.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/widgets-b.js"></script>
+</body>
+</html>

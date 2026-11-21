@@ -1,0 +1,33 @@
+<!--scripts: js/widgets-b.js -->
+<h2>Gagnvirkt: hittu markið</h2>
+<div class="note tip"><p><b class="t">Verkefni:</b> stilltu $\zeta$ og $\omega_n$ í annarrar gerðar kerfinu $G(s) = \dfrac{\omega_n^2}{s^2 + 2\zeta\omega_ns + \omega_n^2}$ svo það hitti tvö mörk í röð. Fyrra markið er gefið með yfirskoti og $T_p$, það seinna með staðsetningu pólanna. Reiknaðu fyrst hvaða $\zeta$ og $\omega_n$ þarf, og notaðu svo sleðana til að staðfesta.</p></div>
+<div class="panel" id="k3-goal" aria-live="polite"></div>
+<div class="panel hero-fig">
+  <div class="row" style="align-items:center">
+    <div style="flex:1 1 14rem">
+      <label class="f" for="k3-z">$\zeta$ = <output id="k3-zv">0,30</output></label>
+      <input type="range" id="k3-z" min="0" max="2" step="0.01" value="0.3">
+    </div>
+    <div style="flex:1 1 14rem">
+      <label class="f" for="k3-wn">$\omega_n$ = <output id="k3-wnv">2,00</output> rad/s</label>
+      <input type="range" id="k3-wn" min="0.2" max="5" step="0.02" value="2">
+    </div>
+    <div class="fixed"><button class="btn ghost" type="button" id="k3-new">Nýtt mark</button></div>
+  </div>
+  <div id="k3-checks" style="margin-top:0.8rem"></div>
+  <div class="hero-readout" aria-live="polite">
+    <div class="hl"><b id="k3-p">–</b><span>pólar</span></div>
+    <div><b id="k3-tau">–</b><span>$\tau$ [s]</span></div>
+    <div><b id="k3-wd">–</b><span>$\omega_d$ [rad/s]</span></div>
+    <div><b id="k3-tp">–</b><span>$T_p$ [s]</span></div>
+    <div><b id="k3-mp">–</b><span>$M_p$</span></div>
+    <div><b id="k3-4t">–</b><span>$4\tau$ [s]</span></div>
+  </div>
+  <div class="result" id="k3-res" aria-live="polite"></div>
+  <p style="margin:1rem 0 0.3rem;font-family:var(--sans);font-weight:700">Þrepasvörun</p>
+  <canvas class="plot" id="k3-step" role="img" aria-label="Þrepasvörun annarrar gerðar kerfis"></canvas>
+  <p style="margin:1rem 0 0.3rem;font-family:var(--sans);font-weight:700">Bode-rit</p>
+  <div class="legend"><span><i style="background:var(--mag)"></i>mögnun</span><span><i style="background:var(--phase)"></i>fasi</span></div>
+  <canvas class="plot" id="k3-bode" role="img" aria-label="Bode-rit annarrar gerðar kerfis"></canvas>
+  <p style="margin:0.8rem 0 0;color:var(--muted);font-size:0.95rem">Taktu eftir: lítið $\zeta$ gefur háan topp í mögnuninni (ómun) og mikið yfirskot. Við $\zeta \ge 1/\sqrt2 \approx 0{,}707$ hverfur toppurinn í Bode-ritinu, og við $\zeta \ge 1$ hverfur yfirskotið.</p>
+</div>

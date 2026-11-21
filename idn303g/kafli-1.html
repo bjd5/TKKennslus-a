@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 1: Líkanagerð · Tæknileg kerfi</title>
+<meta name="description" content="Kennsluvefur fyrir lokaprófið í IÐN303G Tæknileg kerfi: líkanagerð, Laplace, tíma- og tíðnisvörun, nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar, með lausnum á gömlum prófum.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tæknileg kerfi</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" aria-current="page" data-gate="ch1">1. Líkanagerð</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Laplace og blokkrit</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Tíma- og tíðnisvörun</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Nemar</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Hreyflar</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Sjálfvirk stýrikerfi</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. P, PI, PD og PID</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Vinnuferli og hönnun</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Prófasafn</h2><ul>
+<li><a class="nav" href="lokaprof.html" data-gate="archive">Lokapróf 2024 og 2025</a></li>
+<li><a class="nav" href="prof.html" data-gate="archive">Kannanir í hönnun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="1" data-topics="likan">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 1: Líkanagerð</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í  með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 1 af 8 · Vika 2-3 · kaflar 4-9 í hefti</p>
+<h1>Líkanagerð</h1>
+<p class="ch-exam"><b>Á lokaprófinu:</b> Spurning 2: tankur, rafrás eða varmi</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Kaflar 4-9 í heftinu (vika 2-3). Spurning 2 á lokaprófinu er alltaf líkanagerð: vatnstankur 2024 og rafrás 2025. Hér er aðferðin, grunneiningar hverrar tegundar kerfis og dæmi.</p>
+
+<h2>Hvað er líkan?</h2>
+<p>Líkan er verkfæri til að svara spurningum um hegðun kerfis <b>án þess að gera tilraunir á því</b>: þegar tilraunir eru of dýrar eða hættulegar, eða áður en kerfið er til. Í námskeiðinu eru líkönin</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Við notum</th><th>frekar en</th><th>Merking</th></tr></thead>
+<tbody>
+<tr><td>löggeng</td><td>slembin</td><td>Sama upphafsstaða og inntak gefa alltaf sama úttak</td></tr>
+<tr><td>kvik</td><td>föst</td><td>Staðan er háð fyrri stöðu (minni), ekki bara núverandi inntaki</td></tr>
+<tr><td>samfelld</td><td>stakræn</td><td>Breytur eru samfelldar í tíma</td></tr>
+<tr><td>þjöppuð</td><td>dreifð</td><td>Staðsetning innan einingar skiptir ekki máli</td></tr>
+<tr><td>línuleg</td><td>ólínuleg</td><td>Samlagningar- og einsleitniregla gilda: $au_1 + bu_2 \to ay_1 + by_2$</td></tr>
+<tr><td>tímaóháð</td><td>tímaháð</td><td>$u(t-T) \to y(t-T)$: sama svar óháð því hvenær inntakið kemur</td></tr>
+</tbody></table></div>
+<p>Slík líkön eru <b>línulegar diffurjöfnur með fastastuðlum</b>: $y^{(n)} + a_1y^{(n-1)} + \dots + a_ny = b_0u^{(n)} + \dots + b_nu$. Þær má líka skrifa sem <b>ástandslíkan</b> $\dot{\mathbf x} = A\mathbf x + B u$, $y = C\mathbf x$, en á prófunum er ekki beðið um ástandsform.</p>
+
+<h3>Tvær leiðir að líkani</h3>
+<div class="grid2">
+<div class="key"><p><b>Út frá náttúrulögmálum</b> (physical modeling):</p><ol style="margin:0"><li><b>Afmörkun og uppskipting:</b> hvað er kerfið, hverjar eru einingarnar, inntak og úttak? (Markmið líkansins ræður.)</li><li><b>Grunnjöfnur:</b> lögmál fyrir hverja einingu (Newton, Kirchhoff, massa- og orkujafnvægi).</li><li><b>Diffurjafna</b> fyrir kerfið í heild: eyða innri breytum.</li></ol></div>
+<div class="key"><p><b>Út frá mælingum</b> (system identification):</p><ol style="margin:0"><li>Afmörkun og uppskipting (eins).</li><li>Koma kerfinu í vinnupunkt, breyta inntaki (t.d. þrep) og mæla úttakið þar til nýtt jafnvægi næst.</li><li>Meta diffurjöfnu og stika ($K$, $\tau$, ...) út frá mælingunum.</li></ol></div>
+</div>
+<p>Seinni leiðin var notuð í hönnunarverkefninu: þrepasvörun hitastigs mæld og $K$ og $\tau$ lesin af henni (sjá <a href="kafli-3.html">tímasvörun</a>).</p>
+
+<h3>Vinnupunktur og línuleg nálgun</h3>
+<p>Fá raunveruleg kerfi eru línuleg. Lausnin er að gera líkan af <b>frávikum frá vinnupunkti</b> (jafnvægi) og nálga með fyrsta stigs Taylor-margliðu: $\hat f(x) = f(x_0) + f'(x_0)(x - x_0)$.</p>
+<p><b>Dæmi (vatnstankur, kafli 4):</b> $A\dfrac{dh}{dt} = v - q$ og útflæðið fylgir Bernoulli, $q = a\sqrt{2gh}$, sem er ólínulegt. Í jafnvægi er $q_0 = v_0$ og $h_0 = \frac{1}{2g}\bigl(\frac{v_0}{a}\bigr)^2$. Línulega nálgunin er $\hat q = q_0 + a\sqrt{\tfrac{g}{2h_0}}\,(h - h_0)$ og þá fæst</p>
+$$T\frac{d\hat q}{dt} + \hat q = v,\qquad T = \frac{A}{a}\sqrt{\frac{2h_0}{g}}$$
+<div class="note"><p><b class="t">Afleiðingar:</b> stikarnir (hér $T$) eru <b>háðir vinnupunktinum</b>, og líkanið verður ónákvæmara eftir því sem frávikið er stærra. Í lokaprófinu 2024 S2 er línulega nálgunin gefin: „nálægt $h_0$ má gera ráð fyrir $q_2 = h/R$“.</p></div>
+
+<h2>Grunneiningar: samanburður (kafli 9)</h2>
+<p>Allar tegundir kerfa hafa sambærilegar grunneiningar. Ef ein breyta er valin sem <b>áreynslubreyta</b> og önnur sem <b>flæðisbreyta</b> fást sams konar diffurjöfnur. Stærðfræðin er sameiginlega tungumálið.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Kerfi</th><th>Áreynsla</th><th>Flæði</th><th>Tregða</th><th>Rýmd</th><th>Viðnám</th></tr></thead>
+<tbody>
+<tr><td>Vél, lína</td><td>Kraftur $F$</td><td>Hraði $v$</td><td>Massi $m$</td><td>Fjöður $k$</td><td>Dempari $c$</td></tr>
+<tr><td>Vél, snúningur</td><td>Vægi $\tau$</td><td>Hornhraði $\omega$</td><td>Hverfitregða $I$</td><td>Snúningsfjöður</td><td>Snúningsdempari</td></tr>
+<tr><td>Rafrás</td><td>Spenna $v$</td><td>Straumur $i$</td><td>Spóla $L$</td><td>Þéttir $C$</td><td>Viðnám $R$</td></tr>
+<tr><td>Vökvi</td><td>Þrýstingur $p$</td><td>Rúmmálsflæði $q$</td><td>Vökvatregða</td><td>Vökvarýmd (tankur)</td><td>Vökvaviðnám (loki)</td></tr>
+<tr><td>Loft</td><td>Þrýstingur $p$</td><td>Massaflæði $q_m$</td><td>Lofttregða</td><td>Loftrýmd</td><td>Loftviðnám</td></tr>
+<tr><td>Varmi</td><td>Hitastig $T$</td><td>Varmaflæði $q$</td><td><b>engin</b></td><td>Varmarýmd</td><td>Varmaviðnám</td></tr>
+</tbody></table></div>
+<p>Varmakerfi skera sig úr: þau hafa enga tregðu, svo þau sveiflast ekki af sjálfu sér. Tregða + rýmd gefa annarrar gerðar kerfi sem <i>getur</i> sveiflast; ein rýmd + viðnám gefa fyrstu gerðar kerfi.</p>
+
+<h2>Vélar (kafli 5)</h2>
+<div class="grid2">
+<div class="key"><p><b>Hreyfing eftir línu</b> (inntak $F$, úttak $x$)</p>
+$$F = kx,\qquad F = c\,\frac{dx}{dt},\qquad F = m\,\frac{d^2x}{dt^2}$$
+<p>Orka: fjöður $\tfrac12kx^2$, massi $\tfrac12mv^2$; dempari tapar aflinu $cv^2$.</p></div>
+<div class="key"><p><b>Snúningur</b> (inntak $\tau$, úttak $\theta$)</p>
+$$\tau = k\theta,\qquad \tau = c\,\omega,\qquad \tau = I\,\frac{d^2\theta}{dt^2}$$
+<p>Orka: $\tfrac12k\theta^2$, $\tfrac12I\omega^2$; tap $c\omega^2$.</p></div>
+</div>
+<p><b>Aðferð:</b> teiknaðu alla krafta sem verka á hvern massa og notaðu $\sum F = ma$. Massi, fjöður og dempari tengd vegg (mynd 5.2):</p>
+$$F - kx - c\dot x = m\ddot x \quad\Longrightarrow\quad \ddot x + \frac{c}{m}\dot x + \frac{k}{m}x = \frac{F}{m}$$
+<p>Ef massarnir eru fleiri er sett upp kraftajafnvægi fyrir hvern þeirra og jöfnurnar sameinaðar.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Raðtengt (sami kraftur, færslur leggjast saman)</th><th>Hliðtengt (sama færsla, kraftar leggjast saman)</th></tr></thead>
+<tbody>
+<tr><td>Fjaðrir</td><td>$\dfrac{1}{k} = \dfrac{1}{k_1} + \dfrac{1}{k_2}$ (tvær eins: $k/2$)</td><td>$k = k_1 + k_2$</td></tr>
+<tr><td>Demparar</td><td>$\dfrac{1}{c} = \dfrac{1}{c_1} + \dfrac{1}{c_2}$</td><td>$c = c_1 + c_2$</td></tr>
+</tbody></table></div>
+<p>Snúningur yfir í línu (belti eða hjól með radíus $r$): $v = r\omega$ og kraftur á beltið er $F = \tau/r$.</p>
+
+<h2>Rafrásir (kafli 6)</h2>
+<div class="key">
+$$v = Ri,\qquad i = C\,\frac{dv}{dt},\qquad v = L\,\frac{di}{dt}$$
+<p>Orka: þéttir $\tfrac12Cv^2$, spóla $\tfrac12Li^2$; viðnám tapar $P = vi = v^2/R$.</p>
+</div>
+<p><b>Lögmál Kirchhoffs:</b> (1) straumur inn í hnút = straumur út úr honum; (2) í lokaðri lykkju er summa spennufalla jöfn spennunni sem fæðir hana.</p>
+<p><b>RLC í röð</b>, úttak er spennan yfir þéttinn: $v = Ri + L\dfrac{di}{dt} + v_C$ og $i = C\dfrac{dv_C}{dt}$ gefa</p>
+$$\frac{d^2v_C}{dt^2} + \frac{R}{L}\frac{dv_C}{dt} + \frac{1}{LC}v_C = \frac{1}{LC}v$$
+<p>Sams konar jafna og massi-fjöður-dempari: $L \leftrightarrow m$, $R \leftrightarrow c$, $1/C \leftrightarrow k$.</p>
+<p><b>RC-rás</b> (viðnám í röð, þéttir yfir úttakið): $RC\,\dot y + y = u$, fyrstu gerðar með $\tau = RC$.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Raðtengt</th><th>Hliðtengt</th></tr></thead>
+<tbody>
+<tr><td>Viðnám og spólur</td><td>$R = R_1 + R_2$</td><td>$\dfrac1R = \dfrac1{R_1} + \dfrac1{R_2}$</td></tr>
+<tr><td>Þéttar (öfugt!)</td><td>$\dfrac1C = \dfrac1{C_1} + \dfrac1{C_2}$</td><td>$C = C_1 + C_2$</td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Rofar og jafnvægi (2025 S2):</b> í jafnvægi rennur enginn straumur um þétti (hann er eins og opin rás) og spennan yfir spólu er núll (hún er eins og leiðari). Þannig finnur þú upphafsgildið. Eftir breytinguna: Kirchhoff, og $\tau = R_{th}C$ þar sem $R_{th}$ er viðnámið sem þéttirinn sér þegar spennulindir eru núllaðar (skammhleyptar).</p></div>
+
+<h2>Straumefni (kafli 7)</h2>
+<div class="grid2">
+<div class="key"><p><b>Vökvaviðnám</b> (loki, þrenging): $p_1 - p_2 = Rq$</p>
+<p><b>Vökvarýmd</b> (tankur): $q_1 - q_2 = A\dfrac{dh}{dt} = C\dfrac{dp}{dt}$, $C = \dfrac{A}{\rho g}$, $p = \rho gh$</p>
+<p><b>Vökvatregða</b> (pípa, lengd $L$): $p_1 - p_2 = I\dfrac{dq}{dt}$, $I = \dfrac{L\rho}{A}$</p></div>
+<div class="key"><p><b>Loft</b> (samþjappanlegt, massaflæði $q_m$): $p_1 - p_2 = Rq_m$, $q_{m1} - q_{m2} = C\dfrac{dp}{dt}$ með $C = \rho\dfrac{dV}{dp} + \dfrac{VM}{R_gT}$ (gasjafnan $pV = \frac{m}{M}R_gT$).</p></div>
+</div>
+<p><b>Tankur með loka, tregða óveruleg:</b> $q_1 - q_2 = C\dfrac{dp}{dt}$ og $p = Rq_2$ gefa $RC\,\dfrac{dq_2}{dt} + q_2 = q_1$. Með tregðu fæst annarrar gerðar jafna (7.22), sem jafngildir RLC-rás.</p>
+<div class="note"><p><b class="t">Tvær ritvenjur fyrir viðnám.</b> Í heftinu er $R$ skilgreint út frá þrýstingi ($p = Rq$, eining Pa·s/m³), og þá er $\tau = RC = RA/(\rho g)$. Í lokaprófinu 2024 er $R$ skilgreint út frá hæð ($q_2 = h/R$, eining s/m²), og þá er $\tau = AR$. Notaðu skilgreininguna sem er gefin í dæminu og athugaðu einingarnar.</p></div>
+
+<h2>Varmi (kafli 8)</h2>
+<div class="key">
+<p><b>Varmaviðnám:</b> $q = \dfrac{T_1 - T_2}{R}$, með $R = \dfrac{L}{Ak}$ fyrir varmaleiðni og $R = \dfrac{1}{Ah}$ fyrir varmaburð.</p>
+<p><b>Varmarýmd:</b> $q_1 - q_2 = C\dfrac{dT}{dt}$, $C = mc$ (massi × eðlisvarmi, J/°C).</p>
+</div>
+<p><b>Hitamælir í vökva</b> með hitastig $T_L$: $\dfrac{T_L - T}{R} = C\dfrac{dT}{dt}$, svo $RC\,\dot T + T = T_L$. Hitanemi er því fyrstu gerðar með $\tau = RC$, sem er einmitt líkanið af nemum í <a href="kafli-4.html">kaflanum um nema</a>.</p>
+<p><b>Gegnumstreymistankur</b> (flæði $q$, rúmmál $V$, hitari $P$): orkujafnvægi $\rho c V\dot T_2 = \rho cq(T_1 - T_2) + P$, svo $\dfrac{V}{q}\dot T_2 + T_2 = T_1 + \dfrac{P}{\rho cq}$ og $\tau = V/q$ (könnun 2020 S3).</p>
+
+<h2>Uppskrift fyrir spurningu 2</h2>
+<ol>
+<li><b>Jafnvægisjafna</b> fyrir geymsluna: massajafnvægi (tankur), orkujafnvægi (varmi), $\sum F = ma$ (vélar) eða Kirchhoff (rafrásir).</li>
+<li><b>Grunnjöfnur</b> fyrir hverja einingu ($q = h/R$, $i = C\,dv/dt$, $F = kx$, ...).</li>
+<li><b>Eyða innri breytum</b> og raða á staðalformið $\tau\dot y + y = Ku$ (eða annarrar gerðar).</li>
+<li><b>Lesa af</b>: $\tau$ og $K$. Jafnvægi: setja allar afleiður = 0. Tími í jafnvægi: $4\tau$.</li>
+<li>Athuga einingar og hvort jafnan lýsir frávikum frá vinnupunkti.</li>
+</ol>
+
+<h2>Dæmi úr heftinu</h2>
+
+<div class="ex"><div class="ex-head">Dæmi 6.1.6 <span>Spennudeilir með þétti</span></div><div class="ex-body">
+<p>Inntaksspennan $u$ fer í gegnum $R_1$ að hnút. Frá hnútnum til jarðar liggja $R_2$ og þéttirinn $C$ hliðtengd. Úttakið $y$ er spennan yfir þéttinn. Finnið jöfnu sem tengir $u$ og $y$.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Kirchhoff í hnútnum: $\dfrac{u - y}{R_1} = \dfrac{y}{R_2} + C\dot y$. Margföldum með $R_1$:</p>
+$$R_1C\,\dot y + \Bigl(1 + \frac{R_1}{R_2}\Bigr)y = u \quad\Longrightarrow\quad \frac{R_1R_2C}{R_1+R_2}\,\dot y + y = \frac{R_2}{R_1+R_2}\,u$$
+<p>$\tau = (R_1\parallel R_2)\,C$ og $K = R_2/(R_1+R_2)$. Þetta er nákvæmlega rásin í lokaprófinu 2025 S2 eftir að rofinn opnast.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi 8.1.1 <span>Ofn</span></div><div class="ex-body">
+<p>Ofn er hitaður með varmaflæðinu $P$. Hitinn inni í ofninum er $T_1$ og fyrir utan $T_2$. Veggurinn hefur varmaviðnám $R$ og ofninn varmarýmd $C$. Finnið jöfnu fyrir $T_1$.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Orkujafnvægi: varmi inn mínus varmi út = $C\dot T_1$:</p>
+$$P - \frac{T_1 - T_2}{R} = C\frac{dT_1}{dt} \quad\Longrightarrow\quad RC\,\dot T_1 + T_1 = RP + T_2$$
+<p>$\tau = RC$. Í jafnvægi er $T_1 = T_2 + RP$: hitinn hækkar um $RP$ umfram umhverfið.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi 7.3.1 <span>Tveir tankar</span></div><div class="ex-body">
+<p>Jafnt flæði $Q$ rennur inn í vinstri tankinn. Á milli tankanna (báðir með flatarmál $A$) er loki með viðnám $R$; flæðið á milli er $q = (h_1 - h_2)/R$ (hæðarvenja). Hægri tankurinn hefur ekkert annað útflæði. Finnið jöfnu fyrir $h_2$ fyrir gefið $h_1$.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Massajafnvægi hægri tanks: $A\dot h_2 = q = \dfrac{h_1 - h_2}{R}$, svo</p>
+$$AR\,\dot h_2 + h_2 = h_1$$
+<p>Fyrstu gerðar með $\tau = AR$ og mögnun 1: hæðin í hægri tanknum eltir hæðina í þeim vinstri. (Með $p = Rq$ venju heftisins verður $\tau = AR/(\rho g)$.)</p>
+</div></details></div></div>
+
+<p>Fleiri dæmi með lausnum: <a href="lokaprof.html#p2024">vatnstankur 2024 S2</a>, <a href="lokaprof.html#p2025">RC-rás 2025 S2</a>, <a href="lokaprof.html#k1">massi og fjaðrir og varmi í könnun 2020</a>. Æfðu þig með slembitölum í <a href="aefingar.html">æfingaspurningunum</a> (flokkur „Líkanagerð“).</p>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Reiknidæmi með nýjum tölum í hvert skipti og skilningsspurningar úr kaflanum. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð lausnina eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Líkansmiðja: þrjú kerfi, eitt form</h2>
+<p>Vatnstankur, RC-rás og hitamælir eru ólík kerfi, en öll eru þau <b>ein rýmd og eitt viðnám</b>. Þau hafa því sama líkanið, $\tau\dot y + y = K u$ (kafli 9). Hér stillir þú stikana og sérð hvernig $\tau$ og jafnvægisgildið $K\,\Delta u$ ráða þrepasvöruninni.</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu öll þrjú verkefnin neðst, eitt fyrir hvert kerfi. Hvert þeirra krefst þess að þú reiknir út frá líkaninu hvaða gildi þarf (t.d. hvenær 95 % eða 98 % af lokagildinu næst) en giskir ekki.</p></div>
+<div class="panel" id="k1-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 2"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="index.html"><span>Fyrri</span>Kortið</a><a href="kafli-2.html" style="text-align:right"><span>Næsta</span>2. Laplace og blokkrit</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/ctrl.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/widgets-a.js"></script>
+</body>
+</html>

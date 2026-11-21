@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lokapróf með lausnum · Tæknileg kerfi</title>
+<title>Lokapróf 2024 og 2025 með lausnum · Tæknileg kerfi</title>
 <meta name="description" content="Kennsluvefur fyrir lokaprófið í IÐN303G Tæknileg kerfi: líkanagerð, Laplace, tíma- og tíðnisvörun, nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar, með lausnum á gömlum prófum.">
 <link rel="stylesheet" href="vendor/katex/katex.min.css">
 <link rel="stylesheet" href="css/style.css">
@@ -16,30 +16,28 @@
 <div class="shell">
 <aside class="side" id="side">
 <div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
-<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Undirbúningur fyrir lokapróf</small></a>
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
 <nav aria-label="Efnisyfirlit">
-<h2>Byrja hér</h2><ul>
-<li><a class="nav" href="index.html">Yfirlit</a></li>
-<li><a class="nav" href="lokaprof.html" aria-current="page">Lokapróf 2024 og 2025</a></li>
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Líkanagerð</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Laplace og blokkrit</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Tíma- og tíðnisvörun</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Nemar</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Hreyflar</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Sjálfvirk stýrikerfi</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. P, PI, PD og PID</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Vinnuferli og hönnun</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
 </ul>
-<h2>Efni: líkön og svörun</h2><ul>
-<li><a class="nav" href="likanagerd.html">Líkanagerð</a></li>
-<li><a class="nav" href="laplace.html">Laplace og blokkrit</a></li>
-<li><a class="nav" href="svorun.html">Tíma- og tíðnisvörun</a></li>
-</ul>
-<h2>Efni: hönnun</h2><ul>
-<li><a class="nav" href="nemar.html">Nemar</a></li>
-<li><a class="nav" href="hreyflar.html">Hreyflar</a></li>
-<li><a class="nav" href="stjornkerfi.html">Sjálfvirk stýrikerfi</a></li>
-<li><a class="nav" href="styringar.html">P, PI, PD og PID</a></li>
-<li><a class="nav" href="honnun.html">Vinnuferli og spurningar 5-6</a></li>
-</ul>
-<h2>Æfa</h2><ul>
-<li><a class="nav" href="prof.html">Kannanir í hönnun</a></li>
-<li><a class="nav" href="aefingar.html">Æfingaspurningar</a></li>
-<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<h2>Prófasafn</h2><ul>
+<li><a class="nav" href="lokaprof.html" aria-current="page" data-gate="archive">Lokapróf 2024 og 2025</a></li>
+<li><a class="nav" href="prof.html" data-gate="archive">Kannanir í hönnun</a></li>
 </ul>
 <h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
 <li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
 <li><a class="nav" href="formulublad.html">Formúlublað</a></li>
 </ul>
@@ -48,6 +46,9 @@
 </aside>
 <main id="main">
 <div class="page">
+<div class="gate" data-gate="archive">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Prófasafnið er læst</h1><p>Náðu lokaprófi ferðalagsins (einkunn 6 eða hærra) til að opna gömlu prófin með lausnum.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="gated">
 <h1>Lokapróf með lausnum</h1>
 <p class="lede">Lokaprófin frá 6. desember 2024 og 24. nóvember 2025, auk könnunar 1 frá 2020 sem nær yfir líkanagerð og svörun. Reyndu hverja spurningu fyrst sjálf(ur) og opnaðu svo lausnina. Allar tölur eru endurreiknaðar.</p>
 <div class="note"><p><b class="t">Á prófinu:</b> sex spurningar á 3 klst. Spurningar 1-4 gilda 15 % hver og eru reiknidæmi, spurningar 5-6 gilda 20 % hvor og eru skriflegar. Hjálpargögn: vasareiknir og handskrifað formúlublað. Ef spurning er í fleiri en einum lið hafa allir liðir jafnt vægi.</p></div>
@@ -173,7 +174,7 @@ $$\omega_c L > \varphi_m \;\Rightarrow\; L > \frac{35^\circ\cdot\pi/180}{0{,}047
 <div class="ex"><div class="ex-head">Spurning 5 (20 %) <span>Verklegar æfingar, skilaverkefni og líkön</span></div><div class="ex-body">
 <p class="parts"><span class="part"><b>(a)</b> Lýsið stuttlega hvað var líkt og ólíkt með verklegum æfingum og skilaverkefnum og hvernig það sem þið lærðuð í þeim nýttist í hönnunarverkefninu.</span><span class="part"><b>(b)</b> Lýsið því hvernig þið bjugguð til og notuðuð fræðileg líkön í hönnunarverkefninu. Komu líkönin að litlum eða miklum notum? Af hverju?</span></p>
 <details class="reveal"><summary></summary><div class="sol">
-<p>Hér er ekkert eitt rétt svar, því spurt er um <i>þína</i> reynslu. Gott svar tengir reynsluna við hugtök heftisins. Beinagrind og lykilpunkta finnur þú á síðunni <a href="honnun.html#s5">vinnuferli og spurningar 5-6</a>.</p>
+<p>Hér er ekkert eitt rétt svar, því spurt er um <i>þína</i> reynslu. Gott svar tengir reynsluna við hugtök heftisins. Beinagrind og lykilpunkta finnur þú á síðunni <a href="kafli-8.html#s5">vinnuferli og spurningar 5-6</a>.</p>
 <p><b>(a) í stuttu máli:</b> verklegu æfingarnar (V1-V3) voru á raunverulega vélbúnaðinum (Raspberry Pi, LED, lampi, hitanemar, ljósnemi, vifta með PWM): að lesa nema og stýra hreyflum með kóða. Skilaverkefnin (S1-S3) voru í Colab: líkanagerð, svörun og hönnun stýringa í fræðilega heiminum (diffurjöfnur, Laplace, Bode). Í hönnunarverkefninu runnu þessir tveir heimar saman: líkan byggt á mælingum og fræði, stýring hönnuð á líkaninu og síðan útfærð og sannprófuð á raunkerfinu.</p>
 <p><b>(b) í stuttu máli:</b> lýstu hvernig líkanið var fundið (t.d. mæld þrepasvörun hitastigs við breytingu á duty cycle viftunnar → $K$ og $\tau$ fyrstu gerðar, kannski með seinkun), hvernig það var notað (velja stýringu og stilla $K$, $T_I$ út frá Bode/fasaöryggi og hermun) og hversu vel það passaði við mælingar. Rökstyddu: líkanið er línuleg nálgun um vinnupunkt (kafli 4), svo það passar best nálægt honum. Truflanir, suð og mettun stýrimerkis eru ekki í líkaninu.</p>
 </div></details></div></div>
@@ -289,7 +290,7 @@ $$e_{ss} = \frac{10}{1 + 10\cdot10{,}47} = \frac{10}{105{,}7} \approx 0{,}095\ \
 <li><b>Hönnun stýringar á líkaninu</b> (kaflar 17-18; S3, K2): Bode, fasaöryggi, skekkja, truflanir.</li>
 <li><b>Útfærsla og sannprófun</b> (Python á Raspberry Pi, verklegu æfingarnar): stýringin keyrð á raunkerfinu og borin saman við kröfur; endurbætt þar til hún stenst.</li>
 </ul>
-<p><b>(B)</b> Persónulegt svar. Tengdu það við (A): verkefnið skiptist eðlilega í einingar (mælingar/nemi, hreyfill/PWM, líkan, stýring, kóði, sannprófun og skýrsla) með skýrum skilum á milli. Góð verkaskipting fylgir þeim einingum, en samhæfingin þarf sameiginlegar kröfur og líkan. Nefndu hvað gekk vel og illa, <i>af hverju</i>, og hvað þú myndir gera öðruvísi. Sjá <a href="honnun.html#s5">nánari beinagrind</a>.</p>
+<p><b>(B)</b> Persónulegt svar. Tengdu það við (A): verkefnið skiptist eðlilega í einingar (mælingar/nemi, hreyfill/PWM, líkan, stýring, kóði, sannprófun og skýrsla) með skýrum skilum á milli. Góð verkaskipting fylgir þeim einingum, en samhæfingin þarf sameiginlegar kröfur og líkan. Nefndu hvað gekk vel og illa, <i>af hverju</i>, og hvað þú myndir gera öðruvísi. Sjá <a href="kafli-8.html#s5">nánari beinagrind</a>.</p>
 </div></details></div></div>
 
 <div class="ex"><div class="ex-head">Spurning 6 (20 %) <span>Val á stýringu út frá Bode-riti</span></div><div class="ex-body">
@@ -356,9 +357,11 @@ $$y(t) = \frac12\Bigl(1 - e^{-t}\cos t - e^{-t}\sin t\Bigr)$$
 $$G(s) = \frac{I_a}{E} = \frac{1}{Ls + R}$$
 <p>Framleiðin er $F = \dfrac{K_\tau}{(Ls+R)(Is^2+cs)}$ og afturvirknin $K_ms$. Með reglunni $\dfrac{F}{1+F\,H}$:</p>
 $$\frac{\Theta}{V_i} = \frac{K_\tau}{(Ls+R)(Is^2+cs) + K_\tau K_m s} = \frac{K_\tau}{s\bigl[(Ls+R)(Is+c) + K_\tau K_m\bigr]}$$
-<p>Með $L = 0$ fæst kunnuglega formið úr kaflanum um <a href="hreyflar.html">hreyfla</a>: $\dfrac{\Omega}{V_i} = \dfrac{K_\tau/R}{Is + c + K_\tau K_m/R}$.</p>
+<p>Með $L = 0$ fæst kunnuglega formið úr kaflanum um <a href="kafli-5.html">hreyfla</a>: $\dfrac{\Omega}{V_i} = \dfrac{K_\tau/R}{Is + c + K_\tau K_m/R}$.</p>
 </div></details></div></div>
-<div class="pager noprint"><a href="index.html"><span>Fyrri</span>Yfirlit</a><a href="likanagerd.html" style="text-align:right"><span>Næsta</span>Líkanagerð</a></div>
+</div>
+</div>
+<div class="pager noprint"><a href="lokaprof-aefing.html"><span>Fyrri</span>Lokapróf</a><a href="prof.html" style="text-align:right"><span>Næsta</span>Kannanir í hönnun</a></div>
 </div>
 </main>
 </div>
@@ -366,6 +369,8 @@ $$\frac{\Theta}{V_i} = \frac{K_\tau}{(Ls+R)(Is^2+cs) + K_\tau K_m s} = \frac{K_\
 <script src="vendor/katex/auto-render.min.js"></script>
 <script src="js/site.js"></script>
 <script src="js/ctrl.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
 <script src="js/lokaprof.js"></script>
 </body>
 </html>
