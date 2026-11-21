@@ -8,13 +8,14 @@
 <link rel="stylesheet" href="vendor/katex/katex.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
-<script>try{var t=localStorage.getItem("tk-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
 </head>
 <body>
 <div class="topbar"><a href="index.html">Tæknileg kerfi</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
 <div class="shell">
 <aside class="side" id="side">
-<a class="home" href="../index.html">← Allir kennsluvefir</a>
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
 <a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Undirbúningur fyrir lokapróf</small></a>
 <nav aria-label="Efnisyfirlit">
 <h2>Byrja hér</h2><ul>

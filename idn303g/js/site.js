@@ -52,6 +52,30 @@
     });
   }
 
+  // Fela og sýna valmyndina á breiðum skjá. Flýtilykill: \ (backslash)
+  var hideBtn = document.getElementById("side-hide");
+  var showBtn = document.getElementById("side-show");
+  function setSide(hidden, focusEl) {
+    if (hidden) doc.setAttribute("data-side", "hidden"); else doc.removeAttribute("data-side");
+    try { localStorage.setItem("tk-side", hidden ? "hidden" : "shown"); } catch (e) {}
+    if (showBtn) showBtn.setAttribute("aria-expanded", hidden ? "false" : "true");
+    if (focusEl) focusEl.focus();
+    window.dispatchEvent(new Event("resize")); // gröf teiknast aftur í nýrri breidd
+  }
+  if (hideBtn && showBtn) {
+    showBtn.setAttribute("aria-expanded", doc.getAttribute("data-side") === "hidden" ? "false" : "true");
+    hideBtn.addEventListener("click", function () { setSide(true, showBtn); });
+    showBtn.addEventListener("click", function () { setSide(false, hideBtn); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "\\" || e.ctrlKey || e.metaKey || e.altKey) return;
+      var t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      if (window.matchMedia && !window.matchMedia("(min-width: 881px)").matches) return;
+      e.preventDefault();
+      setSide(doc.getAttribute("data-side") !== "hidden");
+    });
+  }
+
   window.store = {
     get: function (k, d) {
       try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; }

@@ -129,6 +129,22 @@ a:hover { text-decoration-color: currentColor; }
 
 .topbar { display: none; }
 
+/* Fela valmyndina á breiðum skjá (fókushamur). Staðan vistast í localStorage ("tk-side"). */
+.side-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 1.1rem; }
+.side-top .home { margin-bottom: 0; }
+.side-hide, .side-show { display: inline-flex; align-items: center; gap: 0.4rem; font: 500 0.82rem var(--sans); color: var(--muted); background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; cursor: pointer; }
+.side-hide { padding: 0.3rem; }
+.side-hide:hover, .side-show:hover { color: var(--ink); border-color: var(--rule-2); }
+.side-hide svg, .side-show svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.side-show { display: none; position: fixed; top: 0.9rem; left: 0.9rem; z-index: 30; padding: 0.4rem 0.7rem; background: var(--raised); box-shadow: 0 1px 3px rgb(0 0 0 / 0.08); }
+@media (min-width: 881px) {
+  [data-side="hidden"] .shell { grid-template-columns: minmax(0, 1fr); }
+  [data-side="hidden"] .side { display: none; }
+  [data-side="hidden"] .side-show { display: inline-flex; }
+  [data-side="hidden"] .page { max-width: 52rem; }
+  [data-side="hidden"] .page.wide { max-width: 72rem; }
+}
+
 main {
   padding: 3rem clamp(1rem, 5vw, 4.5rem) 5rem;
   min-width: 0;
@@ -146,7 +162,7 @@ main {
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.6rem 1rem; border-bottom: 1px solid var(--rule); background: var(--paper); position: sticky; top: 0; z-index: 20; }
   .topbar a { font: 700 1rem var(--sans); color: var(--ink); text-decoration: none; }
   .topbar-btns { display: flex; gap: 0.5rem; }
-  .side .theme-btn { display: none; }
+  .side .theme-btn, .side-hide, .side-show { display: none !important; }
   .topbar button { font: 600 0.85rem var(--sans); padding: 0.4rem 0.75rem; border: 1px solid var(--rule); background: var(--raised); color: var(--ink); border-radius: 6px; cursor: pointer; }
   main { padding-top: 1.75rem; }
 }
@@ -307,7 +323,7 @@ p.small { font-size: 0.9rem; }
 
 /* Print: formula sheet */
 @media print {
-  .side, .topbar, .noprint, .theme-btn { display: none !important; }
+  .side, .topbar, .noprint, .theme-btn, .side-show { display: none !important; }
   .shell { display: block; }
   main { padding: 0; }
   body { font-size: 10pt; line-height: 1.4; background: #fff; color: #000; }
