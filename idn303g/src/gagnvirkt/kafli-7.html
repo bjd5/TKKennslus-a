@@ -1,0 +1,37 @@
+<!--scripts: js/widgets-b.js -->
+<h2>Gagnvirkt: PID-tilraunastofa</h2>
+<div class="note tip"><p><b class="t">Verkefni (lokapróf 2025 S6):</b> ferlið $G_P = \dfrac{1{,}598}{s^2 + 1{,}416s + 1{,}598}$ ($\zeta \approx 0{,}56$, $\omega_n \approx 1{,}26$ rad/s) hefur rístíma 1,4 s og 12 % yfirskot án stýringar. Hannaðu stýringu $G_C = K\Bigl(1 + \dfrac{1}{T_Is}\Bigr)\dfrac{1+T_Ds}{1+T_Fs}$, $T_F = 0{,}2\,T_D$, sem uppfyllir <b>allar</b> kröfurnar: stöðugt, rístími undir 0,5 s, yfirskot undir 10 % og engin skekkja í jafnvægi. Byrjaðu einfalt (bara P) og bættu við liðum þegar þú sérð hvaða krafa stenst ekki.</p></div>
+<div class="panel hero-fig">
+  <div class="row" style="align-items:center">
+    <div style="flex:1 1 12rem">
+      <label class="f" for="k7-k">$K$ = <output id="k7-kv">1,00</output></label>
+      <input type="range" id="k7-k" min="0.2" max="10" step="0.05" value="1">
+    </div>
+    <div style="flex:1 1 12rem">
+      <label class="f" for="k7-ti"><input type="checkbox" id="k7-ion"> I-liður: $T_I$ = <output id="k7-tiv">af</output></label>
+      <input type="range" id="k7-ti" min="0.2" max="10" step="0.1" value="3">
+    </div>
+    <div style="flex:1 1 12rem">
+      <label class="f" for="k7-td"><input type="checkbox" id="k7-don"> D-liður: $T_D$ = <output id="k7-tdv">af</output></label>
+      <input type="range" id="k7-td" min="0.05" max="2" step="0.05" value="0.5">
+    </div>
+    <div class="fixed"><button class="btn ghost" type="button" id="k7-reset">Byrja upp á nýtt</button></div>
+  </div>
+  <div id="k7-specs" style="margin-top:0.8rem" aria-live="polite"></div>
+  <div class="hero-readout" aria-live="polite">
+    <div class="hl"><b id="k7-tr">–</b><span>rístími (10-90 %)</span></div>
+    <div><b id="k7-mp">–</b><span>yfirskot $M_p$</span></div>
+    <div><b id="k7-ess">–</b><span>skekkja $e_{ss}$</span></div>
+    <div><b id="k7-pm">–</b><span>$\varphi_m$</span></div>
+    <div><b id="k7-wc">–</b><span>$\omega_c$ [rad/s]</span></div>
+    <div><b id="k7-umax">–</b><span>stærsta $|u|$</span></div>
+    <div><b id="k7-tf">–</b><span>$T_F$</span></div>
+  </div>
+  <div class="result" id="k7-res" aria-live="polite"></div>
+  <p style="margin:1rem 0 0.3rem;font-family:var(--sans);font-weight:700">Þrepasvörun</p>
+  <div class="legend"><span><i style="background:var(--mag)"></i>lokað kerfi með stýringu</span><span><i style="background:var(--muted)"></i>ferlið án stýringar</span></div>
+  <canvas class="plot" id="k7-step" role="img" aria-label="Þrepasvörun lokaða kerfisins og ferlisins án stýringar"></canvas>
+  <p style="margin:1rem 0 0.3rem;font-family:var(--sans);font-weight:700">Stýrimerki $u(t)$</p>
+  <canvas class="plot" id="k7-u" role="img" aria-label="Stýrimerkið"></canvas>
+  <p style="margin:0.8rem 0 0;color:var(--muted);font-size:0.95rem">Svörunin er hermd í tíma (Runge-Kutta), en $\varphi_m$ og stöðugleiki eru reiknuð út frá lykkjunni og kennijöfnunni. Skoðaðu stýrimerkið: D-liðurinn gefur stóran topp við þrepið ($K\,T_D/T_F = 5K$), sem í raunkerfi gæti mettað hreyfilinn.</p>
+</div>

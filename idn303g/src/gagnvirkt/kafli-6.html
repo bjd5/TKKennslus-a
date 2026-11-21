@@ -1,0 +1,40 @@
+<!--scripts: js/widgets-b.js -->
+<h2>Gagnvirkt: fasaöryggi og seinkun</h2>
+<div class="note tip"><p><b class="t">Verkefni:</b> P-stýring á ferlinu $G_P = \dfrac{2{,}5}{(1+2s)(1+0{,}5s)}$ (sýnidæmi 1 úr stýringum). <b>Skref 1:</b> stilltu $K$ svo fasaöryggið verði $45^\circ \pm 2^\circ$ og reiknaðu skekkjuna í jafnvægi. <b>Skref 2:</b> með þessu $K$ kemur í ljós seinkun $e^{-Ls}$ í lykkjunni. Reiknaðu lengstu seinkun $L$ sem kerfið þolir áður en það verður óstöðugt (lokapróf 2025 S4c), og staðfestu með sleðanum.</p></div>
+<div class="panel hero-fig">
+  <div class="row" style="align-items:center">
+    <div style="flex:1 1 14rem">
+      <label class="f" for="k6-k">$K$ = <output id="k6-kv">1,00</output></label>
+      <input type="range" id="k6-k" min="0.2" max="30" step="0.05" value="1">
+    </div>
+    <div style="flex:1 1 14rem">
+      <label class="f" for="k6-l">Seinkun $L$ = <output id="k6-lv">0,00</output> s</label>
+      <input type="range" id="k6-l" min="0" max="1" step="0.005" value="0" disabled>
+    </div>
+  </div>
+  <div id="k6-checks" style="margin-top:0.8rem"></div>
+  <div class="hero-readout" aria-live="polite">
+    <div class="hl"><b id="k6-pm">–</b><span>fasaöryggi $\varphi_m$</span></div>
+    <div><b id="k6-wc">–</b><span>$\omega_c$ [rad/s]</span></div>
+    <div><b id="k6-am">–</b><span>mögnunaröryggi $A_m$</span></div>
+    <div><b id="k6-tr">–</b><span>$t_r \approx 1{,}4/\omega_c$ [s]</span></div>
+    <div><b id="k6-ess">–</b><span>skekkja (þrep)</span></div>
+    <div><b id="k6-stable">–</b><span>stöðugleiki</span></div>
+  </div>
+  <form id="k6-f1" data-q="1" class="row" style="margin-top:1rem" autocomplete="off" hidden>
+    <div><label class="f" for="k6-a1">Skref 1: hver er skekkjan í jafnvægi við þrep í óskgildi (í %)?</label><input id="k6-a1" type="text" inputmode="decimal" placeholder="t.d. 9,1"></div>
+    <div class="fixed"><button class="btn" type="submit">Athuga</button></div>
+  </form>
+  <div class="result" id="k6-r1" aria-live="polite"></div>
+  <div id="k6-stage2" hidden>
+    <form id="k6-f2" class="row" style="margin-top:1rem" autocomplete="off">
+      <div><label class="f" for="k6-a2">Skref 2: hver er lengsta seinkun $L$ (í s) áður en kerfið verður óstöðugt?</label><input id="k6-a2" type="text" inputmode="decimal" placeholder="t.d. 0,25"></div>
+      <div class="fixed"><button class="btn" type="submit">Athuga</button></div>
+    </form>
+    <div class="result" id="k6-r2" aria-live="polite"></div>
+  </div>
+  <div class="legend" style="margin-top:1rem"><span><i style="background:var(--mag)"></i>mögnun</span><span><i style="background:var(--phase)"></i>fasi</span></div>
+  <canvas class="plot" id="k6-bode" role="img" aria-label="Bode-rit lykkjunnar"></canvas>
+  <p style="margin:1rem 0 0.3rem;font-family:var(--sans);font-weight:700">Þrepasvörun lokaðs kerfis (hermd, með seinkun)</p>
+  <canvas class="plot" id="k6-step" role="img" aria-label="Þrepasvörun lokaða kerfisins"></canvas>
+</div>

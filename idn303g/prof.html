@@ -16,30 +16,28 @@
 <div class="shell">
 <aside class="side" id="side">
 <div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
-<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Undirbúningur fyrir lokapróf</small></a>
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
 <nav aria-label="Efnisyfirlit">
-<h2>Byrja hér</h2><ul>
-<li><a class="nav" href="index.html">Yfirlit</a></li>
-<li><a class="nav" href="lokaprof.html">Lokapróf 2024 og 2025</a></li>
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Líkanagerð</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Laplace og blokkrit</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Tíma- og tíðnisvörun</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Nemar</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Hreyflar</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Sjálfvirk stýrikerfi</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. P, PI, PD og PID</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Vinnuferli og hönnun</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
 </ul>
-<h2>Efni: líkön og svörun</h2><ul>
-<li><a class="nav" href="likanagerd.html">Líkanagerð</a></li>
-<li><a class="nav" href="laplace.html">Laplace og blokkrit</a></li>
-<li><a class="nav" href="svorun.html">Tíma- og tíðnisvörun</a></li>
-</ul>
-<h2>Efni: hönnun</h2><ul>
-<li><a class="nav" href="nemar.html">Nemar</a></li>
-<li><a class="nav" href="hreyflar.html">Hreyflar</a></li>
-<li><a class="nav" href="stjornkerfi.html">Sjálfvirk stýrikerfi</a></li>
-<li><a class="nav" href="styringar.html">P, PI, PD og PID</a></li>
-<li><a class="nav" href="honnun.html">Vinnuferli og spurningar 5-6</a></li>
-</ul>
-<h2>Æfa</h2><ul>
-<li><a class="nav" href="prof.html" aria-current="page">Kannanir í hönnun</a></li>
-<li><a class="nav" href="aefingar.html">Æfingaspurningar</a></li>
-<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<h2>Prófasafn</h2><ul>
+<li><a class="nav" href="lokaprof.html" data-gate="archive">Lokapróf 2024 og 2025</a></li>
+<li><a class="nav" href="prof.html" aria-current="page" data-gate="archive">Kannanir í hönnun</a></li>
 </ul>
 <h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
 <li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
 <li><a class="nav" href="formulublad.html">Formúlublað</a></li>
 </ul>
@@ -48,6 +46,9 @@
 </aside>
 <main id="main">
 <div class="page">
+<div class="gate" data-gate="archive">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Prófasafnið er læst</h1><p>Náðu lokaprófi ferðalagsins (einkunn 6 eða hærra) til að opna gömlu prófin með lausnum.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="gated">
 <h1>Kannanir í hönnun með lausnum</h1>
 <p class="lede">Kannanirnar í hönnun (K2) frá 2021, 2023 og 2025. Sama efni kemur í spurningum 3, 4 og 6 á lokaprófinu, svo þetta er góð æfing fyrir það. <a href="lokaprof.html">Lokaprófin sjálf eru hér</a>. Rúnar mælir með að þú farir fyrst í gegnum prófin án þess að kíkja á lausnirnar. Hver spurning hér er því með lausn sem er falin þar til þú opnar hana. Allar tölur eru endurreiknaðar.</p>
 <div class="note"><p><b class="t">Leyfileg hjálpargögn</b> á prófunum 2023 og 2025: vasareiknir og handskrifað formúlublað (skila þarf blaðinu). Sjá <a href="formulublad.html">formúlublaðið</a>. Prófið er einstaklingspróf með fjórum jafnþungum spurningum (25 % hver). Rökstyðja skal svör með útreikningum.</p></div>
@@ -208,7 +209,7 @@ $$G_{VY} = \frac{G_P}{1+G_K} = \frac{\frac{1}{1+10s}}{1+\frac{50}{1+10s}} = \fra
 </div></details></div></div>
 
 <h2 id="tengi">Tengidæmi kafla 16-19</h2>
-<p>Tvö dæmi sem tengja saman hreyfla og sjálfvirk stýrikerfi. Seinna dæmið (PID-tillögurnar tvær) er leyst á <a href="styringar.html">síðunni um stýringar</a>.</p>
+<p>Tvö dæmi sem tengja saman hreyfla og sjálfvirk stýrikerfi. Seinna dæmið (PID-tillögurnar tvær) er leyst á <a href="kafli-7.html">síðunni um stýringar</a>.</p>
 
 <div class="ex"><div class="ex-head">Dæmi 0.1 <span>Hraðastýring á burstahreyfli</span></div><div class="ex-body">
 <p>Samanlögð tregða $I = 0{,}7$ kg·m², deyfing $c = 0{,}5$ Nms/rad, $R = 1{,}5\ \Omega$, $K_\tau = 0{,}12$ Nm/A, $K_f = 12$ V/1000 RPM ($= 0{,}115$ V·s/rad), $L\approx0$. Inngangsspenna 0-15 V, vinnupunktur 7,5 V (fasti sem leggst við stýrimerkið). Nemi: $G_S = 1{,}5$ V/(rad/s). Óskgildi: stillivíðnám sem mælir 5-15 RPM með 3 V fæðispennu (1,5 V við 10 RPM).</p>
@@ -217,7 +218,7 @@ $$G_{VY} = \frac{G_P}{1+G_K} = \frac{\frac{1}{1+10s}}{1+\frac{50}{1+10s}} = \fra
 </ol>
 <details class="reveal"><summary></summary><div class="sol">
 <p><b>1.</b> $R \to (+,-) \to K \to (+V_1) \to G_P \to Y$, með $G_S = 1{,}5$ í afturvirkninni. $R$ er spenna (0-3 V), $Y$ er hornhraði og $V_1$ er 7,5 V þrep.</p>
-<p><b>2.</b> Með $L = 0$ (úr kaflanum um <a href="hreyflar.html">hreyfla</a>):</p>
+<p><b>2.</b> Með $L = 0$ (úr kaflanum um <a href="kafli-5.html">hreyfla</a>):</p>
 $$G_P = \frac{K_\tau}{R\,(Is+c) + K_\tau K_f} = \frac{K_p}{\tau s + 1},\quad K_p = \frac{0{,}12}{1{,}5\cdot0{,}5 + 0{,}12\cdot0{,}115} = 0{,}157\ \tfrac{\mathrm{rad/s}}{\mathrm V},\quad \tau = \frac{1{,}5\cdot0{,}7}{0{,}764} = 1{,}37\ \mathrm{s}$$
 $$G_K = K\cdot\frac{0{,}157}{1{,}37s+1}\cdot1{,}5 = \frac{0{,}24\,K}{1{,}37s+1}$$
 <p><b>3.</b> Jafnvægi: $y_{ss} = 7{,}5\cdot0{,}157 = 1{,}18$ rad/s <span class="ans">≈ 11 RPM</span>. Tími: $4\tau = $ <span class="ans">5,5 s</span>.</p>
@@ -226,13 +227,16 @@ $$e_{ss} = \frac{0{,}3}{1+0{,}24K}:\quad K=1:\ \text{0,24 V}\ (\approx 80\ \%\te
 <p><b>5.</b> $\omega = 2\pi\cdot50 = 314$ rad/s. $|G_{VY}| = \dfrac{0{,}157}{\sqrt{(1+0{,}24K)^2 + (1{,}37\cdot314)^2}}$. Annar liðurinn undir rótinni er $430^2$ og yfirgnæfir hinn, svo $|G_{VY}| \approx 3{,}7\cdot10^{-4}$ fyrir <b>bæði</b> $K = 1$ og $K = 15$. Útslagið á úttaki er $0{,}1\cdot3{,}7\cdot10^{-4} = $ <span class="ans">3,7·10⁻⁵ rad/s</span> í báðum tilvikum. Hreyfillinn sjálfur deyfir svo háar tíðnir (lághleypissía) og afturvirknin þarf ekki að hjálpa.</p>
 <p><b>6.</b> Stöðugleiki er <i>ekki</i> vandamálið: fyrstu gerðar kerfi hefur fasa sem fer aldrei niður fyrir $-90^\circ$. Takmörkunin er <b>stýrimerkið</b>: vinnupunkturinn er 7,5 V og hreyfillinn tekur við 0-15 V. Ef $K\,|e| > 7{,}5$ V mettast stýringin og getur ekki gefið meira en 15 V eða minna en 0 V. Hátt $K$ virkar vel ef skekkjan er lítil (litlar breytingar í óskgildi og truflanir).</p>
 </div></details></div></div>
-<div class="pager noprint"><a href="honnun.html"><span>Fyrri</span>Vinnuferli og spurningar 5-6</a><a href="aefingar.html" style="text-align:right"><span>Næsta</span>Æfingaspurningar</a></div>
+</div>
+</div>
+<div class="pager noprint"><a href="lokaprof.html"><span>Fyrri</span>Lokapróf 2024 og 2025</a><a href="aefingar.html" style="text-align:right"><span>Næsta</span>Frjálsar æfingar</a></div>
 </div>
 </main>
 </div>
 <script src="vendor/katex/katex.min.js"></script>
 <script src="vendor/katex/auto-render.min.js"></script>
 <script src="js/site.js"></script>
-
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
 </body>
 </html>

@@ -1,35 +1,35 @@
-# Tæknileg kerfi: kennsluvefur fyrir lokapróf
+# Tæknileg kerfi: ferðalag að lokaprófinu
 
-Kennsluvefur á íslensku fyrir lokaprófið í IÐN303G Tæknileg kerfi. Hann nær yfir allan áfangann (kaflar 1-18 í heftinu) með lausnum á lokaprófunum 2024 og 2025 og könnunum. Vefurinn er ósköp venjuleg vefsíða (HTML, CSS og JavaScript) án uppsetningar, svo hann virkar beint á GitHub Pages.
+Kennslu- og æfingavefur á íslensku fyrir lokaprófið í IÐN303G Tæknileg kerfi, settur upp sem leikur í átta köflum. Hann nær yfir allan áfangann (kaflar 1-18 í heftinu) með lausnum á lokaprófunum 2024 og 2025 og könnunum. Vefurinn er ósköp venjuleg vefsíða (HTML, CSS og JavaScript) án uppsetningar, svo hann virkar beint á GitHub Pages.
 
-## Efni
+## Ferðalagið
 
-| Síða | Innihald |
-|---|---|
-| `index.html` | Hvernig lokaprófið er byggt upp, hvað hefur komið á því og efni eftir vikum, auk gagnvirks dæmis (Bode-rit og þrepasvörun) |
-| `lokaprof.html` | Lokaprófin 2024 og 2025 og könnun 1 frá 2020, með fullreiknuðum lausnum |
-| `likanagerd.html` | Líkön, vinnupunktur, vélar, rafrásir, straumefni og varmi (kaflar 4-9) |
-| `laplace.html` | Diffurjöfnur, Laplace, stofnbrotaliðun, yfirfærsluföll og blokkrit (kaflar 10-11) |
-| `svorun.html` | Tímasvörun, pólar og tíðnisvörun, með gagnvirku annarrar gerðar kerfi (kaflar 12-13) |
-| `nemar.html` | Nemar: mælisvið, næmni, tímasvörun, stillivíðnám, kóðaskífa og álagsnemi |
-| `hreyflar.html` | Jafnstraumshreyflar: jöfnur, upphafsvægi, lausagangur, hámarksafl, tímastuðlar og gír |
-| `stjornkerfi.html` | Sjálfvirk stýrikerfi: stöðugleiki, skekkja í jafnvægi, hraði, truflanir, næmni og stýrimerki |
-| `styringar.html` | P, PI, PD og PID með hönnunaruppskriftum |
-| `honnun.html` | Vinnuferli hönnunar (kafli 14), hönnunarverkefnið og hvernig á að svara spurningum 5 og 6 |
-| `prof.html` | Kannanir í hönnun 2021, 2023 og 2025 ásamt tengidæmum, með lausnum sem hægt er að fela |
-| `aefingar.html` | Reiknidæmi með slembitölum og skilningsspurningar |
-| `spjold.html` | Flashcards með „kunni / kunni ekki“ |
-| `reiknivelar.html` | Reiknivélar fyrir hreyfil, nema og lykkjugreiningu |
-| `formulublad.html` | Formúlublað á tvær A4-síður (báðum megin) sem hægt er að prenta |
+Vefurinn er námsferli í átta köflum. Hver kafli (`kafli-N.html`) hefur fjögur skref: **Lesa → Æfa → Gagnvirkt → Kaflapróf**. Næsti kafli opnast við einkunn 6 eða hærra í kaflaprófinu (8 gefur ★★, 9,5 gefur ★★★). Þegar allir kaflar eru búnir opnast **lokapróf ferðalagsins** (`lokaprof-aefing.html`, sex spurningar á sama sniði og alvöru prófið, nýjar tölur í hvert skipti) og þegar það næst opnast **prófasafnið** (`lokaprof.html` með lokaprófunum 2024 og 2025 og `prof.html` með könnununum). Nemandinn safnar XP-stigum og hækkar í stigum. Framvindan er geymd í localStorage vafrans; á forsíðunni er hægt að byrja upp á nýtt eða opna allt (yfirferðarhamur).
+
+| Kafli | Lesefni (`src/`) | Efni í spurningabanka |
+|---|---|---|
+| 1 Líkanagerð | `likanagerd.html` | `likan` |
+| 2 Laplace og blokkrit | `laplace.html` | `laplace` |
+| 3 Tíma- og tíðnisvörun | `svorun.html` | `svorun` |
+| 4 Nemar | `nemar.html` | `nemar` |
+| 5 Hreyflar | `hreyflar.html` | `hreyflar` |
+| 6 Sjálfvirk stýrikerfi | `stjornkerfi.html` | `stjornkerfi` |
+| 7 P, PI, PD og PID | `styringar.html` | `styringar` |
+| 8 Vinnuferli og hönnun | `honnun.html` | `vinnuferli` |
+
+Alltaf opið: `aefingar.html` (frjálsar æfingar), `spjold.html` (flashcards), `reiknivelar.html` og `formulublad.html` (tvær A4-síður). Gömlu slóðirnar (`likanagerd.html` o.s.frv.) vísa áfram á kaflana.
 
 ## Uppbygging
 
-- `namsefni/` er allt efni áfangans úr Canvas (glærur, sýnidæmi, lausnir, próf og myndbönd). Hún er aðeins á eigin tölvu og ekki í git (sjá README í rótinni). Opnaðu `namsefni/index.html` til að skoða hana.
-- `src/*.html` eru efnissíðurnar (aðeins efnið sjálft).
-- `tools/build.py` setur haus, valmynd og skriftur utan um þær og býr til `*.html` í möppu áfangans.
-- `js/ctrl.js` er reiknisafn fyrir yfirfærsluföll (Bode-rit, stöðugleikamörk, þrepasvörun).
-- `js/quiz.js`, `js/cards.js` og `js/calc.js` eru æfingaspurningar, flashcards og reiknivélar.
-- `vendor/katex/` er KaTeX (stærðfræðibirting) og leturgerðirnar eru í `../assets/fonts/` (sameiginlegar öllum kennsluvefjum), svo ekkert er sótt af netinu.
+- `namsefni/` er allt efni áfangans úr Canvas (glærur, sýnidæmi, lausnir, próf og myndbönd). Hún er aðeins á eigin tölvu og ekki í git (sjá README í rótinni).
+- `tools/build.py` setur síðurnar saman. Þar er listinn `CHAPTERS` (kaflarnir, lesefni og efni í spurningabanka), `PASS` (lágmarkseinkunn, 6) og `PRACTICE_GOAL` (rétt svör í æfingum, 5). Hún skrifar `js/chapters.js`.
+- `src/*.html` er lesefnið og aðrar síður; `src/gagnvirkt/kafli-N.html` er gagnvirka skrefið í hverjum kafla.
+- `js/journey.js` er ferðalagsvélin: framvinda, lásar, XP, kortið, æfingar, kaflapróf og lokapróf.
+- `js/bank.js` er spurningabankinn (reiknidæmi með slembitölum og skilningsspurningar eftir efni); `js/quiz.js` er viðmót frjálsu æfinganna.
+- `js/examgen.js` býr til lokapróf ferðalagsins.
+- `js/widgets-a.js` (kaflar 1, 2, 4, 5) og `js/widgets-b.js` (kaflar 3, 6, 7, 8) eru gagnvirku hlutarnir. Þeir skrá sig með `TK.widget("kafli-N", function (root, api) {...})` og kalla á `api.done()` þegar verkefninu er lokið.
+- `js/ctrl.js` er reiknisafn fyrir yfirfærsluföll (Bode-rit, stöðugleikamörk, þrepasvörun); `js/cards.js` og `js/calc.js` eru flashcards og reiknivélar.
+- `vendor/katex/` er KaTeX og leturgerðirnar eru í `../assets/fonts/`, svo ekkert er sótt af netinu.
 
 Eftir breytingar í `src/` eða `tools/build.py`:
 

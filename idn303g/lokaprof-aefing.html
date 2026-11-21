@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lokapróf ferðalagsins · Tæknileg kerfi</title>
+<meta name="description" content="Kennsluvefur fyrir lokaprófið í IÐN303G Tæknileg kerfi: líkanagerð, Laplace, tíma- og tíðnisvörun, nemar, hreyflar, sjálfvirk stýrikerfi og PID-stýringar, með lausnum á gömlum prófum.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1e2b'/%3E%3Cpath d='M4 24 C10 24 10 8 16 8 S24 24 28 24' fill='none' stroke='%23ffe98a' stroke-width='3'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tæknileg kerfi</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Tæknileg kerfi<small>IÐN303G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Líkanagerð</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Laplace og blokkrit</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Tíma- og tíðnisvörun</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Nemar</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Hreyflar</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Sjálfvirk stýrikerfi</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. P, PI, PD og PID</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Vinnuferli og hönnun</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" aria-current="page" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Prófasafn</h2><ul>
+<li><a class="nav" href="lokaprof.html" data-gate="archive">Lokapróf 2024 og 2025</a></li>
+<li><a class="nav" href="prof.html" data-gate="archive">Kannanir í hönnun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="gate" data-gate="final">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Lokaprófið er læst</h1><p>Kláraðu kaflapróf allra átta kaflanna með einkunn 6 eða hærra til að opna lokaprófið.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="gated">
+<!--wide-->
+<h1>Lokapróf ferðalagsins</h1>
+<p class="lede">Sex spurningar á sama sniði og alvöru lokaprófið, með nýjum tölum og nýjum útfærslum í hvert skipti. Náðu 6 eða hærra og prófasafnið opnast: alvöru lokaprófin 2024 og 2025, kannanirnar og eins mörg ný lokapróf og þú vilt.</p>
+<div class="note"><p><b class="t">Um spurningar 5 og 6:</b> á alvöru prófinu eru þær skriflegar. Hér eru þær krossaspurningar um sömu hugtök svo hægt sé að gefa einkunn sjálfvirkt. Æfðu skriflega svarið með <a href="kafli-8.html#s5">beinagrindunum í kafla 8</a>.</p></div>
+<div id="final-exam" class="final-exam"></div>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-8.html"><span>Fyrri</span>8. Vinnuferli og hönnun</a><a href="lokaprof.html" style="text-align:right"><span>Næsta</span>Lokapróf 2024 og 2025</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/ctrl.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/examgen.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+</body>
+</html>
