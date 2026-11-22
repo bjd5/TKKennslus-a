@@ -6,6 +6,7 @@ Kennsluvefir á íslensku fyrir áfangana í skólanum. Forsíðan (`index.html`
 
 | Mappa | Áfangi |
 |---|---|
+| [`idn301g/`](idn301g/) | IÐN301G Greining ferla og kerfa, ferðalag að lokaprófinu (allur áfanginn) |
 | [`idn303g/`](idn303g/) | IÐN303G Tæknileg kerfi, undirbúningur fyrir lokapróf (allur áfanginn) |
 
 ## Uppbygging

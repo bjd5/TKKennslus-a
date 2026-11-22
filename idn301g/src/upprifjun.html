@@ -1,0 +1,471 @@
+<!--wide-->
+<h1>Lokaupprifjun</h1>
+<p class="lede">Til hamingju, þú náðir lokaprófi ferðalagsins. Hér eru ritgerðar- og atburðarásarspurningar úr öllum fyrirlestrunum (F1-F14, Thinking in Systems og CLD-efninu) með fyrirmyndarsvörum, undirbúningur fyrir munnlega prófið og ráð fyrir prófdaginn. Lokaprófið gildir 30 % og nær yfir <b>alla fyrirlestra og öll verkefni</b>, svo þú þarft bæði að kunna hugtökin og að geta beitt þeim á aðstæður eins og í EV1, HÓP1 og HÓP2.</p>
+
+<div class="tablewrap"><table>
+<thead><tr><th>Hluti</th><th>Efni</th></tr></thead>
+<tbody>
+<tr><td><a href="#matskvardi">Matskvarðinn</a></td><td>hvað skilur á milli 5, 8 og 10</td></tr>
+<tr><td><a href="#k1">Kaflar 1-3</a></td><td>ferlar, ferlaskráning, BPMN og þróuð líkön</td></tr>
+<tr><td><a href="#k4">Kaflar 4-5</a></td><td>ferlauppgötvun og eigindleg greining</td></tr>
+<tr><td><a href="#k6">Kafli 6</a></td><td>megindleg greining</td></tr>
+<tr><td><a href="#k7">Kafli 7</a></td><td>endurhönnun, ferlahugbúnaður og ferlaframkvæmd</td></tr>
+<tr><td><a href="#k8">Kafli 8</a></td><td>kerfishugsun og orsakalykkjur</td></tr>
+<tr><td><a href="#k9">Kafli 9</a></td><td>stjórnun ferla, BPM-þroski og Evolv</td></tr>
+<tr><td><a href="#tengsl">Tengispurningar</a></td><td>spurningar sem tengja kaflana saman</td></tr>
+<tr><td><a href="#munnlegt">Munnlega prófið</a></td><td>EV1 og HÓP1, æfingaspurningar</td></tr>
+<tr><td><a href="#profdagur">Á prófdegi</a></td><td>tími og uppbygging svara</td></tr>
+</tbody></table></div>
+
+<h2 id="matskvardi">Hvernig er svar metið?</h2>
+<p>Matskvarði námskeiðsins hefur fjögur viðmið: <b>grunnskilning</b>, <b>samþættingu og greiningu</b>, <b>framsetningu og miðlun</b> og <b>vinnulag og heilindi</b>. Í ritgerðarsvari á prófi skipta fyrstu þrjú mestu máli:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Viðmið</th><th>Einkunn 5</th><th>Einkunn 8</th><th>Einkunn 10</th></tr></thead>
+<tbody>
+<tr><td><b>Grunnskilningur</b></td><td>hugtök að hluta rétt, notkun óljós; yfirborðskennd rök</td><td>hugtök vel skilgreind og rétt notuð; rök í samræmi við námsefnið</td><td>hugtök nákvæmlega skilgreind og vel notuð; rök byggja sterklega á gögnum og sýna djúpan skilning</td></tr>
+<tr><td><b>Samþætting og greining</b></td><td>tengsl til staðar en ósamfelld; göt í rökum óútskýrð</td><td>hugtök tengd í rökréttu flæði; forsendur útskýrðar</td><td>hugtök samþætt í skýra greiningu; óvissa (forsendur, gagnaskortur) auðkennd og rædd gagnrýnið</td></tr>
+<tr><td><b>Framsetning</b></td><td>læsilegt en uppbygging truflar</td><td>vel uppsett, myndir (ef notaðar) skýrar</td><td>til fyrirmyndar; mynd eða tafla styrkir röksemdafærsluna</td></tr>
+</tbody></table></div>
+<div class="key"><p><b>Þumalregla fyrir hvert svar:</b> <b>5</b> = þú nefnir rétt hugtök. <b>8</b> = þú skilgreinir þau rétt og <i>beitir</i> þeim á dæmið í spurningunni. <b>10</b> = þú beitir þeim, <i>tengir</i> saman fleiri hugtök eða kafla, vegur kosti og galla (t.d. með djöflafjórþáttuninni) og nefnir forsendur og takmarkanir.</p></div>
+<p>Í hverju svari hér að neðan eru <b>lykilatriðin</b> sem prófdómari leitar að og stutt lýsing á því hvað lyftir svarinu úr 5 í 8 og úr 8 í 10. Reyndu fyrst að svara sjálf(ur), helst skriflega á 8-12 mínútum, og berðu svo saman.</p>
+
+<h2 id="k1">Kaflar 1-3: Ferlar, ferlaskráning og BPMN</h2>
+
+<div class="ex"><div class="ex-head">Spurning 1 <span>BPM og lífsferillinn</span></div><div class="ex-body">
+<p>Hvað er stjórnun viðskiptaferla (BPM)? Lýstu sex fösum BPM-lífsferilsins og hvaða afurð kemur úr hverjum fasa. Hvernig er BPM ólíkt ISO, Lean og Six Sigma?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>Skilgreining:</b> BPM er list og vísindi þess að hafa yfirumsjón með því hvernig verk eru unnin í rekstri til að ná stöðugri útkomu og nýta umbótatækifæri (lægri kostnaður, aukin samkvæmni, styttri tími, færri mistök). Áherslan er á ferla frá enda til enda, þvert á deildir, og á jafnvægi fólks, ferla og tækni.</p>
+<div class="tablewrap"><table><thead><tr><th>Fasi</th><th>Afurð</th></tr></thead><tbody>
+<tr><td>Auðkenning</td><td>ferlaskipulag (process architecture) og forgangsraðaðir ferlar</td></tr>
+<tr><td>Uppgötvun</td><td>as-is líkan</td></tr>
+<tr><td>Greining</td><td>vandamálaskrá, mælingar (CT, kostnaður, villur), rótarorsakir</td></tr>
+<tr><td>Endurhönnun</td><td>to-be líkan</td></tr>
+<tr><td>Innleiðing</td><td>breytt verklag og/eða keyranlegt ferli í BPMS</td></tr>
+<tr><td>Eftirlit og stjórnun</td><td>mælaborð, frávik og tækifæri sem kveikja nýja umferð</td></tr>
+</tbody></table></div>
+<p><b>Samanburður:</b> ISO er staðall um gæðakerfi og reglufylgni; Lean (Toyota) einblínir á virði fyrir viðskiptavin og að eyða sóun; Six Sigma á breytileika og galla með tölfræði (DMAIC, 3,4 gallar á milljón). BPM er heildræn stjórnunarnálgun sem nýtir þessi verkfæri en stýrir í gegnum ferla og tengir þá við UT og stefnu. F1 staðsetur BPM sem það sem hefur mest fjárhagsleg áhrif en er erfiðast í framkvæmd.</p>
+<p class="small"><b>5:</b> telur upp fasana. <b>8:</b> afurð hvers fasa og að þetta sé hringur. <b>10:</b> bætir við að eftirlitið skili inn í nýja uppgötvun, ber BPM gagnrýnið saman við Lean/Six Sigma (kostir og gallar af glærum F1) og nefnir dæmi úr eigin verkefni.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 2 <span>Ferlaskipulag og ferlaval (byggingavöruverslun)</span></div><div class="ex-body">
+<p>Byggingavöruverslun (EV1, svið 2) vill hefja BPM-starf en hefur ekki fjármagn til að bæta alla ferla í einu. Lýstu hvernig þú myndir flokka ferlana, hvaða tengsl eru milli ferla og hvernig þú velur hvaða ferli á að taka fyrst.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Ferlaflokkar:</b> <i>meginferlar</i> skapa virði sem viðskiptavinir greiða fyrir (innkaup og aðföng, sala, afhending); <i>stoðferlar</i> styðja þá (mannauður, UT, fjármál); <i>stjórnunarferlar</i> setja umgjörð (stefnumótun, árangursmat).</li>
+<li><b>Tengsl:</b> <i>röð</i> (lárétt, t.d. pöntun → móttaka → greiðsla), <i>niðurbrot</i> (lóðrétt/stigveldi, ferli í undirferla), <i>sérhæfing</i> (afbrigði sama ferlis, t.d. innkaup á lagervöru vs. sérpöntun).</li>
+<li><b>Ferlaval:</b> þrjú viðmið (F1): <i>stefnumarkandi mikilvægi</i>, <i>heilsa</i> ferlisins (hve illa gengur) og <i>framkvæmanleiki</i> (menning, mótstaða, pólitík). Ferlayfirlit eða hitakort (heat map) sýnir þetta myndrænt.</li>
+<li><b>Ályktun:</b> innkaupa- og aðfangaferlið er líklegt fyrsta val: mikilvægt (birgðir og framlegð), oft óheilbrigt (tvískráningar, bið eftir samþykki) og raunhæft að bæta.</li>
+</ul>
+<p class="small"><b>5:</b> nefnir meginferla/stoðferla. <b>8:</b> öll þrjú flokkunarstigin, tengslin og viðmiðin þrjú. <b>10:</b> beitir viðmiðunum á verslunina með rökstuðningi, nefnir viðmiðunarramma (APQC/SCOR) og viðurkennir að mat á heilsu krefst gagna sem þarf að afla.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 3 <span>SIPOC, flæðirit, deildarferill og RACI</span></div><div class="ex-body">
+<p>Lýstu tilgangi SIPOC, flæðirits/deildarferils og RACI í ferlaskráningu. Hvað sýnir hvert þeirra sem hin sýna ekki, og hvernig vinna þau saman í EV1?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>SIPOC</b> (birgi, innlag, ferli, frálag, viðskiptavinur): <i>umfang</i> og hagsmunaaðilar á háu stigi, 5-8 þrep. Svarar „hvar byrjar og endar ferlið og hver fær hvað?“</li>
+<li><b>Flæðirit og deildarferill</b> (swimlanes): <i>röð</i>, ákvarðanir og hver framkvæmir hvert þrep; afhendingar milli deilda verða sýnilegar. Haus með nafni ferlis, ferilseiganda, lykilmælingu og dagsetningu.</li>
+<li><b>RACI</b>: <i>ábyrgð</i> á hverju þrepi (vinnur, á lokaákvörðun, ráðgefandi, upplýst). Leysir „óljóst eignarhald“.</li>
+</ul>
+<p><b>Samspil:</b> SIPOC afmarkar, flæðirit/BPMN sýnir flæðið og RACI skýrir hlutverkin. Athugun á skráðu ferli leitar að flöskuhálsum, tvískráningum, óþarfa þrepum, óljósu eignarhaldi og gefnum forsendum.</p>
+<p class="small"><b>5:</b> skilgreinir eitt eða tvö. <b>8:</b> öll þrjú og muninn. <b>10:</b> sýnir með dæmi úr EV1 hvernig SIPOC afmarkaði líkanið og RACI afhjúpaði vandamál, og tengir við einkenni góðs ferlis (skýrt eignarhald, mæling í ferli).</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 4 <span>BPMN-hlið (farangur flugfélags)</span></div><div class="ex-body">
+<p>Í farangursferli flugfélags: eftir innritun er taska annaðhvort send á færiband eða í yfirstærðarafgreiðslu; samtímis er gegnumlýsing og skráning í farangurskerfi; ef taskan er merkt „forgangur“ og/eða „brothætt“ fær hún sérmeðferð. Hvaða BPMN-hlið eiga við og af hverju? Hvað gerist ef rangt join er notað?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>XOR</b> (útilokandi): færiband <i>eða</i> yfirstærð, nákvæmlega ein leið. XOR-join bíður eftir einni komandi leið.</li>
+<li><b>AND</b> (samhliða): gegnumlýsing <i>og</i> skráning, allar leiðir. AND-join samstillir: bíður eftir öllum.</li>
+<li><b>OR</b> (innifalið): forgangur og/eða brothætt, ein eða fleiri leiðir. OR-join bíður eftir öllum <i>virkum</i> leiðum.</li>
+</ul>
+<p><b>Röng join:</b> AND-split með XOR-join gefur <i>skort á samstillingu</i> (tveir tókar halda áfram, t.d. taskan „fer tvisvar“ í vélina). XOR-split með AND-join gefur <i>sjálfheldu</i> (deadlock), því join bíður eftir tóka sem kemur aldrei. Merktu sjálfgefna leið með skástriki og nefndu verkþætti sögn + nafnorð („Gegnumlýsa tösku“), atburði nafnorð + lýsingarhátt þátíðar („Taska innrituð“).</p>
+<p class="small"><b>5:</b> þekkir hliðin. <b>8:</b> velur rétt hlið með rökum og útskýrir join-hegðun. <b>10:</b> útskýrir afleiðingar rangs join með tókahugtakinu (sound líkan: option to complete, proper completion, no dead activities) og nefnir G5 í 7PMG (forðastu OR ef hægt er).</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 5 <span>Atburðir, frávik og event-based gateway</span></div><div class="ex-body">
+<p>Tryggingafélag sendir tjónþola beiðni um gögn og bíður: komi gögnin innan 14 daga heldur málið áfram, annars er málinu lokað. Á meðan matsmaður vinnur að mati á að senda áminningu ef það tekur lengur en 5 daga, án þess að stöðva matið. Teiknaðu (í orðum) rétta BPMN-útfærslu og útskýrðu muninn á XOR- og event-based gateway og truflandi og ótruflandi jaðaratburðum.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li>Eftir „Senda beiðni um gögn“ (send-skilaboðaatburður/verkþáttur) kemur <b>event-based gateway</b> með tveimur leiðum: <i>skilaboðaatburður</i> „Gögn móttekin“ og <i>tímaatburður</i> „14 dagar liðnir“. Sá atburður sem gerist fyrst ræður; hinn er afturkallaður.</li>
+<li>XOR-hlið ákveður út frá <b>gögnum</b> sem eru til staðar í ferlinu; event-based hlið bregst við <b>atburðum utan frá</b>. Ef þú notar XOR hér þarf ákvörðunin gögn sem eru ekki til og ferlið getur lent í sjálfheldu (F4: „af hverju deadlock?“).</li>
+<li>Áminning: <b>ótruflandi tíma-jaðaratburður</b> (strikaður hringur) á „Meta tjón“ sem leiðir í „Senda áminningu“. <b>Truflandi</b> jaðaratburður (heil lína) myndi stöðva matið, eins og frestur (activity timeout).</li>
+</ul>
+<p class="small"><b>5:</b> nefnir tímaatburð. <b>8:</b> event-based gateway og ótruflandi jaðaratburð rétt. <b>10:</b> útskýrir catching/throwing og truflandi/ótruflandi út frá merkingu táknanna og rökstyður af hverju XOR gefur sjálfheldu.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 6 <span>Líkan, tilvik og auðlindir</span></div><div class="ex-body">
+<p>Útskýrðu muninn á ferlalíkani og ferlatilviki og hlutverk tóka. Hvenær notar þú pool og hvenær lane, og hver er munurinn á runuflæði (sequence flow) og skilaboðaflæði (message flow)?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Líkan</b> = hönnunartími (design time); <b>tilvik/mál</b> (instance, case) = keyrslutími. Eitt líkan, mörg óháð tilvik samtímis. <b>Tóki</b> sýnir stöðu tilviks: verður til í upphafsatburði, ferðast og eyðist í endaatburði.</li>
+<li><b>Pool</b> = auðlindaflokkur eða sjálfstæður aðili (t.d. viðskiptavinur, tryggingafélag); <b>lane</b> = undirskipting innan pools (deildir, hlutverk). Virkar auðlindir framkvæma, óvirkar eru notaðar (ljósritunarvél).</li>
+<li><b>Runuflæði</b> tengir hnúta innan sama pools og má ekki fara yfir mörk pools; <b>skilaboðaflæði</b> (strikað) er milli pools.</li>
+</ul>
+<p class="small"><b>5:</b> skilgreinir líkan/tilvik. <b>8:</b> allt rétt með dæmi. <b>10:</b> tengir við setningafræðilegar reglur (flows rule) og við atburðaskrár í F13, þar sem hvert tilvik verður ein slóð (trace).</p>
+</div></details></div></div>
+
+<h2 id="k4">Kaflar 4-5: Ferlauppgötvun og eigindleg greining</h2>
+
+<div class="ex"><div class="ex-head">Spurning 7 <span>Aðferðir við ferlauppgötvun</span></div><div class="ex-body">
+<p>Berðu saman gagnadrifna uppgötvun, viðtöl og vinnustofur. Hvaða áskoranir mæta ferlagreinanda og hvaða blöndu aðferða myndir þú nota til að uppgötva tilvísunarferli í heilbrigðiskerfinu (svið 3)?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<div class="tablewrap"><table><thead><tr><th></th><th>Gagnadrifin</th><th>Viðtöl</th><th>Vinnustofa</th></tr></thead><tbody>
+<tr><td>Hlutlægni</td><td>mikil</td><td>miðl.-mikil</td><td>miðl.-mikil</td></tr>
+<tr><td>Dýpt/ríkidæmi</td><td>miðlungs</td><td>mikil</td><td>mikil</td></tr>
+<tr><td>Tímafrekt</td><td>lítið-miðl.</td><td>miðlungs</td><td>miðlungs</td></tr>
+<tr><td>Skjót endurgjöf</td><td>lítil</td><td>mikil</td><td>mikil</td></tr>
+</tbody></table></div>
+<p><b>Áskoranir:</b> brotakennd þekking (hver þekkir bara sinn hluta), sérfræðingar hugsa í tilvikum en ekki ferlum, og kunna ekki líkanamál eins og BPMN.</p>
+<p><b>Blanda:</b> skjalagreining (verklagsreglur, tilvísunareyðublöð) og atburðaskrá úr bókunarkerfi til að fá hlutlæga mynd; viðtöl við heimilislækni, móttöku og sérfræðing (áfram eða aftur á bak eftir ferlinu); loks vinnustofa með leiðbeinanda, tólstjóra, sérfræðingum og ferilseiganda til að staðfesta líkanið. Gæðatrygging: setningafræðileg, merkingarfræðileg (réttmæti og heilleiki) og hagnýt gæði.</p>
+<p class="small"><b>5:</b> telur upp aðferðirnar. <b>8:</b> ber saman eftir víddunum og velur. <b>10:</b> rökstyður blönduna út frá áskorununum þremur og persónuvernd heilbrigðisgagna (forsenda/takmörkun), og nefnir fimm skref líkanagerðar.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 8 <span>Gæði ferlalíkans og 7PMG</span></div><div class="ex-body">
+<p>Hvað er setningafræðileg, merkingarfræðileg og hagnýt gæði ferlalíkans? Hvenær er líkan „sound“? Nefndu fjórar af sjö leiðbeiningum 7PMG og rökin fyrir þeim.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Setningafræðileg</b> (syntactic): fylgir reglum málsins, bæði <i>byggingarreglum</i> (split-hlið eitt inn, tvö+ út; runuflæði ekki yfir mörk pools) og <i>hegðunarreglum</i> (engin sjálfhelda, endalaus lykkja, skortur á samstillingu eða dauðir verkþættir).</li>
+<li><b>Sound:</b> (1) möguleiki á að ljúka, (2) rétt lok: hver tóki í sínum endaatburði, (3) engir dauðir verkþættir.</li>
+<li><b>Merkingarfræðileg</b> (semantic): <i>réttmæti</i> (allt sem líkanið segir er satt) og <i>heilleiki</i> (allt sem skiptir máli er með).</li>
+<li><b>Hagnýt</b> (pragmatic): skiljanleiki fyrir notendur.</li>
+<li><b>7PMG:</b> G1 fáar einingar; G2 fáar leiðir á hverja einingu; G3 einn upphafs- og einn endaatburður; G4 eins skipulagt og hægt er (hvert split með join sömu gerðar); G5 forðast OR; G6 sögn-nafnorð nafngiftir; G7 brjóta upp líkön með yfir 30 einingar. Rökin eru rannsóknir sem sýna að stærð og óskipulag auka villur og draga úr skilningi.</li>
+</ul>
+<p class="small"><b>5:</b> nefnir eitthvað af þessu. <b>8:</b> allar þrjár gæðagerðirnar og soundness. <b>10:</b> beitir á eigið líkan (EV1): t.d. „ég braut líkanið upp í undirferla samkvæmt G7 og notaði XOR í stað OR samkvæmt G5“.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 9 <span>Virðisgreining og sóun (námsstyrkir)</span></div><div class="ex-body">
+<p>Í umsóknarferli sjóðs: (a) umsækjandi fyllir út umsókn, (b) starfsmaður prentar út umsóknina og skannar hana aftur inn í skjalakerfi, (c) matsnefnd metur umsóknina, (d) umsóknin bíður í 10 daga eftir mánaðarlegum fundi, (e) starfsmaður athugar hvort umsækjandi sé skráður í nám skv. reglugerð, (f) sama athugun er gerð aftur af fjármálasviði. Flokkaðu skrefin í VA/BVA/NVA og nefndu sóunarflokk þar sem við á.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li>(a) og (c): <b>VA</b>, umsækjandinn vill fá mat og myndi sakna þess.</li>
+<li>(e): <b>BVA</b>, krafa í reglugerð; reksturinn þarf skrefið þótt umsækjandinn greiði ekki fyrir það.</li>
+<li>(b): <b>NVA</b>, <i>færsla</i> (flutningur upplýsinga milli miðla) og ofvinnsla.</li>
+<li>(d): <b>NVA</b>, <i>halda</i>: bið vegna lotuvinnslu (batching). Úrræði: case-based work (HPR).</li>
+<li>(f): <b>NVA</b>, <i>yfirgera</i>: tvískráning/ofvinnsla.</li>
+</ul>
+<p>Prófið á VA: „Myndi viðskiptavinurinn finna fyrir því ef skrefið hyrfi?“ Á BVA: „Þarf reksturinn það til að ná inn tekjum eða standast lög?“ Sóunarflokkarnir þrír (færsla, halda, yfirgera) eru samantekt sjö sóunarflokka TPS.</p>
+<p class="small"><b>5:</b> flokkar flest rétt. <b>8:</b> allt rétt með rökum og sóunarflokkum. <b>10:</b> leggur til úrbætur (sjálfvirk athugun gegn nemendaskrá, samfellt mat í stað mánaðarfunda) og bendir á að BVA-skref á að einfalda, ekki fjarlægja.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 10 <span>Vandamálaskrá, Pareto, PICK og rótargreining</span></div><div class="ex-body">
+<p>Lýstu hvernig hagsmunagreining, vandamálaskrá, Pareto-greining og PICK-rit vinna saman. Hver er munurinn á vandamáli og þætti? Notaðu fiskbeinarit og „5 af hverju“ á vandamálið „útflutningssendingar af ferskum fiski missa af flugi“.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Hagsmunagreining</b> safnar vandamálum frá fimm hópum (viðskiptavinum, þátttakendum, ytri aðilum, ferilseiganda, umbótastuðningsaðila). <b>Vandamálaskrá</b> skráir þau: nafn, lýsing, forgangur, gögn og forsendur, eigindlegt og megindlegt mat. <b>Pareto</b> (80/20) sýnir hvaða fá vandamál valda mestu áhrifunum. <b>PICK</b> (Possible, Implement, Challenge, Kill) raðar lausnum eftir ávinningi og erfiðleika.</li>
+<li><b>Vandamál</b> hefur bein áhrif á ferlið; <b>þáttur</b> hefur áhrif á vandamál („er valdið af“ / „veldur“).</li>
+<li><b>Fiskbein (6M):</b> tæki (bilaður lyftari), aðferð (gæðaskoðun eftir pökkun), aðföng (vantar ís), fólk (ein vakt), mælingar (enginn rauntími á flugtímum), umhverfi (veður, færð).</li>
+<li><b>5 af hverju:</b> Missum af flugi → bíllinn fer seint → pökkun klárast seint → bíða eftir gæðavottorði → gæðastjóri skoðar allt í einni lotu í lok dags → vaktaplan og verklag gera ráð fyrir einni lotu. Rótarorsök: lotuvinnsla í gæðaskoðun.</li>
+</ul>
+<p class="small"><b>5:</b> lýsir tólunum. <b>8:</b> beitir þeim á dæmið. <b>10:</b> greinir orsakavalda (causal) frá stuðlandi þáttum (contributing), nefnir að „5 af hverju“ getur greinst í fleiri leiðir og að forsendur þarf að staðfesta með gögnum.</p>
+</div></details></div></div>
+
+<h2 id="k6">Kafli 6: Megindleg greining</h2>
+
+<div class="ex"><div class="ex-head">Spurning 11 <span>Flæðigreining og nýtni</span></div><div class="ex-body">
+<p>Ferli: „Skrá“ (1 dagur), síðan endursendingarblokk „Yfirfara“ (1 dagur) þar sem 20 % fara aftur í yfirferð, síðan samhliða „Athuga A“ (1 dagur) og „Athuga B“ (3 dagar), síðan val: 60 % fara í „Samþykkja“ (1 dagur) og 40 % í „Senda til sérfræðings“ (2 dagar). Reiknaðu CT. Ef vinnslutíminn er alls 4 klst. og CT er í dögum (8 klst. vinnudagar), hver er nýtnin? Hvað segir hún?</p>
+<details class="reveal"><summary></summary><div class="sol">
+$$\text{CT} = 1 + \frac{1}{1-0{,}2} + \max(1,3) + (0{,}6\cdot1 + 0{,}4\cdot2) = 1 + 1{,}25 + 3 + 1{,}4 = 6{,}65 \text{ dagar}$$
+<p>Línuleg blokk: summa. Endursending: $T/(1-r)$. Samhliða: hámark. Val: líkindavegið meðaltal.</p>
+<p>CT í vinnustundum: $6{,}65 \cdot 8 = 53{,}2$ klst. $\text{CTE} = 4/53{,}2 \approx 7{,}5\,\%$.</p>
+<p><b>Túlkun:</b> yfir 92 % tímans bíður málið. Úrbætur ættu að beinast að bið (afhendingum, lotuvinnslu, samþykktum) og bundnu leiðinni (Athuga B), ekki að því að vinna hraðar í hverju skrefi.</p>
+<p class="small"><b>5:</b> rétt formúla fyrir sumar blokkir. <b>8:</b> rétt CT og CTE. <b>10:</b> túlkar, bendir á bundnu leiðina og forsendur (meðaltöl, enginn biðtími í blokkunum nema hann sé talinn með, 8 klst. dagur).</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 12 <span>Little, afkastageta og biðraðir</span></div><div class="ex-body">
+<p>Þjónustuver banka fær að meðaltali 60 nýskráningar á dag og að jafnaði eru 300 nýskráningar í vinnslu. (a) Hver er meðalumferðartíminn? (b) Ef þrír starfsmenn vinna 8 klst. á dag og hver nýskráning þarf 20 mín. af vinnu þeirra, hver er nýting þeirra? (c) Af hverju er hættulegt að keyra á 95 % nýtingu?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) Little: $\text{CT} = \text{WIP}/\lambda = 300/60 = $ <span class="ans">5 dagar</span>.</p>
+<p>(b) Einingaafköst $u_c = 3\cdot 8 = 24$ klst/dag; einingaálag $u_l = 20$ mín $= 1/3$ klst; fræðileg geta $\mu = 24/(1/3) = 72$ á dag. Nýting $\rho = \lambda/\mu = 60/72 \approx $ <span class="ans">83 %</span>.</p>
+<p>(c) Í biðraðakerfi (t.d. M/M/1, $L_q = \rho^2/(1-\rho)$) vex biðin hratt og ólínulega þegar $\rho \to 1$: við 95 % er biðröðin margfalt lengri en við 80 %, og lítil aukning í komum eða breytileika veldur stórum töfum. Það þarf slaka. Little gildir aðeins ef ferlið er stöðugt ($\rho < 1$).</p>
+<p class="small"><b>5:</b> (a) rétt. <b>8:</b> (a) og (b) rétt. <b>10:</b> (c) með ólínuleikanum, tenging við kerfishugsun (ólínulegur heimur, seinkanir) og forsendur (stöðugleiki, meðaltöl).</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 13 <span>Flöskuhálsar</span></div><div class="ex-body">
+<p>Hvernig finnur þú flöskuháls í ferli og hvað gerir þú við hann? Hvers vegna er sóun að bæta afkastagetu annars staðar?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Einkenni:</b> innlag kemur hraðar en frálag; biðraðir, langur biðtími og mikið álag (F2).</li>
+<li><b>Aðferðir:</b> reikna þörf á afkastagetu á hverju stigi; finna auðlindahópinn með minnstu fræðilegu getuna ($\mu$, F7); bera saman leiðir í flæðitímagreiningu (bundna leiðin).</li>
+<li><b>Úrræði:</b> bestu starfsmennirnir á flöskuhálsinn, minnka niðritíma, hafa biðminni fyrir framan, auka auðlindir, útvista eða sjálfvirknivæða.</li>
+<li><b>Af hverju ekki annars staðar:</b> afköst kerfisins ráðast af flöskuhálsinum (TOC); aukin geta annars staðar býr bara til meiri birgðir/bið. Þegar flöskuhálsinn er leystur færist hann annað, það verður alltaf flöskuháls.</li>
+</ul>
+<p class="small"><b>10:</b> tengir við „limits“ í TiS (kerfið vex þar til það rekst á mörk; næsta takmörkun tekur við) og við HÓP1-gögnin.</p>
+</div></details></div></div>
+
+<h2 id="k7">Kafli 7: Endurhönnun, ferlahugbúnaður og ferlaframkvæmd</h2>
+
+<div class="ex"><div class="ex-head">Spurning 14 <span>Endurhönnun með HPR og djöflafjórþáttun</span></div><div class="ex-body">
+<p>Nýskráning í banka (svið 7): fjórar athuganir eru gerðar í röð (skilríki, peningaþvættisskimun, lánshæfi, undirskrift); um 30 % umsókna stöðvast í peningaþvættisskimun, sem er einföld og sjálfvirk, en hún er gerð síðust. Leggðu til endurhönnun með a.m.k. þremur HPR-reglum og metdu áhrifin í fjórum víddum.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Knock-out:</b> raða útsláttarathugunum eftir vaxandi fyrirhöfn og minnkandi útsláttarlíkum. Skimunin er ódýr og slær oft út: setjið hana fyrst.</li>
+<li><b>Parallelism:</b> athuganir sem eru óháðar (skilríki og lánshæfi) má gera samhliða.</li>
+<li><b>Triage:</b> skipta í einfalda umsókn (einstaklingur, lítil áhætta) og flókna.</li>
+<li><b>Activity automation:</b> sjálfvirk skilríkjaathugun með rafrænum skilríkjum.</li>
+<li><b>Control relocation:</b> viðskiptavinurinn hleður gögnum upp sjálfur.</li>
+</ul>
+<p><b>Djöflafjórþáttun:</b> <i>tími</i> styttist (minni bið, samhliða); <i>kostnaður</i> lækkar á hvert mál en fjárfesting í sjálfvirkni bætist við; samhliða athuganir geta aukið kostnað því sumar eru gerðar á málum sem hefðu verið slegin út; <i>gæði</i> geta batnað (færri handvillur) en sjálfvirkni getur misst af undantekningum; <i>sveigjanleiki</i> minnkar ef reglur eru harðkóðaðar, eykst ef triage leyfir sérmeðferð.</p>
+<p class="small"><b>5:</b> nefnir reglur. <b>8:</b> beitir þremur rétt. <b>10:</b> vegur fórnirnar í öllum víddum, metur megindlega (t.d. CT fyrir og eftir) og nefnir að skrefið gæti verið BVA (lagaskylda) og því ekki hægt að sleppa.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 15 <span>BPMS, RPA og keyranleg líkön</span></div><div class="ex-body">
+<p>Hvað er BPMS, úr hvaða einingum er það og hverjir eru kostir þess? Hvernig er RPA ólíkt BPMS og hvenær hentar hvort? Lýstu fimm skrefum frá hugtakalíkani að keyranlegu líkani.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>BPMS</b> styður hönnun, greiningu, framkvæmd og eftirlit á grundvelli skýrs ferlalíkans. Einingar: keyrsluvél, líkanatól, verkefnalisti (worklist handler), ytri þjónustur, stjórnunar- og vöktunartól. Kostir: minna vinnuálag (flutningur, samhæfing, upplýsingasöfnun), sveigjanleg samþætting (reglur aðskildar frá kóða), gegnsæ keyrsla (rekstrar- og söguupplýsingar), reglufylgni (t.d. aðskilnaður verka).</li>
+<li><b>RPA</b> hermir eftir aðgerðum starfsfólks í notendaviðmóti eldri kerfa án breytinga á undirliggjandi hugbúnaði: hröð og ódýr innleiðing en viðkvæm fyrir breytingum á viðmóti og hentar illa þar sem þarf dómgreind. BPMS samhæfir heila ferla þvert á fólk og kerfi.</li>
+<li><b>Fimm skref (F10):</b> (1) afmarka sjálfvirknina (sjálfvirkir, notenda- og handvirkir verkþættir), (2) endurskoða handvirk verk („ef BPMS sér það ekki er það ekki til“), (3) fullgera líkanið (undantekningar eru reglan; engin gögn = engin ákvörðun), (4) rétt upplausn (sundurliða/sameina verkþætti), (5) keyrslueiginleikar (breytur, gagnavarpanir, þjónustur, úthlutunarreglur eins og hlutverkabundin, aðskilnaður verka, retain familiar).</li>
+</ul>
+<p class="small"><b>10:</b> tengir við Evolv (stafrænt vinnuafl sem RPA + gervigreind) og breytingastjórnun (uppsagnir, afhjúpun).</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 16 <span>Breytingastjórnun</span></div><div class="ex-body">
+<p>Hvers vegna mistekst stór hluti umbreytingarverkefna og hvað kennir F9 um breytingastjórnun? Tengdu við menningarþátt BPM-þroska.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li>Um tvö af þremur umbreytingarverkefnum mistakast, oftast vegna lélegrar stjórnunar: áætlun, eftirlit, skortur á auðlindum og þekkingu, ósamrýmanleg stefna.</li>
+<li><b>Of snemmbúinn sigur:</b> teymið leyst upp, breytingin fjarar út. Byggja á skjótum sigrum.</li>
+<li><b>Eðli mótstöðu:</b> duldar andstæðar skuldbindingar; skilja forsendur fólks.</li>
+<li><b>Villa miðstýrðra breytinga:</b> leyfa einingum að aðlaga; festa skipulag eftir á.</li>
+<li><b>Tenging:</b> menning (viðbrögð við breytingum, fylgni við ferlahönnun, athygli leiðtoga) og fólk eru oft veikustu þættirnir; „vangeta til að breytast“ er ein af fjórum mistakaástæðum á F14.</li>
+</ul>
+<p class="small"><b>10:</b> nefnir að TiS (policy resistance) skýrir sama fyrirbæri sem kerfi þar sem gerendur toga í ólíkar áttir.</p>
+</div></details></div></div>
+
+<h2 id="k8">Kafli 8: Kerfishugsun og orsakalykkjur</h2>
+
+<div class="ex"><div class="ex-head">Spurning 17 <span>Orsakalykkjurit af húsnæðismarkaði</span></div><div class="ex-body">
+<p>Teiknaðu og útskýrðu einfalt orsakalykkjurit (CLD) af húsnæðismarkaðnum með a.m.k. einni styrkjandi og einni jafnvægislykkju og einni seinkun. Útskýrðu hvernig þú ákvarðar pólun lykkju.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>R „Verðvæntingar“:</b> íbúðaverð →(+) væntingar um verðhækkun →(+) eftirspurn →(+) íbúðaverð. Enginn mínus: styrkjandi (bóla).</li>
+<li><b>B „Framboð“:</b> íbúðaverð →(+) arðsemi bygginga →(+) byggingaframkvæmdir →(+, <b>seinkun</b> 2-3 ár) framboð íbúða →(−) íbúðaverð. Einn mínus: jafnvægi.</li>
+<li><b>B „Greiðslugeta“:</b> íbúðaverð →(+) greiðslubyrði →(−) eftirspurn →(+) verð.</li>
+<li><b>Pólun:</b> fljótlega leiðin er að telja mínusa (oddatala = B, slétt = R); besta leiðin er að segja söguna hringinn, bæði með hækkun og lækkun.</li>
+<li><b>Seinkunin</b> í framboðslykkjunni veldur sveiflum: þegar íbúðirnar koma loks er eftirspurnin kannski fallin.</li>
+<li>Breytur eru nafnorð sem geta hækkað eða lækkað („framboð íbúða“, ekki „aukið framboð“); áhrifin eru í örvunum.</li>
+</ul>
+<p class="small"><b>5:</b> rit með pílum. <b>8:</b> réttar pólanir, nefndar lykkjur, seinkun. <b>10:</b> skýrir hegðun yfir tíma (sveiflur, bólur), greinir orsakasamband frá fylgni og nefnir afmörkun og forsendur ritsins.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 18 <span>Vogarpunktar í kvótakerfinu</span></div><div class="ex-body">
+<p>Meadows raðar tólf vogarpunktum frá veikasta til sterkasta. Gefðu dæmi úr kvótakerfinu um inngrip á stigi stika, upplýsingaflæðis, reglna og markmiðs og rökstuddu hvert þeirra hefur mest áhrif.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>12 Stikar/tölur:</b> breyta heildarafla um nokkur prósent. Auðvelt, en kerfisuppbyggingin er óbreytt.</li>
+<li><b>6 Upplýsingaflæði:</b> rauntímabirting á afla og brottkasti; opinbert eignarhald. Ódýrt og getur breytt hegðun.</li>
+<li><b>5 Reglur:</b> framsalsreglur, veiðigjald, bann við brottkasti með löndunarskyldu. Getur gerbreytt hvötum.</li>
+<li><b>3 Markmið:</b> frá „hámarksarðsemi útgerðar“ yfir í „sjálfbær nýting í þágu þjóðarinnar“. Allt annað fylgir markmiðinu.</li>
+<li>Ofar eru <b>hugmyndafræði</b> (paradigm) og að hefja sig yfir hana. Neðar: biðminni (stofnstærð), birgða- og flæðiuppbygging, seinkanir, jafnvægis- og styrkjandi lykkjur.</li>
+</ul>
+<p>Hærri vogarpunktar hafa meiri áhrif en eru erfiðari og vekja meiri mótstöðu. Kvótakerfið sjálft var svar við harmleik almenninganna (tragedy of the commons): sameiginleg auðlind þar sem afmörkuð skynsemi hvers og eins leiðir til ofveiði.</p>
+<p class="small"><b>10:</b> raðar rétt, rökstyður af hverju tölur breyta litlu (lykkjurnar eru óbreyttar) og ræðir gildrur eins og að fara í kringum reglur (rule beating).</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 19 <span>Af hverju kerfi koma á óvart og kerfisgildrur</span></div><div class="ex-body">
+<p>Útskýrðu fimm ástæður þess að kerfi koma okkur á óvart (TiS kafli 4) og lýstu tveimur kerfisgildrum (kafli 5) með dæmi úr íslenskri ferðaþjónustu eða peningakerfinu, og hvernig má komast úr þeim.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Seinkanir</b> valda sveiflum; <b>afmörkuð skynsemi</b> (bounded rationality): það sem er skynsamlegt fyrir einstakling er ekki skynsamlegt fyrir kerfið; <b>mörk</b>: kerfi rekast á takmarkandi þátt; <b>blekkjandi atburðir</b>: við sjáum atburði en ekki uppbygginguna að baki; <b>línuleg hugsun í ólínulegum heimi</b>.</li>
+<li><b>Harmleikur almenninganna:</b> náttúruperlur sem sameiginleg auðlind; hver ferðaþjónustuaðili hagnast á fleiri gestum, en ágangurinn skemmir staðinn. Lausnir: siðferði/fræðsla, stýring aðgangs (gjald, kvótar), einkavæðing eða sameiginleg stjórnun.</li>
+<li><b>Að færa byrðina yfir á inngripsaðila</b> (shifting the burden): t.d. að treysta á gengisfellingar eða ríkisstuðning í stað þess að styrkja grunnstoðir; eigin geta kerfisins rýrnar. Lausn: styrkja eigin getu kerfisins og draga inngripið smám saman til baka.</li>
+<li>Aðrar gildrur: stefnuviðnám (policy resistance), að fara í kringum reglur (rule beating), rangt markmið.</li>
+</ul>
+<p class="small"><b>10:</b> notar CLD til að sýna gildruna (t.d. tvær jafnvægislykkjur og ein styrkjandi í shifting the burden) og tengir við HÓP2-efnið.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 20 <span>Seigla, sjálfskipulag og stigveldi</span></div><div class="ex-body">
+<p>Hvers vegna virka kerfi svona vel (TiS kafli 3)? Útskýrðu seiglu, sjálfskipulag og stigveldi og hvernig hagræðing getur skaðað seiglu, með dæmi úr virðiskeðju smásölu.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Seigla</b> (resilience): geta til að jafna sig eftir áfall; byggir á mörgum, oft yfirlappandi jafnvægislykkjum (offramboð/redundancy). Stöðugleiki er ekki það sama og seigla.</li>
+<li><b>Sjálfskipulag</b>: kerfið getur orðið flóknara og myndað nýja uppbyggingu (þróun, nýsköpun).</li>
+<li><b>Stigveldi</b>: undirkerfi sem þjóna heildinni; minnkar upplýsingaþörf, en undirkerfi sem hámarka eigin markmið (suboptimization) skaða heildina.</li>
+<li><b>Dæmi:</b> smásölukeðja sem hagræðir með lágmarksbirgðum (just-in-time) og einum birgi fyrir hverja vöru er skilvirk en hefur lítið biðminni; þegar skip tefst eða landamæri lokast eru hillur tómar. Hagræðing fjarlægði yfirlappandi lykkjur. Sama gildir um kýr sem fá hormóna til að mjólka meira (dæmið á glærunum).</li>
+</ul>
+<p class="small"><b>10:</b> tengir við djöflafjórþáttunina (kostnaður á móti sveigjanleika) og við vogarpunkt 11 (biðminni).</p>
+</div></details></div></div>
+
+<h2 id="k9">Kafli 9: Stjórnun ferla og BPM í starfseminni</h2>
+
+<div class="ex"><div class="ex-head">Spurning 21 <span>Ferlaköfun</span></div><div class="ex-body">
+<p>Tryggingafélag hefur atburðaskrá yfir 20.000 tjónamál. Lýstu hvaða spurningum hver af fjórum aðferðum ferlaköfunar getur svarað, hvaða gögn þarf og hvaða áskoranir mæta þér við gagnaútdrátt.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Gögn:</b> hver færsla tengist máli, verkþætti og tímastimpli (helst líka auðlind).</li>
+<li><b>Sjálfvirk uppgötvun</b> (skrá → líkan): Hvernig keyrir ferlið í raun? (háðnirit, síað; α-reikniritið með orsakasambandi og samhliða gangi).</li>
+<li><b>Frammistaða</b> (skrá + líkan → bætt líkan): Hvar er biðin mest? Hvar eru endurtekningar (gæði)? Hve mörg afbrigði (sveigjanleiki)?</li>
+<li><b>Samræmi</b> (skrá + líkan → frávik): Er lögfræðiálit alltaf fengið á undan samþykki stórra bóta (röðunarskorða)? Eru mál bæði hafnað og greidd (útilokun)?</li>
+<li><b>Afbrigði</b> (tvær skrár → munur): Hvað greinir mál sem tóku yfir 30 daga frá hinum?</li>
+<li><b>Áskoranir:</b> tenging (tölvupóstar án tjónsnúmers), tímastimplun, langlífi (mál ekki búin), upplausn (smellir vs. verkþættir).</li>
+</ul>
+<p class="small"><b>5:</b> nefnir aðferðirnar. <b>8:</b> inntak/úttak og dæmi. <b>10:</b> lýsir hvernig niðurstöðurnar fara aftur inn í greiningu og endurhönnun og ræðir að frávik geti þýtt að líkanið sé rangt, ekki fólkið, og persónuvernd.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 22 <span>Mælaborð og KPI</span></div><div class="ex-body">
+<p>Hannaðu mælikerfi fyrir viðhaldsbeiðnir í fasteignaumsjón: rekstrarlegt, taktískt og stefnumarkandi mælaborð. Hvaða KPI og hvers vegna í fleiri en einni vídd?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Rekstrarlegt</b> (verkstjóri, núna): opnar beiðnir eftir forgangi, á tíma/í hættu/of seinar; rauntímavöktun ókláraðra slóða.</li>
+<li><b>Taktískt</b> (ferilseigandi, liðinn ársfjórðungur): stuðlarit umferðartíma, hlutfall innan tímamarka, endurupptaka, kostnaður á beiðni, eftir verktaka.</li>
+<li><b>Stefnumarkandi</b> (framkvæmdastjórn): samantekt yfir alla rekstrarferla eignanna, ein tala í hverri vídd (vegið meðaltal eftir fjölda mála).</li>
+<li><b>KPI í fjórum víddum</b> (SMART): tími (90 % forgangs-1 innan 24 klst.), kostnaður (á beiðni), gæði (endurupptaka innan 30 daga, ánægja leigjenda), sveigjanleiki (frammistaða í álagstoppum). Fleiri víddir því þær togast á (djöflafjórþáttun) og kerfi lagast að því sem mælt er.</li>
+</ul>
+<p class="small"><b>10:</b> vísar í TiS kafla 7 („gefðu gaum að því sem skiptir máli, ekki bara því sem er mælanlegt“) og rule beating, og nefnir að skrá þurfi gögnin í nýja ferlinu.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 23 <span>BPM-þroski og stjórnarhættir</span></div><div class="ex-body">
+<p>Lýstu sex kjarnaþáttum BPM og fimm þroskastigum. Sveitarfélag hefur skráð alla ferla í dýrt líkanatól með aðstoð ráðgjafa, en starfsfólk þekkir líkönin ekki og enginn ferilseigandi er skráður. Metdu þroskann og leggðu til aðgerðir.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Sex þættir:</b> stefnumið, stjórnarhættir, aðferðir, UT, fólk, menning (hver með fimm getusvið).</li>
+<li><b>Fimm stig:</b> 1 upphaf (tilfallandi), 2 stýrt (fyrstu verkefni, ytri ráðgjafar), 3 skilgreint (innri þjálfun, fyrri fasar), 4 megindlega stýrt (vöktun, öndvegissetur, seinni fasar), 5 bestun (BPM í daglegri stjórnun, setrið minnkar).</li>
+<li><b>Mat:</b> UT sterkt, stjórnarhættir/fólk/menning veik og þekking hjá ráðgjöfum: <b>stig 2</b>, verkfæradrifið mynstur. Þetta sýnir mistakaástæðuna „áhersla á aðferðir og tól en ekki á markmið“.</li>
+<li><b>Aðgerðir:</b> skipa ferilseigendur og gera RACI (eitt A á hvert þrep), tengja ferlana við markmið sveitarfélagsins (KPI), innri þjálfun, vinnustofur með starfsfólki, skjótir sigrar í einum ferli.</li>
+</ul>
+<p class="small"><b>10:</b> rökstyður að heildarþroski ráðist af veikustu þáttunum og að árangur BPM eigi að mæla í viðskiptaárangri, ekki fjölda líkana.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 24 <span>Evolv og stafrænt vinnuafl</span></div><div class="ex-body">
+<p>Lýstu hugmynd Evolv um stafrænt vinnuafl. Hvaða ferli henta, hvað þarf að skýra áður en verkefni hefst og hvar liggja takmarkanirnar? Tengdu við hugtök námskeiðsins.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Stafrænn starfsmaður:</b> eigin notandi og sýndarvél, líkir eftir starfsfólki, vinnur með öllum kerfum, blandar reglum og gervigreind, kallar á manneskju þegar þarf, sjálfvirknivæðir heilt ferli eða hluta. Þrjár gerðir: reglubundnir, gervigreindardrifið vinnuflæði, markmiðsdrifnir þjarkar.</li>
+<li><b>Hentug ferli:</b> síendurtekin, mikil handavinna, tímafrek, villuhætta, kostnaðarleki (afstemmingar, úrlestur skjala, flutningur milli kerfa).</li>
+<li><b>Áður:</b> markmið (tími, kostnaður, villur, öryggi, þjónusta), hvað getur farið úrskeiðis, hvað er utan umfangs, undantekningar, hvar þarf mannlegt mat, hvað krefst raunverulega gervigreindar; stuðningur ferilseiganda, gögn tilbúin, væntingastjórnun, viðtökuprófanir.</li>
+<li><b>Tengsl:</b> RPA (F9), activity automation (HPR), sjálfvirkir/notendaverkþættir (F10), BPM-lífsferillinn (vinnustofa → ferlagreining → arkitektúr → forritun → innleiðing), ferilseigandi og RACI (F14).</li>
+<li><b>Takmarkanir:</b> viðkvæmni fyrir breytingum í viðmóti, ábyrgð á ákvörðunum gervigreindar, hætta á að sjálfvirknivæða slæmt ferli í stað þess að endurhanna, áhrif á störf (uppsagnir, afhjúpun).</li>
+</ul>
+<p class="small"><b>10</b> (eins og í EV2-kvarðanum): endursegir dæmi úr fyrirlestrinum rétt (t.d. afstemming lánardrottna, aðstoðarmaður samþykktar), ræðir bæði tækifæri og takmarkanir og tengir við eigin reynslu.</p>
+</div></details></div></div>
+
+<h2 id="tengsl">Tengispurningar: allt námskeiðið</h2>
+
+<div class="ex"><div class="ex-head">Spurning 25 <span>Eitt ferli í gegnum allan lífsferilinn</span></div><div class="ex-body">
+<p>Taktu tjónstilkynningu og uppgjör hjá tryggingafélagi og lýstu hvað þú gerir og hvaða aðferðir/verkfæri þú notar í hverjum fasa BPM-lífsferilsins, frá auðkenningu til eftirlits. Hvernig nærist hver fasi á þeim fyrri?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ol>
+<li><b>Auðkenning:</b> tjónaferlið er meginferli; valið vegna mikilvægis (ánægja viðskiptavina), heilsu (langur CT) og framkvæmanleika. SIPOC afmarkar.</li>
+<li><b>Uppgötvun:</b> skjöl, atburðaskrá, viðtöl, vinnustofa → as-is BPMN-líkan (pools fyrir tjónþola og félag, lanes fyrir deildir, event-based gateway fyrir bið eftir gögnum). Gæðatrygging og 7PMG.</li>
+<li><b>Eigindleg greining:</b> VA/BVA/NVA, sóun, hagsmunagreining, vandamálaskrá, Pareto, fiskbein og 5 af hverju.</li>
+<li><b>Megindleg greining:</b> CT eftir blokkum, CTE, Little, afkastageta og nýting, flöskuháls, hermun (BIMP).</li>
+<li><b>Endurhönnun:</b> HPR-reglur (triage einfaldra tjóna, knock-out, sjálfvirkni), metið í fjórum víddum; to-be líkan.</li>
+<li><b>Innleiðing:</b> breytingastjórnun; keyranlegt líkan í BPMS (fimm skrefin) eða RPA/stafrænt vinnuafl fyrir endurtekin skref.</li>
+<li><b>Eftirlit:</b> KPI og mælaborð á þremur stigum, ferlaköfun (samræmi við to-be líkanið), sem skilar nýjum vandamálum inn í næstu umferð.</li>
+</ol>
+<p class="small"><b>5:</b> telur fasana. <b>8:</b> réttar aðferðir í hverjum fasa. <b>10:</b> sýnir hvernig afurð eins fasa er inntak þess næsta (as-is líkan → vandamálaskrá → mælingar → to-be → keyranlegt líkan → atburðaskrá), og hvernig stjórnarhættir (ferilseigandi) halda hringnum gangandi.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 26 <span>Ferlagreining og kerfishugsun</span></div><div class="ex-body">
+<p>Hvenær dugar BPMN-líkan og flæðigreining, og hvenær þarftu kerfishugsun og CLD? Notaðu dæmi þar sem lausn á flöskuhálsi í heilbrigðiskerfinu hefur óvæntar afleiðingar.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>BPMN</b> lýsir röð verkþátta í einu tilviki, ákvörðunum og hlutverkum: hentar til að skrá, greina og sjálfvirknivæða afmarkað ferli. Flæðigreining gerir ráð fyrir gefnum komutakti og líkum.</li>
+<li><b>Kerfishugsun</b> skoðar endurgjöf, birgðir, flæði og seinkanir yfir lengri tíma: hentar þegar hegðun ferlisins hefur áhrif á eigin forsendur.</li>
+<li><b>Dæmi:</b> biðtími eftir sérfræðingi styttist með fleiri tímum (flöskuháls leystur). En: styttri bið →(+) fleiri tilvísanir (læknar vísa frekar þegar bið er stutt) →(+) biðlisti →(+) biðtími: <b>jafnvægislykkja</b> sem étur ávinninginn upp. Komutakturinn $\lambda$ í flæðigreiningunni er ekki fasti heldur breyta í kerfinu.</li>
+<li><b>Brú á milli:</b> Little ($\text{WIP} = \lambda\cdot\text{CT}$) er birgða- og flæðisamband: WIP er birgð, $\lambda$ innflæði. Biðraðir sýna ólínuleika ($\rho \to 1$). Flöskuháls er „limit“ í TiS.</li>
+</ul>
+<p class="small"><b>10:</b> rökstyður að aðferðirnar bæti hvor aðra upp, teiknar lykkjuna með pólun og bendir á vogarpunkta (t.d. upplýsingaflæði eða reglur um tilvísanir) í stað þess að bæta bara við afkastagetu (stiki).</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 27 <span>Mælingar og hegðun</span></div><div class="ex-body">
+<p>Ferilseigandi setur KPI: „hlutfall símtala sem svarað er innan 60 sekúndna“. Þjónustuverið nær markmiðinu fljótt en kvörtunum fjölgar. Greindu hvað gerðist með hugtökum úr bæði BPM og TiS.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Djöflafjórþáttun:</b> tímavíddin batnaði á kostnað gæða (styttri, verri svör, mál ekki leyst í fyrsta símtali → endurhringingar, endurvinnsla).</li>
+<li><b>Rule beating / gaming the rules</b> (TiS kafli 5): starfsfólk lagar sig að mælikvarðanum, ekki tilganginum.</li>
+<li><b>Seeking the wrong goal / „pay attention to what is important, not just what is quantifiable“</b> (TiS kafli 7): kerfið hámarkar það sem er mælt.</li>
+<li><b>Lausn:</b> KPI í fleiri víddum (lausn í fyrsta símtali, ánægja), útskýra tilgang reglunnar, afbrigðagreining á málum sem enduðu í kvörtun til að finna orsökina, endurskoða mælikvarðann reglulega í eftirlitsfasanum.</li>
+</ul>
+<p class="small"><b>10:</b> lýsir endurgjafarlykkjunni (mælikvarði → hegðun → gæði → kvartanir → álag → bið) og hvernig hún hefði sést á taktísku mælaborði.</p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Spurning 28 <span>Sjálfvirknivæða eða endurhanna fyrst?</span></div><div class="ex-body">
+<p>Stjórnandi segir: „Við sjálfvirknivæðum bara núverandi ferli með þjarka, það er fljótlegast.“ Rökræddu kosti og galla og hvernig BPM-nálgunin myndi taka á þessu.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Kostir:</b> RPA/stafrænt vinnuafl er fljótlegt og ódýrt, krefst ekki breytinga á kerfum, fækkar villum og einhæfum verkum.</li>
+<li><b>Gallar:</b> sjálfvirknivæðing á sóun gerir sóunina bara hraðari (NVA-skref eins og tvískráning verða áfram); viðkvæmni fyrir breytingum í viðmóti; undantekningar og mannlegt mat; bið milli deilda (sem er oftast stærsti hluti CT, sbr. lága CTE) hverfur ekki við að einstök skref verði hraðari.</li>
+<li><b>BPM-nálgun:</b> greina fyrst (virðisgreining, flöskuháls), endurhanna (activity elimination, knock-out, triage), og <i>svo</i> sjálfvirknivæða það sem eftir er og hentar (síendurtekið, reglubundið). Evolv spyr sjálft: „hvert er markmiðið?“ og „hvað fellur utan?“.</li>
+</ul>
+<p class="small"><b>10:</b> notar tölur (t.d. ef vinnslutími er 8 % af CT bætir hraðari vinnsla CT lítið) og nefnir að stundum sé RPA réttlætanlegt sem bráðabirgðalausn (quick win, F1).</p>
+</div></details></div></div>
+
+<h2 id="munnlegt">Munnlega prófið</h2>
+<p>Munnlega prófið (10 %) snýst um <b>verkefnin sem þú skilaðir</b>. Það sem er metið er hvort þú getir útskýrt <b>hvað þú gerðir og hvers vegna</b>. Fyrir nemanda sem vann verkefnin sín á þetta að vera auðveldasti hluti námskeiðsins.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Til prófs</th><th>Ekki til prófs</th></tr></thead>
+<tbody><tr><td><b>EV1</b> allt · <b>HÓP1</b> allt verkefnið, líka hlutarnir sem þú skrifaðir ekki sjálf(ur) · <b>ein spurning</b> sem tengir verkið þitt við námsefnið</td><td>HÓP2 og EV2. Ekki er prófað úr smáatriðum námsefnisins, en þú þarft að kunna það sem snertir ákvarðanirnar í verkefnunum.</td></tr></tbody>
+</table></div>
+
+<h3>Dæmigerðar spurningar</h3>
+<ul>
+<li>„Farðu með mér í gegnum ferlið í líkaninu þínu.“</li>
+<li>„Lýstu hugsuninni á bak við þessa ákvörðun. Hvað annað kom til greina?“</li>
+<li>„Ef aðstæður í ferlinu breyttust svona, hvað myndi gerast og af hverju?“</li>
+</ul>
+
+<h3>Hvernig á að svara „hvers vegna“?</h3>
+<div class="key"><p><b>Ákvörðun → valkostir → rök með hugtaki → afleiðing.</b> Dæmi: „Ég notaði event-based gateway eftir að beiðni um gögn var send (ákvörðun). Ég íhugaði XOR (valkostur), en XOR ákveður út frá gögnum sem eru til staðar, og hér ræður það hvort skilaboð eða frestur kemur fyrst (rök). Með XOR hefði líkanið getað lent í sjálfheldu (afleiðing).“</p></div>
+<ul>
+<li><b>„Hvað ef“-spurningar:</b> svaraðu með verkfærum námskeiðsins. Meiri komur → Little ($\text{WIP} = \lambda\cdot\text{CT}$) og nýting $\rho$: biðin vex ólínulega og flöskuhálsinn gæti færst. Breyting á einni vídd → djöflafjórþáttunin: hvað fórnast? Nýtt kerfi → hvaða verkþættir verða sjálfvirkir og hvaða undantekningar þarf að líkana?</li>
+<li><b>Ef eitthvað var rangt</b> er fullkomlega gilt að segja: „Þetta gerðum við vitlaust, og ástæðan var þessi; í dag myndi ég …“. Það sýnir einmitt skilninginn sem verið er að meta.</li>
+<li>Talaðu um <b>forsendur</b> (hvaða gögn vantaði, hvaða einföldun þú gerðir) eins og matskvarðinn verðlaunar.</li>
+</ul>
+
+<h3>Gátlisti</h3>
+<ul>
+<li>Lestu EV1-skilin yfir og getur útskýrt hvert tákn, hlið og atburð í BPMN-líkaninu og af hverju það er þarna.</li>
+<li>Veistu hvar ferlið byrjar og endar (SIPOC/umfang) og hvers vegna þú afmarkaðir það svona.</li>
+<li>Getur útskýrt forsendur sem þú gafst þér þar sem gögnin voru ófullnægjandi.</li>
+<li>Farðu yfir þá hluta HÓP1 sem þú vannst ekki sjálf(ur): greininguna, útreikningana og to-be líkanið. Getur þú endurreiknað CT eða nýtingu?</li>
+<li>Getur rökstutt hverja endurhönnunartillögu með HPR-reglu og áhrifum í víddunum fjórum.</li>
+<li>Hefur hugsað um eina „hvað ef“-breytingu fyrir hvort verkefni.</li>
+<li>Getur tengt verkið þitt við a.m.k. tvö hugtök úr námsefninu (t.d. soundness, 7PMG, VA/BVA/NVA, Little).</li>
+</ul>
+
+<h3>Æfingaspurningar: EV1</h3>
+<details class="reveal"><summary></summary><div class="sol">
+<ol>
+<li>Farðu í gegnum líkanið frá upphafsatburði til endaatburðar. Hvað kveikir ferlið?</li>
+<li>Af hverju valdir þú þessi pools og lanes? Hefði mátt líkana viðskiptavininn sem sérstakt pool?</li>
+<li>Hvaða hlið notaðir þú við þessa ákvörðun og hvað gerist ef bæði skilyrðin eru sönn?</li>
+<li>Hvar eru undantekningar í ferlinu og hvernig líkanaðir þú þær (jaðaratburðir, tímaatburðir)?</li>
+<li>Er líkanið þitt „sound“? Sýndu að enginn tóki geti festst.</li>
+<li>Hvaða 7PMG-leiðbeiningar fylgdir þú og hverja braustu, og af hverju?</li>
+<li>Hvaða upplýsingar vantaði í gagnasettið og hvaða forsendur gafstu þér?</li>
+<li>Hvar sérðu flöskuháls eða sóun í as-is ferlinu?</li>
+<li>Hvað myndi breytast í líkaninu ef ferlið yrði keyrt í BPMS (verkþáttagerðir, F10)?</li>
+<li>Hver ætti að vera ferilseigandi og hvaða KPI myndir þú vakta?</li>
+</ol>
+<p>Fyrir hverja spurningu: svaraðu upphátt á um 1 mínútu með ákvörðun → valkostum → rökum → afleiðingu.</p>
+</div></details>
+
+<h3>Æfingaspurningar: HÓP1</h3>
+<details class="reveal"><summary></summary><div class="sol">
+<ol>
+<li>Hvaða vandamál fundu þið og hvernig forgangsröðuðuð þið þeim (vandamálaskrá, Pareto, PICK)?</li>
+<li>Hvernig flokkuðuð þið verkþætti í VA/BVA/NVA? Nefndu eitt umdeilanlegt dæmi.</li>
+<li>Hver var rótarorsök stærsta vandamálsins og hvernig fundu þið hana?</li>
+<li>Útskýrðu útreikninginn á umferðartíma (eða nýtingu). Hvaða forsendur liggja að baki tölunum?</li>
+<li>Hvar er flöskuhálsinn og hvað gerist við hann ef komum fjölgar um 20 %?</li>
+<li>Hvaða endurhönnunarreglur notuðuð þið og hvað fórnaðist í djöflafjórþáttuninni?</li>
+<li>Hvernig vitið þið að to-be ferlið er betra? Hvað myndi hermun eða ný mæling sýna?</li>
+<li>Hvaða hluta verkefnisins vannst þú og hvernig tengist hann hinum hlutunum?</li>
+<li>Hvað var erfiðast í innleiðingu tillagnanna (breytingastjórnun, kerfi)?</li>
+<li>Ef þið gerðuð verkefnið aftur, hvað mynduð þið gera öðruvísi?</li>
+</ol>
+</div></details>
+
+<h2 id="profdagur">Á prófdegi</h2>
+<ul>
+<li><b>Skiptu tímanum eftir vægi:</b> mínútur á spurningu ≈ vægi (%) × heildartími / 100. Skildu eftir 10 mínútur í lokin til yfirlestrar.</li>
+<li><b>Byrjaðu á því sem þú kannt best</b> til að fá öryggi, en svaraðu öllum spurningum; hálft rökstutt svar gefur stig, autt ekkert.</li>
+<li><b>Uppbygging ritgerðarsvars:</b> (1) skilgreindu lykilhugtökin í 1-2 setningum, (2) beittu þeim á aðstæðurnar í spurningunni, (3) greindu: kostir/gallar, fórnir í víddunum fjórum, tengsl við annan kafla, (4) niðurstaða og forsendur.</li>
+<li><b>Reiknidæmi:</b> skrifaðu formúluna, settu inn tölur með einingum, gefðu lokasvar og túlkaðu það í einni setningu (t.d. „CTE 8 % þýðir að biðin er vandamálið“).</li>
+<li><b>Myndir:</b> BPMN með réttum táknum (hlið, atburðir, pools/lanes); CLD með pólun á hverri ör, nefndum lykkjum (R/B) og merktum seinkunum. Mynd sem styður rökin hækkar framsetningarviðmiðið.</li>
+<li><b>Notaðu íslensku fagheitin</b> með ensku heiti í sviga við fyrstu notkun, eins og á glærunum.</li>
+</ul>
+
+<div class="note tip"><p><b class="t">Fleiri æfingapróf:</b> taktu <a href="lokaprof-aefing.html">nýtt æfingalokapróf</a> með nýjum spurningum og tölum í hvert skipti, og notaðu <a href="spjold.html">flashcards</a> til að rifja upp hugtökin.</p></div>

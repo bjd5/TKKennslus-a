@@ -1,0 +1,96 @@
+<!--scripts: js/calc.js -->
+<!--wide-->
+<h1>Reiknivélar</h1>
+<p class="lede">Reiknivélar fyrir megindlega ferlagreiningu (kafli 6). Notaðu þær til að athuga eigin útreikninga og til að sjá hvað gerist þegar þú breytir forsendum, t.d. fyrir as-is og to-be í HÓP1. Á prófinu reiknarðu í höndunum, svo skoðaðu skrefin sem reiknivélarnar sýna. Tölur má skrifa með kommu eða punkti.</p>
+
+<div class="chips noprint">
+  <a class="chip" href="#flaedi" style="text-decoration:none">Flæðisgreining</a>
+  <a class="chip" href="#cte" style="text-decoration:none">CTE</a>
+  <a class="chip" href="#little" style="text-decoration:none">Lögmál Little</a>
+  <a class="chip" href="#geta" style="text-decoration:none">Framleiðslugeta og nýting</a>
+  <a class="chip" href="#mm1" style="text-decoration:none">M/M/1</a>
+  <a class="chip" href="#mmc" style="text-decoration:none">M/M/c</a>
+</div>
+
+<h2 id="flaedi">Flæðisgreining: hringrásartími, kostnaður og einingaálag</h2>
+<p>Settu ferlið saman úr blokkum í réttri röð. Hver blokk getur verið:</p>
+<ul>
+  <li><b>Aðgerð</b> (línuleg): tími $T$. Má skrifa sem summu, t.d. <code>2+0,5</code>.</li>
+  <li><b>XOR</b>: greinar aðskildar með semíkommu, hver á forminu <code>líkur:tími</code>, t.d. <code>0,6:1; 0,4:2</code> eða <code>60:1; 40:2</code> (prósentur). Tíminn má vera summa, t.d. <code>0,3:2+1</code>.</li>
+  <li><b>AND</b>: tímar greina aðskildir með semíkommu, t.d. <code>1; 3</code>. Hver grein má vera summa.</li>
+  <li><b>Endursending</b>: tími $T$ (eða summa) og hlutfall endursendinga $r$.</li>
+</ul>
+<div class="panel" id="flow">
+  <div class="row" style="align-items:center">
+    <div><label class="f" for="fl-mode">Hvað á að reikna?</label><select id="fl-mode"><option value="time">Tíma (CT eða TCT): AND = hámark</option><option value="sum">Kostnað eða einingaálag: AND = summa</option></select></div>
+    <div><label class="f" for="fl-unit">Eining (valfrjálst)</label><input id="fl-unit" type="text" value="dagar"></div>
+  </div>
+  <div id="fl-rows" style="margin-top:1rem"></div>
+  <div class="chips noprint" role="group" aria-label="Bæta við blokk" style="margin-top:0.8rem">
+    <button type="button" class="chip" data-add="seq">+ Aðgerð</button>
+    <button type="button" class="chip" data-add="xor">+ XOR</button>
+    <button type="button" class="chip" data-add="and">+ AND</button>
+    <button type="button" class="chip" data-add="loop">+ Endursending</button>
+    <button type="button" class="chip" data-preset="slide">Dæmið á glæru 7</button>
+    <button type="button" class="chip" data-preset="clear">Hreinsa</button>
+  </div>
+  <div class="out"><dl id="fl-out"></dl></div>
+  <div id="fl-tex" style="overflow-x:auto"></div>
+</div>
+
+<h2 id="cte">Nýtni ferils (CTE)</h2>
+<div class="panel">
+  <p style="margin-top:0">Reiknaðu TCT (bara vinnslutímar) og CT (vinnsla + bið) með flæðisgreiningunni hér að ofan og settu inn hér.</p>
+  <div class="row">
+    <div><label class="f" for="c-tct">$TCT$ (fræðilegur hringrásartími)</label><input id="c-tct" type="text" inputmode="decimal" value="1,7"></div>
+    <div><label class="f" for="c-ct">$CT$ (hringrásartími með bið)</label><input id="c-ct" type="text" inputmode="decimal" value="22,3"></div>
+  </div>
+  <div class="out"><dl id="c-out"></dl></div>
+</div>
+
+<h2 id="little">Lögmál Little: $WIP = \lambda \cdot CT$</h2>
+<div class="panel">
+  <p style="margin-top:0">Fylltu út tvær stærðir og skildu þá sem vantar eftir auða. Notaðu sömu tímaeiningu í $\lambda$ og $CT$ (t.d. á klst og klst).</p>
+  <div class="row">
+    <div><label class="f" for="l-wip">$WIP$ (verk í vinnslu)</label><input id="l-wip" type="text" inputmode="decimal" value="90"></div>
+    <div><label class="f" for="l-lam">$\lambda$ (komutaktur)</label><input id="l-lam" type="text" inputmode="decimal" value="150"></div>
+    <div><label class="f" for="l-ct">$CT$ (hringrásartími)</label><input id="l-ct" type="text" inputmode="decimal" value="" placeholder="reiknað"></div>
+  </div>
+  <div class="out"><dl id="l-out"></dl></div>
+</div>
+
+<h2 id="geta">Fræðileg framleiðslugeta og nýting</h2>
+<div class="panel">
+  <p style="margin-top:0">Fyrir einn auðlindahóp. Reiknaðu einingaálagið $ul$ með flæðisgreiningunni í ham „AND = summa“, bara yfir aðgerðir hópsins. Endurtaktu fyrir hvern hóp; flöskuhálsinn er hópurinn með minnsta $\mu_p$.</p>
+  <div class="row">
+    <div><label class="f" for="g-ul">$ul$ (vinnutími á mál, klst)</label><input id="g-ul" type="text" inputmode="decimal" value="6"></div>
+    <div><label class="f" for="g-n">Fjöldi í hópnum</label><input id="g-n" type="text" inputmode="decimal" value="3"></div>
+    <div><label class="f" for="g-h">Vinnustundir á mann á tímabili</label><input id="g-h" type="text" inputmode="decimal" value="8"></div>
+    <div><label class="f" for="g-lam">$\lambda$ (mál á tímabili, valfrjálst)</label><input id="g-lam" type="text" inputmode="decimal" value="3"></div>
+  </div>
+  <div class="out"><dl id="g-out"></dl></div>
+</div>
+
+<h2 id="mm1">M/M/1-biðröð</h2>
+<div class="panel">
+  <div class="row">
+    <div><label class="f" for="q1-lam">$\lambda$ (komur á tímaeiningu)</label><input id="q1-lam" type="text" inputmode="decimal" value="8"></div>
+    <div><label class="f" for="q1-mu">$\mu$ (afgreiðslur á tímaeiningu)</label><input id="q1-mu" type="text" inputmode="decimal" value="10"></div>
+    <div><label class="f" for="q1-u">Tímaeining</label><select id="q1-u"><option value="klst">klst</option><option value="mín">mín</option><option value="dagar">dagar</option></select></div>
+  </div>
+  <p style="margin:0.6rem 0 0;font-size:0.9rem;color:var(--muted)">Ef þú veist meðalafgreiðslutíma: $\mu = 1/\text{afgreiðslutími}$, t.d. 6 mín ⇒ $\mu = 10$ á klst.</p>
+  <div class="out"><dl id="q1-out"></dl></div>
+</div>
+
+<h2 id="mmc">M/M/c-biðröð (Erlang C)</h2>
+<div class="panel">
+  <div class="row">
+    <div><label class="f" for="qc-lam">$\lambda$ (komur á tímaeiningu)</label><input id="qc-lam" type="text" inputmode="decimal" value="10"></div>
+    <div><label class="f" for="qc-mu">$\mu$ (á hvern þjón)</label><input id="qc-mu" type="text" inputmode="decimal" value="6"></div>
+    <div><label class="f" for="qc-c">Fjöldi þjóna $c$</label><input id="qc-c" type="text" inputmode="numeric" value="2"></div>
+    <div><label class="f" for="qc-u">Tímaeining</label><select id="qc-u"><option value="klst">klst</option><option value="mín">mín</option><option value="dagar">dagar</option></select></div>
+    <div><label class="f" for="qc-t">Markmið $W_q$ (valfrjálst, sama eining)</label><input id="qc-t" type="text" inputmode="decimal" value="" placeholder="t.d. 0,05"></div>
+  </div>
+  <div class="out"><dl id="qc-out"></dl></div>
+  <div id="qc-tab" style="margin-top:1rem"></div>
+</div>

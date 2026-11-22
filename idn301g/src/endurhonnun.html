@@ -1,0 +1,420 @@
+<h1>Endurhönnun og ferlahugbúnaður</h1>
+<p class="lede">Hér ferðu frá greiningu yfir í aðgerðir: hvernig þú býrð til betra ferli (to-be) með endurhönnunaraðferðum, hvaða hugbúnaður getur keyrt ferlið og hvernig huglægt BPMN-líkan er gert keyranlegt. Í HÓP1 þarftu að rökstyðja endurhönnun með heuristics og djöflafjórþáttuninni, og á lokaprófinu koma atburðarásarspurningar um aðferðir, BPMS-einingar og verktegundir.</p>
+
+<h2 id="liftimi">Endurhönnun í BPM-líftímanum</h2>
+<p>Endurhönnun ferla (e. <i>process redesign</i>) er fjórði fasinn í BPM-líftímanum. Hún byggir á því sem kom út úr <b>ferlagreiningunni</b> (vandamálaskrá, sóun, flöskuhálsar, tölur úr megindlegri greiningu) og skilar <b>to-be líkani</b> sem er síðan <b>innleitt</b>, oft með stuðningi hugbúnaðar. Fyrirlestrar F8-F10 fylgja einmitt þessari leið: F8 hvernig þú hannar betra ferli, F9 hvaða hugbúnaður keyrir það og F10 hvernig líkanið verður keyranlegt.</p>
+<svg class="diagram" viewBox="0 0 640 300" role="img" aria-label="BPM-líftíminn: auðkenning, uppgötvun, greining, endurhönnun, innleiðing og eftirlit í hring. Endurhönnun og innleiðing eru auðkenndar." style="max-width:100%;height:auto">
+  <defs><marker id="k7lc-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker></defs>
+  <g style="stroke:var(--muted);stroke-width:1.6;fill:none" marker-end="url(#k7lc-a)">
+    <path d="M398 45 Q450 55 468 80" marker-end="url(#k7lc-a)"/><path d="M520 130 L520 180" marker-end="url(#k7lc-a)"/><path d="M468 230 Q450 255 398 262" marker-end="url(#k7lc-a)"/>
+    <path d="M242 262 Q190 255 172 230" marker-end="url(#k7lc-a)"/><path d="M120 180 L120 130" marker-end="url(#k7lc-a)"/><path d="M172 80 Q190 55 242 45" marker-end="url(#k7lc-a)"/>
+  </g>
+  <rect x="245" y="16" width="150" height="48" rx="10" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="320" y="37" text-anchor="middle">Auðkenning</text><text x="320" y="54" text-anchor="middle" class="small">ferlaarkitektúr</text>
+  <rect x="445" y="81" width="150" height="48" rx="10" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="520" y="102" text-anchor="middle">Uppgötvun</text><text x="520" y="119" text-anchor="middle" class="small">as-is líkan</text>
+  <rect x="445" y="181" width="150" height="48" rx="10" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="520" y="202" text-anchor="middle">Greining</text><text x="520" y="219" text-anchor="middle" class="small">vandamál, tölur</text>
+  <rect x="245" y="238" width="150" height="48" rx="10" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:2.2"/><text x="320" y="259" text-anchor="middle" style="fill:var(--mag);font-weight:700">Endurhönnun</text><text x="320" y="276" text-anchor="middle" class="small">to-be líkan (F8)</text>
+  <rect x="45" y="181" width="150" height="48" rx="10" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:2.2"/><text x="120" y="202" text-anchor="middle" style="fill:var(--mag);font-weight:700">Innleiðing</text><text x="120" y="219" text-anchor="middle" class="small">BPMS, keyrsla (F9-F10)</text>
+  <rect x="45" y="81" width="150" height="48" rx="10" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="120" y="102" text-anchor="middle">Eftirlit</text><text x="120" y="119" text-anchor="middle" class="small">mælingar, frávik</text>
+  <text x="320" y="145" text-anchor="middle" class="small">Hringrás: eftirlit</text><text x="320" y="162" text-anchor="middle" class="small">leiðir til nýrrar umferðar</text>
+</svg>
+<p>Fyrsta spurningin sem F8 setur fram er greinarmunurinn á <b>ferlaendurhönnun og vöruþróun</b>. Í vöruþróun breytir þú því <i>hvað</i> viðskiptavinurinn fær; í ferlaendurhönnun breytir þú <i>hvernig</i> það er búið til og afhent. Mörkin geta verið óljós (ný sjálfsafgreiðsla í appi er bæði nýtt ferli og ný þjónusta), og ein aðferðin, <a href="#umbreytandi">product-based design</a>, notar einmitt vöruna sem upphafspunkt ferlahönnunar.</p>
+
+<h2 id="hugmyndafraedi">Hugmyndafræði endurhönnunar: sjö atriði til athugunar</h2>
+<p>Hugmyndafræði endurhönnunar (e. <i>redesign concept</i>) segir hvaða hliðar ferlisins þú átt að skoða þegar þú leitar að úrbótum. Glærurnar nefna sjö atriði, og hvert þeirra er líka einn flokkur í heuristics-listanum hér á eftir:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Atriði</th><th>Spurningin sem þú spyrð</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Innri og ytri viðskiptavinur (<i>customer</i>)</td><td>Hvernig eiga samskiptin við viðskiptavininn sér stað, hversu oft og hver gerir hvað?</td></tr>
+<tr><td>2</td><td>Ferlaframkvæmd (<i>business process operation</i>)</td><td>Hvaða verk eru unnin og hvernig? Eru einhver óþörf, of smá eða unnin í runum?</td></tr>
+<tr><td>3</td><td>Ferlahegðun (<i>business process behavior</i>)</td><td>Í hvaða röð eru verkin unnin? Mætti vinna þau samhliða eða í annarri röð?</td></tr>
+<tr><td>4</td><td>Skipulagsheildin sem <b>skipulag</b> (<i>structure</i>) og sem <b>þýði</b> (<i>population</i>)</td><td>Hver ber ábyrgð, hvernig er vinnu úthlutað, og hve marga og hvers konar starfsmenn þarf?</td></tr>
+<tr><td>5</td><td>Upplýsingar í ferlinu (<i>information</i>)</td><td>Hvaða gögn fara inn og út, eru þau rétt og heil og hvaðan koma þau?</td></tr>
+<tr><td>6</td><td>Tækni notuð (<i>technology</i>)</td><td>Hvaða verk mætti sjálfvirknivæða eða styðja betur með tækni?</td></tr>
+<tr><td>7</td><td>Ytra umhverfi (<i>external environment</i>)</td><td>Hvernig vinnum við með birgjum, samstarfsaðilum og þriðju aðilum?</td></tr>
+</tbody></table></div>
+
+<h2 id="djoflafjorthattun">Djöflafjórþáttun (devil's quadrangle)</h2>
+<p>Ferli eru oftast metin eftir <b>fjórum víddum</b>: <b>tíma</b> (e. <i>time</i>, t.d. umferðartími), <b>kostnaði</b> (e. <i>cost</i>), <b>gæðum</b> (e. <i>quality</i>, bæði ytri gæði sem viðskiptavinurinn upplifir og innri gæði fyrir starfsmenn) og <b>sveigjanleika</b> (e. <i>flexibility</i>, hæfni ferlisins til að bregðast við breytileika í magni, tegund mála eða kröfum). Í fullkomnum heimi myndi hver endurbót <i>minnka</i> tíma, <i>lækka</i> kostnað, <i>bæta</i> gæði og <i>auka</i> sveigjanleika í einu.</p>
+<div class="key"><p><b>Djöflafjórþáttunin</b> (e. <i>devil's quadrangle</i>) lýsir því að víddirnar fjórar eru samofnar: þegar þú bætir eina þeirra líður oft ein eða fleiri fyrir það. Endurhönnun er því yfirleitt <b>málamiðlun</b> (e. <i>trade-off</i>), og þú þarft að vita hvaða vídd skiptir mestu fyrir viðskiptavininn og stefnuna.</p></div>
+<svg class="diagram" viewBox="0 0 640 330" role="img" aria-label="Djöflafjórþáttun: tígull með tíma efst, kostnaði til hægri, gæðum neðst og sveigjanleika til vinstri. Eftir sjálfvirknivæðingu teygist tígullinn upp og niður (tími og gæði batna) en dregst saman til vinstri (sveigjanleiki versnar)." style="max-width:100%;height:auto">
+  <g style="stroke:var(--rule-2);stroke-width:1.2"><line x1="320" y1="30" x2="320" y2="300"/><line x1="160" y1="165" x2="480" y2="165"/></g>
+  <polygon points="320,85 400,165 320,245 240,165" style="fill:none;stroke:var(--muted);stroke-width:2;stroke-dasharray:6 5"/>
+  <polygon points="320,45 410,165 320,285 275,165" style="fill:color-mix(in srgb, var(--mag) 14%, transparent);stroke:var(--mag);stroke-width:2.4"/>
+  <text x="320" y="22" text-anchor="middle" style="font-weight:700">Tími</text>
+  <text x="490" y="170" style="font-weight:700">Kostnaður</text>
+  <text x="320" y="320" text-anchor="middle" style="font-weight:700">Gæði</text>
+  <text x="150" y="170" text-anchor="end" style="font-weight:700">Sveigjanleiki</text>
+  <g class="small"><text x="520" y="60" class="small">- - - fyrir (as-is)</text><text x="520" y="80" class="small" style="fill:var(--mag)">—— eftir (to-be)</text><text x="520" y="110" class="small">lengra frá miðju</text><text x="520" y="126" class="small">= betri frammistaða</text></g>
+</svg>
+<p>Myndin sýnir dæmigerða sjálfvirknivæðingu: tíminn styttist og gæði aukast (færri innsláttarvillur), kostnaður breytist lítið til lengri tíma (fjárfesting á móti minni vinnu), en sveigjanleikinn minnkar því sjálfvirka verkið ræður aðeins við þau tilvik sem forritað var fyrir.</p>
+<div class="note tip"><p><b class="t">Ráð í HÓP1:</b> þegar þú leggur til breytingu skaltu alltaf segja hvaða vídd hún bætir <i>og</i> hvaða vídd gæti versnað. „Þetta bætir allt“ er næstum alltaf rangt og kennarinn tekur eftir því.</p></div>
+
+<h2 id="viddir">Aðferð, tækni og verkfæri</h2>
+<p>Glærurnar greina endurhönnun í þrjú abstraktstig (e. <i>abstraction level</i>):</p>
+<ul>
+<li><b>Aðferð</b> (e. <i>method</i>): hæsta stigið, heildstæð nálgun á lausn vandamála, t.d. Lean, Six Sigma eða BPR.</li>
+<li><b>Tækni</b> (e. <i>technique</i>): lægra stig, vel skilgreind leið til að leysa ákveðið staðlað verk, t.d. Pareto-greining, af hverju-rit eða ein heuristic.</li>
+<li><b>Verkfæri</b> (e. <i>tool</i>): hugbúnaður sem styður framkvæmdina, t.d. líkanatól eða hermiforrit. Hermun (e. <i>simulation</i>) er m.a. notuð til að prófa to-be ferlið áður en það er innleitt.</li>
+</ul>
+
+<h2 id="hvelid">Endurhönnunarhvelið (redesign orbit)</h2>
+<p>Til eru tugir endurhönnunaraðferða. <b>Endurhönnunarhvelið</b> raðar þeim eftir tveimur ásum og tveimur sporbaugum:</p>
+<svg class="diagram" viewBox="0 0 680 360" role="img" aria-label="Endurhönnunarhvelið. Lárétti ásinn liggur frá transactional til vinstri til transformational til hægri, lóðrétti ásinn frá creative efst til analytical neðst. Innri hringur er inward-looking, ytri sporbaugur outward-looking." style="max-width:100%;height:auto">
+  <ellipse cx="340" cy="180" rx="300" ry="140" style="fill:none;stroke:var(--ink);stroke-width:1.5"/>
+  <circle cx="340" cy="180" r="105" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.5"/>
+  <g style="stroke:var(--ink);stroke-width:1.4"><line x1="25" y1="180" x2="655" y2="180"/><line x1="340" y1="25" x2="340" y2="340"/></g>
+  <text x="340" y="18" text-anchor="middle" style="font-weight:700;font-style:italic">Creative (skapandi)</text>
+  <text x="340" y="356" text-anchor="middle" style="font-weight:700;font-style:italic">Analytical (greinandi)</text>
+  <text x="30" y="172" style="font-weight:700;font-style:italic">Transactional</text>
+  <text x="650" y="172" text-anchor="end" style="font-weight:700;font-style:italic">Transformational</text>
+  <text x="395" y="140" text-anchor="middle" style="fill:var(--mag);font-weight:700">Inward-</text><text x="395" y="156" text-anchor="middle" style="fill:var(--mag);font-weight:700">looking</text>
+  <text x="560" y="215" text-anchor="middle" style="font-weight:700">Outward-looking</text>
+  <g class="small">
+    <text x="245" y="120" class="small">7FE, BPTrends</text>
+    <text x="90" y="110" class="small">Crowdsourcing</text>
+    <text x="80" y="210" class="small">Benchmarking, Lean,</text><text x="80" y="226" class="small">ERP-driven redesign</text>
+    <text x="332" y="200" text-anchor="end" class="small">Heuristic Process</text><text x="332" y="214" text-anchor="end" class="small">Redesign, Six Sigma,</text><text x="332" y="228" text-anchor="end" class="small">TOC, TRIZ,</text><text x="332" y="242" text-anchor="end" class="small">Positive Deviance</text>
+    <text x="348" y="200" class="small">BPR (Business</text><text x="348" y="214" class="small">Process</text><text x="348" y="228" class="small">Reengineering)</text>
+    <text x="470" y="90" class="small">Design-led innovation,</text><text x="470" y="106" class="small">NESTT, Process Model Canvas</text>
+    <text x="480" y="250" class="small">Product-based design</text>
+  </g>
+</svg>
+<div class="tablewrap"><table>
+<thead><tr><th>Ás</th><th>Annar endinn</th><th>Hinn endinn</th></tr></thead>
+<tbody>
+<tr><td>Umfang breytinga</td><td><b>Transactional</b> (stigvaxandi): finna vandamál og flöskuhálsa og leysa þau skref fyrir skref innan núverandi ferlis.</td><td><b>Transformational</b> (umbreytandi): róttækar breytingar á stærri skala; ferlið er hugsað upp á nýtt.</td></tr>
+<tr><td>Vinnulag</td><td><b>Creative</b>: sköpunargáfa og hugvitssemi, oft í hópum og vinnustofum.</td><td><b>Analytical</b>: eigindlegar og megindlegar aðferðir, tölfræði og líkön.</td></tr>
+<tr><td>Sjónarhorn</td><td><b>Inward-looking</b>: horft á ferlið sjálft innan frá.</td><td><b>Outward-looking</b>: horft út, til viðskiptavina, annarra fyrirtækja eða vörunnar.</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að halda að BPR sé „transactional“ af því að það er gamalt. BPR (Hammer, 1990) er klassíska <b>umbreytandi</b> aðferðin: „ekki sjálfvirknivæða, útrýmdu“ (e. <i>don't automate, obliterate</i>). Heuristic Process Redesign er hins vegar transactional og greinandi, þó að það geti leitt til talsverðra breytinga.</p></div>
+
+<h2 id="transactional">Transactional aðferðir</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðferð</th><th>Kjarninn</th></tr></thead>
+<tbody>
+<tr><td><b>TOC</b> (Theory of Constraints)</td><td>Finndu þrengsta hlekkinn (flöskuhálsinn), nýttu hann til fulls, láttu allt annað taka mið af honum og víkkaðu hann svo. Þekkt úr aðgerðagreiningu.</td></tr>
+<tr><td><b>Lean</b></td><td>Fókus á virði fyrir viðskiptavininn og að minnka sóun (sjá <a href="kafli-5.html">kafla 5</a>).</td></tr>
+<tr><td><b>TRIZ</b></td><td>Rússnesk aðferðafræði um kerfisbundna lausn vandamála út frá mótsögnum og þekktum lausnamynstrum.</td></tr>
+<tr><td><b>Six Sigma</b></td><td>Ferlaumbætur með tölfræði; markmiðið er að minnka breytileika og villur (DMAIC).</td></tr>
+<tr><td><b>7FE</b> (7 Fundamental Elements)</td><td>Þrepaskipt aðferð með vinnustofum og leiðbeinanda (sjá hér að neðan).</td></tr>
+<tr><td><b>Heuristic Process Redesign</b> (HPR)</td><td>„Reynslubanki“: listi af 29 endurhönnunarheuristics sem hafa reynst vel (sjá hér að neðan).</td></tr>
+</tbody></table></div>
+
+<h3>7FE: undirbúa, framkalla, staðfesta</h3>
+<ol>
+<li><b>Undirbúningur</b> (e. <i>prepare</i>): safna útkomu úr fyrri vinnustofum, einkum (a) tengingu við stefnu, (b) markmiðum ferlisins, (c) skorðum í hönnun og (d) tímaramma innleiðingar.</li>
+<li><b>Framkalla</b> (e. <i>generate</i>): í vinnustofum með þátttakendum sem þekkja ferlið vel er safnað lausnarhugmyndum, án þess að dæma þær strax.</li>
+<li><b>Staðfesta</b> (e. <i>validate</i>): prófa markvirkni og hagkvæmni lausnanna (atburðarása, e. <i>scenarios</i>), oft með hermun.</li>
+</ol>
+<p><b>Leiðbeinandinn</b> (e. <i>facilitator</i>) skiptir sköpum í 7FE. Hann spyr „af hverju?“ og „hvers vegna þetta?“, gleypir ekki fyrsta svarið, leitar að öðru „réttu“ svari, umorðar spurningar, breytir reglum hugarflugsins þegar það staðnar og treystir á innsæi.</p>
+
+<h3>Heuristic Process Redesign (HPR)</h3>
+<p>HPR hefur þrjú stig í hönnunarfasanum:</p>
+<ol>
+<li><b>Hefja</b> (e. <i>initiate</i>): móta verkefnið, (a) skilja núverandi stöðu (as-is) og (b) setja frammistöðumælikvarða fyrir verkefnið.</li>
+<li><b>Hanna</b> (e. <i>design</i>): velja úr listanum hvaða heuristics á að nota og ákveða hvernig þeim er beitt.</li>
+<li><b>Meta</b> (e. <i>evaluate</i>): meta lausnina bæði megindlega (t.d. umferðartími, kostnaður, hermun) og eigindlega. Möguleg niðurstaða er að hætta við: breytingin borgar sig ekki.</li>
+</ol>
+
+<h2 id="heuristics">HPR-listinn: 29 endurhönnunarheuristics</h2>
+<p>Listinn er flokkaður eftir sjö atriðunum í <a href="#hugmyndafraedi">hugmyndafræðinni</a>: viðskiptavinur (3), ferlaframkvæmd (5), ferlahegðun (4), skipulag (7 + 3 = 10), upplýsingar (2), tækni (2) og ytra umhverfi (3). Ensku heitin eru þau sem eru notuð á glærunum og í bókinni (viðauki A). Dálkurinn „dæmigerð áhrif“ sýnir hvaða víddir batna yfirleitt (↑) og hvað þú þarft að passa (↓); raunveruleg áhrif ráðast af útfærslunni.</p>
+
+<h3>1. Viðskiptavinurinn (customer heuristics)</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Heuristic</th><th>Hugmyndin</th><th>Dæmi</th><th>Dæmigerð áhrif</th></tr></thead>
+<tbody>
+<tr><td><b>Control relocation</b></td><td>Færðu eftirlit til viðskiptavinarins.</td><td>Viðskiptavinur yfirfer sjálfur skráningu sína eða sendir sjálfur inn mælingar.</td><td>tími ↑, kostnaður ↑; gæði ↓ (villur, svik)</td></tr>
+<tr><td><b>Contact reduction</b></td><td>Fækkaðu samskiptum við viðskiptavini og þriðju aðila.</td><td>Öll gögn sótt í einu í stað fjögurra símtala.</td><td>tími ↑, kostnaður ↑</td></tr>
+<tr><td><b>Integration</b></td><td>Samþættu ferlið við ferli viðskiptavinar eða birgja.</td><td>Birgir fylgist sjálfur með lagerstöðu verslunar og fyllir á.</td><td>tími ↑, kostnaður ↑; sveigjanleiki ↓ (bundinn hinum aðilanum)</td></tr>
+</tbody></table></div>
+
+<h3>2. Ferlaframkvæmd (business process operation)</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Heuristic</th><th>Hugmyndin</th><th>Dæmi</th><th>Dæmigerð áhrif</th></tr></thead>
+<tbody>
+<tr><td><b>Case types</b></td><td>Athugaðu hvort verkin tilheyri sömu tegund mála; greindu í sundur í ný ferli ef þarf.</td><td>Einstaklingsumsóknir og fyrirtækjaumsóknir fá hvor sitt ferli.</td><td>tími ↑, gæði ↑; sveigjanleiki ↓</td></tr>
+<tr><td><b>Activity elimination</b></td><td>Fjarlægðu óþörf verk.</td><td>Tvöföld yfirferð sem finnur nánast aldrei villu er felld niður.</td><td>tími ↑, kostnaður ↑; gæði ↓ ef verkið var eftirlit</td></tr>
+<tr><td><b>Case-based work</b></td><td>Losaðu þig við runuvinnslu (e. <i>batch</i>) og verk sem eru unnin með reglulegu millibili.</td><td>Beiðnir afgreiddar jafnóðum í stað vikulegs fundar.</td><td>tími ↑; kostnaður ↓ (stærðarhagkvæmni runanna tapast)</td></tr>
+<tr><td><b>Triage</b></td><td>Skiptu einu verki í aðskildar útgáfur (t.d. einföld og flókin mál).</td><td>Hraðbraut fyrir einföld tjón, sérfræðingar fyrir flókin.</td><td>tími ↑, gæði ↑; sveigjanleiki ↓</td></tr>
+<tr><td><b>Activity composition</b></td><td>Sameinaðu lítil verk í stærri samsett verk.</td><td>„Skanna, telja, skrá“ verður eitt verk eins starfsmanns.</td><td>tími ↑ (færri afhendingar og uppsetningar), kostnaður ↑; sveigjanleiki ↓</td></tr>
+</tbody></table></div>
+<p><b>Triage og composition</b> eru andstæður: triage skiptir verki upp, composition sameinar verk. Hvort á við ræðst af því hvort vandinn er of almenn vinnsla (triage) eða of margar afhendingar (composition).</p>
+
+<h3>3. Ferlahegðun (business process behavior)</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Heuristic</th><th>Hugmyndin</th><th>Dæmi</th><th>Dæmigerð áhrif</th></tr></thead>
+<tbody>
+<tr><td><b>Resequencing</b></td><td>Færðu verk á þann stað sem hentar best, t.d. frestaðu verki þar til ljóst er að þess þarf.</td><td>Samningsdrög aðeins gerð eftir að umsókn er samþykkt.</td><td>kostnaður ↑ (minni sóun), tími ↑</td></tr>
+<tr><td><b>Parallelism</b></td><td>Settu verk sem eru óháð hvert öðru samhliða.</td><td>Heilbrigðisvottorð og tollskýrsla unnin á sama tíma.</td><td>tími ↑↑; kostnaður ↓ (samhæfing, sóun ef máli er hafnað), gæði ↓</td></tr>
+<tr><td><b>Knock-out</b></td><td>Raðaðu útilokunarprófunum í vaxandi röð eftir fyrirhöfn og minnkandi röð eftir líkum á höfnun.</td><td>Ódýr athugun sem hafnar mörgum kemur á undan dýrri greiningu.</td><td>kostnaður ↑, tími ↑</td></tr>
+<tr><td><b>Exception</b></td><td>Hannaðu ferlið fyrir dæmigerð mál og einangraðu frávik frá venjulega flæðinu.</td><td>Sérstakt undirferli fyrir sjaldgæf vottorð.</td><td>tími ↑, kostnaður ↑; sveigjanleiki ↓</td></tr>
+</tbody></table></div>
+<p>Knock-out reglan er í raun hlutfall: settu fyrst það próf sem hefur hæst hlutfall <i>líkur á höfnun / fyrirhöfn</i>. Próf A (5 mín, hafnar 20 %) á að koma á undan prófi B (60 mín, hafnar 30 %), því $0{,}20/5 = 0{,}04$ er miklu hærra en $0{,}30/60 = 0{,}005$.</p>
+
+<h3>4. Skipulagsheildin (organization heuristics)</h3>
+<p><b>Skipulag</b> (e. <i>structure</i>), sjö heuristics:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Heuristic</th><th>Hugmyndin</th><th>Dæmigerð áhrif</th></tr></thead>
+<tbody>
+<tr><td><b>Case assignment</b></td><td>Láttu sama þátttakanda vinna eins mörg skref málsins og hægt er.</td><td>tími ↑, gæði ↑ (þekkir málið); sveigjanleiki ↓</td></tr>
+<tr><td><b>Flexible assignment</b></td><td>Haltu fjölhæfum starfsmönnum lausum eins lengi og hægt er; sérhæfðir taka fyrst.</td><td>tími ↑, sveigjanleiki ↑</td></tr>
+<tr><td><b>Centralization</b></td><td>Láttu landfræðilega dreifða starfsmenn vinna eins og þeir séu á einum stað (sameiginleg biðröð).</td><td>tími ↑, kostnaður ↑</td></tr>
+<tr><td><b>Split responsibilities</b></td><td>Forðastu sameiginlega ábyrgð fólks úr ólíkum deildum á sama verki.</td><td>gæði ↑, tími ↑</td></tr>
+<tr><td><b>Customer teams</b></td><td>Myndaðu teymi úr ólíkum deildum sem sjá um alla meðferð ákveðinnar tegundar mála.</td><td>gæði ↑, tími ↑; sveigjanleiki ↓</td></tr>
+<tr><td><b>Numerical involvement</b></td><td>Lágmarkaðu fjölda deilda, hópa og einstaklinga sem koma að ferlinu.</td><td>tími ↑, kostnaður ↑; sveigjanleiki ↓</td></tr>
+<tr><td><b>Case manager</b></td><td>Skipaðu einn ábyrgðarmann fyrir hverja tegund mála (einn tengiliður).</td><td>gæði ↑ (fyrir viðskiptavininn); kostnaður ↓</td></tr>
+</tbody></table></div>
+<p><b>Þýði</b> (e. <i>population</i>), þrjú heuristics:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Heuristic</th><th>Hugmyndin</th><th>Dæmigerð áhrif</th></tr></thead>
+<tbody>
+<tr><td><b>Extra resources</b></td><td>Ef afköst duga ekki, fjölgaðu auðlindum (fólki, tækjum).</td><td>tími ↑, sveigjanleiki ↑; kostnaður ↓</td></tr>
+<tr><td><b>Specialize</b></td><td>Íhugaðu að dýpka færni þátttakenda (sérfræðingar í stað alhliða starfsmanna).</td><td>tími ↑, gæði ↑; sveigjanleiki ↓</td></tr>
+<tr><td><b>Empower</b></td><td>Gefðu starfsmönnum ákvörðunarvald í stað þess að treysta á millistjórnendur.</td><td>tími ↑, kostnaður ↑, sveigjanleiki ↑; gæði ↓ (minna eftirlit)</td></tr>
+</tbody></table></div>
+
+<h3>5.-7. Upplýsingar, tækni og ytra umhverfi</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Flokkur</th><th>Heuristic</th><th>Hugmyndin</th><th>Dæmigerð áhrif</th></tr></thead>
+<tbody>
+<tr><td rowspan="2">Upplýsingar</td><td><b>Control addition</b></td><td>Athugaðu hvort innkomin gögn séu heil og rétt, og athugaðu úttakið áður en það fer til viðskiptavinar.</td><td>gæði ↑; tími ↓, kostnaður ↓</td></tr>
+<tr><td><b>Buffering</b></td><td>Í stað þess að biðja um upplýsingar frá ytri aðila í hvert sinn, geymdu þær og gerstu áskrifandi að uppfærslum.</td><td>tími ↑; kostnaður ↓ (geymsla), gæði ↓ ef gögn úreldast</td></tr>
+<tr><td rowspan="2">Tækni</td><td><b>Activity automation</b></td><td>Íhugaðu að sjálfvirknivæða verk.</td><td>tími ↑, gæði ↑; kostnaður ↓ (stofnkostnaður), sveigjanleiki ↓</td></tr>
+<tr><td><b>Integral technology</b></td><td>Lyftu efnislegum skorðum með nýrri tækni (t.d. rafræn skjöl í stað pappírs).</td><td>tími ↑, gæði ↑; kostnaður ↓ (fjárfesting)</td></tr>
+<tr><td rowspan="3">Ytra umhverfi</td><td><b>Trusted party</b></td><td>Notaðu niðurstöður trausts þriðja aðila í stað þess að gera allt sjálfur.</td><td>tími ↑, kostnaður ↑</td></tr>
+<tr><td><b>Outsourcing</b></td><td>Íhugaðu að útvista ferlinu í heild eða að hluta.</td><td>kostnaður ↑, tími ↑; gæði og sveigjanleiki ↓ (minni stjórn)</td></tr>
+<tr><td><b>Interfacing</b></td><td>Notaðu staðlað viðmót við viðskiptavini og samstarfsaðila.</td><td>tími ↑, gæði ↑ (færri villur)</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að rugla saman <b>activity elimination</b> og <b>control relocation</b>. Ef eftirlitið hverfur alveg er það elimination; ef viðskiptavinurinn tekur það yfir er það control relocation. Annað algengt rugl: <b>trusted party</b> (þú notar niðurstöðu annars, t.d. rafræn skilríki) og <b>outsourcing</b> (annar vinnur verkið fyrir þig).</p></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Tjónaferli tryggingafélags: þrjár heuristics</span></div><div class="ex-body">
+<p>Í as-is ferlinu fer hver tjónstilkynning, stór og smá, í sömu biðröð. Fulltrúi skráir tilkynninguna handvirkt úr tölvupósti, matsmaður skoðar öll tjón á staðnum (líka rúðutjón upp á 30.000 kr.), og eftir það er hringt í tjónþola til að fá kvittanir, svo aftur til að fá bankaupplýsingar. Umferðartíminn er að meðaltali 14 dagar og kvartanir eru margar. Hvaða heuristics myndir þú leggja til og hvað kostar það í djöflafjórþáttuninni?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>1. Triage:</b> skiptu skoðuninni í tvær útgáfur. Smátjón undir ákveðnu marki fara í hraðbraut þar sem myndir úr appi duga; aðeins stærri tjón fá skoðun á staðnum. Tími og gæði (fyrir viðskiptavininn) batna, en tvö ferli þýða minni sveigjanleika í mönnun.</p>
+<p><b>2. Contact reduction:</b> biddu um kvittanir og bankaupplýsingar í einu, á tjónstilkynningunni sjálfri. Tími og kostnaður batna.</p>
+<p><b>3. Activity automation:</b> vefform sem skráir tjónið beint í tjónakerfið í stað handvirkrar innsláttar. Tími og gæði (færri villur) batna; stofnkostnaður og minni sveigjanleiki fyrir óvenjuleg mál.</p>
+<p>Í hraðbrautinni má líka nota <b>control relocation</b> (tjónþoli staðfestir sjálfur tjónið með myndum), en þá eykst hætta á svikum, svo gæði geta versnað. Það þarf að vega á móti með t.d. úrtakseftirliti.</p>
+<p><span class="ans">Triage + contact reduction + activity automation: tími ↑ og gæði ↑, gegn minni sveigjanleika og stofnkostnaði.</span></p>
+</div></details></div></div>
+
+<h2 id="umbreytandi">Transformational (umbreytandi) aðferðir</h2>
+<p>Umbreytandi aðferðir byrja ekki á núverandi ferli heldur á spurningunni „hvernig ætti þetta að vera?“. Glærurnar nefna fjórar:</p>
+<ul>
+<li><b>BPR</b> (e. <i>Business Process Reengineering</i>): róttæk endurhugsun ferla frá grunni (autt blað) til að ná stökkbreytingu í frammistöðu, frekar en smáum endurbótum. Tengist ráðinu úr ferlaskráningunni: „skráning ferils ef við værum að hefja starfsemi í dag“.</li>
+<li><b>Product-based design</b> (vörumiðuð hönnun): byrjar á <b>vörunni</b> sem ferlið skilar, sérstaklega upplýsingavöru eins og ákvörðun um styrk eða bætur. Þú brýtur vöruna niður í gagnaeiningar og reglurnar sem tengja þær (líkt og efnislista, e. <i>bill of materials</i>), og leiðir svo ferlið út frá því hvaða upplýsingar þarf til að búa til hverja einingu. Ferlið er þá hannað án tillits til núverandi ferlis.</li>
+<li><b>NESTT</b> (<i>Navigate, Expand, Strengthen, Tune/Take-off</i>): vinnustofa 8-10 manna sem hugsar um framtíðina á þremur tímasjónarhornum (20 dagar, 20 mánuðir og 3 ár) innan skorða. Ramminn hefur fjórar hliðar: <i>nútíðina</i> (as-is ferlið, vandamál, customer journey map), <i>framtíðina</i> (framtíðarsýn, hugmyndir, to-be ferlið), <i>auðlindirnar</i> (fólk, kerfi, skjöl) og <i>leiðbeiningarnar</i> (stefnur, verklagsreglur).</li>
+<li><b>Process Model Canvas</b>: eins síðu strigi í anda Business Model Canvas. Efst er <i>WHY</i> (tilgangurinn), <i>WHAT</i> (helstu skref frá virðisloforði, e. <i>value proposition</i>, til afhents virðis, e. <i>value delivered</i>) og <i>WOW</i> (upplifunin). Undir skrefunum eru upplýsingarnar sem berast, flæða og eru afhentar, og neðst „backlog“ með atriðum sem á eftir að leysa.</li>
+</ul>
+<div class="key"><p><b>Stigvaxandi (transactional) vs. umbreytandi (transformational):</b> stigvaxandi aðferðir leysa vandamál í núverandi ferli, eitt af öðru, með minni áhættu og minni ávinningi. Umbreytandi aðferðir endurhugsa ferlið frá grunni, með mögulegum stórum ávinningi en meiri áhættu og meiri breytingastjórnun.</p></div>
+
+<h2 id="pais">Ferlameðvituð upplýsingakerfi (PAIS)</h2>
+<p><b>Sjálfvirkt ferli</b> (e. <i>automated business process</i>), einnig kallað <b>vinnuflæði</b> (e. <i>workflow</i>), er ferli sem er sjálfvirknivætt að hluta eða öllu leyti með hugbúnaði. Hugbúnaðurinn dreifir upplýsingum og verkum milli þátttakenda eftir tíma og skilyrðum (e. <i>temporal and logical dependencies</i>) í samræmi við ferlalíkan. UT-kerfi sem keyra slík ferli kallast <b>ferlameðvituð UT-kerfi</b> (e. <i>Process-Aware Information Systems, PAIS</i>).</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Sértæk PAIS (e. <i>domain-specific</i>)</th><th>Almenn PAIS (e. <i>domain-agnostic</i>)</th></tr></thead>
+<tbody>
+<tr><td>Ferlarnir eru innbyggðir fyrir ákveðið svið:<br>• ERP (Enterprise Resource Planning)<br>• CRM (Customer Relationship Management)<br>• SCM (Supply Chain Management)<br>• PLM (Product Lifecycle Management)</td><td>Ferlarnir eru skilgreindir af notandanum:<br>• Vandamálakerfi (e. <i>issue tracking systems</i>)<br>• Skjalakerfi (e. <i>Document Management Systems, DMS</i>)<br>• Ferlastjórnunarkerfi (e. <i>BPMS</i>)</td></tr>
+</tbody></table></div>
+<p><b>Ferlastjórnunarkerfi</b> (e. <i>Business Process Management System, BPMS</i>) er kerfi sem styður <b>hönnun, greiningu, framkvæmd og eftirlit</b> með viðskiptaferlum á grundvelli <b>skýrs</b> (e. <i>explicit</i>) ferlalíkans. Það þróaðist úr <b>vinnuflæðiskerfum</b> (e. <i>Workflow Management Systems, WfMS</i>), þar sem líkanið og framkvæmdin voru aðalatriðin; BPMS bætir greiningu, hermun og eftirliti við. Dæmi um lausnir á markaði eru Bizagi, ARIS, Signavio og Nintex; margar bjóða líka ferlaköfun (e. <i>process mining</i>), útgáfustýringu og hermun. Gartner-fjórðungurinn á glærunum raðar framleiðendum eftir framtíðarsýn og getu til framkvæmdar.</p>
+
+<h3>Tegundir ferlastjórnunarkerfa</h3>
+<svg class="diagram" viewBox="0 0 640 300" role="img" aria-label="Fjórar tegundir kerfa eftir uppbyggingu ferlisins og því hvort þau eru gagnadrifin eða ferladrifin: hópakerfi neðst til vinstri, ad hoc vinnuflæðiskerfi, tilvikastjórnunarkerfi og framleiðsluvinnuflæðiskerfi efst til hægri." style="max-width:100%;height:auto">
+  <g style="stroke:var(--ink);stroke-width:1.5"><line x1="150" y1="20" x2="150" y2="250"/><line x1="150" y1="250" x2="620" y2="250"/></g>
+  <g class="small" text-anchor="end"><text x="140" y="45" class="small">skýrt mótað</text><text x="140" y="105" class="small">óbeint mótað</text><text x="140" y="165" class="small">ad hoc mótað</text><text x="140" y="225" class="small">ómótað</text></g>
+  <text x="200" y="275" class="small">gagnadrifið</text><text x="610" y="275" class="small" text-anchor="end">ferladrifið</text>
+  <rect x="420" y="25" width="190" height="42" rx="6" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.5"/><text x="515" y="44" text-anchor="middle">Framleiðsluvinnuflæðiskerfi</text><text x="515" y="60" text-anchor="middle" class="small">production workflow (t.d. SAP)</text>
+  <rect x="300" y="85" width="240" height="42" rx="6" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.3"/><text x="420" y="104" text-anchor="middle">Tilvikastjórnunarkerfi</text><text x="420" y="120" text-anchor="middle" class="small">case management (t.d. Salesforce)</text>
+  <rect x="420" y="145" width="190" height="42" rx="6" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.3"/><text x="515" y="164" text-anchor="middle">Ad hoc vinnuflæðiskerfi</text><text x="515" y="180" text-anchor="middle" class="small">t.d. Trello</text>
+  <rect x="165" y="200" width="170" height="42" rx="6" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.3"/><text x="250" y="219" text-anchor="middle">Hópakerfi</text><text x="250" y="235" text-anchor="middle" class="small">groupware (Slack, Teams)</text>
+</svg>
+<p>Því ofar og lengra til hægri, því meira stýrir <b>ferlalíkanið</b> vinnunni. Hópakerfi styðja samskipti en vita ekkert um ferlið; framleiðsluvinnuflæðiskerfi keyra fyrir fram skilgreind, endurtekin ferli með miklu magni. Tilvikastjórnunarkerfi (e. <i>case management</i>) eru á milli: málið (tilvikið) og gögn þess eru í miðjunni og þekkingarstarfsmaður ræður röðinni að hluta.</p>
+
+<h2 id="bpms">Uppbygging BPMS</h2>
+<svg class="diagram" viewBox="0 0 680 360" role="img" aria-label="Uppbygging BPMS: líkanatól tengist líkanageymslu, bæði tengjast keyrsluvél. Keyrsluvélin tengist stjórnunar- og eftirlitstólum, verklistastjóra, keyrsluskrám og ytri þjónustum utan BPMS." style="max-width:100%;height:auto">
+  <defs><marker id="k7b-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker></defs>
+  <rect x="10" y="10" width="480" height="340" rx="8" style="fill:none;stroke:var(--rule-2);stroke-width:1.4;stroke-dasharray:6 4"/><text x="22" y="32" style="font-weight:700">BPMS</text>
+  <g style="stroke:var(--ink);stroke-width:1.5;fill:none">
+    <line x1="170" y1="70" x2="290" y2="70" marker-start="url(#k7b-a)" marker-end="url(#k7b-a)"/>
+    <line x1="350" y1="95" x2="350" y2="160" marker-end="url(#k7b-a)"/>
+    <line x1="150" y1="95" x2="275" y2="165" marker-end="url(#k7b-a)"/>
+    <line x1="182" y1="190" x2="268" y2="190" marker-start="url(#k7b-a)" marker-end="url(#k7b-a)"/>
+    <line x1="290" y1="215" x2="170" y2="280" marker-end="url(#k7b-a)"/>
+    <line x1="100" y1="265" x2="100" y2="220" marker-end="url(#k7b-a)"/>
+    <line x1="350" y1="220" x2="350" y2="270" marker-start="url(#k7b-a)" marker-end="url(#k7b-a)"/>
+    <line x1="430" y1="190" x2="530" y2="190" marker-start="url(#k7b-a)" marker-end="url(#k7b-a)"/>
+  </g>
+  <rect x="30" y="45" width="140" height="50" rx="6" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="100" y="67" text-anchor="middle">Líkanatól</text><text x="100" y="83" text-anchor="middle" class="small">process modeling tool</text>
+  <path d="M290 50 v40 a60 10 0 0 0 120 0 v-40 a60 10 0 0 0 -120 0 a60 10 0 0 0 120 0" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="350" y="78" text-anchor="middle" class="small">líkanageymsla</text><text x="350" y="92" text-anchor="middle" class="small">(repository)</text>
+  <rect x="270" y="160" width="160" height="60" rx="6" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:2.2"/><text x="350" y="186" text-anchor="middle" style="fill:var(--mag);font-weight:700">Keyrsluvél</text><text x="350" y="204" text-anchor="middle" class="small">execution engine</text>
+  <rect x="18" y="165" width="164" height="55" rx="6" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="100" y="186" text-anchor="middle">Stjórnun og eftirlit</text><text x="100" y="204" text-anchor="middle" class="small">administration &amp; monitoring</text>
+  <path d="M40 270 v40 a60 10 0 0 0 120 0 v-40 a60 10 0 0 0 -120 0 a60 10 0 0 0 120 0" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="100" y="300" text-anchor="middle" class="small">keyrsluskrár</text><text x="100" y="314" text-anchor="middle" class="small">(execution logs)</text>
+  <rect x="280" y="270" width="140" height="55" rx="6" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="350" y="292" text-anchor="middle">Verklistastjóri</text><text x="350" y="310" text-anchor="middle" class="small">worklist handler</text>
+  <rect x="540" y="168" width="125" height="50" rx="6" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><rect x="546" y="162" width="125" height="50" rx="6" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="608" y="185" text-anchor="middle">Ytri þjónustur</text><text x="608" y="201" text-anchor="middle" class="small">external services</text>
+</svg>
+<div class="tablewrap"><table>
+<thead><tr><th>Eining</th><th>Hlutverk</th></tr></thead>
+<tbody>
+<tr><td><b>Keyrsluvél</b> (e. <i>execution engine</i>)</td><td>Hjarta kerfisins. (i) Býr til keyranleg tilvik ferlisins (e. <i>process instances, cases</i>), (ii) dreifir vinnu til þátttakenda frá upphafi til enda og (iii) sækir og vistar gögn sjálfvirkt og felur hugbúnaði sjálfvirk verk.</td></tr>
+<tr><td><b>Líkanatól</b> (e. <i>process modeling tool</i>)</td><td>Býr til og breytir ferlalíkönum, bætir við gögnum (inntak/úttak), þátttakendum, viðskiptareglum og frammistöðumælikvörðum, og vistar líkön í <b>líkanageymslu</b> (e. <i>repository</i>). Líkan er sett í keyrsluvélina (e. <i>deployed</i>) til að keyra það.</td></tr>
+<tr><td><b>Verklistastjóri</b> (e. <i>worklist handler</i>)</td><td>Þar sem þátttakendum er boðin vinna (e. <i>work items</i>) og þeir taka hana að sér. Líkist innhólfi í tölvupósti. Keyrsluvélin heldur utan um hvaða verk bíða og birtir þau í verklista hvers og eins.</td></tr>
+<tr><td><b>Ytri þjónustur</b> (e. <i>external services</i>)</td><td>Forrit utan BPMS sem keyrsluvélin kallar á fyrir sjálfvirk verk, t.d. lánshæfismat. Forritið þarf að bjóða <b>þjónustuviðmót</b> (e. <i>service interface</i>).</td></tr>
+<tr><td><b>Stjórnunar- og eftirlitstól</b> (e. <i>administration and monitoring tools</i>)</td><td>Rekstrarmál: hverjir eru tiltækir, hvernig á að bregðast við frávikum, og <b>eftirlit</b>: samantekt yfir mörg mál (t.d. umferðartími, % of seint). BPMS skráir keyrsluna skref fyrir skref í <b>keyrsluskrár</b> (e. <i>execution logs</i>), og úr þeim eru mælaborð búin til (og þær eru hráefni ferlaköfunar).</td></tr>
+</tbody></table></div>
+
+<h2 id="kostir">Kostir og áskoranir BPMS</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Kostur</th><th>Hvað felst í honum</th></tr></thead>
+<tbody>
+<tr><td><b>Minna vinnuálag</b> (e. <i>workload reduction</i>)</td><td>(1) Flutningur vinnu milli fólks minnkar eða hverfur, (2) samhæfing (hvað á að gera, í hvaða röð og af hverjum) er sjálfvirk og (3) upplýsingasöfnun um ferlið er sjálfvirk.</td></tr>
+<tr><td><b>Sveigjanleg samþætting</b> (e. <i>flexible system integration</i>)</td><td>Viðskiptareglur eru aðskildar frá gagnavinnslu: þær eru ekki harðkóðaðar heldur í BPMS. BPMS tengir líka saman ólík UT-kerfi.</td></tr>
+<tr><td><b>Gagnsæ keyrsla</b> (e. <i>execution transparency</i>)</td><td>Gögn um hvernig ferlið keyrir í raun: <b>keyrsluupplýsingar</b> (e. <i>operational information</i>) um hvert mál og <b>sögulegar upplýsingar</b> (e. <i>historic information</i>), samantekt lokaðra mála, meðaltöl o.s.frv.</td></tr>
+<tr><td><b>Reglufylgni</b> (e. <i>rule enforcement</i>)</td><td>Reglum er framfylgt beint, t.d. aðskilnaður verka (e. <i>separation of duties</i>) í fjármálageiranum. Kröfur um reglufylgni jukust eftir Sarbanes-Oxley lögin (2002) í kjölfar Enron og WorldCom.</td></tr>
+</tbody></table></div>
+<p><b>Áskoranir</b> skiptast í tvennt:</p>
+<ul>
+<li><b>Tæknilegar</b> (e. <i>technical</i>): erfitt að samþætta kerfi sem eru ekki „opin“ í hönnun. Millilag (e. <i>middleware</i>) og hugbúnaður sem þjónusta (SaaS) hjálpa, og RPA (hér að neðan) er önnur leið.</li>
+<li><b>Skipulagslegar</b> (e. <i>organizational</i>): ótti við að sjálfvirknivæðing þýði uppsagnir, og <b>afhjúpun</b> (e. <i>exposure</i>): þegar ferlið er gagnsætt sést hver vinnur hægt eða gerir mistök, sem getur vakið mótstöðu.</li>
+</ul>
+<h3>Breytingastjórnun</h3>
+<p>Innleiðing BPMS er oft hluti af stærri umbreytingu, og rannsóknir benda til að um tvær af hverjum þremur slíkum umbreytingum mistakist, oftast vegna lélegrar stjórnunar. Glærurnar nefna þrjú lögmál breytingastjórnunar (e. <i>change management</i>):</p>
+<ul>
+<li><b>Of snemmbúinn sigur</b> (e. <i>early victory</i>): teymið lýsir sigri og er leyst upp, og innan fárra ára hafa breytingarnar horfið. Betra er að nota litla, skjóta sigra sem stökkpall að stærri verkefnum.</li>
+<li><b>Eðli mótstöðu</b> (e. <i>nature of resistance</i>): klárt og tryggt starfsfólk sem styður breytinguna getur samt ekkert gert til að hún takist, vegna <i>falinnar samkeppnisskuldbindingar</i> (e. <i>hidden competing commitment</i>), t.d. reynslu af því að hver unnin áskorun leiðir bara af sér erfiðari. Gefðu þér tíma til að skilja hegðun og forsendur fólks.</li>
+<li><b>Villan um áætlunarbreytingar</b> (e. <i>programmatic change fallacy</i>): að halda að breyting gerist bara með fyrirtækjaáætlun ofan frá. Leyfðu einingum að laga breytinguna að sér; formlega skipulagið breytist fyrst þegar breytingin hefur fest rætur.</li>
+</ul>
+
+<h2 id="rpa">RPA: hugbúnaðarþjarkar</h2>
+<p><b>RPA</b> (e. <i>Robotic Process Automation</i>) er sjálfvirknivæðing síendurtekinna, reglubundinna verka með stafrænum þjörkum (e. <i>software robots</i>) sem herma eftir aðgerðum starfsfólks í notendaviðmóti (GUI): smella, afrita, líma, slá inn. Dæmi úr bókinni: viðskiptavinur spyr um stöðu pöntunar í vefformi; starfsmaður afritar pöntunarnúmerið, flettir því upp í ERP-kerfi og límir stöðuna í svarpóst. Þjarkur getur gert þetta.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Kostir</th><th>Takmarkanir</th></tr></thead>
+<tbody><tr><td>• Hröð innleiðing og lágur kostnaður<br>• Engar breytingar á undirliggjandi kerfum; hentar eldri kerfum án tenginga<br>• Færri villur, meiri afköst<br>• Meiri starfsánægja (einhæf verk hverfa)</td><td>• Gengur best í einföldum, stöðluðum, reglumiðuðum ferlum<br>• Viðkvæmt fyrir breytingum á viðmóti (nýr hnappur getur brotið þjarkinn)<br>• Hentar ekki þegar þarf dómgreind sérfræðinga<br>• Uppsetning krefst þekkingar á kerfunum og tæknikunnáttu</td></tr></tbody>
+</table></div>
+<p>UiPath (stofnað 2005 í Rúmeníu, nú með höfuðstöðvar í New York) er ein útbreiddasta RPA-lausnin, vinsæl í fjármálageiranum, heilbrigðisþjónustu og opinberri stjórnsýslu.</p>
+<div class="note tip"><p><b class="t">BPMS eða RPA?</b> BPMS stýrir <i>öllu ferlinu</i> út frá líkani og talar við kerfi í gegnum þjónustuviðmót. RPA sjálfvirknivæðir <i>einstök verk</i> með því að herma eftir manneskju í viðmótinu, þegar engin tenging er til. Þau vinna oft saman: BPMS kallar á þjark sem „ytri þjónustu“.</p></div>
+
+<h2 id="keyranlegt">Frá hugmyndalíkani til keyranlegs líkans</h2>
+<p>BPMN-líkönin sem þú teiknar í EV1 og HÓP1 eru <b>huglæg líkön</b> (e. <i>conceptual process models</i>) til skjölunar og greiningar. Þau eru <b>viljandi óhlutbundin</b> (e. <i>intentionally abstract</i>) og án tæknilegra smáatriða. Til að BPMS geti túlkað og keyrt þau þarf að endurvinna þau kerfisbundið í <b>keyranleg líkön</b> (e. <i>executable process models</i>). Bókin lýsir því í fimm skrefum:</p>
+<div class="key">
+<ol>
+<li><b>Greina mörk sjálfvirkni</b> (e. <i>identify the automation boundaries</i>)</li>
+<li><b>Fara yfir handvirk verk</b> (e. <i>review manual tasks</i>)</li>
+<li><b>Fullgera líkanið</b> (e. <i>complete the process model</i>)</li>
+<li><b>Koma líkaninu á hæfilegt nákvæmnistig</b> (e. <i>bring to an adequate granularity level</i>)</li>
+<li><b>Tilgreina keyrslueiginleika</b> (e. <i>specify execution properties</i>)</li>
+</ol>
+</div>
+
+<h3>Skref 1: mörk sjálfvirkni og verktegundir</h3>
+<p>Meginreglan er að <b>ekki er hægt að sjálfvirknivæða öll ferli</b>. Þú greinir hvaða hlutum ferlisins BPMS getur stýrt og hverjum ekki, með því að flokka hvert verk í eina af þremur tegundum, í samræmi við BPMN:</p>
+<svg class="diagram" viewBox="0 0 700 220" role="img" aria-label="Sjö BPMN-verktegundir með merkjum: handvirkt verk með hönd, notendaverk með manneskju, þjónustuverk með tannhjólum, skriftuverk með skrollu, viðskiptareglaverk með töflu, sendiverk með fylltu umslagi og móttökuverk með tómu umslagi." style="max-width:100%;height:auto">
+  <g style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5">
+    <rect x="10" y="20" width="90" height="60" rx="9"/><rect x="110" y="20" width="90" height="60" rx="9"/>
+    <rect x="230" y="20" width="85" height="60" rx="9"/><rect x="325" y="20" width="85" height="60" rx="9"/><rect x="420" y="20" width="85" height="60" rx="9"/><rect x="515" y="20" width="85" height="60" rx="9"/><rect x="610" y="20" width="85" height="60" rx="9"/>
+  </g>
+  <g style="fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round">
+    <path d="M20 44 v-8 a2 2 0 0 1 4 0 v6 M24 36 v-4 a2 2 0 0 1 4 0 v10 M28 34 a2 2 0 0 1 4 0 v8 M32 36 a2 2 0 0 1 4 0 v10 q0 6 -7 6 h-3 q-5 0 -8 -6 l-3 -5 a2 2 0 0 1 3 -2 l3 3"/>
+    <circle cx="126" cy="34" r="5"/><path d="M116 50 q0 -9 10 -9 q10 0 10 9 z"/>
+    <circle cx="245" cy="38" r="6"/><circle cx="245" cy="38" r="2"/><path d="M245 29 v3 M245 44 v3 M236 38 h3 M251 38 h3"/><circle cx="254" cy="46" r="4.5"/>
+    <path d="M335 30 h14 q-3 4 0 8 q3 4 0 8 h-14 q3 -4 0 -8 q-3 -4 0 -8 z M338 35 h7 M338 40 h7"/>
+    <rect x="430" y="30" width="20" height="15"/><path d="M430 35 h20 M436 35 v10"/>
+    <rect x="525" y="31" width="20" height="13" style="fill:var(--ink)"/><path d="M525 31 l10 7 l10 -7" style="stroke:var(--raised)"/>
+    <rect x="620" y="31" width="20" height="13"/><path d="M620 31 l10 7 l10 -7"/>
+  </g>
+  <g text-anchor="middle"><text x="55" y="70" class="small">Handvirkt</text><text x="155" y="70" class="small">Notendaverk</text><text x="272" y="70" class="small">Þjónustuverk</text><text x="367" y="70" class="small">Skriftuverk</text><text x="462" y="70" class="small">Viðskiptaregla</text><text x="557" y="70" class="small">Sendiverk</text><text x="652" y="70" class="small">Móttökuverk</text></g>
+  <g text-anchor="middle"><text x="55" y="100" class="small">manual</text><text x="155" y="100" class="small">user</text><text x="272" y="100" class="small">service</text><text x="367" y="100" class="small">script</text><text x="462" y="100" class="small">business rule</text><text x="557" y="100" class="small">send</text><text x="652" y="100" class="small">receive</text></g>
+  <path d="M230 118 h465" style="stroke:var(--mag);stroke-width:2"/><text x="462" y="140" text-anchor="middle" style="fill:var(--mag);font-weight:700">sjálfvirk verk (automated)</text>
+  <path d="M110 118 h90" style="stroke:var(--good);stroke-width:2"/><text x="155" y="138" text-anchor="middle" style="fill:var(--good);font-weight:700;font-size:12px">BPMS sér</text><text x="155" y="153" text-anchor="middle" style="fill:var(--good);font-weight:700;font-size:12px">þau</text>
+  <path d="M10 118 h90" style="stroke:var(--bad);stroke-width:2"/><text x="55" y="138" text-anchor="middle" style="fill:var(--bad);font-weight:700;font-size:12px">BPMS sér</text><text x="55" y="153" text-anchor="middle" style="fill:var(--bad);font-weight:700;font-size:12px">þau ekki</text>
+  <text x="350" y="185" text-anchor="middle" class="small">Handvirkt: unnið án hugbúnaðar. Notendaverk: manneskja vinnur verkið með stuðningi BPMS (verklisti).</text>
+  <text x="350" y="205" text-anchor="middle" class="small">Sjálfvirkt: BPMS sjálft eða ytri þjónusta vinnur verkið án mannlegrar íhlutunar.</text>
+</svg>
+<div class="tablewrap"><table>
+<thead><tr><th>Verktegund</th><th>Merki</th><th>Hver vinnur verkið?</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td><b>Handvirkt verk</b> (<i>manual task</i>)</td><td>hönd</td><td>Þátttakandi, án hugbúnaðar. BPMS veit ekki af því.</td><td>Matsmaður skoðar bíl á staðnum; starfsmaður ber tösku að vél.</td></tr>
+<tr><td><b>Notendaverk</b> (<i>user task</i>)</td><td>manneskja</td><td>Þátttakandi, með stuðningi BPMS: verkið birtist í verklistanum og hann skráir niðurstöðuna.</td><td>Tjónafulltrúi samþykkir eða hafnar bótum á skjá.</td></tr>
+<tr><td><b>Skriftuverk</b> (<i>script task</i>)</td><td>skrolla</td><td>BPMS keyrir kóða (skriftu) innan BPMS.</td><td>Reikna bætur = tjón − sjálfsábyrgð.</td></tr>
+<tr><td><b>Þjónustuverk</b> (<i>service task</i>)</td><td>tannhjól</td><td>Ytra forrit, sem BPMS kallar á og fær svar frá.</td><td>Sækja lánshæfismat; fletta upp í þjóðskrá.</td></tr>
+<tr><td><b>Viðskiptareglaverk</b> (<i>business rule task</i>)</td><td>tafla</td><td>Reglukerfi (e. <i>rules engine</i>) utan BPMS metur reglur, oft ákvörðunartöflu.</td><td>Ákvarða áhættuflokk viðskiptavinar.</td></tr>
+<tr><td><b>Sendiverk</b> (<i>send task</i>)</td><td>fyllt umslag</td><td>BPMS sendir skilaboð til ytri aðila (einstefna).</td><td>Senda staðfestingu til viðskiptavinar.</td></tr>
+<tr><td><b>Móttökuverk</b> (<i>receive task</i>)</td><td>tómt umslag</td><td>BPMS bíður eftir skilaboðum frá ytri aðila.</td><td>Bíða eftir undirrituðum samningi.</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> (1) að merkja verk sem „notendaverk“ af því að manneskja vinnur það, þó að engin tölva komi við sögu. Þá er það <b>handvirkt</b>. Prófaðu: <i>sér BPMS verkið og veit hvenær því lýkur?</i> (2) Að rugla saman <b>þjónustuverki</b> (kallar og fær svar til baka) og <b>sendiverki</b> (sendir skilaboð og heldur áfram). (3) Að kalla útreikning „þjónustuverk“ þegar hann er keyrður í BPMS sjálfu; þá er það <b>skriftuverk</b>.</p></div>
+
+<h3>Skref 2: farið yfir handvirk verk</h3>
+<p>Meginreglan: <b>ef BPMS sér ekki verkið, er það ekki til</b> (fyrir BPMS). Fyrir hvert handvirkt verk velur þú annaðhvort að finna leið til að styðja það með tækni, eða einangra það og sjálfvirknivæða afganginn. Tvær leiðir til að tengja handvirkt verk við BPMS:</p>
+<ul>
+<li><b>Sem notendaverk:</b> starfsmaðurinn tekur verkið út í verklistanum („check out“), vinnur það (t.d. sækir vöru á lager) og skráir það lokið („check in“).</li>
+<li><b>Sem sjálfvirkt verk:</b> lagerstarfsmaður skannar strikamerki hráefnis með skanna sem er tengdur BPMS, og skönnunin lætur BPMS vita að verkinu sé lokið.</li>
+</ul>
+
+<h3>Skref 3: fullgera líkanið</h3>
+<p>Tvær meginreglur: (i) <b>frávik eru reglan</b> (e. <i>exceptions are the rule</i>): keyranlegt líkan þarf að ráða við villur, tímamörk, afturkallanir og ófullnægjandi gögn, og (ii) <b>engin gögn, engar ákvarðanir og engin afhending verka</b> (e. <i>no data implies no decisions and no task handoff</i>): hver ákvörðun í hliði þarf gögn til að byggja á, og hvert verk þarf að fá inntaksgögnin sín. Huglæg líkön sleppa oft slíku af því að líkanagerðarmaðurinn telur það óviðkomandi, gerir ráð fyrir að allir viti það eða veit einfaldlega ekki af því.</p>
+
+<h3>Skref 4: hæfilegt nákvæmnistig</h3>
+<ul>
+<li><b>Sundurliðun verka</b> (e. <i>task decomposition</i>): ef verk krefst fleiri en einnar auðlindar (t.d. tveggja hlutverka) er það brotið niður svo hægt sé að úthluta hverjum hluta til sinnar auðlindar.</li>
+<li><b>Samsöfnun verka</b> (e. <i>task aggregation</i>): tvö eða fleiri samliggjandi verk sem sama auðlind vinnur eru kandídatar í að sameina í eitt.</li>
+<li><b>Ad hoc undirferli með CMMN</b> (e. <i>Case Management Model and Notation</i>): sum verk hafa enga fasta röð, t.d. getur viðskiptavinur skoðað stöðu pöntunar, uppfært upplýsingar eða afturkallað pöntun hvenær sem er þar til greitt er. Í BPMN er það ad hoc undirferli (merkt ~), og CMMN er staðall til að lýsa slíkri málavinnslu nánar.</li>
+</ul>
+<p>Takið eftir tengslunum við heuristics: samsöfnun verka er sama hugmynd og <b>activity composition</b>, og sundurliðun er skyld <b>triage</b>.</p>
+
+<h3>Skref 5: keyrslueiginleikar</h3>
+<p>Síðasta skrefið gerir líkanið að fullu keyranlegt með því að tilgreina hvernig hver eining er útfærð í því BPMS sem er valið. Keyrslueiginleikar (e. <i>execution properties</i>) eru:</p>
+<ul>
+<li>breytur, skilaboð, merki (e. <i>signals</i>), villur og gagnatög þeirra (oft lýst með XML Schema, XSD, og geymd sem XML),</li>
+<li>gagnavörpun (e. <i>data mappings</i>) milli gagnahluta og inntaks/úttaks verka,</li>
+<li>þjónustuupplýsingar fyrir þjónustu-, sendi- og móttökuverk og skilaboða- og merkjaatburði,</li>
+<li>kóðabútar fyrir skriftuverk,</li>
+<li>úthlutunarreglur og uppbygging notendaviðmóts fyrir notendaverk,</li>
+<li>segðir (e. <i>expressions</i>) fyrir verk, atburði og raðflæði (t.d. skilyrði á útgöngum hliða),</li>
+<li>aðrir eiginleikar sem eru sértækir fyrir viðkomandi BPMS.</li>
+</ul>
+
+<h3>Úthlutun notendaverka</h3>
+<p>Fyrir notendaverk þarf að ákveða <b>hverjir koma til greina</b> (e. <i>creation patterns</i>) og síðan <b>hver fær verkið</b> (e. <i>push patterns</i>).</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Mynstur (hverjir koma til greina)</th><th>Merking</th></tr></thead>
+<tbody>
+<tr><td>Direct allocation</td><td>Ákveðinn einstaklingur er skilgreindur við hönnun.</td></tr>
+<tr><td>Role-based allocation</td><td>Verkið er tengt hlutverki við hönnun; í keyrslu er það boðið öllum í hlutverkinu.</td></tr>
+<tr><td>Deferred allocation</td><td>Hver vinnur verkið ræðst fyrst í keyrslu (t.d. út frá gögnum málsins).</td></tr>
+<tr><td>Authorization</td><td>Verkið stendur aðeins þeim til boða sem hafa heimild.</td></tr>
+<tr><td>Separation of duties</td><td>Tvö tiltekin verk verða að vera unnin af <b>ólíkum</b> aðilum (t.d. stofna og samþykkja greiðslu).</td></tr>
+<tr><td>Case handling</td><td>Öll verk málsins fara til sama aðila.</td></tr>
+<tr><td>Retain familiar</td><td>Tvö tiltekin verk verða að vera unnin af <b>sama</b> aðila.</td></tr>
+<tr><td>Capability-based</td><td>Þeir sem hafa rétta hæfni fá verkið.</td></tr>
+<tr><td>History-based</td><td>Þeir sem hafa áður unnið verkið vel fá það.</td></tr>
+<tr><td>Organizational</td><td>Þeir sem gegna ákveðinni stöðu í skipuriti fá verkið.</td></tr>
+</tbody></table></div>
+<div class="tablewrap"><table>
+<thead><tr><th>Mynstur (hver fær verkið)</th><th>Merking</th></tr></thead>
+<tbody>
+<tr><td>Allocation by offer</td><td>Verkið er boðið mörgum; sá sem tekur það („checks out“) fær það og það hverfur hjá hinum.</td></tr>
+<tr><td>Random allocation</td><td>Slembivalinn aðili sem uppfyllir skilyrðin fær verkið.</td></tr>
+<tr><td>Round-robin</td><td>Verkum er deilt í hring: sá sem lengst hefur verið án verks fær næsta.</td></tr>
+<tr><td>Shortest queue</td><td>Sá sem hefur stystu biðröðina af verkum fær það.</td></tr>
+</tbody></table></div>
+
+<h3>Síðasti spölurinn (the last mile)</h3>
+<p>BPMS styðja BPMN misvel. <b>Hreint BPMN</b> (e. <i>pure BPMN</i>): hönnuð frá grunni til að keyra BPMN beint (t.d. Activiti og Camunda). <b>Aðlagað BPMN</b> (e. <i>adapted BPMN</i>): nota BPMN sem „skinn“ en keyra innri framsetningu (t.d. Bizagi og Bonita). <b>Ekki BPMN</b>: eigið mál og merkingarfræði (t.d. YAWL). Því meira sem kerfið víkur frá BPMN, því meiri vinna er að flytja líkanið úr huglægu líkani í keyrslu.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Námsstyrkjaumsókn gerð keyranleg</span></div><div class="ex-body">
+<p>Huglæga líkanið í EV1 hefur þessi verk: (a) Umsækjandi sendir umsókn, (b) Sækja tekjuupplýsingar, (c) Ákvarða styrkflokk eftir úthlutunarreglum, (d) Reikna styrkupphæð, (e) Ráðgjafi metur rökstuðning, (f) Póstleggja frumrit samnings, (g) Senda tilkynningu til greiðslukerfis. Flokkaðu verkin eftir verktegund og segðu hvað skref 2 og 3 myndu bæta við.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) Frá sjónarhóli sjóðsins er þetta <b>móttaka</b>: ferlið bíður eftir skilaboðum (oft skilaboðaupphafsatburður). (b) <b>Þjónustuverk</b>: kallað á vefþjónustu Skattsins og svar kemur til baka. (c) <b>Viðskiptaregluverk</b>: ákvörðunartafla í reglukerfi. (d) <b>Skriftuverk</b>: einföld formúla í BPMS. (e) <b>Notendaverk</b>: ráðgjafi metur á skjá í verklista. (f) <b>Handvirkt verk</b>: póstlagning gerist utan kerfisins. (g) <b>Sendiverk</b>: einstefnuskilaboð.</p>
+<p><b>Skref 2:</b> (f) er ósýnilegt BPMS. Annaðhvort verður það notendaverk („staðfesta póstlagningu“) eða er leyst með rafrænni undirritun. <b>Skref 3:</b> bæta við því sem gerist ef Skatturinn svarar ekki (tímamörk, villuatburður), ef umsókn vantar gögn, og gagnahlutum sem ákvörðunin í (c) byggir á.</p>
+<p><span class="ans">móttaka, þjónusta, viðskiptaregla, skrifta, notandi, handvirkt, sending</span></p>
+</div></details></div></div>
+
+<h2 id="samantekt">Samantekt fyrir prófið</h2>
+<div class="key">
+<ul>
+<li><b>Djöflafjórþáttun:</b> tími, kostnaður, gæði, sveigjanleiki. Bætir þú einn, líður oft annar.</li>
+<li><b>Hvelið:</b> transactional ↔ transformational, creative ↔ analytical, inward ↔ outward. HPR, Lean, Six Sigma, TOC, TRIZ, 7FE eru transactional; BPR, NESTT, Process Model Canvas, product-based design eru transformational.</li>
+<li><b>HPR:</b> 29 heuristics í 7 flokkum; þrjú stig: hefja, hanna, meta.</li>
+<li><b>PAIS:</b> sértæk (ERP, CRM, SCM, PLM) og almenn (vandamálakerfi, DMS, BPMS). BPMS: keyrsluvél, líkanatól, verklistastjóri, ytri þjónustur, stjórnunar- og eftirlitstól.</li>
+<li><b>Kostir BPMS:</b> minna vinnuálag, sveigjanleg samþætting, gagnsæ keyrsla, reglufylgni. <b>Áskoranir:</b> tæknilegar og skipulagslegar.</li>
+<li><b>RPA:</b> þjarkar í notendaviðmóti; hratt og ódýrt, en brothætt og aðeins fyrir reglubundin verk.</li>
+<li><b>Fimm skref</b> í keyranlegt líkan: mörk sjálfvirkni, handvirk verk, fullgera, nákvæmnistig, keyrslueiginleikar.</li>
+</ul>
+</div>

@@ -1,0 +1,25 @@
+/* cards/uppgotvun.js – flashcards fyrir kafla 4: Ferlauppgötvun. */
+(function () { var TK = (window.TK = window.TK || {}); (TK.CARDS = TK.CARDS || []).push(
+  { c: "uppgotvun", q: "Hvað er ferlauppgötvun (process discovery)?", a: "Að safna upplýsingum um <b>núverandi</b> ferli og skipuleggja þær í <b>as-is</b> ferlalíkan." },
+  { c: "uppgotvun", q: "Fjögur verkefni ferlauppgötvunar?", a: "1. Skilgreina umgjörð (teymið) 2. Safna upplýsingum 3. Vinna líkanagerðina 4. Tryggja gæði líkansins." },
+  { c: "uppgotvun", q: "Hlutverk ferlagreinanda vs. sérfræðings á sviðinu?", a: "<b>Ferlagreinandi</b> (process analyst) kann líkanagerð og stýrir vinnunni. <b>Sérfræðingar á sviðinu</b> (domain experts) þekkja starfsemina en ekki líkanamál." },
+  { c: "uppgotvun", q: "Þrjár áskoranir ferlauppgötvunar?", a: "Brotakennd ferlaþekking · hugsun í tilvikum (case level) · vanþekking á líkanamálum (BPMN)." },
+  { c: "uppgotvun", q: "Þrír flokkar uppgötvunaraðferða?", a: "<b>Gagnadrifin</b> (skjalagreining, athugun, sjálfvirk uppgötvun), <b>viðtöl</b> og <b>vinnustofur</b>." },
+  { c: "uppgotvun", q: "Samanburður: hlutlægni og endurgjöf?", a: "Gögn: mikil hlutlægni, lítil endurgjöf strax. Viðtöl og vinnustofur: miðlungs-mikil hlutlægni, mikil dýpt, mikil endurgjöf strax." },
+  { c: "uppgotvun", q: "Þrír gallar skjalagreiningar?", a: "Skjöl ekki skipulögð eftir ferlum · rangt nákvæmnisstig · aðeins að hluta áreiðanleg (oft úrelt)." },
+  { c: "uppgotvun", q: "Virk vs. óvirk athugun?", a: "<b>Virk:</b> greinandinn leikur viðskiptavininn. <b>Óvirk:</b> hann fylgist með starfsfólkinu vinna." },
+  { c: "uppgotvun", q: "Helsti kostur og galli vinnustofa?", a: "Kostur: <b>ágreiningur leystur beint</b>. Galli: margir þurfa að vera lausir <b>samtímis</b>; oft margar lotur." },
+  { c: "uppgotvun", q: "Hlutverk í vinnustofu?", a: "Fundarstjóri (facilitator), tólstjóri (tool operator), sérfræðingar á sviðinu, ferlaeigandi og ferlagreinandi." },
+  { c: "uppgotvun", q: "Lágmarksdálkar í atburðaskrá (event log)?", a: "<b>Málsnúmer</b> (case ID), <b>aðgerð</b> (activity), <b>tímastimpill</b> (timestamp). Oft líka auðlind (resource)." },
+  { c: "uppgotvun", q: "Rakning (trace) vs. afbrigði (variant)?", a: "Rakning = röð aðgerða í einu tilviki. Afbrigði = öll tilvik með nákvæmlega sömu rakningu." },
+  { c: "uppgotvun", q: "Hvað er bein-eftirfylgnirit (DFG)?", a: "Hnútar = aðgerðir; brú $a \\to b$ með tíðni = hversu oft $b$ kom <b>strax</b> á eftir $a$ í sama tilviki." },
+  { c: "uppgotvun", q: "Fimm skref líkanagerðar?", a: "1. Mörk ferlis 2. Aðgerðir og atburðir 3. Auðlindir og afhendingar 4. Stjórnflæði 5. Aðrar einingar (gögn, frávik)." },
+  { c: "uppgotvun", q: "Forsenda vs. einföldun?", a: "<b>Forsenda</b> brúar óvissu um raunheiminn. <b>Einföldun</b> er innri ákvörðun til að gera líkanið fljótlegra og skýrara." },
+  { c: "uppgotvun", q: "Fjórir hlutar líkanamáls?", a: "Orðaforði (vocabulary), málskipan (syntax), merking (semantics), táknmál (notation)." },
+  { c: "uppgotvun", q: "Þrjár tegundir gæða ferlalíkana?", a: "<b>Málskipunargæði</b> (rétt teiknað), <b>merkingargæði</b> (rétt ferli: réttmæti + heilleiki), <b>notagildisgæði</b> (skiljanlegt)." },
+  { c: "uppgotvun", q: "Byggingarreglur um hlið?", a: "Klofnun: 1 inn, ≥2 út. Sameining: ≥2 inn, 1 út. Raðflæði fer ekki yfir mörk lauga." },
+  { c: "uppgotvun", q: "Fjórar hegðunarvillur?", a: "<b>Deadlock</b> (fastur tóki), <b>livelock</b> (endalaus lykkja), <b>skortur á samstillingu</b> (2 tókar á sama flæði), <b>dauð aðgerð</b>." },
+  { c: "uppgotvun", q: "XOR → AND? AND → XOR?", a: "XOR-klofnun + AND-sameining = <b>deadlock</b>. AND-klofnun + XOR-sameining = <b>skortur á samstillingu</b>." },
+  { c: "uppgotvun", q: "Þrjú skilyrði fyrir traustu líkani (soundness)?", a: "Hægt að ljúka (option to complete) · rétt lok (proper completion) · engar dauðar aðgerðir." },
+  { c: "uppgotvun", q: "7PMG G1-G7?", a: "G1 fáar einingar · G2 fáar leiðir á einingu · G3 einn upphafs- og lokaatburður · G4 vel skipulagt · G5 forðast OR · G6 sögn + andlag · G7 brjóta upp yfir 30 einingar." }
+); })();

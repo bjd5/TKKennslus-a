@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 6: Megindleg ferlagreining · Greining ferla og kerfa</title>
+<meta name="description" content="Kennsluvefur fyrir IÐN301G Greining ferla og kerfa: ferlaskráning, BPMN, ferlauppgötvun, eigindleg og megindleg greining, endurhönnun, ferlahugbúnaður, kerfishugsun og stjórnun ferla.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23173327'/%3E%3Ccircle cx='7' cy='16' r='3' fill='%23ffe98a'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23ffe98a'/%3E%3Cpath d='M25 11l5 5-5 5-5-5z' fill='%23ffe98a'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Greining ferla og kerfa</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Greining ferla og kerfa<small>IÐN301G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Ferlar og ferlaskráning</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Ferlalíkön í BPMN</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Þróuð ferlalíkön</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Ferlauppgötvun</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Eigindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-6.html" aria-current="page" data-gate="ch6">6. Megindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Endurhönnun og ferlahugbúnaður</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Kerfishugsun og orsakalykkjur</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Stjórnun ferla og BPM í starfseminni</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="upprifjun.html" data-gate="archive">Lokaupprifjun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+<li><a class="nav" href="verkfaerakista.html">Verkfærakista</a></li>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="6" data-topics="megindleg">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 6: Megindleg ferlagreining</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-5.html">kafla 5</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 6 af 9 · F7 · BPM kafli 7</p>
+<h1>Megindleg ferlagreining</h1>
+<p class="ch-exam"><b>Tengist:</b> HÓP1: flæðigreining, biðraðir og hermun</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Í eigindlegri greiningu spurðir þú <i>hvað</i> er að í ferlinu. Í megindlegri greiningu spyrðu <i>hversu mikið</i>: hve langan tíma tekur málið, hvað kostar það, hve mörg mál ræður ferlið við og hve lengi bíða viðskiptavinir. Þetta er eini reiknandi kafli námskeiðsins: á lokaprófinu eru reiknidæmi úr honum, og í HÓP1 notarðu sömu aðferðir til að bera saman núverandi ferli (as-is) og endurhannað ferli (to-be).</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b> Þrjár aðferðir, frá einföldustu til öflugustu:</p>
+<ol>
+  <li><b>Flæðisgreining</b> (flow analysis): blokkareglur á ferlalíkanið gefa hringrásartíma, kostnað og framleiðslugetu. Reiknað í höndunum.</li>
+  <li><b>Biðraðafræði</b> (queueing theory): M/M/1 og M/M/c gefa biðtíma og lengd raða þegar mál keppa um sömu auðlindir.</li>
+  <li><b>Hermun</b> (simulation): tölva líkir eftir þúsundum mála í gegnum líkanið, t.d. í BIMP.</li>
+</ol>
+<p>Hafðu <a href="formulublad.html">formúlublaðið</a> við höndina og prófaðu tölurnar í <a href="reiknivelar.html">reiknivélunum</a>.</p>
+</div>
+
+<h2 id="maelikvardar">Hvað mælum við? Fjórar víddir frammistöðu</h2>
+<p>Áður en þú reiknar þarftu að vita hvað þú vilt bæta. Kennslubókin (kafli 7.1) flokkar mælikvarða á frammistöðu ferla (process performance measures) í fjórar víddir:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Vídd</th><th>Dæmigerðir mælikvarðar</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td><b>Tími</b> (time)</td><td>Hringrásartími (CT), vinnslutími, biðtími, hlutfall mála sem klárast innan frests</td><td>Tjón er greitt að meðaltali 9 dögum eftir tilkynningu</td></tr>
+<tr><td><b>Kostnaður</b> (cost)</td><td>Kostnaður á hvert mál, launakostnaður, nýting auðlinda</td><td>Hver nýskráning í banka kostar 4.200 kr. í vinnu</td></tr>
+<tr><td><b>Gæði</b> (quality)</td><td>Ytri: ánægja viðskiptavina, kvartanir. Innri: villuhlutfall, endursendingar, starfsánægja</td><td>15 % umsókna um námsstyrk eru sendar til baka</td></tr>
+<tr><td><b>Sveigjanleiki</b> (flexibility)</td><td>Geta ferlisins til að bregðast við breytingum, t.d. auknu álagi eða sérþörfum</td><td>Getur viðhaldsdeildin tekið við tvöföldu magni í óveðri?</td></tr>
+</tbody></table></div>
+<p>Þessar víddir toga hver í aðra og eru því kallaðar <b>„Devil's quadrangle“</b> (djöflafjórþáttunin): ef þú styttir tíma með því að bæta við starfsfólki hækkar kostnaðurinn; ef þú sparar með því að sleppa yfirferð lækka gæðin. Góð endurhönnun bætir eina vídd án þess að fórna hinum að óþörfu, og þú þarft að geta sýnt það með tölum.</p>
+<div class="note tip"><p><b class="t">Ráð fyrir HÓP1:</b> veldu einn eða tvo mælikvarða sem skipta viðskiptavininn mestu (oftast hringrásartíma) og reiknaðu þá fyrir bæði as-is og to-be. „Endurhannaða ferlið styttir CT úr 8,65 í 5,1 dag“ er miklu sterkara en „ferlið verður hraðara“.</p></div>
+
+<h2 id="flaedigreining">Flæðisgreining (flow analysis)</h2>
+<p><b>Flæðisgreining</b> er fjölskylda megindlegra (quantitative) aðferða sem meta frammistöðu ferlis út frá ferlalíkaninu og því sem við vitum um hverja aðgerð (glæra 3). Með henni má meta:</p>
+<ul>
+  <li><b>hringrásartíma</b> (cycle time, CT), einnig kallaður umferðatími: tíminn frá því mál hefst þar til því lýkur,</li>
+  <li><b>kostnað á hvert mál</b> (per instance; á glærunum „token = instance“, eitt mál sem fer í gegnum ferlið),</li>
+  <li><b>villuhlutfall</b>, t.d. hve stór hluti mála endar í höfnun eða endursendingu.</li>
+</ul>
+<p>Hugmyndin er einföld: þú skiptir líkaninu í <b>blokkir</b>, reiknar hverja blokk fyrir sig og leggur saman. Inntakið er meðaltími hverrar aðgerðar ($T_i$), líkurnar á hverri XOR-leið ($p_i$) og hlutfall endursendinga ($r$). Þessar tölur koma úr ferlauppgötvun: viðtölum, mælingum eða atburðaskrám.</p>
+
+<h2 id="ct">Hringrásartími: fjórar blokkir</h2>
+<p>Á glærum 4-5 eru fjórar grunnblokkir. Lærðu þær utanbókar; öll ferli á prófinu eru sett saman úr þeim.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Blokk</th><th>BPMN</th><th>Hringrásartími</th><th>Af hverju</th></tr></thead>
+<tbody>
+<tr><td><b>Línuleg</b> (sequence)</td><td>aðgerðir í röð</td><td>$CT = \sum_{i=1}^{n} T_i$</td><td>Hver aðgerð byrjar þegar sú á undan lýkur.</td></tr>
+<tr><td><b>Valkvæð</b> (XOR)</td><td>XOR-hlið, ein leið valin</td><td>$CT = \sum_{i=1}^{n} p_i T_i$</td><td>Hvert mál fer bara eina leið; meðaltalið er vegið með líkum.</td></tr>
+<tr><td><b>Samhliða</b> (AND)</td><td>AND-hlið, allar leiðir</td><td>$CT = \max(T_1, \dots, T_n)$</td><td>Greinarnar eru unnar á sama tíma og samruninn bíður eftir þeirri lengstu.</td></tr>
+<tr><td><b>Endursending</b> (rework)</td><td>XOR-lykkja aftur á bak með líkum $r$</td><td>$CT = \dfrac{T}{1-r}$</td><td>Aðgerðin er að meðaltali unnin $1/(1-r)$ sinnum.</td></tr>
+</tbody></table></div>
+<p>Formúlan fyrir endursendingu kemur úr því að málið fer í gegn með líkum $1-r$ í hvert sinn. Fjöldi umferða er því geómetrískt dreifður með meðaltal $1/(1-r)$. Ef $r = 0{,}2$ er aðgerðin unnin $1/0{,}8 = 1{,}25$ sinnum að meðaltali.</p>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> (1) að leggja saman greinar í AND-blokk þegar spurt er um tíma; summan á bara við um kostnað og einingaálag. (2) Að nota $T(1+r)$ fyrir endursendingu; það á bara við ef aðgerðin getur í <i>mesta lagi</i> verið endurtekin einu sinni. (3) Að gleyma að líkurnar í XOR-blokk eiga að summast í 1.</p></div>
+<p>Blokkir geta verið <b>hreiðraðar</b>: grein í AND-blokk getur sjálf verið röð tveggja aðgerða (þá er $T$ greinarinnar summa þeirra), og innan endursendingar getur verið heil blokk. Reiknaðu þá innstu blokkina fyrst og vinndu þig út á við.</p>
+
+<h2 id="daemi-ct">Fullunnið dæmi: lánsumsókn (glærur 6-7)</h2>
+<p>Lánsumsókn fer fyrst í yfirferð. Í 20 % tilvika er hún ófullnægjandi og fer aftur í yfirferð. Síðan eru lánasaga og tekjur athugaðar samhliða, umsóknin er metin, og loks er annaðhvort gert lánstilboð (60 %) eða umsókn hafnað (40 %). Brotnu rammarnir sýna blokkirnar.</p>
+<figure style="margin:1.2rem 0"><svg viewBox="0 0 820 270" role="img" aria-label="BPMN-líkan af lánsumsókn með endursendingu, samhliða blokk, línulegri blokk og valkvæðri blokk" style="max-width:100%;height:auto;font:12px var(--sans);fill:var(--ink)"><defs><marker id="m6a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)"/></marker></defs><rect x="42" y="28" width="190" height="200" rx="6" fill="none" style="stroke:var(--mag);stroke-dasharray:5 4;stroke-width:1.2"/><text x="137" y="250" text-anchor="middle" style="fill:var(--mag);font-weight:700">Endursending</text><rect x="240" y="28" width="205" height="200" rx="6" fill="none" style="stroke:var(--mag);stroke-dasharray:5 4;stroke-width:1.2"/><text x="342.5" y="250" text-anchor="middle" style="fill:var(--mag);font-weight:700">Samhliða</text><rect x="453" y="28" width="110" height="200" rx="6" fill="none" style="stroke:var(--mag);stroke-dasharray:5 4;stroke-width:1.2"/><text x="508" y="250" text-anchor="middle" style="fill:var(--mag);font-weight:700">Línuleg</text><rect x="571" y="28" width="199" height="200" rx="6" fill="none" style="stroke:var(--mag);stroke-dasharray:5 4;stroke-width:1.2"/><text x="670.5" y="250" text-anchor="middle" style="fill:var(--mag);font-weight:700">Valkvæð</text><circle cx="20" cy="130" r="10" fill="none" style="stroke:var(--ink);stroke-width:1.5"/><path d="M30,130 L44,130" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><path d="M60,114 L76,130 L60,146 L44,130 Z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><path d="M54,124 L66,136 M66,124 L54,136" style="stroke:var(--ink);stroke-width:2.5"/><path d="M76,130 L94,130" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><rect x="95" y="106" width="90" height="48" rx="8" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><text x="140" y="127" text-anchor="middle">Yfirfara</text><text x="140" y="141" text-anchor="middle">umsókn</text><text x="140" y="169" text-anchor="middle" style="fill:var(--mag);font-weight:700">1 dagur</text><path d="M185,130 L199,130" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><path d="M215,114 L231,130 L215,146 L199,130 Z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><path d="M209,124 L221,136 M221,124 L209,136" style="stroke:var(--ink);stroke-width:2.5"/><path d="M215,114 L215,48 L60,48 L60,113" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><text x="80" y="42" style="">ófullnægjandi (20 %)</text><path d="M231,130 L249,130" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><text x="228" y="158" style="">80 %</text><path d="M265,114 L281,130 L265,146 L249,130 Z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><path d="M265,122 L265,138 M257,130 L273,130" style="stroke:var(--ink);stroke-width:2.5"/><path d="M265,114 L265,72 L299,72" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><path d="M265,146 L265,188 L299,188" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><rect x="300" y="50" width="95" height="44" rx="8" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><text x="347.5" y="69" text-anchor="middle">Athuga</text><text x="347.5" y="83" text-anchor="middle">lánasögu</text><text x="347" y="44" style="fill:var(--mag);font-weight:700;text-anchor:middle">1 dagur</text><rect x="300" y="166" width="95" height="44" rx="8" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><text x="347.5" y="185" text-anchor="middle">Athuga</text><text x="347.5" y="199" text-anchor="middle">tekjur</text><text x="347.5" y="225" text-anchor="middle" style="fill:var(--mag);font-weight:700">3 dagar</text><path d="M395,72 L425,72 L425,113" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><path d="M395,188 L425,188 L425,147" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><path d="M425,114 L441,130 L425,146 L409,130 Z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><path d="M425,122 L425,138 M417,130 L433,130" style="stroke:var(--ink);stroke-width:2.5"/><path d="M441,130 L462,130" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><rect x="463" y="106" width="90" height="48" rx="8" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><text x="508" y="127" text-anchor="middle">Meta</text><text x="508" y="141" text-anchor="middle">umsókn</text><text x="508" y="169" text-anchor="middle" style="fill:var(--mag);font-weight:700">3 dagar</text><path d="M553,130 L569,130" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><path d="M585,114 L601,130 L585,146 L569,130 Z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><path d="M579,124 L591,136 M591,124 L579,136" style="stroke:var(--ink);stroke-width:2.5"/><path d="M585,114 L585,72 L619,72" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><text x="592" y="62" style="">60 %</text><path d="M585,146 L585,188 L619,188" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><text x="592" y="206" style="">40 %</text><rect x="620" y="50" width="95" height="44" rx="8" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><text x="667.5" y="69" text-anchor="middle">Gera</text><text x="667.5" y="83" text-anchor="middle">lánstilboð</text><text x="667" y="44" style="fill:var(--mag);font-weight:700;text-anchor:middle">1 dagur</text><rect x="620" y="166" width="95" height="44" rx="8" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><text x="667.5" y="185" text-anchor="middle">Tilkynna</text><text x="667.5" y="199" text-anchor="middle">höfnun</text><text x="667.5" y="225" text-anchor="middle" style="fill:var(--mag);font-weight:700">2 dagar</text><path d="M715,72 L745,72 L745,113" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><path d="M715,188 L745,188 L745,147" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><path d="M745,114 L761,130 L745,146 L729,130 Z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><path d="M739,124 L751,136 M751,124 L739,136" style="stroke:var(--ink);stroke-width:2.5"/><path d="M761,130 L783,130" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6a)"/><circle cx="794" cy="130" r="10" fill="none" style="stroke:var(--ink);stroke-width:3"/></svg></figure>
+<div class="ex"><div class="ex-head">Dæmi <span>Hringrásartími lánsumsóknar</span></div><div class="ex-body">
+<p>Reiknaðu hringrásartíma ferlisins á myndinni.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Hver blokk fyrir sig:</p>
+<ul>
+  <li>Endursending: $\dfrac{1}{1-0{,}2} = 1{,}25$ dagar</li>
+  <li>Samhliða: $\max(1, 3) = 3$ dagar</li>
+  <li>Línuleg: $3$ dagar</li>
+  <li>Valkvæð: $0{,}6\cdot 1 + 0{,}4 \cdot 2 = 1{,}4$ dagar</li>
+</ul>
+$$CT = 1{,}25 + 3 + 3 + 1{,}4 = 8{,}65 \text{ dagar}$$
+<p><span class="ans">CT = 8,65 dagar</span></p>
+<p>Taktu eftir að athugun lánasögu (1 dagur) hefur engin áhrif á CT; hún hverfur í skugga tekjuathugunarinnar. Ef þú vilt stytta ferlið borgar sig ekki að flýta lánasögunni.</p>
+</div></details></div></div>
+<p>Glæra 6 minnir á að í raunverulegu ferli bætist <b>bið</b> við á undan og eftir hverri aðgerð: hringrásartími aðgerða + bið = heildar hringrásartími ferlisins. Tímarnir í líkaninu þurfa því að innihalda bið ef þú vilt raunhæfan CT.</p>
+
+<h2 id="cte">Biðtími, vinnslutími og nýtni ferils (CTE)</h2>
+<p>Hringrásartími hverrar aðgerðar skiptist í tvennt (glæra 8):</p>
+<ul>
+  <li><b>vinnslutími</b> (processing time): einhver er að vinna í málinu,</li>
+  <li><b>biðtími</b> (waiting time): engin vinna í gangi; málið bíður í pósthólfi, eftir samþykki, eftir upplýsingum eða eftir að lota fyllist.</li>
+</ul>
+<p>Í flestum þjónustuferlum er mestur tíminn <b>bið</b>, sérstaklega þar sem mál fara á milli sviða. Til að mæla þetta er notuð <b>nýtni ferils</b> eða skilvirkni ferils (cycle time efficiency, CTE):</p>
+<div class="key">
+$$CTE = \frac{TCT}{CT}$$
+<p>$TCT$ = <b>fræðilegur hringrásartími</b> (theoretical cycle time): hringrásartíminn ef engin bið væri, reiknaður með sömu blokkareglum en bara með vinnslutímum. $CT$ = raunverulegur hringrásartími með bið.</p>
+</div>
+<p>CTE nálægt 1 þýðir að málið er nær alltaf í vinnslu. Í skrifstofuferlum er CTE oft undir 5-10 %. Hátt hlutfall biðar er merki um tækifæri til endurhönnunar: biðin er oft auðveldari að fjarlægja en vinnslan.</p>
+<div class="ex"><div class="ex-head">Dæmi <span>CTE í tjónaferli tryggingafélags</span></div><div class="ex-body">
+<p>Tjónstilkynning er skráð, síðan fara 30 % mála í skoðun matsmanns en 70 % í einfalda afgreiðslu, og loks eru bætur greiddar. Biðtíminn er bið á undan aðgerðinni.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðgerð</th><th>Vinnslutími (klst)</th><th>Biðtími (klst)</th></tr></thead>
+<tbody>
+<tr><td>Skrá tilkynningu</td><td>0,5</td><td>4</td></tr>
+<tr><td>Skoðun matsmanns (30 %)</td><td>2</td><td>24</td></tr>
+<tr><td>Einföld afgreiðsla (70 %)</td><td>0,5</td><td>2</td></tr>
+<tr><td>Greiða bætur</td><td>0,25</td><td>8</td></tr>
+</tbody></table></div>
+<p>Reiknaðu TCT, CT og CTE.</p>
+<details class="reveal"><summary></summary><div class="sol">
+$$TCT = 0{,}5 + (0{,}3\cdot 2 + 0{,}7 \cdot 0{,}5) + 0{,}25 = 0{,}5 + 0{,}95 + 0{,}25 = 1{,}7 \text{ klst}$$
+$$CT = 4{,}5 + (0{,}3\cdot 26 + 0{,}7 \cdot 2{,}5) + 8{,}25 = 4{,}5 + 9{,}55 + 8{,}25 = 22{,}3 \text{ klst}$$
+$$CTE = \frac{1{,}7}{22{,}3} = 0{,}076$$
+<p><span class="ans">CTE ≈ 7,6 %</span> Meira en 92 % tímans bíður málið. Stærsta biðin (24 klst eftir matsmanni) er augljósasti staðurinn til að byrja.</p>
+</div></details></div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að reikna TCT sem einfalda summu allra vinnslutíma. TCT fylgir sömu blokkareglum og CT: XOR er vegið meðaltal og AND er hámark.</p></div>
+
+<h2 id="cpm">Bundin leið (critical path method, CPM)</h2>
+<p><b>Bundin leið</b> er aðferð úr verkefnastjórnun (glæra 9). Hún finnur lengstu röð innbyrðis háðra aðgerða í gegnum ferlið. Lengd hennar er áætlaður hringrásartími, og aðgerðir utan hennar hafa <b>slaka</b> (slack): þær mega seinka án þess að ferlið lengist.</p>
+<p>Fyrir hverja aðgerð eru reiknaðar fjórar tölur:</p>
+<ul>
+  <li><b>ES</b> (earliest start) = mesta EF forvera; <b>EF</b> (earliest finish) = ES + $T$. Reiknað fram á við.</li>
+  <li><b>LF</b> (latest finish) = minnsta LS eftirfara; <b>LS</b> (latest start) = LF − $T$. Reiknað aftur á bak frá lokum.</li>
+  <li><b>Slaki</b> = LS − ES. Aðgerðir á bundnu leiðinni hafa slaka 0.</li>
+</ul>
+<div class="ex"><div class="ex-head">Dæmi <span>Glæra 9</span></div><div class="ex-body">
+<p>Yfirfara umsókn (2 klst), síðan samhliða athuga lánasögu (30 mín) og athuga tekjur (3 klst), síðan meta umsókn (2 klst) og gera lánstilboð (2 klst). Finndu bundnu leiðina, CT og slaka lánasögunnar.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<div class="tablewrap"><table>
+<thead><tr><th>Aðgerð</th><th>$T$</th><th>ES</th><th>EF</th><th>LS</th><th>LF</th><th>Slaki</th></tr></thead>
+<tbody>
+<tr><td>Yfirfara umsókn</td><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td><td>0</td></tr>
+<tr><td>Athuga lánasögu</td><td>0,5</td><td>2</td><td>2,5</td><td>4,5</td><td>5</td><td><b>2,5</b></td></tr>
+<tr><td>Athuga tekjur</td><td>3</td><td>2</td><td>5</td><td>2</td><td>5</td><td>0</td></tr>
+<tr><td>Meta umsókn</td><td>2</td><td>5</td><td>7</td><td>5</td><td>7</td><td>0</td></tr>
+<tr><td>Gera lánstilboð</td><td>2</td><td>7</td><td>9</td><td>7</td><td>9</td><td>0</td></tr>
+</tbody></table></div>
+<p>Bundin leið: yfirfara → athuga tekjur → meta → tilboð. <span class="ans">CT = 9 klst, slaki lánasögu 2,5 klst</span></p>
+</div></details></div></div>
+<p>Þetta er sama niðurstaða og AND-reglan gefur ($2 + \max(0{,}5;\,3) + 2 + 2 = 9$), en CPM segir þér líka <i>hvar</i> slakinn er. Við bestun á ferli (TCT) skaltu einblína á vinnslutíma aðgerða á bundnu leiðinni.</p>
+
+<h2 id="little">Lögmál Little</h2>
+<p>Lögmál Little tengir saman þrjár stærðir í hvaða stöðugu ferli sem er (glæra 10):</p>
+<div class="key">
+$$WIP = \lambda \cdot CT$$
+<ul>
+  <li><b>WIP</b> (work in process, verk í vinnslu): meðalfjöldi mála sem eru hafin en ekki lokið.</li>
+  <li><b>$\lambda$</b> (komutaktur, arrival rate): meðalfjöldi nýrra mála á tímaeiningu, t.d. beiðnir á dag.</li>
+  <li><b>$CT$</b>: meðal hringrásartími.</li>
+</ul>
+</div>
+<p>Afleiðingar: WIP vex ef hringrásartíminn lengist eða komutakturinn eykst. Ef komutakturinn eykst þarf CT að styttast ef WIP á að haldast óbreytt. Lögmálið er gagnlegt því tvær stærðanna eru oft auðmældar (t.d. fjöldi opinna mála í kerfinu og fjöldi nýrra mála á viku), og þá fæst sú þriðja án þess að elta hvert mál.</p>
+<div class="ex"><div class="ex-head">Dæmi <span>Æfing 7.5 (glærur 11-13): veitingastaður</span></div><div class="ex-body">
+<p>Veitingastaður fær 1.200 gesti á dag (kl. 10-22). Á álagstímum (12-15 og 18-21, samtals 6 klst) koma 900 gestir og að meðaltali eru 90 inni. Utan álagstíma (6 klst) koma 300 gestir og að meðaltali eru 30 inni. Hve lengi er hver gestur að meðaltali?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Álagstími: $\lambda = 900/6 = 150$ gestir á klst, $CT = WIP/\lambda = 90/150 = 0{,}6$ klst.</p>
+<p>Utan álagstíma: $\lambda = 300/6 = 50$ á klst, $CT = 30/50 = 0{,}6$ klst.</p>
+<p><span class="ans">36 mínútur í báðum tilvikum</span></p>
+</div></details></div></div>
+<div class="ex"><div class="ex-head">Dæmi <span>Viðhaldsbeiðnir í fasteignafélagi</span></div><div class="ex-body">
+<p>Að jafnaði eru 45 viðhaldsbeiðnir opnar og 12 nýjar berast á dag. (a) Hver er meðal hringrásartíminn? (b) Leigjendum fjölgar og beiðnum fjölgar í 15 á dag. Hver þarf CT að vera svo opnar beiðnir verði ekki fleiri en 45?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) $CT = 45/12 = 3{,}75$ dagar. (b) $CT = 45/15 = 3$ dagar.</p>
+<p><span class="ans">(a) 3,75 dagar, (b) 3 dagar</span>, þ.e. stytting um 20 %.</p>
+</div></details></div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að blanda tímaeiningum. Ef $\lambda$ er á klukkustund verður CT að vera í klukkustundum: 20 mál á klst og 45 mín CT gefa $WIP = 20 \cdot 0{,}75 = 15$, ekki $20 \cdot 45$.</p></div>
+
+<h2 id="geta">Framleiðslugeta, nýting og flöskuhálsar</h2>
+<p>Lögmál Little gildir bara ef ferlið er <b>stöðugt</b> (glæra 14), þ.e. ef það getur afgreitt jafnmörg mál og berast. Til að athuga það er reiknuð <b>fræðileg framleiðslugeta</b> (theoretical capacity): mesti fjöldi mála sem ferlið getur lokið á tímaeiningu ef auðlindirnar eru fullnýttar og án biðtíma.</p>
+<p>Framleiðslugetan er bundin <b>auðlindahópum</b> (resource pools), t.d. „fulltrúum“ og „lánafulltrúum“. Fyrir hvern hóp (glærur 15-16):</p>
+<div class="key">
+$$\mu_p = \frac{uc}{ul}$$
+<ul>
+  <li><b>Einingaálag</b> $ul$ (unit load): vinnutími hópsins á hvert mál. Reiknað með blokkareglum yfir þær aðgerðir sem hópurinn vinnur, <b>en AND er lagt saman</b>: $\sum ul_i$, $\sum p_i\,ul_i$, $\sum ul_i$, $ul_b/(1-r)$.</li>
+  <li><b>Einingaafköst</b> $uc$ (unit capacity): vinnutími sem hópurinn hefur á tímaeiningu. Hentugt er að nota daga: $uc$ = 8 klst × fjöldi í hópnum.</li>
+</ul>
+<p>Fræðileg framleiðslugeta ferlisins er geta þess hóps sem hefur <b>minnstu</b> getuna: hann er <b>flöskuhálsinn</b> (bottleneck). <b>Nýting auðlinda</b> (resource utilization) er $\rho_p = \lambda/\mu_p$ (glæra 18).</p>
+</div>
+<div class="ex"><div class="ex-head">Dæmi <span>Glæra 17: lánsumsóknir</span></div><div class="ex-body">
+<p><b>Fulltrúar</b> (3 manns) yfirfara umsókn (2 klst, 20 % endursending) og athuga samhliða lánasögu (30 mín) og tekjur (3 klst). <b>Lánafulltrúar</b> (2 manns) meta umsókn (2 klst) og gera lánstilboð (2 klst, 60 %) eða tilkynna höfnun (30 mín, 40 %). Allir vinna 8 klst á dag. Hver er framleiðslugeta hvors hóps, hvar er flöskuhálsinn, og hver er nýtingin ef 3 umsóknir berast á dag?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Fulltrúar: $ul = \dfrac{2}{1-0{,}2} + 3 + 0{,}5 = 6$ klst (AND lagt saman), $uc = 8 \cdot 3 = 24$ klst á dag, $\mu = 24/6 = 4$ umsóknir á dag.</p>
+<p>Lánafulltrúar: $ul = 2 + 0{,}6\cdot 2 + 0{,}4\cdot 0{,}5 = 3{,}4$ klst, $uc = 8\cdot 2 = 16$ klst á dag, $\mu = 16/3{,}4 = 4{,}7$ umsóknir á dag.</p>
+<p>Flöskuhálsinn er hópurinn með minni getu: fulltrúarnir. <span class="ans">$\mu_p = 4$ umsóknir á dag</span></p>
+<p>Nýting við $\lambda = 3$: fulltrúar $3/4 = 75\,\%$, lánafulltrúar $3/4{,}7 = 64\,\%$.</p>
+</div></details></div></div>
+<div class="note warn"><p><b class="t">Athugaðu glæru 17:</b> þar stendur $ul = 2 + 0{,}6\cdot2 + 0{,}4\cdot0{,}5 = 5{,}2$ klst fyrir lánafulltrúa, sem gefur $\mu = 3$. Rétt summa er $2 + 1{,}2 + 0{,}2 = 3{,}4$ klst og $\mu = 4{,}7$. Aðferðin á glærunni er rétt en samlagningin ekki. Ef spurt er um þetta dæmi á prófi skaltu sýna útreikninginn svo matsaðili sjái hvaðan talan kemur.</p></div>
+<div class="note tip"><p><b class="t">Ráð:</b> flöskuhálsinn er ekki endilega aðgerðin sem tekur lengstan tíma. Löng aðgerð sem margir sinna getur haft meiri getu en stutt aðgerð sem einn sérfræðingur sinnir. Berðu alltaf saman $\mu_p$ hópanna.</p></div>
+
+<h2 id="lotur">Lotuvinnsla og flæði (batching / flow)</h2>
+<p>Glæra 19 ber saman <b>lotuvinnslu</b> (batching) og samfellt <b>flæði</b> (flow): lyfta á móti rúllustiga, umferðarljós á móti hringtorgi, timburflekar á móti fljótandi straumi. Í lotuvinnslu bíður hvert mál eftir að lotan fyllist og eftir að öll lotan klárist. Það eykur WIP og, samkvæmt lögmáli Little, hringrásartímann. Dæmi: umsóknir um námsstyrki sem eru afgreiddar á vikulegum nefndarfundi bíða að meðaltali hálfa viku bara eftir fundinum. Að skipta lotum út fyrir samfellt flæði er ein algengasta endurhönnunin (sjá kafla 7).</p>
+
+<h2 id="kostnadur">Flæðisgreining með kostnaði</h2>
+<p>Sömu blokkareglur gilda þegar þú reiknar <b>kostnað á hvert mál</b>, með peningum í stað tíma (glæra 20), <b>nema í samhliða blokk þar sem allt er lagt saman</b>. Þar eru allar greinarnar unnar og greitt fyrir þær allar, jafnvel þótt þær séu unnar á sama tíma.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Blokk</th><th>Tími (CT)</th><th>Kostnaður og einingaálag</th></tr></thead>
+<tbody>
+<tr><td>Línuleg</td><td>$\sum T_i$</td><td>$\sum K_i$</td></tr>
+<tr><td>Valkvæð (XOR)</td><td>$\sum p_i T_i$</td><td>$\sum p_i K_i$</td></tr>
+<tr><td>Samhliða (AND)</td><td>$\max(T_i)$</td><td>$\sum K_i$</td></tr>
+<tr><td>Endursending</td><td>$T/(1-r)$</td><td>$K/(1-r)$</td></tr>
+</tbody></table></div>
+<p>Kostnaður aðgerðar er oft vinnslutími × tímakaup auðlindarinnar sem vinnur hana, auk fasts kostnaðar (t.d. gjald fyrir lögregluskýrslu). Biðtími kostar yfirleitt ekkert beint, en hann kostar viðskiptavininn.</p>
+<div class="ex"><div class="ex-head">Dæmi <span>Kostnaður á hvert tjón</span></div><div class="ex-body">
+<p>Skrá tilkynningu kostar 2.000 kr. og er endurtekin í 10 % tilvika. Síðan eru samhliða sótt lögregluskýrsla (1.500 kr.) og mat á viðgerðarkostnaði (6.000 kr.). Þá fara 30 % í skoðun matsmanns (12.000 kr.) og 70 % í einfalda afgreiðslu (1.000 kr.). Loks eru bætur greiddar (500 kr.). Hver er kostnaður á hvert tjón?</p>
+<details class="reveal"><summary></summary><div class="sol">
+$$\frac{2000}{1-0{,}1} + (1500 + 6000) + (0{,}3\cdot 12000 + 0{,}7\cdot 1000) + 500 = 2222 + 7500 + 4300 + 500$$
+<p><span class="ans">≈ 14.522 kr. á tjón</span> Hefðir þú tekið max í AND-blokkinni hefðir þú fengið 1.500 kr. of lítið.</p>
+</div></details></div></div>
+
+<h2 id="takmarkanir">Takmarkanir flæðisgreiningar</h2>
+<p>Flæðisgreining er fljótleg og gagnsæ, en þú þarft að þekkja takmarkanir hennar (BPM kafli 7.2):</p>
+<ul>
+  <li><b>Meðaltöl, ekki dreifing.</b> Hún segir hver meðaltíminn er, ekki hve mörg mál fara yfir frest eða hver lengsta biðin er.</li>
+  <li><b>Engin bið vegna auðlinda.</b> Hún gerir ráð fyrir að tímarnir séu fastir óháð álagi. Í raun lengist biðin þegar starfsfólk er upptekið og mál safnast upp. Ef sama manneskja á að vinna tvær „samhliða“ aðgerðir verður tíminn summa, ekki hámark.</li>
+  <li><b>Vel uppbyggt líkan.</b> Blokkareglurnar krefjast þess að líkanið sé byggt úr hreiðruðum blokkum (block-structured). Flókin stökk á milli greina passa ekki.</li>
+  <li><b>Þekktar og fastar líkur.</b> Líkurnar á hverri leið eru metnar fyrir fram og taldar óháðar t.d. álagi eða árstíma.</li>
+</ul>
+<p>Biðraðafræði tekur á bið vegna auðlinda í einföldum kerfum; hermun ræður við hvort tveggja í flóknum ferlum.</p>
+
+<h2 id="bidradir">Biðraðafræði (queueing theory)</h2>
+<p>Biðraðakerfi (glæra 21) samanstendur af einni eða fleiri <b>biðröðum</b> og <b>þjónustu</b> með einum eða fleiri <b>þjónum</b> (servers). Einingarnar sem koma inn eru verkefni eða viðskiptavinir, þ.e. keyrslur á málum (process instances). Tvær stærðir lýsa kerfinu:</p>
+<ul>
+  <li><b>komutaktur</b> $\lambda$ (arrival rate): meðalfjöldi koma á tímaeiningu,</li>
+  <li><b>þjónustutaktur</b> $\mu$ (service rate): meðalfjöldi sem einn þjónn afgreiðir á tímaeiningu. Meðalþjónustutími er $1/\mu$.</li>
+</ul>
+<figure style="margin:1.2rem 0"><svg viewBox="0 0 560 150" role="img" aria-label="Biðraðakerfi: komur með takti lambda, biðröð, c þjónar með takti mu, brottför" style="max-width:100%;height:auto;font:12px var(--sans);fill:var(--ink)"><defs><marker id="m6b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)"/></marker></defs><path d="M10,75 L70,75" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6b)"/><text x="40" y="62" style="text-anchor:middle">komur, λ</text><circle cx="100" cy="75" r="12" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.5"/><circle cx="130" cy="75" r="12" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.5"/><circle cx="160" cy="75" r="12" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.5"/><circle cx="190" cy="75" r="12" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.5"/><rect x="80" y="55" width="125" height="40" rx="6" fill="none" style="stroke:var(--rule-2);stroke-dasharray:4 3"/><text x="142" y="115" style="text-anchor:middle;fill:var(--muted)">biðröð: L<tspan baseline-shift='sub' font-size='9'>q</tspan>, W<tspan baseline-shift='sub' font-size='9'>q</tspan></text><path d="M210,75 L250,40" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6b)"/><path d="M210,75 L250,75" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6b)"/><path d="M210,75 L250,110" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6b)"/><rect x="252" y="27" width="34" height="26" rx="4" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><rect x="252" y="62" width="34" height="26" rx="4" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><rect x="252" y="97" width="34" height="26" rx="4" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.5"/><text x="300" y="44" style="">þjónn 1, μ</text><text x="300" y="79" style="">þjónn 2, μ</text><text x="300" y="114" style="">þjónn c, μ</text><path d="M380,75 L450,75" fill="none" style="stroke:var(--ink);stroke-width:1.4" marker-end="url(#m6b)"/><text x="415" y="62" style="text-anchor:middle">brottför</text><rect x="70" y="18" width="300" height="122" rx="8" fill="none" style="stroke:var(--mag);stroke-width:1.2"/><text x="220" y="136" style="text-anchor:middle;fill:var(--mag);font-weight:700">kerfið: L, W</text></svg></figure>
+<p>Mælistikur (glærur 22-23): meðallengd raðar $L_q$, meðalbiðtími í röð $W_q$, meðaltími í kerfinu $W$ (bið + þjónusta), meðalfjöldi í kerfinu $L$ og <b>nýting</b> þjóns $\rho$. Einnig skipta máli mesta lengd raðar, mesta bið og mesti CT, sem formúlurnar gefa ekki en hermun gefur.</p>
+<p><b>Kendall-táknun</b> A/B/c: A = dreifing koma, B = dreifing þjónustutíma, c = fjöldi þjóna. <b>M</b> stendur fyrir Markov: komur eru Poisson-dreifðar (millikomutímar veldisdreifðir) og þjónustutími er veldisdreifður (glæra 24). M/M/1 er því ein röð með einum þjóni og M/M/c ein sameiginleg röð með $c$ þjónum.</p>
+
+<h3 id="mm1">M/M/1</h3>
+<div class="key">
+$$\rho = \frac{\lambda}{\mu},\qquad L_q = \frac{\rho^2}{1-\rho},\qquad W_q = \frac{L_q}{\lambda},\qquad W = W_q + \frac{1}{\mu},\qquad L = \lambda W$$
+<p>Skilyrði: $\rho \lt 1$. Annars koma fleiri en hægt er að afgreiða og röðin vex án takmarka.</p>
+</div>
+<p>Síðustu tvær jöfnurnar eru almennar: heildartími er bið + þjónusta, og $L = \lambda W$ er lögmál Little beitt á biðraðakerfið (líka $L_q = \lambda W_q$).</p>
+<div class="ex"><div class="ex-head">Dæmi <span>Þjónustuborð byggingavöruverslunar</span></div><div class="ex-body">
+<p>Einn starfsmaður er við þjónustuborð. Að meðaltali koma 8 viðskiptavinir á klst og afgreiðsla tekur að meðaltali 6 mínútur. Reiknaðu $\rho$, $L_q$, $W_q$, $W$ og $L$.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$\mu = 60/6 = 10$ á klst, $\rho = 8/10 = 0{,}8$.</p>
+$$L_q = \frac{0{,}8^2}{1-0{,}8} = 3{,}2,\qquad W_q = \frac{3{,}2}{8} = 0{,}4\text{ klst} = 24 \text{ mín}$$
+$$W = 0{,}4 + \frac{1}{10} = 0{,}5\text{ klst},\qquad L = 8\cdot 0{,}5 = 4$$
+<p><span class="ans">ρ = 80 %, Lq = 3,2, Wq = 24 mín, W = 30 mín, L = 4</span> Viðskiptavinurinn bíður fjórum sinnum lengur en hann er afgreiddur.</p>
+</div></details></div></div>
+<p>Grafið sýnir mikilvægustu lexíu biðraðafræðinnar. Í M/M/1 er $W_q = \dfrac{\rho}{1-\rho}\cdot\dfrac1\mu$: við 50 % nýtingu bíður viðskiptavinur jafnlengi og afgreiðslan tekur, við 80 % fjórfalt lengur og við 90 % nífalt lengur.</p>
+<figure style="margin:1.2rem 0"><svg viewBox="0 0 520 270" role="img" aria-label="Graf: meðalbiðtími í röð sem margfeldi af þjónustutíma vex hratt þegar nýting nálgast 1" style="max-width:100%;height:auto;font:12px var(--sans);fill:var(--ink)"><line x1="60" x2="490" y1="230" y2="230" style="stroke:var(--rule-2);stroke-width:1.2"/><text x="52" y="234" text-anchor="end" style="fill:var(--muted)">0</text><line x1="60" x2="490" y1="180" y2="180" style="stroke:var(--rule-2);stroke-width:0.6"/><text x="52" y="184" text-anchor="end" style="fill:var(--muted)">5</text><line x1="60" x2="490" y1="130" y2="130" style="stroke:var(--rule-2);stroke-width:0.6"/><text x="52" y="134" text-anchor="end" style="fill:var(--muted)">10</text><line x1="60" x2="490" y1="80" y2="80" style="stroke:var(--rule-2);stroke-width:0.6"/><text x="52" y="84" text-anchor="end" style="fill:var(--muted)">15</text><line x1="60" x2="490" y1="30" y2="30" style="stroke:var(--rule-2);stroke-width:0.6"/><text x="52" y="34" text-anchor="end" style="fill:var(--muted)">20</text><text x="60" y="248" text-anchor="middle" style="fill:var(--muted)">0,0</text><text x="146" y="248" text-anchor="middle" style="fill:var(--muted)">0,2</text><text x="232" y="248" text-anchor="middle" style="fill:var(--muted)">0,4</text><text x="318.00000000000006" y="248" text-anchor="middle" style="fill:var(--muted)">0,6</text><text x="404" y="248" text-anchor="middle" style="fill:var(--muted)">0,8</text><text x="490" y="248" text-anchor="middle" style="fill:var(--muted)">1,0</text><line x1="60" x2="60" y1="230" y2="30" style="stroke:var(--rule-2)"/><path d="M60.0,230.0 L62.1,229.9 L64.3,229.9 L66.5,229.8 L68.6,229.8 L70.8,229.7 L72.9,229.7 L75.0,229.6 L77.2,229.6 L79.3,229.5 L81.5,229.5 L83.7,229.4 L85.8,229.4 L87.9,229.3 L90.1,229.2 L92.3,229.2 L94.4,229.1 L96.6,229.1 L98.7,229.0 L100.9,229.0 L103.0,228.9 L105.2,228.8 L107.3,228.8 L109.5,228.7 L111.6,228.6 L113.8,228.6 L115.9,228.5 L118.1,228.4 L120.2,228.4 L122.4,228.3 L124.5,228.2 L126.7,228.2 L128.8,228.1 L131.0,228.0 L133.1,228.0 L135.3,227.9 L137.4,227.8 L139.6,227.7 L141.7,227.7 L143.9,227.6 L146.0,227.5 L148.2,227.4 L150.3,227.3 L152.5,227.3 L154.6,227.2 L156.8,227.1 L158.9,227.0 L161.1,226.9 L163.2,226.8 L165.4,226.8 L167.5,226.7 L169.7,226.6 L171.8,226.5 L174.0,226.4 L176.1,226.3 L178.3,226.2 L180.4,226.1 L182.6,226.0 L184.7,225.9 L186.9,225.8 L189.0,225.7 L191.2,225.6 L193.3,225.5 L195.5,225.4 L197.6,225.3 L199.8,225.2 L201.9,225.1 L204.1,225.0 L206.2,224.8 L208.4,224.7 L210.5,224.6 L212.7,224.5 L214.8,224.4 L217.0,224.3 L219.1,224.1 L221.3,224.0 L223.4,223.9 L225.6,223.7 L227.7,223.6 L229.9,223.5 L232.0,223.3 L234.2,223.2 L236.3,223.1 L238.5,222.9 L240.6,222.8 L242.8,222.6 L244.9,222.5 L247.1,222.3 L249.2,222.1 L251.4,222.0 L253.5,221.8 L255.7,221.7 L257.8,221.5 L260.0,221.3 L262.1,221.1 L264.3,221.0 L266.4,220.8 L268.6,220.6 L270.7,220.4 L272.9,220.2 L275.0,220.0 L277.2,219.8 L279.3,219.6 L281.5,219.4 L283.6,219.2 L285.8,218.9 L287.9,218.7 L290.1,218.5 L292.2,218.3 L294.4,218.0 L296.5,217.8 L298.7,217.5 L300.8,217.3 L303.0,217.0 L305.1,216.7 L307.3,216.5 L309.4,216.2 L311.6,215.9 L313.7,215.6 L315.9,215.3 L318.0,215.0 L320.2,214.7 L322.3,214.4 L324.5,214.0 L326.6,213.7 L328.8,213.3 L330.9,213.0 L333.1,212.6 L335.2,212.2 L337.4,211.8 L339.5,211.4 L341.7,211.0 L343.8,210.6 L346.0,210.1 L348.1,209.7 L350.3,209.2 L352.4,208.7 L354.6,208.3 L356.7,207.7 L358.9,207.2 L361.0,206.7 L363.2,206.1 L365.3,205.5 L367.5,204.9 L369.6,204.3 L371.8,203.6 L373.9,203.0 L376.1,202.3 L378.2,201.5 L380.4,200.8 L382.5,200.0 L384.7,199.2 L386.8,198.3 L389.0,197.4 L391.1,196.5 L393.3,195.6 L395.4,194.5 L397.6,193.5 L399.7,192.4 L401.9,191.2 L404.0,190.0 L406.2,188.7 L408.3,187.4 L410.5,185.9 L412.6,184.4 L414.8,182.9 L416.9,181.2 L419.1,179.4 L421.2,177.5 L423.4,175.5 L425.5,173.3 L427.7,171.0 L429.8,168.6 L432.0,165.9 L434.1,163.1 L436.3,160.0 L438.4,156.7 L440.6,153.0 L442.7,149.1 L444.9,144.8 L447.0,140.0 L449.2,134.7 L451.3,128.9 L453.5,122.4 L455.6,115.0 L457.8,106.7 L459.9,97.1 L462.1,86.2 L464.2,73.3 L466.4,58.2 L468.5,40.0" fill="none" style="stroke:var(--mag);stroke-width:2.5"/><circle cx="275" cy="220" r="4" style="fill:var(--mag)"/><text x="267" y="212" text-anchor="end">ρ = 0,5: 1×</text><circle cx="404" cy="190" r="4" style="fill:var(--mag)"/><text x="396" y="182" text-anchor="end">ρ = 0,8: 4×</text><circle cx="447" cy="140" r="4" style="fill:var(--mag)"/><text x="439" y="132" text-anchor="end">ρ = 0,9: 9×</text><text x="275" y="266" text-anchor="middle" style="fill:var(--muted)">nýting ρ = λ/μ</text><text x="14" y="130" transform="rotate(-90 14 130)" text-anchor="middle" style="fill:var(--muted)">W<tspan baseline-shift='sub' font-size='9'>q</tspan> sem margfeldi af 1/μ</text></svg></figure>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að stefna á 100 % nýtingu starfsfólks. Í kerfi með breytilegum komum og þjónustutíma þýðir það óendanlegar biðraðir. Smá umframgeta er það sem heldur biðinni stuttri.</p></div>
+
+<h3 id="mmc">M/M/c: margir þjónar, ein röð</h3>
+<p>Þegar $c$ þjónar vinna úr einni sameiginlegri röð er nýtingin $\rho = \dfrac{\lambda}{c\mu}$ (verður að vera < 1). Í ítarefninu (kafli 7.2) kemur fram að formúlurnar fyrir $W_q$, $W$ og $L$ gilda áfram; aðeins $L_q$ er reiknað öðruvísi:</p>
+<div class="key">
+$$L_q = \frac{(\lambda/\mu)^c\,\rho}{c!\,(1-\rho)^2\left(\dfrac{(\lambda/\mu)^c}{c!\,(1-\rho)} + \displaystyle\sum_{n=0}^{c-1}\frac{(\lambda/\mu)^n}{n!}\right)},\qquad \rho = \frac{\lambda}{c\mu}$$
+<p>Síðan $W_q = L_q/\lambda$, $W = W_q + 1/\mu$ og $L = \lambda W$. Með $c = 1$ verður formúlan að $\rho^2/(1-\rho)$.</p>
+</div>
+<p>Formúlan er þekkt sem <b>Erlang C</b>. Brotið $\dfrac{(\lambda/\mu)^c}{c!(1-\rho)}$ deilt með allri summunni í sviganum er líkurnar á að viðskiptavinur þurfi að bíða, $P_w$, og þá er $L_q = P_w\,\dfrac{\rho}{1-\rho}$. Reiknaðu í þessari röð: (1) $\lambda/\mu$ og $\rho$, (2) summuna, (3) brotið, (4) $L_q$, (5) $W_q$ og $W$.</p>
+<div class="ex"><div class="ex-head">Dæmi <span>Ein röð eða tvær? Týndur farangur í Keflavík</span></div><div class="ex-body">
+<p>Tveir starfsmenn taka við tilkynningum um týndan farangur. Hvor fær 5 farþega á klst og afgreiðsla tekur 10 mín að meðaltali. Nú er hvor með sína röð (tvær M/M/1-raðir). Hver er biðtíminn, og hver yrði hann með einni sameiginlegri röð (M/M/2)?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>Tvær raðir:</b> $\mu = 6$, $\rho = 5/6 = 0{,}833$, $L_q = 0{,}833^2/0{,}167 = 4{,}17$, $W_q = 4{,}17/5 = 0{,}833$ klst = <b>50 mín</b>.</p>
+<p><b>Ein röð:</b> $\lambda = 10$, $\lambda/\mu = 1{,}667$, $\rho = 10/12 = 0{,}833$.</p>
+<p>Summa: $1 + 1{,}667 = 2{,}667$. Brot: $\dfrac{1{,}667^2}{2!\cdot 0{,}1667} = \dfrac{2{,}778}{0{,}3333} = 8{,}333$.</p>
+$$L_q = \frac{2{,}778\cdot 0{,}833}{2\cdot 0{,}1667^2\cdot(8{,}333 + 2{,}667)} = \frac{2{,}315}{0{,}611} = 3{,}79$$
+$$W_q = \frac{3{,}79}{10} = 0{,}379\text{ klst} \approx 22{,}7 \text{ mín},\qquad W = 22{,}7 + 10 = 32{,}7\text{ mín}$$
+<p><span class="ans">50 mín með tveimur röðum, 22,7 mín með einni</span> Sama starfsfólk og sama nýting, en biðin styttist um meira en helming. Með sérröðum getur annar starfsmaðurinn verið laus meðan röð er hjá hinum; sameiginleg röð (pooling) kemur í veg fyrir það.</p>
+</div></details></div></div>
+<div class="ex"><div class="ex-head">Dæmi <span>Mönnun símavers</span></div><div class="ex-body">
+<p>Símaver banka fær 30 símtöl á klst og hvert tekur 6 mínútur. Hve marga starfsmenn þarf svo meðalbiðin verði undir 1 mínútu?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$\mu = 10$ á klst og $\lambda/\mu = 3$, svo $c \geq 4$ til að kerfið sé stöðugt. M/M/c-formúlan gefur:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>$c$</th><th>$\rho$</th><th>$W_q$</th></tr></thead>
+<tbody><tr><td>4</td><td>0,75</td><td>3,06 mín</td></tr><tr><td>5</td><td>0,60</td><td>0,71 mín</td></tr><tr><td>6</td><td>0,50</td><td>0,20 mín</td></tr></tbody>
+</table></div>
+<p><span class="ans">c = 5 starfsmenn</span> Fimmti starfsmaðurinn styttir biðina um fjórfalt; sá sjötti skilar miklu minna. Þetta er sú ákvörðun sem gagnvirki hluti kaflans æfir.</p>
+</div></details></div></div>
+
+<h2 id="hermun">Hermun (simulation)</h2>
+<p>Biðraðaformúlur ráða bara við einföld kerfi: eina röð, eina gerð þjóna, ákveðnar dreifingar. Raunveruleg ferli hafa margar aðgerðir, ólíka auðlindahópa, vinnutíma, XOR-greinar og endursendingar. Þá er notuð <b>hermun</b>: tölva býr til þúsundir slembinna mála og „keyrir“ þau í gegnum BPMN-líkanið, með takmörkuðum auðlindum sem mál þurfa að bíða eftir.</p>
+<p>Á glæru 25 er hermiforritið <b>BIMP</b> (bimp.cs.ut.ee), sem kennslubókin notar. Það les inn BPMN-líkan og er einfalt í notkun.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Inntak hermunar</th><th>Úttak hermunar</th></tr></thead>
+<tbody>
+<tr><td>
+<ul>
+<li>BPMN-líkan ferlisins</li>
+<li>Komutaktur og dreifing millikomutíma</li>
+<li>Dreifing vinnslutíma hverrar aðgerðar (meðaltal og breytileiki)</li>
+<li>Líkur á hverri XOR-leið</li>
+<li>Auðlindahópar: fjöldi, tímakaup og vinnutímar, og hvaða aðgerðum hver sinnir</li>
+</ul>
+</td><td>
+<ul>
+<li>Dreifing hringrásartíma: meðaltal, lágmark, hámark</li>
+<li>Biðtími og vinnslutími hverrar aðgerðar</li>
+<li>Nýting hvers auðlindahóps (finnur flöskuhálsa)</li>
+<li>Kostnaður á hvert mál</li>
+<li>Samanburður sviðsmynda, t.d. as-is og to-be</li>
+</ul>
+</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Gildrur í hermun:</b> (1) Niðurstöðurnar eru slembnar; keyrðu nógu mörg mál og helst nokkrar keyrslur. (2) Líkanið er ekki betra en inntaksgögnin: ef vinnslutímarnir eru giskaðir er niðurstaðan gisk. (3) Einfaldanir: í hermun vinnur fólk oft af 100 % afköstum allan vinnutímann og sinnir einu verki í einu, sem er sjaldnast satt. Prófaðu líkanið á as-is ferlinu og berðu saman við raunverulegar mælingar áður en þú treystir to-be niðurstöðunni.</p></div>
+
+<h2 id="samantekt">Samantekt</h2>
+<div class="key">
+<div class="tablewrap"><table>
+<thead><tr><th>Spurning</th><th>Aðferð</th><th>Formúla</th></tr></thead>
+<tbody>
+<tr><td>Hve langan tíma tekur málið?</td><td>Flæðisgreining (CT)</td><td>röð $\sum T_i$, XOR $\sum p_iT_i$, AND $\max T_i$, endursending $T/(1-r)$</td></tr>
+<tr><td>Hve mikið er bið?</td><td>Nýtni ferils</td><td>$CTE = TCT/CT$</td></tr>
+<tr><td>Hvað kostar málið?</td><td>Flæðisgreining (kostnaður)</td><td>eins og CT en AND = $\sum$</td></tr>
+<tr><td>Hve mörg mál eru í gangi?</td><td>Lögmál Little</td><td>$WIP = \lambda \cdot CT$</td></tr>
+<tr><td>Hve mörg mál ræður ferlið við?</td><td>Framleiðslugeta</td><td>$\mu_p = uc/ul$, flöskuháls = minnsta $\mu_p$, $\rho_p = \lambda/\mu_p$</td></tr>
+<tr><td>Hve lengi bíða viðskiptavinir?</td><td>Biðraðafræði</td><td>M/M/1: $L_q = \rho^2/(1-\rho)$; M/M/c: formúla 7.13; $W_q = L_q/\lambda$</td></tr>
+<tr><td>Flókið ferli með mörgum auðlindum?</td><td>Hermun</td><td>BIMP: dreifingar, nýting, kostnaður</td></tr>
+</tbody></table></div>
+</div>
+<div class="note tip"><p><b class="t">Fyrir prófið:</b> skrifaðu alltaf formúluna fyrst, svo tölurnar, svo svarið með einingu. Athugaðu einingar (klst eða mín, á dag eða á klst) áður en þú reiknar og hvort $\rho \lt 1$ áður en þú notar biðraðaformúlur.</p></div>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og, þar sem við á, reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: flæðigreinandinn og biðraðastjórinn</h2>
+<p>Þú ert ráðin(n) til að greina þjónustuferli með tölum. Fyrst reiknar þú hringrásartíma, nýtni og verk í vinnslu fyrir ferli sem birtist sem BPMN-líkan. Síðan tekur þú við mönnun þjónustuborðs: hve marga starfsmenn þarf, og hver er ódýrasta leiðin til að halda biðinni í skefjum?</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu fimm borð. <b>Borð 1:</b> reiknaðu hringrásartíma (CT) ferlisins. <b>Borð 2:</b> reiknaðu nýtni ferilsins (CTE) þegar biðtíma er bætt við. <b>Borð 3:</b> notaðu lögmál Little. <b>Borð 4:</b> finndu minnstu mönnun sem heldur biðtíma undir markmiði (M/M/c). <b>Borð 5:</b> finndu samsetningu starfsfólks og þjálfunar sem lágmarkar heildarkostnað (laun + kostnaður biðar). Svör í borðum 1-3 mega skeika 2 %. Þú mátt reyna eins oft og þú vilt og fá nýtt dæmi.</p></div>
+<div class="panel" id="k6-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 7"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-5.html"><span>Fyrri</span>5. Eigindleg ferlagreining</a><a href="kafli-7.html" style="text-align:right"><span>Næsta</span>7. Endurhönnun og ferlahugbúnaður</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/bpmn.js"></script>
+<script src="js/q/bpmn2.js"></script>
+<script src="js/q/eigindleg.js"></script>
+<script src="js/q/endurhonnun.js"></script>
+<script src="js/q/ferlar.js"></script>
+<script src="js/q/kerfi.js"></script>
+<script src="js/q/megindleg.js"></script>
+<script src="js/q/stjornun.js"></script>
+<script src="js/q/uppgotvun.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-6.js"></script>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 8: Kerfishugsun og orsakalykkjur · Greining ferla og kerfa</title>
+<meta name="description" content="Kennsluvefur fyrir IÐN301G Greining ferla og kerfa: ferlaskráning, BPMN, ferlauppgötvun, eigindleg og megindleg greining, endurhönnun, ferlahugbúnaður, kerfishugsun og stjórnun ferla.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23173327'/%3E%3Ccircle cx='7' cy='16' r='3' fill='%23ffe98a'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23ffe98a'/%3E%3Cpath d='M25 11l5 5-5 5-5-5z' fill='%23ffe98a'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Greining ferla og kerfa</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Greining ferla og kerfa<small>IÐN301G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Ferlar og ferlaskráning</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Ferlalíkön í BPMN</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Þróuð ferlalíkön</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Ferlauppgötvun</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Eigindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Megindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Endurhönnun og ferlahugbúnaður</a></li>
+<li><a class="nav" href="kafli-8.html" aria-current="page" data-gate="ch8">8. Kerfishugsun og orsakalykkjur</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Stjórnun ferla og BPM í starfseminni</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="upprifjun.html" data-gate="archive">Lokaupprifjun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+<li><a class="nav" href="verkfaerakista.html">Verkfærakista</a></li>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="8" data-topics="kerfi">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 8: Kerfishugsun og orsakalykkjur</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-7.html">kafla 7</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 8 af 9 · F11-F12 · Thinking in Systems</p>
+<h1>Kerfishugsun og orsakalykkjur</h1>
+<p class="ch-exam"><b>Tengist:</b> HÓP2: orsakalykkjurit (CLD) af íslensku kerfi</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Ferlagreining skoðar eitt ferli í einu. Kerfishugsun stígur skrefi aftar og spyr hvers vegna kerfið í heild hegðar sér eins og það gerir: hvar safnast hlutir upp, hvaða lykkjur magna breytingar eða halda aftur af þeim og hvar seinkanir valda sveiflum. Þetta er grunnurinn að HÓP2, þar sem þú teiknar orsakarit (CLD) af íslensku kerfi, og á lokaprófinu er spurt bæði um hugtökin og um einfalda útreikninga á birgðum og flæði.</p>
+
+<h2 id="kerfi">Hvað er kerfi?</h2>
+<p>Donella Meadows skilgreinir <b>kerfi</b> (system) sem safn eininga sem tengjast innbyrðis og eru skipulagðar þannig að saman ná þær einhverju fram. Kerfi hefur því þrjá hluta:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Hluti</th><th>Hvað er það?</th><th>Dæmi: kvótakerfið</th></tr></thead>
+<tbody>
+<tr><td><b>Einingar</b> (elements)</td><td>Það sem auðveldast er að sjá og telja upp: hlutir, fólk, birgðir.</td><td>Fiskistofnar, skip, útgerðir, Hafrannsóknastofnun, fiskvinnslur.</td></tr>
+<tr><td><b>Tengingar</b> (relations, interconnections)</td><td>Það sem tengir einingarnar: efnisflæði, peningaflæði, upplýsingar og reglur.</td><td>Afli, verð á fiski, ráðgjöf um heildarafla, úthlutun aflaheimilda.</td></tr>
+<tr><td><b>Tilgangur</b> (function, purpose)</td><td>Það sem kerfið <i>gerir í raun</i>. Hann sést á hegðuninni, ekki á yfirlýsingum.</td><td>Sjálfbær nýting stofna með arðbærum veiðum.</td></tr>
+</tbody></table></div>
+<p>Á glærunum (F12) eru fjögur lykilhugtök sett fram: <b>einingar</b> (elements), <b>tengingar</b> (relations), <b>endurgjöf</b> (feedback) og <b>afmörkun</b> (boundary). Afmörkunin segir hvað er innan kerfisins og hvað telst umhverfi þess.</p>
+<div class="key">
+<p><b>Kerfishugsun</b> (systems thinking) snýst um að horfa á kerfi út frá orsökum, afleiðingum og endurgjöf. Til þess þarftu að:</p>
+<ol>
+<li><b>Kortleggja breytur kerfisins:</b> birgðir (stocks, items), flæði (flows, actions) og stýribreytur (controls).</li>
+<li><b>Skilja orsakasamhengið:</b> orsakatengingar (causal links) og upplýsingatengingar (information links).</li>
+<li><b>Skilja hegðunina sem stafar af uppbyggingunni:</b> hegðun yfir tíma (behavior over time) og lykkjugreiningu (loop analysis).</li>
+</ol>
+</div>
+<p>Mikilvægasta innsýn Meadows er að <b>uppbygging kerfisins ræður hegðun þess</b>. Ef þú skiptir út öllum einingum (öllum leikmönnum í fótboltaliði) en heldur tengingum og tilgangi, verður kerfið nokkurn veginn það sama. Ef þú breytir tilganginum (liðið á að tapa) verður það gjörólíkt kerfi. Einingarnar skipta því oftast <i>minnstu</i> máli, tilgangurinn mestu.</p>
+<div class="note tip"><p><b class="t">Opin og lokuð kerfi:</b> í opnu kerfi (open-loop) fer inntak í gegnum ferli og út kemur úttak, og úttakið hefur engin áhrif á inntakið. Í lokuðu kerfi (closed-loop) er <b>endurgjöf</b>: úttakið berst aftur og breytir inntakinu. Línuleg hugsun („refurinn étur kanínuna“) sér bara opnar keðjur; kerfishugsun sér lykkjuna („fleiri kanínur, fleiri refir, færri kanínur, færri refir“).</p></div>
+
+<h2 id="birgdir">Birgðir og flæði</h2>
+<p><b>Birgð</b> (stock) er það sem safnast upp og þú getur mælt á einum tímapunkti: vatn í baðkari, peningar á reikningi, íbúðir á landinu, fiskur í sjónum, vörur á lager. <b>Flæði</b> (flow) er hraðinn sem breytir birgðinni og er mælt <i>á tímaeiningu</i>: lítrar á mínútu, krónur á mánuði, íbúðir á ári. Orsakarit eitt og sér nægir ekki til að lýsa kerfi; þú þarft líka að sjá hvar birgðir safnast og hvernig flæðir á milli þeirra. Til þess er <b>birgða- og flæðirit</b> (stock-flow diagram, SFD).</p>
+<svg class="diagram" viewBox="0 0 640 215" role="img" aria-label="Birgða- og flæðirit af baðkari: ský, innflæði með loka, birgðin vatn í baðkari, útflæði með loka og ský" style="max-width:100%;height:auto">
+  <path d="M28 118 a13 13 0 0 1 6 -24 a17 17 0 0 1 30 -5 a14 14 0 0 1 22 15 a12 12 0 0 1 -4 20 z" style="fill:none;stroke:var(--ink);stroke-width:1.6"/>
+  <line x1="84" y1="96" x2="234" y2="96" style="stroke:var(--ink);stroke-width:1.6"/>
+  <line x1="84" y1="106" x2="234" y2="106" style="stroke:var(--ink);stroke-width:1.6"/>
+  <path d="M234 86 L250 101 L234 116 z" style="fill:var(--ink)"/>
+  <path d="M146 86 L174 116 L174 86 L146 116 z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.6"/>
+  <line x1="160" y1="101" x2="160" y2="72" style="stroke:var(--ink);stroke-width:1.6"/>
+  <rect x="148" y="66" width="24" height="6" style="fill:var(--ink)"/>
+  <text x="160" y="140" text-anchor="middle" font-weight="700">Innflæði</text>
+  <text x="160" y="158" text-anchor="middle" class="small">t.d. 12 L/mín úr krana</text>
+  <rect x="252" y="50" width="150" height="104" class="box"/>
+  <rect x="253" y="104" width="148" height="49" style="fill:var(--mag);opacity:0.18"/>
+  <text x="327" y="84" text-anchor="middle" font-weight="700">Birgð</text>
+  <text x="327" y="104" text-anchor="middle">Vatn í baðkari</text>
+  <text x="327" y="140" text-anchor="middle" class="small">mælt í lítrum</text>
+  <line x1="402" y1="96" x2="540" y2="96" style="stroke:var(--ink);stroke-width:1.6"/>
+  <line x1="402" y1="106" x2="540" y2="106" style="stroke:var(--ink);stroke-width:1.6"/>
+  <path d="M540 86 L556 101 L540 116 z" style="fill:var(--ink)"/>
+  <path d="M458 86 L486 116 L486 86 L458 116 z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.6"/>
+  <line x1="472" y1="101" x2="472" y2="72" style="stroke:var(--ink);stroke-width:1.6"/>
+  <rect x="460" y="66" width="24" height="6" style="fill:var(--ink)"/>
+  <text x="472" y="140" text-anchor="middle" font-weight="700">Útflæði</text>
+  <text x="472" y="158" text-anchor="middle" class="small">t.d. 8 L/mín um niðurfall</text>
+  <path d="M562 118 a13 13 0 0 1 6 -24 a17 17 0 0 1 30 -5 a14 14 0 0 1 22 15 a12 12 0 0 1 -4 20 z" style="fill:none;stroke:var(--ink);stroke-width:1.6"/>
+  <text x="56" y="140" text-anchor="middle" class="small">uppspretta</text>
+  <text x="590" y="140" text-anchor="middle" class="small">niðurfall</text>
+  <text x="320" y="196" text-anchor="middle" class="small">Kassi = birgð · rör með loka = flæði · ský = utan afmörkunar kerfisins · hringur = breyta (converter)</text>
+</svg>
+<p>Táknin í SFD (glæra „Birgðir og flæði“): <b>kassi</b> er birgð, <b>rör með loka</b> (krana) er flæði, lítill <b>hringur</b> er breyta (variable, converter) sem hefur áhrif á flæði, og <b>ský</b> er uppspretta eða niðurfall utan afmörkunar kerfisins. Á glærunum er hænudæmið teiknað bæði sem CLD og SFD: birgðirnar eru „Fjöldi eggja“ og „Fjöldi hæna“, og flæðin „leggja á egg“, „ungar sem koma úr eggjum“, „egg sem klekjast út“ og „hænur deyja“.</p>
+<div class="key">
+<p><b>Baðkarsjafnan.</b> Birgð breytist aðeins vegna flæðis:</p>
+$$\text{Birgð}(t) = \text{Birgð}(0) + \int_0^t \big(\text{innflæði} - \text{útflæði}\big)\,dt$$
+<p>Ef flæðin eru fasti einfaldast þetta í</p>
+$$S(t) = S_0 + (q_{inn} - q_{út})\cdot t \qquad\text{og}\qquad t_{\text{tómt}} = \frac{S_0}{q_{út} - q_{inn}}\ \ (\text{ef } q_{út} > q_{inn})$$
+</div>
+<p>Þrjár reglur um birgðir sem gott er að kunna utan að:</p>
+<ul>
+<li>Ef innflæði &gt; útflæði hækkar birgðin; ef útflæði &gt; innflæði lækkar hún; ef þau eru jöfn er birgðin í <b>kviku jafnvægi</b> (dynamic equilibrium): hún stendur í stað þótt allt sé á hreyfingu.</li>
+<li>Þú getur hækkað birgð bæði með því að <b>auka innflæði</b> og með því að <b>minnka útflæði</b>. Íbúðum fjölgar jafnt hvort sem byggt er meira eða færri íbúðir eru teknar úr notkun (t.d. í skammtímaleigu).</li>
+<li>Birgðir breytast <b>hægt</b>, jafnvel þegar flæðin breytast hratt. Þær virka sem <b>stuðpúði</b> (buffer) og <b>seinkun</b>, og þær <b>aftengja</b> innflæði og útflæði: lager í verslun leyfir að vörur komi í stórum sendingum en séu seldar jafnt og þétt.</li>
+</ul>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Baðkarið</span></div><div class="ex-body">
+<p>Í baðkari eru 50 L. Kraninn gefur 12 L/mín og niðurfallið tekur 8 L/mín. (a) Hve mikið er í baðkarinu eftir 10 mínútur? (b) Þá er skrúfað fyrir kranann. Hve lengi er baðkarið að tæmast?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) Nettóflæðið er $12 - 8 = 4$ L/mín, svo $S(10) = 50 + 4\cdot 10 = 90$ L.</p>
+<p>(b) Nú er innflæðið 0 og útflæðið 8 L/mín: $t = 90/8 = 11{,}25$ mín. <span class="ans">90 L og 11,25 mín</span></p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Lager í byggingavöruverslun</span></div><div class="ex-body">
+<p>Á lager eru 1200 sementspokar. Verslunin selur 150 poka á dag en birgirinn nær aðeins að afhenda 90 poka á dag. Hvenær tæmist lagerinn?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Útflæðið er meira en innflæðið, nettó $90 - 150 = -60$ pokar á dag. $t = 1200/60 = 20$ dagar. Taktu eftir að lagerinn (birgðin) „kaupir tíma“: verslunin hefur 20 daga til að bregðast við, t.d. finna annan birgi. <span class="ans">20 dagar</span></p>
+</div></details></div></div>
+
+<h2 id="endurgjof">Endurgjöf: styrkjandi og jafnvægislykkjur</h2>
+<p><b>Afturvirk lykkja</b> (feedback loop) er lokuð keðja orsakatengsla: frá birgð, í gegnum ákvarðanir, reglur eða eðlisfræðileg lögmál sem ráðast af stöðu birgðarinnar, og aftur í gegnum flæði sem breytir birgðinni. Lykkjurnar eru tvær tegundir.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Styrkjandi lykkja (R)</th><th>Jafnvægislykkja (B)</th></tr></thead>
+<tbody>
+<tr><td>Ensk heiti</td><td>reinforcing loop, positive feedback</td><td>balancing loop, negative feedback</td></tr>
+<tr><td>Íslensk heiti á glærum</td><td>jákvæð endurgjöf, <b>sjálfstyrkjandi</b> (self-reinforcing)</td><td>neikvæð endurgjöf, <b>sjálfleiðréttandi</b> (self-correcting)</td></tr>
+<tr><td>Hvað gerir hún?</td><td>Magnar breytingu: vöxtur leiðir af sér meiri vöxt, hrun meira hrun.</td><td>Vinnur á móti breytingu og dregur kerfið að markmiði eða jafnvægi.</td></tr>
+<tr><td>Hegðun yfir tíma</td><td>Veldisvöxtur eða veldishrun</td><td>Markmiðsleit (goal seeking), stöðugleiki</td></tr>
+<tr><td>Dæmi úr glærum</td><td>Hænur → egg → fleiri hænur</td><td>Fleiri hænur → fleiri fara yfir veginn → færri hænur</td></tr>
+<tr><td>Íslensk dæmi</td><td>Vextir á innistæðu; vinsæll ferðamannastaður fær umtal og enn fleiri gesti</td><td>Hitastillir; hækkandi húsnæðisverð kallar á nýbyggingar sem lækka verðið</td></tr>
+</tbody></table></div>
+<p>Orðin „jákvæð“ og „neikvæð“ segja <b>ekkert um hvort lykkjan er góð eða slæm</b>. Styrkjandi lykkja getur verið vítahringur (atvinnuleysi → minni neysla → meira atvinnuleysi) og jafnvægislykkja getur haldið kerfi föstu í slæmu ástandi. Þess vegna eru R og B (reinforcing, balancing) skýrari heiti.</p>
+
+<h3>Hegðun yfir tíma</h3>
+<svg class="diagram" viewBox="0 0 640 200" role="img" aria-label="Fjögur hegðunarmynstur: veldisvöxtur, markmiðsleit, S-ferill og deyfðar sveiflur" style="max-width:100%;height:auto">
+  <g style="stroke:var(--rule-2);stroke-width:1.2;fill:none">
+    <path d="M10 20 V140 H150"/><path d="M170 20 V140 H310"/><path d="M330 20 V140 H470"/><path d="M490 20 V140 H630"/>
+  </g>
+  <g style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4">
+    <line x1="170" y1="56" x2="310" y2="56"/><line x1="330" y1="50.7" x2="470" y2="50.7"/><line x1="490" y1="82.2" x2="630" y2="82.2"/>
+  </g>
+  <g style="stroke:var(--mag);stroke-width:2.4;fill:none">
+    <path d="M10.0 136.8 L19.8 135.9 L29.5 134.7 L39.3 133.1 L49.0 131.0 L58.8 128.3 L68.5 124.8 L78.3 120.2 L88.0 114.3 L94.5 109.4 L101.0 103.5 L107.5 96.5 L114.0 88.2 L120.5 78.3 L127.0 66.5 L133.5 52.4 L140.0 35.7"/>
+    <path d="M170.0 129.5 L176.5 116.2 L183.0 105.3 L189.5 96.3 L196.0 89.0 L202.5 83.0 L209.0 78.1 L215.5 74.1 L222.0 70.8 L231.8 67.0 L241.5 64.1 L251.3 62.0 L261.0 60.5 L274.0 59.0 L287.0 58.0 L300.0 57.3"/>
+    <path d="M330.0 139.0 L339.8 137.9 L349.5 135.8 L356.0 133.2 L362.5 129.4 L369.0 123.7 L375.5 116.0 L382.0 106.3 L388.5 95.4 L395.0 84.4 L401.5 74.8 L408.0 67.0 L414.5 61.4 L421.0 57.5 L430.8 54.1 L440.5 52.4 L450.3 51.5 L460.0 51.1"/>
+    <path d="M490.0 129.5 L496.5 118.3 L503.0 99.4 L509.5 79.6 L516.0 64.3 L522.5 57.1 L529.0 58.1 L535.5 65.6 L542.0 76.2 L548.5 86.4 L555.0 93.4 L561.5 96.0 L568.0 94.2 L574.5 89.6 L581.0 83.8 L587.5 78.7 L594.0 75.7 L600.5 75.0 L607.0 76.4 L613.5 79.2 L620.0 82.3"/>
+  </g>
+  <text x="80" y="162" text-anchor="middle" font-weight="700">Veldisvöxtur</text><text x="80" y="180" text-anchor="middle" class="small">R ræður</text>
+  <text x="240" y="162" text-anchor="middle" font-weight="700">Markmiðsleit</text><text x="240" y="180" text-anchor="middle" class="small">B ræður (markmið brotalína)</text>
+  <text x="400" y="162" text-anchor="middle" font-weight="700">S-ferill</text><text x="400" y="180" text-anchor="middle" class="small">R fyrst, svo B við takmörk</text>
+  <text x="560" y="162" text-anchor="middle" font-weight="700">Sveiflur</text><text x="560" y="180" text-anchor="middle" class="small">B með seinkun</text>
+</svg>
+
+<h3>Styrkjandi lykkja og tvöföldunartími</h3>
+<p>Ef birgð vex um fast hlutfall $r$ á tímaeiningu verður vöxturinn veldisvöxtur: $S(t) = S_0(1+r)^t$. Gagnleg nálgun er <b>regla 70</b> (rule of 70):</p>
+<div class="key">
+$$T_{2} \approx \frac{70}{r\,[\%]} \qquad\text{(nákvæmt: } T_2 = \tfrac{\ln 2}{\ln(1+r)}\text{)}$$
+<p>Vöxtur um 7 % á ári tvöfaldar birgðina á um 10 árum, 2 % á um 35 árum. Eftir $n$ tvöfaldanir er birgðin $2^n$ sinnum stærri.</p>
+</div>
+<p>Fólk vanmetur veldisvöxt kerfisbundið. Í grein Kristrúnar Frostadóttur (glæra í F11) er gátan um vatnaliljurnar: liljunum fjölgar tvöfalt á dag og tjörnin er hulin á degi 48. Hvenær var hún hálfhulin? Á degi 47. Lengst af tekur enginn eftir liljunum, og svo er tjörnin skyndilega full. Sama átti við um COVID-19 og á við um loftslagsvandann, þar sem töfin milli orsakar og afleiðingar er löng.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Ferðamenn og regla 70</span></div><div class="ex-body">
+<p>Gerum ráð fyrir að ferðamönnum fjölgi um 14 % á ári og að árið 2012 hafi þeir verið 0,6 milljónir. Hve langur er tvöföldunartíminn og hve margir eru ferðamennirnir 10 árum síðar ef vöxturinn helst?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$T_2 \approx 70/14 = 5$ ár. Á 10 árum verða tvær tvöfaldanir: $0{,}6 \cdot 2^2 = 2{,}4$ milljónir. (Nákvæmt: $0{,}6\cdot 1{,}14^{10} \approx 2{,}22$ milljónir; regla 70 er nálgun.) <span class="ans">5 ár, um 2,4 milljónir</span></p>
+<p>Í raun getur enginn veldisvöxtur haldið áfram endalaust: jafnvægislykkjur (álag á innviði, gistirými, verð, ánægja ferðamanna) taka við og vöxturinn verður S-ferill.</p>
+</div></details></div></div>
+
+<h3>Jafnvægislykkja og jafnvægisgildi</h3>
+<p>Jafnvægislykkja ber saman stöðuna við markmið og bregst við <b>bilinu</b> (gap, discrepancy). Ef birgðin lokar ákveðnu hlutfalli $k$ af bilinu á hverju tímabili minnkar bilið veldisvíslega:</p>
+<div class="key">
+$$\text{bil}_n = \text{bil}_0\,(1-k)^n \qquad\text{og}\qquad S_n = M - (M - S_0)(1-k)^n$$
+<p>Ef innflæði er fast, $I$, og útflæðið er hlutfall $d$ af birgðinni (úrelding, dauðsföll, brottfarir), er jafnvægið þar sem inn = út:</p>
+$$I = d\,S^* \ \Rightarrow\ S^* = \frac{I}{d} = I\cdot D,\qquad D = \frac{1}{d}\ \text{(meðaldvalartími)}$$
+</div>
+<p>Síðasta jafnan er sama hugmynd og <b>lögmál Little</b> úr megindlegri ferlagreiningu: fjöldi í kerfinu = komutíðni × meðaltími í kerfinu.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Ferðamenn á landinu hverju sinni</span></div><div class="ex-body">
+<p>Til landsins koma að meðaltali 6000 ferðamenn á dag og hver dvelur að meðaltali í 7 daga. Hve margir ferðamenn eru á landinu á hverjum tíma þegar kerfið er í jafnvægi? Hvað gerist ef meðaldvölin styttist í 5 daga?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Útflæðið (brottfarir) er $S/7$ á dag. Í jafnvægi er $6000 = S^*/7$, svo $S^* = 6000\cdot 7 = 42\,000$. Með 5 daga dvöl verður $S^* = 30\,000$: álag á gistirými minnkar þótt komum fækki ekki. <span class="ans">42 000 ferðamenn</span></p>
+</div></details></div></div>
+
+<h2 id="cld">Orsakarit (CLD)</h2>
+<p><b>Orsakarit</b> (causal loop diagram, CLD) er sameiginlegt tungumál til að lýsa rökfræði kerfis. Það samanstendur af <b>breytum</b> og <b>örvum</b>; hver ör er orsakatengsl frá orsök til afleiðingar. CLD fangar fljótt tilgátu þína um hvaða lykkjur valda hegðuninni, er auðskilið líka fyrir þá sem þekkja það ekki og hentar vel í <b>sameiginlega líkanagerð</b> (group model building), eins og í HÓP2.</p>
+
+<h3>Pólun tengsla</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Merki</th><th>Merking</th><th>Lesið sem</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td>$A \xrightarrow{+} B$ (eða S)</td><td>Breytingin er í <b>sömu átt</b> (same)</td><td>Ef A eykst, eykst B (umfram það sem annars hefði orðið); ef A minnkar, minnkar B.</td><td>Ferðamenn $\xrightarrow{+}$ Tekjur ferðaþjónustu</td></tr>
+<tr><td>$A \xrightarrow{-} B$ (eða O)</td><td>Breytingin er í <b>gagnstæða átt</b> (opposite)</td><td>Ef A eykst, minnkar B; ef A minnkar, eykst B.</td><td>Stýrivextir $\xrightarrow{-}$ Útlán</td></tr>
+<tr><td>$A \xrightarrow{\ \|\ } B$</td><td><b>Seinkun</b> (delay)</td><td>Ef A breytist, breytist B eftir nokkurn tíma.</td><td>Húsnæðisverð $\xrightarrow{+\ \|}$ Fullbúnar íbúðir</td></tr>
+</tbody></table></div>
+<p>Plúsinn segir ekki að B <i>aukist</i>, heldur að B breytist í <i>sömu átt</i> og A. Á glærunum (F12) er plúsinn útskýrður svona: ef hluturinn við upphaf pílunnar hækkar, hækkar hluturinn við örvaroddinn líka. Sumir nota S (same) og O (opposite) í stað + og −, eins og á glærunni um niðurstöður De Meulenaere o.fl.</p>
+
+<h3>Pólun lykkju</h3>
+<div class="key">
+<p><b>Fljótlega leiðin:</b> teldu neikvæðu tengslin í lykkjunni. <b>Slétt tala</b> (0, 2, 4, …) = <b>R</b>, styrkjandi. <b>Oddatala</b> (1, 3, …) = <b>B</b>, jafnvægislykkja.</p>
+<p><b>Besta leiðin:</b> segðu söguna hringinn: „ef X eykst, þá … og þá … og að lokum eykst/minnkar X“. Ef X endar í sömu átt og hún byrjaði er lykkjan R, annars B.</p>
+<p><b>Helst bæði:</b> segðu söguna tvisvar, einu sinni með aukningu og einu sinni með minnkun.</p>
+</div>
+<p>Ástæðan fyrir reglunni: hvert neikvætt tengsl snýr stefnunni við. Tvö neikvæð tengsl snúa henni tvisvar, svo þau núllast út. Pólun lykkju er því margfeldi formerkjanna: $(+1)^a(-1)^b$, sem er $+1$ (R) ef $b$ er slétt og $-1$ (B) ef $b$ er oddatala.</p>
+
+<svg class="diagram" viewBox="0 0 640 320" role="img" aria-label="Orsakarit af húsnæðismarkaði: vinstra megin styrkjandi lykkja um væntingar og eftirspurn, hægra megin jafnvægislykkja um arðsemi nýbygginga og framboð með seinkun" style="max-width:100%;height:auto">
+  <defs><marker id="k8m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--ink)"/></marker></defs>
+  <text x="320" y="165" text-anchor="middle" font-weight="700">Húsnæðisverð</text>
+  <text x="128" y="62" text-anchor="middle">Væntingar um verðhækkun</text>
+  <text x="140" y="262" text-anchor="middle">Eftirspurn eftir íbúðum</text>
+  <text x="500" y="62" text-anchor="middle">Arðsemi nýbygginga</text>
+  <text x="500" y="262" text-anchor="middle">Framboð íbúða</text>
+  <g style="fill:none;stroke:var(--ink);stroke-width:1.6" marker-end="url(#k8m1)">
+    <path d="M292 147 Q290 70 236 62"/>
+    <path d="M110 74 Q60 160 110 244"/>
+    <path d="M236 262 Q300 260 306 178"/>
+    <path d="M348 147 Q350 70 420 62"/>
+    <path d="M530 74 Q580 160 530 244"/>
+    <path d="M450 262 Q345 262 336 178"/>
+  </g>
+  <g style="stroke:var(--ink);stroke-width:2"><line x1="547" y1="155" x2="563" y2="155"/><line x1="547" y1="162" x2="563" y2="162"/></g>
+  <g font-weight="700" style="fill:var(--mag)">
+    <text x="244" y="82">+</text><text x="84" y="240">+</text><text x="288" y="196">+</text>
+    <text x="388" y="82">+</text><text x="546" y="240">+</text><text x="344" y="198">−</text>
+  </g>
+  <circle cx="200" cy="161" r="15" style="fill:none;stroke:var(--good);stroke-width:1.6;stroke-dasharray:80 14.2"/>
+  <text x="200" y="166" text-anchor="middle" font-weight="700" style="fill:var(--good)">R</text>
+  <circle cx="440" cy="161" r="15" style="fill:none;stroke:var(--bad);stroke-width:1.6;stroke-dasharray:80 14.2"/>
+  <text x="440" y="166" text-anchor="middle" font-weight="700" style="fill:var(--bad)">B</text>
+  <text x="570" y="162" class="small">seinkun</text>
+  <text x="200" y="300" text-anchor="middle" class="small">R: „verðbóla“ (0 neikvæð tengsl)</text>
+  <text x="460" y="300" text-anchor="middle" class="small">B: „framboðið svarar“ (1 neikvætt tengsl)</text>
+</svg>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Lykkjurnar á húsnæðismarkaði</span></div><div class="ex-body">
+<p>Greindu lykkjurnar tvær í ritinu að ofan. Hvor er R og hvor B? Hvers vegna getur húsnæðisverð sveiflast frekar en að leita jafnt og þétt að jafnvægi?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p><b>Vinstri lykkjan:</b> Húsnæðisverð $\xrightarrow{+}$ Væntingar um verðhækkun $\xrightarrow{+}$ Eftirspurn eftir íbúðum $\xrightarrow{+}$ Húsnæðisverð. Engin neikvæð tengsl (slétt tala) → <b>R</b>. Saga: verð hækkar, fólk býst við meiri hækkun og flýtir kaupum, eftirspurn eykst og verðið hækkar enn meira.</p>
+<p><b>Hægri lykkjan:</b> Húsnæðisverð $\xrightarrow{+}$ Arðsemi nýbygginga $\xrightarrow{+\ \|}$ Framboð íbúða $\xrightarrow{-}$ Húsnæðisverð. Eitt neikvætt tengsl (oddatala) → <b>B</b>.</p>
+<p>Seinkunin (||) skiptir sköpum: það tekur 2-3 ár að skipuleggja og byggja. Þegar nýju íbúðirnar koma loks á markað getur verðið þegar verið farið að lækka, svo framboðið „skýtur yfir markið“. Lengri seinkun → stærri sveiflur. <span class="ans">Vinstri R, hægri B; seinkunin veldur sveiflum</span></p>
+</div></details></div></div>
+
+<h3>Seinkanir</h3>
+<p><b>Seinkun</b> (delay) er tíminn sem líður frá því að eitthvað breytist þar til áhrifin koma fram. Seinkanir eru í öllum kerfum, hvort sem þær eru sekúndur eða ár. Þú þarft ekki að merkja allar seinkanir í CLD, bara þær sem skipta máli fyrir hegðunina. Meginreglan: <b>lengri seinkun í jafnvægislykkju → stærri sveiflur</b>. Dæmi: sá sem stillir sturtuna og bíður ekki eftir að heita vatnið berist brennir sig og skrúfar þá of mikið niður. Í smásölu veldur seinkun á pöntunum sveiflum í lager (bullwhip-áhrif), og í kvótakerfinu er seinkun milli stofnmælingar, ráðgjafar og áhrifa veiða á stofninn.</p>
+
+<h3>Reglur um nöfn breyta</h3>
+<ul>
+<li><b>Nafnorð</b> eða nafnliðir, ekki sagnir eða aðgerðir: „Fjöldi ferðamanna“, ekki „ferðamönnum fjölgar“.</li>
+<li><b>Mælanleg stærð</b> sem getur aukist eða minnkað, þótt engin mæling sé til á henni. Það á að vera ljóst hvað það þýðir að breytan aukist: ekki „viðhorf til glæpa“ heldur „umburðarlyndi gagnvart glæpum“.</li>
+<li><b>Hlutlaus um stefnu:</b> nafnið má ekki fela í sér breytinguna. Ekki „aukin ánægja ferðamanna“ heldur „ánægja ferðamanna“; áhrifin eru sýnd með örvunum og formerkjunum, ekki orðunum.</li>
+<li><b>Jákvætt orðaðar</b> að jafnaði: „ánægja“ frekar en „óánægja“, „atvinna“ eða „atvinnuleysi“ eftir því hvort er eðlilegra í sögunni, en forðastu tvöfaldar neitanir.</li>
+</ul>
+
+<h3>Leiðbeiningar og algeng mistök</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Leiðbeining (glærur um CLD)</th><th>Útskýring</th></tr></thead>
+<tbody>
+<tr><td>Ekki nota örvar til að tákna „og svo…“</td><td>Ör er orsök, ekki tímaröð. „Umsókn berst → umsókn metin“ er ferlarit, ekki CLD.</td></tr>
+<tr><td>Ef tengsl þarfnast útskýringar, brjóttu þau upp</td><td>Settu inn milliliðinn: í stað „Stýrivextir → Húsnæðisverð“ skaltu teikna „Stýrivextir → Greiðslubyrði lána → Eftirspurn eftir íbúðum → Húsnæðisverð“.</td></tr>
+<tr><td>Ekki túlka opnar keðjur sem lykkjur</td><td>Lykkja er bara lykkja ef þú kemst hringinn í örvaáttina aftur á upphafsstað.</td></tr>
+<tr><td>Gerðu markmið jafnvægislykkja sýnileg</td><td>Teiknaðu „æskileg vatnshæð“ og „skynjað bil“ inn í lykkjuna í stað þess að fela markmiðið.</td></tr>
+<tr><td>Bara lykkjur eiga að líta út eins og lykkjur</td><td>Örvar utan lykkja eiga að vera beinar ef hægt er. Merktu lykkjur með lit eða feitum örvum, einkum R-lykkjur.</td></tr>
+<tr><td>Nefndu lykkjurnar</td><td>Stutt, grípandi og lýsir virkni allrar lykkjunnar, t.d. „verðbóla“, „framboðið svarar“, „ofálag á náttúruperlur“.</td></tr>
+<tr><td>Orsök, ekki fylgni</td><td>Fylgni endurspeglar fyrri hegðun, ekki uppbyggingu, og getur rofnað ef yfirráð lykkja breytast. Ísasala og morðtíðni fylgjast að (bæði hærri á sumrin) en hvorugt veldur hinu.</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök í CLD:</b> vandamálið er ekki skýrt skilgreint; spurningin er ekki nógu afmörkuð; margar aðgerðir eru faldar í einni breytu („kvótakerfið“); of mikil einföldun; skortur á uppbyggingu; eða of mörg smáatriði svo enginn sér lykkjurnar.</p></div>
+<p><b>Hvernig byrjarðu?</b> Skilgreindu vandamálið og afmörkun þess, settu fram mjög skýra spurningu, gerðu lista yfir viðeigandi breytur, raðaðu þeim eftir mikilvægi, teiknaðu hegðun yfir tíma (reference behavior pattern, RBP) fyrir lykilbreyturnar, byrjaðu einfalt og bættu við. Og „notaðu aldrei orðið ómögulegt“.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Lagaðu breytuheitin (HÓP2: ferðaþjónusta)</span></div><div class="ex-body">
+<p>Hópur teiknaði: „Aukning ferðamanna“ $\xrightarrow{+}$ „Slæmt viðhorf íbúa“ $\xrightarrow{+}$ „Ferðaþjónustan“. Hvað er að og hvernig lagarðu það?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>„Aukning ferðamanna“ felur í sér stefnu, „slæmt viðhorf“ er hvorki hlutlaust né skýrt mælanlegt og „Ferðaþjónustan“ er heil atvinnugrein, ekki stærð sem eykst eða minnkar. Betra: <b>Fjöldi ferðamanna</b> $\xrightarrow{-}$ <b>Þolinmæði íbúa gagnvart ferðamönnum</b> $\xrightarrow{+}$ <b>Stuðningur við uppbyggingu ferðaþjónustu</b>. <span class="ans">Nafnorð, mælanleg og hlutlaus</span></p>
+</div></details></div></div>
+
+<h2 id="dyragardur">Kerfisdýragarðurinn: algengar kerfisgerðir</h2>
+<p>Í 2. kafla <i>Thinking in Systems</i> fer Meadows í „heimsókn í dýragarð kerfanna“ (systems zoo): einföld kerfi sem birtast aftur og aftur í raunveruleikanum.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Kerfisgerð</th><th>Uppbygging</th><th>Hegðun og lærdómur</th><th>Íslenskt dæmi</th></tr></thead>
+<tbody>
+<tr><td><b>Ein birgð, tvær jafnvægislykkjur sem togast á</b> (hitastillirinn)</td><td>Hitastillir hitar herbergið að markmiði; varmatap út um veggina dregur hitann að útihitanum.</td><td>Birgðin endar aðeins <i>undir</i> markmiðinu, því lekinn heldur áfram meðan stýringin bregst við. Bæta þarf lekann upp í markmiðinu.</td><td>Lón Landsvirkjunar: innrennsli vs. keyrsla virkjana.</td></tr>
+<tr><td><b>Ein birgð, ein R og ein B</b> (mannfjöldi, fjármagn)</td><td>Fæðingar (R) og dauðsföll (B) á sömu birgð.</td><td>Hvor lykkjan <b>ræður</b> (loop dominance) ákvarðar hegðunina: vöxt, hnignun eða jafnvægi. Yfirráðin geta færst á milli.</td><td>Íbúðastofn: nýbyggingar og úrelding; peningamagn: útlán og afborganir.</td></tr>
+<tr><td><b>Ein birgð með seinkun</b> (lager bílasala)</td><td>Jafnvægislykkja sem leiðréttir lager, en með seinkun í skynjun, ákvörðun og afhendingu.</td><td>Sveiflur. Að bregðast hraðar við gerir þær oft <i>verri</i>; að bregðast hægar og yfirvegað jafnar þær.</td><td>Virðiskeðja smásölu: pantanir hjá heildsala.</td></tr>
+<tr><td><b>Tvær birgðir: endurnýjanleg auðlind takmörkuð af óendurnýjanlegri</b> (olíulind)</td><td>Fjármagn (R) vex með hagnaði af vinnslu; auðlindin minnkar og vinnsla verður dýrari.</td><td>Vöxtur, toppur og hrun. Tvöföld auðlind lengir tímann bara um nokkur ár.</td><td>Vinnsla á takmarkaðri auðlind, t.d. námu.</td></tr>
+<tr><td><b>Tvær birgðir: endurnýjanleg auðlind takmörkuð af endurnýjanlegri</b> (fiskveiðar)</td><td>Fjármagn í útgerð (R) og fiskistofn sem endurnýjar sig (sjálfur með R og B).</td><td>Þrennt getur gerst: jafnvægi, sveiflur í kringum jafnvægi, eða <b>ofveiði og hrun</b> ef sóknin eykst of hratt.</td><td>Kvótakerfið; hrun síldarstofnsins 1968.</td></tr>
+</tbody></table></div>
+
+<h2 id="eiginleikar">Af hverju kerfi virka vel</h2>
+<p>Í 3. kafla nefnir Meadows þrjá eiginleika sem gera kerfi hæf til að lifa af og virka vel:</p>
+<ul>
+<li><b>Seigla</b> (resilience): geta kerfisins til að jafna sig eftir áföll. Seigla byggist á <b>mörgum afturvirkum lykkjum</b> sem vinna á mismunandi hátt og geta tekið við hver af annarri (redundancy). Dæmi: mannslíkaminn, ástralskt kjarrlendi sem lifir af kjarrelda. Seigla er ekki það sama og stöðugleiki: kerfi er oft hámarkað fyrir afköst eða stöðugleika á kostnað seiglu (kýr á hormónum sem mjólka meira en lifa skemur; einsleitur skógur sem þolir illa mengun). Smásala sem rekur „lean“ lager án stuðpúða er skilvirk en lítið seig.</li>
+<li><b>Sjálfsskipulag</b> (self-organization): geta kerfis til að gera sig flóknara, læra og þróa nýja uppbyggingu. Þróun lífvera, tækniframfarir, ný fyrirtæki. Sjálfsskipulag krefst frelsis, tilrauna og fjölbreytni, og er sterkasta form seiglu.</li>
+<li><b>Stigveldi</b> (hierarchy): kerfi eru byggð úr undirkerfum (frumur → líffæri → líkami; deild → fyrirtæki → atvinnugrein). Tengsl innan undirkerfis eru sterkari en milli undirkerfa, svo hlutar geta starfað sjálfstætt og ekki þarf að senda allar upplýsingar um allt kerfið. Stigveldi verður til neðan frá og á að <b>þjóna undirkerfunum</b>. Mistök verða þegar undirkerfi hámarkar eigin markmið á kostnað heildarinnar (suboptimization) eða þegar efsta stig stýrir of mikið.</li>
+</ul>
+
+<h2 id="ovaent">Af hverju kerfi koma á óvart</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Ástæða</th><th>Útskýring</th></tr></thead>
+<tbody>
+<tr><td><b>Tælandi atburðir</b> (beguiling events)</td><td>Við sjáum kerfi sem röð atburða (hrun á hlutabréfamarkaði, skriðufall) en ekki uppbygginguna undir þeim. Skoðaðu mynstur yfir tíma og síðan uppbygginguna. Líkön sem byggja á hegðun flæða spá vel til skamms tíma en bregðast þegar uppbyggingin breytist.</td></tr>
+<tr><td><b>Ólínuleiki</b> (nonlinearity)</td><td>Orsök og afleiðing eru ekki í réttu hlutfalli. Tvöfalt meiri vinna getur gefið fjórfalda eða hálfa afurð. Yfirráð lykkja færast til: lítil umferð flæðir vel en örlítil aukning getur valdið umferðarteppu.</td></tr>
+<tr><td><b>Ekki til raunveruleg mörk</b> (nonexistent boundaries)</td><td>Afmörkun er nauðsynleg einföldun, en í raun er heimurinn eitt kerfi. Ský á SFD (uppspretta, niðurfall) eru tímabundnar einfaldanir sem geta bitið þig.</td></tr>
+<tr><td><b>Takmörk</b> (limits, limiting factors)</td><td>Vöxtur stöðvast við þann þátt sem er mest takmarkandi. Ef þú fjarlægir hann tekur næsti við. Endalaus vöxtur er ómögulegur; spurningin er „innan hvaða takmarka viljum við lifa?“.</td></tr>
+<tr><td><b>Seinkanir</b> (delays)</td><td>Breytingar taka tíma. Seinkanir valda sveiflum og þegar seinkanir eru langar þarf framsýni: að bregðast við þegar vandinn er augljós er oft of seint.</td></tr>
+<tr><td><b>Afmörkuð skynsemi</b> (bounded rationality)</td><td>Hver aðili tekur skynsamlegar ákvarðanir út frá þeim upplýsingum sem hann hefur, en upplýsingarnar eru ófullkomnar og ná ekki til heildarinnar. Sjómaðurinn veit ekki hvað keppinautarnir veiða eða hve mikið er eftir í sjónum. Við vanmetum framtíðina, metum áhættu illa og leitum staðfestingar (confirmation bias). Að skipta um fólk breytir litlu; að breyta upplýsingum, hvötum og uppbyggingu breytir miklu.</td></tr>
+</tbody></table></div>
+
+<h2 id="gildrur">Kerfisgildrur (archetypes)</h2>
+<p>Í 5. kafla lýsir Meadows átta algengum <b>kerfisgildrum</b> (system traps, archetypes): uppbyggingum sem framleiða vandræðahegðun aftur og aftur. Hverri gildru fylgir „útgönguleið“. Í HÓP2 er gott að spyrja hvort einhver þessara gildra sé í þínu kerfi.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Gildra</th><th>Uppbygging</th><th>Útgönguleið</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td><b>Andstaða við stefnu</b> (policy resistance)</td><td>Margir aðilar toga sömu birgð að ólíkum markmiðum. Þegar einn togar fastar toga hinir á móti.</td><td>Hætta að toga; finna markmið sem allir geta sameinast um.</td><td>Stríðið gegn fíkniefnum; leiguþak sem fær leigusala til að færa íbúðir í skammtímaleigu.</td></tr>
+<tr><td><b>Harmleikur almenninganna</b> (tragedy of the commons)</td><td>Sameiginleg auðlind; hver notandi hagnast á meiri nýtingu en kostnaðurinn dreifist á alla. Endurgjöfin frá auðlindinni til notandans er veik eða sein.</td><td>Siðareglur og fræðsla, einkavæðing (skipta auðlindinni) eða reglusetning (stjórnun aðgangs).</td><td>Ofveiði á Íslandsmiðum fyrir kvótakerfið; álag á vinsæla náttúrustaði.</td></tr>
+<tr><td><b>Hnignun markmiða</b> (drift to low performance)</td><td>Markmiðið ræðst af fyrri frammistöðu; neikvæð frammistaða lækkar væntingar, sem lækka viðleitni.</td><td>Halda markmiðum föstum (óháð frammistöðu) eða miða við bestu frammistöðu fyrri tíma.</td><td>„Biðlistarnir eru ekki verri en í fyrra.“</td></tr>
+<tr><td><b>Stigmögnun</b> (escalation)</td><td>Staða hvors aðila ræðst af því að vera á undan hinum. Tvær R-lykkjur ýta hvor annarri upp.</td><td>Neita að taka þátt (einhliða afvopnun) eða semja um nýtt kerfi með jafnvægislykkjum.</td><td>Verðstríð matvöruverslana; „höfrungahlaup“ í kjarasamningum.</td></tr>
+<tr><td><b>Velgengni til hinna velgengnu</b> (success to the successful)</td><td>Sigurvegarinn fær umbun sem gerir honum auðveldara að sigra aftur (R-lykkja).</td><td>Fjölbreytni, samkeppnislög, jafna leikvöllinn, umbun sem hefur ekki áhrif á næstu umferð.</td><td>Stórar verslanakeðjur fá betri innkaupakjör; samþjöppun aflaheimilda.</td></tr>
+<tr><td><b>Að velta byrðinni</b> (shifting the burden, addiction)</td><td>Inngrip leysir einkenni vandans en ekki rót hans; kerfið missir eigin getu og verður háð inngripinu.</td><td>Ekki fara þangað. Ef þú ert þar: styrkja getu kerfisins sjálfs og draga inngripið út hægt.</td><td>Fyrirtæki sem kaupir alltaf ráðgjöf í stað þess að byggja upp þekkingu; þróunaraðstoð sem veikir heimahagkerfi.</td></tr>
+<tr><td><b>Að snúa á reglurnar</b> (rule beating)</td><td>Hegðun sem uppfyllir bókstaf reglunnar en vinnur gegn tilgangi hennar.</td><td>Endurhanna reglurnar eða útskýra tilganginn svo kraftar kerfisins vinni með honum.</td><td>Deildir sem eyða afgangi fjárheimilda í desember; brottkast á fiski.</td></tr>
+<tr><td><b>Að elta rangt markmið</b> (seeking the wrong goal)</td><td>Kerfið hámarkar mælikvarðann en ekki raunverulega velferð. Það framleiðir viðleitni, ekki árangur.</td><td>Velja vísa og markmið sem endurspegla raunverulega velferð kerfisins.</td><td>Ferðaþjónusta mæld eingöngu í fjölda ferðamanna; spítali mældur í fjölda aðgerða.</td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Ráð:</b> á prófi er oft lýst atburðarás og spurt hvaða gildra það sé. Leitaðu að lykilorðum: <i>sameiginleg auðlind</i> → almenningar; <i>tveir keppinautar svara hvor öðrum</i> → stigmögnun; <i>sigurvegarinn fær forskot</i> → velgengni til hinna velgengnu; <i>skammtímalausn sem gerir kerfið háð sér</i> → að velta byrðinni; <i>mælikvarði hámarkaður</i> → rangt markmið; <i>bókstafur en ekki andi reglunnar</i> → að snúa á reglurnar; <i>markmið lækkar smám saman</i> → hnignun.</p></div>
+
+<h2 id="vogarafl">Vogaraflspunktar (leverage points)</h2>
+<p>Í 6. kafla raðar Meadows stöðum þar sem hægt er að grípa inn í kerfi, frá <b>minnst áhrifaríkum (12)</b> til <b>áhrifaríkasta (1)</b>. Því hærra sem vogaraflið er, því meira veitir kerfið mótspyrnu.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Vogaraflspunktur</th><th>Útskýring og dæmi</th></tr></thead>
+<tbody>
+<tr><td>12</td><td><b>Tölur</b>: fastar og stikar (constants, parameters)</td><td>Auðvelt að breyta en breytir sjaldan hegðuninni („að raða þilfarsstólum á Titanic“). Lágmarkslaun, fjárveitingar, skattprósentur. Undantekning: stikar sem breyta lykkjum, t.d. vextir.</td></tr>
+<tr><td>11</td><td><b>Stuðpúðar</b> (buffers): stærð birgða miðað við flæði</td><td>Stórar birgðir miðað við flæði eru stöðugar (stöðuvatn vs. á). Lager í bakherbergi vs. engan lager. Oft dýrt eða ómögulegt að breyta.</td></tr>
+<tr><td>10</td><td><b>Uppbygging birgða og flæða</b> (stock-and-flow structure)</td><td>Efnisleg uppbygging: vegakerfi, lestarkerfi, aldursdreifing. Að endurbyggja getur gefið mikinn ávinning en er dýrt og hægt.</td></tr>
+<tr><td>9</td><td><b>Seinkanir</b> (delays)</td><td>Lengd seinkana miðað við breytingahraða kerfisins. Of langar: brugðist of seint; of stuttar: ofviðbrögð. Oft erfitt að breyta; oft betra að hægja á breytingunum.</td></tr>
+<tr><td>8</td><td><b>Jafnvægislykkjur</b> (balancing feedback loops)</td><td>Styrkur þeirra miðað við áhrifin sem þær eiga að leiðrétta. Ekki fjarlægja „óþarfar“ öryggislykkjur. Vernd uppljóstrara, frjáls verðmyndun.</td></tr>
+<tr><td>7</td><td><b>Styrkjandi lykkjur</b> (reinforcing feedback loops)</td><td>Að hægja á styrkjandi lykkjum er oft áhrifaríkara en að styrkja jafnvægislykkjur. Smitvarnir, samkeppnislög gegn „velgengni til hinna velgengnu“.</td></tr>
+<tr><td>6</td><td><b>Upplýsingaflæði</b> (information flows)</td><td>Hver hefur aðgang að hvaða upplýsingum. Ódýrt og fljótlegt. Rafmagnsmælir í forstofunni minnkar notkun; að láta þá sem taka ákvörðun bera afleiðingarnar.</td></tr>
+<tr><td>5</td><td><b>Reglur</b> (rules): hvatar, refsingar, skorður</td><td>Hver setur reglurnar hefur mikil völd. Ef einkunn væri sameiginleg fyrir allan hópinn breyttist hegðun nemenda gjörsamlega.</td></tr>
+<tr><td>4</td><td><b>Sjálfsskipulag</b> (self-organization)</td><td>Geta kerfisins til að bæta við, breyta eða þróa eigin uppbyggingu. Þróun, nýsköpun, fjölbreytni.</td></tr>
+<tr><td>3</td><td><b>Markmið</b> (goals)</td><td>Tilgangur kerfisins; allt neðar á listanum lagar sig að honum.</td></tr>
+<tr><td>2</td><td><b>Hugmyndafræði</b> (paradigms)</td><td>Ósagðar grunnhugmyndir samfélagsins sem kerfið sprettur úr: „vöxtur er góður“, „peningar mæla raunverulegt virði“.</td></tr>
+<tr><td>1</td><td><b>Að hefja sig yfir hugmyndafræði</b> (transcending paradigms)</td><td>Að átta sig á að engin hugmyndafræði er „sönn“ og vera sveigjanlegur gagnvart þeim.</td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Minnisregla:</b> neðst eru <i>tölur og efni</i> (12-10), svo <i>tími og lykkjur</i> (9-7), síðan <i>upplýsingar og reglur</i> (6-5) og efst <i>uppbygging, markmið og hugarfar</i> (4-1). Við eyðum um 90-99 % athyglinnar í tölurnar neðst á listanum.</p></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Hvar er vogaraflið? (kvótakerfið)</span></div><div class="ex-body">
+<p>Flokkaðu inngripin: (a) lækka leyfilegan heildarafla þorsks um 5 %; (b) birta upplýsingar um afla og brottkast hvers skips í rauntíma; (c) breyta markmiði kerfisins úr „hámarka afla í ár“ í „hámarka langtímaafrakstur stofnsins“.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) er tala/stiki (12). (b) er upplýsingaflæði (6). (c) er markmið (3). Lægsta talan á listanum hefur mest vogarafl, svo (c) &gt; (b) &gt; (a). <span class="ans">12, 6 og 3</span></p>
+</div></details></div></div>
+
+<h2 id="lifa">Að lifa í heimi kerfa</h2>
+<p>Í 7. kafla dregur Meadows saman venjur kerfishugsuðar. Kerfisgreining gefur ekki fullkomna spá eða stjórn, en hún kennir auðmýkt og betri spurningar:</p>
+<ol>
+<li><b>Finndu taktinn í kerfinu</b> (get the beat): skoðaðu hegðun yfir tíma áður en þú grípur inn í.</li>
+<li><b>Dragðu hugarlíkönin fram í dagsljósið</b>: teiknaðu kerfið og bjóddu öðrum að gagnrýna það.</li>
+<li><b>Virtu, dreifðu og verndaðu upplýsingar</b>: ósamhverfar upplýsingar valda mörgum vandamálum.</li>
+<li><b>Gættu að tungumálinu</b>: það sem við nefnum er það sem við einbeitum okkur að.</li>
+<li><b>Hugaðu að því sem skiptir máli, ekki bara því sem er mælanlegt</b>.</li>
+<li><b>Búðu til endurgjafarstefnu fyrir endurgjafarkerfi</b>: láttu afleiðingarnar berast aftur til ákvarðana.</li>
+<li><b>Fagnaðu flækjustiginu</b>.</li>
+<li><b>Lengdu tímasjóndeildarhringinn</b> (5, 10, 50, 100 ár).</li>
+<li><b>Farðu þvert á fræðigreinar</b>.</li>
+<li><b>Ekki láta markmiðið um hið góða rofna</b> (hnignun markmiða á líka við um siðferði).</li>
+</ol>
+
+<h2 id="hop2">Frá kenningu til HÓP2</h2>
+<p>Í HÓP2 teiknar hópurinn CLD af íslensku kerfi. Gott vinnulag:</p>
+<ol>
+<li>Skilgreindu <b>vandamálið og spurninguna</b> (t.d. „Af hverju hækkar húsnæðisverð hraðar en laun?“) og <b>afmörkunina</b>.</li>
+<li>Teiknaðu <b>hegðun yfir tíma</b> fyrir 2-3 lykilbreytur.</li>
+<li>Gerðu lista yfir breytur (nafnorð, mælanlegar, hlutlausar) og raðaðu eftir mikilvægi.</li>
+<li>Teiknaðu tengslin með pólun, merktu mikilvægar seinkanir (||).</li>
+<li>Finndu lykkjurnar, ákvarðaðu R/B (teldu neikvæð tengsl <i>og</i> segðu söguna) og nefndu þær.</li>
+<li>Greindu hvaða lykkja ræður hvenær, hvaða <b>kerfisgildrur</b> sjást og hvar <b>vogaraflspunktar</b> eru.</li>
+</ol>
+<div class="tablewrap"><table>
+<thead><tr><th>Viðfangsefni</th><th>Dæmi um R-lykkju</th><th>Dæmi um B-lykkju</th></tr></thead>
+<tbody>
+<tr><td>Húsnæðismarkaður</td><td>Verð → væntingar → eftirspurn → verð</td><td>Verð → arðsemi nýbygginga → (||) framboð → (−) verð</td></tr>
+<tr><td>Ferðaþjónusta</td><td>Ferðamenn → tekjur → markaðssetning → ferðamenn</td><td>Ferðamenn → álag á náttúru → (−) ánægja ferðamanna → ferðamenn</td></tr>
+<tr><td>Peningakerfið</td><td>Útlán → innlán → útlánageta → útlán</td><td>Verðbólga → stýrivextir → (−) útlán → eftirspurn → verðbólga</td></tr>
+<tr><td>Virðiskeðja smásölu</td><td>Markaðshlutdeild → innkaupamáttur → (−) útsöluverð → (−) markaðshlutdeild</td><td>Biðröð við kassa → (−) ánægja → viðskiptavinir → biðröð</td></tr>
+<tr><td>Kvótakerfið</td><td>Fiskistofn → nýliðun → fiskistofn</td><td>Fiskistofn → (||) ráðlagður heildarafli → afli → (−) fiskistofn</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök í verkefninu:</b> að teikna ferlarit („svo gerist þetta“) í stað orsakarits, að nota stofnanir („Seðlabankinn“) sem breytur í stað stærða („stýrivextir“), og að merkja lykkju R eða B án þess að hafa talið neikvæðu tengslin eða sagt söguna.</p></div>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og, þar sem við á, reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: lykkjuspæjarinn og baðkarið</h2>
+<p>Hér æfir þú tvo kjarna kerfishugsunar til skiptis. Í <b>lykkjuspæjaranum</b> færðu orsakarit (CLD) af íslensku kerfi (húsnæðismarkaði, ferðaþjónustu, peningakerfi, smásölu eða kvótakerfi), ákvarðar pólun hvers tengsls og segir til um hvort lykkjan sé styrkjandi (R) eða jafnvægislykkja (B). Í <b>birgðaherminum</b> stillir þú flæði svo birgð nái markmiði, fyrst með föstum flæðum (baðkarið) og síðan með jafnvægislykkju þar sem útflæðið ræðst af birgðinni.</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu fimm borð í röð. <b>Borð 1, 3 og 5:</b> settu + eða − á hvert tengsl (smelltu á hringinn í ritinu eða notaðu hnappana fyrir neðan það) og veldu R eða B fyrir hverja lykkju; allt þarf að vera rétt. Borð 5 hefur tvær lykkjur. <b>Borð 2:</b> stilltu flæðið svo birgðin hitti markmiðið nákvæmlega á tilsettum tíma. <b>Borð 4:</b> stilltu innflæðið svo jafnvægisgildið verði jafnt markmiðinu. Reiknaðu fyrst, keyrðu svo hermunina til að staðfesta. Þú getur alltaf beðið um nýtt dæmi.</p></div>
+<div class="panel" id="k8-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 9"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-7.html"><span>Fyrri</span>7. Endurhönnun og ferlahugbúnaður</a><a href="kafli-9.html" style="text-align:right"><span>Næsta</span>9. Stjórnun ferla og BPM í starfseminni</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/bpmn.js"></script>
+<script src="js/q/bpmn2.js"></script>
+<script src="js/q/eigindleg.js"></script>
+<script src="js/q/endurhonnun.js"></script>
+<script src="js/q/ferlar.js"></script>
+<script src="js/q/kerfi.js"></script>
+<script src="js/q/megindleg.js"></script>
+<script src="js/q/stjornun.js"></script>
+<script src="js/q/uppgotvun.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-8.js"></script>
+</body>
+</html>

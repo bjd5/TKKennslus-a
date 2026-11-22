@@ -1,0 +1,27 @@
+/* cards/stjornun.js – flashcards fyrir kafla 9: Stjórnun ferla og BPM í starfseminni. */
+(function () { var TK = (window.TK = window.TK || {}); (TK.CARDS = TK.CARDS || []).push(
+  { c: "stjornun", q: "Hverjir eru sex fasar BPM-lífsferilsins?", a: "Auðkenning → uppgötvun → greining → endurhönnun → innleiðing → <b>eftirlit og stjórnun</b>, sem skilar aftur inn í uppgötvun í næstu umferð." },
+  { c: "stjornun", q: "Hvað er atburðaskrá (event log)?", a: "Safn atburðafærslna úr keyrslu ferlis. Hver færsla tengist <b>máli</b> (case ID), <b>verkþætti</b> og <b>tímastimpli</b>, oft líka auðlind. Staðlað snið: XES." },
+  { c: "stjornun", q: "Ótengd vs. rauntímavöktun?", a: "<b>Ótengd</b> (offline): söguleg, lokin mál yfir tímabil. <b>Rauntíma</b> (online): mál í gangi, út frá ókláruðum slóðum." },
+  { c: "stjornun", q: "Tölfræðileg vs. líkanabyggð vöktun?", a: "<b>Tölfræðileg</b>: meðaltal, staðalfrávik, min/max, unnin í BAM/PPM-tólum, úttak er mælaborð. <b>Líkanabyggð</b>: greinir keyrslu út frá ferlalíkani, unnin í ferlaköfunartólum." },
+  { c: "stjornun", q: "Þrjár gerðir mælaborða?", a: "<b>Rekstrarlegt</b>: mál í gangi, fyrir þátttakendur. <b>Taktískt</b>: liðið tímabil, fyrir ferilseiganda. <b>Stefnumarkandi</b>: samantekt fyrir framkvæmdastjórn." },
+  { c: "stjornun", q: "Hvernig verða stefnumarkandi mælaborð til?", a: "Með samantekt (i) upp eftir ferlaskipulaginu (ferli → ferlahópur) og (ii) innan sömu víddar (margar skilvirknimælingar → ein)." },
+  { c: "stjornun", q: "Fjórar aðferðir ferlaköfunar (inntak → úttak)?", a: "<b>Uppgötvun</b>: skrá → líkan. <b>Frammistaða</b>: skrá + líkan → bætt líkan. <b>Samræmi</b>: skrá + líkan → frávik. <b>Afbrigði</b>: tvær skrár → munur." },
+  { c: "stjornun", q: "Röðunarvensl í α-reikniritinu?", a: "$a\\rightarrow b$ (orsakasamband) ef $a>b$ en ekki $b>a$. $a\\parallel b$ (samhliða) ef bæði $a>b$ og $b>a$. $a\\#b$ ef hvorugt. Krefst hegðunarlega heillar skrár." },
+  { c: "stjornun", q: "Þrjár gerðir skorða í samræmisathugun?", a: "<b>Skylda</b> (verkþáttur verður að koma fyrir), <b>útilokun</b> (tveir verkþættir mega ekki báðir koma fyrir), <b>röðun</b> (A alltaf á undan B)." },
+  { c: "stjornun", q: "Fjórar áskoranir við gagnaútdrátt?", a: "<b>Tenging</b> (hvaða máli?), <b>tímastimplun</b> (skráð seint), <b>langlífi</b> (löng mál ekki búin), <b>upplausn</b> (of fínir atburðir)." },
+  { c: "stjornun", q: "Hvernig mælir atburðaskrá víddirnar fjórar?", a: "Tími: tímastimplar. Kostnaður: beinn og óbeinn. Gæði: endurtekningar og lykkjur. Sveigjanleiki: breytileiki slóða (afbrigði)." },
+  { c: "stjornun", q: "PPI vs. KPI og SMART?", a: "PPI = hver mælistika. KPI = þær fáu sem skipta mestu fyrir markmiðin. SMART = sértækt, mælanlegt, raunhæft, viðeigandi, tímasett." },
+  { c: "stjornun", q: "RACI á íslensku (F14)?", a: "<b>R</b> Ábyrgð (vinnur verkið), <b>A</b> Stýring/eignarhald (lokaákvörðun), <b>C</b> Ráðgefandi (áður), <b>I</b> Upplýst (eftir)." },
+  { c: "stjornun", q: "Reglur fyrir hverja línu í RACI-fylki?", a: "Nákvæmlega <b>eitt A</b> og a.m.k. <b>eitt R</b>. Hóflega mörg C, því hvert C hægir á ákvörðun." },
+  { c: "stjornun", q: "Hvað gerir ferilseigandi (process owner)?", a: "Ber ábyrgð á frammistöðu ferils frá enda til enda, þvert á deildir: setur markmið og KPI, samþykkir breytingar, fylgist með mælaborði." },
+  { c: "stjornun", q: "Deildadrifin vs. ferladrifin skipulagsheild?", a: "Ferladrifin: ábyrgð eftir ferlum, sýn frá enda til enda, skráðar afhendingar, ferilseigandi breytir reglum, kostnaður eftir ferlaþrepum, áhættumat með hermun." },
+  { c: "stjornun", q: "Sex kjarnaþættir BPM-þroska?", a: "Stefnumið, stjórnarhættir, aðferðir, upplýsingatækni, fólk og menning (hver með fimm getusvið)." },
+  { c: "stjornun", q: "Fimm þroskastig BPM (F14)?", a: "1 Upphaf (tilfallandi) · 2 Stýrt (fyrstu verkefni, ytri ráðgjafar) · 3 Skilgreint (innri þjálfun, fyrri fasar) · 4 Megindlega stýrt (vöktun, öndvegissetur) · 5 Bestun (BPM í daglegri stjórnun)." },
+  { c: "stjornun", q: "Fjórar ástæður þess að BPM misheppnast?", a: "Áhersla á aðferðir og tól en ekki markmið · BPM talið eina uppspretta sannleikans · verkefni sem einangraðar sílóar · vangeta til að breytast." },
+  { c: "stjornun", q: "Hvað er BPM-öndvegissetur (CoE)?", a: "Miðlæg eining með aðferðir, staðla, verkfæri og þjálfun. Stofnað á stigi 4; minnkar á stigi 5 þegar BPM er orðið útbreitt." },
+  { c: "stjornun", q: "Þrjár gildrur í breytingastjórnun (F9)?", a: "Of snemmbúinn sigur · eðli mótstöðu (duldar andstæðar skuldbindingar) · villa miðstýrðra breytinga." },
+  { c: "stjornun", q: "Hvað er stafrænn starfsmaður (Evolv)?", a: "Hugbúnaðarþjarkur með eigin notanda og sýndarvél sem líkir eftir starfsfólki, vinnur með öllum kerfum, blandar reglum og gervigreind og kallar á manneskju þegar þarf." },
+  { c: "stjornun", q: "Þrjár gerðir stafræns vinnuafls (Evolv)?", a: "<b>Reglubundnir</b> þjarkar · <b>gervigreindardrifið vinnuflæði</b> (fast flæði + túlkun) · <b>markmiðsdrifnir</b> gervigreindarþjarkar (skipulag, verkfæri, stigmögnun)." },
+  { c: "stjornun", q: "Hvaða ferli henta sjálfvirknivæðingu (Evolv)?", a: "Síendurtekin, mikil handavinna, tímafrek, hætta á mistökum, kostnaðarleki. T.d. afstemmingar, úrlestur skjala, flutningur gagna milli kerfa." }
+); })();

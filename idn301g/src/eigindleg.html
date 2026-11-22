@@ -1,0 +1,356 @@
+<h1>Eigindleg ferlagreining</h1>
+<p class="lede">Eigindleg ferlagreining (qualitative process analysis) leitar að því sem er að í as-is ferlinu án þess að reikna: hvaða skref skapa ekkert virði, hvar sóun leynist, hvaða vandamál hagsmunaaðilar sjá og hver rót þeirra er. Þetta eru verkfærin sem þú beitir í HÓP1 (virðisgreining, sóun, vandamálaskrá, Pareto, fiskbeinarit og af-hverju-rit) og á prófinu er oft beðið um að flokka skref eða sóun í stuttri atburðarás.</p>
+
+<h2 id="samhengi">Hvar greinum við?</h2>
+<p>Glærurnar setja greininguna í samhengi <b>ferlaramma</b> (process framework) með fjórum lögum: <b>stefnur</b> (policy) efst, svo <b>yfirlitsflæðirit</b> virðiskeðjunnar (t.d. vöruþróun, framleiðsla, sala, dreifing, þjónusta), svo <b>deildarferlar</b> (t.d. innkaup, skil á vöru) og neðst <b>vinnulýsingar</b> (work instructions). Eigindleg greining fer oftast fram á stigi deildarferla, þar sem einstök skref sjást.</p>
+<p>BPM hefur fjórar víddir sem greiningin snertir: <b>stefnu</b>, <b>fólk</b> (starfslýsingar, þjálfun), <b>ferla</b> og <b>tækni</b> (UT-kerfi, UT-arkitektúr). Vandamál í ferli á sér oft rót í annarri vídd, t.d. í kerfi eða þjálfun.</p>
+<div class="key">
+<p>Engin ein „rétt leið“ er til við að greina ferla. Greiningin er bæði list og vísindi, en glærurnar nefna fjögur verkfæri sem vinna saman:</p>
+<ol>
+<li><b>Virðisgreining</b> (value-added analysis): finna óþörf skref og eyða þeim.</li>
+<li><b>Sóunargreining</b> (waste analysis): finna uppsprettur sóunar.</li>
+<li><b>Skráning vandamála</b> (issues) frá ólíkum sjónarhólum: hagsmunagreining, vandamálaskrá, Pareto og PICK.</li>
+<li><b>Rótargreining</b> (root cause analysis): finna af hverju vandamálin verða.</li>
+</ol>
+</div>
+
+<h2 id="virdisgreining">Virðisgreining (VA / BVA / NVA)</h2>
+<p>Virðisgreining (value-added analysis) brýtur ferlið niður í skref og flokkar hvert þeirra í einn af þremur flokkum. Markmiðið er að finna skref sem má fella burt.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Flokkur</th><th>Skilgreining</th><th>Prófspurning</th></tr></thead>
+<tbody>
+<tr><td><b>Virðisaukandi</b> (value adding, <b>VA</b>)</td><td>Skrefið skapar virði fyrir <b>viðskiptavininn</b>.</td><td>Er viðskiptavinurinn tilbúinn að greiða fyrir það? Myndi hann sakna þess ef það væri tekið út?</td></tr>
+<tr><td><b>Rekstrarvirði</b> (business value adding, <b>BVA</b>)</td><td>Skrefið er nauðsynlegt til að <b>reka starfsemina</b>: afla tekna, stýra áhættu eða uppfylla <b>lög og reglugerðir</b>.</td><td>Myndi reksturinn finna fyrir því ef skrefið væri tekið út?</td></tr>
+<tr><td><b>Óvirðisaukandi</b> (non-value adding, <b>NVA</b>)</td><td>Fellur í hvorugan flokkinn.</td><td>Hverfur skrefið ef ferlið er endurhannað? Oft afhendingar, bið, leit og endurvinnsla.</td></tr>
+</tbody></table></div>
+<svg class="diagram" viewBox="0 0 620 210" role="img" aria-label="Ákvörðunartré fyrir virðisgreiningu: ef skrefið skapar virði fyrir viðskiptavin er það VA, annars ef það er nauðsynlegt fyrir reksturinn eða lög er það BVA, annars NVA" style="max-width:100%;height:auto">
+  <defs><marker id="e5-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)"/></marker></defs>
+  <g style="stroke:var(--ink);stroke-width:1.6;fill:var(--paper)">
+    <rect x="10" y="15" width="290" height="60" rx="8"/>
+    <rect x="10" y="125" width="290" height="60" rx="8"/>
+  </g>
+  <g style="stroke-width:2">
+    <rect x="380" y="15" width="225" height="60" rx="30" style="stroke:var(--good);fill:var(--key-bg)"/>
+    <rect x="380" y="108" width="225" height="40" rx="20" style="stroke:var(--mag);fill:var(--paper)"/>
+    <rect x="380" y="160" width="225" height="40" rx="20" style="stroke:var(--bad);fill:var(--paper)"/>
+  </g>
+  <g style="stroke:var(--ink);stroke-width:1.6;fill:none">
+    <path d="M300,45 L378,45" marker-end="url(#e5-ar)"/>
+    <path d="M155,75 L155,123" marker-end="url(#e5-ar)"/>
+    <path d="M300,145 L378,129" marker-end="url(#e5-ar)"/>
+    <path d="M300,165 L378,178" marker-end="url(#e5-ar)"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="155" y="40">Skapar skrefið virði sem viðskipta-</text>
+    <text x="155" y="60">vinurinn myndi greiða fyrir?</text>
+    <text x="155" y="150">Nauðsynlegt til að reka starfsemina,</text>
+    <text x="155" y="170">afla tekna eða uppfylla lög?</text>
+    <text x="492" y="50" style="font-weight:700">VA · virðisaukandi</text>
+    <text x="492" y="133" style="font-weight:700">BVA · rekstrarvirði</text>
+    <text x="492" y="185" style="font-weight:700">NVA · óvirðisaukandi</text>
+    <text x="338" y="38" class="small">Já</text>
+    <text x="172" y="104" class="small">Nei</text>
+    <text x="338" y="128" class="small">Já</text>
+    <text x="338" y="185" class="small">Nei</text>
+  </g>
+</svg>
+<p>Eftir flokkunina: <b>fella burt NVA</b> skref þar sem hægt er, <b>lágmarka BVA</b> skref (t.d. sjálfvirkja eftirlit eða sameina það öðru skrefi) og passa að VA skrefin skili sínu vel.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Tækjaleiga BuildIT (tafla 6.1 í bókinni)</span></div><div class="ex-body">
+<p>Verkfræðingur á verkstað (site engineer) þarf tæki. Hann fyllir út leigubeiðni sem fer til innkaupafulltrúa (clerk). Fulltrúinn velur hentugt tæki og athugar framboð. Ef það er laust fer beiðnin til yfirverkfræðings (works engineer) sem samþykkir eða hafnar. Við samþykki býr fulltrúinn til innkaupapöntun (PO) og sendir birgi. Flokkaðu skrefin.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<div class="tablewrap"><table>
+<thead><tr><th>Skref</th><th>Hver</th><th>Flokkur</th></tr></thead>
+<tbody>
+<tr><td>Fylla út beiðni</td><td>Verkfr. á verkstað</td><td><b>VA</b></td></tr>
+<tr><td>Senda beiðni til fulltrúa</td><td>Verkfr. á verkstað</td><td>NVA</td></tr>
+<tr><td>Opna og lesa beiðni</td><td>Fulltrúi</td><td>NVA</td></tr>
+<tr><td>Velja hentugt tæki</td><td>Fulltrúi</td><td><b>VA</b></td></tr>
+<tr><td>Athuga framboð tækis</td><td>Fulltrúi</td><td><b>VA</b></td></tr>
+<tr><td>Skrá tæki og birgi sem mælt er með</td><td>Fulltrúi</td><td>BVA</td></tr>
+<tr><td>Áframsenda beiðni til yfirverkfræðings</td><td>Fulltrúi</td><td>NVA</td></tr>
+<tr><td>Opna og skoða beiðni</td><td>Yfirverkfræðingur</td><td>BVA</td></tr>
+<tr><td>Koma athugasemdum á framfæri</td><td>Yfirverkfræðingur</td><td>BVA</td></tr>
+<tr><td>Senda beiðni aftur til fulltrúa</td><td>Yfirverkfræðingur</td><td>NVA</td></tr>
+<tr><td>Búa til innkaupapöntun</td><td>Fulltrúi</td><td>BVA</td></tr>
+<tr><td>Senda pöntun til birgis</td><td>Fulltrúi</td><td><b>VA</b></td></tr>
+</tbody></table></div>
+<p>Viðskiptavinurinn (verkfræðingurinn á verkstað) vill fá rétt tæki: að lýsa þörfinni, velja tækið, athuga framboð og panta það skapar virði. Samþykkt og skráning eru eftirlit sem fyrirtækið þarf (BVA). Allar <b>sendingar á milli fólks</b> eru NVA: þær hverfa ef sami aðili getur unnið skrefin eða ef kerfið sér um flutninginn.</p>
+<p><span class="ans">4 VA · 4 BVA · 4 NVA</span></p>
+</div></details></div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að flokka samþykktir og eftirlit sem VA af því þau „skipta máli“. Viðskiptavinurinn greiðir ekki fyrir að yfirmaður skoði beiðnina hans. Ef skrefið verndar fyrirtækið (áhætta, lög, tekjur) er það <b>BVA</b>. Annað algengt: að flokka ekki „ósýnileg“ skref eins og að senda, opna og lesa. Þau eru einmitt NVA skrefin sem auðveldast er að losna við.</p></div>
+
+<h2 id="soun">Sóunargreining</h2>
+<p><b>Sóun</b> (waste) eru aðgerðir eða verkþættir sem fela ekki í sér virði, þ.e. viðskiptavinurinn er ekki tilbúinn að greiða fyrir þá. Sóunargreining byggir á Toyota-framleiðslukerfinu (Toyota Production System, TPS) og straumlínustjórnun (Lean). Hefðbundið eru taldar <b>sjö tegundir sóunar</b> og sú <b>áttunda</b>, vannýttur mannauður, hefur bæst við. Á ensku eru þær oft lagðar á minnið með <b>TIMWOODS</b>.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Tegund (glærur)</th><th>Enska</th><th>Í framleiðslu</th><th>Á skrifstofu / í þjónustu</th></tr></thead>
+<tbody>
+<tr><td>1. <b>Umframframleiðsla</b></td><td>Overproduction (O)</td><td>Óseld framleiðsla beint á lager</td><td>Of margar skýrslur, tölvupóstur með fjölda í cc</td></tr>
+<tr><td>2. <b>Of miklar birgðir</b></td><td>Inventory (I)</td><td>Of stór lager, of mikið af varahlutum</td><td>Yfirfullt pósthólf, hrúga af skýrslum sem bíða rýni</td></tr>
+<tr><td>3. <b>Hreyfing / áreynsla</b></td><td>Motion (M)</td><td>Löng leið í verkfæri, lyfta þungu</td><td>Leita að gögnum eða búnaði, löng leið í prentarann</td></tr>
+<tr><td>4. <b>Bið</b></td><td>Waiting (W)</td><td>Bið eftir íhlutum eða vél</td><td>Óskilvirkt samþykktarferli, óstundvísi á fundi</td></tr>
+<tr><td>5. <b>Óþarfa tilfærsla / flutningar</b></td><td>Transportation (T)</td><td>Færa bretti og vörur langar leiðir</td><td>Upplýsingar færðar milli kerfa, beiðnir flakka milli deilda</td></tr>
+<tr><td>6. <b>Óskilvirk ferli</b> (ofvinnsla)</td><td>Over-processing (O)</td><td>Ofurþjónusta, flókin tækni, óþarfa þrep</td><td>Endurtekinn innsláttur, óþarfa skýrslugerð, flýtimeðferð án tilefnis</td></tr>
+<tr><td>7. <b>Gallar</b></td><td>Defects (D)</td><td>Vörugalli, rangt magn</td><td>Innsláttarvillur, rangt heimilisfang, rangur reikningur, týnd skjöl</td></tr>
+<tr><td>8. <b>Vannýttur mannauður</b></td><td>Skills / unutilized talent (S)</td><td>Reyndur starfsmaður ekki spurður</td><td>Sérfræðingur í ljósritun, hugmyndir starfsfólks hunsaðar</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að rugla <b>hreyfingu</b> og <b>tilfærslu</b>. <b>Tilfærsla</b> (transportation) er þegar <i>hluturinn eða upplýsingarnar</i> eru fluttar milli staða, fólks eða kerfa. <b>Hreyfing</b> (motion) er þegar <i>fólkið</i> sjálft hreyfir sig óþarflega innan verksins: gengur, leitar, teygir sig. Annað: <b>birgðir</b> eru hlutir sem bíða, <b>bið</b> er tími sem tilvik (eða fólk) eyðir í að bíða.</p></div>
+
+<h3>Þrír flokkar sóunar í bókinni: færsla, halda, yfirgera</h3>
+<p>Bókin (og glæra 13) dregur sjö tegundir TPS saman í þrjá flokka sem henta þjónustuferlum vel:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Flokkur</th><th>TPS-tegundir</th><th>Dæmi í þjónustuferli</th></tr></thead>
+<tbody>
+<tr><td><b>Færsla</b> (move)</td><td>Tilfærsla (transportation) og hreyfing (motion)</td><td>Hver afhending milli fólks eða deilda, t.d. allar „transportation“-merkingarnar í tækjaleigunni þar sem beiðnin flakkar milli brauta.</td></tr>
+<tr><td><b>Halda</b> (hold)</td><td>Birgðir (inventory) og bið (waiting)</td><td><b>Birgðir:</b> vörur á lager. <b>Bið:</b> tilvik (tóki) bíður eftir vinnslu, auðlind eða samþykki. <b>Tómagangur</b> (idleness): auðlind bíður eftir tilviki.</td></tr>
+<tr><td><b>Yfirgera</b> (overdo)</td><td>Gallar (defects), ofvinnsla (over-processing), umframframleiðsla (overproduction)</td><td><b>Gallar:</b> leiðrétta, laga eða bæta fyrir. <b>Ofvinnsla:</b> meira gert en viðskiptavinurinn greiðir fyrir. <b>Umframframleiðsla:</b> umfram eftirspurn.</td></tr>
+</tbody></table></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>SIPOC og sóun: heimsendur matur (glæra 35)</span></div><div class="ex-body">
+<p>Eldri borgari sækir um heimsendan mat: (1) fyllir út umsókn, (2) þarf aðstoð, (3) fær svar frá þjónustuveri, (4) skilar eyðublaði í þjónustumiðstöð hverfisins, (5) upplýsingar eru slegnar inn í UT-kerfi, (6) matur er afhentur, (7) skráningu er lokið. Finndu sóun í skrefum 1-4.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li>Skref 1: <b>hreyfing</b> (leita að eyðublaðinu á vefnum) og <b>galli</b> (óljóst hvað er skylt að fylla út, svo hægt er að fylla það út á ýmsa vegu).</li>
+<li>Skref 2: <b>hreyfing</b> (hringja í þjónustuver til að fá aðstoð) og <b>bið</b> (eftir svari í símanum).</li>
+<li>Skref 3: <b>bið</b> eftir svari frá þjónustufulltrúa.</li>
+<li>Skref 4: <b>hreyfing</b>: umsækjandinn þarf sjálfur að ferðast í þjónustumiðstöðina.</li>
+</ul>
+<p>Í skrefi 5 eru upplýsingar slegnar <b>aftur</b> inn í kerfið (glæran flokkar það sem umframframleiðslu, á glæru 12 er endurtekinn innsláttur flokkaður sem óskilvirkt ferli) og svo tekur við <b>bið</b> þar til matur er afhentur.</p>
+<p><span class="ans">hreyfing, galli, bið</span></p>
+</div></details></div></div>
+
+<h2 id="vandamal">Hagsmunagreining, vandamálaskrá, Pareto og PICK</h2>
+<p>Þrjú verkfæri til að safna, skrá og forgangsraða vandamálum (issues) í ferli:</p>
+<ol>
+<li><b>Hagsmunagreining</b> (stakeholder analysis): safna vandamálum frá ólíkum sjónarhornum.</li>
+<li><b>Vandamálaskrá</b> (issue register): skrá vandamálin skipulega og meta áhrif þeirra.</li>
+<li><b>Pareto-greining</b> og <b>PICK-rit</b>: velja hvaða vandamál fara í frekari greiningu og endurhönnun.</li>
+</ol>
+
+<h3>Hagsmunagreining</h3>
+<p>Hagsmunagreining (stakeholder analysis) spyr <b>fimm aðalhópa</b> hagsmunaaðila hvert vandamálið í ferlinu sé:</p>
+<ul>
+<li><b>viðskiptavini</b> (customers),</li>
+<li><b>ferlaþátttakendur</b> (process participants), þ.e. starfsfólkið sem vinnur verkin,</li>
+<li><b>ytri aðila</b> (external parties), t.d. birgja og eftirlitsaðila,</li>
+<li><b>ferlaeiganda</b> (process owner),</li>
+<li><b>umbótastuðningsaðila</b> (sponsor), stjórnanda sem styður og fjármagnar umbæturnar.</li>
+</ul>
+<p>Allir gefa sína sýn og ferlagreinandinn setur saman heildarmynd. Viðskiptavinurinn sér langan biðtíma, starfsmaðurinn sér endurtekinn innslátt og eftirlitsaðilinn sér ófullnægjandi skráningu: hver hópur sér vandamál sem hinir sjá ekki.</p>
+
+<h3>Vandamálaskrá</h3>
+<p>Vandamálaskrá (issue register) heldur utan um vandamálin á skipulagðan hátt og metur áhrif þeirra bæði <b>megindlega</b> (tími, peningar) og <b>eigindlega</b> (upplifun viðskiptavina, áhætta). Fyrir hvert vandamál er oftast skráð:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Svæði</th><th>Innihald</th></tr></thead>
+<tbody>
+<tr><td>Nafn</td><td>Stutt heiti, 2-5 orð</td></tr>
+<tr><td>Lýsing</td><td>1-3 setningar</td></tr>
+<tr><td>Forgangsröðun</td><td>Mikilvægi, t.d. sem tala (1, 2, 3, …)</td></tr>
+<tr><td>Gögn og forsendur (assumptions)</td><td>Á hverju matið byggir</td></tr>
+<tr><td>Eigindlegt mat</td><td>T.d. óánægja viðskiptavina eða starfsfólks, orðsporsáhætta</td></tr>
+<tr><td>Megindlegt mat</td><td>T.d. tíðni × vinnslutími, eða kostnaður í kr.</td></tr>
+</tbody></table></div>
+<p>Í vandamálaskrá eru oft bæði <b>vandamál</b> (issues) og <b>þættir</b> (factors). <b>Vandamál</b> hefur bein áhrif á ferlið. <b>Þáttur</b> hefur áhrif á vandamál, sem svo hefur áhrif á ferlið. Til að halda þessu aðgreindu er bætt við tveimur svæðum: <b>„er valdið af“</b> (caused by) og <b>„veldur“</b> (is cause of).</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Proforma-reikningar hjá Flugleiðahótelum</span></div><div class="ex-body">
+<p>Úr vandamálaskrá (glæra 22) með tíðni á mánuði og vinnslutíma á skipti:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Nr.</th><th>Vandamál</th><th>Eigindlegt mat</th><th class="num">Tíðni/mán</th><th class="num">Mín/skipti</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Ófullnægjandi upplýsingar fyrir stofnun AR-númera</td><td>Óánægja í bókhaldi</td><td class="num">7</td><td class="num">1</td></tr>
+<tr><td>2</td><td>Ófullnægjandi upplýsingar fyrir gerð proforma-reikninga</td><td>Óánægja proforma-fulltrúa</td><td class="num">15</td><td class="num">5</td></tr>
+<tr><td>3</td><td>Endurgerð proforma-reikninga</td><td>Óánægja, áhrif á viðskiptavini</td><td class="num">7</td><td class="num">10</td></tr>
+<tr><td>4</td><td>Óþarfa leit að proforma-reikningum</td><td>Óánægja í bakvinnslu</td><td class="num">5</td><td class="num">10</td></tr>
+<tr><td>6</td><td>Sending á afriti innan ferlis</td><td>Truflandi áhrif</td><td class="num">55</td><td class="num">1</td></tr>
+<tr><td>7</td><td>Ofvinnsla á upplýsingum</td><td>Óánægja proforma-fulltrúa</td><td class="num">55</td><td class="num">1</td></tr>
+<tr><td>8</td><td>Tvítekin eftirfylgni með greiðslum</td><td>Á ekki við</td><td class="num">55</td><td class="num">2</td></tr>
+</tbody></table></div>
+<p>(a) Reiknaðu mánaðarlegan tíma hvers vandamáls og raðaðu í Pareto-röð. (b) Hversu mörg vandamál þarf til að ná 80 % af tímanum? (c) Hvaða sóunartegund er nr. 4?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) Áhrif = tíðni × mínútur: nr. 1: 7, nr. 2: 75, nr. 3: 70, nr. 4: 50, nr. 6: 55, nr. 7: 55, nr. 8: 110. Samtals $422$ mín á mánuði.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Röð</th><th>Nr.</th><th class="num">Mín/mán</th><th class="num">Uppsafnað</th><th class="num">Uppsafnað %</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>8</td><td class="num">110</td><td class="num">110</td><td class="num">26,1 %</td></tr>
+<tr><td>2</td><td>2</td><td class="num">75</td><td class="num">185</td><td class="num">43,8 %</td></tr>
+<tr><td>3</td><td>3</td><td class="num">70</td><td class="num">255</td><td class="num">60,4 %</td></tr>
+<tr><td>4</td><td>6</td><td class="num">55</td><td class="num">310</td><td class="num">73,5 %</td></tr>
+<tr><td>5</td><td>7</td><td class="num">55</td><td class="num">365</td><td class="num">86,5 %</td></tr>
+<tr><td>6</td><td>4</td><td class="num">50</td><td class="num">415</td><td class="num">98,3 %</td></tr>
+<tr><td>7</td><td>1</td><td class="num">7</td><td class="num">422</td><td class="num">100 %</td></tr>
+</tbody></table></div>
+<p>(b) 80 % markið næst fyrst með fimmta vandamálinu (86,5 %). Hér gildir 80/20-reglan <i>ekki</i>: 5 af 7 vandamálum (71 %) þarf til að ná 80 %. Það segir að engin ein „töfralausn“ er til; vandamálin eru mörg og álíka stór. Athugaðu líka að nr. 5 og 9 (geymsla skjala, tapaðar kröfur) hafa ekki tímamat og falla því utan Pareto-ritsins, en tapaðar kröfur geta samt verið alvarlegastar. Eigindlega matið skiptir máli!</p>
+<p>(c) Leit er <b>hreyfing</b> (motion).</p>
+<p><span class="ans">(b) 5 vandamál · (c) hreyfing</span></p>
+</div></details></div></div>
+
+<h3>Pareto-greining</h3>
+<p>Pareto-greining hjálpar við að ákveða hvaða vandamál fá forgang. Hún byggir á <b>Pareto-reglunni</b> (80/20-reglunni): <b>fá vandamál valda stórum hluta áhrifanna</b>, oft er sagt að 20 % vandamálanna valdi 80 % áhrifanna. Pareto-rit er teiknað svona:</p>
+<ol>
+<li>Reiknaðu áhrif hvers vandamáls (t.d. tíðni × kostnaður á skipti).</li>
+<li>Raðaðu í <b>lækkandi röð</b> og teiknaðu sem súlur.</li>
+<li>Reiknaðu <b>uppsafnað hlutfall</b> og teiknaðu sem línu á hægri ás (0-100 %).</li>
+<li>Vandamálin sem saman ná ~80 % eru „hin fáu mikilvægu“ (vital few).</li>
+</ol>
+<svg class="diagram" viewBox="0 0 540 275" role="img" aria-label="Pareto-rit: hægt samþykki 60.000, rangt tæki 15.000, dráttarvextir 2.400; uppsafnað 77,5 %, 96,9 % og 100 %" style="max-width:100%;height:auto">
+  <g style="stroke:var(--rule-2);stroke-width:1">
+    <path d="M60,220 L470,220 M60,20 L60,220 M470,20 L470,220"/>
+  </g>
+  <path d="M60,60 L470,60" style="stroke:var(--bad);stroke-width:1.2;stroke-dasharray:5 4;fill:none"/>
+  <g style="fill:var(--mag);opacity:0.85">
+    <rect x="85" y="48.6" width="85" height="171.4"/>
+    <rect x="222" y="177.1" width="85" height="42.9"/>
+    <rect x="360" y="213.1" width="85" height="6.9"/>
+  </g>
+  <path d="M127,65 L265,26.2 L402,20" style="stroke:var(--ink);stroke-width:2.2;fill:none"/>
+  <g style="fill:var(--ink)"><circle cx="127" cy="65" r="4"/><circle cx="265" cy="26.2" r="4"/><circle cx="402" cy="20" r="4"/></g>
+  <g text-anchor="middle">
+    <text x="127" y="40" class="small">60.000</text>
+    <text x="265" y="170" class="small">15.000</text>
+    <text x="402" y="207" class="small">2.400</text>
+    <text x="147" y="82" style="font-weight:700">77,5 %</text>
+    <text x="265" y="46" style="font-weight:700">96,9 %</text>
+    <text x="127" y="240" class="small">Hægt samþykki</text>
+    <text x="265" y="240" class="small">Rangt tæki</text>
+    <text x="402" y="240" class="small">Dráttarvextir</text>
+    <text x="265" y="265" class="small">kostnaður á ári (USD) · lína: uppsafnað %</text>
+  </g>
+  <g text-anchor="end" class="small"><text x="54" y="224" class="small">0</text><text x="54" y="24" class="small">70.000</text></g>
+  <g><text x="476" y="224" class="small">0 %</text><text x="476" y="24" class="small">100 %</text><text x="476" y="64" class="small" style="fill:var(--bad)">80 %</text></g>
+</svg>
+<p>Dæmið af glærunni (tækjaleigan): hægt samþykki kostar 60.000 af alls 77.400 á ári, eða $60\,000/77\,400 = 77{,}5\,\%$. Eitt vandamál af þremur veldur nánast 80 % kostnaðarins, svo það er augljóst forgangsverkefni.</p>
+<div class="note tip"><p><b class="t">Ráð:</b> Pareto-rit er aðeins eins gott og áhrifamatið. Ef þú berð saman vandamál skaltu nota <b>sömu einingu</b> (t.d. mínútur á mánuði eða kr. á ári) og muna að margfalda tíðni með áhrifum á skipti. Algengt vandamál með lítil áhrif á skipti getur verið stærra en sjaldgæft vandamál með mikil áhrif.</p></div>
+
+<h3>PICK-rit</h3>
+<p>PICK-rit (PICK chart) raðar vandamálum (eða lausnum á þeim) eftir tveimur ásum: <b>ávinningi</b> (payoff) og <b>erfiðleika</b> (difficulty). PICK er skammstöfun fyrir fjóra reiti:</p>
+<svg class="diagram" viewBox="0 0 520 270" role="img" aria-label="PICK-rit: Framkvæma er mikill ávinningur og auðvelt, Áskorun er mikill ávinningur og erfitt, Geranlegt er lítill ávinningur og auðvelt, Slátra er lítill ávinningur og erfitt" style="max-width:100%;height:auto">
+  <g style="stroke:var(--ink);stroke-width:1.4;fill:none">
+    <rect x="80" y="15" width="400" height="210"/>
+    <path d="M280,15 L280,225 M80,120 L480,120"/>
+  </g>
+  <rect x="81" y="16" width="198" height="103" style="fill:var(--key-bg)"/>
+  <g text-anchor="middle">
+    <text x="180" y="58" style="font-weight:700;fill:var(--good)">Framkvæma</text>
+    <text x="180" y="78" class="small">(Implement) · gera fyrst</text>
+    <text x="380" y="58" style="font-weight:700">Áskorun</text>
+    <text x="380" y="78" class="small">(Challenge) · velja vandlega</text>
+    <text x="180" y="165" style="font-weight:700">Geranlegt</text>
+    <text x="180" y="185" class="small">(Possible) · gera ef hægt</text>
+    <text x="380" y="165" style="font-weight:700;fill:var(--bad)">Slátra</text>
+    <text x="380" y="185" class="small">(Kill) · ekki þess virði</text>
+    <text x="180" y="248" class="small">auðvelt</text><text x="380" y="248" class="small">erfitt</text>
+    <text x="280" y="265">Erfiðleiki (difficulty) →</text>
+  </g>
+  <g text-anchor="end">
+    <text x="72" y="40" class="small">mikill</text><text x="72" y="220" class="small">lítill</text>
+    <text x="72" y="125">Ávinningur</text>
+  </g>
+</svg>
+<ul>
+<li><b>Framkvæma</b> (Implement): mikill ávinningur, auðvelt. Forgangsraða þessum.</li>
+<li><b>Áskorun</b> (Challenge): mikill ávinningur, erfitt. Ætti að gera, en velja vandlega, oft bara eitt í einu.</li>
+<li><b>Geranlegt</b> (Possible): lítill ávinningur, auðvelt. Gera ef tími gefst.</li>
+<li><b>Slátra</b> (Kill): lítill ávinningur, erfitt. Líklega ekki þess virði.</li>
+</ul>
+
+<h2 id="rotargreining">Rótargreining</h2>
+<p><b>Rótargreining</b> (root cause analysis) er fjölskylda aðferða til að finna undirliggjandi ástæður vandamála eða óæskilegra atburða. Sumar aðferðirnar eru leiðbeiningar um gagnasöfnun í viðtölum og vinnustofum, aðrar eru leiðir til að skipuleggja og skjala hugmyndir. Glærurnar taka fyrir tvær: <b>orsakarit</b> og <b>af-hverju-rit</b>.</p>
+
+<h3>Orsakarit (fiskbeinarit, Ishikawa-rit)</h3>
+<p><b>Orsakarit</b> (cause-and-effect diagram) sýnir sambandið milli <b>neikvæðrar útkomu</b> (negative effect, vandamálsins) og <b>mögulegra orsaka</b>. Vegna lögunarinnar er það kallað <b>fiskbeinarit</b> (fishbone diagram), og eftir höfundinum <b>Ishikawa-rit</b>. Vandamálið er „hausinn“ og orsakirnar „beinin“. Tveir flokkar orsaka:</p>
+<ul>
+<li><b>Áhrifaþættir</b> (causal factors): ef þeir eru lagaðir stöðvast neikvæða útkoman.</li>
+<li><b>Valdandi þættir</b> (contributing factors): hjálpa til við að valda vandamálinu. Mörkin eru óljós og oft er ekki gerður greinarmunur.</li>
+</ul>
+<p>Beinin eru flokkuð eftir <b>6M</b>:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>M</th><th>Íslenska</th><th>Dæmi um spurningu</th></tr></thead>
+<tbody>
+<tr><td>Machine (technology)</td><td><b>Tækni / tæki</b></td><td>Er kerfið hægt, bilað eða rangt stillt?</td></tr>
+<tr><td>Method (process)</td><td><b>Aðferð / ferli</b></td><td>Er verklagið rangt eða óljóst?</td></tr>
+<tr><td>Material</td><td><b>Aðföng</b></td><td>Eru gögn, eyðublöð eða hráefni gölluð?</td></tr>
+<tr><td>Man</td><td><b>Fólk</b></td><td>Skortir þjálfun, mannskap eða samskipti?</td></tr>
+<tr><td>Measurement</td><td><b>Mælingar</b></td><td>Er mælt rangt eða ekki neitt?</td></tr>
+<tr><td>Milieu</td><td><b>Umhverfi</b></td><td>Hávaði, aðstaða, reglugerðir, árstíð?</td></tr>
+</tbody></table></div>
+<svg class="diagram" viewBox="0 0 760 305" role="img" aria-label="Fiskbeinarit fyrir vandamálið tæki hafnað við afhendingu, með sex beinum: mælingar, aðföng, tækni, umhverfi, fólk og aðferð" style="max-width:100%;height:auto">
+  <defs><marker id="e5-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--mag)"/></marker></defs>
+  <path d="M15,150 L630,150" style="stroke:var(--mag);stroke-width:4;fill:none" marker-end="url(#e5-ar2)"/>
+  <ellipse cx="692" cy="150" rx="62" ry="36" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:2"/>
+  <g style="stroke:var(--ink);stroke-width:1.6;fill:none">
+    <path d="M100,40 L170,148 M320,40 L390,148 M540,40 L610,148"/>
+    <path d="M100,260 L170,152 M320,260 L390,152 M540,260 L610,152"/>
+    <path d="M230,85 L348,85 M230,215 L348,215 M450,215 L568,215" style="stroke-width:1.2"/>
+  </g>
+  <g style="stroke:var(--ink);stroke-width:1.4;fill:var(--paper)">
+    <rect x="55" y="14" width="90" height="26" rx="6"/><rect x="275" y="14" width="90" height="26" rx="6"/><rect x="495" y="14" width="90" height="26" rx="6"/>
+    <rect x="55" y="260" width="90" height="26" rx="6"/><rect x="275" y="260" width="90" height="26" rx="6"/><rect x="495" y="260" width="90" height="26" rx="6"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="100" y="32">Mælingar</text><text x="320" y="32">Aðföng</text><text x="540" y="32">Tækni</text>
+    <text x="100" y="278">Umhverfi</text><text x="320" y="278">Fólk</text><text x="540" y="278">Aðferð</text>
+    <text x="692" y="146" style="font-weight:700">Tæki hafnað</text>
+    <text x="692" y="164" style="font-weight:700">við afhendingu</text>
+  </g>
+  <g text-anchor="end">
+    <text x="345" y="80" style="font-size:12px">Rangar tæknilýsingar valdar</text>
+    <text x="345" y="99" class="small" style="font-size:11px">vegna: ónákvæms vörulista birgis</text>
+    <text x="345" y="210" style="font-size:12px">Þarfir misskildar</text>
+    <text x="345" y="229" class="small" style="font-size:11px">vegna: ófullnægjandi kröfulýsingar</text>
+    <text x="565" y="210" style="font-size:12px">Beiðandi sér ekki valið</text>
+    <text x="565" y="229" class="small" style="font-size:11px">vegna: fulltrúi einn velur tæki</text>
+  </g>
+</svg>
+<p>Myndin er byggð á dæmi glæranna (tækjaleigan): tæki er hafnað þegar það kemur á verkstað. Ekki þarf að fylla öll sex beinin; tóm bein segja að þar hafi ekki fundist orsakir.</p>
+
+<h3>Af-hverju-rit og 5 sinnum af hverju</h3>
+<p><b>Af-hverju-rit</b> (why-why diagram), líka kallað <b>trérit</b>, setur fram endurtekin pör (dyad) af spurningunni <i>af hverju?</i> og svari. Hvert svar verður að nýrri spurningu, svo greinarnar dýpka þar til komið er að rót. Í gæðastjórnun og Six Sigma er talað um að spyrja <b>5 sinnum af hverju</b> (5 Whys): talan 5 er ekki heilög, hún minnir á að hætta ekki við fyrsta svarið, sem er oftast bara einkenni.</p>
+<div class="ex"><div class="ex-head">Dæmi <span>5 sinnum af hverju: farangur flugfélags</span></div><div class="ex-body">
+<p>Vandamál: margar töskur verða eftir í Keflavík þegar farþegar millilenda. Gerðu 5-af-hverju greiningu.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Af hverju?</th><th>Af því að…</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Af hverju verða töskur eftir?</td><td>Þær ná ekki í tengiflugið.</td></tr>
+<tr><td>2</td><td>Af hverju ná þær ekki?</td><td>Flokkun tengitaskna tekur of langan tíma á morgnana.</td></tr>
+<tr><td>3</td><td>Af hverju tekur flokkunin langan tíma?</td><td>Töskurnar eru flokkaðar handvirkt eftir að allar vélar hafa lent.</td></tr>
+<tr><td>4</td><td>Af hverju handvirkt?</td><td>Merkimiðar tengitaskna eru ekki lesnir sjálfvirkt við komu.</td></tr>
+<tr><td>5</td><td>Af hverju ekki?</td><td>Skannar eru bara á innritunarborðum, ekki á komubandi.</td></tr>
+</tbody></table></div>
+<p>Fyrsta svarið („ná ekki í flugið“) er einkenni. Rótin er í <b>tækni</b> (6M: machine): vantar skanna á komubandi. Lausnin sem lagar rótina er önnur en sú sem lagar einkennið (t.d. að lengja tengitíma).</p>
+<p><span class="ans">rót: engir skannar á komubandi</span></p>
+</div></details></div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að hætta á einkenni („starfsfólkið er of seint“) eða að enda á sökudólgi („Jón gleymdi“). Góð rót er eitthvað í <b>ferlinu, kerfinu eða umhverfinu</b> sem hægt er að breyta svo vandamálið komi ekki aftur, sama hver vinnur verkið.</p></div>
+
+<h2 id="hop1">Hvernig þetta passar saman í HÓP1</h2>
+<svg class="diagram" viewBox="0 0 640 110" role="img" aria-label="Vinnuflæði eigindlegrar greiningar: as-is líkan, virðis- og sóunargreining, hagsmunagreining og vandamálaskrá, Pareto og PICK, rótargreining, endurhönnun" style="max-width:100%;height:auto">
+  <defs><marker id="e5-ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)"/></marker></defs>
+  <g style="stroke:var(--ink);stroke-width:1.5;fill:var(--paper)">
+    <rect x="5" y="30" width="100" height="50" rx="8"/><rect x="132" y="30" width="110" height="50" rx="8"/>
+    <rect x="269" y="30" width="110" height="50" rx="8"/><rect x="406" y="30" width="100" height="50" rx="8"/>
+    <rect x="533" y="30" width="102" height="50" rx="8" style="stroke:var(--mag);fill:var(--key-bg)"/>
+  </g>
+  <g style="stroke:var(--ink);stroke-width:1.5;fill:none">
+    <path d="M105,55 L130,55" marker-end="url(#e5-ar3)"/><path d="M242,55 L267,55" marker-end="url(#e5-ar3)"/>
+    <path d="M379,55 L404,55" marker-end="url(#e5-ar3)"/><path d="M506,55 L531,55" marker-end="url(#e5-ar3)"/>
+  </g>
+  <g text-anchor="middle" style="font-size:12px">
+    <text x="55" y="52">As-is líkan</text><text x="55" y="68" class="small">(kafli 4)</text>
+    <text x="187" y="52">VA/BVA/NVA</text><text x="187" y="68">og sóun</text>
+    <text x="324" y="52">Vandamálaskrá</text><text x="324" y="68">+ Pareto/PICK</text>
+    <text x="456" y="52">Rótargreining</text><text x="456" y="68" class="small">fiskbein, 5 af hverju</text>
+    <text x="584" y="52">Endurhönnun</text><text x="584" y="68" class="small">(kafli 7)</text>
+  </g>
+</svg>
+
+<h2 id="samantekt">Samantekt</h2>
+<div class="key">
+<ul>
+<li><b>VA</b>: virði fyrir viðskiptavininn. <b>BVA</b>: nauðsynlegt fyrir reksturinn eða lög. <b>NVA</b>: hvorugt; fella burt. Sendingar, bið og endurvinnsla eru yfirleitt NVA.</li>
+<li><b>8 tegundir sóunar</b>: umframframleiðsla, of miklar birgðir, hreyfing, bið, tilfærsla, óskilvirk ferli (ofvinnsla), gallar og vannýttur mannauður (TIMWOODS). Í bókinni: <b>færsla</b> (tilfærsla, hreyfing), <b>halda</b> (birgðir, bið), <b>yfirgera</b> (gallar, ofvinnsla, umframframleiðsla).</li>
+<li><b>Hagsmunagreining</b>: viðskiptavinir, ferlaþátttakendur, ytri aðilar, ferlaeigandi, umbótastuðningsaðili.</li>
+<li><b>Vandamálaskrá</b>: nafn, lýsing, forgangur, gögn og forsendur, eigindlegt og megindlegt mat. Vandamál vs. þáttur: „er valdið af“ / „veldur“.</li>
+<li><b>Pareto</b>: raða eftir áhrifum, uppsafnað %, fá vandamál valda flestum áhrifum (80/20). <b>PICK</b>: Possible, Implement, Challenge, Kill.</li>
+<li><b>Rótargreining</b>: fiskbeinarit með 6M (tækni, aðferð, aðföng, fólk, mælingar, umhverfi) og af-hverju-rit (5 sinnum af hverju).</li>
+</ul>
+</div>
