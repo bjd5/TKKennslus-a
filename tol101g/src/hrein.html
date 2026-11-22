@@ -1,0 +1,126 @@
+<h1>Hrein klasar og viðmót</h1>
+<p class="lede">Hvað er flatarmál „marghyrnings“ almennt? Það er ekki hægt að reikna nema vita hvort hann er þríhyrningur eða rétthyrningur. Hrein klasar (abstract classes) og viðmót (interfaces) leyfa þér að lýsa <b>hvað</b> hlutir geta gert án þess að segja <b>hvernig</b>, og láta undirklasana fylla í. Þetta er síðasta stóra hugtakið í hlutbundnu hönnuninni.</p>
+
+<h2 id="abstract">Hreinir klasar (abstract)</h2>
+<pre class="code"><code class="java">public abstract class Polygon {
+    protected Point[] corners;
+
+    protected double distance(Point p, Point q) {
+        return Math.sqrt(Math.pow(p.getX() - q.getX(), 2)
+                       + Math.pow(p.getY() - q.getY(), 2));
+    }
+
+    public double calcPerimeter() {              // venjuleg aðferð
+        double perimeter = 0;
+        for (int i = 0; i &lt; corners.length; i++) {
+            perimeter += distance(corners[i], corners[(i + 1) % corners.length]);
+        }
+        return perimeter;
+    }
+
+    public abstract double calcArea();           // hrein aðferð: enginn líkami, ;
+}</code></pre>
+<ul>
+<li><b>Hrein aðferð</b> (abstract method) hefur undirskrift en <b>engan líkama</b>; hún endar á <code>;</code>.</li>
+<li>Klasi sem hefur hreina aðferð <b>verður</b> að vera merktur <code>abstract</code>.</li>
+<li><b>Ekki er hægt að búa til hlut</b> af hreinum klasa: <code>new Polygon()</code> er þýðingarvilla. En breyta má vera af taginu: <code>Polygon p = new Triangle(…);</code></li>
+<li>Undirklasi verður að útfæra <b>allar</b> hreinu aðferðirnar, annars verður hann sjálfur að vera <code>abstract</code>.</li>
+<li>Hreinn klasi getur samt haft <b>eigindi, smiði og venjulegar aðferðir</b> (smiðurinn er kallaður með <code>super(…)</code> úr undirklasanum).</li>
+</ul>
+<p>Í geometry-dæminu reiknar Polygon ummálið eins fyrir alla marghyrninga (<code>calcPerimeter</code>), en hver undirklasi útfærir <code>calcArea</code> á sinn hátt: Triangle með formúlu Herons og Rectangle sem breidd × hæð. Í UNO er <code>Player</code> hreinn klasi með hreinu aðferðinni <code>playTurn</code>, sem HumanPlayer og ComputerPlayer útfæra.</p>
+<div class="note"><p><b class="t">Sniðmátsaðferð:</b> þegar venjuleg aðferð í hreinum klasa kallar á hreina aðferð (t.d. <code>toString()</code> sem kallar á <code>calcArea()</code>) ákveður yfirklasinn <i>skrefin</i> og undirklasarnir <i>innihald</i> þeirra. Breytileg binding sér um að rétta útgáfan keyri.</p></div>
+
+<h2 id="interface">Viðmót (interface)</h2>
+<p>Viðmót er „samningur“: listi af aðferðum sem klasi lofar að útfæra. Klasi <b>útfærir</b> viðmót með <code>implements</code>:</p>
+<pre class="code"><code class="java">public interface Shape {
+    double PI_ISH = 3.14;          // fastar eru sjálfkrafa public static final
+    double area();                 // aðferðir eru sjálfkrafa public abstract
+    default String describe() {    // default-aðferð (Java 8+) hefur líkama
+        return "Lögun með flatarmál " + area();
+    }
+}
+
+public class Circle implements Shape {
+    private double r;
+    public Circle(double r) { this.r = r; }
+    @Override
+    public double area() { return Math.PI * r * r; }   // verður að vera public
+}</code></pre>
+<ul>
+<li>Viðmót hefur <b>engin hlutbundin eigindi</b> og <b>enga smiði</b>; ekki er hægt að gera <code>new Shape()</code>.</li>
+<li>Klasi má <b>útfæra mörg viðmót</b> (<code>implements A, B, C</code>) en bara erfa einn klasa: <code>class HumanPlayer extends Player implements Comparable&lt;HumanPlayer&gt;</code>.</li>
+<li>Viðmót má erfa önnur viðmót með <code>extends</code>.</li>
+<li>Útfærslan verður að vera <code>public</code> (því aðferðir viðmótsins eru public).</li>
+</ul>
+
+<h3>Comparable: að raða eigin hlutum</h3>
+<p><code>Arrays.sort</code> kann að raða tölum og strengjum, en hvernig á að raða spilum? Klasinn útfærir <code>Comparable&lt;T&gt;</code> og aðferðina <code>compareTo</code>, sem skilar <b>neikvæðu</b> ef <code>this</code> á að koma á undan, <b>0</b> ef jafnt og <b>jákvæðu</b> ef á eftir:</p>
+<pre class="code"><code class="java">public class Card implements Comparable&lt;Card&gt; {
+    private int number;
+    private char color;
+    …
+    @Override
+    public int compareTo(Card other) {
+        if (color != other.color) {
+            return color - other.color;      // fyrst eftir lit (B &lt; G &lt; R &lt; Y)
+        }
+        return number - other.number;        // svo eftir tölu
+    }
+}
+
+Card[] hand = { new Card(7, 'R'), new Card(2, 'G'), new Card(5, 'R') };
+Arrays.sort(hand);                           // notar compareTo
+System.out.println(Arrays.toString(hand));   // [G2, R5, R7]</code></pre>
+
+<h2 id="samanburdur">Hreinn klasi eða viðmót?</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Hreinn klasi</th><th>Viðmót</th></tr></thead>
+<tbody>
+<tr><td>Lykilorð</td><td><code>abstract class</code>, notaður með <code>extends</code></td><td><code>interface</code>, notað með <code>implements</code></td></tr>
+<tr><td>Hversu marga</td><td>aðeins einn yfirklasa</td><td>mörg viðmót</td></tr>
+<tr><td>Eigindi</td><td>hver sem er</td><td>aðeins fastar (<code>public static final</code>)</td></tr>
+<tr><td>Smiðir</td><td>já (kallaðir með super)</td><td>nei</td></tr>
+<tr><td>Aðferðir</td><td>hreinar og venjulegar, hvaða aðgangur sem er</td><td>hreinar (og default/static), allar public</td></tr>
+<tr><td>Samband</td><td>sterkt „er“ með sameiginlegri útfærslu og ástandi</td><td>„getur“ (hæfni): Comparable, Cloneable, Shape</td></tr>
+<tr><td>UML</td><td>nafn og hreinar aðferðir í <i>skáletri</i> (eða <code>{abstract}</code>)</td><td><code>«interface»</code> fyrir ofan nafnið; brotin lína með holum þríhyrningi frá útfærsluklasanum</td></tr>
+</tbody></table></div>
+
+<h2 id="daemi">Fullunnið dæmi: launagreiðslur</h2>
+<pre class="code"><code class="java">abstract class Employee implements Comparable&lt;Employee&gt; {
+    private String name;
+    public Employee(String name) { this.name = name; }
+    public String getName() { return name; }
+    public abstract double pay();                     // hver tegund reiknar sjálf
+    public int compareTo(Employee o) {                // raða eftir launum
+        return Double.compare(pay(), o.pay());
+    }
+    public String toString() { return name + ": " + pay(); }
+}
+
+class Salaried extends Employee {
+    private double monthly;
+    public Salaried(String n, double m) { super(n); monthly = m; }
+    public double pay() { return monthly; }
+}
+
+class Hourly extends Employee {
+    private double rate; private int hours;
+    public Hourly(String n, double r, int h) { super(n); rate = r; hours = h; }
+    public double pay() { return rate * hours; }
+}
+
+Employee[] staff = { new Salaried("Anna", 900), new Hourly("Kári", 20, 30) };
+Arrays.sort(staff);
+for (Employee e : staff) System.out.println(e);</code></pre>
+<pre class="out">Kári: 600.0
+Anna: 900.0</pre>
+
+<h2 id="samantekt">Samantekt</h2>
+<ul class="checklist">
+<li>Hrein aðferð: <code>public abstract double calcArea();</code> án líkama.</li>
+<li>Hreinum klasa má ekki <code>new</code>-a; undirklasi útfærir allar hreinu aðferðirnar eða er sjálfur abstract.</li>
+<li>Hreinn klasi getur haft eigindi, smiði og venjulegar aðferðir.</li>
+<li>Viðmót: aðferðir sjálfkrafa public abstract, fastar public static final; <code>implements</code> mörg.</li>
+<li><code>Comparable&lt;T&gt;</code> + <code>compareTo</code> → <code>Arrays.sort</code> virkar á eigin hluti.</li>
+<li>UML: skáletur = abstract; «interface»; brotin lína + ▷ = implements.</li>
+</ul>

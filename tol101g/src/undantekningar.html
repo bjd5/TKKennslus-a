@@ -1,0 +1,160 @@
+<h1>Undantekningar og pakkar</h1>
+<p class="lede">Hvað á pop() að gera ef bunkinn er tómur? Hvað ef notandinn slær inn „abc“ þegar beðið er um tölu? Undantekningar (exceptions) eru sérstök rás til að tilkynna og meðhöndla villuástand, aðskilin frá venjulegum skilagildum. Hér lærir þú try/catch/finally, throw og throws, muninn á athuguðum og óathuguðum undantekningum, að búa til eigin undantekningar, og hvernig pakkar skipuleggja kóðann og takmarka aðgang.</p>
+
+<h2 id="af-hverju">Af hverju ekki sérstök skilagildi?</h2>
+<p>Gamla leiðin er að skila „villugildi“: <code>setYear</code> skilar <code>false</code>, <code>numPublications</code> skilar <code>-1</code>. Það hefur galla:</p>
+<ul>
+<li>Villan fer um <b>sömu rás</b> og venjuleg gildi; stundum er ekkert gildi laust (hvaða staða á bankareikningi táknar „reikningurinn var ekki til“?).</li>
+<li>Merkingin er bara skjalfest óformlega og <b>auðvelt að gleyma</b> að athuga hana.</li>
+<li>Kallandinn þarf að flækja kóðann með <code>if</code>/<code>switch</code> á skilagildum.</li>
+</ul>
+<p>Undantekningar leysa þetta: sérstök rás, nákvæm villutegund (klasi), formleg yfirlýsing (<code>throws</code>) og þvinguð meðhöndlun.</p>
+
+<h2 id="try">try, catch og finally</h2>
+<pre class="code"><code class="java">try {
+    int found = library.numPublications(year);   // getur kastað
+    System.out.println(found + " books found.");  // keyrir EKKI ef kastað var
+} catch (InvalidYearException e) {
+    System.out.println("Invalid search year.");
+} finally {
+    System.out.println("Leit lokið.");            // keyrir ALLTAF
+}
+System.out.println("Áfram");</code></pre>
+<ul>
+<li>Ef undantekning kastast í <code>try</code> er <b>afgangur try-blokkarinnar sleppt</b> og keyrslan fer í fyrstu <code>catch</code>-blokk sem passar. Settu því allt sem á <i>ekki</i> að keyra eftir villu inn í try.</li>
+<li>Ef engin undantekning kastast er öllum catch-blokkum sleppt.</li>
+<li><code>finally</code> keyrir <b>alltaf</b>: eftir try, eftir catch, og jafnvel þótt undantekningin sé ekki gripin eða <code>return</code> sé í try.</li>
+<li>Eftir catch (eða finally) heldur keyrslan áfram <b>á eftir</b> try-setningunni, ekki þar sem villan varð.</li>
+</ul>
+
+<h3>Röð catch-blokka</h3>
+<p>Undantekningar mynda stigveldi, og catch fyrir yfirklasa grípur líka alla undirklasa hans. Raðaðu því frá <b>sértækum</b> til <b>almennra</b>; annars er seinni blokkin óaðgengileg (þýðingarvilla):</p>
+<pre class="code"><code class="java">try { … }
+catch (ArrayIndexOutOfBoundsException e) { … }  // sértækt fyrst
+catch (RuntimeException e) { … }
+catch (Exception e) { … }                        // almennt síðast</code></pre>
+<div class="figure" style="margin:1rem 0">
+<pre class="code" style="font-family:var(--mono);font-size:0.82rem">Throwable
+├── Error                        (alvarlegt, t.d. OutOfMemoryError: ekki grípa)
+└── Exception                    ← athugaðar (checked), t.d. IOException, FileNotFoundException
+    └── RuntimeException         ← óathugaðar (unchecked)
+        ├── ArithmeticException            (heiltala / 0)
+        ├── NullPointerException           (aðferð á null)
+        ├── ClassCastException             (rangt niðurkast)
+        ├── IllegalArgumentException       (ógild færibreyta)
+        │   └── NumberFormatException      (Integer.parseInt("abc"))
+        ├── IndexOutOfBoundsException
+        │   ├── ArrayIndexOutOfBoundsException
+        │   └── StringIndexOutOfBoundsException
+        └── java.util.InputMismatchException   (nextInt() fær ekki tölu)</pre>
+</div>
+
+<h2 id="throw">throw og throws</h2>
+<pre class="code"><code class="java">public class InvalidYearException extends Exception {   // eigin, athuguð
+    public InvalidYearException(String message) {
+        super(message);                                   // geymir skilaboðin
+    }
+}
+
+public int numPublications(int year) throws InvalidYearException {  // yfirlýsing
+    if (year &lt;= 1452) {
+        throw new InvalidYearException("Engar prentaðar bækur fyrir " + year);
+    }
+    …
+    return found;
+}</code></pre>
+<ul>
+<li><code>throw</code> (setning, í líkamanum) <b>kastar</b> undantekningarhlut; aðferðin hættir strax.</li>
+<li><code>throws</code> (í hausnum) <b>lýsir yfir</b> að aðferðin geti kastað þessari tegund.</li>
+<li><code>e.getMessage()</code> skilar skilaboðunum sem voru gefin smiðnum; <code>e.toString()</code> (eða println(e)) gefur „klasanafn: skilaboð“.</li>
+<li>Í UNO kastar <code>pop()</code> á tómum bunka <code>EmptyStackException</code>, sem er skilgreind sem <code>extends RuntimeException</code>.</li>
+</ul>
+
+<h3>Athugaðar og óathugaðar undantekningar</h3>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Athugaðar (checked)</th><th>Óathugaðar (unchecked)</th></tr></thead>
+<tbody>
+<tr><td>Erfa frá</td><td><code>Exception</code> (en ekki RuntimeException)</td><td><code>RuntimeException</code></td></tr>
+<tr><td>Þýðandinn krefst</td><td>að þær séu <b>gripnar</b> (try/catch) <b>eða yfirlýstar</b> (throws) — „catch or declare“</td><td>engrar meðhöndlunar</td></tr>
+<tr><td>Tákna</td><td>fyrirsjáanlegar en óhjákvæmilegar aðstæður utan forritsins (skrá vantar, net, inntak)</td><td>forritunarvillur sem eiga ekki að gerast í gallalausu forriti (null, rangur vísir)</td></tr>
+<tr><td>Dæmi</td><td><code>IOException</code>, <code>FileNotFoundException</code>, eigin <code>extends Exception</code></td><td><code>NullPointerException</code>, <code>ArithmeticException</code>, <code>IllegalArgumentException</code></td></tr>
+</tbody></table></div>
+
+<h3>Þrjár leiðir til að bregðast við</h3>
+<ol>
+<li><b>Grípa og meðhöndla</b> (algengast), t.d. biðja notandann aftur um inntak.</li>
+<li><b>Grípa og kasta annarri</b>: breyta tæknilegri villu í villu úr viðfangsefninu: <code>catch (ArrayIndexOutOfBoundsException e) { throw new EndOfListException(); }</code>. Kallandinn þarf þá ekki að vita að safnið er fylki.</li>
+<li><b>Láta hana fljúga upp</b>: grípa ekki, heldur lýsa yfir með <code>throws</code> og láta aðferðina sem kallaði sjá um hana. Ef enginn grípur hana stöðvar JVM forritið og prentar <b>staflarakningu</b> (stack trace): <code>Exception in thread "main" java.lang.ArithmeticException: / by zero at …</code></li>
+</ol>
+<div class="note warn"><p><b class="t">Aldrei:</b> <code>catch (Exception e) { }</code>, þ.e. grípa og gera ekkert. Þá eru allar villur faldar.</p></div>
+
+<h3>Fullunnið dæmi: öruggt inntak (HumanPlayer)</h3>
+<pre class="code"><code class="java">Scanner stdin = new Scanner(System.in);
+int choice;
+do {
+    System.out.print("\nChoose card to discard: ");
+    try {
+        choice = stdin.nextInt();
+    } catch (InputMismatchException e) {
+        System.out.println("Invalid input: " + stdin.next());   // gleypa ógilda orðið
+        choice = -1;
+    }
+} while (choice &lt; 0 || choice &gt; index);</code></pre>
+<p>Án <code>stdin.next()</code> í catch yrði ógilda orðið áfram í inntakinu og lykkjan endalaus.</p>
+
+<h3>Rakning: hvað prentast?</h3>
+<div class="vs">
+<div><pre class="code"><code class="java">static int f(int x) {
+    try {
+        System.out.print("a");
+        int y = 10 / x;
+        System.out.print("b");
+        return y;
+    } catch (ArithmeticException e) {
+        System.out.print("c");
+        return -1;
+    } finally {
+        System.out.print("d");
+    }
+}
+// í main:
+System.out.println(" " + f(2));
+System.out.println(" " + f(0));</code></pre></div>
+<div><pre class="out">abd 5
+acd -1</pre><p style="font-size:0.92rem">finally keyrir áður en aðferðin skilar, líka þegar return er í try eða catch. Prentunin í main kemur á eftir, því f er kallað áður en strengurinn er prentaður.</p></div>
+</div>
+
+<h2 id="pakkar">Pakkar og aðgangur</h2>
+<p><b>Pakki</b> (package) er nafnasvæði og mappa fyrir skylda klasa. Lokaútgáfa UNO-spilsins skiptir kóðanum í tvo pakka:</p>
+<pre class="code"><code class="java">// src/uno/game/StackOfCards.java
+package uno.game;
+class StackOfCards { … }            // engin aðgangsorð: pakkaaðgangur
+
+// src/uno/players/ComputerPlayer.java
+package uno.players;
+import uno.game.Card;               // klasar úr öðrum pakka þarf að flytja inn
+import uno.game.Player;
+public class ComputerPlayer extends Player { … }</code></pre>
+<ul>
+<li><code>package</code> verður að vera <b>fyrsta</b> setning skrárinnar; mappan verður að heita eins (<code>uno/game/</code>).</li>
+<li><code>import pakki.Klasi;</code> eða <code>import pakki.*;</code> gerir klasann aðgengilegan með stuttu nafni. <code>java.lang</code> (String, Math, System, Integer) er alltaf fluttur inn; <code>java.util</code> (Scanner, Arrays, ArrayList) þarf að flytja inn.</li>
+<li><b>Pakkaaðgangur</b> (ekkert aðgangsorð, <code>~</code> í UML) leyfir klösum í sama pakka að nota klasann eða aðferðina, en engum utan hans. Í UNO er <code>StackOfCards</code> þannig falinn utan <code>uno.game</code>: leikmennirnir sjá bara DrawPile og DiscardPile.</li>
+</ul>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðgangur</th><th>Klasinn</th><th>Pakkinn</th><th>Undirklasar</th><th>Allir</th></tr></thead>
+<tbody>
+<tr><td><code>public</code></td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td><code>protected</code></td><td>✓</td><td>✓</td><td>✓</td><td>–</td></tr>
+<tr><td>(ekkert)</td><td>✓</td><td>✓</td><td>–</td><td>–</td></tr>
+<tr><td><code>private</code></td><td>✓</td><td>–</td><td>–</td><td>–</td></tr>
+</tbody></table></div>
+
+<h2 id="samantekt">Samantekt</h2>
+<ul class="checklist">
+<li>try: afgangi sleppt eftir kast; catch: fyrsta sem passar; finally: alltaf.</li>
+<li>catch frá sértæku til almenns.</li>
+<li><code>throw new X(…)</code> kastar; <code>throws X</code> lýsir yfir.</li>
+<li>Athugaðar (Exception): „catch or declare“. Óathugaðar (RuntimeException): engin krafa.</li>
+<li>Eigin undantekning: <code>class MyException extends Exception { … super(message); }</code></li>
+<li>Pakki = mappa; <code>package</code> fyrst, <code>import</code> svo; enginn aðgangur = pakkaaðgangur.</li>
+</ul>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 4: Stafir og strengir · Tölvunarfræði 1</title>
+<meta name="description" content="Kennsluvefur fyrir TÖL101G Tölvunarfræði 1: Java frá breytum og lykkjum að klösum, erfðum, viðmótum og undantekningum.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a8461a'/%3E%3Cpath d='M12 9l-6 7 6 7M20 9l6 7-6 7' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tölvunarfræði 1</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Tölvunarfræði 1<small>TÖL101G · Java · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Forrit og reiknirit</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Tölur, breytur og segðir</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Rökgildi og skilyrði</a></li>
+<li><a class="nav" href="kafli-4.html" aria-current="page" data-gate="ch4">4. Stafir og strengir</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Lykkjur</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Aðferðir</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Fylki</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Klasar og hlutir</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Tengsl hluta og UML</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Erfðir og fjölbrigðni</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Hrein klasar og viðmót</a></li>
+<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Undantekningar og pakkar</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="kodaskrif.html">Kóðaskrif</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="minnisblad.html">Minnisblað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="4" data-topics="strengir">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 4: Stafir og strengir</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-3.html">kafla 3</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 4 af 12 · Vika 4 · Liang kafli 4</p>
+<h1>Stafir og strengir</h1>
+<p class="ch-exam"><b>Tengist:</b> Miðannarpróf 1 og lokapróf: char-reikningur og String-aðferðir</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Verkstæði</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Stafir (<code>char</code>) eru tölur í dulargervi og strengir (<code>String</code>) eru hlutir með aðferðum. Hér lærir þú að reikna með stöfum, nota helstu aðferðir String-klasans, bera saman strengi rétt og forsníða úttak með <code>printf</code>.</p>
+
+<h2 id="char">Tagið char</h2>
+<p><code>char</code> geymir einn staf með einföldum gæsalöppum: <code>'A'</code>, <code>'7'</code>, <code>' '</code>, <code>'\n'</code>. Á bak við tjöldin er hver stafur <b>tala</b> (Unicode-kóði). Fyrstu 128 kóðarnir eru þeir sömu og í ASCII:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Stafir</th><th>Kóðar</th><th>Athugið</th></tr></thead>
+<tbody>
+<tr><td><code>'0'</code> … <code>'9'</code></td><td>48 … 57</td><td><code>'7' - '0'</code> er 7 (talan)</td></tr>
+<tr><td><code>'A'</code> … <code>'Z'</code></td><td>65 … 90</td><td>hástafir á undan lágstöfum</td></tr>
+<tr><td><code>'a'</code> … <code>'z'</code></td><td>97 … 122</td><td><code>'a' - 'A'</code> er 32</td></tr>
+<tr><td><code>' '</code> (bil)</td><td>32</td><td></td></tr>
+</tbody></table></div>
+<p>Af því að char er tala má reikna með honum, en <b>útkoman er int</b> nema þú kastir aftur:</p>
+<pre class="code"><code class="java">char c = 'a';
+System.out.println(c + 1);          // 98   (char + int = int)
+System.out.println((char) (c + 1)); // b
+c++;                                // ++ og += halda tagi char
+System.out.println(c);              // b
+System.out.println('a' + 'b');      // 195  (97 + 98, tveir char eru lagðir saman!)
+System.out.println("" + 'a' + 'b'); // ab   (strengur fremst: samskeyting)
+int digit = '7' - '0';              // 7</code></pre>
+
+<h3>Character-aðferðir</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðferð</th><th>Skilar</th></tr></thead>
+<tbody>
+<tr><td><code>Character.isDigit(c)</code></td><td>true ef c er tölustafur</td></tr>
+<tr><td><code>Character.isLetter(c)</code>, <code>isLetterOrDigit(c)</code></td><td>true ef bókstafur (líka íslenskir)</td></tr>
+<tr><td><code>Character.isUpperCase(c)</code>, <code>isLowerCase(c)</code></td><td>há- eða lágstafur?</td></tr>
+<tr><td><code>Character.toUpperCase(c)</code>, <code>toLowerCase(c)</code></td><td>stafurinn breyttur (char)</td></tr>
+<tr><td><code>Character.isWhitespace(c)</code></td><td>bil, tab, línuskil</td></tr>
+</tbody></table></div>
+
+<h2 id="string">Strengir (String)</h2>
+<p><code>String</code> er ekki frumtag heldur <b>klasi</b>: strengur er hlutur sem geymir runu af stöfum og hefur aðferðir sem kallað er á með punkti. Stafirnir eru <b>númeraðir frá 0</b>:</p>
+<pre class="code"><code class="java">String s = "Halló Java";
+//          0123456789</code></pre>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðferð</th><th>Skilar</th><th>Dæmi með <code>s = "Halló Java"</code></th></tr></thead>
+<tbody>
+<tr><td><code>s.length()</code></td><td>fjölda stafa</td><td><code>10</code></td></tr>
+<tr><td><code>s.charAt(i)</code></td><td>staf nr. i (char)</td><td><code>s.charAt(1)</code> → <code>'a'</code></td></tr>
+<tr><td><code>s.substring(b)</code></td><td>frá b til enda</td><td><code>s.substring(6)</code> → <code>"Java"</code></td></tr>
+<tr><td><code>s.substring(b, e)</code></td><td>frá b <b>upp að en ekki með</b> e (e − b stafir)</td><td><code>s.substring(0, 5)</code> → <code>"Halló"</code></td></tr>
+<tr><td><code>s.indexOf(x)</code></td><td>fyrsta sæti x (char eða String), annars <code>-1</code></td><td><code>s.indexOf('a')</code> → <code>1</code>, <code>s.indexOf("Java")</code> → <code>6</code></td></tr>
+<tr><td><code>s.indexOf(x, from)</code></td><td>fyrsta sæti x frá og með <code>from</code></td><td><code>s.indexOf('a', 2)</code> → <code>7</code></td></tr>
+<tr><td><code>s.lastIndexOf(x)</code></td><td>síðasta sæti x</td><td><code>s.lastIndexOf('a')</code> → <code>9</code></td></tr>
+<tr><td><code>s.contains(t)</code>, <code>startsWith(t)</code>, <code>endsWith(t)</code></td><td>boolean</td><td><code>s.endsWith("va")</code> → <code>true</code></td></tr>
+<tr><td><code>s.toUpperCase()</code>, <code>toLowerCase()</code></td><td>nýjan streng</td><td><code>"HALLÓ JAVA"</code></td></tr>
+<tr><td><code>s.trim()</code></td><td>nýjan streng án bila í endum</td><td><code>"  hæ ".trim()</code> → <code>"hæ"</code></td></tr>
+<tr><td><code>s.replace(a, b)</code></td><td>nýjan streng þar sem öllum a er skipt út fyrir b</td><td><code>s.replace('a', 'o')</code> → <code>"Holló Jovo"</code></td></tr>
+<tr><td><code>s.equals(t)</code>, <code>equalsIgnoreCase(t)</code></td><td>sama innihald?</td><td></td></tr>
+<tr><td><code>s.compareTo(t)</code></td><td>&lt; 0, 0 eða &gt; 0 eftir orðabókarröð</td><td><code>"api".compareTo("apa")</code> → <code>8</code></td></tr>
+</tbody></table></div>
+<p>Síðasti stafurinn er <code>s.charAt(s.length() - 1)</code>. <code>s.charAt(s.length())</code> kastar <code>StringIndexOutOfBoundsException</code>, eins og <code>substring</code> með vísi utan bilsins 0…length().</p>
+
+<h3>Strengir eru óbreytanlegir</h3>
+<p>Engin String-aðferð breytir strengnum sjálfum; þær skila <b>nýjum</b> streng. Ef þú geymir ekki útkomuna gerist ekkert:</p>
+<div class="vs">
+<div><pre class="code"><code class="java">String s = "uno";
+s.toUpperCase();          // útkoman glatast
+System.out.println(s);
+s = s.toUpperCase();      // nú vísar s á nýja strenginn
+System.out.println(s);</code></pre></div>
+<div><pre class="out">uno
+UNO</pre></div>
+</div>
+
+<h3>Samanburður: equals, ekki ==</h3>
+<p><code>==</code> á hlutum spyr hvort þetta sé <b>sami hluturinn</b> í minninu, ekki hvort innihaldið sé eins. Strengur sem er lesinn inn eða búinn til með <code>+</code> eða <code>new</code> er nýr hlutur, svo <code>==</code> getur gefið <code>false</code> þó stafirnir séu þeir sömu. Notaðu alltaf <code>s.equals(t)</code>.</p>
+<p><code>compareTo</code> ber saman staf fyrir staf. Við fyrsta stafinn sem er ólíkur skilar hún <b>mismun kóðanna</b>; ef annar strengurinn klárast fyrst skilar hún <b>mismun lengdanna</b>. Hástafir koma á undan lágstöfum (<code>"Z".compareTo("a")</code> er neikvætt).</p>
+
+<h2 id="umbreyting">Strengir og tölur</h2>
+<pre class="code"><code class="java">int n = Integer.parseInt("42");        // strengur → int
+double d = Double.parseDouble("2.5");  // strengur → double
+String s1 = String.valueOf(42);        // int → strengur
+String s2 = "" + 42;                   // sama, með samskeytingu
+String s3 = Integer.toString(42);      // sama</code></pre>
+<p><code>Integer.parseInt("4x")</code> kastar <code>NumberFormatException</code> (kafli 12).</p>
+
+<h2 id="printf">Forsniðið úttak: printf og String.format</h2>
+<p><code>System.out.printf(snið, gildi…)</code> prentar eftir sniðstreng (án línuskila nema þú setjir <code>%n</code> eða <code>\n</code>). <code>String.format</code> gerir það sama en skilar strengnum.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Tákn</th><th>Fyrir</th><th>Dæmi</th><th>Útkoma</th></tr></thead>
+<tbody>
+<tr><td><code>%d</code></td><td>heiltölu</td><td><code>printf("%d spil", 7)</code></td><td><code>7 spil</code></td></tr>
+<tr><td><code>%f</code>, <code>%.2f</code></td><td>kommutölu (6 / 2 aukastafir, námundað)</td><td><code>printf("%.2f", 3.14159)</code></td><td><code>3.14</code></td></tr>
+<tr><td><code>%s</code></td><td>streng (eða hvað sem er, með toString)</td><td><code>printf("%s!", "UNO")</code></td><td><code>UNO!</code></td></tr>
+<tr><td><code>%c</code>, <code>%b</code></td><td>staf, boolean</td><td><code>printf("%c%b", 'x', true)</code></td><td><code>xtrue</code></td></tr>
+<tr><td><code>%5d</code></td><td>breidd 5, hægrijafnað</td><td><code>printf("[%5d]", 42)</code></td><td><code>[   42]</code></td></tr>
+<tr><td><code>%-5s</code></td><td>breidd 5, vinstrijafnað</td><td><code>printf("[%-5s]", "ab")</code></td><td><code>[ab   ]</code></td></tr>
+<tr><td><code>%8.3f</code></td><td>breidd 8, 3 aukastafir</td><td><code>printf("[%8.3f]", Math.PI)</code></td><td><code>[   3.142]</code></td></tr>
+</tbody></table></div>
+
+<h2 id="daemi">Fullunnið dæmi: telja sérhljóða og snúa streng við</h2>
+<pre class="code"><code class="java">String s = "Tölvunarfræði";
+int vowels = 0;
+String reversed = "";
+for (int i = 0; i &lt; s.length(); i++) {
+    char c = Character.toLowerCase(s.charAt(i));
+    if ("aáeéiíoóuúyýæö".indexOf(c) &gt;= 0) {
+        vowels++;
+    }
+    reversed = c + reversed;     // nýr stafur fremst
+}
+System.out.println(vowels + " " + reversed);</code></pre>
+<pre class="out">5 iðærfranuvlöt</pre>
+<p>(Lykkjur koma í kafla 5; hér skiptir máli mynstrið <code>for (int i = 0; i &lt; s.length(); i++)</code> og <code>s.charAt(i)</code>.)</p>
+
+<h2 id="samantekt">Samantekt</h2>
+<ul class="checklist">
+<li>char er tala: <code>'a' + 1</code> er 98, <code>(char) ('a' + 1)</code> er 'b', <code>'7' - '0'</code> er 7.</li>
+<li>Strengir eru númeraðir frá 0; <code>substring(b, e)</code> tekur ekki staf nr. e með.</li>
+<li><code>indexOf</code> skilar −1 ef ekkert finnst.</li>
+<li>Strengir breytast aldrei: <code>s = s.toUpperCase();</code></li>
+<li><code>equals</code> fyrir innihald, aldrei <code>==</code>; <code>compareTo</code> fyrir röð.</li>
+<li><code>%d %.2f %s %5d %-5s</code> í printf.</li>
+</ul>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Kóðadæmi („hvað prentar forritið?“) með nýjum tölum í hvert skipti og skilningsspurningar úr kaflanum. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Kóðaverkstæði</h2>
+<p>Hér vinnur þú með kóðann sjálfan, eins og á prófinu: raðar línum í rétt forrit, fyllir í eyður, finnur villur og rekur breytur skref fyrir skref. Leystu öll verkefnin til að ljúka skrefinu.</p>
+<div class="panel ws-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 5"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-3.html"><span>Fyrri</span>3. Rökgildi og skilyrði</a><a href="kafli-5.html" style="text-align:right"><span>Næsta</span>5. Lykkjur</a></div>
+</div>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/adferdir.js"></script>
+<script src="js/q/erfdir.js"></script>
+<script src="js/q/forrit.js"></script>
+<script src="js/q/fylki.js"></script>
+<script src="js/q/hrein.js"></script>
+<script src="js/q/klasar.js"></script>
+<script src="js/q/lykkjur.js"></script>
+<script src="js/q/skilyrdi.js"></script>
+<script src="js/q/strengir.js"></script>
+<script src="js/q/tengsl.js"></script>
+<script src="js/q/tolur.js"></script>
+<script src="js/q/undantekningar.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/verkstaedi.js"></script>
+<script src="js/w/kafli-4.js"></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 10: Erfðir og fjölbrigðni · Tölvunarfræði 1</title>
+<meta name="description" content="Kennsluvefur fyrir TÖL101G Tölvunarfræði 1: Java frá breytum og lykkjum að klösum, erfðum, viðmótum og undantekningum.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a8461a'/%3E%3Cpath d='M12 9l-6 7 6 7M20 9l6 7-6 7' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tölvunarfræði 1</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Tölvunarfræði 1<small>TÖL101G · Java · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Forrit og reiknirit</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Tölur, breytur og segðir</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Rökgildi og skilyrði</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Stafir og strengir</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Lykkjur</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Aðferðir</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Fylki</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Klasar og hlutir</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Tengsl hluta og UML</a></li>
+<li><a class="nav" href="kafli-10.html" aria-current="page" data-gate="ch10">10. Erfðir og fjölbrigðni</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Hrein klasar og viðmót</a></li>
+<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Undantekningar og pakkar</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="kodaskrif.html">Kóðaskrif</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="minnisblad.html">Minnisblað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="10" data-topics="erfdir">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 10: Erfðir og fjölbrigðni</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-9.html">kafla 9</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 10 af 12 · Vika 11 · Liang kafli 11</p>
+<h1>Erfðir og fjölbrigðni</h1>
+<p class="ch-exam"><b>Tengist:</b> Miðannarpróf 2 og lokapróf: extends, super, yfirskrifun, fjölbrigðni</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Verkstæði</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Dráttarbunki og kastbunki eru báðir hlaðar af spilum; mennskur leikmaður og tölvuleikmaður eru báðir leikmenn sem gera á sinn hátt. Erfðir láta undirklasa endurnýta og sérhæfa yfirklasa, og fjölbrigðni lætur sama kallið gera mismunandi hluti eftir því hver hluturinn raunverulega er. Þetta er kjarninn í seinni hluta prófsins: smiðakeðjur, yfirskrifun og „hvaða aðferð er keyrð?“.</p>
+
+<h2 id="extends">extends: yfirklasi og undirklasi</h2>
+<pre class="code"><code class="java">public class StackOfCards {               // yfirklasi (superclass)
+    protected Card[] cards = new Card[112];
+    protected int top = -1;
+    protected void push(Card c) { cards[++top] = c; }
+    protected Card pop()        { return cards[top--]; }
+    public boolean isEmpty()    { return top == -1; }
+}
+
+public class DiscardPile extends StackOfCards {  // undirklasi (subclass)
+    public void discard(Card c) { push(c); }     // notar erfða aðferð
+    public Card topCard()       { return cards[top]; }
+}</code></pre>
+<ul>
+<li>Undirklasinn <b>erfir</b> öll eigindi og aðferðir yfirklasans og getur <b>bætt við</b> nýjum og <b>yfirskrifað</b> (override) erfðar aðferðir.</li>
+<li>Sambandið er „<b>er</b>“ (is-a): DiscardPile <i>er</i> StackOfCards. Ef það er bara „hefur“ á að nota eigindi (kafli 9), ekki erfðir.</li>
+<li>Java leyfir aðeins <b>einn</b> yfirklasa (single inheritance). Allir klasar erfa á endanum frá <code>Object</code>.</li>
+<li><code>private</code> eigindi yfirklasans eru <b>til</b> í undirklasanum en hann má <b>ekki</b> nota þau beint; hann notar public/protected aðferðir eða gerir þau <code>protected</code>.</li>
+</ul>
+<div class="note"><p><b class="t">Af hverju í UNO?</b> Ef drawPile og discardPile væru bæði StackOfCards gætu allir ýtt og tekið af báðum. Með undirklösum og <code>protected</code> aðferðum í StackOfCards býður hvor bunki aðeins upp á þær aðgerðir sem eiga við: úr dráttarbunka er bara dregið og í kastbunka er bara kastað.</p></div>
+
+<h2 id="smidir">Smiðir og super(…)</h2>
+<p>Smiðir erfast <b>ekki</b>. Smiður undirklasans byrjar <b>alltaf</b> á því að kalla á smið yfirklasans, svo erfði hlutinn sé frumstilltur fyrst:</p>
+<pre class="code"><code class="java">public class Player {
+    private String name;
+    public Player(String name) { this.name = name; }
+    public String getName() { return name; }
+}
+
+public class ComputerPlayer extends Player {
+    private int level;
+    public ComputerPlayer(String name, int level) {
+        super(name);          // verður að vera FYRSTA setningin
+        this.level = level;
+    }
+}</code></pre>
+<ul>
+<li>Ef þú skrifar ekki <code>super(…)</code> setur Java inn <code>super();</code> (án færibreyta) sjálfkrafa.</li>
+<li>Ef yfirklasinn hefur <b>engan smið án færibreyta</b> (t.d. bara <code>Player(String name)</code>) og undirklasinn kallar ekki á <code>super(name)</code> er það <b>þýðingarvilla</b>.</li>
+<li>Smiðakeðjan keyrir því <b>ofan frá</b>: Object → Player → ComputerPlayer. Það sem smiður yfirklasans prentar kemur á undan því sem undirklasinn prentar.</li>
+</ul>
+
+<h2 id="override">Yfirskrifun (overriding)</h2>
+<p>Undirklasi <b>yfirskrifar</b> aðferð með því að skilgreina aðferð með <b>sömu undirskrift</b> (og samhæfðu skilatagi). Merkið <code>@Override</code> lætur þýðandann athuga að þú sért í raun að yfirskrifa eitthvað. <code>super.aðferð()</code> kallar á útgáfu yfirklasans:</p>
+<pre class="code"><code class="java">public class Triangle extends Polygon {
+    @Override
+    public String toString() {
+        return "Triangle " + super.toString();   // bætir við útgáfu Polygon
+    }
+}
+
+public class DrawPile extends StackOfCards {
+    @Override
+    public Card pop() {
+        if (isEmpty()) {
+            fill(UnoGame.discardPile.flush());   // fylla á úr kastbunkanum
+        }
+        return super.pop();                      // svo venjulega pop
+    }
+}</code></pre>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Yfirskrifun (overriding)</th><th>Yfirhleðsla (overloading)</th></tr></thead>
+<tbody>
+<tr><td>Hvar</td><td>í undirklasa</td><td>í sama klasa (eða undirklasa)</td></tr>
+<tr><td>Undirskrift</td><td><b>sú sama</b></td><td><b>ólíkar</b> færibreytur</td></tr>
+<tr><td>Valið</td><td>við <b>keyrslu</b>, eftir raunverulegu tagi hlutarins</td><td>við <b>þýðingu</b>, eftir yfirlýstu tagi raungildanna</td></tr>
+</tbody></table></div>
+<p>Yfirskrifuð aðferð má ekki hafa <b>þrengri</b> aðgang (public → private er villa), en má víkka hann (protected → public). <code>final</code> aðferð má ekki yfirskrifa og frá <code>final</code> klasa má ekki erfa (t.d. String).</p>
+
+<h2 id="fjolbrigdni">Fjölbrigðni og breytileg binding</h2>
+<p>Breyta af tagi yfirklasa má vísa á hlut af undirklasa: <code>Player p = new HumanPlayer();</code>. Þá skiptir máli:</p>
+<div class="grid2">
+<div class="key"><p><b>Yfirlýst tag</b> (declared type) breytunnar, hér <code>Player</code>, ákveður við <b>þýðingu</b> hvaða aðferðir <b>má</b> kalla á.</p></div>
+<div class="key"><p><b>Raunverulegt tag</b> (actual type) hlutarins, hér <code>HumanPlayer</code>, ákveður við <b>keyrslu</b> hvaða útgáfa er <b>keyrð</b> (breytileg binding, dynamic binding).</p></div>
+</div>
+<pre class="code"><code class="java">Player[] players = { new HumanPlayer(), new ComputerPlayer(), new ComputerPlayer() };
+for (Player p : players) {
+    p.playTurn(currentCard);   // hver leikmaður gerir á sinn hátt
+}</code></pre>
+<p>Þetta er <b>fjölbrigðni</b> (polymorphism): leikjalykkjan þarf ekki að vita hvers konar leikmenn eru með. Nýja leikmannategund má bæta við án þess að breyta henni.</p>
+<p>Breytileg binding gildir líka <b>inni í yfirklasanum</b>: ef aðferð í Polygon kallar á <code>calcArea()</code> er útgáfa raunverulega hlutarins keyrð.</p>
+<div class="vs">
+<div><pre class="code"><code class="java">class A {
+    void hi()   { System.out.println("A.hi"); }
+    void both() { hi(); }              // hvaða hi?
+}
+class B extends A {
+    @Override
+    void hi()   { System.out.println("B.hi"); }
+    void only() { System.out.println("B.only"); }
+}
+
+A x = new B();
+x.hi();
+x.both();
+// x.only();   // þýðingarvilla: A hefur ekki only()
+((B) x).only();</code></pre></div>
+<div><pre class="out">B.hi
+B.hi
+B.only</pre></div>
+</div>
+
+<h2 id="kast">Kast á hlutum og instanceof</h2>
+<ul>
+<li><b>Upp</b> (upcast), undirklasi → yfirklasi, er sjálfkrafa: <code>Player p = new HumanPlayer();</code></li>
+<li><b>Niður</b> (downcast) þarf kast: <code>HumanPlayer h = (HumanPlayer) p;</code>. Ef hluturinn er í raun ekki HumanPlayer kastast <code>ClassCastException</code> við keyrslu.</li>
+<li><code>obj instanceof Klasi</code> er true ef hluturinn er af þessum klasa <b>eða undirklasa hans</b>. Notaðu það áður en þú kastar niður. (<code>null instanceof X</code> er false.)</li>
+</ul>
+<pre class="code"><code class="java">if (p instanceof HumanPlayer) {
+    HumanPlayer h = (HumanPlayer) p;
+    …
+}</code></pre>
+
+<h2 id="object">Klasinn Object: toString og equals</h2>
+<p>Allir klasar erfa frá <code>Object</code>, sem hefur m.a. <code>toString()</code> (skilar <code>Klasi@kóði</code>) og <code>equals(Object o)</code> (sem er <code>==</code>, þ.e. sami hlutur). Til að bera saman innihald yfirskrifarðu equals; færibreytan verður að vera af tagi <b>Object</b>, annars ertu að <b>yfirhlaða</b>, ekki yfirskrifa:</p>
+<pre class="code"><code class="java">@Override
+public boolean equals(Object o) {
+    if (!(o instanceof Card)) return false;
+    Card other = (Card) o;
+    return number == other.number &amp;&amp; color == other.color;
+}</code></pre>
+
+<h2 id="protected">Aðgangur í erfðum</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðgangur</th><th>Sami klasi</th><th>Sami pakki</th><th>Undirklasi (annar pakki)</th><th>Allir</th></tr></thead>
+<tbody>
+<tr><td><code>public</code> (+)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td><code>protected</code> (#)</td><td>✓</td><td>✓</td><td>✓</td><td>–</td></tr>
+<tr><td>pakki (~)</td><td>✓</td><td>✓</td><td>–</td><td>–</td></tr>
+<tr><td><code>private</code> (−)</td><td>✓</td><td>–</td><td>–</td><td>–</td></tr>
+</tbody></table></div>
+
+<h2 id="samantekt">Samantekt</h2>
+<ul class="checklist">
+<li><code>extends</code> = „er“; einn yfirklasi; allt erfir frá Object.</li>
+<li>Smiður undirklasa kallar fyrst á <code>super(…)</code> (sjálfkrafa <code>super()</code> ef ekkert er skrifað); keyrslan fer ofan frá.</li>
+<li>Yfirskrifun: sama undirskrift, valin við keyrslu. Yfirhleðsla: ólíkar færibreytur, valin við þýðingu.</li>
+<li>Yfirlýst tag ákveður hvað <b>má</b> kalla á; raunverulegt tag ákveður hvað <b>keyrir</b>.</li>
+<li>Upcast sjálfkrafa; downcast með kasti, varið með <code>instanceof</code>.</li>
+<li><code>equals(Object o)</code> til að yfirskrifa; <code>super.toString()</code> til að bæta við.</li>
+</ul>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Kóðadæmi („hvað prentar forritið?“) með nýjum tölum í hvert skipti og skilningsspurningar úr kaflanum. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Kóðaverkstæði</h2>
+<p>Hér vinnur þú með kóðann sjálfan, eins og á prófinu: raðar línum í rétt forrit, fyllir í eyður, finnur villur og rekur breytur skref fyrir skref. Leystu öll verkefnin til að ljúka skrefinu.</p>
+<div class="panel ws-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 11"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-9.html"><span>Fyrri</span>9. Tengsl hluta og UML</a><a href="kafli-11.html" style="text-align:right"><span>Næsta</span>11. Hrein klasar og viðmót</a></div>
+</div>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/adferdir.js"></script>
+<script src="js/q/erfdir.js"></script>
+<script src="js/q/forrit.js"></script>
+<script src="js/q/fylki.js"></script>
+<script src="js/q/hrein.js"></script>
+<script src="js/q/klasar.js"></script>
+<script src="js/q/lykkjur.js"></script>
+<script src="js/q/skilyrdi.js"></script>
+<script src="js/q/strengir.js"></script>
+<script src="js/q/tengsl.js"></script>
+<script src="js/q/tolur.js"></script>
+<script src="js/q/undantekningar.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/verkstaedi.js"></script>
+<script src="js/w/kafli-10.js"></script>
+</body>
+</html>

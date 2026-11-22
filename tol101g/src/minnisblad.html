@@ -1,0 +1,105 @@
+<!--wide-->
+<h1>Minnisblað: Java á einu blaði</h1>
+<p class="lede">Á prófinu máttu hafa eitt A4-blað með <b>eigin handskrifuðum</b> glósum (báðar hliðar). Hér er allt sem flestir þurfa að fletta upp, í þéttu formi. Notaðu það sem fyrirmynd þegar þú skrifar þitt eigið blað: að skrifa það sjálf(ur) er líka góð upprifjun. Síðan prentast á tvær síður.</p>
+
+<div class="code-cols mem">
+<div>
+<h3>Uppbygging og inntak</h3>
+<pre class="code"><code class="java">import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();      double d = in.nextDouble();
+        String w = in.next();      String line = in.nextLine();
+        System.out.println(x);     System.out.print(x);
+        System.out.printf("%5d %.2f %-6s%n", n, d, w);
+    }
+}</code></pre>
+<p><code>\n \t \" \\</code> · eftir nextInt þarf auka nextLine() · Inspera: ekki public klasar, engin aukaprentun.</p>
+
+<h3>Tög og segðir</h3>
+<p><code>int</code> 32 bita, <code>long</code> <code>42L</code>, <code>double</code>, <code>char</code> <code>'A'</code>=65 <code>'a'</code>=97 <code>'0'</code>=48, <code>boolean</code>.</p>
+<p><code>7/2=3</code> · <code>-7/2=-3</code> · <code>7%3=1</code> · <code>-7%3=-1</code> · <code>7.0/2=3.5</code> · <code>(double)7/2=3.5</code> · <code>(double)(7/2)=3.0</code> · <code>(int)-7.9=-7</code> · <code>Math.round(2.5)=3</code>, <code>(-2.5)=-2</code></p>
+<p>Forgangur: <code>() </code> → <code>++ -- ! (kast)</code> → <code>* / %</code> → <code>+ -</code> → <code>&lt; &lt;= &gt; &gt;=</code> → <code>== !=</code> → <code>&amp;&amp;</code> → <code>||</code> → <code>?:</code> → <code>= += …</code></p>
+<p><code>x++</code> skilar gamla, <code>++x</code> nýja · <code>k += 2.7</code> kastar sjálft · <code>1+2+"x"="3x"</code>, <code>"x"+1+2="x12"</code> · <code>'a'+1=98</code>, <code>(char)('a'+1)='b'</code></p>
+<p>Math: <code>pow sqrt abs max min round ceil floor random PI</code> · teningur <code>(int)(Math.random()*6)+1</code></p>
+
+<h3>Skilyrði</h3>
+<pre class="code"><code class="java">if (a &gt;= 1 &amp;&amp; a &lt;= 6) { … } else if (…) { … } else { … }
+switch (n) { case 1: …; break; case 2: case 3: …; break; default: … }
+int m = a &gt; b ? a : b;</code></pre>
+<p>Aðeins fyrsta sanna greinin · else → næsta if · <code>if (…);</code> = tómt · switch án break fellur í gegn · De Morgan <code>!(a&amp;&amp;b) = !a||!b</code> · skammhlaup.</p>
+
+<h3>Lykkjur</h3>
+<pre class="code"><code class="java">for (int i = 0; i &lt; n; i++) { … }        // n umferðir
+while (cond) { … }                        // 0+
+do { … } while (cond);                    // 1+
+for (int x : arr) { … }                   // x er afrit
+break;  continue;</code></pre>
+<p>Tölustafir: <code>while (n&gt;0) { d = n%10; n /= 10; }</code> · frumtala: <code>for (d=2; d*d&lt;=n; d++)</code></p>
+
+<h3>Strengir</h3>
+<p><code>length() charAt(i) substring(b,e)</code> (e ekki með) <code>indexOf(x) lastIndexOf(x)</code> (−1) <code>equals equalsIgnoreCase compareTo</code> (mismunur kóða / lengda) <code>toUpperCase toLowerCase trim replace contains startsWith endsWith split(",") toCharArray</code></p>
+<p>Óbreytanlegir: <code>s = s.toUpperCase();</code> · alltaf <code>equals</code>, aldrei <code>==</code> · <code>Integer.parseInt Double.parseDouble String.valueOf</code> · <code>Character.isDigit isLetter isUpperCase toUpperCase</code> · <code>StringBuilder append insert reverse toString</code></p>
+</div>
+
+<div>
+<h3>Aðferðir</h3>
+<pre class="code"><code class="java">public static double pow(double base, int exp) { …; return r; }</code></pre>
+<p>Undirskrift = nafn + færibreytutög · return á öllum leiðum · gildisfærsla: frumtög afrituð, fylki/hlutir: tilvísun afrituð (innihald má breyta) · yfirhleðsla = ólíkar færibreytur.</p>
+
+<h3>Fylki</h3>
+<pre class="code"><code class="java">int[] a = new int[n];   int[] b = {1, 2, 3};   a.length
+int[][] m = new int[rows][cols];  m.length  m[0].length  m[r][c]
+Arrays.toString(a)  Arrays.sort(a)  Arrays.copyOf(a, n)  Arrays.equals(a, b)</code></pre>
+<p>Sjálfgefið 0 / false / null · vísar 0…length−1 · <code>b = a</code> deilir · max: byrja á a[0] · snúa: víxla a[i] og a[len−1−i] · tíðni: <code>count[v]++</code></p>
+
+<h3>Klasar</h3>
+<pre class="code"><code class="java">class Card {
+    private int number;  private static int count = 0;
+    public Card(int number) { this.number = number; count++; }
+    public Card() { this(0); }
+    public int getNumber() { return number; }
+    public void setNumber(int n) { if (n &gt;= 0) number = n; }
+    public String toString() { return "C" + number; }
+}</code></pre>
+<p>Smiður: sama nafn, ekkert skilatag; sjálfgefinn aðeins ef enginn er skrifaður · <code>this.x = x</code> · static = eitt eintak, ekkert this · null → NullPointerException · <code>new Card[7]</code> = 7 null.</p>
+
+<h3>UML</h3>
+<p><code>+</code> public <code>-</code> private <code>#</code> protected <code>~</code> pakki · <code>- name : String</code> · <code>+ get() : int</code> · static undirstrikað · abstract skáletrað · «interface»</p>
+<p>▷ heil lína = extends · ▷ brotin = implements · ◆ samsetning (deyr með heild) · ◇ safntengsl · → samband · ⇢ brotin = háð · <code>1 0..1 * 1..*</code></p>
+
+<h3>Erfðir og viðmót</h3>
+<pre class="code"><code class="java">class Human extends Player {
+    public Human(String n) { super(n); …}     // fyrsta lína
+    @Override public void playTurn(Card c) { super.playTurn(c); … }
+}
+abstract class Shape { public abstract double area(); }
+interface Scorable { int score(); }            // public abstract
+class Card implements Comparable&lt;Card&gt; {
+    public int compareTo(Card o) { return number - o.number; }
+}
+@Override public boolean equals(Object o) {
+    if (!(o instanceof Card)) return false;
+    Card c = (Card) o; return number == c.number;
+}</code></pre>
+<p>Smiðir keyra ofan frá · sjálfkrafa super() · yfirlýst tag: hvað <b>má</b> kalla á; raunverulegt: hvað <b>keyrir</b> · downcast → ClassCastException · abstract: ekki new, útfæra allt · interface: mörg, fastar, engir smiðir.</p>
+
+<h3>Undantekningar</h3>
+<pre class="code"><code class="java">class MyException extends Exception { MyException(String m) { super(m); } }
+void f() throws MyException { if (bad) throw new MyException("…"); }
+try { … } catch (ArithmeticException e) { … } catch (Exception e) { e.getMessage(); }
+finally { … }   // alltaf</code></pre>
+<p>Exception = athuguð (catch or declare) · RuntimeException = óathuguð · catch: sértækt → almennt · Arithmetic, NullPointer, ArrayIndexOutOfBounds, StringIndexOutOfBounds, ClassCast, IllegalArgument, NumberFormat, InputMismatch.</p>
+<p><code>package uno.game;</code> fyrst, svo <code>import</code> · enginn aðgangur = pakkaaðgangur · java.lang þarf ekki import.</p>
+</div>
+</div>
+
+<h2>Gátlisti fyrir prófdaginn</h2>
+<ul class="checklist">
+<li>Safe Exam Browser uppsettur og prófaður dögum fyrir prófið, Ugla-lykilorð, eduroam, hleðslutæki og skilríki.</li>
+<li>Mættu snemma; klukkan byrjar 13:30.</li>
+<li>Lestu hverja spurningu tvisvar: <b>skilar</b> eða <b>prentar</b>? Hvað á <b>ekki</b> að breyta í gefnum kóða?</li>
+<li>Byrjaðu á því sem þú kannt; stigin standa við hverja spurningu.</li>
+<li>Í rakningu: tafla með dálki á breytu. Í kóðaskrifum: skrifaðu eitthvað, hálf lausn gefur stig.</li>
+</ul>

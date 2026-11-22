@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 11: Hrein klasar og viðmót · Tölvunarfræði 1</title>
+<meta name="description" content="Kennsluvefur fyrir TÖL101G Tölvunarfræði 1: Java frá breytum og lykkjum að klösum, erfðum, viðmótum og undantekningum.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a8461a'/%3E%3Cpath d='M12 9l-6 7 6 7M20 9l6 7-6 7' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tölvunarfræði 1</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Tölvunarfræði 1<small>TÖL101G · Java · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Forrit og reiknirit</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Tölur, breytur og segðir</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Rökgildi og skilyrði</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Stafir og strengir</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Lykkjur</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Aðferðir</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Fylki</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Klasar og hlutir</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Tengsl hluta og UML</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Erfðir og fjölbrigðni</a></li>
+<li><a class="nav" href="kafli-11.html" aria-current="page" data-gate="ch11">11. Hrein klasar og viðmót</a></li>
+<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Undantekningar og pakkar</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="kodaskrif.html">Kóðaskrif</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="minnisblad.html">Minnisblað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="11" data-topics="hrein">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 11: Hrein klasar og viðmót</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-10.html">kafla 10</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 11 af 12 · Vika 12 · Liang kafli 13</p>
+<h1>Hrein klasar og viðmót</h1>
+<p class="ch-exam"><b>Tengist:</b> Miðannarpróf 2 og lokapróf: abstract, interface, Comparable</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Verkstæði</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Hvað er flatarmál „marghyrnings“ almennt? Það er ekki hægt að reikna nema vita hvort hann er þríhyrningur eða rétthyrningur. Hrein klasar (abstract classes) og viðmót (interfaces) leyfa þér að lýsa <b>hvað</b> hlutir geta gert án þess að segja <b>hvernig</b>, og láta undirklasana fylla í. Þetta er síðasta stóra hugtakið í hlutbundnu hönnuninni.</p>
+
+<h2 id="abstract">Hreinir klasar (abstract)</h2>
+<pre class="code"><code class="java">public abstract class Polygon {
+    protected Point[] corners;
+
+    protected double distance(Point p, Point q) {
+        return Math.sqrt(Math.pow(p.getX() - q.getX(), 2)
+                       + Math.pow(p.getY() - q.getY(), 2));
+    }
+
+    public double calcPerimeter() {              // venjuleg aðferð
+        double perimeter = 0;
+        for (int i = 0; i &lt; corners.length; i++) {
+            perimeter += distance(corners[i], corners[(i + 1) % corners.length]);
+        }
+        return perimeter;
+    }
+
+    public abstract double calcArea();           // hrein aðferð: enginn líkami, ;
+}</code></pre>
+<ul>
+<li><b>Hrein aðferð</b> (abstract method) hefur undirskrift en <b>engan líkama</b>; hún endar á <code>;</code>.</li>
+<li>Klasi sem hefur hreina aðferð <b>verður</b> að vera merktur <code>abstract</code>.</li>
+<li><b>Ekki er hægt að búa til hlut</b> af hreinum klasa: <code>new Polygon()</code> er þýðingarvilla. En breyta má vera af taginu: <code>Polygon p = new Triangle(…);</code></li>
+<li>Undirklasi verður að útfæra <b>allar</b> hreinu aðferðirnar, annars verður hann sjálfur að vera <code>abstract</code>.</li>
+<li>Hreinn klasi getur samt haft <b>eigindi, smiði og venjulegar aðferðir</b> (smiðurinn er kallaður með <code>super(…)</code> úr undirklasanum).</li>
+</ul>
+<p>Í geometry-dæminu reiknar Polygon ummálið eins fyrir alla marghyrninga (<code>calcPerimeter</code>), en hver undirklasi útfærir <code>calcArea</code> á sinn hátt: Triangle með formúlu Herons og Rectangle sem breidd × hæð. Í UNO er <code>Player</code> hreinn klasi með hreinu aðferðinni <code>playTurn</code>, sem HumanPlayer og ComputerPlayer útfæra.</p>
+<div class="note"><p><b class="t">Sniðmátsaðferð:</b> þegar venjuleg aðferð í hreinum klasa kallar á hreina aðferð (t.d. <code>toString()</code> sem kallar á <code>calcArea()</code>) ákveður yfirklasinn <i>skrefin</i> og undirklasarnir <i>innihald</i> þeirra. Breytileg binding sér um að rétta útgáfan keyri.</p></div>
+
+<h2 id="interface">Viðmót (interface)</h2>
+<p>Viðmót er „samningur“: listi af aðferðum sem klasi lofar að útfæra. Klasi <b>útfærir</b> viðmót með <code>implements</code>:</p>
+<pre class="code"><code class="java">public interface Shape {
+    double PI_ISH = 3.14;          // fastar eru sjálfkrafa public static final
+    double area();                 // aðferðir eru sjálfkrafa public abstract
+    default String describe() {    // default-aðferð (Java 8+) hefur líkama
+        return "Lögun með flatarmál " + area();
+    }
+}
+
+public class Circle implements Shape {
+    private double r;
+    public Circle(double r) { this.r = r; }
+    @Override
+    public double area() { return Math.PI * r * r; }   // verður að vera public
+}</code></pre>
+<ul>
+<li>Viðmót hefur <b>engin hlutbundin eigindi</b> og <b>enga smiði</b>; ekki er hægt að gera <code>new Shape()</code>.</li>
+<li>Klasi má <b>útfæra mörg viðmót</b> (<code>implements A, B, C</code>) en bara erfa einn klasa: <code>class HumanPlayer extends Player implements Comparable&lt;HumanPlayer&gt;</code>.</li>
+<li>Viðmót má erfa önnur viðmót með <code>extends</code>.</li>
+<li>Útfærslan verður að vera <code>public</code> (því aðferðir viðmótsins eru public).</li>
+</ul>
+
+<h3>Comparable: að raða eigin hlutum</h3>
+<p><code>Arrays.sort</code> kann að raða tölum og strengjum, en hvernig á að raða spilum? Klasinn útfærir <code>Comparable&lt;T&gt;</code> og aðferðina <code>compareTo</code>, sem skilar <b>neikvæðu</b> ef <code>this</code> á að koma á undan, <b>0</b> ef jafnt og <b>jákvæðu</b> ef á eftir:</p>
+<pre class="code"><code class="java">public class Card implements Comparable&lt;Card&gt; {
+    private int number;
+    private char color;
+    …
+    @Override
+    public int compareTo(Card other) {
+        if (color != other.color) {
+            return color - other.color;      // fyrst eftir lit (B &lt; G &lt; R &lt; Y)
+        }
+        return number - other.number;        // svo eftir tölu
+    }
+}
+
+Card[] hand = { new Card(7, 'R'), new Card(2, 'G'), new Card(5, 'R') };
+Arrays.sort(hand);                           // notar compareTo
+System.out.println(Arrays.toString(hand));   // [G2, R5, R7]</code></pre>
+
+<h2 id="samanburdur">Hreinn klasi eða viðmót?</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Hreinn klasi</th><th>Viðmót</th></tr></thead>
+<tbody>
+<tr><td>Lykilorð</td><td><code>abstract class</code>, notaður með <code>extends</code></td><td><code>interface</code>, notað með <code>implements</code></td></tr>
+<tr><td>Hversu marga</td><td>aðeins einn yfirklasa</td><td>mörg viðmót</td></tr>
+<tr><td>Eigindi</td><td>hver sem er</td><td>aðeins fastar (<code>public static final</code>)</td></tr>
+<tr><td>Smiðir</td><td>já (kallaðir með super)</td><td>nei</td></tr>
+<tr><td>Aðferðir</td><td>hreinar og venjulegar, hvaða aðgangur sem er</td><td>hreinar (og default/static), allar public</td></tr>
+<tr><td>Samband</td><td>sterkt „er“ með sameiginlegri útfærslu og ástandi</td><td>„getur“ (hæfni): Comparable, Cloneable, Shape</td></tr>
+<tr><td>UML</td><td>nafn og hreinar aðferðir í <i>skáletri</i> (eða <code>{abstract}</code>)</td><td><code>«interface»</code> fyrir ofan nafnið; brotin lína með holum þríhyrningi frá útfærsluklasanum</td></tr>
+</tbody></table></div>
+
+<h2 id="daemi">Fullunnið dæmi: launagreiðslur</h2>
+<pre class="code"><code class="java">abstract class Employee implements Comparable&lt;Employee&gt; {
+    private String name;
+    public Employee(String name) { this.name = name; }
+    public String getName() { return name; }
+    public abstract double pay();                     // hver tegund reiknar sjálf
+    public int compareTo(Employee o) {                // raða eftir launum
+        return Double.compare(pay(), o.pay());
+    }
+    public String toString() { return name + ": " + pay(); }
+}
+
+class Salaried extends Employee {
+    private double monthly;
+    public Salaried(String n, double m) { super(n); monthly = m; }
+    public double pay() { return monthly; }
+}
+
+class Hourly extends Employee {
+    private double rate; private int hours;
+    public Hourly(String n, double r, int h) { super(n); rate = r; hours = h; }
+    public double pay() { return rate * hours; }
+}
+
+Employee[] staff = { new Salaried("Anna", 900), new Hourly("Kári", 20, 30) };
+Arrays.sort(staff);
+for (Employee e : staff) System.out.println(e);</code></pre>
+<pre class="out">Kári: 600.0
+Anna: 900.0</pre>
+
+<h2 id="samantekt">Samantekt</h2>
+<ul class="checklist">
+<li>Hrein aðferð: <code>public abstract double calcArea();</code> án líkama.</li>
+<li>Hreinum klasa má ekki <code>new</code>-a; undirklasi útfærir allar hreinu aðferðirnar eða er sjálfur abstract.</li>
+<li>Hreinn klasi getur haft eigindi, smiði og venjulegar aðferðir.</li>
+<li>Viðmót: aðferðir sjálfkrafa public abstract, fastar public static final; <code>implements</code> mörg.</li>
+<li><code>Comparable&lt;T&gt;</code> + <code>compareTo</code> → <code>Arrays.sort</code> virkar á eigin hluti.</li>
+<li>UML: skáletur = abstract; «interface»; brotin lína + ▷ = implements.</li>
+</ul>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Kóðadæmi („hvað prentar forritið?“) með nýjum tölum í hvert skipti og skilningsspurningar úr kaflanum. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Kóðaverkstæði</h2>
+<p>Hér vinnur þú með kóðann sjálfan, eins og á prófinu: raðar línum í rétt forrit, fyllir í eyður, finnur villur og rekur breytur skref fyrir skref. Leystu öll verkefnin til að ljúka skrefinu.</p>
+<div class="panel ws-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 12"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-10.html"><span>Fyrri</span>10. Erfðir og fjölbrigðni</a><a href="kafli-12.html" style="text-align:right"><span>Næsta</span>12. Undantekningar og pakkar</a></div>
+</div>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/adferdir.js"></script>
+<script src="js/q/erfdir.js"></script>
+<script src="js/q/forrit.js"></script>
+<script src="js/q/fylki.js"></script>
+<script src="js/q/hrein.js"></script>
+<script src="js/q/klasar.js"></script>
+<script src="js/q/lykkjur.js"></script>
+<script src="js/q/skilyrdi.js"></script>
+<script src="js/q/strengir.js"></script>
+<script src="js/q/tengsl.js"></script>
+<script src="js/q/tolur.js"></script>
+<script src="js/q/undantekningar.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/verkstaedi.js"></script>
+<script src="js/w/kafli-11.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<h1>Erfðir og fjölbrigðni</h1>
+<p class="lede">Dráttarbunki og kastbunki eru báðir hlaðar af spilum; mennskur leikmaður og tölvuleikmaður eru báðir leikmenn sem gera á sinn hátt. Erfðir láta undirklasa endurnýta og sérhæfa yfirklasa, og fjölbrigðni lætur sama kallið gera mismunandi hluti eftir því hver hluturinn raunverulega er. Þetta er kjarninn í seinni hluta prófsins: smiðakeðjur, yfirskrifun og „hvaða aðferð er keyrð?“.</p>
+
+<h2 id="extends">extends: yfirklasi og undirklasi</h2>
+<pre class="code"><code class="java">public class StackOfCards {               // yfirklasi (superclass)
+    protected Card[] cards = new Card[112];
+    protected int top = -1;
+    protected void push(Card c) { cards[++top] = c; }
+    protected Card pop()        { return cards[top--]; }
+    public boolean isEmpty()    { return top == -1; }
+}
+
+public class DiscardPile extends StackOfCards {  // undirklasi (subclass)
+    public void discard(Card c) { push(c); }     // notar erfða aðferð
+    public Card topCard()       { return cards[top]; }
+}</code></pre>
+<ul>
+<li>Undirklasinn <b>erfir</b> öll eigindi og aðferðir yfirklasans og getur <b>bætt við</b> nýjum og <b>yfirskrifað</b> (override) erfðar aðferðir.</li>
+<li>Sambandið er „<b>er</b>“ (is-a): DiscardPile <i>er</i> StackOfCards. Ef það er bara „hefur“ á að nota eigindi (kafli 9), ekki erfðir.</li>
+<li>Java leyfir aðeins <b>einn</b> yfirklasa (single inheritance). Allir klasar erfa á endanum frá <code>Object</code>.</li>
+<li><code>private</code> eigindi yfirklasans eru <b>til</b> í undirklasanum en hann má <b>ekki</b> nota þau beint; hann notar public/protected aðferðir eða gerir þau <code>protected</code>.</li>
+</ul>
+<div class="note"><p><b class="t">Af hverju í UNO?</b> Ef drawPile og discardPile væru bæði StackOfCards gætu allir ýtt og tekið af báðum. Með undirklösum og <code>protected</code> aðferðum í StackOfCards býður hvor bunki aðeins upp á þær aðgerðir sem eiga við: úr dráttarbunka er bara dregið og í kastbunka er bara kastað.</p></div>
+
+<h2 id="smidir">Smiðir og super(…)</h2>
+<p>Smiðir erfast <b>ekki</b>. Smiður undirklasans byrjar <b>alltaf</b> á því að kalla á smið yfirklasans, svo erfði hlutinn sé frumstilltur fyrst:</p>
+<pre class="code"><code class="java">public class Player {
+    private String name;
+    public Player(String name) { this.name = name; }
+    public String getName() { return name; }
+}
+
+public class ComputerPlayer extends Player {
+    private int level;
+    public ComputerPlayer(String name, int level) {
+        super(name);          // verður að vera FYRSTA setningin
+        this.level = level;
+    }
+}</code></pre>
+<ul>
+<li>Ef þú skrifar ekki <code>super(…)</code> setur Java inn <code>super();</code> (án færibreyta) sjálfkrafa.</li>
+<li>Ef yfirklasinn hefur <b>engan smið án færibreyta</b> (t.d. bara <code>Player(String name)</code>) og undirklasinn kallar ekki á <code>super(name)</code> er það <b>þýðingarvilla</b>.</li>
+<li>Smiðakeðjan keyrir því <b>ofan frá</b>: Object → Player → ComputerPlayer. Það sem smiður yfirklasans prentar kemur á undan því sem undirklasinn prentar.</li>
+</ul>
+
+<h2 id="override">Yfirskrifun (overriding)</h2>
+<p>Undirklasi <b>yfirskrifar</b> aðferð með því að skilgreina aðferð með <b>sömu undirskrift</b> (og samhæfðu skilatagi). Merkið <code>@Override</code> lætur þýðandann athuga að þú sért í raun að yfirskrifa eitthvað. <code>super.aðferð()</code> kallar á útgáfu yfirklasans:</p>
+<pre class="code"><code class="java">public class Triangle extends Polygon {
+    @Override
+    public String toString() {
+        return "Triangle " + super.toString();   // bætir við útgáfu Polygon
+    }
+}
+
+public class DrawPile extends StackOfCards {
+    @Override
+    public Card pop() {
+        if (isEmpty()) {
+            fill(UnoGame.discardPile.flush());   // fylla á úr kastbunkanum
+        }
+        return super.pop();                      // svo venjulega pop
+    }
+}</code></pre>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Yfirskrifun (overriding)</th><th>Yfirhleðsla (overloading)</th></tr></thead>
+<tbody>
+<tr><td>Hvar</td><td>í undirklasa</td><td>í sama klasa (eða undirklasa)</td></tr>
+<tr><td>Undirskrift</td><td><b>sú sama</b></td><td><b>ólíkar</b> færibreytur</td></tr>
+<tr><td>Valið</td><td>við <b>keyrslu</b>, eftir raunverulegu tagi hlutarins</td><td>við <b>þýðingu</b>, eftir yfirlýstu tagi raungildanna</td></tr>
+</tbody></table></div>
+<p>Yfirskrifuð aðferð má ekki hafa <b>þrengri</b> aðgang (public → private er villa), en má víkka hann (protected → public). <code>final</code> aðferð má ekki yfirskrifa og frá <code>final</code> klasa má ekki erfa (t.d. String).</p>
+
+<h2 id="fjolbrigdni">Fjölbrigðni og breytileg binding</h2>
+<p>Breyta af tagi yfirklasa má vísa á hlut af undirklasa: <code>Player p = new HumanPlayer();</code>. Þá skiptir máli:</p>
+<div class="grid2">
+<div class="key"><p><b>Yfirlýst tag</b> (declared type) breytunnar, hér <code>Player</code>, ákveður við <b>þýðingu</b> hvaða aðferðir <b>má</b> kalla á.</p></div>
+<div class="key"><p><b>Raunverulegt tag</b> (actual type) hlutarins, hér <code>HumanPlayer</code>, ákveður við <b>keyrslu</b> hvaða útgáfa er <b>keyrð</b> (breytileg binding, dynamic binding).</p></div>
+</div>
+<pre class="code"><code class="java">Player[] players = { new HumanPlayer(), new ComputerPlayer(), new ComputerPlayer() };
+for (Player p : players) {
+    p.playTurn(currentCard);   // hver leikmaður gerir á sinn hátt
+}</code></pre>
+<p>Þetta er <b>fjölbrigðni</b> (polymorphism): leikjalykkjan þarf ekki að vita hvers konar leikmenn eru með. Nýja leikmannategund má bæta við án þess að breyta henni.</p>
+<p>Breytileg binding gildir líka <b>inni í yfirklasanum</b>: ef aðferð í Polygon kallar á <code>calcArea()</code> er útgáfa raunverulega hlutarins keyrð.</p>
+<div class="vs">
+<div><pre class="code"><code class="java">class A {
+    void hi()   { System.out.println("A.hi"); }
+    void both() { hi(); }              // hvaða hi?
+}
+class B extends A {
+    @Override
+    void hi()   { System.out.println("B.hi"); }
+    void only() { System.out.println("B.only"); }
+}
+
+A x = new B();
+x.hi();
+x.both();
+// x.only();   // þýðingarvilla: A hefur ekki only()
+((B) x).only();</code></pre></div>
+<div><pre class="out">B.hi
+B.hi
+B.only</pre></div>
+</div>
+
+<h2 id="kast">Kast á hlutum og instanceof</h2>
+<ul>
+<li><b>Upp</b> (upcast), undirklasi → yfirklasi, er sjálfkrafa: <code>Player p = new HumanPlayer();</code></li>
+<li><b>Niður</b> (downcast) þarf kast: <code>HumanPlayer h = (HumanPlayer) p;</code>. Ef hluturinn er í raun ekki HumanPlayer kastast <code>ClassCastException</code> við keyrslu.</li>
+<li><code>obj instanceof Klasi</code> er true ef hluturinn er af þessum klasa <b>eða undirklasa hans</b>. Notaðu það áður en þú kastar niður. (<code>null instanceof X</code> er false.)</li>
+</ul>
+<pre class="code"><code class="java">if (p instanceof HumanPlayer) {
+    HumanPlayer h = (HumanPlayer) p;
+    …
+}</code></pre>
+
+<h2 id="object">Klasinn Object: toString og equals</h2>
+<p>Allir klasar erfa frá <code>Object</code>, sem hefur m.a. <code>toString()</code> (skilar <code>Klasi@kóði</code>) og <code>equals(Object o)</code> (sem er <code>==</code>, þ.e. sami hlutur). Til að bera saman innihald yfirskrifarðu equals; færibreytan verður að vera af tagi <b>Object</b>, annars ertu að <b>yfirhlaða</b>, ekki yfirskrifa:</p>
+<pre class="code"><code class="java">@Override
+public boolean equals(Object o) {
+    if (!(o instanceof Card)) return false;
+    Card other = (Card) o;
+    return number == other.number &amp;&amp; color == other.color;
+}</code></pre>
+
+<h2 id="protected">Aðgangur í erfðum</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðgangur</th><th>Sami klasi</th><th>Sami pakki</th><th>Undirklasi (annar pakki)</th><th>Allir</th></tr></thead>
+<tbody>
+<tr><td><code>public</code> (+)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td><code>protected</code> (#)</td><td>✓</td><td>✓</td><td>✓</td><td>–</td></tr>
+<tr><td>pakki (~)</td><td>✓</td><td>✓</td><td>–</td><td>–</td></tr>
+<tr><td><code>private</code> (−)</td><td>✓</td><td>–</td><td>–</td><td>–</td></tr>
+</tbody></table></div>
+
+<h2 id="samantekt">Samantekt</h2>
+<ul class="checklist">
+<li><code>extends</code> = „er“; einn yfirklasi; allt erfir frá Object.</li>
+<li>Smiður undirklasa kallar fyrst á <code>super(…)</code> (sjálfkrafa <code>super()</code> ef ekkert er skrifað); keyrslan fer ofan frá.</li>
+<li>Yfirskrifun: sama undirskrift, valin við keyrslu. Yfirhleðsla: ólíkar færibreytur, valin við þýðingu.</li>
+<li>Yfirlýst tag ákveður hvað <b>má</b> kalla á; raunverulegt tag ákveður hvað <b>keyrir</b>.</li>
+<li>Upcast sjálfkrafa; downcast með kasti, varið með <code>instanceof</code>.</li>
+<li><code>equals(Object o)</code> til að yfirskrifa; <code>super.toString()</code> til að bæta við.</li>
+</ul>
