@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 4: Ferlauppgötvun · Greining ferla og kerfa</title>
+<meta name="description" content="Kennsluvefur fyrir IÐN301G Greining ferla og kerfa: ferlaskráning, BPMN, ferlauppgötvun, eigindleg og megindleg greining, endurhönnun, ferlahugbúnaður, kerfishugsun og stjórnun ferla.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23173327'/%3E%3Ccircle cx='7' cy='16' r='3' fill='%23ffe98a'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23ffe98a'/%3E%3Cpath d='M25 11l5 5-5 5-5-5z' fill='%23ffe98a'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Greining ferla og kerfa</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Greining ferla og kerfa<small>IÐN301G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Ferlar og ferlaskráning</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Ferlalíkön í BPMN</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Þróuð ferlalíkön</a></li>
+<li><a class="nav" href="kafli-4.html" aria-current="page" data-gate="ch4">4. Ferlauppgötvun</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Eigindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Megindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Endurhönnun og ferlahugbúnaður</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Kerfishugsun og orsakalykkjur</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Stjórnun ferla og BPM í starfseminni</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="upprifjun.html" data-gate="archive">Lokaupprifjun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+<li><a class="nav" href="verkfaerakista.html">Verkfærakista</a></li>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="4" data-topics="uppgotvun">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 4: Ferlauppgötvun</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-3.html">kafla 3</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 4 af 9 · F5 · BPM kafli 5</p>
+<h1>Ferlauppgötvun</h1>
+<p class="ch-exam"><b>Tengist:</b> EV1 og HÓP1: viðtöl, vinnustofur og atburðaskrár</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Ferlauppgötvun (process discovery) er það að safna upplýsingum um ferli eins og það er í raun og koma þeim í <b>núverandi ferlalíkan</b> (as-is). Hér lærir þú hver gerir hvað, hvaða aðferðum er beitt (gögn, viðtöl, vinnustofur, atburðaskrár), hvernig líkanið er byggt upp í fimm skrefum og hvernig gæði þess eru metin. Þetta er nákvæmlega vinnan sem þú vinnur í EV1, og á prófinu er spurt um kosti og galla aðferða, deadlock og 7PMG.</p>
+
+<h2 id="liftimi">Hvar erum við í BPM-líftímanum?</h2>
+<p>BPM-líftímakúrfan (BPM lifecycle) hefur sex fasa. Ferlaauðkenning (process identification) skilar <b>ferlaarkitektúr</b>: hvaða ferla fyrirtækið hefur og hverjir skipta mestu máli. Þá tekur ferlauppgötvun við fyrir þann feril sem var valinn og skilar <b>as-is líkani</b>, sem er svo grunnurinn að greiningu (kaflar 5 og 6) og endurhönnun (kafli 7).</p>
+<svg class="diagram" viewBox="0 0 610 250" role="img" aria-label="BPM-líftíminn: auðkenning, uppgötvun, greining, endurhönnun, innleiðing og eftirlit, sem leiðir aftur í uppgötvun" style="max-width:100%;height:auto">
+  <defs><marker id="u4-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)"/></marker></defs>
+  <g style="stroke:var(--ink);stroke-width:1.6;fill:var(--paper)">
+    <rect x="5" y="111" width="130" height="38" rx="8"/>
+    <rect x="165" y="31" width="130" height="38" rx="8" style="stroke:var(--mag);stroke-width:2.6;fill:var(--key-bg)"/>
+    <rect x="355" y="31" width="130" height="38" rx="8"/>
+    <rect x="465" y="111" width="130" height="38" rx="8"/>
+    <rect x="355" y="191" width="130" height="38" rx="8"/>
+    <rect x="165" y="191" width="130" height="38" rx="8"/>
+  </g>
+  <g style="stroke:var(--ink);stroke-width:1.6;fill:none" marker-end="url(#u4-ar)">
+    <path d="M110,111 L180,71" marker-end="url(#u4-ar)"/>
+    <path d="M295,50 L353,50" marker-end="url(#u4-ar)"/>
+    <path d="M470,69 L515,109" marker-end="url(#u4-ar)"/>
+    <path d="M515,149 L470,189" marker-end="url(#u4-ar)"/>
+    <path d="M355,210 L297,210" marker-end="url(#u4-ar)"/>
+    <path d="M230,191 L230,71" marker-end="url(#u4-ar)"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="70" y="135">Auðkenning</text>
+    <text x="230" y="55" style="font-weight:700;fill:var(--mag)">Uppgötvun</text>
+    <text x="420" y="55">Greining</text>
+    <text x="530" y="135">Endurhönnun</text>
+    <text x="420" y="215">Innleiðing</text>
+    <text x="230" y="215">Eftirlit</text>
+    <text class="small" x="330" y="125">as-is líkan → greining</text>
+    <text class="small" x="330" y="143">→ to-be líkan</text>
+  </g>
+</svg>
+<p>Uppgötvunin er því ekki einskiptisverk: eftirlit (process monitoring) með keyrandi ferli getur sýnt að líkanið passar ekki lengur við raunveruleikann og þá þarf að uppgötva ferlið upp á nýtt.</p>
+
+<h2 id="skilgreining">Skilgreining og fjögur verkefni</h2>
+<div class="key">
+<p><b>Ferlauppgötvun</b> (process discovery) er að safna upplýsingum um <i>núverandi</i> ferli og skipuleggja þær í <b>as-is ferlalíkan</b>.</p>
+<p>Fjögur verkefni, í þessari röð:</p>
+<ol>
+<li><b>Skilgreina umgjörðina</b> (defining the setting): setja saman teymið.</li>
+<li><b>Safna upplýsingum</b> (gathering information): skilja ferlið.</li>
+<li><b>Vinna líkanagerðina</b> (conducting the modeling task): teikna líkanið.</li>
+<li><b>Tryggja gæði líkansins</b> (assuring process model quality).</li>
+</ol>
+</div>
+
+<h2 id="hlutverk">Hlutverk og áskoranir</h2>
+<p>Í uppgötvun vinna saman tvær tegundir fólks með ólíka þekkingu. Annar hópurinn kann líkanagerð en ekki starfsemina, hinn kann starfsemina en ekki líkanagerð.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Hlutverk</th><th>Hvað gerir hann/hún?</th></tr></thead>
+<tbody>
+<tr><td><b>Ferlagreinandi</b> (process analyst)</td><td>Stýrir uppgötvuninni og líkanagerðinni. Kann BPMN og aðferðirnar en þekkir starfsemina oft lítið. Einn eða fleiri.</td></tr>
+<tr><td><b>Sérfræðingar á sviðinu</b> (domain experts)</td><td>Fólk sem þekkir ferlið af eigin raun: ferlaþátttakendur (process participants), stjórnendur, stundum viðskiptavinir eða birgjar. Þurfa að vera <b>nokkrir</b>, því hver og einn þekkir bara sinn hluta.</td></tr>
+<tr><td><b>Ferlaeigandi</b> (process owner)</td><td>Ber ábyrgð á ferlinu í heild og árangri þess. Tryggir aðgang að fólki og samþykkir líkanið.</td></tr>
+<tr><td><b>Fundarstjóri</b> (facilitator)</td><td>Í vinnustofum: stýrir umræðunni og heldur utan um framlag þátttakenda.</td></tr>
+<tr><td><b>Líkanasmiður við tólið</b> (tool operator)</td><td>Í vinnustofum: færir niðurstöður umræðunnar beint inn í líkanatólið jafnóðum.</td></tr>
+</tbody></table></div>
+<p>Glærurnar nefna <b>þrjár áskoranir</b> sem stafa af því að þekking á líkönum og á starfseminni (domain) liggur hjá ólíku fólki:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Áskorun</th><th>Hvað þýðir hún?</th><th>Viðbrögð</th></tr></thead>
+<tbody>
+<tr><td><b>Brotakennd ferlaþekking</b> (fragmented process knowledge)</td><td>Verkum er skipt á sérhæft fólk. Enginn einn þekkir allt ferlið frá upphafi til enda.</td><td>Tala við marga og safna upplýsingum víða að. Ferlagreinandinn púslar heildarmyndinni saman.</td></tr>
+<tr><td><b>Hugsun í tilvikum</b> (thinking on a case level)</td><td>Fagfólk segir sögur af einstökum málum („í gær kom kona með…“) en ekki almennar reglur um flæðið.</td><td>Spyrja um mörg tilvik og alhæfa: hvað gerist <i>alltaf</i>, hvað <i>stundum</i> og við hvaða skilyrði.</td></tr>
+<tr><td><b>Lítil þekking á líkanamálum</b> (unfamiliar with modeling languages)</td><td>Fagfólk les ekki BPMN og getur því ekki staðfest líkanið beint.</td><td>Greinandinn teiknar og útskýrir líkanið í orðum, eða notar einfaldari framsetningu við staðfestingu.</td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Ráð fyrir EV1:</b> skrifaðu í skýrsluna hverjir voru heimildarmenn þínir (hlutverk, ekki nöfn) og hvaða áskorun þú lentir í. Ef þú talaðir bara við einn starfsmann er það dæmi um brotakennda þekkingu sem þú þarft að nefna sem takmörkun.</p></div>
+
+<h2 id="adferdir">Aðferðir við uppgötvun</h2>
+<p>Aðferðunum er skipt í þrjá flokka:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Flokkur</th><th>Aðferðir</th><th>Kjarninn</th></tr></thead>
+<tbody>
+<tr><td><b>Gagnadrifin uppgötvun</b> (evidence-based discovery)</td><td>Skjalagreining (document analysis), athugun (observation), sjálfvirk ferlauppgötvun (automatic process discovery)</td><td>Byggt á því sem er til: skjölum, því sem sést gerast og gögnum úr upplýsingakerfum.</td></tr>
+<tr><td><b>Viðtöl</b> (interview-based discovery)</td><td>Viðtöl við sérfræðinga á sviðinu</td><td>Fólk lýsir því hvernig ferlið er framkvæmt.</td></tr>
+<tr><td><b>Vinnustofur</b> (workshop-based discovery)</td><td>Fundir með mörgum þátttakendum í einu</td><td>Ferlið er mótað sameiginlega og ágreiningur leystur á staðnum.</td></tr>
+</tbody></table></div>
+
+<h3>Gagnadrifin uppgötvun</h3>
+<p><b>Skjalagreining</b> (document analysis) nýtir það að yfirleitt er til efni um ferlið: verklagsreglur, eyðublöð, skipurit, starfslýsingar, gæðahandbækur. Þrír gallar:</p>
+<ol>
+<li>Skjöl eru sjaldnast skipulögð <b>eftir ferlum</b>. Starfslýsing segir hvað einn starfsmaður gerir, ekki hvernig málið flæðir.</li>
+<li><b>Nákvæmnisstigið</b> (granularity) passar oft ekki: of almennt eða of ítarlegt.</li>
+<li>Skjölin eru aðeins <b>að hluta til áreiðanleg</b>: þau lýsa oft því hvernig ferlið <i>á</i> að vera, eða voru rétt fyrir nokkrum árum.</li>
+</ol>
+<p><b>Athugun</b> (observation) fylgir einstökum málum beint í gegnum ferlið. Greinandinn getur verið í:</p>
+<ul>
+<li><b>virku hlutverki</b>: hann leikur sjálfur viðskiptavininn (sækir um, hringir inn, skilar vöru) og upplifir ferlið utan frá;</li>
+<li><b>óvirku hlutverki</b>: hann situr hjá og fylgist með starfsfólkinu vinna.</li>
+</ul>
+<p>Athugun gefur ríka innsýn, en fólk hagar sér öðruvísi þegar fylgst er með því og aðeins er hægt að sjá fá tilvik.</p>
+<p><b>Sjálfvirk ferlauppgötvun</b> (automatic process discovery, process mining) nýtir það að upplýsingakerfi skrá hvað gerist. Hún notar <b>atburðaskrár</b> (event logs). Gögnin þurfa að vera skráð þannig að hver atburður tengist nákvæmlega þremur hlutum: <b>einu tilviki</b> ferlisins (case), <b>tiltekinni aðgerð</b> (activity) og <b>nákvæmum tímapunkti</b> (timestamp). Nánar um þetta <a href="#atburdaskrar">hér að neðan</a>.</p>
+
+<h3>Viðtöl</h3>
+<p>Viðtöl (interview-based discovery) byggja á því að spyrja sérfræðinga á sviðinu hvernig ferlið er framkvæmt. Tvær leiðir til að raða viðtölunum:</p>
+<ul>
+<li><b>Aftur á bak</b> frá afurðum og niðurstöðum ferlisins: hvað þarftu til að geta gert þetta? Þá kemur í ljós hvaða ílag þarf og í hvaða röð.</li>
+<li><b>Áfram</b> frá upphafi ferlisins: fylgja flæðinu og ákvörðunum á hverju stigi.</li>
+</ul>
+<p>Viðtöl eru yfirleitt endurtekin: greinandinn teiknar líkan eftir fyrsta viðtal, sýnir það í því næsta og lagar. Það tekur tíma áður en allir samþykkja (sign-off).</p>
+
+<h3>Vinnustofur</h3>
+<p>Vinnustofur (workshop-based discovery) gefa ítarlegar upplýsingar með ferlaþátttakendunum sjálfum. Í vinnustofu eru:</p>
+<ul>
+<li><b>fundarstjóri</b> (facilitator) sem skipuleggur munnleg framlög þátttakenda,</li>
+<li><b>tólstjóri</b> (tool operator) sem færir niðurstöðurnar beint inn í líkanatólið,</li>
+<li>nokkrir <b>sérfræðingar á sviðinu</b>, og helst bæði <b>ferlaeigandinn</b> og <b>ferlagreinandinn</b>.</li>
+</ul>
+<p>Stóri kosturinn: ef tveir þátttakendur lýsa ferlinu á ólíkan hátt er hægt að <b>leysa ágreininginn strax</b>. Gallinn: erfitt er að ná mörgu uppteknu fólki saman, og oft þarf fleiri en eina vinnustofu.</p>
+
+<h3>Samanburður aðferðanna</h3>
+<p>Þessar tvær töflur af glærunum (tafla 5.2 í bókinni) eru mjög líklegar á prófi.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Þáttur</th><th>Gögn (evidence)</th><th>Viðtöl</th><th>Vinnustofur</th></tr></thead>
+<tbody>
+<tr><td><b>Hlutlægni</b> (objectivity)</td><td>mikil</td><td>miðlungs til mikil</td><td>miðlungs til mikil</td></tr>
+<tr><td><b>Dýpt/auðlegð</b> (richness)</td><td>miðlungs</td><td>mikil</td><td>mikil</td></tr>
+<tr><td><b>Tímafrekt</b> (time consumption)</td><td>lítið til miðlungs</td><td>miðlungs</td><td>miðlungs</td></tr>
+<tr><td><b>Endurgjöf strax</b> (immediacy of feedback)</td><td>lítil</td><td>mikil</td><td>mikil</td></tr>
+</tbody></table></div>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðferð</th><th>Styrkleikar</th><th>Veikleikar</th></tr></thead>
+<tbody>
+<tr><td>Skjalagreining</td><td>Skipulegar upplýsingar. Óháð því hvort fólk hefur tíma.</td><td>Úrelt efni. Rangt nákvæmnisstig (abstraction).</td></tr>
+<tr><td>Athugun</td><td>Innsýn í samhengið (context-rich).</td><td>Getur verið ágeng. Fólk hagar sér öðruvísi. Fá tilvik og ekki er hægt að fylgjast með öllum ferlum.</td></tr>
+<tr><td>Sjálfvirk uppgötvun</td><td>Mjög mörg tilvik. Hlutlæg gögn.</td><td>Gagnagæði og nákvæmnisstig geta verið vandamál. Gögn ekki til eða aðeins að hluta. Gagnaútdráttur og undirbúningur tekur tíma.</td></tr>
+<tr><td>Viðtöl</td><td>Innsýn í samhengið.</td><td>Krefst tíma upptekins fólks. Tímafrekt: margar ítranir fyrir samþykkt.</td></tr>
+<tr><td>Vinnustofur</td><td>Innsýn í samhengið. <b>Ágreiningur leystur beint.</b></td><td>Krefst þess að margir séu lausir <b>samtímis</b>. Tímafrekt: oft þarf margar lotur.</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að segja að gagnadrifin uppgötvun sé „best“ af því hún er hlutlægust. Hún er hlutlæg en endurgjöfin er hæg og hún segir ekki <i>af hverju</i> hlutirnir gerast. Í reynd eru aðferðirnar notaðar saman: t.d. skjöl og atburðaskrá fyrst, svo viðtöl til að skilja, og vinnustofa til að staðfesta.</p></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Hvaða aðferð hentar?</span></div><div class="ex-body">
+<p>Þú átt að kortleggja þrjá ferla. Hvaða uppgötvunaraðferð myndir þú byrja á í hverju tilviki?</p>
+<p>(a) Tryggingafélag: öll tjón eru skráð í tjónakerfi með málsnúmeri, aðgerð og tíma, 40.000 mál á ári.<br>(b) Byggingavöruverslun: ágreiningur milli lagers og afgreiðslu um hver tekur við skilavöru.<br>(c) Heilsugæsla: þú vilt skilja upplifun sjúklings frá því hann bókar tíma þar til hann fær lyfseðil.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) Gögnin eru til, mörg og með málsnúmeri, aðgerð og tíma: <b>sjálfvirk ferlauppgötvun</b> úr atburðaskrá. Svo viðtöl til að skýra frávik sem koma í ljós.</p>
+<p>(b) Ólíkar lýsingar sem stangast á: <b>vinnustofa</b>, því þar er hægt að leysa ágreininginn beint með báðum aðilum.</p>
+<p>(c) Upplifun viðskiptavinar utan frá: <b>athugun í virku hlutverki</b> (greinandinn fer sjálfur í gegnum ferlið), eða óvirk athugun á biðstofunni.</p>
+<p><span class="ans">(a) atburðaskrá · (b) vinnustofa · (c) athugun</span></p>
+</div></details></div></div>
+
+<h2 id="atburdaskrar">Atburðaskrár og process mining</h2>
+<p><b>Ferlaköfun</b> (process mining) er sú grein sem vinnur sjálfvirkt úr atburðaskrám. Þetta er nánar í 11. kafla bókarinnar; glærurnar í F5 leggja áherslu á kröfurnar til gagnanna og F13 á samræmisathugun (conformance checking).</p>
+<div class="key">
+<p><b>Atburðaskrá</b> (event log) er tafla þar sem hver lína er <b>atburður</b> (event). Lágmarksdálkarnir eru þrír:</p>
+<ul>
+<li><b>Málsnúmer</b> (case ID): í hvaða tilviki ferlisins atburðurinn gerðist, t.d. tjónsnúmer eða pöntunarnúmer.</li>
+<li><b>Aðgerð</b> (activity): hvað var gert, t.d. „Meta tjón“.</li>
+<li><b>Tímastimpill</b> (timestamp): hvenær það var gert.</li>
+</ul>
+<p>Oft eru líka dálkar fyrir <b>auðlind</b> (resource, hver gerði það) og önnur gögn (upphæð, tegund máls).</p>
+</div>
+<p>Úr atburðaskránni fást lykilhugtök process mining:</p>
+<ul>
+<li><b>Rakning</b> (trace): röð aðgerða í einu tilviki, fengin með því að flokka eftir málsnúmeri og raða eftir tíma, t.d. $\langle S, M, A, G\rangle$.</li>
+<li><b>Afbrigði</b> (variant): tilvik sem hafa nákvæmlega sömu rakningu tilheyra sama afbrigði. Algengasta afbrigðið er oft kallað „hamingjuleiðin“ (happy path).</li>
+<li><b>Bein eftirfylgni</b> (directly-follows): $a > b$ ef $b$ kemur <i>strax á eftir</i> $a$ í einhverri rakningu.</li>
+<li><b>Bein-eftirfylgniritið</b> (directly-follows graph, DFG): hnútar eru aðgerðir, brýr eru $a \to b$ og talan á brúnni er hversu oft $b$ fylgdi beint á eftir $a$ í allri skránni. Þetta er einfaldasta sjálfvirka uppgötvunaraðferðin og það sem flest process mining-tól sýna fyrst.</li>
+</ul>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Atburðaskrá tryggingafélags → afbrigði og DFG</span></div><div class="ex-body">
+<p>Aðgerðir: <b>S</b> = Skrá tjón, <b>M</b> = Meta tjón, <b>Ó</b> = Óska eftir gögnum, <b>A</b> = Samþykkja bætur, <b>H</b> = Hafna, <b>G</b> = Greiða bætur. Hér eru fyrstu línurnar í skránni, raðað eftir tíma eins og kerfið skilar þeim:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Málsnúmer</th><th>Aðgerð</th><th>Tímastimpill</th></tr></thead>
+<tbody>
+<tr><td>T1</td><td>S Skrá tjón</td><td>3.3. 09:02</td></tr>
+<tr><td>T2</td><td>S Skrá tjón</td><td>3.3. 09:15</td></tr>
+<tr><td>T1</td><td>M Meta tjón</td><td>3.3. 10:40</td></tr>
+<tr><td>T3</td><td>S Skrá tjón</td><td>3.3. 11:05</td></tr>
+<tr><td>T2</td><td>M Meta tjón</td><td>3.3. 13:20</td></tr>
+<tr><td>T2</td><td>Ó Óska eftir gögnum</td><td>3.3. 13:31</td></tr>
+<tr><td>…</td><td>…</td><td>…</td></tr>
+</tbody></table></div>
+<p>Þegar allri skránni er raðað eftir málsnúmeri fást þessar sex rakningar:</p>
+<p>T1: $\langle S,M,A,G\rangle$ · T2: $\langle S,M,Ó,M,A,G\rangle$ · T3: $\langle S,M,H\rangle$ · T4: $\langle S,M,A,G\rangle$ · T5: $\langle S,Ó,M,A,G\rangle$ · T6: $\langle S,M,A,G\rangle$</p>
+<p>(a) Hversu mörg afbrigði eru og hvert er algengast? (b) Teiknaðu DFG með tíðni á brúnum. (c) Hversu margar ólíkar brýr eru í DFG?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) Ólíkar rakningar: $\langle S,M,A,G\rangle$ (T1, T4, T6), $\langle S,M,Ó,M,A,G\rangle$, $\langle S,M,H\rangle$ og $\langle S,Ó,M,A,G\rangle$. Það eru <b>4 afbrigði</b> og hamingjuleiðin $\langle S,M,A,G\rangle$ er algengust (3 af 6).</p>
+<p>(b) Teldu hvert par sem kemur strax í röð, í öllum rakningum:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Brú</th><th>Hvar?</th><th class="num">Tíðni</th></tr></thead>
+<tbody>
+<tr><td>S → M</td><td>T1, T2, T3, T4, T6</td><td class="num">5</td></tr>
+<tr><td>S → Ó</td><td>T5</td><td class="num">1</td></tr>
+<tr><td>M → Ó</td><td>T2</td><td class="num">1</td></tr>
+<tr><td>Ó → M</td><td>T2, T5</td><td class="num">2</td></tr>
+<tr><td>M → A</td><td>T1, T2, T4, T5, T6</td><td class="num">5</td></tr>
+<tr><td>M → H</td><td>T3</td><td class="num">1</td></tr>
+<tr><td>A → G</td><td>T1, T2, T4, T5, T6</td><td class="num">5</td></tr>
+</tbody></table></div>
+<svg class="diagram" viewBox="0 0 660 235" role="img" aria-label="Bein-eftirfylgnirit: S til M 5, S til Ó 1, M til Ó 1, Ó til M 2, M til A 5, M til H 1, A til G 5" style="max-width:100%;height:auto">
+  <defs><marker id="u4-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)"/></marker></defs>
+  <g style="stroke:var(--ink);stroke-width:1.6;fill:var(--paper)">
+    <rect x="40" y="92" width="70" height="36" rx="8"/>
+    <rect x="205" y="92" width="70" height="36" rx="8"/>
+    <rect x="205" y="12" width="70" height="36" rx="8"/>
+    <rect x="375" y="92" width="70" height="36" rx="8"/>
+    <rect x="375" y="177" width="70" height="36" rx="8"/>
+    <rect x="540" y="92" width="70" height="36" rx="8"/>
+  </g>
+  <g style="stroke:var(--ink);fill:none">
+    <circle cx="12" cy="110" r="7" style="stroke-width:1.6"/>
+    <circle cx="645" cy="110" r="7" style="stroke-width:3"/>
+    <circle cx="500" cy="195" r="7" style="stroke-width:3"/>
+  </g>
+  <g style="stroke:var(--ink);fill:none" marker-end="url(#u4-ar2)">
+    <path d="M19,110 L38,110" style="stroke-width:1.2"/>
+    <path d="M110,110 L203,110" style="stroke-width:3.4"/>
+    <path d="M100,92 L203,42" style="stroke-width:1.2"/>
+    <path d="M230,48 L230,90" style="stroke-width:1.8"/>
+    <path d="M250,92 L250,50" style="stroke-width:1.2"/>
+    <path d="M275,110 L373,110" style="stroke-width:3.4"/>
+    <path d="M265,128 L373,190" style="stroke-width:1.2"/>
+    <path d="M445,110 L538,110" style="stroke-width:3.4"/>
+    <path d="M610,110 L636,110" style="stroke-width:1.2"/>
+    <path d="M445,195 L491,195" style="stroke-width:1.2"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="75" y="115">S</text><text x="240" y="115">M</text><text x="240" y="35">Ó</text>
+    <text x="410" y="115">A</text><text x="410" y="200">H</text><text x="575" y="115">G</text>
+    <text x="155" y="102" style="font-weight:700">5</text>
+    <text x="140" y="58" style="font-weight:700">1</text>
+    <text x="218" y="74" style="font-weight:700">2</text>
+    <text x="262" y="74" style="font-weight:700">1</text>
+    <text x="325" y="102" style="font-weight:700">5</text>
+    <text x="310" y="170" style="font-weight:700">1</text>
+    <text x="492" y="102" style="font-weight:700">5</text>
+    <text class="small" x="28" y="140">6 hefjast</text>
+  </g>
+</svg>
+<p>Athugun: allar 7 komur í M eru taldar bæði inn ($5+2$) og út ($5+1+1$). Svona sannreynir þú talninguna.</p>
+<p>(c) <span class="ans">4 afbrigði · 7 brýr</span></p>
+</div></details></div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að lesa atburðaskrána línu fyrir línu eins og hún kemur. Línurnar eru raðaðar eftir <b>tíma</b>, svo atburðir ólíkra mála fléttast saman. Í T2 kemur „Ó“ á eftir „M“ í sama máli, en lína T3 sem er á milli þeirra kemur málinu ekki við. Flokkaðu alltaf fyrst eftir málsnúmeri.</p></div>
+<div class="note tip"><p><b class="t">Ráð:</b> DFG sýnir ekki hliðar (gateways). Ef $b \to c$ og $c \to b$ koma bæði fyrir getur það þýtt samsíða aðgerðir (AND) eða lykkju. Til að fá BPMN-líkan þarf flóknari reiknirit (t.d. Split Miner í bókinni), en DFG er góð fyrsta mynd af raunverulegu flæði.</p></div>
+
+<h2 id="likanagerd">Aðferð við líkanagerð í fimm skrefum</h2>
+<p>Líkanagerð í uppgötvunarfasa er flókin. Bókin mælir með að fara kerfisbundið í gegnum fimm skref:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Skref</th><th>Spurning</th><th>BPMN-einingar</th></tr></thead>
+<tbody>
+<tr><td>1. <b>Afmarka ferlið</b> (process boundaries)</td><td>Hvar byrjar það og hvar endar það? Hvaða atburður hrindir því af stað?</td><td>Upphafs- og lokaatburðir</td></tr>
+<tr><td>2. <b>Finna aðgerðir og atburði</b> (activities and events)</td><td>Hvað er gert? Hvað gerist?</td><td>Verk og millistigsatburðir</td></tr>
+<tr><td>3. <b>Finna auðlindir og afhendingar</b> (resources and handovers)</td><td>Hver gerir hvað, og hvar færist verkið á milli aðila?</td><td>Laugar, brautir, skilaboðaflæði</td></tr>
+<tr><td>4. <b>Finna stjórnflæðið</b> (control flow)</td><td>Hvenær og af hverju er hver aðgerð framkvæmd? Röð, ákvarðanir, samsíða vinnsla, endurvinnsla.</td><td>Raðflæði og hliðar (XOR, AND, OR)</td></tr>
+<tr><td>5. <b>Bæta við öðrum einingum</b> (additional elements)</td><td>Hvaða gögn og frávik?</td><td>Gagnahlutir, gagnageymslur, jaðaratburðir, frávikaflæði, bætur (compensation)</td></tr>
+</tbody></table></div>
+<p>Glærurnar sýna þetta með pöntunarferli (order-to-cash). Í skrefi 3 eru aðgerðirnar settar í brautir (ERP-kerfi, lagerstarfsfólk, sala) og <b>afhendingarpunktarnir</b> (handovers) milli brauta gefa fyrstu drög að stjórnflæðinu. Í skrefi 4 bætast við XOR-hlið („vara til á lager?“) og AND-hlið (senda reikning og senda vöru samhliða).</p>
+<div class="note tip"><p><b class="t">Ráð:</b> byrjaðu á <b>aðgerðunum</b> (skref 2) þegar þú talar við starfsfólk. Fólk getur alltaf sagt hvað það gerir, jafnvel þótt það hugsi ekki um sig sem hluta af stærri ferli. Röðin og hliðin koma á eftir.</p></div>
+
+<h3>Undirbúningur: vandamálið, markmið, umfang, forsendur</h3>
+<p>Áður en líkanið er teiknað þarf að skýra hvað á að ná með því. Glærurnar nefna fjögur atriði:</p>
+<ul>
+<li><b>Vandamálið</b> (problem situation). Þrjár mögulegar stöður: (1) vandamálið er skýrt skilið og orðað; (2) það <i>virðist</i> skilið og orðað en er það ekki; (3) það er hvorki skilið né orðað. Staða 2 er hættulegust, því enginn spyr.</li>
+<li><b>Markmið</b> (objectives) eru sett fram sem <b>árangur</b> (achievement, t.d. betri þjónusta), <b>mælikvarðar</b> (performance, t.d. auka afköst um 10 %) og <b>skorður</b> (constraints, t.d. fjárhagsrammi).</li>
+<li><b>Umfang</b> (scope) í þremur skrefum: finna mörk líkansins, finna alla þætti raunkerfisins innan markanna, og meta hverjum á að halda inni og hverjum sleppa.</li>
+<li><b>Forsendur og einfaldanir</b>. <b>Forsendur</b> (assumptions) tengja raunheiminn og líkanið þegar óvissa ríkir um hvernig hlutirnir eru. <b>Einfaldanir</b> (simplifications) eru innri ákvarðanir í líkaninu til að flýta vinnunni, minnka gagnaþörf og gera líkanið skiljanlegra. Hvort tveggja á að skrá sérstaklega.</li>
+</ul>
+
+<h2 id="gaedi">Gæði ferlalíkana</h2>
+<p>Uppgötvunin fer fram í skrefum með mörgum aðilum, svo líkanið þarf gæðaeftirlit. Til að skilja það þarf að þekkja fjóra hluta líkanamáls:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Hluti</th><th>Hvað skilgreinir hann?</th></tr></thead>
+<tbody>
+<tr><td><b>Orðaforði</b> (vocabulary)</td><td>Hvaða einingar eru til (verk, atburðir, hlið, flæði).</td></tr>
+<tr><td><b>Málskipan</b> (syntax)</td><td>Reglur um hvernig má tengja einingarnar saman.</td></tr>
+<tr><td><b>Merking</b> (semantics)</td><td>Hvað hver eining (og textinn á henni) þýðir nákvæmlega.</td></tr>
+<tr><td><b>Táknmál</b> (notation)</td><td>Hvernig einingarnar eru teiknaðar.</td></tr>
+</tbody></table></div>
+<p>Gæðunum er skipt í þrennt:</p>
+<div class="key">
+<p><b>Málskipunargæði</b> (syntactic quality): fylgir líkanið reglum líkanamálsins? „Er líkanið rétt teiknað?“</p>
+<p><b>Merkingargæði</b> (semantic quality): lýsir líkanið raunverulega ferlinu rétt? „Er þetta rétt ferli?“</p>
+<p><b>Notagildisgæði</b> (pragmatic quality): er líkanið nothæft, þ.e. skiljanlegt og viðhaldanlegt fyrir þá sem eiga að nota það? „Skilst það?“</p>
+</div>
+
+<h3>Málskipunargæði: byggingarreglur</h3>
+<p><b>Byggingarreglur</b> (structural rules) segja hvernig einingarnar mega tengjast:</p>
+<ul>
+<li><b>Klofnandi hlið</b> (split gateway): nákvæmlega <b>eitt</b> inn, <b>minnst tvö</b> út.</li>
+<li><b>Sameinandi hlið</b> (join gateway): <b>minnst tvö</b> inn, nákvæmlega <b>eitt</b> út.</li>
+<li><b>Flæðisregla:</b> raðflæði tengir tvo flæðishnúta (verk, atburði, hlið) í <b>sömu laug</b>. Raðflæði fer aldrei yfir mörk lauga; þar á skilaboðaflæði við.</li>
+<li><b>Verkregla:</b> hvert verk hefur minnst eitt raðflæði inn og eitt út.</li>
+</ul>
+
+<h3>Málskipunargæði: hegðunarreglur</h3>
+<p><b>Hegðunarreglur</b> (behavioral rules) koma í veg fyrir villur þegar líkanið „keyrir“, þ.e. þegar tókar (tokens) flæða í gegnum það.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Villa</th><th>Hvað gerist?</th><th>Dæmigerð orsök</th></tr></thead>
+<tbody>
+<tr><td><b>Deadlock</b> (sjálfhelda)</td><td>Tóki festist: tilvikið kemst ekki lengra.</td><td>XOR-klofnun sameinuð með AND-hliði. AND bíður eftir grein sem kemur aldrei.</td></tr>
+<tr><td><b>Livelock</b></td><td>Tilvikið hringsólar endalaust í lykkju og lýkur aldrei.</td><td>Lykkja þar sem engin leið liggur út.</td></tr>
+<tr><td><b>Skortur á samstillingu</b> (lack of synchronization)</td><td>Tveir eða fleiri tókar lenda á sama raðflæði því þeir voru ekki sameinaðir.</td><td>AND-klofnun sameinuð með XOR-hliði: allt á eftir keyrir tvisvar.</td></tr>
+<tr><td><b>Dauð aðgerð</b> (dead activity)</td><td>Aðgerð sem getur aldrei verið framkvæmd í neinu tilviki.</td><td>Aðgerð á eftir AND-sameiningu sem fær aldrei tóka úr öllum greinum.</td></tr>
+</tbody></table></div>
+<svg class="diagram" viewBox="0 0 650 190" role="img" aria-label="Tvö gölluð brot: XOR-klofnun með AND-sameiningu gefur deadlock, AND-klofnun með XOR-sameiningu gefur skort á samstillingu" style="max-width:100%;height:auto">
+  <defs><marker id="u4-ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)"/></marker></defs>
+  <g style="stroke:var(--ink);stroke-width:1.6;fill:none">
+    <path d="M10,85 L45,85" marker-end="url(#u4-ar3)"/>
+    <path d="M65,67 L65,40 L103,40" marker-end="url(#u4-ar3)"/>
+    <path d="M65,103 L65,130 L103,130" marker-end="url(#u4-ar3)"/>
+    <path d="M195,40 L255,40 L255,65" marker-end="url(#u4-ar3)"/>
+    <path d="M195,130 L255,130 L255,105" marker-end="url(#u4-ar3)"/>
+    <path d="M275,85 L305,85" marker-end="url(#u4-ar3)"/>
+    <path d="M335,85 L370,85" marker-end="url(#u4-ar3)"/>
+    <path d="M390,67 L390,40 L428,40" marker-end="url(#u4-ar3)"/>
+    <path d="M390,103 L390,130 L428,130" marker-end="url(#u4-ar3)"/>
+    <path d="M520,40 L580,40 L580,65" marker-end="url(#u4-ar3)"/>
+    <path d="M520,130 L580,130 L580,105" marker-end="url(#u4-ar3)"/>
+    <path d="M600,85 L635,85" marker-end="url(#u4-ar3)"/>
+  </g>
+  <g style="stroke:var(--ink);stroke-width:1.6;fill:var(--paper)">
+    <rect x="105" y="22" width="90" height="36" rx="7"/><rect x="105" y="112" width="90" height="36" rx="7"/>
+    <rect x="430" y="22" width="90" height="36" rx="7"/><rect x="430" y="112" width="90" height="36" rx="7"/>
+    <path d="M65,67 L83,85 L65,103 L47,85 Z"/>
+    <path d="M255,67 L273,85 L255,103 L237,85 Z" style="stroke:var(--bad);stroke-width:2.4"/>
+    <path d="M390,67 L408,85 L390,103 L372,85 Z"/>
+    <path d="M580,67 L598,85 L580,103 L562,85 Z" style="stroke:var(--bad);stroke-width:2.4"/>
+  </g>
+  <g style="stroke:var(--ink);stroke-width:2.2">
+    <path d="M59,79 L71,91 M71,79 L59,91"/>
+    <path d="M247,85 L263,85 M255,77 L255,93"/>
+    <path d="M382,85 L398,85 M390,77 L390,93"/>
+    <path d="M574,79 L586,91 M586,79 L574,91"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="150" y="45">Verk A</text><text x="150" y="135">Verk B</text>
+    <text x="475" y="45">Verk A</text><text x="475" y="135">Verk B</text>
+    <text x="160" y="178" style="font-weight:600">XOR → AND: deadlock</text>
+    <text x="490" y="178" style="font-weight:600">AND → XOR: skortur á samstillingu</text>
+  </g>
+</svg>
+<p>Í vinstra brotinu fer tókinn aðeins í A <i>eða</i> B, en AND-sameiningin bíður eftir báðum: tilvikið festist. Í hægra brotinu fara tókar í bæði A <i>og</i> B, og XOR-sameiningin hleypir hvorum um sig í gegn: allt sem kemur á eftir keyrir tvisvar. OR-klofnun með XOR-sameiningu gefur <i>mögulegan</i> skort á samstillingu, og OR-klofnun með AND-sameiningu <i>mögulegt</i> deadlock.</p>
+<div class="key">
+<p>Líkan er <b>hegðunarlega rétt</b> eða <b>traust</b> (sound) ef og aðeins ef:</p>
+<ol>
+<li><b>Hægt er að ljúka</b> (option to complete): hvert tilvik sem er í gangi lýkur að lokum (ekkert deadlock eða livelock).</li>
+<li><b>Rétt lok</b> (proper completion): þegar tilvikinu lýkur er hver tóki í sínum <b>eigin</b> lokaatburði (enginn skortur á samstillingu).</li>
+<li><b>Engar dauðar aðgerðir</b> (no dead activities): hver aðgerð getur verið framkvæmd í a.m.k. einu tilviki.</li>
+</ol>
+</div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Hvað er að? Farangur flugfélags</span></div><div class="ex-body">
+<p>Líkan af ferli fyrir týndan farangur: eftir „Skrá kvörtun“ kemur XOR-hlið: „Taska fannst?“ Já → „Senda tösku heim“. Nei → „Greiða bætur“. Báðar greinarnar sameinast í <b>AND-hliði</b> á undan „Loka máli“. Hvað er að, og hvaða skilyrði fyrir traust líkan er brotið?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Hvert mál fer aðeins í aðra greinina. AND-sameiningin bíður eftir tóka úr báðum greinum, svo tókinn festist þar alltaf. Það er <b>deadlock</b>, sem brýtur skilyrði 1 (hægt að ljúka). Þar sem enginn tóki kemst í gegn er „Loka máli“ líka <b>dauð aðgerð</b> (skilyrði 3).</p>
+<p>Lagfæring: sameina með <b>XOR-hliði</b>, sömu tegund og klofnunin.</p>
+<p><span class="ans">Deadlock: skipta AND-sameiningu út fyrir XOR</span></p>
+</div></details></div></div>
+
+<h3>Merkingargæði</h3>
+<p>Merkingargæði (semantic quality) snúast um samræmi líkansins við raunverulega ferlið. Þar sem enginn formlegur mælikvarði er til eru þau staðfest með sérfræðingunum á sviðinu. Tvær hliðar:</p>
+<ul>
+<li><b>Réttmæti</b> (validity): allar fullyrðingar sem lesa má úr líkaninu eru <b>réttar</b> og skipta máli fyrir raunverulega ferlið. Brot: líkanið sýnir að yfirmaður samþykki öll mál, en í raun samþykkir hann bara mál yfir 500.000 kr.</li>
+<li><b>Heilleiki</b> (completeness): líkanið inniheldur <b>allar</b> fullyrðingar sem skipta máli. Brot: líkanið vantar leiðina þar sem umsókn er send til baka til leiðréttingar.</li>
+</ul>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að rugla málskipunar- og merkingargæðum saman. Líkan getur verið fullkomlega rétt teiknað (traust, góð málskipan) en lýst röngu ferli (léleg merkingargæði). Og öfugt: rétt lýsing á ferlinu getur innihaldið deadlock.</p></div>
+
+<h3>Notagildisgæði og 7PMG</h3>
+<p>Notagildisgæði (pragmatic quality) snúast um hvort fólk skilur líkanið og getur viðhaldið því. Rannsóknir á stórum söfnum ferlalíkana sýndu bæði margar málskipunarvillur og flóknar byggingar sem gera líkönin torskilin. Út frá því urðu til <b>sjö leiðbeiningar um líkanagerð</b> (Seven Process Modeling Guidelines, 7PMG):</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Nr.</th><th>Leiðbeining</th><th>Af hverju?</th></tr></thead>
+<tbody>
+<tr><td><b>G1</b></td><td>Notaðu <b>sem fæstar einingar</b>.</td><td>Stærri líkön eru torskildari og með fleiri villur.</td></tr>
+<tr><td><b>G2</b></td><td>Lágmarkaðu <b>leiðir á hverja einingu</b> (routing paths).</td><td>Margar brýr inn og út úr einingu gera hana torskilda.</td></tr>
+<tr><td><b>G3</b></td><td>Notaðu <b>einn upphafsatburð og einn lokaatburð</b>.</td><td>Fleiri upphafs- og lokaatburðir tengjast fleiri villum.</td></tr>
+<tr><td><b>G4</b></td><td>Hafðu líkanið <b>eins vel skipulagt og hægt er</b> (structured).</td><td>Hver klofnun á sér sameiningu af sömu tegund, eins og svigar sem standast á.</td></tr>
+<tr><td><b>G5</b></td><td><b>Forðastu OR-hlið</b>.</td><td>Líkön með bara AND og XOR eru síður villugjörn; OR-samsetningar eru erfiðar að skilja.</td></tr>
+<tr><td><b>G6</b></td><td>Notaðu <b>sögn + andlag</b> í heitum aðgerða (verb-object).</td><td>„Upplýsa kvartanda“ er skýrara en „Kvörtunargreining“ eða „Atvikaskrá“.</td></tr>
+<tr><td><b>G7</b></td><td><b>Brjóttu upp líkan með fleiri en 30 einingar</b>.</td><td>Villulíkur aukast mikið yfir 30 einingum. Notaðu undirferli.</td></tr>
+</tbody></table></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Kvörtunarferli eins og það fannst í raun (glæra 44)</span></div><div class="ex-body">
+<p>Kvörtunarferli hefst á „Call registration“ og XOR-hlið skiptir í þrjár greinar. Efsta greinin („Complaint analysis“ → „Contact complainant“ → „Archiving system“) endar í eigin lokaatburði „close case“. Hinar tvær klofna með AND-hliðum, en greinar þeirra eru sameinaðar í krossi með XOR- og AND-hliðum, og ferlið endar í „case closed“. Hvaða 7PMG-leiðbeiningar eru brotnar?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>G3:</b> tveir lokaatburðir („close case“ og „case closed“).</li>
+<li><b>G4:</b> ekki skipulagt; AND-klofnanir eru sameinaðar með XOR-hliði (og öfugt), svo „svigarnir“ standast ekki á. Það gefur líka hættu á skorti á samstillingu og deadlock.</li>
+<li><b>G6:</b> heiti eins og „Complaint analysis“ (nafnorð) og „Incident agenda“ (hvorki sögn né andlag) í stað t.d. „Greina kvörtun“ og „Skrá atvik“. „Archiving system“ kemur tvisvar fyrir sem nafnorð.</li>
+</ul>
+<p><span class="ans">G3, G4 og G6</span></p>
+</div></details></div></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Endurskírðu aðgerðirnar (G6)</span></div><div class="ex-body">
+<p>Í EV1-líkani af námsstyrkjaumsókn eru þessar aðgerðir: „Umsókn“, „Yfirferð gagna“, „Ákvörðunarbréf“, „Útborgun“. Skrifaðu þær í formi sagnar og andlags.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>„Skila umsókn“, „Yfirfara gögn“, „Senda ákvörðunarbréf“, „Greiða út styrk“. Sögnin segir hvað er <i>gert</i> og andlagið á hverju. „Umsókn“ gæti annars verið skjal, atburður eða aðgerð.</p>
+<p><span class="ans">sögn + andlag: „Yfirfara gögn“</span></p>
+</div></details></div></div>
+
+<h2 id="samantekt">Samantekt</h2>
+<div class="key">
+<ul>
+<li><b>Ferlauppgötvun</b> = safna upplýsingum og búa til <b>as-is</b> líkan. Fjögur verkefni: umgjörð, upplýsingaöflun, líkanagerð, gæðatrygging.</li>
+<li><b>Hlutverk:</b> ferlagreinandi (kann líkön), sérfræðingar á sviðinu (kunna starfsemina), ferlaeigandi (ábyrgur). Í vinnustofum líka fundarstjóri og tólstjóri.</li>
+<li><b>Þrjár áskoranir:</b> brotakennd þekking, hugsun í tilvikum, vanþekking á líkanamálum.</li>
+<li><b>Aðferðir:</b> gagnadrifin (skjöl, athugun, atburðaskrár) er hlutlægust en með hæga endurgjöf; viðtöl og vinnustofur eru ríkari með hraða endurgjöf. Vinnustofur leysa ágreining beint.</li>
+<li><b>Atburðaskrá:</b> málsnúmer + aðgerð + tímastimpill. Rakning → afbrigði → DFG.</li>
+<li><b>Fimm skref líkanagerðar:</b> mörk → aðgerðir og atburðir → auðlindir og afhendingar → stjórnflæði → aðrar einingar.</li>
+<li><b>Gæði:</b> málskipunar- (bygging + hegðun: deadlock, livelock, skortur á samstillingu, dauð aðgerð), merkingar- (réttmæti, heilleiki) og notagildisgæði (7PMG).</li>
+</ul>
+</div>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og, þar sem við á, reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: atburðaskrárspæjarinn</h2>
+<p>Upplýsingakerfi fyrirtækisins hefur skilað þér hrárri atburðaskrá: málsnúmer, aðgerð og tímastimpill, raðað eftir tíma svo mál fléttast saman. Þú átt að lesa ferlið út úr gögnunum eins og process mining-tól gerir: finna afbrigðin, telja brýrnar í bein-eftirfylgniritinu (DFG) og loks finna hegðunarvillur í líkanabrotum sem teymið teiknaði.</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> ljúktu þremur borðum. <b>Borð 1:</b> finndu hversu mörg afbrigði eru í skránni og hvert þeirra er algengast. <b>Borð 2:</b> teldu tíðni þriggja brúa í DFG og fjölda ólíkra brúa. <b>Borð 3:</b> greindu rétt 4 líkanabrot (traust, deadlock, skortur á samstillingu eða livelock). Ný slembiskrá kemur í hverri tilraun.</p></div>
+<div class="panel" id="k4-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 5"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-3.html"><span>Fyrri</span>3. Þróuð ferlalíkön</a><a href="kafli-5.html" style="text-align:right"><span>Næsta</span>5. Eigindleg ferlagreining</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/bpmn.js"></script>
+<script src="js/q/bpmn2.js"></script>
+<script src="js/q/eigindleg.js"></script>
+<script src="js/q/endurhonnun.js"></script>
+<script src="js/q/ferlar.js"></script>
+<script src="js/q/kerfi.js"></script>
+<script src="js/q/megindleg.js"></script>
+<script src="js/q/stjornun.js"></script>
+<script src="js/q/uppgotvun.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-4.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+/* cards/bpmn.js – flashcards fyrir kafla 2: Ferlalíkön í BPMN. */
+(function () { var TK = (window.TK = window.TK || {}); (TK.CARDS = TK.CARDS || []).push(
+  { c: "bpmn", q: "Þrjár gerðir atburða eftir línu?", a: "<b>Upphaf</b>: þunn lína. <b>Millistig</b>: tvöföld lína. <b>Endir</b>: þykk lína." },
+  { c: "bpmn", q: "Verk í BPMN?", a: "Ávalur rétthyrningur: vinnueining sem auðlind framkvæmir og tekur tíma." },
+  { c: "bpmn", q: "Raðflæði?", a: "Heil lína með fylltri ör; sýnir röð verka innan laugar." },
+  { c: "bpmn", q: "Hvað er tóki (token)?", a: "Depill sem sýnir stöðu tilviks: verður til í upphafsatburði, eytt í endaatburði." },
+  { c: "bpmn", q: "Nafngift verka og atburða?", a: "Verk: <b>sögn + nafnorð</b> („Meta tjón“). Atburður: <b>nafnorð + lh. þt.</b> („Tjón metið“). Líkan: nafnorð („Tjónameðhöndlun“)." },
+  { c: "bpmn", q: "XOR-hlið?", a: "Tígull með X. Klofnun: <b>nákvæmlega ein</b> grein. Samruni: hleypir hverjum tóka strax í gegn." },
+  { c: "bpmn", q: "AND-hlið?", a: "Tígull með +. Klofnun: <b>allar</b> greinar. Samruni: bíður eftir öllum (samstilling)." },
+  { c: "bpmn", q: "OR-hlið?", a: "Tígull með O. Klofnun: <b>ein eða fleiri</b> greinar. Samruni: bíður eftir öllum <b>virkum</b> greinum." },
+  { c: "bpmn", q: "XOR-klofnun + AND-samruni?", a: "<b>Sjálfhelda</b> (deadlock): AND bíður eftir grein sem fékk engan tóka." },
+  { c: "bpmn", q: "AND-klofnun + XOR-samruni?", a: "<b>Engin samstilling</b>: verkin á eftir keyra einu sinni fyrir hverja grein." },
+  { c: "bpmn", q: "Lykkja í BPMN?", a: "<b>XOR-samruni</b> á undan endurtekna hlutanum og <b>XOR-klofnun</b> á eftir með bakflæði." },
+  { c: "bpmn", q: "Skástrik við upphaf raðflæðis úr XOR?", a: "<b>Sjálfgefið flæði</b> (default flow): farið ef ekkert annað skilyrði gildir." },
+  { c: "bpmn", q: "Hvað er spor (trace)?", a: "Ein röð verka frá upphafi til enda í einu tilviki, t.d. ⟨A, C, D, I⟩." },
+  { c: "bpmn", q: "Hve mörg spor gefur AND með tveimur greinum, tvö verk í hvorri?", a: "Fléttur: $\\binom{4}{2} = 6$." },
+  { c: "bpmn", q: "Þrjú skilyrði hljómandi (sound) líkans?", a: "Möguleiki á að ljúka (engin sjálfhelda), rétt lok (engir tókar eftir), engin dauð verk." },
+  { c: "bpmn", q: "Gagnahlutur og gagnatenging?", a: "Blað með brotnu horni; tengt verki með <b>punktalínu og opinni ör</b>. Staða í hornklofa: „Pöntun [staðfest]“." },
+  { c: "bpmn", q: "Gagnageymsla?", a: "Sívalningur; gögn sem lifa lengur en eitt tilvik (gagnagrunnur)." },
+  { c: "bpmn", q: "Textaskýring?", a: "Opinn hornklofi með texta, tengdur með punktalínu (association) án örvar." },
+  { c: "bpmn", q: "Laug vs. braut?", a: "<b>Laug</b> (pool): sjálfstæður aðili/auðlindaflokkur. <b>Braut</b> (lane): undirflokkur innan laugar (deild, hlutverk)." },
+  { c: "bpmn", q: "Má raðflæði fara milli lauga?", a: "<b>Nei.</b> Milli brauta sömu laugar já, milli lauga aldrei: þar er notað skilaboðaflæði." },
+  { c: "bpmn", q: "Virk vs. óvirk auðlind?", a: "Virk framkvæmir verk sjálfstætt (starfsmaður); óvirk er aðeins notuð (ljósritunarvél)." },
+  { c: "bpmn", q: "Fjögur sjónarhorn ferlalíkans?", a: "Virkni (hvaða verk), stýriflæði (röð og skilyrði), gögn (inn/út), auðlindir (hver)." }
+); })();

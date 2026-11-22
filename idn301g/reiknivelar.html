@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reiknivélar fyrir megindlega greiningu · Greining ferla og kerfa</title>
+<meta name="description" content="Kennsluvefur fyrir IÐN301G Greining ferla og kerfa: ferlaskráning, BPMN, ferlauppgötvun, eigindleg og megindleg greining, endurhönnun, ferlahugbúnaður, kerfishugsun og stjórnun ferla.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23173327'/%3E%3Ccircle cx='7' cy='16' r='3' fill='%23ffe98a'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23ffe98a'/%3E%3Cpath d='M25 11l5 5-5 5-5-5z' fill='%23ffe98a'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Greining ferla og kerfa</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Greining ferla og kerfa<small>IÐN301G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Ferlar og ferlaskráning</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Ferlalíkön í BPMN</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Þróuð ferlalíkön</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Ferlauppgötvun</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Eigindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Megindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Endurhönnun og ferlahugbúnaður</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Kerfishugsun og orsakalykkjur</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Stjórnun ferla og BPM í starfseminni</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="upprifjun.html" data-gate="archive">Lokaupprifjun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+<li><a class="nav" href="verkfaerakista.html">Verkfærakista</a></li>
+<li><a class="nav" href="reiknivelar.html" aria-current="page">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<!--wide-->
+<h1>Reiknivélar</h1>
+<p class="lede">Reiknivélar fyrir megindlega ferlagreiningu (kafli 6). Notaðu þær til að athuga eigin útreikninga og til að sjá hvað gerist þegar þú breytir forsendum, t.d. fyrir as-is og to-be í HÓP1. Á prófinu reiknarðu í höndunum, svo skoðaðu skrefin sem reiknivélarnar sýna. Tölur má skrifa með kommu eða punkti.</p>
+
+<div class="chips noprint">
+  <a class="chip" href="#flaedi" style="text-decoration:none">Flæðisgreining</a>
+  <a class="chip" href="#cte" style="text-decoration:none">CTE</a>
+  <a class="chip" href="#little" style="text-decoration:none">Lögmál Little</a>
+  <a class="chip" href="#geta" style="text-decoration:none">Framleiðslugeta og nýting</a>
+  <a class="chip" href="#mm1" style="text-decoration:none">M/M/1</a>
+  <a class="chip" href="#mmc" style="text-decoration:none">M/M/c</a>
+</div>
+
+<h2 id="flaedi">Flæðisgreining: hringrásartími, kostnaður og einingaálag</h2>
+<p>Settu ferlið saman úr blokkum í réttri röð. Hver blokk getur verið:</p>
+<ul>
+  <li><b>Aðgerð</b> (línuleg): tími $T$. Má skrifa sem summu, t.d. <code>2+0,5</code>.</li>
+  <li><b>XOR</b>: greinar aðskildar með semíkommu, hver á forminu <code>líkur:tími</code>, t.d. <code>0,6:1; 0,4:2</code> eða <code>60:1; 40:2</code> (prósentur). Tíminn má vera summa, t.d. <code>0,3:2+1</code>.</li>
+  <li><b>AND</b>: tímar greina aðskildir með semíkommu, t.d. <code>1; 3</code>. Hver grein má vera summa.</li>
+  <li><b>Endursending</b>: tími $T$ (eða summa) og hlutfall endursendinga $r$.</li>
+</ul>
+<div class="panel" id="flow">
+  <div class="row" style="align-items:center">
+    <div><label class="f" for="fl-mode">Hvað á að reikna?</label><select id="fl-mode"><option value="time">Tíma (CT eða TCT): AND = hámark</option><option value="sum">Kostnað eða einingaálag: AND = summa</option></select></div>
+    <div><label class="f" for="fl-unit">Eining (valfrjálst)</label><input id="fl-unit" type="text" value="dagar"></div>
+  </div>
+  <div id="fl-rows" style="margin-top:1rem"></div>
+  <div class="chips noprint" role="group" aria-label="Bæta við blokk" style="margin-top:0.8rem">
+    <button type="button" class="chip" data-add="seq">+ Aðgerð</button>
+    <button type="button" class="chip" data-add="xor">+ XOR</button>
+    <button type="button" class="chip" data-add="and">+ AND</button>
+    <button type="button" class="chip" data-add="loop">+ Endursending</button>
+    <button type="button" class="chip" data-preset="slide">Dæmið á glæru 7</button>
+    <button type="button" class="chip" data-preset="clear">Hreinsa</button>
+  </div>
+  <div class="out"><dl id="fl-out"></dl></div>
+  <div id="fl-tex" style="overflow-x:auto"></div>
+</div>
+
+<h2 id="cte">Nýtni ferils (CTE)</h2>
+<div class="panel">
+  <p style="margin-top:0">Reiknaðu TCT (bara vinnslutímar) og CT (vinnsla + bið) með flæðisgreiningunni hér að ofan og settu inn hér.</p>
+  <div class="row">
+    <div><label class="f" for="c-tct">$TCT$ (fræðilegur hringrásartími)</label><input id="c-tct" type="text" inputmode="decimal" value="1,7"></div>
+    <div><label class="f" for="c-ct">$CT$ (hringrásartími með bið)</label><input id="c-ct" type="text" inputmode="decimal" value="22,3"></div>
+  </div>
+  <div class="out"><dl id="c-out"></dl></div>
+</div>
+
+<h2 id="little">Lögmál Little: $WIP = \lambda \cdot CT$</h2>
+<div class="panel">
+  <p style="margin-top:0">Fylltu út tvær stærðir og skildu þá sem vantar eftir auða. Notaðu sömu tímaeiningu í $\lambda$ og $CT$ (t.d. á klst og klst).</p>
+  <div class="row">
+    <div><label class="f" for="l-wip">$WIP$ (verk í vinnslu)</label><input id="l-wip" type="text" inputmode="decimal" value="90"></div>
+    <div><label class="f" for="l-lam">$\lambda$ (komutaktur)</label><input id="l-lam" type="text" inputmode="decimal" value="150"></div>
+    <div><label class="f" for="l-ct">$CT$ (hringrásartími)</label><input id="l-ct" type="text" inputmode="decimal" value="" placeholder="reiknað"></div>
+  </div>
+  <div class="out"><dl id="l-out"></dl></div>
+</div>
+
+<h2 id="geta">Fræðileg framleiðslugeta og nýting</h2>
+<div class="panel">
+  <p style="margin-top:0">Fyrir einn auðlindahóp. Reiknaðu einingaálagið $ul$ með flæðisgreiningunni í ham „AND = summa“, bara yfir aðgerðir hópsins. Endurtaktu fyrir hvern hóp; flöskuhálsinn er hópurinn með minnsta $\mu_p$.</p>
+  <div class="row">
+    <div><label class="f" for="g-ul">$ul$ (vinnutími á mál, klst)</label><input id="g-ul" type="text" inputmode="decimal" value="6"></div>
+    <div><label class="f" for="g-n">Fjöldi í hópnum</label><input id="g-n" type="text" inputmode="decimal" value="3"></div>
+    <div><label class="f" for="g-h">Vinnustundir á mann á tímabili</label><input id="g-h" type="text" inputmode="decimal" value="8"></div>
+    <div><label class="f" for="g-lam">$\lambda$ (mál á tímabili, valfrjálst)</label><input id="g-lam" type="text" inputmode="decimal" value="3"></div>
+  </div>
+  <div class="out"><dl id="g-out"></dl></div>
+</div>
+
+<h2 id="mm1">M/M/1-biðröð</h2>
+<div class="panel">
+  <div class="row">
+    <div><label class="f" for="q1-lam">$\lambda$ (komur á tímaeiningu)</label><input id="q1-lam" type="text" inputmode="decimal" value="8"></div>
+    <div><label class="f" for="q1-mu">$\mu$ (afgreiðslur á tímaeiningu)</label><input id="q1-mu" type="text" inputmode="decimal" value="10"></div>
+    <div><label class="f" for="q1-u">Tímaeining</label><select id="q1-u"><option value="klst">klst</option><option value="mín">mín</option><option value="dagar">dagar</option></select></div>
+  </div>
+  <p style="margin:0.6rem 0 0;font-size:0.9rem;color:var(--muted)">Ef þú veist meðalafgreiðslutíma: $\mu = 1/\text{afgreiðslutími}$, t.d. 6 mín ⇒ $\mu = 10$ á klst.</p>
+  <div class="out"><dl id="q1-out"></dl></div>
+</div>
+
+<h2 id="mmc">M/M/c-biðröð (Erlang C)</h2>
+<div class="panel">
+  <div class="row">
+    <div><label class="f" for="qc-lam">$\lambda$ (komur á tímaeiningu)</label><input id="qc-lam" type="text" inputmode="decimal" value="10"></div>
+    <div><label class="f" for="qc-mu">$\mu$ (á hvern þjón)</label><input id="qc-mu" type="text" inputmode="decimal" value="6"></div>
+    <div><label class="f" for="qc-c">Fjöldi þjóna $c$</label><input id="qc-c" type="text" inputmode="numeric" value="2"></div>
+    <div><label class="f" for="qc-u">Tímaeining</label><select id="qc-u"><option value="klst">klst</option><option value="mín">mín</option><option value="dagar">dagar</option></select></div>
+    <div><label class="f" for="qc-t">Markmið $W_q$ (valfrjálst, sama eining)</label><input id="qc-t" type="text" inputmode="decimal" value="" placeholder="t.d. 0,05"></div>
+  </div>
+  <div class="out"><dl id="qc-out"></dl></div>
+  <div id="qc-tab" style="margin-top:1rem"></div>
+</div>
+<div class="pager noprint"><a href="verkfaerakista.html"><span>Fyrri</span>Verkfærakista</a><a href="formulublad.html" style="text-align:right"><span>Næsta</span>Formúlublað</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/calc.js"></script>
+</body>
+</html>

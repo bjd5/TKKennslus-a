@@ -1,0 +1,358 @@
+<h1>Stjórnun ferla og BPM í starfseminni</h1>
+<p class="lede">Ferli sem hefur verið endurhannað og innleitt er ekki „búið“. Það þarf að mæla það, vakta og stýra því, og skipulagsheildin þarf að hafa getu til að gera þetta aftur og aftur. Hér lærir þú um ferlavöktun, mælaborð og ferlaköfun (F13), stjórnarhætti, RACI og þroskalíkön BPM (F14) og gestafyrirlestur Evolv um stafrænt vinnuafl sem EV2 byggir á. Þetta er síðasti fasi BPM-lífsferilsins og tengir saman allt námskeiðið, svo það kemur oft fyrir í ritgerðarspurningum á lokaprófinu.</p>
+
+<h2 id="lifsferill">Síðasti fasinn í BPM-lífsferlinum</h2>
+<p>BPM-lífsferillinn hefur sex fasa: <b>ferlaauðkenning</b> (process identification), <b>ferlauppgötvun</b> (process discovery), <b>ferlagreining</b> (process analysis), <b>ferlaendurhönnun</b> (process redesign), <b>ferlainnleiðing</b> (process implementation) og <b>ferlaeftirlit og -stjórnun</b> (process monitoring and controlling). Á glærum F13 heitir síðasti fasinn „ferlastjórnun“ en á F14 og F5 „ferlaeftirlit“; þetta er sami fasinn.</p>
+<svg class="diagram" viewBox="0 0 720 300" role="img" aria-label="BPM-lífsferillinn: auðkenning leiðir inn í hring uppgötvunar, greiningar, endurhönnunar, innleiðingar og eftirlits, og eftirlitið skilar aftur inn í uppgötvun" style="max-width:100%;height:auto">
+  <defs><marker id="k9-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" style="fill:var(--ink)"/></marker></defs>
+  <rect class="box" x="16" y="127" width="134" height="46" rx="8"/><text x="83" y="155" text-anchor="middle">Auðkenning</text>
+  <rect class="box" x="210" y="30" width="150" height="46" rx="8"/><text x="285" y="58" text-anchor="middle">Uppgötvun</text>
+  <rect class="box" x="450" y="30" width="150" height="46" rx="8"/><text x="525" y="58" text-anchor="middle">Greining</text>
+  <rect class="box" x="540" y="127" width="160" height="46" rx="8"/><text x="620" y="155" text-anchor="middle">Endurhönnun</text>
+  <rect class="box" x="450" y="224" width="150" height="46" rx="8"/><text x="525" y="252" text-anchor="middle">Innleiðing</text>
+  <rect x="190" y="224" width="190" height="46" rx="8" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:2.4"/><text x="285" y="252" text-anchor="middle" font-weight="700" style="fill:var(--mag)">Eftirlit og stjórnun</text>
+  <path class="ln" d="M150 150 C185 150 180 53 206 53" marker-end="url(#k9-ar)"/>
+  <line class="ln" x1="360" y1="53" x2="446" y2="53" marker-end="url(#k9-ar)"/>
+  <line class="ln" x1="565" y1="76" x2="600" y2="123" marker-end="url(#k9-ar)"/>
+  <line class="ln" x1="600" y1="173" x2="565" y2="220" marker-end="url(#k9-ar)"/>
+  <line class="ln" x1="450" y1="247" x2="384" y2="247" marker-end="url(#k9-ar)"/>
+  <line class="ln" x1="285" y1="224" x2="285" y2="80" marker-end="url(#k9-ar)" style="stroke:var(--mag)"/>
+  <text x="296" y="140" class="small">ný frávik,</text><text x="296" y="156" class="small">flöskuhálsar og</text><text x="296" y="172" class="small">tækifæri</text>
+  <text x="380" y="210" class="small">ferlið í rekstri</text>
+</svg>
+<p>Eftirlitið lokar hringnum. Gögn úr keyrslu ferlisins sýna hvort endurhönnunin skilaði því sem lofað var, og ný vandamál (nýr flöskuháls, aukin endurvinnsla, breytt eftirspurn) verða kveikjan að næstu umferð uppgötvunar og greiningar. Rökin eru gamla setningin sem F13 byrjar á: það sem þú getur ekki mælt getur þú ekki skilið, ekki stýrt og ekki bætt.</p>
+<div class="key"><p><b>Ferlavöktun (process monitoring)</b> er að safna og greina gögn um hvernig ferlið keyrir í raun, bera þau saman við markmið og líkan, og bregðast við. Hún svarar spurningum eins og: <i>Hve langan tíma taka málin? Hvar bíða þau? Fylgir fólk ferlinu? Hvaða mál enda illa og af hverju?</i></p></div>
+
+<h2 id="maelingar">Frammistöðumælingar: fjórar víddir</h2>
+<p>Þú þekkir víddirnar fjórar úr F1 og djöflafjórþáttuninni (devil's quadrangle) í F8. Þær eru líka grunnurinn að vöktun:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Vídd</th><th>Dæmigerðir mælikvarðar</th><th>Hvernig sést hún í atburðaskrá?</th></tr></thead>
+<tbody>
+<tr><td><b>Tími</b></td><td>umferðartími (cycle time, CT), biðtími, vinnslutími, hlutfall mála innan tímamarka</td><td>beint úr tímastimplum: tími frá fyrsta til síðasta atburðar, bil milli verkþátta</td></tr>
+<tr><td><b>Kostnaður</b></td><td>kostnaður á hvert mál, launakostnaður, beinn og óbeinn kostnaður</td><td>vinnslutími × kostnaður auðlindar; óbeinn kostnaður þarf oft aðrar heimildir</td></tr>
+<tr><td><b>Gæði</b></td><td>endurvinnsla, villuhlutfall, kvartanir, ánægja viðskiptavina (ytri gæði) og innri gæði</td><td>endurtekningar og lykkjur í ferlinum, t.d. sami verkþáttur tvisvar í sama máli</td></tr>
+<tr><td><b>Sveigjanleiki</b></td><td>fjöldi afbrigða sem ferlið ræður við, geta til að taka við auknu álagi</td><td>breytileiki í ferlum málanna (hversu mörg ólík afbrigði eru til)</td></tr>
+</tbody></table></div>
+<ul>
+<li><b>Mælistika (process performance indicator, PPI)</b> er hver sú mæling sem lýsir frammistöðu ferlisins. <b>Lykilmælikvarði (key performance indicator, KPI)</b> er sú mælistika sem skiptir mestu máli fyrir markmið ferlisins og stefnuna; þeir eru fáir.</li>
+<li>Góður mælikvarði er <b>SMART</b> (F2): sértækur (specific), mælanlegur (measurable), raunhæfur (achievable), viðeigandi (relevant) og tímasettur (time-bound). „Bæta þjónustu“ er ekki mælikvarði; „90 % viðhaldsbeiðna í forgangi 1 leyst innan 24 klst. á árinu 2027“ er það.</li>
+<li>Mælikvarði þarf <b>skilgreiningu</b>: hvar byrjar og endar tíminn, hvaða mál eru talin með (t.d. afturkölluð mál?), og hvaðan gögnin koma. Í F2 er spurt: <i>Eru nauðsynleg gögn skráð í nýju ferlahönnuninni?</i> Ef ekki, er ekki hægt að vakta.</li>
+</ul>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að mæla bara tíma. Ef þú styttir umferðartíma með því að sleppa yfirferð hækkar villuhlutfallið. Djöflafjórþáttunin minnir á að víddirnar togast á, svo hafðu a.m.k. einn mælikvarða í hverri vídd sem skiptir máli. Kerfishugsunin (TiS kafli 7) bætir við: <i>gefðu gaum að því sem skiptir máli, ekki bara því sem er mælanlegt</i>, og kerfi lagar sig að mælikvarðanum (rule beating, kafli 8).</p></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Mælikvarðar fyrir viðhaldsbeiðnir (EV1, svið 8)</span></div><div class="ex-body">
+<p>Fasteignafélag tekur við viðhaldsbeiðnum frá leigjendum, forgangsraðar, sendir verktaka og staðfestir verklok. Stjórnendur vilja „betra ferli“. Leggðu til einn KPI í hverri vídd, með skilgreiningu, og segðu hvaða gögn þurfa að vera skráð.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<ul>
+<li><b>Tími:</b> hlutfall beiðna í forgangi 1 sem eru leystar innan 24 klst. frá skráningu til staðfestra verkloka. Gögn: tímastimpill skráningar, forgangur, tímastimpill verkloka.</li>
+<li><b>Kostnaður:</b> meðalkostnaður á lokaða beiðni (verktakareikningur + innri vinnustundir × tímakostnaður). Gögn: reikningar tengdir beiðnanúmeri.</li>
+<li><b>Gæði:</b> hlutfall beiðna sem eru opnaðar aftur innan 30 daga (endurvinnsla). Gögn: tenging nýrrar beiðni við fyrri beiðni sömu eignar.</li>
+<li><b>Sveigjanleiki:</b> hlutfall beiðna sem leystar eru á tímamörkum í álagstoppum (t.d. í óveðursviku) miðað við venjulegar vikur. Gögn: sömu tímastimplar, flokkaðir eftir viku.</li>
+</ul>
+<p>Lykilatriðið er að hver KPI hefur upphaf, endi og gagnalind, og að saman ná þeir yfir allar víddir svo ekki sé hægt að „bæta“ eina á kostnað annarrar án þess að það sjáist. <span class="ans">einn SMART-KPI í hverri vídd + gagnalind</span></p>
+</div></details></div></div>
+
+<h2 id="atburdaskrar">Atburðaskrár: hráefni vöktunarinnar</h2>
+<p>Þegar ferli keyrir á ferlastjórnunarkerfi (BPMS) eða í fyrirtækjakerfi (ERP, CRM) skráir kerfið <b>atburði</b> (events): verkþáttur hófst eða lauk, skilaboð bárust, frestur rann út. Safn slíkra atburðafærslna (event records) kallast <b>atburðaskrá</b> (event log). Hver færsla þarf að tengjast þremur hlutum (F5): <b>máli</b> (case ID), <b>verkþætti</b> (activity) og <b>tímapunkti</b> (timestamp). Oft fylgir líka <b>auðlind</b> (resource), t.d. starfsmaður eða kerfi.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Mál</th><th>Verkþáttur</th><th>Tímastimpill</th><th>Auðlind</th></tr></thead>
+<tbody>
+<tr><td>T-102</td><td>Skrá tjónstilkynningu</td><td>3.11. 09:00 – 09:20</td><td>Anna (þjónustuver)</td></tr>
+<tr><td>T-102</td><td>Meta bótaskyldu</td><td>3.11. 13:00 – 14:30</td><td>Bjarni (tjónadeild)</td></tr>
+<tr><td>T-102</td><td>Samþykkja bætur</td><td>4.11. 10:00 – 10:15</td><td>Deildarstjóri</td></tr>
+<tr><td>T-102</td><td>Greiða bætur</td><td>4.11. 11:00 – 11:05</td><td>GJALDK-kerfi</td></tr>
+<tr><td>T-103</td><td>Skrá tjónstilkynningu</td><td>3.11. 09:40 – 09:55</td><td>Anna (þjónustuver)</td></tr>
+</tbody></table></div>
+<p>Röð atburða í einu máli kallast <b>slóð</b> (trace). Staðlað skráarsnið fyrir atburðaskrár er <b>XES</b> (eXtensible Event Stream), XML-snið þar sem hver <code>trace</code> er mál og hver <code>event</code> hefur heiti verkþáttar, tímastimpil og auðlind.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Umferðartími og nýtni úr atburðaskrá</span></div><div class="ex-body">
+<p>Notaðu færslurnar fyrir mál T-102 í töflunni. Reiknaðu umferðartíma (CT), heildarvinnslutíma, biðtíma og nýtni ferilsins (cycle time efficiency, CTE). Teldu klukkutíma, ekki bara vinnutíma.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>CT er frá fyrsta upphafi til síðustu loka: 3.11. 09:00 til 4.11. 11:05, þ.e. $24\text{ klst} + 2\text{ klst }5\text{ mín} = 1565$ mín.</p>
+<p>Vinnslutími: $20 + 90 + 15 + 5 = 130$ mín. Biðtími: $1565 - 130 = 1435$ mín.</p>
+$$\text{CTE} = \frac{\text{vinnslutími}}{\text{CT}} = \frac{130}{1565} \approx 0{,}083$$
+<p>Aðeins um <span class="ans">8,3 %</span> af umferðartímanum er vinna. Þetta er dæmigert (F2: „5 % vinna, 95 % bið“) og bendir á að mesti ávinningurinn liggur í að stytta bið, t.d. milli mats og samþykktar.</p>
+</div></details></div></div>
+
+<h3>Fjórar áskoranir við gagnaútdrátt</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Áskorun</th><th>Í hverju felst hún</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td><b>Tenging</b> (correlation)</td><td>að finna hvaða máli atburður tilheyrir</td><td>tölvupóstur frá viðskiptavini án tjónsnúmers</td></tr>
+<tr><td><b>Tímastimplun</b> (timestamping)</td><td>kerfi skrá atburði seint eða ónákvæmt, t.d. þegar álag er lítið</td><td>allir atburðir dagsins fá tímann 23:59 í næturkeyrslu</td></tr>
+<tr><td><b>Langlífi</b> (longevity)</td><td>í löngum ferlum er óvíst hvort nýleg mál hafa klárast</td><td>byggingarleyfi sem taka marga mánuði: skrá síðasta mánaðar sýnir bara byrjanir</td></tr>
+<tr><td><b>Upplausn</b> (granularity)</td><td>kerfið skráir fínni atburði en hugtakalegu verkþættirnir sem þú vilt greina</td><td>tíu smellir í skjámynd sem saman eru einn verkþáttur „Yfirfara umsókn“</td></tr>
+</tbody></table></div>
+
+<h2 id="maelabord">Vöktun: tölfræðileg eða líkanabyggð, ótengd eða í rauntíma</h2>
+<p>F13 flokkar vöktun eftir tveimur ásum:</p>
+<ul>
+<li><b>Ótengd vöktun</b> (offline monitoring) greinir <b>söguleg</b> mál úr atburðaskrá yfir tímabil, t.d. síðasta mánuð. <b>Rauntímavöktun</b> (online monitoring) metur mál sem eru <b>í gangi</b> út frá ókláruðum slóðum, t.d. hvaða mál eru í hættu á að fara fram yfir frest.</li>
+<li><b>Tölfræðileg vöktun</b> (statistical) dregur saman dreifingu mælinga: meðaltal, staðalfrávik, lágmark og hámark umferðartíma og vinnslutíma. Verkfærin kallast BAM (Business Activity Monitoring) eða PPM (Process Performance Measurement) og afurðin er <b>mælaborð</b>. <b>Líkanabyggð vöktun</b> (model-based) greinir keyrsluna út frá ferlalíkani, t.d. sýnir biðtíma á örvum líkansins. Verkfæri með þessa áherslu kallast <b>ferlaköfunartól</b> (process mining tools).</li>
+</ul>
+<h3>Þrjár gerðir mælaborða</h3>
+<p>Mælaborð (process performance dashboard) er myndræn framsetning á einni eða fleiri mælingum ferlis.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Rekstrarlegt (operational)</th><th>Taktískt (tactical)</th><th>Stefnumarkandi (strategic)</th></tr></thead>
+<tbody>
+<tr><td>Notandi</td><td>þátttakendur og verkstjórar</td><td>ferilseigandi, millistjórnendur</td><td>framkvæmdastjórn</td></tr>
+<tr><td>Tímasvið</td><td>núna: mál í gangi</td><td>liðið tímabil, t.d. ár</td><td>langtímaþróun</td></tr>
+<tr><td>Spurning</td><td>Hvaða mál eru á tíma, í hættu eða komin fram yfir?</td><td>Hvernig dreifist umferðartíminn? Er þróun eða frávik?</td><td>Hvernig standa ferlahópar sig í hverri vídd?</td></tr>
+<tr><td>Dæmi (F13)</td><td>kökurit Bizagi BAM: „á tíma / í hættu / of seint“</td><td>stuðlarit umferðartíma lokinna mála á einu ári</td><td>samanteknar mælingar fyrir alla ferla í ferlaskipulaginu</td></tr>
+</tbody></table></div>
+<p>Stefnumarkandi mælaborð verða til með <b>samantekt</b> á tvennan hátt: (i) mælingar einstakra ferla eru teknar saman fyrir heila ferlahópa í ferlaskipulaginu (process architecture), og (ii) margar mælingar í sömu vídd (t.d. nokkrar skilvirknimælingar) eru sameinaðar í eina.</p>
+
+<h2 id="ferlakofun">Ferlaköfun (process mining)</h2>
+<p><b>Ferlaköfun</b> er fjölskylda aðferða sem greina frammistöðu og samræmi ferla út frá atburðaskrám. Hún bætir upp taktísku mælaborðin: mælaborð sýnir <i>að</i> umferðartími hefur lengst, ferlaköfun sýnir <i>hvar</i> og <i>hvers vegna</i>. Fjórar aðferðir, aðgreindar eftir inntaki og úttaki:</p>
+<svg class="diagram" viewBox="0 0 720 270" role="img" aria-label="Fjórar aðferðir ferlaköfunar: sjálfvirk uppgötvun tekur atburðaskrá og skilar líkani; frammistöðugreining tekur skrá og líkan og skilar bættu líkani; samræmisathugun tekur skrá og líkan og skilar fráviki; afbrigðagreining tekur tvær skrár og skilar mun" style="max-width:100%;height:auto">
+  <defs><marker id="k9-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--ink)"/></marker></defs>
+  <text x="95" y="20" text-anchor="middle" class="small">INNTAK</text><text x="360" y="20" text-anchor="middle" class="small">AÐFERÐ</text><text x="620" y="20" text-anchor="middle" class="small">ÚTTAK</text>
+  <g>
+    <rect class="box" x="10" y="35" width="170" height="40" rx="6"/><text x="95" y="60" text-anchor="middle">Atburðaskrá</text>
+    <line class="ln" x1="180" y1="55" x2="256" y2="55" marker-end="url(#k9-ar2)"/>
+    <rect x="260" y="35" width="200" height="40" rx="6" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.8"/><text x="360" y="60" text-anchor="middle">Sjálfvirk uppgötvun</text>
+    <line class="ln" x1="460" y1="55" x2="536" y2="55" marker-end="url(#k9-ar2)"/>
+    <rect class="box" x="540" y="35" width="170" height="40" rx="6"/><text x="625" y="60" text-anchor="middle">Ferlalíkan</text>
+  </g>
+  <g>
+    <rect class="box" x="10" y="95" width="170" height="40" rx="6"/><text x="95" y="120" text-anchor="middle">Skrá + líkan</text>
+    <line class="ln" x1="180" y1="115" x2="256" y2="115" marker-end="url(#k9-ar2)"/>
+    <rect x="260" y="95" width="200" height="40" rx="6" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.8"/><text x="360" y="120" text-anchor="middle">Frammistöðugreining</text>
+    <line class="ln" x1="460" y1="115" x2="536" y2="115" marker-end="url(#k9-ar2)"/>
+    <rect class="box" x="540" y="95" width="170" height="40" rx="6"/><text x="625" y="120" text-anchor="middle">Litakóðað líkan</text>
+  </g>
+  <g>
+    <rect class="box" x="10" y="155" width="170" height="40" rx="6"/><text x="95" y="180" text-anchor="middle">Skrá + líkan</text>
+    <line class="ln" x1="180" y1="175" x2="256" y2="175" marker-end="url(#k9-ar2)"/>
+    <rect x="260" y="155" width="200" height="40" rx="6" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.8"/><text x="360" y="180" text-anchor="middle">Samræmisathugun</text>
+    <line class="ln" x1="460" y1="175" x2="536" y2="175" marker-end="url(#k9-ar2)"/>
+    <rect class="box" x="540" y="155" width="170" height="40" rx="6"/><text x="625" y="180" text-anchor="middle">Listi yfir frávik</text>
+  </g>
+  <g>
+    <rect class="box" x="10" y="215" width="170" height="40" rx="6"/><text x="95" y="240" text-anchor="middle">Tvær skrár</text>
+    <line class="ln" x1="180" y1="235" x2="256" y2="235" marker-end="url(#k9-ar2)"/>
+    <rect x="260" y="215" width="200" height="40" rx="6" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:1.8"/><text x="360" y="240" text-anchor="middle">Afbrigðagreining</text>
+    <line class="ln" x1="460" y1="235" x2="536" y2="235" marker-end="url(#k9-ar2)"/>
+    <rect class="box" x="540" y="215" width="170" height="40" rx="6"/><text x="625" y="240" text-anchor="middle">Listi yfir mun</text>
+  </g>
+</svg>
+
+<h3>1. Sjálfvirk ferlauppgötvun (automated process discovery)</h3>
+<p>Tekur atburðaskrá og skilar ferlalíkani sem lýsir hegðuninni í skránni vel. Hún er hluti af <b>gagnadrifinni uppgötvun</b> (evidence-based discovery) í F5, ásamt skjalagreiningu og athugun, og er hlutlægari en viðtöl en sér bara það sem kerfin skrá.</p>
+<ul>
+<li><b>Háðnirit</b> (dependency graph, directly-follows graph): hnútur fyrir hvern verkþátt og ör frá $a$ til $b$ ef $b$ kemur <i>beint á eftir</i> $a$ í einhverri slóð, merkt með fjölda skipta. Í raunverulegum skrám verður þetta „spagettí“; þá síar þú burt sjaldgæfar örvar og verkþætti (F13, mynd 11.9).</li>
+<li><b>α-reikniritið</b> (alpha algorithm) er einfalt grunnreiknirit í tveimur skrefum: (1) það les <b>röðunarvensl</b> milli verkþátta úr skránni og (2) byggir líkanið skref fyrir skref út frá þeim. Það krefst þess að skráin sé <b>hegðunarlega heil</b> (behaviorally complete), þ.e. öll leyfileg „beint á eftir“-pör komi fyrir.</li>
+</ul>
+<div class="key">
+<p>Röðunarvensl α-reikniritsins, þar sem $a > b$ þýðir „$b$ kemur einhvern tíma beint á eftir $a$“:</p>
+<ul>
+<li><b>Orsakasamband</b> (causality) $a \rightarrow b$: $a > b$ en ekki $b > a$.</li>
+<li><b>Mögulegur samhliða gangur</b> (potential parallelism) $a \parallel b$: bæði $a > b$ og $b > a$.</li>
+<li><b>Ótengt</b> $a \# b$: hvorki $a > b$ né $b > a$ (t.d. valkostir í XOR).</li>
+</ul></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Röðunarvensl úr lítilli skrá</span></div><div class="ex-body">
+<p>Atburðaskrá úr umsóknum um námsstyrk (svið 4) hefur þrjár gerðir slóða: $\langle a,b,c,d\rangle$, $\langle a,c,b,d\rangle$ og $\langle a,e,d\rangle$, þar sem $a$ = Skrá umsókn, $b$ = Athuga einkunnir, $c$ = Athuga tekjur, $e$ = Hraðafgreiða endurnýjun, $d$ = Tilkynna niðurstöðu. Finndu venslin og lýstu líkaninu sem α-reikniritið myndi skila.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Beint á eftir: $a>b$, $b>c$, $c>d$, $a>c$, $c>b$, $b>d$, $a>e$, $e>d$.</p>
+<ul>
+<li>$b>c$ og $c>b$ ⇒ $b \parallel c$ (samhliða).</li>
+<li>$a\rightarrow b$, $a\rightarrow c$, $b\rightarrow d$, $c\rightarrow d$, $a\rightarrow e$, $e\rightarrow d$.</li>
+<li>$b \# e$ og $c \# e$: koma aldrei saman, svo þau eru valkostir.</li>
+</ul>
+<p>Líkanið: $a$, síðan XOR-split: annaðhvort AND-split með $b$ og $c$ samhliða (og AND-join) eða $e$; XOR-join og loks $d$. <span class="ans">a → XOR( AND(b, c) | e ) → d</span></p>
+</div></details></div></div>
+
+<h3>2. Frammistöðugreining (process performance mining)</h3>
+<p>Tekur atburðaskrá og ferlalíkan og skilar <b>bættu líkani</b>, t.d. þar sem verkþættir og örvar eru litaðar eftir biðtíma eða tíðni (Disco-mynd af BPI Challenge 2017 á F13). Hún mælir víddirnar fjórar: <b>tími</b> úr tímastimplum (umferðar- og biðtími), <b>kostnaður</b> (beinn og óbeinn), <b>gæði</b> með endurtekningum og lykkjum í skránni, og <b>sveigjanleiki</b> sem breytileiki í því hvernig mál fara í gegn.</p>
+
+<h3>3. Samræmisathugun (conformance checking)</h3>
+<p>Tekur atburðaskrá og ferlalíkan og skilar <b>lista yfir mun</b>: hvar raunveruleikinn víkur frá líkaninu. Tvær nálganir á glærunum:</p>
+<ul>
+<li><b>Skorður</b> (constraints): <b>skylduskorða</b> (mandatoriness), verkþáttur verður að koma fyrir í hverju máli; <b>útilokunarskorða</b> (exclusiveness), tveir verkþættir mega ekki báðir koma fyrir í sama máli; <b>röðunarskorða</b> (ordering), verkþættir verða alltaf að koma í tiltekinni röð.</li>
+<li><b>Viðmiðunarlíkan</b> (normative process model): <b>endurspilun tóka</b> (token replay) spilar slóðina skref fyrir skref á líkaninu og merkir hvar tóki vantar eða verður eftir; <b>slóðarstilling</b> (trace alignment) finnur næstu slóð sem líkanið leyfir og telur muninn; <b>hegðunarstilling</b> (behavioral alignment) ber saman á vensla­stigi (margra tóka).</li>
+</ul>
+<div class="ex"><div class="ex-head">Dæmi <span>Skorður í námsstyrkjaferli</span></div><div class="ex-body">
+<p>Reglur sjóðsins: „Yfirfara umsókn“ er skylda; „Samþykkja“ og „Hafna“ útiloka hvort annað; „Meta umsókn“ á alltaf að koma á undan „Samþykkja“. Hvaða skorða er brotin í hverri slóð?</p>
+<ol>
+<li>Skrá, Yfirfara, Meta, Samþykkja, Greiða</li>
+<li>Skrá, Meta, Hafna</li>
+<li>Skrá, Yfirfara, Samþykkja, Meta, Greiða</li>
+<li>Skrá, Yfirfara, Meta, Hafna, Samþykkja, Greiða</li>
+</ol>
+<details class="reveal"><summary></summary><div class="sol">
+<p>1: í samræmi. 2: „Yfirfara“ vantar, <b>skylduskorða</b> brotin. 3: samþykkt á undan mati, <b>röðunarskorða</b> brotin. 4: bæði hafnað og samþykkt, <b>útilokunarskorða</b> brotin (líklega var ákvörðun breytt eftir kæru, sem líkanið gerir ekki ráð fyrir).</p>
+<p>Frávik er ekki alltaf „villa starfsmanns“. Það getur líka þýtt að líkanið sé ófullnægjandi og þurfi að endurskoða, sem er einmitt hlutverk eftirlitsfasans. <span class="ans">1 í lagi · 2 skylda · 3 röðun · 4 útilokun</span></p>
+</div></details></div></div>
+
+<h3>4. Afbrigðagreining (variants analysis)</h3>
+<p>Tekur <b>tvær atburðaskrár</b>, yfirleitt mál með jákvæða útkomu og mál með neikvæða útkomu (t.d. innan og utan tímamarka, eða ánægðir og óánægðir viðskiptavinir), og skilar lista yfir muninn. Dæmi: tjón sem fóru yfir 30 daga fóru mun oftar í gegnum „Óska eftir viðbótargögnum“. Þá veist þú hvar á að leita að rótarorsök (F6).</p>
+<div class="note tip"><p><b class="t">Ráð:</b> á prófi er nóg að muna aðferðirnar fjórar eftir <b>inntaki → úttaki</b>: skrá → líkan (uppgötvun), skrá + líkan → bætt líkan (frammistaða), skrá + líkan → frávik (samræmi), skrá + skrá → munur (afbrigði). Celonis-myndbandið í F13 sýnir hvernig þetta lítur út í atvinnulífinu.</p></div>
+
+<h2 id="stjornarhaettir">Stjórnarhættir: hver á ferlið?</h2>
+<p>Vöktun skilar engu ef enginn ber ábyrgð á að bregðast við. <b>Stjórnarhættir ferla</b> (process governance) skilgreina hver tekur hvaða ákvarðanir um ferla, hver ber ábyrgð og hvernig er fylgst með.</p>
+<h3>Deildaskipt eða ferladrifin skipulagsheild</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Deildadrifin (functionally driven)</th><th>Ferladrifin (process-driven)</th></tr></thead>
+<tbody>
+<tr><td>hlutverk og ábyrgð skipt eftir deildum</td><td>hlutverk og ábyrgð skipt eftir viðskiptaferlum</td></tr>
+<tr><td>stjórnendur sjá lítið út fyrir sína deild</td><td>stjórnendur sjá ferlið frá enda til enda</td></tr>
+<tr><td>afhendingar milli deilda eru óskráðar (implicit)</td><td>afhendingar eru skýrar og skráðar (explicit)</td></tr>
+<tr><td>breyting á viðskiptareglu bíður eftir UT-deildinni</td><td>ferilseigandi breytir reglum og ferlaþrepum</td></tr>
+<tr><td>kostnaðarbókhald eftir deildum</td><td>kostnaðarbókhald eftir ferlaþrepum</td></tr>
+<tr><td>áhættumat byggt á reynslu og innsæi stjórnenda</td><td>áhættumat byggt á hermun miðað við núverandi rekstur</td></tr>
+</tbody></table></div>
+
+<h3>Hlutverk í BPM</h3>
+<ul>
+<li><b>Ferilseigandi</b> (process owner): ber ábyrgð á frammistöðu ferilsins frá enda til enda, þvert á deildir. Skilgreinir markmið og KPI, samþykkir breytingar og fylgist með mælaborðinu. Á flæðiritinu úr F1-F2 stendur ferilseigandi og lykilmæling efst, og „óljóst eignarhald“ er eitt af því sem leitað er að í ferlaskráningu.</li>
+<li><b>Þátttakendur í ferli</b> (process participants): vinna verkin og þekkja ferlið best.</li>
+<li><b>Ferlagreinandi</b> (process analyst): leiðir uppgötvun, greiningu og endurhönnun (eins og þú í EV1 og HÓP1).</li>
+<li><b>BPM-öndvegissetur</b> (BPM Center of Excellence, CoE): miðlæg eining sem á aðferðir, staðla, verkfæri, ferlaskipulagið og þjálfun, og styður einstök verkefni.</li>
+<li><b>Yfirstjórn / stýrihópur</b> (oft með yfirmanni ferlamála, chief process officer): forgangsraðar ferlaverkefnum eftir stefnu og leysir árekstra milli ferla og deilda.</li>
+</ul>
+
+<h3 id="raci">RACI-ramminn</h3>
+<p>RACI-fylki (F2, F14) sýnir fyrir hvert ferlaþrep (línu) hvaða hlutverk (dálkur) hefur hvaða aðkomu. Íslensku heitin á glærunum:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Stafur</th><th>Heiti á glærum</th><th>Merking</th></tr></thead>
+<tbody>
+<tr><td><b>R</b> (Responsible)</td><td>Ábyrgð</td><td>þau sem <b>vinna</b> verkið í ferlinu og taka ákvarðanir við framkvæmdina</td></tr>
+<tr><td><b>A</b> (Accountable)</td><td>Stýring (eignarhald)</td><td>sá eini sem tekur <b>lokaákvörðun</b> og fer með eignarhald á ferlinu og framkvæmd þess</td></tr>
+<tr><td><b>C</b> (Consulted)</td><td>Ráðgefandi</td><td>verður að vera haft með í ráðum <b>áður</b> en ákvörðun er tekin (tvíátta samskipti)</td></tr>
+<tr><td><b>I</b> (Informed)</td><td>Upplýst</td><td>fær að vita <b>eftir</b> að ákvörðun hefur verið tekin eða verkið framkvæmt (einátta)</td></tr>
+</tbody></table></div>
+<div class="key"><p><b>Reglur sem RACI-fylki á að standast:</b> nákvæmlega <b>eitt A</b> á hverri línu (annars er eignarhaldið óljóst); a.m.k. <b>eitt R</b> á hverri línu (einhver þarf að vinna verkið); hóflega mörg C (hvert C hægir á ákvörðun) og I sem þurfa raunverulega upplýsingarnar. Sami aðili getur verið bæði R og A í litlu teymi, en þá er það skráð meðvitað.</p></div>
+<p>Dæmið á F14 er innkaupaferli: í öllum þremur þrepunum (undirbúningur, framkvæmd, samningstími) eru starfsmenn innkaupadeildar <b>Ábyrgð</b>, sviðsstjóri innkaupadeildar <b>Stýring</b>, framkvæmdastjóri <b>Ráðgefandi</b> og framleiðsla og þróun <b>Upplýst</b>.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Lagaðu RACI-fylki (svið 3, tilvísun í sérfræðiþjónustu)</span></div><div class="ex-body">
+<div class="tablewrap"><table>
+<thead><tr><th>Ferlaþrep</th><th>Heimilislæknir</th><th>Móttökuritari</th><th>Sérfræðingur</th><th>Yfirlæknir deildar</th><th>Sjúklingur</th></tr></thead>
+<tbody>
+<tr><td>Senda tilvísun</td><td>R</td><td></td><td></td><td>A</td><td>I</td></tr>
+<tr><td>Forgangsraða tilvísun</td><td></td><td></td><td>A</td><td>A</td><td></td></tr>
+<tr><td>Bóka tíma</td><td></td><td>R</td><td>C</td><td>A</td><td>I</td></tr>
+</tbody></table></div>
+<p>Hvað er að og hvernig lagar þú það?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Línan „Forgangsraða tilvísun“ brýtur báðar reglurnar: tvö A og ekkert R. Ef sérfræðingurinn metur tilvísunina klínískt er hann <b>R</b> og yfirlæknir deildarinnar áfram eini <b>A</b>. Ef heimilislæknirinn á að geta gefið skýringar áður en forgangur er ákveðinn má bæta honum við sem <b>C</b>.</p>
+<p>Svo má spyrja hvort heimilislæknirinn eigi að vera <b>I</b> í „Bóka tíma“: hann þarf að vita að sjúklingurinn fékk tíma. <span class="ans">eitt A og a.m.k. eitt R á hverja línu</span></p>
+</div></details></div></div>
+
+<h2 id="throski">BPM sem eiginleiki í skipulagsheildinni</h2>
+<p>Lykilspurning F14 (BPM-bókin kafli 12) er: <i>Hvað þarf til að reka BPM-starf með árangri?</i> <b>BPM-þroski</b> (BPM maturity) lýsir hversu breitt og djúpt litróf BPM-starfsins í skipulagsheildinni er.</p>
+<h3>Hvenær misheppnast BPM?</h3>
+<p>Árangur BPM á ekki að mæla í gæðum einstakrar athafnar (t.d. námskeiðs) eða afurðar (t.d. ferlaskipulags) heldur í <b>viðskiptaárangri</b>: hvort reksturinn nær markmiðunum í stefnunni. Algengar ástæður þess að BPM-starf mistekst:</p>
+<ol>
+<li>öll áhersla á aðferðir og verkfæri BPM, ekki á viðskiptamarkmið,</li>
+<li>sú trú að BPM sé eina uppspretta sannleikans,</li>
+<li>BPM-verkefni rekin sem einangraðar sílóar,</li>
+<li>almenn vangeta til að breytast.</li>
+</ol>
+
+<h3>Sex kjarnaþættir BPM</h3>
+<p>Rammi Rosemanns og vom Brockes (F14, „The Six Success Factors“) skiptir BPM-getu í sex þætti, hver með fimm getusviðum (capability areas):</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Þáttur</th><th>Spurningin sem hann svarar</th><th>Getusvið (dæmi)</th></tr></thead>
+<tbody>
+<tr><td><b>Stefnumið</b> (strategic alignment)</td><td>Tengjast ferlaverkefnin stefnunni og öfugt?</td><td>stefnudrifin verkefnaáætlun, ferlaskipulag fyrirtækisins, frammistöðumælingar, sjónarmið viðskiptavina</td></tr>
+<tr><td><b>Stjórnarhættir</b> (governance)</td><td>Hver ákveður hvað, og hvernig er fylgst með?</td><td>ákvarðanataka, hlutverk og ábyrgð (RACI), mælikerfi, staðlar og leiðbeiningar, gæðaeftirlit</td></tr>
+<tr><td><b>Aðferðir</b> (methods)</td><td>Eru til aðferðir fyrir hvern fasa lífsferilsins?</td><td>auðkenning og uppgötvun, greining og endurhönnun, innleiðing, vöktun, verkefna- og verkefnastofnastjórnun</td></tr>
+<tr><td><b>Upplýsingatækni</b> (IT)</td><td>Styðja kerfin hvern fasa?</td><td>líkanagerðartól, hermun, BPMS, rauntímamælaborð, ferlaköfun</td></tr>
+<tr><td><b>Fólk</b> (people)</td><td>Kann fólkið ferlana og aðferðirnar?</td><td>ferlaþekking, BPM-þekking, þjálfun, samvinna, vilji stjórnenda til að leiða BPM</td></tr>
+<tr><td><b>Menning</b> (culture)</td><td>Er ferlahugsun hluti af gildunum?</td><td>viðbrögð við breytingum, ferlagildi, fylgni við ferlahönnun, athygli leiðtoga, BPM-tengslanet</td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Minnisregla:</b> fyrstu tveir þættirnir eru <i>stjórnun</i> (af hverju og hver), miðþættirnir tveir eru <i>tæki</i> (hvernig og með hverju), og síðustu tveir eru <i>mannlegi þátturinn</i> (hver kann og hver vill). Taktu eftir að aðferðir og UT hafa sömu fimm getusviðin: einn fyrir hvern hluta lífsferilsins plús verkefnastjórnun.</p></div>
+
+<h3>Þroskastig</h3>
+<p>Þroskalíkan BPM á glærunum er byggt á sömu hugmynd og CMMI (Capability Maturity Model Integration): fimm stig þar sem hvert byggir á því fyrra.</p>
+<svg class="diagram" viewBox="0 0 720 250" role="img" aria-label="Tröppurit fimm þroskastiga BPM: 1 upphafsstig, 2 stýrt, 3 skilgreint, 4 megindlega stýrt, 5 stöðugar umbætur" style="max-width:100%;height:auto">
+  <rect x="10" y="190" width="136" height="48" rx="6" style="fill:var(--raised);stroke:var(--rule-2);stroke-width:1.6"/><text x="78" y="211" text-anchor="middle" font-weight="700">1 Upphaf</text><text x="78" y="229" text-anchor="middle" class="small">Initial</text>
+  <rect x="150" y="150" width="136" height="88" rx="6" style="fill:var(--raised);stroke:var(--rule-2);stroke-width:1.6"/><text x="218" y="171" text-anchor="middle" font-weight="700">2 Stýrt</text><text x="218" y="189" text-anchor="middle" class="small">Managed</text>
+  <rect x="290" y="110" width="136" height="128" rx="6" style="fill:var(--key-bg);stroke:var(--key-line);stroke-width:1.6"/><text x="358" y="131" text-anchor="middle" font-weight="700">3 Skilgreint</text><text x="358" y="149" text-anchor="middle" class="small">Defined</text>
+  <rect x="430" y="70" width="136" height="168" rx="6" style="fill:var(--key-bg);stroke:var(--key-line);stroke-width:1.6"/><text x="498" y="91" text-anchor="middle" font-weight="700">4 Megindlega</text><text x="498" y="109" text-anchor="middle" class="small">Quantitatively managed</text>
+  <rect x="570" y="30" width="140" height="208" rx="6" style="fill:var(--key-bg);stroke:var(--mag);stroke-width:2"/><text x="640" y="51" text-anchor="middle" font-weight="700" style="fill:var(--mag)">5 Bestun</text><text x="640" y="69" text-anchor="middle" class="small">Optimizing</text>
+  <text x="358" y="180" text-anchor="middle" class="small">innri þjálfun</text><text x="498" y="150" text-anchor="middle" class="small">öndvegissetur,</text><text x="498" y="166" text-anchor="middle" class="small">vöktun</text><text x="640" y="120" text-anchor="middle" class="small">BPM hluti af</text><text x="640" y="136" text-anchor="middle" class="small">daglegri stjórnun</text>
+</svg>
+<div class="tablewrap"><table>
+<thead><tr><th>Stig</th><th>Einkenni (F14)</th></tr></thead>
+<tbody>
+<tr><td><b>1 Upphafsstig</b> (initial)</td><td>BPM er ekki til eða sjaldan notað; þar sem það sést er það tilfallandi og einangrað innan einstakra UT- eða rekstrareininga. Lítil samhæfing og lítil þátttaka starfsfólks.</td></tr>
+<tr><td><b>2 Stýrt</b> (managed)</td><td>BPM-geta byrjar að myndast með fyrstu verkefnunum. Ferlahugsun kviknar hjá starfsfólki, fyrstu ferlar eru skráðir og greindir og stjórnendur taka meiri þátt. Þekking á aðferðunum er að mestu hjá utanaðkomandi sérfræðingum.</td></tr>
+<tr><td><b>3 Skilgreint</b> (defined)</td><td>Ávinningur fyrstu verkefna kemur fram, en áherslan er enn á fyrstu fasa lífsferilsins. Aðferðir og verkfæri verða fágaðri, innri þjálfun minnkar þörf fyrir utanaðkomandi sérfræðinga og samráðsvettvangar (t.d. á innraneti) verða til.</td></tr>
+<tr><td><b>4 Megindlega stýrt</b> (quantitatively managed)</td><td>Áherslan færist á seinni fasa lífsferilsins (innleiðingu og vöktun) með öflugri breytingastjórnun. Kerfisbundin frammistöðuvöktun tryggir stefnumarkandi ávinning. BPM-öndvegissetur er stofnað. Lítil þörf fyrir utanaðkomandi aðstoð.</td></tr>
+<tr><td><b>5 Bestun</b> (optimizing)</td><td>BPM er fest í sessi bæði á rekstrar- og stefnustigi og er hluti af stjórnun, ábyrgð og frammistöðumati. Aðferðir eru staðlaðar og almennt viðurkenndar. Stöðugar umbætur; öndvegissetrið <b>minnkar</b> af því að BPM er orðið útbreitt.</td></tr>
+</tbody></table></div>
+<p>F14 sýnir fleiri útgáfur af sömu hugmynd: CMMI-líkt dæmi með stigunum <i>Initial, Repeatable, Defined, Managed, Optimizing</i> (frá óútreiknanlegum og viðbragðsdrifnum ferlum til áherslu á stöðugar umbætur), sex þrepa skala (frá „lítil ferlaþekking“ til „öll skipulagsheildin stýrð með samtengdum ferlum“) með spurningunni <i>hvar er fyrirtækið í dag og hvar eftir tvö ár?</i>, og þroskakúrfu Gartners (0 viðurkenna óskilvirkni, 1 ferlavitund, 2 sjálfvirkni og stýring innan ferla, 3 þvert á ferla, 4 virðistengd stýring á fyrirtækjastigi, 5 sveigjanlegt viðskiptaskipulag).</p>
+
+<h3>Þroskamynstur: ójafn prófíll</h3>
+<p>Þroski er sjaldnast jafn í öllum sex þáttum. F14 sýnir þrjú dæmigerð mynstur:</p>
+<ul>
+<li><b>Ofan frá:</b> stefnumið og stjórnarhættir á stigi 5 en aðferðir, UT, fólk og menning á stigi 2. Fín skjöl og ráð, en lítið gerist í raun.</li>
+<li><b>Verkfæradrifið:</b> aðferðir og UT á stigi 5 en fólk og menning á stigi 1. Þetta er fyrsta mistakaástæðan í lifandi mynd: BPM sem UT-verkefni án tengsla við markmið og fólk.</li>
+<li><b>Grasrót:</b> fólk og menning á stigi 3 en allt annað á stigi 1. Áhugi og vilji, en engin umgjörð, aðferðir eða kerfi.</li>
+</ul>
+<div class="ex"><div class="ex-head">Dæmi <span>Þroskamat banka (svið 7)</span></div><div class="ex-body">
+<p>Banki hefur keypt dýrt BPMS-kerfi og ferlaköfunartól og ráðgjafar hafa teiknað nýskráningarferlið í BPMN. Starfsfólk útibúa veit ekki af líkaninu og vinnur „eins og alltaf“, enginn ferilseigandi er skráður og stjórnendur líta á verkefnið sem UT-verkefni. Metdu þroskann og leggðu til næstu skref.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Prófíllinn er <b>verkfæradrifinn</b>: UT (og að hluta aðferðir) eru sterk, en stjórnarhættir (enginn ferilseigandi, ekkert A í RACI), fólk (ferlaþekking) og menning (fylgni við ferlahönnun, athygli leiðtoga) eru á stigi 1-2. Þekkingin er hjá ráðgjöfum, sem er einkenni stigs 2. Heildarþroski er því um <b>stig 2</b>, sama hve gott kerfið er.</p>
+<p>Næstu skref: (1) skipa ferilseiganda og gera RACI fyrir nýskráningu, (2) tengja verkefnið við markmið bankans (t.d. tími til að opna reikning, hlutfall nýskráninga sem stöðvast í áreiðanleikakönnun), (3) þjálfa starfsfólk útibúa og fá það í vinnustofu um to-be ferlið, (4) nota ferlaköfunartólið í samræmisathugun til að sjá hvar fólk víkur frá líkaninu og af hverju. <span class="ans">um stig 2, verkfæradrifið mynstur</span></p>
+</div></details></div></div>
+
+<h3>Breytingastjórnun (úr F9)</h3>
+<p>Menningarþátturinn tengist beint breytingastjórnuninni í F9, þar sem bent er á að um tvö af hverjum þremur umbreytingarverkefnum mistakist:</p>
+<ul>
+<li><b>Of snemmbúinn sigur</b> (early victory): teymið er leyst upp eftir 2-3 ár og breytingarnar fjara út. Byggðu frekar á litlum, skjótum sigrum sem stökkpöllum.</li>
+<li><b>Eðli mótstöðu</b> (nature of resistance): hæft og velviljað fólk gerir ekkert því það hefur <i>dulda andstæða skuldbindingu</i>, t.d. reynslu af því að fá alltaf erfiðara verk eftir hvert vel unnið. Gefðu þér tíma til að skilja forsendur fólks.</li>
+<li><b>Villa miðstýrðra breytinga</b> (programmatic change fallacy): breytingar breiðast best út þegar einingar fá svigrúm til að laga þær að sér; formlega skipulagið er fest eftir að breytingin hefur skotið rótum.</li>
+</ul>
+
+<h2 id="evolv">Gestafyrirlestur Evolv: stafrænt vinnuafl (EV2)</h2>
+<p>Evolv (stofnað 2020, nú hluti af Advania) smíðar <b>stafrænt vinnuafl</b> (software agents, digital workforce): hugbúnað sem sjálfvirknivæðir ferli, ýmist staðlaðar lausnir eða sérsmíðaðar. Stafrænn starfsmaður:</p>
+<ul>
+<li>á sinn eigin notanda og tölvu (sýndarvél) og getur líkt eftir aðgerðum starfsfólks,</li>
+<li>vinnur með öllum kerfum, óháð tækniumhverfi (eins og RPA í F9, í gegnum notendaviðmót),</li>
+<li>blandar saman <b>reglum og gervigreind</b> í ákvörðunum,</li>
+<li>vinnur sjálfstætt en <b>kallar eftir mannlegri aðkomu</b> þegar þörf krefur (human in the loop),</li>
+<li>getur sjálfvirknivætt ferli frá A til Ö eða bara hluta úr ferli.</li>
+</ul>
+<div class="tablewrap"><table>
+<thead><tr><th>Gerð (glæra „Agents of the Digital Workforce“)</th><th>Hvernig hún vinnur</th></tr></thead>
+<tbody>
+<tr><td><b>Reglubundnir þjarkar</b> (rule-based agents)</td><td>fylgja ströngum reglum; ef regla er uppfyllt heldur þjarkinn áfram, annars fer málið til manneskju í yfirferð. Hratt, nákvæmt og samkvæmt.</td></tr>
+<tr><td><b>Gervigreindardrifið vinnuflæði</b> (AI-driven workflows)</td><td>fylgja enn föstu flæði en nota gervigreind til að túlka ómótuð gögn (t.d. PDF-skjöl, tölvupóst) og taka ákvarðanir innan flæðisins.</td></tr>
+<tr><td><b>Markmiðsdrifnir gervigreindarþjarkar</b> (goal-based AI agents)</td><td>fylgja ekki föstu flæði heldur markmiði: skipuleggja, nota verkfæri (sjálfvirkni, API, aðra þjarka), stigmagna til manneskju og fínstilla sig eftir aðstæðum.</td></tr>
+</tbody></table></div>
+<h3>Hvaða ferli henta?</h3>
+<p>Á glærunum eru einkenni góðra verkefna: <b>síendurtekið</b>, <b>mikil handavinna</b>, <b>tímafrekt</b>, <b>hætta á mistökum</b> og <b>kostnaðarleki</b>. Dæmigerð verkefni: áminningar, úrlestur úr skjölum, flutningur upplýsinga milli kerfa, afstemmingar, greining pósthólfa, úrvinnsla umsókna og utanumhald leyfa. Lausnir Evolv eru t.d. bankaafstemmingar, afstemming lánardrottna, vöktun ógreiddra reikninga, tollskýrslugerð og „aðstoðarmaður samþykktar“ sem notar gervigreind til að finna síðasta sambærilega reikning birgis.</p>
+<p>Áður en hafist er handa þarf að svara tveimur spurningum:</p>
+<ul>
+<li><b>Hvert er markmiðið?</b> Að spara tíma, draga úr kostnaði, fækka mistökum, bæta öryggi eða veita betri þjónustu? (Þetta eru víddir djöflafjórþáttunarinnar.)</li>
+<li><b>Skilningur á vandamálinu:</b> Hvað getur farið úrskeiðis? Hvað fellur utan verkefnisins? Hvernig er brugðist við undantekningum? Hvar þarf mannlegt mat? Hvað er hægt að leysa með einfaldri sjálfvirkni og hvað krefst raunverulega gervigreindar?</li>
+</ul>
+<p>Árangursþættir sem Evolv nefnir: <b>stuðningur ferilseiganda</b> (buy-in: innsýn og ábyrgðartilfinning), <b>undirbúningur</b> (ferlið og gögnin þurfa að vera tilbúin), skýrt <b>umfang</b> og <b>væntingastjórnun</b> (hvaða hluta ferlisins erum við að skoða?), og <b>viðtökuprófanir</b> þar sem upplifun notandans og frumkvæði skipta máli.</p>
+<h3>Vinnulag Evolv og BPM-lífsferillinn</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Skref hjá Evolv</th><th>Samsvarandi fasi í BPM</th></tr></thead>
+<tbody>
+<tr><td>Vinnustofa / hugarflug</td><td>auðkenning og val ferla (mikilvægi, heilsa, framkvæmanleiki)</td></tr>
+<tr><td>Ferlagreining (oft á Teams-fundi)</td><td>uppgötvun (viðtöl, vinnustofa) og eigindleg greining</td></tr>
+<tr><td>Greining og arkitektúr (arkitektúrrýni, ArcRev)</td><td>endurhönnun og frá hugtakalíkani að keyrslulíkani (F10)</td></tr>
+<tr><td>Uppsetning og forritun</td><td>innleiðing: sjálfvirkir verkþættir, þjónustur</td></tr>
+<tr><td>Innleiðing með viðskiptavini, viðtökuprófanir (QA)</td><td>innleiðing og breytingastjórnun</td></tr>
+<tr><td>Rekstur og vöktun lausnarinnar</td><td>ferlaeftirlit</td></tr>
+</tbody></table></div>
+<p>Innra flæði verkefna hjá Evolv er sjálft ferli: <i>Backlog</i> (innri kick-off) → <i>Pre kick-off</i> (arkitektúrrýni) → <i>In progress</i> → <i>In QA</i> → <i>Done</i>. Dæmið um <b>afstemmingu lánardrottna</b> sýnir dæmigerða uppbyggingu: þjarkinn sendir póst og óskar eftir hreyfingalista, les PDF með vélnámslíkani (opnunar- og lokastaða, dagsetningar, upphæðir), ber saman línu fyrir línu við bókhaldið, útbýr afstemmingarskjal og endar á XOR-ákvörðun: <i>Stemmir afstemmingin?</i> Ef ekki, bíður hann í X daga svo bókhaldið geti bókað það sem vantar og reynir aftur (lykkja).</p>
+<div class="note tip"><p><b class="t">EV2:</b> matskvarðinn gefur 10 þegar svörin sýna að þú fylgdist með (dæmi úr fyrirlestrinum endursögð rétt með eigin orðum), tengja fyrirlesturinn við <b>hugtök námskeiðsins</b> og eigin reynslu og ræða <b>bæði tækifæri og takmarkanir</b>. Góðar tengingar: RPA og BPMS (F9), verkþáttagerðir og keyranleg líkön (F10), sjálfvirknivæðing sem endurhönnunarregla (activity automation, F8), djöflafjórþáttunin, ferilseigandinn og breytingastjórnun. Takmarkanir: viðkvæmni fyrir breytingum í viðmóti, undantekningar, ábyrgð á ákvörðunum gervigreindar og hætta á að sjálfvirknivæða slæmt ferli í stað þess að endurhanna það fyrst.</p></div>
+
+<h2 id="samantekt">Samantekt</h2>
+<div class="key">
+<ul>
+<li><b>Vöktun</b> lokar BPM-lífsferlinum: ótengd (söguleg) eða í rauntíma; tölfræðileg (BAM, mælaborð) eða líkanabyggð (ferlaköfun).</li>
+<li><b>Atburðaskrá</b>: mál + verkþáttur + tímastimpill (+ auðlind). Áskoranir: tenging, tímastimplun, langlífi, upplausn.</li>
+<li><b>Mælaborð</b>: rekstrarlegt (núna, mál í gangi), taktískt (liðið tímabil, ferilseigandi), stefnumarkandi (samantekt fyrir framkvæmdastjórn).</li>
+<li><b>Ferlaköfun</b>: uppgötvun (skrá → líkan), frammistaða (skrá + líkan → bætt líkan), samræmi (skrá + líkan → frávik), afbrigði (tvær skrár → munur). α-reikniritið: orsakasamband og samhliða gangur.</li>
+<li><b>Stjórnarhættir</b>: ferilseigandi, RACI (eitt A, a.m.k. eitt R á hverja línu), öndvegissetur.</li>
+<li><b>Þroski</b>: sex kjarnaþættir (stefnumið, stjórnarhættir, aðferðir, UT, fólk, menning) og fimm stig (upphaf, stýrt, skilgreint, megindlega stýrt, bestun).</li>
+<li><b>Evolv</b>: stafrænt vinnuafl = reglur + gervigreind + mannleg aðkoma; veldu síendurtekin, handvirk, villugjörn ferli og hafðu ferilseigandann með.</li>
+</ul></div>

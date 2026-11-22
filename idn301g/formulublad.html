@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formúlublað · Greining ferla og kerfa</title>
+<meta name="description" content="Kennsluvefur fyrir IÐN301G Greining ferla og kerfa: ferlaskráning, BPMN, ferlauppgötvun, eigindleg og megindleg greining, endurhönnun, ferlahugbúnaður, kerfishugsun og stjórnun ferla.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23173327'/%3E%3Ccircle cx='7' cy='16' r='3' fill='%23ffe98a'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23ffe98a'/%3E%3Cpath d='M25 11l5 5-5 5-5-5z' fill='%23ffe98a'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Greining ferla og kerfa</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Greining ferla og kerfa<small>IÐN301G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Ferlar og ferlaskráning</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Ferlalíkön í BPMN</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Þróuð ferlalíkön</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Ferlauppgötvun</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Eigindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Megindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Endurhönnun og ferlahugbúnaður</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Kerfishugsun og orsakalykkjur</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Stjórnun ferla og BPM í starfseminni</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="upprifjun.html" data-gate="archive">Lokaupprifjun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+<li><a class="nav" href="verkfaerakista.html">Verkfærakista</a></li>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html" aria-current="page">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<!--wide-->
+<h1 class="sheet-title">Formúlublað · Megindleg ferlagreining</h1>
+<p class="lede noprint">Allar formúlur megindlegrar ferlagreiningar (F7, BPM kafli 7) á einni til tveimur A4-síðum, með táknaskýringum. Notaðu blaðið þegar þú æfir reiknidæmin og prentaðu það út fyrir upprifjun. Til að prófa tölur skaltu nota <a href="reiknivelar.html">reiknivélarnar</a>.</p>
+<p class="noprint"><button type="button" class="btn" onclick="window.print()">Prenta blaðið</button></p>
+
+<div class="sheet sheet-1">
+
+<section>
+<h3>Mælikvarðar ferla</h3>
+<p><b>Tími</b> (CT, bið, vinnsla), <b>kostnaður</b> (á mál, nýting), <b>gæði</b> (villur, endursendingar, ánægja), <b>sveigjanleiki</b>. Togast á: „Devil's quadrangle“.</p>
+<p>Flæðisgreining metur: hringrásartíma (CT), kostnað á hvert mál (token = instance) og villuhlutfall.</p>
+</section>
+
+<section>
+<h3>Flæðisgreining: blokkir</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Blokk</th><th>Tími $CT$</th><th>Kostnaður / $ul$</th></tr></thead>
+<tbody>
+<tr><td>Línuleg</td><td>$\sum T_i$</td><td>$\sum K_i$</td></tr>
+<tr><td>Valkvæð (XOR)</td><td>$\sum p_i T_i$</td><td>$\sum p_i K_i$</td></tr>
+<tr><td>Samhliða (AND)</td><td>$\max(T_1,\dots,T_n)$</td><td>$\sum K_i$ (!)</td></tr>
+<tr><td>Endursending</td><td>$\dfrac{T}{1-r}$</td><td>$\dfrac{K}{1-r}$</td></tr>
+</tbody></table></div>
+<p>$\sum p_i = 1$. Endursending í mesta lagi einu sinni: $T_1 + r\,T_2$. Hreiðraðar blokkir: innst fyrst. Heildar CT = blokkir lagðar saman.</p>
+<p>Glæra 7: $CT = \frac{1}{1-0{,}2} + \max(1,3) + 3 + (0{,}6\cdot1+0{,}4\cdot2) = 8{,}65$ dagar.</p>
+</section>
+
+<section>
+<h3>Nýtni ferils og bundin leið</h3>
+$$CTE = \frac{TCT}{CT}$$
+<p>$TCT$ = fræðilegur hringrásartími (bara vinnslutímar, sömu blokkareglur). $CT$ = með bið. Bið = $CT - TCT$.</p>
+<p>CPM: $EF = ES + T$, $ES$ = mesta $EF$ forvera; $LS = LF - T$, $LF$ = minnsta $LS$ eftirfara. Slaki $= LS - ES$; bundin leið hefur slaka 0 og lengd hennar = CT.</p>
+</section>
+
+<section>
+<h3>Lögmál Little</h3>
+$$WIP = \lambda \cdot CT \qquad CT = \frac{WIP}{\lambda} \qquad \lambda = \frac{WIP}{CT}$$
+<p>Gildir bara í stöðugu ferli. Sama tímaeining í $\lambda$ og $CT$. Í biðraðakerfi: $L = \lambda W$, $L_q = \lambda W_q$.</p>
+</section>
+
+<section>
+<h3>Framleiðslugeta, nýting, flöskuháls</h3>
+$$\mu_p = \frac{uc}{ul} \qquad \rho_p = \frac{\lambda}{\mu_p}$$
+<p>$ul$ = vinnutími hóps á mál (blokkareglur, <b>AND = summa</b>, bara aðgerðir hópsins). $uc$ = vinnustundir hóps á tímabili, t.d. $8\text{ klst}\times$ fjöldi á dag.</p>
+<p>Framleiðslugeta ferlis = $\min$ yfir hópa (flöskuhálsinn). Stöðugt ef $\rho_p \lt 1$.</p>
+</section>
+
+<section>
+<h3>M/M/1</h3>
+$$\rho = \frac{\lambda}{\mu},\quad L_q = \frac{\rho^2}{1-\rho},\quad W_q = \frac{L_q}{\lambda},\quad W = W_q + \frac1\mu,\quad L = \lambda W$$
+<p>Jafngilt: $W_q = \dfrac{\lambda}{\mu(\mu-\lambda)}$, $L = \dfrac{\rho}{1-\rho}$, $W = \dfrac{1}{\mu-\lambda}$. Skilyrði $\rho \lt 1$.</p>
+<p>Nauðsynlegt $\mu$ fyrir markmið $W_q$: $\mu = \dfrac{\lambda + \sqrt{\lambda^2 + 4\lambda/W_q}}{2}$.</p>
+</section>
+
+<section>
+<h3>M/M/c (formúla 7.13, Erlang C)</h3>
+$$\rho = \frac{\lambda}{c\mu},\qquad L_q = \frac{(\lambda/\mu)^c\,\rho}{c!\,(1-\rho)^2\left(\dfrac{(\lambda/\mu)^c}{c!(1-\rho)} + \displaystyle\sum_{n=0}^{c-1}\frac{(\lambda/\mu)^n}{n!}\right)}$$
+<p>Síðan eins og M/M/1: $W_q = L_q/\lambda$, $W = W_q + 1/\mu$, $L = \lambda W$. Líkur á bið $P_w = \dfrac{(\lambda/\mu)^c/(c!(1-\rho))}{\text{svigi}}$, $L_q = P_w\dfrac{\rho}{1-\rho}$. Stöðugt ef $c \gt \lambda/\mu$.</p>
+<p>Röð: (1) $\lambda/\mu$, $\rho$; (2) summa; (3) brot; (4) $L_q$; (5) $W_q$, $W$. Ein sameiginleg röð gefur styttri bið en $c$ sérraðir.</p>
+</section>
+
+<section>
+<h3>Hermun</h3>
+<p>Inntak: BPMN-líkan, komutaktur og dreifing, dreifing vinnslutíma, líkur á XOR-greinum, auðlindahópar (fjöldi, tímakaup, vinnutími). Úttak: dreifing CT, bið, nýting, kostnaður (t.d. BIMP). Gildrur: slembni, gæði gagna, 100 % afköst.</p>
+<p>Takmarkanir flæðisgreiningar: meðaltöl, engin bið vegna auðlinda, krefst blokkaskipts líkans.</p>
+</section>
+
+<section>
+<h3>Táknaskýringar</h3>
+<div class="tablewrap"><table>
+<tbody>
+<tr><td>$T_i$</td><td>tími aðgerðar $i$</td><td>$p_i$</td><td>líkur á XOR-grein</td></tr>
+<tr><td>$r$</td><td>hlutfall endursendinga</td><td>$K_i$</td><td>kostnaður aðgerðar</td></tr>
+<tr><td>$CT$</td><td>hringrásartími</td><td>$TCT$</td><td>fræðil. hringrásartími</td></tr>
+<tr><td>$CTE$</td><td>nýtni ferils</td><td>$WIP$</td><td>verk í vinnslu</td></tr>
+<tr><td>$\lambda$</td><td>komutaktur</td><td>$\mu$</td><td>þjónustutaktur (á þjón)</td></tr>
+<tr><td>$ul$</td><td>einingaálag</td><td>$uc$</td><td>einingaafköst</td></tr>
+<tr><td>$\mu_p$</td><td>fræðileg framleiðslugeta</td><td>$\rho$</td><td>nýting</td></tr>
+<tr><td>$c$</td><td>fjöldi þjóna</td><td>$1/\mu$</td><td>meðalþjónustutími</td></tr>
+<tr><td>$L_q$</td><td>meðalfjöldi í röð</td><td>$W_q$</td><td>meðalbið í röð</td></tr>
+<tr><td>$L$</td><td>meðalfjöldi í kerfi</td><td>$W$</td><td>meðaltími í kerfi</td></tr>
+</tbody></table></div>
+<p>M/M/c: Poisson-komur / veldisdreifð þjónusta / $c$ þjónar.</p>
+</section>
+
+</div>
+<div class="pager noprint"><a href="reiknivelar.html"><span>Fyrri</span>Reiknivélar</a><i></i></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+</body>
+</html>

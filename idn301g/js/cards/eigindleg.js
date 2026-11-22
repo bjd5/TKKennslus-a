@@ -1,0 +1,25 @@
+/* cards/eigindleg.js – flashcards fyrir kafla 5: Eigindleg ferlagreining. */
+(function () { var TK = (window.TK = window.TK || {}); (TK.CARDS = TK.CARDS || []).push(
+  { c: "eigindleg", q: "Fjögur verkfæri eigindlegrar ferlagreiningar?", a: "Virðisgreining · sóunargreining · skráning vandamála (hagsmunagreining, vandamálaskrá, Pareto, PICK) · rótargreining." },
+  { c: "eigindleg", q: "VA, BVA og NVA?", a: "<b>VA</b>: virði fyrir viðskiptavininn. <b>BVA</b>: nauðsynlegt fyrir reksturinn, tekjur eða lög. <b>NVA</b>: hvorugt." },
+  { c: "eigindleg", q: "Prófspurning fyrir VA?", a: "Er viðskiptavinurinn tilbúinn að greiða fyrir skrefið? Myndi hann sakna þess?" },
+  { c: "eigindleg", q: "Hvað er gert eftir virðisgreiningu?", a: "Fella burt NVA, lágmarka (einfalda, sjálfvirkja) BVA, tryggja að VA skili sínu." },
+  { c: "eigindleg", q: "Hvernig flokkast sendingar milli fólks?", a: "Yfirleitt <b>NVA</b> (t.d. „Áframsenda beiðni“ í tækjaleigunni), og sóun af tegundinni tilfærsla." },
+  { c: "eigindleg", q: "Átta tegundir sóunar (TIMWOODS)?", a: "Tilfærsla, birgðir, hreyfing, bið, umframframleiðsla, ofvinnsla (óskilvirk ferli), gallar, vannýttur mannauður (skills)." },
+  { c: "eigindleg", q: "Tilfærsla vs. hreyfing?", a: "<b>Tilfærsla</b>: hlutir/upplýsingar fluttar milli staða, fólks eða kerfa. <b>Hreyfing</b>: fólkið sjálft gengur, leitar, teygir sig." },
+  { c: "eigindleg", q: "Birgðir vs. bið?", a: "<b>Birgðir</b>: hlutir sem eru geymdir. <b>Bið</b>: tilvik (tóki) bíður eftir vinnslu, auðlind eða samþykki." },
+  { c: "eigindleg", q: "Færsla, halda, yfirgera?", a: "<b>Færsla</b> (move): tilfærsla, hreyfing. <b>Halda</b> (hold): birgðir, bið (+ tómagangur). <b>Yfirgera</b> (overdo): gallar, ofvinnsla, umframframleiðsla." },
+  { c: "eigindleg", q: "Hvað er tómagangur (idleness)?", a: "Þegar <b>auðlind</b> bíður eftir tilviki (andstæðan við bið, þar sem tilvikið bíður)." },
+  { c: "eigindleg", q: "Dæmi um umframframleiðslu á skrifstofu?", a: "Of margar skýrslur, tölvupóstur á fjölda í cc." },
+  { c: "eigindleg", q: "Fimm hópar í hagsmunagreiningu?", a: "Viðskiptavinir, ferlaþátttakendur, ytri aðilar, ferlaeigandi, umbótastuðningsaðili (sponsor)." },
+  { c: "eigindleg", q: "Svæði í vandamálaskrá?", a: "Nafn (2-5 orð), lýsing (1-3 setn.), forgangsröðun, gögn og forsendur, eigindlegt mat, megindlegt mat." },
+  { c: "eigindleg", q: "Vandamál (issue) vs. þáttur (factor)?", a: "Vandamál hefur bein áhrif á ferlið; þáttur hefur áhrif á vandamál. Svæðin „er valdið af“ og „veldur“." },
+  { c: "eigindleg", q: "Pareto-greining?", a: "Raða vandamálum eftir áhrifum (tíðni × áhrif á skipti), teikna súlur og uppsafnað %. Fá vandamál valda flestum áhrifum (80/20)." },
+  { c: "eigindleg", q: "PICK-rit?", a: "Ávinningur × erfiðleiki: <b>Implement</b> (mikill, auðvelt), <b>Challenge</b> (mikill, erfitt), <b>Possible</b> (lítill, auðvelt), <b>Kill</b> (lítill, erfitt)." },
+  { c: "eigindleg", q: "Hvað er rótargreining?", a: "Fjölskylda aðferða til að finna undirliggjandi ástæður vandamála, t.d. orsakarit og af-hverju-rit." },
+  { c: "eigindleg", q: "Önnur heiti á orsakariti?", a: "Fiskbeinarit, Ishikawa-rit (cause-and-effect diagram)." },
+  { c: "eigindleg", q: "6M í fiskbeinariti?", a: "Machine (tækni), Method (aðferð), Material (aðföng), Man (fólk), Measurement (mælingar), Milieu (umhverfi)." },
+  { c: "eigindleg", q: "Áhrifaþáttur vs. valdandi þáttur?", a: "<b>Áhrifaþáttur</b> (causal): ef lagaður stöðvast vandamálið. <b>Valdandi</b> (contributing): hjálpar til við að valda því." },
+  { c: "eigindleg", q: "Af-hverju-rit og 5 Whys?", a: "Trérit með endurteknum pörum af „af hverju?“ og svari. Spyrja ~5 sinnum til að komast frá einkenni að rót." },
+  { c: "eigindleg", q: "Hvað er góð rót í rótargreiningu?", a: "Eitthvað í ferlinu, kerfinu eða umhverfinu sem hægt er að breyta svo vandamálið komi ekki aftur, ekki sökudólgur." }
+); })();

@@ -1,0 +1,28 @@
+/* cards/endurhonnun.js – flashcards fyrir kafla 7: Endurhönnun og ferlahugbúnaður. */
+(function () { var TK = (window.TK = window.TK || {}); (TK.CARDS = TK.CARDS || []).push(
+  { c: "endurhonnun", q: "Hvað er djöflafjórþáttun (devil's quadrangle)?", a: "Fjórar víddir frammistöðu: <b>tími, kostnaður, gæði og sveigjanleiki</b>. Þær eru samofnar: þegar ein er bætt líður oft önnur." },
+  { c: "endurhonnun", q: "Hver eru sjö atriðin í hugmyndafræði endurhönnunar?", a: "Viðskiptavinur, ferlaframkvæmd, ferlahegðun, skipulagsheildin (skipulag og þýði), upplýsingar, tækni og ytra umhverfi. Hvert er líka flokkur í HPR-listanum." },
+  { c: "endurhonnun", q: "Aðferð, tækni og verkfæri í endurhönnun?", a: "<b>Aðferð</b>: hæsta abstraktstig (t.d. Lean). <b>Tækni</b>: vel skilgreind leið að ákveðnu verki. <b>Verkfæri</b>: hugbúnaður sem styður, t.d. hermun." },
+  { c: "endurhonnun", q: "Hvaða ásar eru á endurhönnunarhvelinu (redesign orbit)?", a: "Transactional ↔ transformational, creative ↔ analytical, og innri hringur (inward-looking) og ytri (outward-looking)." },
+  { c: "endurhonnun", q: "Transactional vs. transformational endurhönnun?", a: "<b>Transactional</b> (stigvaxandi): finna vandamál og leysa skref fyrir skref (HPR, Lean, Six Sigma, TOC, TRIZ, 7FE). <b>Transformational</b> (umbreytandi): ferlið endurhugsað frá grunni (BPR, NESTT, Process Model Canvas, product-based design)." },
+  { c: "endurhonnun", q: "Þrjú stig 7FE?", a: "<b>Undirbúa</b> (prepare), <b>framkalla</b> (generate) lausnir í vinnustofum og <b>staðfesta</b> (validate), oft með hermun." },
+  { c: "endurhonnun", q: "Þrjú stig HPR?", a: "<b>Hefja</b> (initiate: skilja as-is, setja mælikvarða), <b>hanna</b> (design: velja heuristics) og <b>meta</b> (evaluate: megindlega og eigindlega; má hætta við)." },
+  { c: "endurhonnun", q: "Hvernig skiptast 29 heuristics HPR?", a: "Viðskiptavinur 3, ferlaframkvæmd 5, ferlahegðun 4, skipulag 10 (7 skipulag + 3 þýði), upplýsingar 2, tækni 2, ytra umhverfi 3." },
+  { c: "endurhonnun", q: "Knock-out heuristic?", a: "Raðaðu útilokunarprófunum í <b>vaxandi</b> röð eftir fyrirhöfn og <b>minnkandi</b> röð eftir líkum á höfnun: hæst hlutfall $p/c$ fyrst." },
+  { c: "endurhonnun", q: "Triage vs. activity composition?", a: "<b>Triage</b> skiptir einu verki í aðskildar útgáfur (t.d. einföld/flókin mál). <b>Composition</b> sameinar lítil verk í eitt samsett. Þau eru andstæður." },
+  { c: "endurhonnun", q: "Activity elimination vs. control relocation?", a: "<b>Elimination</b>: verkið hverfur. <b>Control relocation</b>: eftirlitið færist til viðskiptavinarins (t.d. sjúklingur mælir sjálfur blóðþrýsting)." },
+  { c: "endurhonnun", q: "Trusted party vs. outsourcing?", a: "<b>Trusted party</b>: notaðu niðurstöðu trausts aðila (t.d. rafræn skilríki). <b>Outsourcing</b>: annar aðili vinnur verkið fyrir þig." },
+  { c: "endurhonnun", q: "Hvað er product-based design?", a: "Umbreytandi aðferð sem leiðir ferlið út frá <b>vörunni</b> sem það skilar (oft upplýsingavöru) og gagnaeiningum hennar, án tillits til núverandi ferlis." },
+  { c: "endurhonnun", q: "Hvað er PAIS?", a: "<b>Process-Aware Information System</b>: UT-kerfi sem keyrir sjálfvirk ferli og dreifir verkum og upplýsingum í samræmi við ferlalíkan. Sértæk: ERP, CRM, SCM, PLM. Almenn: vandamálakerfi, DMS, BPMS." },
+  { c: "endurhonnun", q: "Fimm einingar BPMS?", a: "<b>Keyrsluvél</b> (execution engine), <b>líkanatól</b> (process modeling tool), <b>verklistastjóri</b> (worklist handler), <b>ytri þjónustur</b> (external services) og <b>stjórnunar- og eftirlitstól</b>." },
+  { c: "endurhonnun", q: "Fjórir kostir BPMS?", a: "Minna vinnuálag, sveigjanleg samþætting, gagnsæ keyrsla og reglufylgni." },
+  { c: "endurhonnun", q: "Áskoranir við innleiðingu BPMS?", a: "<b>Tæknilegar</b>: samþætting lokaðra kerfa (millilag, SaaS, RPA hjálpa). <b>Skipulagslegar</b>: ótti við uppsagnir og afhjúpun (exposure)." },
+  { c: "endurhonnun", q: "Þrjú lögmál breytingastjórnunar á glærunum?", a: "Of snemmbúinn sigur (early victory), eðli mótstöðu (falin samkeppnisskuldbinding) og villan um áætlunarbreytingar (programmatic change fallacy)." },
+  { c: "endurhonnun", q: "Hvað er RPA og hvenær hentar það?", a: "Hugbúnaðarþjarkar sem herma eftir aðgerðum starfsfólks í notendaviðmóti. Hentar síendurteknum, reglubundnum verkum í eldri kerfum án tenginga. Brothætt ef viðmót breytist." },
+  { c: "endurhonnun", q: "Fimm skref í keyranlegt líkan?", a: "1) Mörk sjálfvirkni, 2) farið yfir handvirk verk, 3) fullgera líkanið, 4) hæfilegt nákvæmnistig, 5) keyrslueiginleikar." },
+  { c: "endurhonnun", q: "Handvirkt verk vs. notendaverk?", a: "<b>Manual</b> (hönd): unnið án hugbúnaðar, BPMS veit ekki af því. <b>User</b> (manneskja): unnið af manneskju með stuðningi BPMS, t.d. í verklista." },
+  { c: "endurhonnun", q: "Fimm tegundir sjálfvirkra verka í BPMN?", a: "<b>Script</b> (kóði innan BPMS), <b>service</b> (ytra forrit), <b>business rule</b> (reglukerfi), <b>send</b> (sendir skilaboð) og <b>receive</b> (bíður eftir skilaboðum)." },
+  { c: "endurhonnun", q: "Meginreglur skrefs 2 og 3?", a: "Skref 2: <i>ef BPMS sér ekki verkið, er það ekki til</i>. Skref 3: <i>frávik eru reglan</i> og <i>engin gögn, engar ákvarðanir og engin afhending verka</i>." },
+  { c: "endurhonnun", q: "Separation of duties vs. retain familiar?", a: "<b>Separation of duties</b>: tvö verk verða að vera unnin af ólíkum aðilum. <b>Retain familiar</b>: tvö verk verða að vera unnin af sama aðila." },
+  { c: "endurhonnun", q: "Síðasti spölurinn (the last mile)?", a: "BPMS flokkuð eftir stuðningi við BPMN: <b>hreint BPMN</b> (Activiti, Camunda), <b>aðlagað</b> (Bizagi, Bonita) og <b>ekki BPMN</b> (YAWL)." }
+); })();

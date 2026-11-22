@@ -1,0 +1,26 @@
+/* cards/kerfi.js – flashcards fyrir kafla 8: Kerfishugsun og orsakalykkjur. */
+(function () { var TK = (window.TK = window.TK || {}); (TK.CARDS = TK.CARDS || []).push(
+  { c: "kerfi", q: "Hvað er kerfi (Meadows)?", a: "Safn <b>eininga</b> sem tengjast með <b>tengingum</b> og ná saman einhverjum <b>tilgangi</b>. Tilgangurinn ræður mestu um hegðunina, einingarnar minnstu." },
+  { c: "kerfi", q: "Hvað er kerfishugsun (systems thinking)?", a: "Að horfa á kerfi með tilliti til <b>orsaka, afleiðinga og endurgjafar</b>: kortleggja breytur, skilja orsakasamhengi og skilja hegðun sem stafar af uppbyggingunni yfir tíma." },
+  { c: "kerfi", q: "Birgð (stock) vs. flæði (flow)?", a: "<b>Birgð</b> safnast upp og er mæld á tímapunkti (L, íbúðir, tonn). <b>Flæði</b> breytir birgðinni og er mælt á tímaeiningu (L/mín, íbúðir/ár)." },
+  { c: "kerfi", q: "Baðkarsjafnan með föstum flæðum?", a: "$S(t) = S_0 + (q_{inn} - q_{út})\\,t$. Tæmist eftir $t = S_0/(q_{út}-q_{inn})$ ef útflæðið er meira." },
+  { c: "kerfi", q: "Tákn í birgða- og flæðiriti (SFD)?", a: "Kassi = birgð, rör með loka = flæði, lítill hringur = breyta (converter), ský = uppspretta/niðurfall utan afmörkunar." },
+  { c: "kerfi", q: "Hvað er kvikt jafnvægi (dynamic equilibrium)?", a: "Innflæði = útflæði, svo birgðin stendur í stað þótt allt sé á hreyfingu." },
+  { c: "kerfi", q: "Styrkjandi lykkja (R)?", a: "Jákvæð endurgjöf, <b>sjálfstyrkjandi</b>: magnar breytingar. Veldisvöxtur eða veldishrun. Dæmi: hænur → egg → hænur; vextir á innistæðu." },
+  { c: "kerfi", q: "Jafnvægislykkja (B)?", a: "Neikvæð endurgjöf, <b>sjálfleiðréttandi</b>: vinnur á móti breytingum og leitar að markmiði. Dæmi: hitastillir; verð → nýbyggingar → (−) verð." },
+  { c: "kerfi", q: "Hvað þýða + og − (S og O) á ör?", a: "$A \\xrightarrow{+} B$: breyting í <b>sömu átt</b> (same). $A \\xrightarrow{-} B$: breyting í <b>gagnstæða átt</b> (opposite). Segir ekkert um gott eða slæmt." },
+  { c: "kerfi", q: "Hvernig ákvarðar þú pólun lykkju?", a: "Teldu neikvæðu tengslin: <b>slétt tala → R</b>, <b>oddatala → B</b>. Best: segðu söguna hringinn, helst bæði með aukningu og minnkun." },
+  { c: "kerfi", q: "Hvað þýðir || á ör?", a: "<b>Seinkun</b>: ef A breytist, breytist B eftir nokkurn tíma. Lengri seinkun í B-lykkju → stærri sveiflur." },
+  { c: "kerfi", q: "Reglur um nöfn breyta í CLD?", a: "<b>Nafnorð</b>, <b>mælanleg</b> (getur aukist/minnkað), <b>hlutlaus</b> um stefnu („ánægja“, ekki „aukin ánægja“), að jafnaði jákvætt orðuð. Ekki stofnanir („Seðlabankinn“)." },
+  { c: "kerfi", q: "Regla 70?", a: "Tvöföldunartími $T_2 \\approx 70/r$ með $r$ í %. Dæmi: 7 % á ári → 10 ár." },
+  { c: "kerfi", q: "Jafnvægisgildi birgðar með föstu innflæði $I$ og hlutfallslegu útflæði $d$?", a: "$S^* = I/d = I\\cdot D$, þar sem $D = 1/d$ er meðaldvalartími (sama hugmynd og lögmál Little)." },
+  { c: "kerfi", q: "Seigla, sjálfsskipulag og stigveldi?", a: "<b>Seigla</b>: geta til að jafna sig eftir áföll (margar lykkjur). <b>Sjálfsskipulag</b>: geta til að þróa nýja uppbyggingu. <b>Stigveldi</b>: undirkerfi með sterkari innri tengsl, sem þjóna heildinni." },
+  { c: "kerfi", q: "Af hverju koma kerfi á óvart? (6 ástæður)", a: "Tælandi atburðir, ólínuleiki, ekki raunveruleg mörk (afmörkun), takmörk, seinkanir og <b>afmörkuð skynsemi</b> (bounded rationality)." },
+  { c: "kerfi", q: "Harmleikur almenninganna — útgönguleiðir?", a: "Sameiginleg auðlind ofnýtt. Útgönguleiðir: siðareglur/fræðsla, einkavæðing (skipta auðlindinni, t.d. aflaheimildir) eða reglusetning (stýra aðgangi)." },
+  { c: "kerfi", q: "Kerfisgildrurnar átta?", a: "Andstaða við stefnu, harmleikur almenninganna, hnignun markmiða, stigmögnun, velgengni til hinna velgengnu, að velta byrðinni, að snúa á reglurnar, að elta rangt markmið." },
+  { c: "kerfi", q: "Stigmögnun vs. velgengni til hinna velgengnu?", a: "<b>Stigmögnun</b>: tveir aðilar svara hvor öðrum með meiru (verðstríð). <b>Velgengni til hinna velgengnu</b>: sigurvegarinn fær forskot sem auðveldar honum að sigra aftur (stærsta keðjan fær bestu kjörin)." },
+  { c: "kerfi", q: "Vogaraflspunktar 12 → 7 (minnst)?", a: "12 tölur/stikar, 11 stuðpúðar, 10 uppbygging birgða og flæða, 9 seinkanir, 8 jafnvægislykkjur, 7 styrkjandi lykkjur." },
+  { c: "kerfi", q: "Vogaraflspunktar 6 → 1 (mest)?", a: "6 upplýsingaflæði, 5 reglur, 4 sjálfsskipulag, 3 markmið, 2 hugmyndafræði (paradigms), 1 að hefja sig yfir hugmyndafræði." },
+  { c: "kerfi", q: "Algeng mistök í CLD?", a: "Óskýrt vandamál, óafmörkuð spurning, margar aðgerðir í einni breytu, of mikil einföldun, skortur á uppbyggingu, of mörg smáatriði; örvar sem „og svo…“; fylgni túlkuð sem orsök." },
+  { c: "kerfi", q: "Fylgni vs. orsök í CLD?", a: "Fylgni endurspeglar fyrri hegðun, ekki uppbyggingu, og getur rofnað ef yfirráð lykkja breytast. Ísasala og morðtíðni fylgjast að en hvorugt veldur hinu." }
+); })();

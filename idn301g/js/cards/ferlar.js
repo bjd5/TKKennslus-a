@@ -1,0 +1,26 @@
+/* cards/ferlar.js – flashcards fyrir kafla 1: Ferlar og ferlaskráning. */
+(function () { var TK = (window.TK = window.TK || {}); (TK.CARDS = TK.CARDS || []).push(
+  { c: "ferlar", q: "Hvað er viðskiptaferli (business process)?", a: "Safn <b>atburða, verka og ákvarðana</b> sem skilar útkomu sem hefur virði fyrir (innri eða ytri) <b>viðskiptavin</b>." },
+  { c: "ferlar", q: "Hvað er BPM?", a: "Stjórnun viðskiptaferla: list og vísindi þess að hafa umsjón með því hvernig vinnan er unnin, svo útkoman verði jöfn og umbótatækifæri nýtist (kostnaður, samkvæmni, tími, mistök)." },
+  { c: "ferlar", q: "Sex fasar BPM-lífsferilsins?", a: "Auðkenning → uppgötvun (as-is) → greining (veikleikar) → endurhönnun (to-be) → innleiðing (keyranlegt líkan) → eftirlit (frávik) → aftur í uppgötvun." },
+  { c: "ferlar", q: "Hvaða tvö skref felur ferlaauðkenning í sér?", a: "1) Skilgreina <b>ferlaarkitektúr</b>. 2) <b>Velja ferla</b> til að vinna með." },
+  { c: "ferlar", q: "Þrír ferlaflokkar?", a: "<b>Meginferlar</b> (skapa virðið sem viðskiptavinur greiðir fyrir), <b>stoðferlar</b> (HR, UT, fjármál), <b>stjórnunarferlar</b> (stefna, áætlanir, áhætta)." },
+  { c: "ferlar", q: "Þrjú tengsl milli ferla?", a: "<b>Röð</b> (lárétt), <b>niðurbrot</b> (lóðrétt/stigveldi), <b>sérhæfing</b> (útgáfur af sama ferli)." },
+  { c: "ferlar", q: "Þrjú viðmið við val á ferlum?", a: "<b>Mikilvægi</b> (strategic importance), <b>heilsa</b> (health), <b>framkvæmanleiki</b> (feasibility)." },
+  { c: "ferlar", q: "Hvar er áherslureiturinn í ferlaeignasafni?", a: "Mikið mikilvægi + léleg heilsa; þar fyrst ferlar með mikinn framkvæmanleika." },
+  { c: "ferlar", q: "Fjórar víddir ferlaframmistöðu?", a: "<b>Tími</b> (umferðartími = vinnslutími + bið), <b>kostnaður</b>, <b>gæði</b> (ytri og innri), <b>sveigjanleiki</b>." },
+  { c: "ferlar", q: "Nýtni vs. markvirkni?", a: "<b>Nýtni</b> (efficiency): sömu gæði, minni tími/fyrirhöfn (Lean). <b>Markvirkni</b> (effectiveness): sama fyrirhöfn, meiri gæði (Six Sigma)." },
+  { c: "ferlar", q: "Lean vs. Six Sigma?", a: "Lean: áhersla á <b>ferlið</b>, eyða sóun, bæta flæði. Six Sigma: áhersla á <b>útkomuna</b>, færri gallar, minni breytileiki, DMAIC." },
+  { c: "ferlar", q: "DMAIC?", a: "Define, Measure, Analyze, Improve, Control." },
+  { c: "ferlar", q: "SIPOC?", a: "<b>S</b>upplier (birgi), <b>I</b>nput (innlag), <b>P</b>rocess (4-8 meginþrep), <b>O</b>utput (frálag), <b>C</b>ustomer (viðskiptavinur)." },
+  { c: "ferlar", q: "RACI?", a: "<b>R</b> vinnur verkið, <b>A</b> eigandi með lokasamþykki (nákvæmlega einn), <b>C</b> ráðgefandi áður, <b>I</b> upplýstur eftir." },
+  { c: "ferlar", q: "Flæðirit vs. deildarferill (sniðmát námskeiðsins)?", a: "<b>Flæðirit</b>: enda-í-enda með brautum fyrir deildir, haus með nafni, eiganda, UT-hagsmunaaðila, KPI og samþykktardegi. <b>Deildarferill</b>: númeruð þrep með lýsingu; ákvarðanir fá ekki númer." },
+  { c: "ferlar", q: "Viðskiptaregla vs. UT-krafa?", a: "<b>Viðskiptaregla</b>: hvað má/má ekki eða forsenda ákvörðunar (t.d. 70 % hámark). <b>UT-krafa</b>: hvernig kerfi styður regluna (t.d. telur niður ábyrgðartíma)." },
+  { c: "ferlar", q: "Hvað á að skoða við ferlaskráningu?", a: "Flöskuhálsa, tvískráningar, óþarfa þrep, óljóst eignarhald, gefnar forsendur og umferðartíma." },
+  { c: "ferlar", q: "Hvað er flöskuháls?", a: "Þrep þar sem innflæði er meira en afköst; skorðan sem ræður hraða alls ferlisins. Afköst ferlis = $\\min$(afköst þrepa)." },
+  { c: "ferlar", q: "Afköst þreps?", a: "$\\dfrac{\\text{starfsmenn}\\cdot 60}{\\text{vinnslutími (mín)}}$ einingar/klst." },
+  { c: "ferlar", q: "Þrjár rekstrarlegar leiðir til að losna við flöskuháls?", a: "Bæta við <b>auðlindum</b>, <b>útvista</b> eða <b>sjálfvirknivæða</b>. Auk þess: besta fólkið á hann, minnka niðritíma, biðminni fyrir framan." },
+  { c: "ferlar", q: "Lengsta leiðin (critical path) í flæðitímagreiningu?", a: "Leiðin með mestan samanlagðan tíma; hún ræður heildartímanum og þar á að byrja úrbætur." },
+  { c: "ferlar", q: "Takt-tími?", a: "$\\text{takt} = \\dfrac{\\text{tiltækur tími}}{\\text{eftirspurn}}$: hve oft ferlið þarf að skila einingu." },
+  { c: "ferlar", q: "Ferlafjölskyldur?", a: "Quote-to-order, order-to-cash (saman quote-to-cash), procure-to-pay, issue-to-resolution, application-to-approval, record-to-report, hire-to-retire." }
+); })();

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verkfærakista: sniðmát og greiningartól · Greining ferla og kerfa</title>
+<meta name="description" content="Kennsluvefur fyrir IÐN301G Greining ferla og kerfa: ferlaskráning, BPMN, ferlauppgötvun, eigindleg og megindleg greining, endurhönnun, ferlahugbúnaður, kerfishugsun og stjórnun ferla.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23173327'/%3E%3Ccircle cx='7' cy='16' r='3' fill='%23ffe98a'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23ffe98a'/%3E%3Cpath d='M25 11l5 5-5 5-5-5z' fill='%23ffe98a'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Greining ferla og kerfa</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Greining ferla og kerfa<small>IÐN301G · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Ferlar og ferlaskráning</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Ferlalíkön í BPMN</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Þróuð ferlalíkön</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Ferlauppgötvun</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Eigindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Megindleg ferlagreining</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Endurhönnun og ferlahugbúnaður</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Kerfishugsun og orsakalykkjur</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Stjórnun ferla og BPM í starfseminni</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="upprifjun.html" data-gate="archive">Lokaupprifjun</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+<li><a class="nav" href="verkfaerakista.html" aria-current="page">Verkfærakista</a></li>
+<li><a class="nav" href="reiknivelar.html">Reiknivélar</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page">
+<h1>Verkfærakista: sniðmát og greiningartól</h1>
+<p class="lede">Hér eru tólin sem þú notar í EV1, HÓP1 og HÓP2, hvert með sama sniði: til hvers það er, hvenær þú grípur til þess, hvernig þú fyllir það út, lítið útfyllt dæmi og algengustu mistökin. Sniðmátin sjálf (SIPOC, RACI, flæðirit og deildarferill) eru í námsefninu á Canvas; hér lærir þú að nota þau rétt.</p>
+
+<h2 id="val">Hvaða tól á ég að nota?</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Spurningin sem þú vilt svara</th><th>Tól</th><th>Verkefni</th></tr></thead>
+<tbody>
+<tr><td>Hvar byrjar og endar ferlið, hvað fer inn og út og fyrir hvern?</td><td><a href="#sipoc">SIPOC</a></td><td>EV1, HÓP1</td></tr>
+<tr><td>Hver vinnur verkið, hver samþykkir, hver er spurður og hver upplýstur?</td><td><a href="#raci">RACI-fylki</a></td><td>EV1, HÓP1</td></tr>
+<tr><td>Hvernig flæðir ferlið milli deilda og kerfa, í stórum dráttum?</td><td><a href="#flaedirit">Flæðirit</a></td><td>EV1</td></tr>
+<tr><td>Hvaða þrep vinnur ein deild, í hvaða röð og með hvaða leiðbeiningum?</td><td><a href="#deildarferill">Deildarferill</a></td><td>EV1</td></tr>
+<tr><td>Hvernig upplifir viðskiptavinurinn ferlið?</td><td><a href="#cjm">Customer Journey Map</a></td><td>HÓP1</td></tr>
+<tr><td>Nákvæmt, staðlað líkan sem aðrir (og BPMS) geta lesið?</td><td><a href="#bpmn">BPMN</a></td><td>EV1, HÓP1</td></tr>
+<tr><td>Hvaða vandamál eru í ferlinu, hver skipta mestu og hver er rót þeirra?</td><td><a href="#eigindleg">Vandamálaskrá, Pareto, orsakarit, af hverju rit</a></td><td>HÓP1</td></tr>
+<tr><td>Hvaða afturvirkni stýrir hegðun kerfisins yfir tíma?</td><td><a href="#kerfi">CLD, birgða- og flæðirit</a></td><td>HÓP2</td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Röðin skiptir máli:</b> glærurnar ráðleggja að ná fyrst utan um ferlið og helstu þætti þess (SIPOC) <i>áður</i> en þú setur það á flæðirit með deildum og sviðum. Byrjaðu vítt, svo nákvæmt: SIPOC → flæðirit → deildarferlar → BPMN, og RACI í lokin til að ákveða hver þarf að samþykkja hvað.</p></div>
+
+<h2 id="sipoc">SIPOC</h2>
+<p><b>Til hvers:</b> SIPOC (<i>Suppliers, Inputs, Process, Outputs, Customers</i>; birgjar, innlag, ferli, frálag, viðskiptavinir) er yfirlit yfir ferlið á einni síðu. Það sýnir <b>flæðið</b>, <b>umfang ferlisins</b> (hvar það byrjar og endar) og <b>hagsmunaaðilana</b>.</p>
+<p><b>Hvenær:</b> fremst í ferlaskráningu, áður en þú teiknar nokkuð nákvæmt, og þegar þú þarft að afmarka verkefni eða finna hagsmunaaðila fyrir viðtöl.</p>
+<p><b>Hvernig:</b></p>
+<ol>
+<li>Gefðu ferlinu nafn og ákveddu <b>upphaf</b> (hvað hleypir því af stað) og <b>endi</b>.</li>
+<li>Fylltu fyrst út dálkinn <b>Ferli</b> með 5-8 meginþrepum, hvert sögn + nafnorð („Skrá beiðni“). Ekki meira; nánari lýsing kemur í deildarferlum.</li>
+<li>Skráðu <b>frálag</b> hvers þreps og <b>viðskiptavininn</b> sem fær það (innri eða ytri).</li>
+<li>Skráðu <b>innlagið</b> sem hvert þrep þarf og <b>birginn</b> sem leggur það til.</li>
+<li>Sniðmátið leyfir að bæta við dálki fyrir <b>kröfur</b> (gagnlegt í hugbúnaðarþróun) og að kafa dýpra með nýju SIPOC fyrir undirferli eins þreps.</li>
+</ol>
+<div class="ex"><div class="ex-head">Dæmi <span>Viðhaldsbeiðni í fasteignaumsjón</span></div><div class="ex-body">
+<div class="tablewrap"><table>
+<thead><tr><th>Birgir</th><th>Innlag</th><th>Ferli</th><th>Frálag</th><th>Viðskiptavinur</th></tr></thead>
+<tbody>
+<tr><td>Leigjandi</td><td>Beiðni á vef eða í síma</td><td>1. Skrá beiðni</td><td>Skráð verkbeiðni</td><td>Verkstjóri</td></tr>
+<tr><td>Verkstjóri</td><td>Verkbeiðni, forgangsreglur</td><td>2. Forgangsraða og úthluta</td><td>Úthlutað verk</td><td>Iðnaðarmaður</td></tr>
+<tr><td>Birgir varahluta</td><td>Varahlutir</td><td>3. Panta efni</td><td>Efni á staðnum</td><td>Iðnaðarmaður</td></tr>
+<tr><td>Iðnaðarmaður</td><td>Verk, efni, aðgangur að íbúð</td><td>4. Framkvæma viðgerð</td><td>Viðgerð íbúð</td><td>Leigjandi</td></tr>
+<tr><td>Iðnaðarmaður</td><td>Tímaskráning, efnisnotkun</td><td>5. Loka verki og skrá kostnað</td><td>Lokað verk, reikningur</td><td>Leigjandi, bókhald</td></tr>
+</tbody></table></div>
+</div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> (1) of mörg þrep, svo SIPOC verður að flæðiriti; (2) frálag sem er verk en ekki hlutur („viðgerð“ í stað „viðgerð íbúð“); (3) aðeins ytri viðskiptavinurinn skráður, þótt mörg þrep skili innri viðskiptavini; (4) deildir í ferlisdálknum í stað verka; skipuritið kemur seinna.</p></div>
+
+<h2 id="raci">RACI-fylki</h2>
+<p><b>Til hvers:</b> að gera ábyrgð og hlutverk skýr fyrir hvert ferli eða þrep. Bókstafirnir eru:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Bókstafur</th><th>Íslenska (sniðmátið)</th><th>Merking</th></tr></thead>
+<tbody>
+<tr><td><b>R</b> Responsible</td><td>Ábyrgð</td><td>Þau sem <b>vinna verkið</b> og taka ákvarðanir í því.</td></tr>
+<tr><td><b>A</b> Accountable</td><td>Stýring (eignarhald)</td><td>Sá/sú sem tekur <b>lokaákvörðun</b>, á ferlið og samþykkir vinnuna. Aðeins <b>einn</b> á hvert þrep.</td></tr>
+<tr><td><b>C</b> Consulted</td><td>Ráðgefandi</td><td>Leitað ráða hjá þeim <b>áður</b> en verkið er unnið eða ákvörðun tekin; tvíhliða samskipti.</td></tr>
+<tr><td><b>I</b> Informed</td><td>Upplýst</td><td>Látin vita <b>eftir</b> að ákvörðun er tekin eða verk unnið; einhliða samskipti.</td></tr>
+</tbody></table></div>
+<p><b>Hvenær:</b> í lok ferlaskráningar (glærurnar: „í lokin ákveðið hver þarf að samþykkja hvað“), þegar eignarhald er óljóst eða þegar greining sýnir að mál stranda vegna óskýrrar ábyrgðar.</p>
+<p><b>Hvernig:</b> settu ferlin eða þrepin í línur og hlutverk (ekki nöfn einstaklinga) í dálka, eða notaðu sniðmátið þar sem hver dálkur er R, A, C eða I og hlutverkin eru skrifuð í reitina. Athugaðu síðan hverja línu: nákvæmlega eitt A, a.m.k. eitt R.</p>
+<div class="ex"><div class="ex-head">Dæmi <span>Tjónaferli tryggingafélags</span></div><div class="ex-body">
+<div class="tablewrap"><table>
+<thead><tr><th>Þrep</th><th>Tjónafulltrúi</th><th>Matsmaður</th><th>Deildarstjóri tjóna</th><th>Lögfræðideild</th><th>Fjármálasvið</th></tr></thead>
+<tbody>
+<tr><td>Skrá tjónstilkynningu</td><td>R</td><td></td><td>A</td><td></td><td></td></tr>
+<tr><td>Meta tjón</td><td>C</td><td>R</td><td>A</td><td></td><td></td></tr>
+<tr><td>Ákveða bótaskyldu</td><td>R</td><td>C</td><td>A</td><td>C</td><td>I</td></tr>
+<tr><td>Greiða bætur</td><td>I</td><td></td><td>A</td><td></td><td>R</td></tr>
+</tbody></table></div>
+</div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> (1) tvö eða fleiri A í sömu línu, þá ber í raun enginn ábyrgð; (2) R og A rugluð saman: sá sem vinnur verkið (R) er ekki endilega sá sem samþykkir það (A); (3) allir merktir C „til öryggis“, sem hægir á öllu; (4) nöfn fólks í stað hlutverka, svo fylkið úreldist við fyrstu starfsmannabreytingu.</p></div>
+
+<h2 id="flaedirit">Flæðirit</h2>
+<p><b>Til hvers:</b> í sniðmáti námskeiðsins er <b>flæðiritið</b> yfirlitsmynd sem sýnir hvernig ferlið fer <b>þvert á deildir og svið</b>. Hver deild fær sína láréttu braut (e. <i>swimlane</i>, <i>cross-functional flowchart</i>), og neðst er braut fyrir <b>UT-lausnir og skjöl</b> (kerfi, vinnulýsingar, gátlista). Efst er nafn ferlis, ferilseigandi, UT-hagsmunaaðili, lykilmæling og dagsetning samþykktar.</p>
+<p><b>Hvenær:</b> þegar SIPOC er tilbúið og þú vilt sýna afhendingar milli deilda; það er þar sem tafir og tvískráningar sjást best.</p>
+<p><b>Hvernig:</b></p>
+<ol>
+<li>Settu upphaf ferlisins (hvað hleypir því af stað) í braut þeirrar deildar sem tekur fyrst við.</li>
+<li>Teiknaðu ferlaþrep (rétthyrninga) í rétta braut og tengdu með örvum. Ákvarðanir eru tíglar með <i>Já/Nei</i> á útgöngum.</li>
+<li>Þrep sem eru heilt ferli innan einnar deildar eru teiknuð sem <b>deildarferill</b> (rétthyrningur með tvöföldum hliðarstrikum) og vísa á sérstakan <a href="#deildarferill">deildarferil</a>.</li>
+<li>Tengdu þrep við kerfi og skjöl í neðstu brautinni með punktalínu.</li>
+<li>Endaðu hverja grein í <b>ENDIR</b>.</li>
+</ol>
+<div class="ex"><div class="ex-head">Dæmi <span>Umsókn um námsstyrk</span></div><div class="ex-body">
+<svg class="diagram" viewBox="0 0 720 330" role="img" aria-label="Flæðirit með fjórum brautum: umsækjandi, þjónustuver, úthlutunarnefnd og UT-lausnir og skjöl. Umsókn send, yfirfarin, ákvörðun um hvort gögn vanti, deildarferill um mat, ákvörðun um samþykki, og tilkynning send." style="max-width:100%;height:auto">
+  <defs><marker id="vk-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker></defs>
+  <g style="fill:none;stroke:var(--rule-2);stroke-width:1.2"><rect x="5" y="5" width="710" height="320"/><line x1="5" y1="85" x2="715" y2="85"/><line x1="5" y1="165" x2="715" y2="165"/><line x1="5" y1="245" x2="715" y2="245"/><line x1="40" y1="5" x2="40" y2="325"/></g>
+  <text style="font:600 11px var(--sans);fill:var(--ink)" transform="translate(26 45) rotate(-90)" text-anchor="middle">Umsækjandi</text><text style="font:600 11px var(--sans);fill:var(--ink)" transform="translate(26 125) rotate(-90)" text-anchor="middle">Þjónustuver</text><text style="font:600 11px var(--sans);fill:var(--ink)" transform="translate(26 205) rotate(-90)" text-anchor="middle">Nefnd</text><text style="font:600 11px var(--sans);fill:var(--ink)" transform="translate(26 285) rotate(-90)" text-anchor="middle">UT / skjöl</text>
+  <rect x="48" y="28" width="104" height="34" rx="17" style="fill:var(--ink)"/><text x="100" y="49" text-anchor="middle" style="fill:var(--raised);font-size:12px">Sendir umsókn</text>
+  <rect x="165" y="108" width="100" height="36" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="215" y="130" text-anchor="middle" style="font-size:12px">Yfirfara gögn</text>
+  <polygon points="335,102 375,126 335,150 295,126" style="fill:var(--raised);stroke:var(--bad);stroke-width:1.6"/><text x="335" y="130" text-anchor="middle" style="font-size:11px">Vantar?</text>
+  <rect x="278" y="28" width="114" height="36" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="335" y="50" text-anchor="middle" style="font-size:12px">Bætir við gögnum</text>
+  <rect x="405" y="187" width="110" height="36" style="fill:var(--key-bg);stroke:var(--ink);stroke-width:1.4"/><line x1="413" y1="187" x2="413" y2="223" style="stroke:var(--ink)"/><line x1="507" y1="187" x2="507" y2="223" style="stroke:var(--ink)"/><text x="460" y="209" text-anchor="middle" style="font-size:12px">Mat umsókna</text>
+  <polygon points="580,181 620,205 580,229 540,205" style="fill:var(--raised);stroke:var(--bad);stroke-width:1.6"/><text x="580" y="209" text-anchor="middle" style="font-size:11px">Samþ.?</text>
+  <rect x="610" y="28" width="90" height="34" rx="17" style="fill:var(--ink)"/><text x="655" y="49" text-anchor="middle" style="fill:var(--raised);font-size:12px">ENDIR</text>
+  <rect x="610" y="108" width="95" height="36" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="657" y="130" text-anchor="middle" style="font-size:12px">Senda svar</text>
+  <path d="M190 268 v30 a35 7 0 0 0 70 0 v-30 a35 7 0 0 0 -70 0 a35 7 0 0 0 70 0" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.3"/><text x="225" y="295" text-anchor="middle" style="font-size:11px">Umsóknakerfi</text>
+  <path d="M410 262 h90 v34 q-22 -8 -45 0 q-22 8 -45 0 z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.3"/><text x="455" y="283" text-anchor="middle" style="font-size:11px">Úthlutunarreglur</text>
+  <g style="fill:none;stroke:var(--ink);stroke-width:1.4" marker-end="url(#vk-a)">
+    <path d="M100 62 V126 H163"/><path d="M265 126 H293"/><path d="M335 102 V66"/><path d="M278 46 H240 V106"/>
+    <path d="M375 126 H460 V185"/><path d="M515 205 H538"/><path d="M620 205 H657 V146"/><path d="M657 108 V64"/>
+  </g>
+  <g style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 4"><path d="M215 144 V266"/><path d="M460 223 V260"/></g>
+  <text style="font:600 10px var(--sans);fill:var(--ink)" x="342" y="96">Já</text><text style="font:600 10px var(--sans);fill:var(--ink)" x="380" y="120">Nei</text><text style="font:600 10px var(--sans);fill:var(--ink)" x="625" y="198">Já/Nei</text>
+</svg>
+<p>Matið sjálft er sýnt sem <b>deildarferill</b> (tvöföld hliðarstrik) því það er heilt ferli innan nefndarinnar og fær sína eigin mynd.</p>
+</div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> (1) of mikil smáatriði; flæðiritið er yfirlit og nákvæmnin á heima í deildarferlum; (2) ákvörðun án merktra útganga (Já/Nei); (3) greinar sem enda hvergi; (4) kerfi og skjöl teiknuð inni í deildabrautunum í stað neðstu brautarinnar; (5) ferilseiganda og lykilmælingu vantar í hausinn.</p></div>
+<div class="note tip"><p><b class="t">Heiti:</b> í almennum heimildum er „flowchart“ oft einföld mynd án brauta og „swimlane“ eða „cross-functional flowchart“ sú sem hefur brautir. Í sniðmátum námskeiðsins er <b>flæðirit</b> yfirlitið þvert á deildir (með brautum) og <b>deildarferill</b> nákvæma myndin innan einnar deildar. Notaðu heitin eins og sniðmátin.</p></div>
+
+<h2 id="deildarferill">Deildarferill</h2>
+<p><b>Til hvers:</b> nákvæm lýsing á ferli <b>innan einnar deildar</b>: lóðrétt röð númeraðra verkþátta frá upphafi til enda, með ákvörðunum, tengdum verklagsreglum eða gátlistum, og texta til hliðar sem útskýrir hvert þrep. Hausinn hefur nafn ferlis og tengingu við flæðiritið, ferilseiganda (staða og titill) og lykilmælingu (KPI).</p>
+<p><b>Hvenær:</b> þegar flæðiritið er komið og þú þarft að lýsa því sem gerist inni í einum deildarferli, t.d. sem vinnulýsingu fyrir nýjan starfsmann.</p>
+<p><b>Hvernig:</b></p>
+<ol>
+<li>Þrep 1 er það sem hleypir ferlinu af stað (símtal, verkbeiðni, skoðun hefst).</li>
+<li>Númeraðu hvern verkþátt og lýstu til hliðar <b>innlagi og frálagi</b> og hvað þarf að gera til að halda áfram.</li>
+<li>Ákvarðanir fá <b>ekki</b> númer; þær eru ekki virðisaukandi verkþættir heldur hluti flæðisins.</li>
+<li>Tengdu verklagsreglur, leiðbeiningar eða gátlista við viðeigandi þrep (skjalatákn með punktalínu).</li>
+<li>Prófaðu hvert þrep: ef það er tekið út, gengur ferlið þá upp? Ef já, á það ekki heima þar.</li>
+</ol>
+<div class="ex"><div class="ex-head">Dæmi <span>Tjónadeild: móttaka tjónstilkynningar</span></div><div class="ex-body">
+<svg class="diagram" viewBox="0 0 640 360" role="img" aria-label="Deildarferill: upphaf, 1. taka við tilkynningu, 2. fletta upp tryggingu, ákvörðun um gilda tryggingu, ef nei 3. synjunarbréf, ef já 4. skrá tjón og stofna mál með gátlista, 5. senda staðfestingu, endir. Lýsingar til hægri." style="max-width:100%;height:auto">
+  <defs><marker id="vk-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker></defs>
+  <rect x="5" y="5" width="630" height="34" style="fill:var(--key-bg);stroke:var(--rule-2)"/><text x="14" y="27" style="font-size:12px"><tspan font-weight="700">Móttaka tjóns</tspan> · Ferilseigandi: deildarstjóri tjóna · KPI: % mála skráð innan 1 vinnudags</text>
+  <rect x="110" y="50" width="110" height="30" rx="15" style="fill:var(--ink)"/><text x="165" y="70" text-anchor="middle" style="fill:var(--raised);font-size:12px">Upphaf</text>
+  <rect x="100" y="95" width="130" height="34" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="165" y="116" text-anchor="middle" style="font-size:12px">1. Taka við tilkynningu</text>
+  <rect x="100" y="145" width="130" height="34" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="165" y="166" text-anchor="middle" style="font-size:12px">2. Fletta upp tryggingu</text>
+  <polygon points="165,193 210,215 165,237 120,215" style="fill:var(--raised);stroke:var(--bad);stroke-width:1.6"/><text x="165" y="219" text-anchor="middle" style="font-size:11px">Í gildi?</text>
+  <rect x="5" y="250" width="95" height="34" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="52" y="271" text-anchor="middle" style="font-size:11px">3. Synjunarbréf</text>
+  <rect x="100" y="250" width="130" height="34" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4" transform="translate(15 0)"/><text x="180" y="271" text-anchor="middle" style="font-size:12px">4. Skrá og stofna mál</text>
+  <path d="M260 252 h70 v26 q-17 -6 -35 0 q-17 6 -35 0 z" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.2"/><text x="295" y="268" text-anchor="middle" style="font-size:10px">Gátlisti</text>
+  <rect x="115" y="298" width="130" height="30" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="180" y="318" text-anchor="middle" style="font-size:12px">5. Senda staðfestingu</text>
+  <rect x="140" y="336" width="80" height="20" rx="10" style="fill:var(--ink)"/><text x="180" y="350" text-anchor="middle" style="fill:var(--raised);font-size:11px">ENDIR</text>
+  <g style="fill:none;stroke:var(--ink);stroke-width:1.4" marker-end="url(#vk-b)"><path d="M165 80 V93"/><path d="M165 129 V143"/><path d="M165 179 V191"/><path d="M120 215 H52 V248"/><path d="M165 237 V248"/><path d="M180 284 V296"/><path d="M180 328 V334"/><path d="M52 284 V346 H138"/></g>
+  <path d="M245 267 H258" style="stroke:var(--muted);stroke-dasharray:3 3"/>
+  <text style="font:600 10px var(--sans);fill:var(--ink)" x="92" y="209">Nei</text><text style="font:600 10px var(--sans);fill:var(--ink)" x="186" y="245">Já</text>
+  <text style="font-size:11.5px" x="350" y="110"><tspan font-weight="700">1.</tspan> Inn: tilkynning. Út: skráð mál.</text>
+  <text style="font-size:11.5px" x="350" y="162"><tspan font-weight="700">2.</tspan> Kennitala → trygging í kerfinu.</text>
+  <text style="font-size:11.5px" x="350" y="215">Ákvörðun fær ekki númer.</text>
+  <text style="font-size:11.5px" x="350" y="268"><tspan font-weight="700">3./4.</tspan> Gátlisti tryggir að gögn séu heil.</text>
+  <text style="font-size:11.5px" x="350" y="318"><tspan font-weight="700">5.</tspan> Út: staðfesting með málsnúmeri.</text>
+</svg>
+</div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> (1) önnur deild vinnur þrep inni í deildarferlinum; þá á það heima í flæðiritinu; (2) ákvarðanir númeraðar eins og verkþættir; (3) lýsingin til hliðar endurtekur bara heiti þrepsins í stað þess að segja hvað fer inn og út; (4) engin tenging við flæðiritið í hausnum.</p></div>
+
+<h2 id="cjm">Customer Journey Map</h2>
+<p><b>Til hvers:</b> að sjá ferlið <b>með augum viðskiptavinarins</b>. Customer journey map (ferðalag viðskiptavinar) sýnir fasa og snertifleti (e. <i>touchpoints</i>) í tímaröð, ánægjuferil sem fer upp og niður, hugsanir viðskiptavinarins og <b>sannleiksstundir</b> (e. <i>moments of truth</i>): samskipti sem ráða úrslitum um upplifunina. Oft fylgir persóna (e. <i>persona</i>) með bakgrunni og áhyggjum.</p>
+<p><b>Hvenær:</b> í greiningu HÓP1 til að finna hvar ferlið bregst viðskiptavininum, og í endurhönnun (t.d. NESTT notar CJM sem lýsingu á „nútíðinni“).</p>
+<p><b>Hvernig:</b></p>
+<ol>
+<li>Veldu eina persónu og eitt markmið hennar („fá týnda tösku til baka“).</li>
+<li>Skiptu ferðalaginu í 3-4 fasa og hvern fasa í snertifleti.</li>
+<li>Fyrir hvern snertiflöt: hvað gerist, hvað hugsar persónan og hversu ánægð er hún (t.d. −2 til +2)?</li>
+<li>Teiknaðu ánægjuferilinn og merktu sannleiksstundir og lágpunkta.</li>
+<li>Tengdu lágpunktana við vandamálaskrána: þeir eru oft bestu tækifærin til endurhönnunar.</li>
+</ol>
+<div class="ex"><div class="ex-head">Dæmi <span>Farþegi sem fær ekki töskuna sína</span></div><div class="ex-body">
+<svg class="diagram" viewBox="0 0 700 300" role="img" aria-label="Customer journey map með þremur fösum: við komu, tilkynning og bið, afhending. Ánægja fer niður við færibandið, lengst niður við biðröðina á afgreiðsluborðinu, hækkar við SMS um að taskan sé fundin og endar ofan við miðlínu við heimsendingu." style="max-width:100%;height:auto">
+  <g style="font:600 12px var(--sans)">
+    <path d="M10 15 h200 l12 15 l-12 15 h-200 z" style="fill:var(--mag)"/><text x="110" y="35" text-anchor="middle" style="fill:var(--raised);font:600 12px var(--sans)">Við komu</text>
+    <path d="M226 15 h230 l12 15 l-12 15 h-230 l12 -15 z" style="fill:var(--phase)"/><text x="345" y="35" text-anchor="middle" style="fill:var(--raised);font:600 12px var(--sans)">Tilkynning og bið</text>
+    <path d="M472 15 h200 l12 15 l-12 15 h-200 l12 -15 z" style="fill:var(--good)"/><text x="580" y="35" text-anchor="middle" style="fill:var(--raised);font:600 12px var(--sans)">Afhending</text>
+  </g>
+  <line x1="40" y1="150" x2="690" y2="150" style="stroke:var(--rule-2);stroke-dasharray:4 4"/>
+  <text x="8" y="105" class="small" style="font-size:11px">ánægð</text><text x="8" y="215" class="small" style="font-size:11px">óánægð</text>
+  <polyline points="60,130 160,190 290,235 400,200 520,105 640,115" style="fill:none;stroke:var(--ink);stroke-width:2"/>
+  <g style="fill:var(--ink)"><circle cx="60" cy="130" r="6"/><circle cx="160" cy="190" r="6"/><circle cx="400" cy="200" r="6"/><circle cx="640" cy="115" r="6"/></g>
+  <g style="fill:var(--bad)"><circle cx="290" cy="235" r="9"/></g><text x="290" y="239" text-anchor="middle" style="fill:var(--raised);font:700 11px var(--sans)">★</text>
+  <g style="fill:var(--good)"><circle cx="520" cy="105" r="9"/></g><text x="520" y="109" text-anchor="middle" style="fill:var(--raised);font:700 11px var(--sans)">★</text>
+  <text style="font-size:11px" x="60" y="115" text-anchor="middle">Lendir</text><text style="font-size:11px" x="160" y="178" text-anchor="middle">Taska kemur ekki</text>
+  <text style="font-size:11px" x="290" y="262" text-anchor="middle">40 manna röð við borðið</text><text style="font-size:11px" x="400" y="225" text-anchor="middle">Fyllir út eyðublað</text>
+  <text style="font-size:11px" x="520" y="90" text-anchor="middle">SMS: taskan fundin</text><text style="font-size:11px" x="640" y="100" text-anchor="middle">Send heim</text>
+  <text style="font-size:11px;font-style:italic;fill:var(--muted)" x="20" y="290">„Hvert á ég að snúa mér?“</text><text style="font-size:11px;font-style:italic;fill:var(--muted)" x="250" y="290">„Þarf ég að segja þetta allt aftur?“</text><text style="font-size:11px;font-style:italic;fill:var(--muted)" x="510" y="290">„Loksins, og ég þurfti ekkert að gera.“</text>
+</svg>
+<p>Rauða stjarnan er sannleiksstund sem fer illa (biðröð, endurteknar upplýsingar) og tengist beint heuristics eins og <i>extra resources</i> og <i>contact reduction</i>; græna stjarnan sýnir hvað fyrirbyggjandi samskipti gera fyrir upplifunina.</p>
+</div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> (1) að teikna innra ferli fyrirtækisins en kalla það CJM; á kortinu eru bara það sem viðskiptavinurinn sér og upplifir; (2) ánægjuferill án gagna (byggðu á viðtölum, kvörtunum eða könnunum); (3) margar persónur á sama korti; (4) ekkert gert við lágpunktana.</p></div>
+
+<h2 id="bpmn">BPMN</h2>
+<p><b>Til hvers:</b> BPMN (<i>Business Process Model and Notation</i>) er staðlað líkanamál fyrir ferli. Ólíkt flæðiriti og deildarferli hefur hvert tákn nákvæma merkingu, svo líkanið er ótvírætt og getur, eftir viðbætur, keyrt í BPMS (sjá <a href="kafli-7.html">kafla 7</a>). Táknin eru kennd í <a href="kafli-2.html">kafla 2</a> og <a href="kafli-3.html">kafla 3</a>.</p>
+<p><b>Hvenær:</b> þegar þú þarft nákvæmt as-is eða to-be líkan, eins og í EV1 og HÓP1.</p>
+<p><b>Hvernig (gátlisti):</b></p>
+<ol>
+<li>Einn <b>pool</b> fyrir fyrirtækið, <b>lanes</b> fyrir hlutverk; ytri aðilar (viðskiptavinur, birgir) í eigin pool með <b>skilaboðaflæði</b> (punktalína) á milli.</li>
+<li>Upphafsatburður og <b>nefndir</b> endaatburðir (t.d. „umsókn samþykkt“, „umsókn hafnað“).</li>
+<li>Verk heita sögn + nafnorð; atburðir lýsa ástandi („reikningur móttekinn“).</li>
+<li>Hvert opnandi hlið (XOR, AND, OR) hefur samsvarandi lokandi hlið af sömu gerð; útgangar XOR-hliða eru merktir skilyrðum.</li>
+<li>Raðflæði (heil lína) fer aldrei milli pools.</li>
+</ol>
+<div class="ex"><div class="ex-head">Dæmi <span>Nýskráning í banka (einfaldað)</span></div><div class="ex-body">
+<svg class="diagram" viewBox="0 0 700 220" role="img" aria-label="BPMN-líkan: pool bankans með tveimur brautum, þjónustufulltrúi og regluvörður. Upphafsatburður umsókn móttekin, verkið sannreyna auðkenni, verkið áhættuflokka, XOR-hlið há áhætta. Já fer í braut regluvarðar, yfirfara mál, og sameinast. Nei fer beint. Stofna reikning og endaatburður reikningur stofnaður." style="max-width:100%;height:auto">
+  <defs><marker id="vk-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker></defs>
+  <g style="fill:none;stroke:var(--ink);stroke-width:1.4"><rect x="5" y="5" width="690" height="210"/><line x1="30" y1="5" x2="30" y2="215"/><line x1="55" y1="5" x2="55" y2="215"/><line x1="30" y1="120" x2="695" y2="120"/></g>
+  <text style="font:600 11px var(--sans);fill:var(--ink)" transform="translate(21 110) rotate(-90)" text-anchor="middle">Banki</text><text style="font:600 11px var(--sans);fill:var(--ink)" transform="translate(46 62) rotate(-90)" text-anchor="middle">Fulltrúi</text><text style="font:600 11px var(--sans);fill:var(--ink)" transform="translate(46 168) rotate(-90)" text-anchor="middle">Regluvörður</text>
+  <circle cx="85" cy="60" r="14" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.6"/><text x="85" y="95" text-anchor="middle" style="font-size:10px">Umsókn</text><text x="85" y="107" text-anchor="middle" style="font-size:10px">móttekin</text>
+  <rect x="120" y="38" width="100" height="44" rx="9" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="170" y="57" text-anchor="middle" style="font-size:11px">Sannreyna</text><text x="170" y="71" text-anchor="middle" style="font-size:11px">auðkenni</text>
+  <rect x="240" y="38" width="100" height="44" rx="9" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="290" y="64" text-anchor="middle" style="font-size:11px">Áhættuflokka</text>
+  <polygon points="385,38 407,60 385,82 363,60" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><path d="M378 53 l14 14 M392 53 l-14 14" style="stroke:var(--ink);stroke-width:2"/>
+  <text x="385" y="30" text-anchor="middle" style="font-size:10px">Há áhætta?</text>
+  <rect x="430" y="145" width="100" height="44" rx="9" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="480" y="164" text-anchor="middle" style="font-size:11px">Yfirfara</text><text x="480" y="178" text-anchor="middle" style="font-size:11px">mál</text>
+  <polygon points="560,38 582,60 560,82 538,60" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><path d="M553 53 l14 14 M567 53 l-14 14" style="stroke:var(--ink);stroke-width:2"/>
+  <rect x="595" y="38" width="62" height="44" rx="9" style="fill:var(--raised);stroke:var(--ink);stroke-width:1.4"/><text x="626" y="57" text-anchor="middle" style="font-size:10px">Stofna</text><text x="626" y="71" text-anchor="middle" style="font-size:10px">reikning</text>
+  <circle cx="678" cy="60" r="12" style="fill:var(--raised);stroke:var(--ink);stroke-width:3.5"/>
+  <g style="fill:none;stroke:var(--ink);stroke-width:1.4" marker-end="url(#vk-c)"><path d="M99 60 H118"/><path d="M220 60 H238"/><path d="M340 60 H361"/><path d="M407 60 H536"/><path d="M385 82 V167 H428"/><path d="M530 167 H560 V84"/><path d="M582 60 H593"/><path d="M657 60 H664"/></g>
+  <text style="font-size:10px" x="450" y="54">Nei</text><text style="font-size:10px" x="390" y="140">Já</text>
+</svg>
+</div></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> (1) raðflæði milli pools í stað skilaboðaflæðis; (2) XOR-hlið opnað en aldrei lokað, eða lokað með AND-hliði; (3) endaatburðir án nafns; (4) gagnahlutir og athugasemdir notaðir í stað verka; (5) of mörg smáatriði í as-is líkani sem gera það ólæsilegt.</p></div>
+
+<h2 id="eigindleg">Tól úr eigindlegri greiningu</h2>
+<p>Þessi tól eru kennd ítarlega í <a href="kafli-5.html">kafla 5: Eigindleg ferlagreining</a>. Í stuttu máli:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Tól</th><th>Til hvers</th><th>Algeng mistök</th></tr></thead>
+<tbody>
+<tr><td><b>Vandamálaskrá</b> (<i>issue register</i>)</td><td>Skráir hvert vandamál skipulega: nafn, lýsing, forsendur, áhrif (eigindleg og megindleg).</td><td>Lausnir skráðar sem vandamál („vantar nýtt kerfi“).</td></tr>
+<tr><td><b>Pareto-greining</b> og PICK-kort</td><td>Raðar vandamálum eftir áhrifum (oft valda fá vandamál mestum hluta tjónsins, 80/20) og velur hver á að leysa fyrst.</td><td>Áhrif metin af tilfinningu, ekki tölum.</td></tr>
+<tr><td><b>Orsakarit</b> (fiskbeinarit, <i>cause-and-effect / Ishikawa</i>)</td><td>Flokkar mögulegar orsakir einnar neikvæðrar útkomu, t.d. eftir 6 M.</td><td>Útkoman („haus fisksins“) of almenn.</td></tr>
+<tr><td><b>Af hverju rit</b> (<i>why-why diagram</i>)</td><td>Spyr „af hverju?“ endurtekið (oft 5 sinnum) til að komast að rót vandans.</td><td>Hætt við fyrsta einkenni eða endað á að kenna einstaklingi um.</td></tr>
+</tbody></table></div>
+
+<h2 id="kerfi">Tól úr kerfishugsun</h2>
+<p>Þessi tól eru kennd í <a href="kafli-8.html">kafla 8: Kerfishugsun og orsakalykkjur</a> og eru kjarninn í HÓP2.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Tól</th><th>Til hvers</th><th>Algeng mistök</th></tr></thead>
+<tbody>
+<tr><td><b>Orsakalykkjurit</b> (CLD, <i>causal loop diagram</i>)</td><td>Sýnir orsakatengsl milli breyta með + og − merktum örvum og styrkjandi (R) og jafnandi (B) lykkjur, t.d. á húsnæðismarkaði eða í kvótakerfinu.</td><td>Breytur sem eru ekki magn („stjórnvöld“ í stað „vextir“) og rangt merktar lykkjur.</td></tr>
+<tr><td><b>Birgða- og flæðirit</b> (<i>stock-and-flow</i>)</td><td>Sýnir birgðir (það sem safnast upp, t.d. fiskistofn) og flæði inn og út (nýliðun, veiði), og tafir.</td><td>Birgðum og flæði ruglað saman (stofn vs. veiði á ári).</td></tr>
+</tbody></table></div>
+<div class="pager noprint"><a href="ordasafn.html"><span>Fyrri</span>Orðasafn</a><a href="reiknivelar.html" style="text-align:right"><span>Næsta</span>Reiknivélar</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+</body>
+</html>
