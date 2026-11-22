@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 5: Lykkjur · Tölvunarfræði 1</title>
+<meta name="description" content="Kennsluvefur fyrir TÖL101G Tölvunarfræði 1: Java frá breytum og lykkjum að klösum, erfðum, viðmótum og undantekningum.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a8461a'/%3E%3Cpath d='M12 9l-6 7 6 7M20 9l6 7-6 7' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tölvunarfræði 1</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Tölvunarfræði 1<small>TÖL101G · Java · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Forrit og reiknirit</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Tölur, breytur og segðir</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Rökgildi og skilyrði</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Stafir og strengir</a></li>
+<li><a class="nav" href="kafli-5.html" aria-current="page" data-gate="ch5">5. Lykkjur</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Aðferðir</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Fylki</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Klasar og hlutir</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Tengsl hluta og UML</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Erfðir og fjölbrigðni</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Hrein klasar og viðmót</a></li>
+<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Undantekningar og pakkar</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="kodaskrif.html">Kóðaskrif</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="minnisblad.html">Minnisblað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="5" data-topics="lykkjur">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 5: Lykkjur</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-4.html">kafla 4</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 5 af 12 · Vika 5 · Liang kafli 5</p>
+<h1>Lykkjur</h1>
+<p class="ch-exam"><b>Tengist:</b> Miðannarpróf 1 og lokapróf: rekja lykkjur og skrifa þær</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Verkstæði</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Lykkjur endurtaka setningar: að kasta teningi þar til einhver vinnur, að fara í gegnum alla stafi strengs eða öll spil í stokki. Hér lærir þú <code>while</code>, <code>do-while</code> og <code>for</code>, <code>break</code> og <code>continue</code>, hreiðraðar lykkjur og hvernig þú rekur lykkju skref fyrir skref, sem er ein algengasta prófspurningin.</p>
+
+<h2 id="while">while-lykkjan</h2>
+<pre class="code"><code class="java">int i = 1;                 // 1. frumstilling
+while (i &lt;= 5) {           // 2. skilyrði, prófað FYRIR hverja umferð
+    System.out.print(i + " ");
+    i++;                   // 3. uppfærsla: annars endalaus lykkja
+}
+System.out.println("| i = " + i);</code></pre>
+<pre class="out">1 2 3 4 5 | i = 6</pre>
+<p>Skilyrðið er prófað áður en hver umferð byrjar. Ef það er ósatt í upphafi keyrir lykkjan <b>aldrei</b>. Eftir lykkjuna er skilyrðið ósatt (hér <code>i = 6</code>).</p>
+
+<h3>Lykkja með vaktgildi (sentinel)</h3>
+<pre class="code"><code class="java">int sum = 0;
+int n = input.nextInt();
+while (n != 0) {           // 0 merkir „búið“
+    sum += n;
+    n = input.nextInt();   // lesa næsta í lok umferðar
+}
+System.out.println("Summa: " + sum);</code></pre>
+
+<h2 id="dowhile">do-while-lykkjan</h2>
+<p>Í <code>do-while</code> er skilyrðið prófað <b>eftir</b> umferðina, svo lykkjan keyrir <b>að minnsta kosti einu sinni</b>. Hún hentar til að lesa inntak þar til það er löglegt, eins og í Snakes &amp; Ladders:</p>
+<pre class="code"><code class="java">int roll;
+do {
+    roll = input.nextInt();
+} while (roll &lt; 1 || roll &gt; 6);   // endurtaka á meðan kastið er ólöglegt
+                                    // takið eftir semíkommunni!</code></pre>
+
+<h2 id="for">for-lykkjan</h2>
+<p><code>for</code> safnar frumstillingu, skilyrði og uppfærslu í eina línu. Hún er eðlilegasti kosturinn þegar fjöldi umferða er þekktur:</p>
+<pre class="code"><code class="java">for (int i = 0; i &lt; 5; i++) {     // i = 0, 1, 2, 3, 4  (5 umferðir)
+    System.out.print(i * i + " ");
+}
+// 0 1 4 9 16</code></pre>
+<p>Röðin í hverri umferð: <b>skilyrði → líkami → uppfærsla</b> → skilyrði → … Frumstillingin keyrir einu sinni í byrjun. Breyta sem er lýst í for-hausnum (<code>int i</code>) er aðeins til inni í lykkjunni; eftir hana er <code>i</code> óþekkt (þýðingarvilla).</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Haus</th><th>Gildi á i</th><th>Umferðir</th></tr></thead>
+<tbody>
+<tr><td><code>for (int i = 0; i &lt; n; i++)</code></td><td>0 … n−1</td><td>n</td></tr>
+<tr><td><code>for (int i = 1; i &lt;= n; i++)</code></td><td>1 … n</td><td>n</td></tr>
+<tr><td><code>for (int i = n; i &gt; 0; i--)</code></td><td>n … 1</td><td>n</td></tr>
+<tr><td><code>for (int i = 0; i &lt; n; i += 2)</code></td><td>0, 2, 4 … &lt; n</td><td>⌈n/2⌉</td></tr>
+<tr><td><code>for (int i = 1; i &lt; 100; i *= 2)</code></td><td>1, 2, 4 … 64</td><td>7</td></tr>
+</tbody></table></div>
+<p>Fjöldi umferða í <code>for (int i = a; i &lt; b; i++)</code> er <code>b − a</code>; með <code>&lt;=</code> er hann <code>b − a + 1</code>.</p>
+<div class="note warn"><p><b class="t">Klassískar villur:</b> (1) <b>Einum of mikið/lítið</b> (off-by-one): <code>&lt;=</code> í stað <code>&lt;</code> eða öfugt, sérstaklega með <code>length()</code>. (2) <code>for (…);</code> með semíkommu: líkaminn verður tóm setning og blokkin á eftir keyrir einu sinni. (3) <b>Endalaus lykkja</b>: uppfærslan gleymist eða færir breytuna í ranga átt (<code>i--</code> þegar <code>i &lt; n</code>).</p></div>
+
+<h2 id="break">break og continue</h2>
+<ul>
+<li><code>break</code> hættir í <b>innstu</b> lykkjunni (eða switch) strax.</li>
+<li><code>continue</code> sleppir afganginum af <b>þessari umferð</b> og fer í næstu (í for-lykkju er uppfærslan samt keyrð).</li>
+</ul>
+<div class="vs">
+<div><pre class="code"><code class="java">for (int i = 1; i &lt;= 10; i++) {
+    if (i % 3 == 0) continue;   // sleppa 3, 6, 9
+    if (i &gt; 7) break;           // hætta við 8
+    System.out.print(i + " ");
+}</code></pre></div>
+<div><pre class="out">1 2 4 5 7</pre></div>
+</div>
+<p>Leikjalykkjan í Snakes &amp; Ladders er <code>do { … } while (true);</code>: endalaus lykkja sem <code>break</code> rýfur þegar einhver nær reit 100.</p>
+
+<h2 id="hreidrad">Hreiðraðar lykkjur</h2>
+<p>Innri lykkjan keyrir <b>allar sínar umferðir</b> fyrir hverja umferð ytri lykkjunnar:</p>
+<div class="vs">
+<div><pre class="code"><code class="java">for (int row = 1; row &lt;= 4; row++) {
+    for (int col = 1; col &lt;= row; col++) {
+        System.out.print("*");
+    }
+    System.out.println();
+}</code></pre></div>
+<div><pre class="out">*
+**
+***
+****</pre></div>
+</div>
+<p>Heildarfjöldi umferða innri lykkjunnar hér er 1 + 2 + 3 + 4 = 10. Ef innri lykkjan fer alltaf m sinnum og sú ytri n sinnum er fjöldinn n·m.</p>
+
+<h2 id="mynstur">Algeng mynstur</h2>
+<div class="code-cols">
+<div><h4>Summa og fjöldi</h4><pre class="code"><code class="java">int sum = 0, count = 0;
+for (int i = 1; i &lt;= n; i++) {
+    if (i % 3 == 0) {
+        sum += i;
+        count++;
+    }
+}</code></pre></div>
+<div><h4>Stærsta gildi</h4><pre class="code"><code class="java">int max = input.nextInt();   // fyrsta gildið
+for (int i = 1; i &lt; n; i++) {
+    int x = input.nextInt();
+    if (x &gt; max) max = x;
+}</code></pre></div>
+<div><h4>Tölustafir tölu</h4><pre class="code"><code class="java">int digitSum = 0, rev = 0;
+while (n &gt; 0) {
+    int d = n % 10;      // síðasti stafur
+    digitSum += d;
+    rev = rev * 10 + d;  // byggja öfuga tölu
+    n /= 10;             // henda síðasta staf
+}</code></pre></div>
+<div><h4>Er n frumtala?</h4><pre class="code"><code class="java">boolean prime = n &gt; 1;
+for (int d = 2; d * d &lt;= n; d++) {
+    if (n % d == 0) {
+        prime = false;
+        break;
+    }
+}</code></pre></div>
+</div>
+
+<h2 id="rakning">Að rekja lykkju</h2>
+<p>Á prófinu áttu að geta sagt nákvæmlega hvað lykkja prentar, án tölvu. Gerðu töflu með dálki fyrir hverja breytu og línu fyrir hverja umferð:</p>
+<div class="vs">
+<div><pre class="code"><code class="java">int a = 1, b = 0;
+while (a &lt; 20) {
+    b += a;
+    a *= 3;
+}
+System.out.println(a + " " + b);</code></pre></div>
+<div class="tablewrap" style="margin:0"><table>
+<thead><tr><th>umferð</th><th>a &lt; 20?</th><th>b</th><th>a</th></tr></thead>
+<tbody>
+<tr><td>(byrjun)</td><td></td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>já</td><td>1</td><td>3</td></tr>
+<tr><td>2</td><td>já</td><td>4</td><td>9</td></tr>
+<tr><td>3</td><td>já</td><td>13</td><td>27</td></tr>
+<tr><td>–</td><td>nei</td><td colspan="2">prentar <code>27 13</code></td></tr>
+</tbody></table></div>
+</div>
+
+<h2 id="samantekt">Samantekt</h2>
+<ul class="checklist">
+<li><code>while</code>: 0 eða fleiri umferðir; <code>do-while</code>: 1 eða fleiri; <code>for</code>: þekktur fjöldi.</li>
+<li>Röð í for: frumstilling (1×), svo skilyrði → líkami → uppfærsla.</li>
+<li><code>i &lt; n</code> frá 0 gefur n umferðir; <code>i &lt;= n</code> frá 1 líka.</li>
+<li><code>break</code> hættir í innstu lykkju; <code>continue</code> fer í næstu umferð.</li>
+<li>Hreiðraðar: innri lykkjan klárast fyrir hverja ytri umferð.</li>
+<li>Raktu með töflu: ein lína á umferð, einn dálkur á breytu.</li>
+</ul>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Kóðadæmi („hvað prentar forritið?“) með nýjum tölum í hvert skipti og skilningsspurningar úr kaflanum. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Kóðaverkstæði</h2>
+<p>Hér vinnur þú með kóðann sjálfan, eins og á prófinu: raðar línum í rétt forrit, fyllir í eyður, finnur villur og rekur breytur skref fyrir skref. Leystu öll verkefnin til að ljúka skrefinu.</p>
+<div class="panel ws-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 6"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-4.html"><span>Fyrri</span>4. Stafir og strengir</a><a href="kafli-6.html" style="text-align:right"><span>Næsta</span>6. Aðferðir</a></div>
+</div>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/adferdir.js"></script>
+<script src="js/q/erfdir.js"></script>
+<script src="js/q/forrit.js"></script>
+<script src="js/q/fylki.js"></script>
+<script src="js/q/hrein.js"></script>
+<script src="js/q/klasar.js"></script>
+<script src="js/q/lykkjur.js"></script>
+<script src="js/q/skilyrdi.js"></script>
+<script src="js/q/strengir.js"></script>
+<script src="js/q/tengsl.js"></script>
+<script src="js/q/tolur.js"></script>
+<script src="js/q/undantekningar.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/verkstaedi.js"></script>
+<script src="js/w/kafli-5.js"></script>
+</body>
+</html>

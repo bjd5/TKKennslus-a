@@ -21,6 +21,17 @@
       ],
       "port": 8301,
       "url": "http://localhost:8301"
+    },
+    {
+      "name": "tol101g",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8101"
+      ],
+      "port": 8101,
+      "url": "http://localhost:8101"
     }
   ]
 }

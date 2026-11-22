@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lokapróf ferðalagsins · Tölvunarfræði 1</title>
+<meta name="description" content="Kennsluvefur fyrir TÖL101G Tölvunarfræði 1: Java frá breytum og lykkjum að klösum, erfðum, viðmótum og undantekningum.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a8461a'/%3E%3Cpath d='M12 9l-6 7 6 7M20 9l6 7-6 7' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Tölvunarfræði 1</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Tölvunarfræði 1<small>TÖL101G · Java · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Forrit og reiknirit</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Tölur, breytur og segðir</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Rökgildi og skilyrði</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Stafir og strengir</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Lykkjur</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Aðferðir</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Fylki</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Klasar og hlutir</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Tengsl hluta og UML</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Erfðir og fjölbrigðni</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Hrein klasar og viðmót</a></li>
+<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Undantekningar og pakkar</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" aria-current="page" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="kodaskrif.html">Kóðaskrif</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="minnisblad.html">Minnisblað</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="gate" data-gate="final">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Lokaprófið er læst</h1><p>Kláraðu kaflapróf allra 12 kaflanna með einkunn 6 eða hærra til að opna lokaprófið.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="gated">
+<!--wide-->
+<h1>Lokapróf ferðalagsins</h1>
+<p class="lede">Sex hlutar úr öllu námsefninu, eins og alvöru lokaprófið sem nær yfir kafla 1-13. Nýjar spurningar og nýjar tölur í hvert skipti. Náðu 6 eða hærra og prófhermirinn opnast: stór kóðaverkefni á prófsniði með fyrirmyndarlausnum og matsblaði.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Hluti</th><th>Efni</th><th>Vægi</th><th>Kaflar</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Tölur, segðir og skilyrði</td><td>15 %</td><td>1-3</td></tr>
+<tr><td>2</td><td>Strengir og lykkjur</td><td>20 %</td><td>4-5</td></tr>
+<tr><td>3</td><td>Aðferðir og fylki</td><td>20 %</td><td>6-7</td></tr>
+<tr><td>4</td><td>Klasar, hlutir og UML</td><td>15 %</td><td>8-9</td></tr>
+<tr><td>5</td><td>Erfðir, fjölbrigðni og hrein klasar</td><td>20 %</td><td>10-11</td></tr>
+<tr><td>6</td><td>Undantekningar og pakkar</td><td>10 %</td><td>12</td></tr>
+</tbody></table></div>
+<div class="note"><p><b class="t">Um kóðaskrif:</b> á alvöru prófinu skrifar þú líka kóða frá grunni og hann er metinn handvirkt. Hér eru rakningar- og krossaspurningar svo hægt sé að gefa einkunn sjálfkrafa. Kóðaskrifin æfir þú í <a href="kodaskrif.html">kóðaskrifunum</a> og í prófherminum.</p></div>
+<div id="final-exam" class="final-exam"></div>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-12.html"><span>Fyrri</span>12. Undantekningar og pakkar</a><a href="profhermir.html" style="text-align:right"><span>Næsta</span>Prófhermir</a></div>
+</div>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/adferdir.js"></script>
+<script src="js/q/erfdir.js"></script>
+<script src="js/q/forrit.js"></script>
+<script src="js/q/fylki.js"></script>
+<script src="js/q/hrein.js"></script>
+<script src="js/q/klasar.js"></script>
+<script src="js/q/lykkjur.js"></script>
+<script src="js/q/skilyrdi.js"></script>
+<script src="js/q/strengir.js"></script>
+<script src="js/q/tengsl.js"></script>
+<script src="js/q/tolur.js"></script>
+<script src="js/q/undantekningar.js"></script>
+<script src="js/examgen.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+</body>
+</html>

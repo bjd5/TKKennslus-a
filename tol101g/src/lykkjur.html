@@ -1,0 +1,139 @@
+<h1>Lykkjur</h1>
+<p class="lede">Lykkjur endurtaka setningar: að kasta teningi þar til einhver vinnur, að fara í gegnum alla stafi strengs eða öll spil í stokki. Hér lærir þú <code>while</code>, <code>do-while</code> og <code>for</code>, <code>break</code> og <code>continue</code>, hreiðraðar lykkjur og hvernig þú rekur lykkju skref fyrir skref, sem er ein algengasta prófspurningin.</p>
+
+<h2 id="while">while-lykkjan</h2>
+<pre class="code"><code class="java">int i = 1;                 // 1. frumstilling
+while (i &lt;= 5) {           // 2. skilyrði, prófað FYRIR hverja umferð
+    System.out.print(i + " ");
+    i++;                   // 3. uppfærsla: annars endalaus lykkja
+}
+System.out.println("| i = " + i);</code></pre>
+<pre class="out">1 2 3 4 5 | i = 6</pre>
+<p>Skilyrðið er prófað áður en hver umferð byrjar. Ef það er ósatt í upphafi keyrir lykkjan <b>aldrei</b>. Eftir lykkjuna er skilyrðið ósatt (hér <code>i = 6</code>).</p>
+
+<h3>Lykkja með vaktgildi (sentinel)</h3>
+<pre class="code"><code class="java">int sum = 0;
+int n = input.nextInt();
+while (n != 0) {           // 0 merkir „búið“
+    sum += n;
+    n = input.nextInt();   // lesa næsta í lok umferðar
+}
+System.out.println("Summa: " + sum);</code></pre>
+
+<h2 id="dowhile">do-while-lykkjan</h2>
+<p>Í <code>do-while</code> er skilyrðið prófað <b>eftir</b> umferðina, svo lykkjan keyrir <b>að minnsta kosti einu sinni</b>. Hún hentar til að lesa inntak þar til það er löglegt, eins og í Snakes &amp; Ladders:</p>
+<pre class="code"><code class="java">int roll;
+do {
+    roll = input.nextInt();
+} while (roll &lt; 1 || roll &gt; 6);   // endurtaka á meðan kastið er ólöglegt
+                                    // takið eftir semíkommunni!</code></pre>
+
+<h2 id="for">for-lykkjan</h2>
+<p><code>for</code> safnar frumstillingu, skilyrði og uppfærslu í eina línu. Hún er eðlilegasti kosturinn þegar fjöldi umferða er þekktur:</p>
+<pre class="code"><code class="java">for (int i = 0; i &lt; 5; i++) {     // i = 0, 1, 2, 3, 4  (5 umferðir)
+    System.out.print(i * i + " ");
+}
+// 0 1 4 9 16</code></pre>
+<p>Röðin í hverri umferð: <b>skilyrði → líkami → uppfærsla</b> → skilyrði → … Frumstillingin keyrir einu sinni í byrjun. Breyta sem er lýst í for-hausnum (<code>int i</code>) er aðeins til inni í lykkjunni; eftir hana er <code>i</code> óþekkt (þýðingarvilla).</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Haus</th><th>Gildi á i</th><th>Umferðir</th></tr></thead>
+<tbody>
+<tr><td><code>for (int i = 0; i &lt; n; i++)</code></td><td>0 … n−1</td><td>n</td></tr>
+<tr><td><code>for (int i = 1; i &lt;= n; i++)</code></td><td>1 … n</td><td>n</td></tr>
+<tr><td><code>for (int i = n; i &gt; 0; i--)</code></td><td>n … 1</td><td>n</td></tr>
+<tr><td><code>for (int i = 0; i &lt; n; i += 2)</code></td><td>0, 2, 4 … &lt; n</td><td>⌈n/2⌉</td></tr>
+<tr><td><code>for (int i = 1; i &lt; 100; i *= 2)</code></td><td>1, 2, 4 … 64</td><td>7</td></tr>
+</tbody></table></div>
+<p>Fjöldi umferða í <code>for (int i = a; i &lt; b; i++)</code> er <code>b − a</code>; með <code>&lt;=</code> er hann <code>b − a + 1</code>.</p>
+<div class="note warn"><p><b class="t">Klassískar villur:</b> (1) <b>Einum of mikið/lítið</b> (off-by-one): <code>&lt;=</code> í stað <code>&lt;</code> eða öfugt, sérstaklega með <code>length()</code>. (2) <code>for (…);</code> með semíkommu: líkaminn verður tóm setning og blokkin á eftir keyrir einu sinni. (3) <b>Endalaus lykkja</b>: uppfærslan gleymist eða færir breytuna í ranga átt (<code>i--</code> þegar <code>i &lt; n</code>).</p></div>
+
+<h2 id="break">break og continue</h2>
+<ul>
+<li><code>break</code> hættir í <b>innstu</b> lykkjunni (eða switch) strax.</li>
+<li><code>continue</code> sleppir afganginum af <b>þessari umferð</b> og fer í næstu (í for-lykkju er uppfærslan samt keyrð).</li>
+</ul>
+<div class="vs">
+<div><pre class="code"><code class="java">for (int i = 1; i &lt;= 10; i++) {
+    if (i % 3 == 0) continue;   // sleppa 3, 6, 9
+    if (i &gt; 7) break;           // hætta við 8
+    System.out.print(i + " ");
+}</code></pre></div>
+<div><pre class="out">1 2 4 5 7</pre></div>
+</div>
+<p>Leikjalykkjan í Snakes &amp; Ladders er <code>do { … } while (true);</code>: endalaus lykkja sem <code>break</code> rýfur þegar einhver nær reit 100.</p>
+
+<h2 id="hreidrad">Hreiðraðar lykkjur</h2>
+<p>Innri lykkjan keyrir <b>allar sínar umferðir</b> fyrir hverja umferð ytri lykkjunnar:</p>
+<div class="vs">
+<div><pre class="code"><code class="java">for (int row = 1; row &lt;= 4; row++) {
+    for (int col = 1; col &lt;= row; col++) {
+        System.out.print("*");
+    }
+    System.out.println();
+}</code></pre></div>
+<div><pre class="out">*
+**
+***
+****</pre></div>
+</div>
+<p>Heildarfjöldi umferða innri lykkjunnar hér er 1 + 2 + 3 + 4 = 10. Ef innri lykkjan fer alltaf m sinnum og sú ytri n sinnum er fjöldinn n·m.</p>
+
+<h2 id="mynstur">Algeng mynstur</h2>
+<div class="code-cols">
+<div><h4>Summa og fjöldi</h4><pre class="code"><code class="java">int sum = 0, count = 0;
+for (int i = 1; i &lt;= n; i++) {
+    if (i % 3 == 0) {
+        sum += i;
+        count++;
+    }
+}</code></pre></div>
+<div><h4>Stærsta gildi</h4><pre class="code"><code class="java">int max = input.nextInt();   // fyrsta gildið
+for (int i = 1; i &lt; n; i++) {
+    int x = input.nextInt();
+    if (x &gt; max) max = x;
+}</code></pre></div>
+<div><h4>Tölustafir tölu</h4><pre class="code"><code class="java">int digitSum = 0, rev = 0;
+while (n &gt; 0) {
+    int d = n % 10;      // síðasti stafur
+    digitSum += d;
+    rev = rev * 10 + d;  // byggja öfuga tölu
+    n /= 10;             // henda síðasta staf
+}</code></pre></div>
+<div><h4>Er n frumtala?</h4><pre class="code"><code class="java">boolean prime = n &gt; 1;
+for (int d = 2; d * d &lt;= n; d++) {
+    if (n % d == 0) {
+        prime = false;
+        break;
+    }
+}</code></pre></div>
+</div>
+
+<h2 id="rakning">Að rekja lykkju</h2>
+<p>Á prófinu áttu að geta sagt nákvæmlega hvað lykkja prentar, án tölvu. Gerðu töflu með dálki fyrir hverja breytu og línu fyrir hverja umferð:</p>
+<div class="vs">
+<div><pre class="code"><code class="java">int a = 1, b = 0;
+while (a &lt; 20) {
+    b += a;
+    a *= 3;
+}
+System.out.println(a + " " + b);</code></pre></div>
+<div class="tablewrap" style="margin:0"><table>
+<thead><tr><th>umferð</th><th>a &lt; 20?</th><th>b</th><th>a</th></tr></thead>
+<tbody>
+<tr><td>(byrjun)</td><td></td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>já</td><td>1</td><td>3</td></tr>
+<tr><td>2</td><td>já</td><td>4</td><td>9</td></tr>
+<tr><td>3</td><td>já</td><td>13</td><td>27</td></tr>
+<tr><td>–</td><td>nei</td><td colspan="2">prentar <code>27 13</code></td></tr>
+</tbody></table></div>
+</div>
+
+<h2 id="samantekt">Samantekt</h2>
+<ul class="checklist">
+<li><code>while</code>: 0 eða fleiri umferðir; <code>do-while</code>: 1 eða fleiri; <code>for</code>: þekktur fjöldi.</li>
+<li>Röð í for: frumstilling (1×), svo skilyrði → líkami → uppfærsla.</li>
+<li><code>i &lt; n</code> frá 0 gefur n umferðir; <code>i &lt;= n</code> frá 1 líka.</li>
+<li><code>break</code> hættir í innstu lykkju; <code>continue</code> fer í næstu umferð.</li>
+<li>Hreiðraðar: innri lykkjan klárast fyrir hverja ytri umferð.</li>
+<li>Raktu með töflu: ein lína á umferð, einn dálkur á breytu.</li>
+</ul>
