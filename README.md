@@ -9,6 +9,7 @@ Kennsluvefir á íslensku fyrir áfangana í skólanum. Forsíðan (`index.html`
 | [`edl102g/`](edl102g/) | EÐL102G Eðlisfræði 1V, leiðin að lokaprófinu: æfingadæmi, jöfnur og kaflapróf í 16 köflum |
 | [`idn301g/`](idn301g/) | IÐN301G Greining ferla og kerfa, ferðalag að lokaprófinu (allur áfanginn) |
 | [`idn303g/`](idn303g/) | IÐN303G Tæknileg kerfi, undirbúningur fyrir lokapróf (allur áfanginn) |
+| [`lyd105f/`](lyd105f/) | LÝÐ105F Líftölfræði I, ferðalag að lokaprófinu: R-úttak, kaflapróf og prófhermir í 11 köflum |
 | [`tol101g/`](tol101g/) | TÖL101G Tölvunarfræði 1 (Java), ferðalag að lokaprófinu: kóðadæmi, kóðaverkstæði og kaflapróf í 12 köflum |
 
 ## Uppbygging

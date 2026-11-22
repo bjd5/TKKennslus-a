@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 1: Rannsóknir, breytur og úrtök · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" aria-current="page" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="1" data-topics="breytur">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 1: Rannsóknir, breytur og úrtök</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í  með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 1 af 11 · Fyrirlestrar k1-2 · Tölfræði frá grunni kafli 2</p>
+<h1>Rannsóknir, breytur og úrtök</h1>
+<p class="ch-exam"><b>Tengist:</b> Krossaspurningar um gerðir breyta, bjaga og rannsóknarsnið</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Öll tölfræði byrjar á spurningunni: <i>hvaðan koma gögnin?</i> Í þessum kafla lærir þú muninn á þýði og úrtaki, hvernig breytur eru flokkaðar, hvernig úrtök eru tekin og hvaða bjagar geta skekkt niðurstöðurnar. Þú lærir líka muninn á tilraun og athugunarrannsókn og hvenær má álykta um orsakasamband. Á lokaprófinu eru alltaf krossaspurningar úr þessu efni, t.d. „af hvaða gerð er breytan?“ og „hvert er helsta vandamálið við þessa rannsókn?“.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li><b>Þýði</b> er hópurinn sem við viljum vita eitthvað um. <b>Úrtak</b> er sá hluti þess sem við mælum. Tölur úr þýðinu heita <b>stikar</b> (μ, σ, p) og tölur úr úrtakinu <b>lýsistærðir</b> (x̄, s, p̂).</li>
+  <li>Breytur eru <b>talnabreytur</b> (samfelldar eða strjálar) eða <b>flokkabreytur</b> (raðaðar eða óraðaðar). Gerðin ræður hvaða gröf og próf eiga við.</li>
+  <li><b>Slembiúrtak</b> ver gegn úrtaksbjaga. <b>Slembival</b> og <b>blindun</b> í tilraunum verja gegn blöndun, lyfleysuáhrifum og rannsakandabjaga.</li>
+  <li>Aðeins vel hönnuð <b>tilraun</b> með slembivali leyfir ályktanir um <b>orsakasamband</b>. Athugunarrannsókn sýnir tengsl.</li>
+</ol>
+</div>
+
+<h2 id="thydi">Þýði og úrtak</h2>
+<p><b>Þýði</b> (population) er allur sá hópur einstaklinga sem rannsóknarspurningin fjallar um, til dæmis allir fullorðnir Íslendingar eða allir sjúklingar með sykursýki 2. Það er sjaldnast hægt að mæla allt þýðið, svo við tökum <b>úrtak</b> (sample): hluta þýðisins sem við mælum í raun. Út frá úrtakinu drögum við ályktanir um þýðið. Það heitir <b>ályktunartölfræði</b> (inferential statistics), en <b>lýsandi tölfræði</b> (descriptive statistics) lýsir bara gögnunum sem við höfum.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Þýði</th><th>Úrtak</th></tr></thead>
+<tbody>
+<tr><td>Hvað heita tölurnar?</td><td><b>Stikar</b> (parameters): óþekktir, fastir</td><td><b>Lýsistærðir</b> (statistics): reiknaðar úr gögnum, breytast milli úrtaka</td></tr>
+<tr><td>Meðaltal</td><td>$\mu$</td><td>$\bar{x}$</td></tr>
+<tr><td>Staðalfrávik</td><td>$\sigma$</td><td>$s$</td></tr>
+<tr><td>Hlutfall</td><td>$p$</td><td>$\hat{p}$</td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að skrifa tilgátur um lýsistærðir, t.d. $H_0: \bar{x}_1 = \bar{x}_2$. Tilgátur fjalla alltaf um <b>stika þýðisins</b>: $H_0: \mu_1 = \mu_2$. Við vitum nú þegar hvað $\bar{x}$ er; það er μ sem við viljum vita um.</p></div>
+
+<h2 id="breytur">Gerðir breyta</h2>
+<p><b>Breyta</b> (variable) er eiginleiki sem er mældur eða skráður á hverjum einstaklingi, t.d. púls, kyn, aldur eða reykingar. Gerð breytunnar ræður því hvernig hún er sýnd á grafi og hvaða tölfræðipróf á við.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Gerð</th><th>Lýsing</th><th>Dæmi úr gögnum áfangans</th></tr></thead>
+<tbody>
+<tr><td><b>Samfelld talnabreyta</b> (continuous)</td><td>Getur tekið hvaða gildi sem er á bili; mælingar</td><td>Hæð, þyngd, blóðþrýstingur (SYSBP), kólesteról, BMI</td></tr>
+<tr><td><b>Strjál talnabreyta</b> (discrete)</td><td>Talning: 0, 1, 2, …</td><td>Fjöldi sjúklinga á bráðamóttöku á klukkutíma, fjöldi sígaretta á dag (CIGPDAY)</td></tr>
+<tr><td><b>Óröðuð flokkabreyta</b> (nominal)</td><td>Flokkar án náttúrulegrar röðunar</td><td>Kyn, blóðflokkur, reykir (já/nei), <code>inngrip</code> (hljóp/sat kyrr)</td></tr>
+<tr><td><b>Röðuð flokkabreyta</b> (ordinal)</td><td>Flokkar með röð, en bilin eru ekki jöfn tölugildi</td><td>Hæsta prófgráða, BMI-flokkar, æxlisgráða (vel/miðlungs/illa þroskað)</td></tr>
+</tbody></table></div>
+<p>Flokkabreyta með bara tveimur gildum (já/nei, veikur/heilbrigður) er kölluð <b>tvíkosta breyta</b> (binary). Hún skiptir miklu síðar í áfanganum: hlutföll, kí-kvaðrat próf og tvíkosta aðhvarf fjalla öll um slíkar breytur.</p>
+<div class="note tip"><p><b class="t">Gildra á prófinu:</b> að breyta sé skráð með tölum gerir hana ekki að talnabreytu. Í púlsgögnunum er <code>kyn</code> skráð sem 1 og 2, og <code>summary()</code> reiknar meira að segja meðaltalið (1.33). Kyn er samt óröðuð flokkabreyta. Í R breytum við henni í <code>factor</code> til að R viti það.</p></div>
+<p>Í rannsóknum greinum við líka á milli <b>svarbreytu</b> (response variable), útkomunnar sem við höfum áhuga á, og <b>skýribreytu</b> (explanatory variable), sem við teljum að hafi áhrif á svarbreytuna. Í púlsrannsókninni er <code>seinniPuls</code> svarbreyta og <code>inngrip</code> skýribreyta.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Lokapróf 2025, krossaspurning 10</span></div><div class="ex-body">
+<p>Sjúklingar á heilsugæslu eru spurðir hver sé hæsta prófgráða sem þeir hafa lokið (grunnskóli, framhaldsskóli, BS, MS, doktorspróf). Af hvaða gerð er breytan?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Flokkarnir hafa náttúrulega röð (doktorspróf er „hærra“ en BS), en munurinn á milli þeirra er ekki tölulegur.</p>
+<p><span class="ans">Röðuð flokkabreyta</span></p>
+</div></details>
+</div></div>
+
+<h2 id="urtok">Úrtakshögun</h2>
+<p>Til þess að úrtakið segi eitthvað um þýðið þarf það að vera <b>lýsandi</b> fyrir þýðið (representative). Besta leiðin til þess er að láta tilviljun ráða hverjir lenda í úrtakinu.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðferð</th><th>Hvernig</th><th>Kostir og gallar</th></tr></thead>
+<tbody>
+<tr><td><b>Einfalt slembiúrtak</b> (simple random sample)</td><td>Allir í þýðinu eiga jafna möguleika á að lenda í úrtakinu, t.d. dregið af handahófi úr þjóðskrá</td><td>Gulls ígildi; forsenda flestra aðferða í áfanganum</td></tr>
+<tr><td><b>Lagskipt slembiúrtak</b> (stratified)</td><td>Þýðinu skipt í lög (t.d. aldurshópa eða landshluta) og slembiúrtak tekið úr hverju lagi</td><td>Tryggir að allir hópar séu með; nákvæmara mat</td></tr>
+<tr><td><b>Klasaúrtak</b> (cluster)</td><td>Heilir hópar (t.d. skólar eða heilsugæslur) valdir af handahófi</td><td>Ódýrt og hentugt, en einstaklingar innan klasa líkjast hver öðrum</td></tr>
+<tr><td><b>Aðgengisúrtak</b> (convenience sample)</td><td>Þeir sem auðvelt er að ná til, t.d. nemendur í tíma</td><td>Ódýrt en oft bjagað</td></tr>
+<tr><td><b>Sjálfboðaliðaúrtak</b> (voluntary response)</td><td>Fólk velur sig sjálft, t.d. netkönnun</td><td>Mjög bjagað: þeir sem hafa sterkar skoðanir svara frekar</td></tr>
+</tbody></table></div>
+<p>Púlsgögnin (<code>pulsAll</code>) eru aðgengisúrtak: nemendur í tölfræðinámskeiðum við HÍ. Ályktanir um „alla Íslendinga“ út frá þeim væru því varhugaverðar, því hópurinn er ungur (miðgildi aldurs 22 ár).</p>
+
+<h2 id="bjagi">Bjagi og breytileiki</h2>
+<p><b>Bjagi</b> (bias) er kerfisbundin skekkja: matið hittir að jafnaði ekki á rétt gildi, sama hve stórt úrtakið er. <b>Breytileiki</b> (variability) er tilviljanakennd dreifing matsins milli úrtaka; hann minnkar þegar úrtakið stækkar. Stórt úrtak lagar því breytileika en <b>ekki</b> bjaga.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Bjagi</th><th>Hvað gerist</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td><b>Úrtaksbjagi</b> (sampling bias)</td><td>Sumir hópar þýðisins eru líklegri til að lenda í úrtakinu</td><td>Símakönnun sem nær aðeins til þeirra sem eru með heimasíma</td></tr>
+<tr><td><b>Brottfallsbjagi</b> (non-response)</td><td>Þeir sem svara ekki eru ólíkir þeim sem svara</td><td>Veikustu sjúklingarnir mæta ekki í eftirfylgd</td></tr>
+<tr><td><b>Svarbjagi</b> (response bias)</td><td>Fólk svarar ekki satt, t.d. um viðkvæm efni</td><td>Áfengisneysla er vanmetin í könnunum</td></tr>
+<tr><td><b>Rannsakandabjagi</b> (experimenter's bias)</td><td>Væntingar rannsakanda lita mælingar eða mat</td><td>Læknir sem veit hver fékk nýja lyfið metur þann sjúkling „hressari“</td></tr>
+<tr><td><b>Lyfleysuáhrif</b> (placebo effect)</td><td>Þátttakendum líður betur bara af því að þeir fá meðferð</td><td>Sykurpilla dregur úr verkjum</td></tr>
+</tbody></table></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Lokapróf 2025, krossaspurning 11</span></div><div class="ex-body">
+<p>Þú ert á bráðamóttöku og vilt rannsaka hvort konur séu veikari en karlar þegar þau mæta. Þú mátt ekki taka mælingar, en metur veikindi 25 kvenna og 25 karla á skalanum 0–10 með því að fylgjast með þeim. Hvert er helsta vandamálið?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Matið er huglægt og þú veist hvort sjúklingurinn er karl eða kona. Ef þú býst við að annað kynið sé veikara getur það litað matið. Lítið úrtak gefur <i>minni</i> styrk, ekki of mikinn, og rannsóknin er hvorki ein- né tvíblind.</p>
+<p><span class="ans">Hætta á rannsakandabjaga</span></p>
+</div></details>
+</div></div>
+
+<h2 id="tilraun">Tilraun eða athugunarrannsókn?</h2>
+<p>Í <b>athugunarrannsókn</b> (observational study) skráum við bara það sem gerist, án þess að hafa áhrif á það. Framingham-rannsóknin er dæmi: fylgst var með þúsundum íbúa Framingham í Massachusetts í áratugi, og skráð hverjir reyktu, hverjir fengu sykursýki og hverjir fengu hjartasjúkdóma. Í <b>tilraun</b> (experiment) ákveður rannsakandinn hver fær hvaða meðferð. Í púlsrannsókninni ákvarðaði krónukast hvort nemandi hljóp í eina mínútu eða sat kyrr, og það er tilraun.</p>
+<h3 id="blondun">Blöndun og orsakasamband</h3>
+<p>Tengsl tveggja breyta þýða ekki að önnur valdi hinni. <b>Blöndunarþáttur</b> (confounder) er þriðja breyta sem tengist bæði skýribreytu og svarbreytu. Dæmi: í Framingham dóu 66% þeirra sem notuðu blóðþrýstingslyf við upphaf rannsóknar á eftirfylgdartímanum, en 34% hinna. Það þýðir ekki að lyfin séu hættuleg: þeir sem nota lyfin eru eldri (meðalaldur 56 ár á móti 50) og veikari. Aldur og fyrri veikindi blanda sambandinu.</p>
+<p>Í athugunarrannsókn getum við reynt að leiðrétta fyrir þekktum blöndunarþáttum (t.d. með aðhvarfsgreiningu, kaflar 9–11), en aldrei fyrir óþekktum. <b>Slembival</b> (randomization) leysir þetta: þegar tilviljun ræður hver fær meðferð dreifast allir aðrir þættir, þekktir og óþekktir, að jafnaði jafnt á hópana. Þess vegna leyfir vel hönnuð tilraun ályktanir um <b>orsakasamband</b> (causation).</p>
+
+<h3 id="hoenun">Góð tilraun</h3>
+<ul>
+  <li><b>Samanburðarhópur</b> (control group): hópur sem fær enga meðferð, hefðbundna meðferð eða <b>lyfleysu</b> (placebo).</li>
+  <li><b>Slembival</b>: tilviljun ræður hver fer í hvaða hóp (krónukast, slembitölur).</li>
+  <li><b>Blindun</b> (blinding): í <b>einblindri</b> rannsókn veit þátttakandinn ekki hvaða meðferð hann fær. Í <b>tvíblindri</b> rannsókn veit hvorki þátttakandinn né sá sem metur útkomuna það. Tvíblindun ver gegn bæði lyfleysuáhrifum og rannsakandabjaga.</li>
+  <li><b>Endurtekning</b> (replication): nógu margir þátttakendur til að tilviljun ráði ekki niðurstöðunni.</li>
+</ul>
+<div class="note warn"><p><b class="t">Á prófinu:</b> spurt er hvaða hönnunaratriði vantar eða hvaða bjagi ógnar rannsókn. Lestu lýsinguna og spurðu: Réð tilviljun hver fékk meðferð? Vissi matsmaðurinn hver fékk hvað? Völdu þátttakendur sig sjálfir?</p></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Krónukastið í púlsrannsókninni</span></div><div class="ex-body">
+<p>Í púlsgögnunum hlupu 183 af 469 nemendum. Ef allir fóru eftir krónukastinu, hve marga hefðum við búist við að hlypu, og hvað gæti skýrt muninn?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Með heiðarlegri krónu eru líkurnar 0.5, svo væntanlegur fjöldi er $0.5 \cdot 469 = 234.5$. Mun færri hlupu. Líklegasta skýringin er að ekki fóru allir eftir krónunni: sumir sem áttu að hlaupa nenntu því ekki. Það er brot á slembivalinu. Þeir sem hlupu gætu verið hraustari en hinir, og þá er samanburðurinn ekki lengur alveg sanngjarn. Í kafla 7 prófum við þetta formlega með <code>prop.test</code>.</p>
+<p><span class="ans">Væntanlega 234.5, en aðeins 183 hlupu</span></p>
+</div></details>
+</div></div>
+
+<h2 id="r">Gögn í R</h2>
+<p>Í R eru gögn geymd í <b>gagnatöflu</b> (data frame): hver lína er einn einstaklingur og hver dálkur ein breyta. Svona eru púlsgögnin lesin inn og skoðuð:</p>
+<pre class="rcode">puls &lt;- read.csv2("pulsAll.csv")   # read.csv2: semíkomma milli dálka
+dim(puls)          # 471 línur (nemendur), 13 dálkar (breytur)
+head(puls)         # fyrstu sex línurnar
+str(puls)          # gerð hverrar breytu: int, num, chr …
+table(puls$inngrip)
+
+   hljop sat_kyrr
+     183      286</pre>
+<p>Flokkabreytur á að gera að <code>factor</code> svo R meðhöndli þær rétt í gröfum og líkönum. Með <code>factor()</code> má líka gefa flokkunum skiljanleg nöfn:</p>
+<pre class="rcode">puls$kyn &lt;- factor(puls$kyn, levels = c(1, 2), labels = c("kona", "karl"))
+table(puls$kyn)
+
+kona karl
+ 307  164</pre>
+<p>Vantandi gildi eru merkt <code>NA</code> (not available). Mörg föll skila <code>NA</code> ef eitt gildi vantar, nema þú bætir við <code>na.rm = TRUE</code>, t.d. <code>mean(puls$fyrriPuls, na.rm = TRUE)</code>. Í <code>summary()</code> sést fjöldi vantandi gilda í línunni <code>NA's</code>.</p>
+<div class="note tip"><p><b class="t">Í tidyverse-stíl</b> (eins og í sýnikóða kennarans) er sama gert með <code>mutate()</code>: <code>puls &lt;- puls %&gt;% mutate(kyn = factor(kyn, labels = c("kona", "karl")))</code>. Báðar leiðir eru jafn gildar á prófinu.</p></div>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: Breytur í alvöru gögnum</h2>
+<p>Þú færð breytur úr gagnasettum áfangans (pulsAll, Framingham og diabetes) og flokkar þær eftir gerð. Svo metur þú rannsóknarsniðið: hvað má álykta af krónukastinu og hvað af ferilrannsókn?</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu öll verkefnin. Skrefinu lýkur þegar þau eru öll leyst og meðaleinkunnin er a.m.k. 60%. Fyrsta svarið við hverju verkefni gildir, en þú getur alltaf byrjað upp á nýtt.</p></div>
+<div class="lab-root"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 2"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="index.html"><span>Fyrri</span>Kortið</a><a href="kafli-2.html" style="text-align:right"><span>Næsta</span>2. Lýsandi tölfræði og gröf</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/stat.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/kafli01.js"></script>
+<script src="js/q/kafli02.js"></script>
+<script src="js/q/kafli03.js"></script>
+<script src="js/q/kafli04.js"></script>
+<script src="js/q/kafli05.js"></script>
+<script src="js/q/kafli06.js"></script>
+<script src="js/q/kafli07.js"></script>
+<script src="js/q/kafli08.js"></script>
+<script src="js/q/kafli09.js"></script>
+<script src="js/q/kafli10.js"></script>
+<script src="js/q/lyd.js"></script>
+<script src="js/uttak.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/malin-data.js"></script>
+<script src="js/gagnvirkt.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-1.js"></script>
+</body>
+</html>

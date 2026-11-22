@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 9: Línulegt aðhvarf · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" aria-current="page" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="9" data-topics="adhvarf">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 9: Línulegt aðhvarf</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-8.html">kafla 8</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 9 af 11 · Fyrirlestrar k10 · Tölfræði frá grunni kafli 10</p>
+<h1>Línulegt aðhvarf</h1>
+<p class="ch-exam"><b>Tengist:</b> Lokapróf: summary(lm), confint, forsendur og spár</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Hvernig breytist blóðþrýstingur með BMI? Hve vel spáir hvíldarpúls fyrir um púls eftir hlaup? Með <b>einföldu línulegu aðhvarfi</b> (simple linear regression) lýsum við sambandi tveggja talnabreyta með beinni línu, metum hve sterkt það er og prófum hvort það sé marktækt. <code>summary(lm(...))</code> er líklega algengasta R-úttakið á lokaprófinu: þar er spurt um líkanið, tilgáturnar, túlkun hallatölunnar, R², forsendur, spár og öryggisbil.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li>Líkanið: $y = \alpha + \beta x + \varepsilon$. Metið með aðferð minnstu kvaðrata.</li>
+  <li><b>Hallatalan</b> $\hat\beta$: vænt breyting á $y$ þegar $x$ hækkar um eina einingu.</li>
+  <li>H₀: $\beta = 0$ (ekkert línulegt samband). Prófstærð $t = \hat\beta/SE(\hat\beta)$ með $n-2$ frígráður.</li>
+  <li>95% bil: $\hat\beta \pm t_{0.975,\,n-2}\cdot SE(\hat\beta)$ eða <code>confint(fit)</code>.</li>
+  <li>$R^2$: hlutfall breytileikans í $y$ sem $x$ skýrir. Í einföldu aðhvarfi er $R^2 = r^2$.</li>
+  <li>Forsendur: línulegt samband, óháðar leifar, normaldreifðar leifar, jöfn dreifni leifa.</li>
+</ol>
+</div>
+
+<h2 id="punktarit">Punktarit og fylgnistuðull</h2>
+<p>Byrjaðu alltaf á <b>punktariti</b> (scatter plot): skýribreytan $x$ á lárétta ásnum og svarbreytan $y$ á þeim lóðrétta. Er sambandið línulegt? Jákvætt eða neikvætt? Eru útlagar?</p>
+<p><b>Fylgnistuðullinn</b> (correlation coefficient) $r$ mælir styrk <i>línulegs</i> sambands. Hann er á bilinu $-1 \le r \le 1$: $r = 1$ er fullkomin vaxandi lína, $r = 0$ ekkert línulegt samband og $r = -1$ fullkomin minnkandi lína. Í R: <code>cor(x, y)</code> og <code>cor.test(x, y)</code>.</p>
+<div class="note warn"><p><b class="t">Fylgni er ekki orsakasamband.</b> Sterk fylgni í athugunarrannsókn getur skýrst af blöndunarþætti (confounder). Í Framingham hækka bæði BMI og blóðþrýstingur með aldri, svo hluti fylgninnar gæti verið aldursáhrif. Auk þess getur $r \approx 0$ falið sterkt bogið samband.</p></div>
+
+<h2 id="likan">Líkanið og minnstu kvaðröt</h2>
+$$y_i = \alpha + \beta x_i + \varepsilon_i, \qquad \varepsilon_i \sim N(0, \sigma^2)\ \text{óháð}.$$
+<p>$\alpha$ er <b>skurðpunktur</b> (intercept): vænt gildi $y$ þegar $x = 0$. $\beta$ er <b>hallatala</b> (slope). $\varepsilon_i$ eru skekkjurnar. Metlarnir $\hat\alpha$ og $\hat\beta$ eru valdir þannig að summa kvaðraðra <b>leifa</b> (residuals) $e_i = y_i - \hat y_i$ verði sem minnst. Það er aðferð minnstu kvaðrata (least squares):</p>
+$$\hat\beta = r\cdot\frac{s_y}{s_x}, \qquad \hat\alpha = \bar y - \hat\beta\,\bar x.$$
+
+<h2 id="framingham">Dæmi: BMI og systólískur blóðþrýstingur (lokapróf 2025, dæmi 4)</h2>
+<pre class="rcode">&gt; fit &lt;- lm(SYSBP ~ BMI, data = fr)
+&gt; summary(fit)
+&gt; confint(fit)
+
+Call:
+lm(formula = SYSBP ~ BMI, data = fr)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-56.214 -14.776  -3.833  10.422 138.903
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) 86.66684    2.02861   42.72   &lt;2e-16 ***
+BMI          1.78852    0.07752   23.07   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 21.12 on 4413 degrees of freedom
+  (19 observations deleted due to missingness)
+Multiple R-squared:  0.1076,	Adjusted R-squared:  0.1074
+F-statistic: 532.3 on 1 and 4413 DF,  p-value: &lt; 2.2e-16
+
+                2.5 %    97.5 %
+(Intercept) 82.689752 90.643923
+BMI          1.636546  1.940493</pre>
+<p>Svona lestu úttakið, lið fyrir lið:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Spurning</th><th>Svar úr úttakinu</th></tr></thead>
+<tbody>
+<tr><td>Líkanið?</td><td>$\widehat{SYSBP} = 86.67 + 1.789\cdot BMI$</td></tr>
+<tr><td>Túlkun hallatölu?</td><td>Fyrir hverja einingu sem BMI hækkar hækkar vænt systólískur blóðþrýstingur um 1.79 mmHg.</td></tr>
+<tr><td>Túlkun skurðpunkts?</td><td>Vænt SYSBP við BMI = 0. Það hefur enga raunhæfa merkingu, því enginn er með BMI 0.</td></tr>
+<tr><td>Tilgátur?</td><td>H₀: $\beta_{BMI} = 0$, H₁: $\beta_{BMI} \neq 0$.</td></tr>
+<tr><td>Prófstærð og p?</td><td>$t = 1.78852/0.07752 = 23.07$ með $df = 4413$; $p \lt 2\cdot10^{-16}$. Höfnum H₀.</td></tr>
+<tr><td>95% bil fyrir $\beta$?</td><td>$[1.637,\ 1.940]$ (<code>confint</code>). Handreiknað: $1.78852 \pm 1.9605\cdot 0.07752$.</td></tr>
+<tr><td>$R^2$?</td><td>0.1076: BMI skýrir um 11% breytileikans í SYSBP. Fylgnin er $r = \sqrt{0.1076} = 0.33$.</td></tr>
+<tr><td>Frígráður?</td><td>$n - 2 = 4413$, svo $n = 4415$ (4434 − 19 sem vantar).</td></tr>
+</tbody></table></div>
+<p>Takið eftir: sambandið er <b>mjög marktækt</b> en skýrir samt <b>lítið</b> af breytileikanum. Með 4415 þátttakendur verða jafnvel lítil áhrif marktæk. Marktekt segir hvort samband sé til staðar, $R^2$ og leifastaðalfrávikið (21.1 mmHg) segja hve vel líkanið spáir fyrir einstaklinga.</p>
+
+<h2 id="spa">Spár og bryggjun</h2>
+<p>Spá fyrir einstakling með BMI = 25: $\hat y = 86.67 + 1.789\cdot 25 = 131.4$ mmHg. Í R: <code>predict(fit, data.frame(BMI = 25))</code>.</p>
+<p>Á prófinu 2025 var spurt um BMI = 15: $\hat y = 86.67 + 1.789\cdot15 = 113.5$ mmHg. Er spáin áreiðanleg? BMI í gögnunum er á bilinu 15.5–56.8, svo 15 er rétt <b>utan</b> gagnasviðsins. Að spá utan sviðsins kallast <b>bryggjun</b> (extrapolation): við höfum engin gögn um hvort sambandið sé enn línulegt þar. Spá innan sviðsins kallast <b>brúun</b> (interpolation). Auk þess er leifastaðalfrávikið 21 mmHg, svo einstaklingsspár eru ónákvæmar hvort sem er.</p>
+
+<h2 id="puls">Dæmi 2: hvíldarpúls og púls eftir hlaup</h2>
+<pre class="rcode">&gt; fit &lt;- lm(seinniPuls ~ fyrriPuls, data = subset(puls, inngrip == "hljop"))
+&gt; summary(fit)
+
+Call:
+lm(formula = seinniPuls ~ fyrriPuls, data = subset(puls, inngrip ==
+    "hljop"))
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-29.472 -13.809  -2.685  10.189  53.753
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  34.1097     8.1396   4.191 4.38e-05 ***
+fyrriPuls     0.8877     0.1083   8.194 4.80e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 17.81 on 178 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.2739,	Adjusted R-squared:  0.2698
+F-statistic: 67.14 on 1 and 178 DF,  p-value: 4.797e-14</pre>
+<p>Meðal hlauparanna hækkar vænt púls eftir hlaup um 0.89 slög/mín fyrir hvert slag í hvíldarpúlsi ($p = 4.8\cdot10^{-14}$). Hlaupari með hvíldarpúls 70 fær spána $34.11 + 0.8877\cdot70 = 96.2$ slög/mín. $R^2 = 0.27$: hvíldarpúls skýrir um 27% breytileikans, $r = 0.52$. Í einföldu aðhvarfi er F-prófið neðst það sama og t-próf hallatölunnar: $F = t^2$ ($8.194^2 \approx 67.1$).</p>
+
+<h2 id="forsendur">Forsendur og leifarit</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Forsenda</th><th>Hvaða graf?</th><th>Hvað viltu sjá?</th></tr></thead>
+<tbody>
+<tr><td><b>Línulegt samband</b></td><td>Punktarit; leifar á móti spágildum</td><td>Punktar dreifast um beina línu; ekkert bogið mynstur í leifaritinu.</td></tr>
+<tr><td><b>Óháðar leifar</b></td><td>Rannsóknarsniðið</td><td>Ein mæling á hvern einstakling, engin tímaröð eða klasar.</td></tr>
+<tr><td><b>Normaldreifðar leifar</b></td><td>QQ-rit leifa (<code>plot(fit, which = 2)</code>)</td><td>Punktarnir falla nálægt beinu línunni.</td></tr>
+<tr><td><b>Jöfn dreifni leifa</b></td><td>Leifarit (<code>plot(fit, which = 1)</code>)</td><td>Jafnbreitt band um 0, engin trekt.</td></tr>
+</tbody></table></div>
+<p>Leifaritið (Residuals vs Fitted) sýnir leifarnar $e_i$ á móti spágildunum $\hat y_i$. Bogið mynstur bendir til þess að samband sé ekki línulegt. <b>Trekt</b>, þar sem leifar dreifast meira fyrir há spágildi, bendir til ójafnrar dreifni. Í úttakinu sjálfu gefur samantektin á leifunum vísbendingu: ef Min og Max eru mjög ósamhverf um 0 eru leifarnar skekktar.</p>
+<div class="note tip"><p><b class="t">Á prófinu 2025</b> var spurt: „Hverjar eru forsendurnar fyrir línulegt aðhvarf? Hvaða upplýsingar (gröf, myndir eða lýsistærðir) vantar ykkur til að geta metið hvort þær standist?“ Svarið nefnir forsendurnar fjórar og gröfin: punktarit, leifarit og QQ-rit leifanna.</p></div>
+
+<h2 id="plasma">Dæmi 3: þegar forsendurnar bresta (plasma)</h2>
+<pre class="rcode">&gt; fit &lt;- lm(betaplasma ~ fiber, data = plasma)
+&gt; summary(fit)
+
+Call:
+lm(formula = betaplasma ~ fiber, data = plasma)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-240.91  -91.49  -44.01   31.72 1170.23
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   86.292     26.122   3.303  0.00107 **
+fiber          8.101      1.886   4.296 2.33e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 178.1 on 313 degrees of freedom
+Multiple R-squared:  0.05567,	Adjusted R-squared:  0.05266
+F-statistic: 18.45 on 1 and 313 DF,  p-value: 2.327e-05</pre>
+<p>Hallatalan er marktæk: hvert gramm af trefjum á dag tengist 8.1 ng/mL hærra beta-karótíni. En sjáðu leifarnar: miðgildið er −44, Min er −241 og Max er <b>1170</b>. Leifarnar eru mjög hægri-skekktar, svo forsendan um normaldreifðar leifar stenst ekki, og $R^2 = 0.056$ er mjög lágt. Hér væri eðlilegt að umbreyta svarbreytunni, t.d. <code>lm(log(betaplasma) ~ fiber)</code>.</p>
+
+<h2 id="r">R í hnotskurn</h2>
+<pre class="rcode">plot(y ~ x, data = d); abline(fit)        # punktarit með línu
+cor(d$x, d$y); cor.test(d$x, d$y)         # fylgni
+fit &lt;- lm(y ~ x, data = d)
+summary(fit)                              # stuðlar, t, p, R²
+confint(fit)                              # 95% bil fyrir α og β
+predict(fit, data.frame(x = 25))          # spá
+plot(fit, which = c(1, 2))                # leifarit og QQ-rit
+b + c(-1, 1) * qt(0.975, df) * SE         # bil handreiknað
+Estimate / SE                             # t value</pre>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: Línulegt aðhvarf í R-úttaki</h2>
+<p><code>summary(lm)</code> og <code>confint</code> úr Framingham (BMI og blóðþrýstingur), púlsgögnunum og plasma. Smelltu á hallatölur og R², spáðu og metu forsendur.</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu öll verkefnin. Skrefinu lýkur þegar þau eru öll leyst og meðaleinkunnin er a.m.k. 60%. Fyrsta svarið við hverju verkefni gildir, en þú getur alltaf byrjað upp á nýtt.</p></div>
+<div class="lab-root"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 10"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-8.html"><span>Fyrri</span>8. Fervikagreining (ANOVA)</a><a href="kafli-10.html" style="text-align:right"><span>Næsta</span>10. Tvíkosta aðhvarf, næmi og sértæki</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/stat.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/kafli01.js"></script>
+<script src="js/q/kafli02.js"></script>
+<script src="js/q/kafli03.js"></script>
+<script src="js/q/kafli04.js"></script>
+<script src="js/q/kafli05.js"></script>
+<script src="js/q/kafli06.js"></script>
+<script src="js/q/kafli07.js"></script>
+<script src="js/q/kafli08.js"></script>
+<script src="js/q/kafli09.js"></script>
+<script src="js/q/kafli10.js"></script>
+<script src="js/q/lyd.js"></script>
+<script src="js/uttak.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/malin-data.js"></script>
+<script src="js/gagnvirkt.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-9.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 6: Tilgátupróf og t-próf · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" aria-current="page" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="6" data-topics="tilgatur ttest">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 6: Tilgátupróf og t-próf</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-5.html">kafla 5</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 6 af 11 · Fyrirlestrar k7-8 · Tölfræði frá grunni kaflar 7-8</p>
+<h1>Tilgátupróf og t-próf</h1>
+<p class="ch-exam"><b>Tengist:</b> Lokapróf: var.test, t.test, parað t-próf og villur af gerð I og II</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Er meðalpúls kvenna annar en karla? Hækkar blóðþrýstingur með sykursýki? Lækkar lyfið blóðþrýsting? Tilgátupróf svara slíkum spurningum með tölum. Í þessum kafla lærir þú rökfræðina á bak við öll próf áfangans (núlltilgátu, prófstærð, p-gildi og villur af gerð I og II) og beitir henni á t-prófin. Á lokaprófinu færðu R-úttak úr <code>var.test</code> og <code>t.test</code> og átt að velja rétta prófið, lesa prófstærð og p-gildi og draga ályktun á mannamáli.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li>$H_0$ er „enginn munur / engin áhrif“ og er sett fram um <b>stika</b> (μ, p). $H_1$ er það sem við viljum sýna.</li>
+  <li><b>p-gildið</b> eru líkurnar á jafn öfgafullri eða öfgafyllri niðurstöðu <b>ef $H_0$ er sönn</b>. Ef $p &lt; \alpha$ (oftast 0.05) höfnum við $H_0$.</li>
+  <li><b>Villa af gerð I:</b> hafna sannri $H_0$ (líkur α). <b>Villa af gerð II:</b> hafna ekki ósannri $H_0$ (líkur β). <b>Styrkur</b> = $1 - \beta$.</li>
+  <li>Eitt úrtak við fast gildi: <code>t.test(x, mu = …)</code>. Sömu einstaklingar mældir tvisvar: <b>parað</b> t-próf. Tveir óháðir hópar: <b>óparað</b> t-próf, með <code>var.test</code> fyrst til að velja <code>var.equal</code>.</li>
+</ol>
+</div>
+
+<h2 id="skref">Skrefin í tilgátuprófi</h2>
+<ol>
+  <li><b>Tilgátur.</b> Núlltilgátan $H_0$ (null hypothesis) og gagntilgátan $H_1$ (alternative hypothesis), t.d. $H_0: \mu_{\text{konur}} = \mu_{\text{karlar}}$ og $H_1: \mu_{\text{konur}} \ne \mu_{\text{karlar}}$.</li>
+  <li><b>Marktektarkrafa</b> α (significance level), oftast 0.05.</li>
+  <li><b>Prófstærð</b> (test statistic): tala sem mælir hve langt gögnin eru frá $H_0$, oftast á forminu $\dfrac{\text{mat} - \text{gildi í } H_0}{\text{staðalskekkja}}$.</li>
+  <li><b>p-gildi</b>: líkurnar, ef $H_0$ er sönn, á prófstærð sem er jafn öfgafull eða öfgafyllri en sú sem fékkst.</li>
+  <li><b>Ályktun</b>: ef $p &lt; \alpha$ höfnum við $H_0$; annars höfnum við henni ekki. Segðu svo hvað það þýðir á mannamáli.</li>
+</ol>
+<div class="note warn"><p><b class="t">Orðalag skiptir máli.</b> Við „höfnum ekki“ $H_0$; við „samþykkjum“ hana aldrei og „sönnum“ hana aldrei. Að finna ekki mun er ekki sönnun þess að enginn munur sé; úrtakið gæti verið of lítið. Og p-gildið eru <b>ekki</b> líkurnar á að $H_0$ sé sönn.</p></div>
+
+<h3 id="hlidar">Einhliða eða tvíhliða</h3>
+<p>Í <b>tvíhliða</b> prófi (two-sided) er $H_1: \mu \ne \mu_0$, og p-gildið telur báða halana. Í <b>einhliða</b> prófi (one-sided) er $H_1: \mu &gt; \mu_0$ (eða $&lt;$), og aðeins annar halinn telur. R gerir tvíhliða próf nema þú skrifir <code>alternative = "greater"</code> eða <code>"less"</code>. Einhliða próf á aðeins að nota ef ákveðið var fyrir fram að aðeins önnur áttin skipti máli.</p>
+
+<h2 id="villur">Villur og styrkur</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>$H_0$ er sönn</th><th>$H_0$ er ósönn</th></tr></thead>
+<tbody>
+<tr><td><b>Höfnum $H_0$</b></td><td>Villa af gerð I (falsk jákvæð), líkur α</td><td>Rétt ákvörðun, líkur $1-\beta$ = <b>styrkur</b></td></tr>
+<tr><td><b>Höfnum ekki $H_0$</b></td><td>Rétt ákvörðun, líkur $1 - \alpha$</td><td>Villa af gerð II (falsk neikvæð), líkur β</td></tr>
+</tbody></table></div>
+<p><b>Styrkur</b> (power) er líkurnar á að finna raunverulegan mun. Hann eykst með <b>stærra úrtaki</b>, <b>stærri áhrifum</b>, <b>minni breytileika</b> og <b>hærra α</b>. Að lækka α (t.d. í 0.01) fækkar villum af gerð I en fjölgar villum af gerð II.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Lokapróf 2024 (dæmi 4) og 2025 (krossaspurning 13)</span></div><div class="ex-body">
+<p>(a) Lína lyfjafræðingur prófar jurtalyf gegn háþrýstingi og fær p = 0.059 (α = 0.05). Gefum okkur að lyfið virki í raun. Hvað gerðist? (b) Í rannsókn á blóðþrýstingi fyrir og eftir lyf varð villa af gerð I. Hvað gerðist?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) $H_0$ (engin áhrif) er ósönn, en $p = 0.059 &gt; 0.05$, svo henni var ekki hafnað: <b>villa af gerð II</b>.</p>
+<p>(b) Villa af gerð I er að hafna sannri $H_0$: ályktað var að munur væri á meðalblóðþrýstingi fyrir og eftir lyfjanotkun, þótt í raun sé enginn munur.</p>
+<p><span class="ans">(a) Villa af gerð II (b) Fundinn „munur“ sem er ekki til</span></p>
+</div></details>
+</div></div>
+
+<h2 id="eitt">t-próf fyrir eitt úrtak</h2>
+<p>Við berum meðaltal saman við fast gildi $\mu_0$:</p>
+$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}, \qquad \text{frígráður } n - 1$$
+<div class="ex"><div class="ex-head">Dæmi <span>Er meðalblóðþrýstingur frábrugðinn 120?</span></div><div class="ex-body">
+<p>Í úrtaki 25 manns er $\bar{x} = 124.5$ mmHg og $s = 12$. Prófaðu $H_0: \mu = 120$ á móti $H_1: \mu \ne 120$ við α = 0.05.</p>
+<details class="reveal"><summary></summary><div class="sol">
+$$t = \frac{124.5 - 120}{12/\sqrt{25}} = \frac{4.5}{2.4} = 1.875, \qquad df = 24$$
+<p>Gagnrýna gildið er $t_{0.975,\,24} = 2.064$. Þar sem $|t| = 1.875 &lt; 2.064$ höfnum við ekki $H_0$. p-gildið er $2 \cdot P(T_{24} &gt; 1.875) = 0.073$.</p>
+<pre class="rcode">2 * pt(-1.875, df = 24)
+[1] 0.07301264</pre>
+<p><span class="ans">t = 1.875, p = 0.073: höfnum ekki H₀</span></p>
+<p>Gögnin benda til hærri blóðþrýstings, en munurinn er ekki marktækur við 5% marktektarkröfu. Með stærra úrtaki gæti sami munur orðið marktækur.</p>
+</div></details>
+</div></div>
+
+<h2 id="parad">Parað t-próf</h2>
+<p>Ef sömu einstaklingar eru mældir tvisvar (fyrir og eftir meðferð, hægri og vinstri hönd) eru mælingarnar <b>háðar</b>. Þá reiknum við mismuninn $d_i = \text{eftir}_i - \text{fyrir}_i$ fyrir hvern og gerum eins úrtaks t-próf á $d$ með $H_0: \mu_d = 0$. Það tekur burt breytileikann milli einstaklinga og gefur oft mun meiri styrk.</p>
+<pre class="rcode">hlupu &lt;- subset(puls, inngrip == "hljop")
+t.test(hlupu$seinniPuls, hlupu$fyrriPuls, paired = TRUE)
+
+	Paired t-test
+
+data:  hlupu$seinniPuls and hlupu$fyrriPuls
+t = 19.421, df = 179, p-value &lt; 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 23.16357 28.40310
+sample estimates:
+mean difference
+       25.78333</pre>
+<p>180 hlauparar eru með báðar mælingar ($df = 179$). Púlsinn hækkaði að meðaltali um 25.8 slög/mín (95% öryggisbil 23.2 til 28.4). Prófstærðin er $t = 19.42$ og $p &lt; 2.2 \cdot 10^{-16}$, svo við höfnum $H_0$: hlaupið hækkar púlsinn.</p>
+
+<h2 id="oparad">t-próf fyrir tvö óháð úrtök</h2>
+<p>Við berum saman meðaltöl tveggja óháðra hópa, $H_0: \mu_1 = \mu_2$:</p>
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{SE(\bar{x}_1 - \bar{x}_2)}$$
+<p>Staðalskekkjan er reiknuð á tvo vegu:</p>
+<ul>
+  <li><b>Jöfn dreifni</b> (<code>var.equal = TRUE</code>): dreifnin í hópunum er metin saman sem <b>vegin dreifni</b> (pooled variance), og frígráður eru $n_1 + n_2 - 2$.</li>
+  <li><b>Welch-próf</b> (<code>var.equal = FALSE</code>, sjálfgefið í R): hvor hópur fær sína dreifni, og frígráðurnar eru nálgaðar (oft ekki heiltala).</li>
+</ul>
+<p>Til að velja á milli er dreifnin prófuð með <b>F-prófi</b>, <code>var.test()</code>, með $H_0: \sigma_1^2 = \sigma_2^2$ (hlutfall dreifnanna er 1). Ef $p &lt; 0.05$ er dreifnin ólík og Welch-prófið notað.</p>
+
+<h3 id="kyn">Dæmi: hvíldarpúls kvenna og karla</h3>
+<pre class="rcode">var.test(fyrriPuls ~ kyn, data = puls)
+
+	F test to compare two variances
+
+data:  fyrriPuls by kyn
+F = 1.2512, num df = 293, denom df = 159, p-value = 0.1155
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.9461411 1.6360633
+sample estimates:
+ratio of variances
+          1.251186
+
+t.test(fyrriPuls ~ kyn, data = puls, var.equal = TRUE)
+
+	Two Sample t-test
+
+data:  fyrriPuls by kyn
+t = 2.5937, df = 452, p-value = 0.009803
+alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
+95 percent confidence interval:
+ 0.7277253 5.2789073
+sample estimates:
+mean in group 1 mean in group 2
+       73.04082        70.03750</pre>
+<p><b>Lestur:</b> <code>var.test</code> gefur $p = 0.116 &gt; 0.05$, og öryggisbilið fyrir hlutfall dreifnanna, [0.95, 1.64], inniheldur 1. Við höfnum því ekki jafnri dreifni, og <code>var.equal = TRUE</code> á rétt á sér. Frígráður t-prófsins eru $294 + 160 - 2 = 452$. Konur (hópur 1) eru með hvíldarpúls 73.0 og karlar (hópur 2) 70.0. Munurinn er 3.0 slög/mín (95% öryggisbil 0.73 til 5.28), $t = 2.59$ og $p = 0.0098$. Við höfnum $H_0$: konur eru að jafnaði með hraðari hvíldarpúls en karlar.</p>
+
+<h3 id="sykursyki">Dæmi: sykursýki og blóðþrýstingur (Framingham)</h3>
+<p>Þetta er sama spurning og í skriflegu dæmi 2 á lokaprófinu 2025.</p>
+<pre class="rcode">var.test(SYSBP ~ sykursyki, data = fr)
+
+	F test to compare two variances
+
+data:  SYSBP by sykursyki
+F = 0.54643, num df = 4312, denom df = 120, p-value = 2.809e-07
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.4157170 0.6958453
+sample estimates:
+ratio of variances
+         0.5464293
+
+t.test(SYSBP ~ sykursyki, data = fr, var.equal = FALSE)
+
+	Welch Two Sample t-test
+
+data:  SYSBP by sykursyki
+t = -5.8067, df = 123.71, p-value = 5.044e-08
+alternative hypothesis: true difference in means between group No and group Yes is not equal to 0
+95 percent confidence interval:
+ -21.25444 -10.44807
+sample estimates:
+ mean in group No mean in group Yes
+         132.4752          148.3264</pre>
+<p><b>Lestur:</b> <code>var.test</code> gefur $p = 2.8\cdot 10^{-7} &lt; 0.05$: dreifnin er ólík (dreifnin hjá þeim sem ekki hafa sykursýki er um helmingur af dreifninni hjá hinum). Því á að nota Welch-prófið. Hóparnir eru líka mjög misstórir (4313 og 121), og þá skiptir rétt val mestu. $t = -5.81$ með $df = 123.71$ og $p = 5\cdot 10^{-8}$. Öryggisbilið er fyrir $\mu_{\text{No}} - \mu_{\text{Yes}}$ og er allt neikvætt, svo þeir sem eru með sykursýki eru með 10 til 21 mmHg hærri meðalblóðþrýsting.</p>
+
+<div class="note tip"><p><b class="t">Svona skrifar þú svarið á prófinu</b></p>
+<ol>
+  <li><b>Val á prófi:</b> „var.test gefur p = 2.8·10⁻⁷ &lt; 0.05, svo dreifnin er ólík og ég nota Welch t-próf (var.equal = FALSE).“</li>
+  <li><b>Tilgátur:</b> „$H_0: \mu_{\text{No}} = \mu_{\text{Yes}}$, $H_1: \mu_{\text{No}} \ne \mu_{\text{Yes}}$.“</li>
+  <li><b>Prófstærð og p-gildi:</b> „t = −5.81, df = 123.7, p = 5.0·10⁻⁸.“</li>
+  <li><b>Ákvörðun:</b> „p &lt; 0.05 svo ég hafna $H_0$.“</li>
+  <li><b>Ályktun á mannamáli:</b> „Fólk með sykursýki er að jafnaði með hærri systólískan blóðþrýsting (148.3 á móti 132.5 mmHg). 95% öryggisbil fyrir muninn er 10.4 til 21.3 mmHg.“</li>
+</ol></div>
+
+<h2 id="forsendur">Forsendur t-prófa</h2>
+<ul>
+  <li><b>Óháðar mælingar</b>: innan hóps, og milli hópa í óparaða prófinu.</li>
+  <li><b>Normaldreifing</b>: mælingarnar (eða mismunirnir í paraða prófinu) eru u.þ.b. normaldreifðar. Fyrir stór úrtök skiptir þetta litlu vegna höfuðsetningarinnar, en fyrir lítil úrtök skaltu skoða stuðlarit eða QQ-rit.</li>
+  <li><b>Jöfn dreifni</b>: aðeins ef <code>var.equal = TRUE</code> er notað.</li>
+</ul>
+<p>Ef gögnin eru mjög skökk og úrtakið lítið eru til <b>stikalaus próf</b> (nonparametric tests), t.d. Wilcoxon-próf (<code>wilcox.test</code>), sem byggja á röðun í stað meðaltala.</p>
+
+<h2 id="val">Hvaða t-próf?</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Aðstæður</th><th>Próf</th><th>R</th></tr></thead>
+<tbody>
+<tr><td>Eitt meðaltal borið við fast gildi</td><td>Eins úrtaks t-próf</td><td><code>t.test(x, mu = 120)</code></td></tr>
+<tr><td>Sömu einstaklingar mældir tvisvar</td><td>Parað t-próf</td><td><code>t.test(eftir, fyrir, paired = TRUE)</code></td></tr>
+<tr><td>Tveir óháðir hópar, jöfn dreifni</td><td>Óparað t-próf, vegin dreifni</td><td><code>t.test(y ~ hopur, var.equal = TRUE)</code></td></tr>
+<tr><td>Tveir óháðir hópar, ójöfn dreifni</td><td>Welch t-próf</td><td><code>t.test(y ~ hopur)</code></td></tr>
+<tr><td>Þrír eða fleiri hópar</td><td>Fervikagreining (kafli 8)</td><td><code>aov(y ~ hopur)</code></td></tr>
+</tbody></table></div>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: t-próf í R-úttaki</h2>
+<p>Raunveruleg úttök úr púls- og Framingham-gögnunum: <code>var.test</code>, óparað og parað t-próf og Welch-próf. Smelltu á prófstærðir og p-gildi, veldu rétt próf og dragðu ályktanir eins og á lokaprófinu.</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu öll verkefnin. Skrefinu lýkur þegar þau eru öll leyst og meðaleinkunnin er a.m.k. 60%. Fyrsta svarið við hverju verkefni gildir, en þú getur alltaf byrjað upp á nýtt.</p></div>
+<div class="lab-root"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 7"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-5.html"><span>Fyrri</span>5. Öryggisbil</a><a href="kafli-7.html" style="text-align:right"><span>Næsta</span>7. Hlutföll og tengslatöflur</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/stat.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/kafli01.js"></script>
+<script src="js/q/kafli02.js"></script>
+<script src="js/q/kafli03.js"></script>
+<script src="js/q/kafli04.js"></script>
+<script src="js/q/kafli05.js"></script>
+<script src="js/q/kafli06.js"></script>
+<script src="js/q/kafli07.js"></script>
+<script src="js/q/kafli08.js"></script>
+<script src="js/q/kafli09.js"></script>
+<script src="js/q/kafli10.js"></script>
+<script src="js/q/lyd.js"></script>
+<script src="js/uttak.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/malin-data.js"></script>
+<script src="js/gagnvirkt.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-6.js"></script>
+</body>
+</html>

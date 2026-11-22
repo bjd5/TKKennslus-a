@@ -1,0 +1,113 @@
+<h1>Líkur: tvíkosta- og Poisson-dreifing</h1>
+<p class="lede">Hve líklegt er að þrír eða færri sjúklingar komi á bráðamóttökuna á næsta klukkutíma? Hve líklegt er að a.m.k. þrír af fimm sjúklingum séu beinbrotnir? Á hverju lokaprófi eru svona spurningar, og þær snúast nær alltaf um tvær strjálar dreifingar: <b>tvíkostadreifingu</b> og <b>Poisson-dreifingu</b>. Í þessum kafla lærir þú að þekkja hvor á við, reikna líkurnar í höndunum og með R, og forðast algengustu gildruna.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li><b>Tvíkostadreifing</b> $X \sim \text{Bin}(n, p)$: fjöldi „árangra“ í $n$ óháðum tilraunum með líkur $p$. $E[X] = np$, $\text{Var}[X] = np(1-p)$.</li>
+  <li><b>Poisson-dreifing</b> $X \sim \text{Poisson}(\lambda)$: fjöldi atburða á föstu tímabili. $E[X] = \text{Var}[X] = \lambda$. λ skalast með tímabilinu.</li>
+  <li><code>d…</code> gefur $P(X = k)$, <code>p…</code> gefur $P(X \le k)$.</li>
+  <li><b>Gildran:</b> $P(X \ge k) = 1 - P(X \le k-1)$, þ.e. <code>1 - pbinom(k - 1, …)</code>.</li>
+</ol>
+</div>
+
+<h2 id="slembistaerd">Slembistærðir</h2>
+<p><b>Slembistærð</b> (random variable) er tala sem ræðst af tilviljun, t.d. fjöldi sjúklinga sem koma næsta klukkutímann. Við táknum hana með hástaf, $X$, og tiltekið gildi hennar með lágstaf, $k$ eða $x$. <b>Líkindadreifing</b> (probability distribution) segir hvaða gildi $X$ getur tekið og með hvaða líkum.</p>
+<p><b>Strjál</b> slembistærð (discrete) tekur teljanleg gildi (0, 1, 2, …). Dreifing hennar er gefin með <b>massafalli</b> (mass function) $P(X = k)$, og líkurnar summast í 1. <b>Samfelld</b> slembistærð (continuous), t.d. blóðþrýstingur, er í næsta kafla.</p>
+<p><b>Væntigildi</b> (expected value) er meðaltal dreifingarinnar, „langtímameðaltalið“ ef tilraunin væri endurtekin óendanlega oft:</p>
+$$E[X] = \mu = \sum_k k \cdot P(X = k), \qquad \text{Var}[X] = \sigma^2 = \sum_k (k - \mu)^2 \cdot P(X = k)$$
+
+<h2 id="tvikosta">Tvíkostadreifing</h2>
+<p>Einföld tilraun með tvær mögulegar útkomur, „árangur“ (líkur $p$) og „misheppnun“ (líkur $1-p$), heitir <b>Bernoulli-tilraun</b>. Ef við gerum $n$ slíkar tilraunir og teljum árangrana fylgir fjöldinn <b>tvíkostadreifingu</b> (binomial distribution), $X \sim \text{Bin}(n, p)$, ef:</p>
+<ol>
+  <li>fjöldi tilrauna $n$ er fastur fyrir fram,</li>
+  <li>hver tilraun hefur aðeins tvær útkomur,</li>
+  <li>líkurnar $p$ eru þær sömu í öllum tilraunum,</li>
+  <li>tilraunirnar eru óháðar.</li>
+</ol>
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \qquad \binom{n}{k} = \frac{n!}{k!\,(n-k)!}$$
+<p>Tvíliðustuðullinn $\binom{n}{k}$ (binomial coefficient) telur á hve marga vegu má velja hvaða $k$ af $n$ tilraunum heppnast. Í R heitir hann <code>choose(n, k)</code>.</p>
+$$E[X] = np, \qquad \text{Var}[X] = np(1-p), \qquad \text{sd}(X) = \sqrt{np(1-p)}$$
+
+<div class="ex"><div class="ex-head">Dæmi <span>Bóluefni (lokapróf 2024, dæmi 6)</span></div><div class="ex-body">
+<p>Bóluefni ver 70% bólusettra gegn sýkingu. Tíu manns eru bólusettir. (a) Hverjar eru líkurnar á að nákvæmlega 7 séu varðir? (b) Að a.m.k. 8 séu varðir? (c) Hvert er væntanlegt gildi og dreifni fjöldans?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$X \sim \text{Bin}(n = 10, p = 0.7)$.</p>
+$$(a)\quad P(X = 7) = \binom{10}{7} 0.7^7 \cdot 0.3^3 = 120 \cdot 0.0824 \cdot 0.027 = 0.267$$
+$$(b)\quad P(X \ge 8) = P(8) + P(9) + P(10) = 1 - P(X \le 7) = 0.383$$
+$$(c)\quad E[X] = 10 \cdot 0.7 = 7, \qquad \text{Var}[X] = 10 \cdot 0.7 \cdot 0.3 = 2.1$$
+<pre class="rcode">dbinom(7, size = 10, prob = 0.7)
+[1] 0.2668279
+1 - pbinom(7, size = 10, prob = 0.7)
+[1] 0.3827828
+sum(dbinom(8:10, 10, 0.7))
+[1] 0.3827828</pre>
+<p><span class="ans">(a) 0.267 (b) 0.383 (c) 7 og 2.1</span></p>
+</div></details>
+</div></div>
+
+<h2 id="poisson">Poisson-dreifing</h2>
+<p><b>Poisson-dreifingin</b> lýsir fjölda atburða sem gerast á föstu tímabili (eða svæði) þegar atburðirnir gerast óháð hver öðrum með föstum meðalhraða $\lambda$ (lambda). Dæmi: sjúklingar sem koma á bráðamóttöku á klukkutíma, ný inflúensutilfelli á dag, útköll sjúkrabíla á vakt. Ólíkt tvíkostadreifingunni er ekkert efra mark á fjöldanum.</p>
+$$P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}, \qquad k = 0, 1, 2, \dots \qquad E[X] = \text{Var}[X] = \lambda$$
+<div class="note tip"><p><b class="t">λ skalast með tímanum.</b> Ef að meðaltali koma 4 sjúklingar á klukkutíma, þá er fjöldinn á <b>tveimur</b> klukkutímum $\text{Poisson}(8)$ og á hálftíma $\text{Poisson}(2)$. Þetta var spurt á lokaprófinu 2025 („en á tveimur dögum?“).</p></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Bráðamóttakan (lokapróf 2025, krossaspurningar 2–3)</span></div><div class="ex-body">
+<p>Að meðaltali koma 4 sjúklingar á bráðamóttöku á klukkutíma. (a) Hverjar eru líkurnar á að á einum klukkutíma komi þrír eða færri? (b) Að nákvæmlega sex komi? (c) Að a.m.k. þrír komi á tveimur klukkutímum?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$X \sim \text{Poisson}(\lambda = 4)$.</p>
+$$(a)\quad P(X \le 3) = e^{-4}\left(\frac{4^0}{0!} + \frac{4^1}{1!} + \frac{4^2}{2!} + \frac{4^3}{3!}\right) = e^{-4}(1 + 4 + 8 + 10.667) = 0.433$$
+$$(b)\quad P(X = 6) = \frac{e^{-4}\, 4^6}{6!} = \frac{0.01832 \cdot 4096}{720} = 0.104$$
+<p>(c) Á tveimur klukkutímum er $Y \sim \text{Poisson}(8)$ og $P(Y \ge 3) = 1 - P(Y \le 2) = 0.986$.</p>
+<pre class="rcode">ppois(3, lambda = 4)
+[1] 0.4334701
+dpois(6, lambda = 4)
+[1] 0.1041956
+1 - ppois(2, lambda = 8)
+[1] 0.986246</pre>
+<p><span class="ans">(a) 0.433 (b) 0.104 (c) 0.986</span></p>
+</div></details>
+</div></div>
+
+<h2 id="r">R-föllin og gildran</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Spurning</th><th>Tvíkosta</th><th>Poisson</th></tr></thead>
+<tbody>
+<tr><td>$P(X = k)$</td><td><code>dbinom(k, n, p)</code></td><td><code>dpois(k, lambda)</code></td></tr>
+<tr><td>$P(X \le k)$ („k eða færri“, „í mesta lagi k“)</td><td><code>pbinom(k, n, p)</code></td><td><code>ppois(k, lambda)</code></td></tr>
+<tr><td>$P(X &lt; k)$ („færri en k“)</td><td><code>pbinom(k - 1, n, p)</code></td><td><code>ppois(k - 1, lambda)</code></td></tr>
+<tr><td>$P(X \ge k)$ („a.m.k. k“, „k eða fleiri“)</td><td><code>1 - pbinom(k - 1, n, p)</code></td><td><code>1 - ppois(k - 1, lambda)</code></td></tr>
+<tr><td>$P(X &gt; k)$ („fleiri en k“)</td><td><code>1 - pbinom(k, n, p)</code></td><td><code>1 - ppois(k, lambda)</code></td></tr>
+</tbody></table></div>
+<div class="note warn"><p><b class="t">Gildran:</b> <code>pbinom(k, n, p, lower.tail = FALSE)</code> gefur $P(X &gt; k)$, <b>ekki</b> $P(X \ge k)$. Fyrir strjálar dreifingar skiptir máli hvort mörkin eru með eða ekki. Þýddu orðin fyrst yfir í ójöfnu og breyttu henni svo í „≤“: „a.m.k. 3“ er $X \ge 3$, sem er $1 - P(X \le 2)$. Fyrir samfelldar dreifingar (næsti kafli) skiptir þetta engu máli.</p></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Beinbrot (lokapróf 2025, krossaspurningar 5–6)</span></div><div class="ex-body">
+<p>Um 24% þeirra sem koma á bráðamóttöku eru með beinbrot. Fimm sjúklingar eru valdir af handahófi. (a) Hverjar eru líkurnar á að a.m.k. 3 séu með beinbrot? (b) Að færri en 2 séu með beinbrot?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>$X \sim \text{Bin}(5, 0.24)$.</p>
+<p>(a) „A.m.k. 3“ er $X \ge 3$: $P(X \ge 3) = 1 - P(X \le 2) = 0.093$.</p>
+<p>(b) „Færri en 2“ er $X \le 1$: $P(X \le 1) = 0.76^5 + 5 \cdot 0.24 \cdot 0.76^4 = 0.2536 + 0.4003 = 0.654$.</p>
+<pre class="rcode">1 - pbinom(2, size = 5, prob = 0.24)
+[1] 0.09325117
+pbinom(1, size = 5, prob = 0.24)
+[1] 0.6538986</pre>
+<p><span class="ans">(a) 0.093 (b) 0.654</span></p>
+</div></details>
+</div></div>
+
+<h2 id="hvor">Tvíkosta eða Poisson?</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Spurðu</th><th>Tvíkosta</th><th>Poisson</th></tr></thead>
+<tbody>
+<tr><td>Er fastur fjöldi tilrauna?</td><td>Já, $n$ (t.d. 5 sjúklingar, 10 bólusettir)</td><td>Nei, talið á tímabili</td></tr>
+<tr><td>Hvað er gefið?</td><td>Líkur $p$ (t.d. 24%)</td><td>Meðalfjöldi $\lambda$ (t.d. 4 á klst.)</td></tr>
+<tr><td>Hámark?</td><td>$X \le n$</td><td>Ekkert hámark</td></tr>
+<tr><td>Dreifni</td><td>$np(1-p) &lt; np$</td><td>$\lambda$ = meðaltal</td></tr>
+</tbody></table></div>
+<p>Poisson-dreifingin er líka góð nálgun á tvíkostadreifingu þegar $n$ er stórt og $p$ lítið, með $\lambda = np$. Til dæmis er fjöldi sjaldgæfra aukaverkana hjá 10 000 bólusettum, $p = 0.0003$, nálægt $\text{Poisson}(3)$.</p>
+
+<h2 id="eiginleikar">Reiknireglur fyrir væntigildi og dreifni</h2>
+<p>Þessar reglur nýtast í næsta kafla, þegar við skoðum meðaltöl:</p>
+$$E[aX + b] = aE[X] + b, \qquad \text{Var}[aX + b] = a^2\,\text{Var}[X]$$
+$$E[X + Y] = E[X] + E[Y], \qquad \text{Var}[X + Y] = \text{Var}[X] + \text{Var}[Y] \text{ ef } X, Y \text{ eru óháðar}$$
+<p>Fasti sem er lagður við breytir ekki dreifninni, og margfaldari fer í öðru veldi inn í dreifnina. Ef $X$ er hiti í °C er hitinn í °F $1.8X + 32$, og staðalfrávikið margfaldast með 1.8.</p>
+<div class="note tip"><p><b class="t">Á prófinu:</b> skrifaðu alltaf dreifinguna með stikum fyrst, t.d. „$X \sim \text{Poisson}(\lambda = 4)$“, svo ójöfnuna sem spurt er um, og loks útreikning eða R-skipun. Það gefur hlutastig þó að lokatalan sé röng.</p></div>
