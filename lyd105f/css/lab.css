@@ -20,15 +20,15 @@ pre.rcode { padding: 0.75rem 1rem; overflow-x: auto; white-space: pre; margin: 0
 .tok.miss { background: var(--bad); color: var(--raised); box-shadow: none; }
 
 .task-body .q { font-size: 1.05rem; margin: 0 0 0.9rem; }
-.opts { display: flex; flex-direction: column; gap: 0.5rem; }
-.opt { text-align: left; display: grid; grid-template-columns: 1.6rem 1fr; gap: 0.6rem; align-items: start;
+.task-body .opts { display: flex; flex-direction: column; gap: 0.5rem; }
+.task-body .opt { text-align: left; display: grid; grid-template-columns: 1.6rem 1fr; gap: 0.6rem; align-items: start;
   border: 1px solid var(--rule-2); background: var(--raised); color: var(--ink); border-radius: var(--radius); padding: 0.6rem 0.85rem; font: inherit; cursor: pointer; }
-.opt:hover:not(:disabled) { border-color: var(--mag); }
-.opt .l { width: 1.5rem; height: 1.5rem; border-radius: 6px; background: var(--paper-2); display: grid; place-items: center; font: 700 0.78rem var(--sans); }
-.opt.sel { border-color: var(--mag); background: var(--key-bg); }
-.opt.right { border-color: var(--good); box-shadow: inset 4px 0 0 var(--good); }
-.opt.wrong { border-color: var(--bad); box-shadow: inset 4px 0 0 var(--bad); }
-.opt:disabled { cursor: default; }
+.task-body .opt:hover:not(:disabled) { border-color: var(--mag); }
+.task-body .opt .l { width: 1.5rem; height: 1.5rem; border-radius: 6px; background: var(--paper-2); display: grid; place-items: center; font: 700 0.78rem var(--sans); }
+.task-body .opt.sel { border-color: var(--mag); background: var(--key-bg); }
+.task-body .opt.right { border-color: var(--good); box-shadow: inset 4px 0 0 var(--good); }
+.task-body .opt.wrong { border-color: var(--bad); box-shadow: inset 4px 0 0 var(--bad); }
+.task-body .opt:disabled { cursor: default; }
 .numin { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
 .numin input { width: 11rem; padding: 0.5rem 0.7rem; border: 1px solid var(--rule-2); border-radius: 8px; background: var(--raised); color: var(--ink); font: inherit; }
 .btn.pri { background: var(--mag); border-color: var(--mag); color: var(--raised); }
