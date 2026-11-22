@@ -1,0 +1,81 @@
+<h1>Fervikagreining (ANOVA)</h1>
+<p class="lede">t-próf ber saman meðaltöl <b>tveggja</b> hópa. Hvað ef hóparnir eru þrír eða fleiri, t.d. fjórir aldurshópar eða reykingamenn, fyrrverandi reykingamenn og fólk sem hefur aldrei reykt? Þá notum við <b>fervikagreiningu</b> (analysis of variance, ANOVA). Á lokaprófinu er gefin ANOVA-tafla úr R, oft með gati, og spurt um F-gildið, tilgáturnar, ályktunina og forsendurnar.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li>H₀: $\mu_1 = \mu_2 = \dots = \mu_k$. H₁: <b>a.m.k. eitt</b> meðaltal er frábrugðið hinum.</li>
+  <li>Hugmyndin: berðu saman breytileika <b>milli</b> hópa og breytileika <b>innan</b> hópa.</li>
+  <li>$MS = SS/df$ og $F = MS_{\text{hópa}}/MS_{\text{leifa}}$, með $df = k-1$ og $N-k$.</li>
+  <li>Forsendur: óháðar mælingar, normaldreifðar leifar og jöfn dreifni í hópunum.</li>
+</ol>
+</div>
+
+<h2 id="hugmynd">Hugmyndin: breytileiki milli og innan hópa</h2>
+<p>Hugsaðu þér kassarit af kólesteróli í fjórum aldurshópum. Ef hópmeðaltölin liggja langt hvert frá öðru <i>miðað við</i> hve dreifðar mælingarnar eru innan hvers hóps, trúum við því að meðaltölin í þýðinu séu ólík. Ef hópmeðaltölin eru ólík en mælingarnar innan hópanna mjög dreifðar gæti munurinn vel verið tilviljun.</p>
+<p>Heildarbreytileikanum er því skipt í tvo hluta (fervikasummur, sums of squares):</p>
+$$\underbrace{\sum_{i,j}(y_{ij}-\bar y)^2}_{SS_{\text{heild}}} = \underbrace{\sum_{i} n_i(\bar y_i-\bar y)^2}_{SS_{\text{hópa}}} + \underbrace{\sum_{i,j}(y_{ij}-\bar y_i)^2}_{SS_{\text{leifa}}}$$
+<p>$SS_{\text{hópa}}$ mælir hve langt hópmeðaltölin $\bar y_i$ eru frá heildarmeðaltalinu. $SS_{\text{leifa}}$ mælir hve langt einstakar mælingar eru frá meðaltali síns hóps.</p>
+
+<h2 id="tafla">ANOVA-taflan</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Df</th><th>Sum Sq</th><th>Mean Sq</th><th>F value</th></tr></thead>
+<tbody>
+<tr><td>hópar</td><td>$k-1$</td><td>$SS_{\text{hópa}}$</td><td>$MS_{\text{hópa}} = \dfrac{SS_{\text{hópa}}}{k-1}$</td><td>$F = \dfrac{MS_{\text{hópa}}}{MS_{\text{leifa}}}$</td></tr>
+<tr><td>Residuals</td><td>$N-k$</td><td>$SS_{\text{leifa}}$</td><td>$MS_{\text{leifa}} = \dfrac{SS_{\text{leifa}}}{N-k}$</td><td></td></tr>
+</tbody></table></div>
+<p>$k$ er fjöldi hópa og $N$ heildarfjöldi mælinga. Ef H₀ er sönn eru bæði MS-gildin mat á sama breytileikanum og $F \approx 1$. Ef meðaltölin eru ólík verður $MS_{\text{hópa}}$ stórt og $F$ stórt. Undir H₀ fylgir $F$ F-dreifingu með $(k-1,\ N-k)$ frígráður, og p-gildið er efri halinn: <code>pf(F, k - 1, N - k, lower.tail = FALSE)</code>.</p>
+
+<h2 id="framingham">Dæmi 1: kólesteról eftir aldurshópum (Framingham)</h2>
+<pre class="rcode">&gt; tapply(fr$TOTCHOL, fr$aldursflokkur, mean, na.rm = TRUE)
+&gt; summary(aov(TOTCHOL ~ aldursflokkur, data = fr))
+
+ (30,40]  (40,50]  (50,60]  (60,70]
+215.6855 232.8671 249.3015 245.8277
+                Df  Sum Sq Mean Sq F value Pr(&gt;F)
+aldursflokkur    3  622674  207558     112 &lt;2e-16 ***
+Residuals     4378 8111815    1853
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+52 observations deleted due to missingness</pre>
+<p><b>Lestu töfluna.</b> $k = 4$ aldurshópar gefa $df = 3$. 52 vantar, svo $N = 4434 - 52 = 4382$ og $df = N - k = 4378$. Mean Sq er Sum Sq deilt með Df:</p>
+$$MS_{\text{hópa}} = \frac{622674}{3} = 207558, \qquad MS_{\text{leifa}} = \frac{8111815}{4378} = 1852.9, \qquad F = \frac{207558}{1852.9} = 112.0.$$
+<p><b>Tilgátur.</b> H₀: $\mu_{30\text{–}40} = \mu_{40\text{–}50} = \mu_{50\text{–}60} = \mu_{60\text{–}70}$. H₁: a.m.k. eitt meðaltal er ólíkt.</p>
+<p><b>Ályktun.</b> $p \lt 2\cdot 10^{-16}$, svo við höfnum H₀. Meðalkólesteról er ólíkt eftir aldurshópum: það hækkar úr um 216 mg/dL hjá 30–40 ára í um 249 hjá 50–60 ára.</p>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að skrifa H₁ sem „öll meðaltölin eru ólík“. Gagntilgátan er að <b>a.m.k. eitt</b> sé ólíkt. ANOVA segir heldur ekki <i>hvaða</i> hópar eru ólíkir. Til þess þarf eftirápróf (post hoc), t.d. Tukey (<code>TukeyHSD(aov(...))</code>) eða t-próf með Bonferroni-leiðréttingu.</p></div>
+
+<h2 id="plasma">Dæmi 2: beta-karótín í blóði eftir reykingum (plasma)</h2>
+<pre class="rcode">&gt; tapply(plasma$betaplasma, plasma$smokstat, mean)
+&gt; summary(aov(betaplasma ~ smokstat, data = plasma))
+
+Current Smoker         Former          Never
+      121.3256       193.4696       206.0510
+             Df   Sum Sq Mean Sq F value Pr(&gt;F)
+smokstat      2   244625  122312   3.715 0.0254 *
+Residuals   312 10271014   32920
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</pre>
+<p>Þrír hópar gefa $df = 2$, og $N = 312 + 3 = 315$. $F = 122312/32920 = 3.72$ og $p = 0.025 \lt 0.05$: höfnum H₀. Meðalgildi beta-karótíns er ólíkt eftir reykingum, lægst hjá þeim sem reykja (121 á móti 193 og 206 ng/mL).</p>
+<p>Hér er þó ástæða til að hugsa um forsendurnar. Beta-karótín í blóði er mjög hægri-skekkt (sjá leifarnar í kafla 9, þar sem hámarksleifin er yfir 1100), reykingamenn eru fáir (43 af 315) og staðalfrávikin eru 79, 192 og 193, svo það stærsta er meira en tvöfalt það minnsta. Í gögnum eins og þessum er oft betra að skoða <code>log(betaplasma)</code>.</p>
+
+<h2 id="forsendur">Forsendur ANOVA</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Forsenda</th><th>Hvernig metin</th></tr></thead>
+<tbody>
+<tr><td><b>Óháðar mælingar</b></td><td>Út frá rannsóknarsniðinu: hver einstaklingur mældur einu sinni, í einum hópi.</td></tr>
+<tr><td><b>Normaldreifðar leifar</b></td><td>QQ-rit (normaldreifingarrit) leifanna, stuðlarit. Skiptir minna máli ef hóparnir eru stórir (CLT).</td></tr>
+<tr><td><b>Jöfn dreifni í hópum</b></td><td>Kassarit hlið við hlið: álíka breiðir kassar? Þumalputtaregla: stærsta staðalfrávik ekki meira en tvöfalt það minnsta.</td></tr>
+</tbody></table></div>
+<div class="note tip"><p><b class="t">Lokapróf 2025, dæmi 3:</b> spurt var „Útskýrið á hverju ANOVA byggir“ og „Teljið þið viðeigandi að nota ANOVA miðað við hvað ykkur er gefið?“. Gott svar nefnir breytileika milli og innan hópa, F sem hlutfall þeirra, og vísar í kassaritið: eru dreifingarnar álíka breiðar og u.þ.b. samhverfar, eru útlagar, og eru hóparnir stórir?</p></div>
+
+<h2 id="tengsl">Tengsl við t-próf og aðhvarf</h2>
+<p>Með tvo hópa gefur ANOVA nákvæmlega sama p-gildi og t-próf með <code>var.equal = TRUE</code>, og $F = t^2$. ANOVA er líka sérstakt línulegt líkan með flokkaskýribreytu: <code>anova(lm(y ~ hopur))</code> gefur sömu töflu. Í kafla 9 sést F-prófið líka neðst í <code>summary(lm)</code>.</p>
+
+<h2 id="r">R í hnotskurn</h2>
+<pre class="rcode">boxplot(y ~ hopur, data = d)              # skoða fyrst
+tapply(d$y, d$hopur, mean)                # hópmeðaltöl
+fit &lt;- aov(y ~ hopur, data = d)
+summary(fit)                              # ANOVA-taflan
+TukeyHSD(fit)                             # hvaða hópar eru ólíkir?
+qqnorm(residuals(fit)); qqline(residuals(fit))
+pf(F, k - 1, N - k, lower.tail = FALSE)   # p-gildi úr F</pre>

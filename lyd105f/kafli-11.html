@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 11: Lifunargreining · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" aria-current="page" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="11" data-topics="lifun">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 11: Lifunargreining</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-10.html">kafla 10</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 11 af 11 · Fyrirlestur um lifunargreiningu · Kaplan–Meier og Cox</p>
+<h1>Lifunargreining</h1>
+<p class="ch-exam"><b>Tengist:</b> Lokapróf: Kaplan–Meier gröf, log-rank og Cox-líkan</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Í mörgum rannsóknum er útkoman ekki bara <i>hvort</i> atburður gerist (dauði, endurkoma krabbameins, Covid-smit) heldur <i>hvenær</i>. Þá er ekki hægt að bíða þar til allir hafa orðið fyrir atburðinum, og sumir hverfa úr rannsókninni. <b>Lifunargreining</b> (survival analysis) ræður við þetta. Á lokaprófunum er gefið Kaplan–Meier graf og Cox-úttak úr R: þú átt að lýsa ferlunum, lesa af þeim lifun og miðgildi, skrifa Cox-líkanið og túlka áhættuhlutföll með öryggisbilum og p-gildum.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li>Gögnin eru <b>tími</b> og <b>staða</b> (atburður = 1, skert = 0). Í R: <code>Surv(time, status)</code>.</li>
+  <li><b>Skerðing</b> (censoring): vitum aðeins að atburður hafði ekki orðið þegar eftirfylgd lauk.</li>
+  <li><b>Kaplan–Meier</b> metur lifunarfallið $S(t) = P(T \gt t)$ sem þrepaferil. Miðgildi lifunar: þar sem $S(t) = 0.5$.</li>
+  <li><b>Log-rank próf</b> ber saman lifun hópa. H₀: sama lifun.</li>
+  <li><b>Cox-líkan:</b> $h(t\mid x) = h_0(t)\,e^{\beta x}$. $e^{\beta}$ = <b>áhættuhlutfall</b> (hazard ratio, HR).</li>
+</ol>
+</div>
+
+<h2 id="gogn">Lifunargögn og skerðing</h2>
+<p>Fyrir hvern þátttakanda skráum við tvennt: <b>tímann</b> frá upphafi (t.d. slembiröðun eða fyrstu skoðun) og <b>stöðuna</b> í lok eftirfylgdar: 1 ef atburðurinn varð, 0 ef ekki. Í seinna tilvikinu er tíminn <b>hægri-skertur</b> (right censored): við vitum aðeins að lifunartíminn er lengri en sá tími sem við fylgdumst með. Skerðing verður t.d. þegar rannsókninni lýkur (stjórnunarleg skerðing), þátttakandi flytur eða hættir þátttöku, eða deyr úr öðru en því sem skoðað er.</p>
+<div class="note warn"><p><b class="t">Af hverju ekki bara meðaltal eða hlutfall?</b> Ef við hendum skertu mælingunum, eða teljum þær sem lifun allan tímann, verður niðurstaðan bjöguð. Skertur einstaklingur gefur hlutaupplýsingar: hann lifði a.m.k. til ákveðins tíma. Kaplan–Meier og Cox nýta þær.</p></div>
+
+<h2 id="km">Kaplan–Meier matið</h2>
+<p>Lifunarfallið $S(t)$ eru líkurnar á að lifa lengur en $t$. Kaplan–Meier metillinn reiknar þær skref fyrir skref. Í hvert sinn $t_j$ sem atburður verður eru $n_j$ í áhættu (enn á lífi og ekki skertir) og $d_j$ atburðir:</p>
+$$\hat S(t) = \prod_{t_j \le t}\left(1 - \frac{d_j}{n_j}\right).$$
+<p>Ferillinn byrjar í 1 og fellur í þrepum við hvern atburð. Skertir einstaklingar valda ekki falli en fækka þeim sem eru í áhættu (oft merktir með litlu + á grafinu).</p>
+
+<h3>Dæmi: hjartasjúkdómur og lifun í Framingham</h3>
+<figure class="fig">
+<svg viewBox="0 0 600 300" role="img" aria-label="Kaplan–Meier ferlar: lifun fellur mun hraðar hjá þeim sem voru með hjartasjúkdóm" style="width:100%;height:auto;max-width:640px;font:12px var(--sans)">
+<g stroke="var(--rule-2)" stroke-width="1"><line x1="50" y1="260" x2="580" y2="260"/><line x1="50" y1="15" x2="50" y2="260"/>
+<line x1="50" y1="137.5" x2="580" y2="137.5" stroke-dasharray="4 4"/></g>
+<g fill="var(--muted)"><text x="44" y="264" text-anchor="end">0</text><text x="44" y="202" text-anchor="end">0.25</text><text x="44" y="141" text-anchor="end">0.5</text><text x="44" y="80" text-anchor="end">0.75</text><text x="44" y="19" text-anchor="end">1</text>
+<text x="50" y="278" text-anchor="middle">0</text><text x="160.4" y="278" text-anchor="middle">5</text><text x="270.8" y="278" text-anchor="middle">10</text><text x="381.2" y="278" text-anchor="middle">15</text><text x="491.7" y="278" text-anchor="middle">20</text>
+<text x="315" y="296" text-anchor="middle">Ár frá fyrstu skoðun</text></g>
+<path d="M50,15H50V15.8H61V16.4H72.1V16.9H83.1V17.4H94.2V18.4H105.2V18.9H116.2V20.1H127.3V21.1H138.3V22H149.4V23.1H160.4V24.2H171.5V25.5H182.5V26.7H193.5V28H204.6V29.4H215.6V30.3H226.7V31.5H237.7V32.7H248.8V33.8H259.8V35.5H270.8V37.5H281.9V39H292.9V40.9H304V42.6H315V44.5H326V46.1H337.1V47.9H348.1V49.8H359.2V52H370.2V53.9H381.2V56.4H392.3V58.4H403.3V60.6H414.4V63H425.4V64.9H436.5V67.4H447.5V69.7H458.5V71.5H469.6V74.5H480.6V76.4H491.7V78.8H502.7V82.2H513.8V84.5H524.8V86.4H535.8V88.5H546.9V91.2H557.9V93.6H569V96.2H580" fill="none" stroke="var(--ink)" stroke-width="2"/>
+<path d="M50,15H50V21.3H61V23.8H72.1V30.2H83.1V36.5H94.2V37.7H105.2V41.5H116.2V42.8H127.3V46.6H138.3V54.1H149.4V60.5H160.4V71.8H171.5V75.6H182.5V79.4H193.5V81.9H204.6V87H215.6V90.8H226.7V92H237.7V98.4H248.8V105.9H259.8V108.5H270.8V112.2H281.9V113.5H292.9V117.3H304V123.6H315V123.6H326V123.6H337.1V129.9H348.1V136.2H359.2V138.8H370.2V147.6H381.2V150.1H392.3V155.2H403.3V159H414.4V159H425.4V160.2H436.5V162.8H447.5V166.5H458.5V166.5H469.6V170.3H480.6V171.6H491.7V176.6H502.7V181.7H513.8V188H524.8V190.5H535.8V191.8H546.9V193.1H557.9V194.3H569V196.9H580" fill="none" stroke="var(--mag)" stroke-width="2.5"/>
+<line x1="363.6" y1="137.5" x2="363.6" y2="260" stroke="var(--mag)" stroke-dasharray="3 3"/>
+<text x="470" y="60" fill="var(--ink)">Án hjartasjúkdóms</text><text x="440" y="215" fill="var(--mag)">Með hjartasjúkdóm (CHD)</text>
+<text x="368" y="250" fill="var(--mag)">miðgildi 14.2 ár</text>
+</svg>
+<figcaption class="small">Kaplan–Meier ferlar fyrir heildarlifun í Framingham eftir því hvort hjartasjúkdómur (CHD) var til staðar við fyrstu skoðun. Teiknað úr gögnunum með hálfs árs upplausn.</figcaption>
+</figure>
+<pre class="rcode">&gt; km &lt;- survfit(Surv(TIMEDTH / 365.25, DEATH) ~ hjarta, data = fr)
+&gt; km
+&gt; summary(km, times = c(5, 10, 20))
+
+Call: survfit(formula = Surv(TIMEDTH/365.25, DEATH) ~ hjarta, data = fr)
+
+                 n events median 0.95LCL 0.95UCL
+hjarta=No CHD 4240   1406     NA      NA      NA
+hjarta=CHD     194    144   14.2    11.9    16.1
+Call: survfit(formula = Surv(TIMEDTH/365.25, DEATH) ~ hjarta, data = fr)
+
+                hjarta=No CHD
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    5   4099     141    0.967 0.00275        0.961        0.972
+   10   3885     214    0.916 0.00425        0.908        0.925
+   20   3177     708    0.749 0.00666        0.736        0.762
+
+                hjarta=CHD
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    5    158      36    0.814  0.0279        0.762        0.871
+   10    120      38    0.619  0.0349        0.554        0.691
+   20     71      50    0.361  0.0345        0.299        0.435</pre>
+<p><b>Svona lestu úttakið:</b></p>
+<ul>
+  <li><b>Lifun við tíma $t$:</b> eftir 10 ár eru 91.6% þeirra án CHD á lífi, en aðeins 61.9% þeirra með CHD. Eftir 20 ár 74.9% á móti 36.1%.</li>
+  <li><b>Miðgildi lifunar</b> í CHD-hópnum er 14.2 ár (95% bil 11.9–16.1): þá hefur helmingurinn dáið. Á grafinu finnurðu það þar sem ferillinn sker strikuðu línuna $S(t) = 0.5$, og lest tímann af x-ásnum.</li>
+  <li><b>NA</b> í hópnum án CHD þýðir að ferillinn fer aldrei niður fyrir 0.5 á eftirfylgdartímanum (24 ár), svo miðgildið er ekki hægt að meta. Það þýðir ekki að það vanti gögn.</li>
+  <li><code>n.event</code> í <code>summary</code> er fjöldi atburða <i>frá síðasta tímapunkti</i> í töflunni, ekki samtals.</li>
+</ul>
+<div class="note tip"><p><b class="t">Lokapróf 2025, spurning 15</b> gaf Kaplan–Meier graf af þessu tagi og bað um rétta lýsingu. Svarmöguleikarnir prófuðu tvennt: hvort hópurinn með hjartasjúkdóm hefði <b>verri</b> eða betri lifun (ferillinn sem fellur hraðar hefur verri lifun), og hvort tölurnar væru lesnar rétt af ásunum. Athugaðu alltaf í hvaða einingum tíminn er, hvort y-ásinn sýnir lifun eða uppsafnaða dánartíðni, og að „50% látnir“ þýðir $S(t) = 0.5$.</p></div>
+
+<h2 id="logrank">Log-rank prófið</h2>
+<p>Til að prófa hvort lifun sé ólík milli hópa notum við <b>log-rank prófið</b>. H₀: lifunarföllin eru eins í öllum hópum. H₁: þau eru ekki öll eins. Prófið ber saman séðan og væntan fjölda atburða í hverjum hópi á hverjum atburðartíma og fylgir $\chi^2$-dreifingu með (fjöldi hópa − 1) frígráður. Í R: <code>survdiff(Surv(time, status) ~ hopur)</code>. Í úttaki <code>summary(coxph(...))</code> heitir sama próf <code>Score (logrank) test</code>.</p>
+
+<h2 id="cox">Cox-líkanið</h2>
+<p>Cox-líkanið (proportional hazards model) lýsir <b>áhættufallinu</b> (hazard) $h(t)$, augnabliksáhættu á atburði við tíma $t$ hjá þeim sem enn eru í áhættu:</p>
+$$h(t \mid x_1,\dots,x_p) = h_0(t)\cdot e^{\beta_1 x_1 + \dots + \beta_p x_p}.$$
+<p>$h_0(t)$ er grunnáhætta sem ekki þarf að tilgreina. Ef $x_1$ hækkar um eina einingu margfaldast áhættan með $e^{\beta_1}$, svo</p>
+$$HR = e^{\beta_1}.$$
+<p>HR = 1 þýðir engin tengsl, HR &gt; 1 meiri áhætta og HR &lt; 1 minni áhætta. Prósentubreytingin er $(HR - 1)\cdot 100\%$.</p>
+
+<h3>Dæmi 1: hjartasjúkdómur (Framingham)</h3>
+<pre class="rcode">&gt; cox &lt;- coxph(Surv(TIMEDTH / 365.25, DEATH) ~ hjarta, data = fr)
+&gt; summary(cox)
+
+Call:
+coxph(formula = Surv(TIMEDTH/365.25, DEATH) ~ hjarta, data = fr)
+
+  n= 4434, number of events= 1550
+
+             coef exp(coef) se(coef)     z Pr(&gt;|z|)
+hjartaCHD 1.32399   3.75840  0.08776 15.09   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+          exp(coef) exp(-coef) lower .95 upper .95
+hjartaCHD     3.758     0.2661     3.164     4.464
+
+Concordance= 0.536  (se = 0.004 )
+Likelihood ratio test= 161.9  on 1 df,   p=&lt;2e-16
+Wald test            = 227.6  on 1 df,   p=&lt;2e-16
+Score (logrank) test = 262.8  on 1 df,   p=&lt;2e-16</pre>
+<ul>
+  <li><b>Líkanið:</b> $h(t) = h_0(t)\cdot e^{1.324\cdot \text{CHD}}$, þar sem CHD = 1 ef hjartasjúkdómur var til staðar.</li>
+  <li><b>HR</b> $= e^{1.324} = 3.76$ (95% bil 3.16–4.46): þeir sem eru með hjartasjúkdóm eru í um 3.8 sinnum meiri áhættu á að deyja, á hverjum tíma, en þeir sem ekki eru með hann. Það er 276% hærri áhætta.</li>
+  <li><b>exp(−coef)</b> $= 0.266 = 1/3.758$ er sama samband séð frá hinum hópnum: þeir <i>án</i> hjartasjúkdóms hafa 0.27 sinnum áhættu hinna.</li>
+  <li>$z = 1.324/0.0878 = 15.09$ og $p \lt 2\cdot10^{-16}$; bilið inniheldur ekki 1. Tengslin eru marktæk.</li>
+</ul>
+<div class="note warn"><p><b class="t">Gildra á prófinu 2025 (spurning 14):</b> svarmöguleikarnir rugluðu saman exp(coef) og exp(−coef), og hvorum hópnum áhættan á við. Viðmiðunarflokkurinn er sá sem <b>ekki</b> birtist í línuheitinu (hér „No CHD“). HR = exp(coef) á við flokkinn sem birtist (<code>hjartaCHD</code>) miðað við viðmiðunarflokkinn.</p></div>
+
+<h3>Dæmi 2: krabbameinslyf og ristilkrabbamein (leiðrétt líkan)</h3>
+<p>Í <code>survival::colon</code> voru sjúklingar slembiraðaðir í eftirlit (Obs), levamisole (Lev) eða levamisole + 5-FU. Tíminn er í dögum.</p>
+<pre class="rcode">&gt; km &lt;- survfit(Surv(time, status) ~ rx, data = colon2)
+&gt; km
+
+Call: survfit(formula = Surv(time, status) ~ rx, data = colon2)
+
+             n events median 0.95LCL 0.95UCL
+rx=Obs     315    168   2083    1656    2789
+rx=Lev     310    161   2152    1540      NA
+rx=Lev+5FU 304    123     NA    2725      NA</pre>
+<pre class="rcode">&gt; summary(km, times = c(365, 1000, 2000))
+
+                rx=Obs
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  365    292      24    0.924  0.0149        0.895        0.954
+ 1000    211      79    0.672  0.0265        0.622        0.726
+ 2000    141      52    0.505  0.0283        0.453        0.564
+
+                rx=Lev
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  365    281      29    0.906  0.0165        0.875        0.939
+ 1000    203      78    0.655  0.0270        0.604        0.710
+ 2000    145      44    0.512  0.0284        0.459        0.571
+
+                rx=Lev+5FU
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  365    279      25    0.918  0.0158        0.887        0.949
+ 1000    227      52    0.747  0.0249        0.699        0.797
+ 2000    170      37    0.623  0.0279        0.571        0.681</pre>
+<p>Eftir 1000 daga eru 74.7% á lífi í Lev+5FU-hópnum á móti 67.2% í eftirlitshópnum. Miðgildi lifunar í eftirlitshópnum er 2083 dagar; í Lev+5FU-hópnum er það NA, því meira en helmingurinn lifði út eftirfylgdina.</p>
+<pre class="rcode">&gt; fit &lt;- coxph(Surv(time, status) ~ Lev + Lev_5FU + age, data = colon2)
+&gt; summary(fit)
+
+Call:
+coxph(formula = Surv(time, status) ~ Lev + Lev_5FU + age, data = colon2)
+
+  n= 929, number of events= 452
+
+             coef exp(coef)  se(coef)      z Pr(&gt;|z|)
+Lev     -0.027493  0.972881  0.110313 -0.249  0.80318
+Lev_5FU -0.373805  0.688111  0.118811 -3.146  0.00165 **
+age      0.002368  1.002370  0.004045  0.585  0.55836
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+        exp(coef) exp(-coef) lower .95 upper .95
+Lev        0.9729     1.0279    0.7837    1.2077
+Lev_5FU    0.6881     1.4533    0.5452    0.8685
+age        1.0024     0.9976    0.9945    1.0103
+
+Concordance= 0.548  (se = 0.014 )
+Likelihood ratio test= 12.49  on 3 df,   p=0.006
+Wald test            = 11.9  on 3 df,   p=0.008
+Score (logrank) test = 12.02  on 3 df,   p=0.007</pre>
+<ul>
+  <li><b>Líkanið:</b> $h(t) = h_0(t)\cdot\exp(-0.0275\,\text{Lev} - 0.3738\,\text{Lev\_5FU} + 0.0024\,\text{age})$, þar sem Lev og Lev_5FU eru 0/1-vísibreytur og eftirlitshópurinn er viðmiðun.</li>
+  <li><b>Lev+5FU:</b> HR = 0.69 (95% bil 0.55–0.87), $p = 0.002$. Leiðrétt fyrir aldri er dánaráhættan um 31% lægri en í eftirlitshópnum. Marktækt.</li>
+  <li><b>Lev eitt sér:</b> HR = 0.97 (0.78–1.21), $p = 0.80$. Bilið inniheldur 1: engin marktæk áhrif.</li>
+  <li><b>Aldur:</b> HR = 1.0024 á ár, ekki marktækt ($p = 0.56$). Fyrir 10 ár væri HR $= e^{10\cdot0.002368} = 1.024$.</li>
+  <li>Prófin þrjú neðst prófa <b>öll</b> stuðlana í einu (H₀: allir $\beta = 0$), með 3 frígráður.</li>
+</ul>
+
+<h2 id="forsenda">Forsenda Cox-líkansins</h2>
+<p>Cox-líkanið gerir ekki ráð fyrir neinni lögun á grunnáhættunni $h_0(t)$, en það gerir ráð fyrir <b>hlutfallslegri áhættu</b> (proportional hazards): HR milli hópa er <b>fast yfir tíma</b>. Vísbending um brot: Kaplan–Meier ferlarnir skerast. Formlega má prófa það með <code>cox.zph(fit)</code>.</p>
+<div class="note tip"><p><b class="t">Bóluefnarannsóknir:</b> fasa 3 rannsóknir á bóluefnum (t.d. gegn Covid-19) eru lifunarrannsóknir: allir byrja án sjúkdómsins og fylgst er með hvenær þeir smitast. Virkni bóluefnis er þá oft metin sem $1 - HR$: HR = 0.05 þýðir 95% virkni.</p></div>
+
+<h2 id="r">R í hnotskurn</h2>
+<pre class="rcode">library(survival)
+Surv(time, status)                               # status: 1 = atburður, 0 = skert
+km &lt;- survfit(Surv(time, status) ~ hopur, data = d)
+km                                               # n, events, median og bil
+summary(km, times = c(365, 1000))                # lifun við valda tíma
+plot(km, col = 1:3, xlab = "Tími", ylab = "Lifun")
+survdiff(Surv(time, status) ~ hopur, data = d)   # log-rank próf
+fit &lt;- coxph(Surv(time, status) ~ x1 + x2, data = d)
+summary(fit)                                     # exp(coef) = HR, bil og p
+cox.zph(fit)                                     # prófar hlutfallslega áhættu</pre>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: Lifun í Framingham og ristilkrabbameinsrannsókninni</h2>
+<p>Kaplan–Meier gröf og <code>summary(survfit)</code>, log-rank og Cox-líkön. Lestu lifun og miðgildi af grafinu og túlkaðu áhættuhlutföll.</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu öll verkefnin. Skrefinu lýkur þegar þau eru öll leyst og meðaleinkunnin er a.m.k. 60%. Fyrsta svarið við hverju verkefni gildir, en þú getur alltaf byrjað upp á nýtt.</p></div>
+<div class="lab-root"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="lokaprófið"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-10.html"><span>Fyrri</span>10. Tvíkosta aðhvarf, næmi og sértæki</a><a href="lokaprof-aefing.html" style="text-align:right"><span>Næsta</span>Lokapróf</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/stat.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/kafli01.js"></script>
+<script src="js/q/kafli02.js"></script>
+<script src="js/q/kafli03.js"></script>
+<script src="js/q/kafli04.js"></script>
+<script src="js/q/kafli05.js"></script>
+<script src="js/q/kafli06.js"></script>
+<script src="js/q/kafli07.js"></script>
+<script src="js/q/kafli08.js"></script>
+<script src="js/q/kafli09.js"></script>
+<script src="js/q/kafli10.js"></script>
+<script src="js/q/lyd.js"></script>
+<script src="js/uttak.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/malin-data.js"></script>
+<script src="js/gagnvirkt.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-11.js"></script>
+</body>
+</html>

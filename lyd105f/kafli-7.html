@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 7: Hlutföll og tengslatöflur · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" aria-current="page" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="7" data-topics="hlutfoll">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 7: Hlutföll og tengslatöflur</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-6.html">kafla 6</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 7 af 11 · Fyrirlestrar k7 og k9 · Tölfræði frá grunni kaflar 7 og 9</p>
+<h1>Hlutföll og tengslatöflur</h1>
+<p class="ch-exam"><b>Tengist:</b> Lokapróf: prop.test, kí-kvaðrat próf og gagnlíkindahlutfall</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Hingað til höfum við mest skoðað meðaltöl talnabreyta. Margar spurningar í heilbrigðisvísindum snúast þó um <b>flokkabreytur</b>: hve stór hluti er með sykursýki, reykja karlar meira en konur, er sjúkdómurinn algengari meðal útsettra? Í þessum kafla lærir þú að álykta um hlutföll, lesa tengslatöflur, nota kí-kvaðrat próf og reikna og túlka gagnlíkindahlutfall (OR) og áhættuhlutfall (RR). Á lokaprófinu 2025 var heilt skriflegt dæmi um þetta (11 stig).</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li><b>Eitt hlutfall:</b> $\hat p = x/n$, öryggisbil $\hat p \pm 1.96\sqrt{\hat p(1-\hat p)/n}$, próf með <code>prop.test(x, n, p = p0)</code>.</li>
+  <li><b>Tvö hlutföll:</b> <code>prop.test</code> á 2×2 töflu. H₀: $p_1 = p_2$.</li>
+  <li><b>Tengslatafla r×c:</b> kí-kvaðrat próf (<code>chisq.test</code>) á óhæði. Vænt tíðni $E = \dfrac{\text{línusumma}\cdot\text{dálksumma}}{\text{heild}}$. Ef væntar tíðnir eru litlar (undir 5): Fisher-próf.</li>
+  <li><b>Mælikvarðar á tengsl:</b> $OR = \dfrac{ad}{bc}$ og $RR = \dfrac{a/(a+b)}{c/(c+d)}$. Gildið 1 þýðir engin tengsl.</li>
+</ol>
+</div>
+
+<h2 id="eitt">Eitt hlutfall</h2>
+<p>Ef $x$ af $n$ einstaklingum hafa ákveðinn eiginleika er <b>punktmatið</b> (point estimate) fyrir hlutfallið í þýðinu $\hat p = x/n$. Samkvæmt höfuðsetningu tölfræðinnar er $\hat p$ nálgunarlega normaldreift með staðalskekkju</p>
+$$SE(\hat p) = \sqrt{\frac{\hat p(1-\hat p)}{n}},$$
+<p>svo 95% <b>öryggisbil</b> fyrir hlutfallið er $\hat p \pm 1.96 \cdot SE(\hat p)$. Nálgunin er góð ef bæði $n\hat p$ og $n(1-\hat p)$ eru a.m.k. 5–10.</p>
+
+<h3>Dæmi: hlupu nógu margir í púlsrannsókninni?</h3>
+<p>Í púlsrannsókninni (<code>pulsAll</code>) kastaði hver nemandi krónu: skjaldarmerki → hlaupa, annars sitja kyrr. Með heiðarlegri krónu ætti helmingurinn að hlaupa, svo við prófum H₀: $p = 0.5$ á móti H₁: $p \neq 0.5$.</p>
+<pre class="rcode">&gt; table(puls$inngrip)
+&gt; prop.test(x = 183, n = 469)
+
+   hljop sat_kyrr
+     183      286
+
+	1-sample proportions test with continuity correction
+
+data:  183 out of 469, null probability 0.5
+X-squared = 22.183, df = 1, p-value = 2.478e-06
+alternative hypothesis: true p is not equal to 0.5
+95 percent confidence interval:
+ 0.3460722 0.4361387
+sample estimates:
+        p
+0.3901919</pre>
+<p>Punktmatið er $\hat p = 183/469 = 0.390$. Undir H₀ hefðum við búist við $0.5 \cdot 469 = 234.5$ hlaupurum. Prófstærðin er $\chi^2 = 22.18$ með 1 frígráðu og p-gildið $2.5\cdot 10^{-6} \lt 0.05$. Við höfnum því H₀: hlutfall hlaupara er marktækt lægra en 0.5. Öryggisbilið $[0.346,\ 0.436]$ inniheldur ekki 0.5, sem segir það sama.</p>
+<p>Með formúlunni fæst $0.390 \pm 1.96\sqrt{0.390\cdot 0.610/469} = [0.346,\ 0.434]$. Bilið frá <code>prop.test</code> er aðeins annað, því R notar samfelluleiðréttingu (continuity correction) og svokallað Wilson-bil. Á prófinu er hvort tveggja tekið gilt ef þú sýnir útreikninginn.</p>
+<div class="note tip"><p><b class="t">Lokapróf 2025, dæmi 7:</b> „Úrtak af 500 manns er tekið og 110 reynast hafa háþrýsting. (a) Punktmat? (b) 95% öryggisbil? (c) Túlkun?“ Svar: $\hat p = 0.22$, $SE = \sqrt{0.22\cdot0.78/500} = 0.0185$, bil $[0.184,\ 0.256]$. Túlkun: ef við tækjum mörg slík úrtök myndu um 95% bilanna innihalda raunverulegt algengi háþrýstings í þýðinu.</p></div>
+
+<h2 id="tafla">Tengslatöflur (contingency tables)</h2>
+<p>Þegar tvær flokkabreytur eru skoðaðar saman er fjöldinn settur upp í <b>tengslatöflu</b>: línur fyrir einn flokk, dálkar fyrir hinn. Í R fæst hún með <code>table(x, y)</code>. Í 2×2 töflu er venjan að merkja reitina svona:</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Sjúkdómur (D+)</th><th>Ekki sjúkdómur (D−)</th><th>Samtals</th></tr></thead>
+<tbody>
+<tr><th>Útsett</th><td>$a$</td><td>$b$</td><td>$a+b$</td></tr>
+<tr><th>Ekki útsett</th><td>$c$</td><td>$d$</td><td>$c+d$</td></tr>
+</tbody></table></div>
+
+<h2 id="tvo">Tvö hlutföll: prop.test á töflu</h2>
+<p>Í Framingham-gögnunum (fyrsta skoðun, $n = 4434$) er spurt hvort algengi sykursýki sé ólíkt hjá körlum og konum. H₀: $p_{\text{karlar}} = p_{\text{konur}}$.</p>
+<pre class="rcode">&gt; tafla &lt;- table(fr$kyn, fr$sykursyki)
+&gt; tafla
+&gt; prop.test(tafla)
+
+           No  Yes
+  Male   1885   59
+  Female 2428   62
+
+	2-sample test for equality of proportions with continuity correction
+
+data:  tafla
+X-squared = 1.025, df = 1, p-value = 0.3113
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.015686252  0.004785861
+sample estimates:
+   prop 1    prop 2
+0.9696502 0.9751004</pre>
+<div class="note warn"><p><b class="t">Gildra:</b> <code>prop.test(tafla)</code> lítur á <b>fyrsta dálkinn</b> sem „árangur“. Hér er fyrsti dálkurinn „No“, svo <code>prop 1 = 0.970</code> er hlutfall karla <b>án</b> sykursýki ($1885/1944$). Hlutfall karla <b>með</b> sykursýki er $59/1944 = 0.0303$ og kvenna $62/2490 = 0.0249$. p-gildið og ályktunin breytast ekki, en tölurnar sem þú vitnar í verða að vera réttar.</p></div>
+<p>Ályktun: $p = 0.311 \gt 0.05$, svo við höfnum ekki H₀. Ekki er marktækur munur á algengi sykursýki eftir kyni. Öryggisbilið fyrir mun hlutfallanna, $[-0.016,\ 0.005]$, inniheldur 0.</p>
+
+<h2 id="kikvadrat">Kí-kvaðrat próf á óhæði</h2>
+<p>Fyrir tengslatöflu af hvaða stærð sem er prófum við H₀: <i>breyturnar eru óháðar</i> (engin tengsl) á móti H₁: <i>tengsl eru á milli þeirra</i>. Hugmyndin er að bera saman <b>séða tíðni</b> $O$ í hverjum reit við <b>vænta tíðni</b> $E$ ef H₀ væri sönn:</p>
+$$E = \frac{\text{línusumma}\cdot\text{dálksumma}}{\text{heildarfjöldi}}, \qquad \chi^2 = \sum_{\text{reitir}} \frac{(O-E)^2}{E}, \qquad df = (r-1)(c-1).$$
+<p>Stórt $\chi^2$ þýðir að séðu tölurnar víkja mikið frá því sem óhæði spáir, og þá er p-gildið lítið. Fyrir 2×2 töflu er $\chi^2$-prófið jafngilt <code>prop.test</code> og gefur sama p-gildi.</p>
+
+<h3>Dæmi: reykingar og kyn í púlsrannsókninni</h3>
+<pre class="rcode">&gt; tafla &lt;- table(puls$kyn, puls$reykir)
+&gt; tafla
+&gt; chisq.test(tafla)
+
+     ja nei
+  1  28 272
+  2  18 140
+
+	Pearson's Chi-squared test with Yates' continuity correction
+
+data:  tafla
+X-squared = 0.28449, df = 1, p-value = 0.5938</pre>
+<p>Hér er kyn 1 = kona og 2 = karl. Vænt fjöldi kvenna sem reykja er $E = 300\cdot 46/458 = 30.13$; séð er 28, sem er nálægt. Prófstærðin $\chi^2 = 0.28$ er lítil og $p = 0.594$, svo við höfnum ekki H₀: ekki eru marktæk tengsl milli kyns og reykinga (9.3% kvenna og 11.4% karla reykja).</p>
+
+<h2 id="fisher">Litlar væntar tíðnir og Fisher-próf</h2>
+<p>Kí-kvaðrat prófið byggir á nálgun sem er bara góð ef <b>allar væntar tíðnir eru a.m.k. 5</b>. Ef svo er ekki varar R við:</p>
+<pre class="rcode">&gt; table(diabetes$bmi_group, diabetes$sykursyki)
+&gt; chisq.test(table(diabetes$bmi_group, diabetes$sykursyki))
+
+              0   1
+  (-Inf,18]   6   0
+  (18,25]   103   9
+  (25,30]    99  20
+  (30,35]    69  19
+  (35, Inf]  49  10
+
+	Pearson's Chi-squared test
+
+data:  table(diabetes$bmi_group, diabetes$sykursyki)
+X-squared = 8.7448, df = 4, p-value = 0.0678
+
+Warning message:
+Chi-squared approximation may be incorrect</pre>
+<p>Í efstu línunni eru aðeins 6 einstaklingar, svo vænt fjöldi með sykursýki þar er $6\cdot 58/384 = 0.91$, langt undir 5. Þá má (1) nota <b>Fisher-próf</b> (<code>fisher.test</code>), sem reiknar nákvæmt p-gildi, eða (2) sameina flokka, t.d. tvo neðstu BMI-flokkana. Frígráðurnar eru $(5-1)(2-1) = 4$.</p>
+
+<h2 id="or">Gagnlíkindi og gagnlíkindahlutfall (OR)</h2>
+<p><b>Gagnlíkindi</b> (odds) atburðar með líkur $p$ eru $\dfrac{p}{1-p}$: hve miklu líklegra er að atburðurinn gerist en ekki. Líkur 0.2 gefa gagnlíkindi $0.2/0.8 = 0.25$ („1 á móti 4“). <b>Gagnlíkindahlutfallið</b> (odds ratio, OR) ber saman gagnlíkindi tveggja hópa:</p>
+$$OR = \frac{a/b}{c/d} = \frac{a\cdot d}{b\cdot c}.$$
+<p><b>Áhættuhlutfallið</b> (relative risk, RR) ber saman líkurnar sjálfar:</p>
+$$RR = \frac{a/(a+b)}{c/(c+d)}.$$
+<div class="tablewrap"><table>
+<thead><tr><th>Gildi</th><th>Túlkun</th></tr></thead>
+<tbody>
+<tr><td>$OR = 1$</td><td>Engin tengsl: sömu gagnlíkindi í báðum hópum.</td></tr>
+<tr><td>$OR \gt 1$</td><td>Útsettir hafa hærri gagnlíkindi á útkomunni.</td></tr>
+<tr><td>$OR \lt 1$</td><td>Útsettir hafa lægri gagnlíkindi (verndandi þáttur).</td></tr>
+<tr><td>Bil inniheldur 1</td><td>Tengslin eru ekki marktæk.</td></tr>
+</tbody></table></div>
+
+<h3>Dæmi: sykursýki eftir kyni (lokapróf 2025, dæmi 1)</h3>
+<p>Úr Framingham-töflunni hér að ofan: gagnlíkindi karla á sykursýki eru $59/1885 = 0.0313$ og kvenna $62/2428 = 0.0255$. Því er</p>
+$$OR = \frac{59/1885}{62/2428} = \frac{59\cdot 2428}{1885\cdot 62} = 1.226.$$
+<p>Túlkun: karlar hafa um 23% hærri gagnlíkindi á að vera með sykursýki en konur. Munurinn er þó ekki marktækur ($p = 0.311$). Áhættuhlutfallið er $RR = 0.0303/0.0249 = 1.219$, nánast það sama. OR og RR eru nálægt hvort öðru þegar útkoman er sjaldgæf.</p>
+<div class="note tip"><p><b class="t">Aðrar aðferðir (spurt á prófinu 2025):</b> sama spurningu má prófa með <code>chisq.test(tafla)</code> (sama p-gildi og <code>prop.test</code> á 2×2 töflu), <code>fisher.test(tafla)</code> (sem gefur líka OR og öryggisbil fyrir það) eða tvíkosta aðhvarfi, <code>glm(sykursyki ~ kyn, family = "binomial")</code>, þar sem $\exp(\beta)$ er OR (kafli 10).</p></div>
+
+<h2 id="r">R í hnotskurn</h2>
+<pre class="rcode">prop.test(x, n, p = 0.5)          # eitt hlutfall (bil og próf)
+prop.test(table(d$x, d$y))        # tvö hlutföll; ATH: fyrsti dálkur = „árangur“
+chisq.test(table(d$x, d$y))       # óhæði í r × c töflu
+chisq.test(tafla)$expected        # væntar tíðnir
+fisher.test(table(d$x, d$y))      # litlar væntar tíðnir; gefur líka OR
+(a * d) / (b * c)                 # gagnlíkindahlutfall
+(a / (a + b)) / (c / (c + d))     # áhættuhlutfall</pre>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: Hlutföll og tengslatöflur í R-úttaki</h2>
+<p>Sykursýki eftir kyni í Framingham, reykingar eftir kyni í púlsgögnunum og <code>prop.test</code>. Gættu þín á gildrunni: hvaða hlutfall sýnir <code>prop.test(tafla)</code>?</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu öll verkefnin. Skrefinu lýkur þegar þau eru öll leyst og meðaleinkunnin er a.m.k. 60%. Fyrsta svarið við hverju verkefni gildir, en þú getur alltaf byrjað upp á nýtt.</p></div>
+<div class="lab-root"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 8"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-6.html"><span>Fyrri</span>6. Tilgátupróf og t-próf</a><a href="kafli-8.html" style="text-align:right"><span>Næsta</span>8. Fervikagreining (ANOVA)</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/stat.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/kafli01.js"></script>
+<script src="js/q/kafli02.js"></script>
+<script src="js/q/kafli03.js"></script>
+<script src="js/q/kafli04.js"></script>
+<script src="js/q/kafli05.js"></script>
+<script src="js/q/kafli06.js"></script>
+<script src="js/q/kafli07.js"></script>
+<script src="js/q/kafli08.js"></script>
+<script src="js/q/kafli09.js"></script>
+<script src="js/q/kafli10.js"></script>
+<script src="js/q/lyd.js"></script>
+<script src="js/uttak.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/malin-data.js"></script>
+<script src="js/gagnvirkt.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-7.js"></script>
+</body>
+</html>

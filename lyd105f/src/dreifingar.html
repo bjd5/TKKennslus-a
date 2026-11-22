@@ -1,0 +1,9 @@
+<!--wide-->
+<h1>Dreifingaborðið</h1>
+<p class="lede">Veldu dreifingu og spurningu. Skyggða svæðið eru líkurnar sem spurt er um. Undir grafinu sérðu svarið, R-skipunina sem gefur það og útreikninginn eins og hann er gerður með z-töflu á prófinu. Notaðu borðið til að athuga eigin útreikninga í köflum 3–5 og til að sjá hvað gerist þegar þú breytir stikunum.</p>
+
+<div class="note tip"><p><b class="t">Fimm dreifingar:</b> <b>Normal</b> fyrir eina samfellda mælingu, <b>t</b> fyrir prófstærðir og öryggisbil þegar σ er óþekkt (berðu hana saman við N(0, 1)), <b>Tvíkosta</b> fyrir fjölda árangra í n tilraunum, <b>Poisson</b> fyrir fjölda atburða á tímabili og <b>Meðaltal</b> fyrir dreifingu X̄ samkvæmt höfuðsetningunni.</p></div>
+
+<div id="dr-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+
+<div class="note warn"><p><b class="t">Gildra í strjálum dreifingum:</b> <code>pbinom(k, n, p, lower.tail = FALSE)</code> og <code>ppois(k, λ, lower.tail = FALSE)</code> gefa P(X &gt; k), ekki P(X ≥ k). Fyrir „a.m.k. k“ notarðu <code>1 - pbinom(k - 1, n, p)</code>. Í samfelldum dreifingum skiptir þetta ekki máli, því P(X = a) = 0.</p></div>

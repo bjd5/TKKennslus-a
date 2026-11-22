@@ -1,0 +1,125 @@
+<h1>Lýsandi tölfræði og gröf</h1>
+<p class="lede">Áður en þú prófar tilgátur þarftu að <i>sjá</i> gögnin. Lýsandi tölfræði dregur hundruð mælinga saman í fáar tölur og gröf: hvar er miðjan, hve mikil er dreifingin, er dreifingin skökk og eru útlagar? Á lokaprófinu þarftu að lesa <code>summary()</code>-úttak og kassarit, velja rétta lýsistærð og þekkja hvaða graf hentar hvaða breytu.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li><b>Flokkabreytur:</b> tíðnitafla, stöplarit (kökurit). <b>Talnabreytur:</b> stuðlarit, kassarit, punktarit (tvær talnabreytur).</li>
+  <li><b>Miðja:</b> meðaltal $\bar{x}$, miðgildi, tíðasta gildi. <b>Dreifing:</b> staðalfrávik $s$, dreifni $s^2$, spönn, fjórðungaspönn (IQR).</li>
+  <li>Meðaltalið er viðkvæmt fyrir útlögum og skekkju; miðgildið ekki. Í hægri-skakkri dreifingu er meðaltal &gt; miðgildi.</li>
+  <li>Útlagi samkvæmt kassariti: gildi utan $[Q_1 - 1.5\cdot IQR,\; Q_3 + 1.5\cdot IQR]$.</li>
+</ol>
+</div>
+
+<h2 id="grof">Hvaða graf?</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Graf</th><th>Fyrir</th><th>Sýnir</th><th>R</th></tr></thead>
+<tbody>
+<tr><td><b>Stöplarit</b> (bar chart)</td><td>Eina flokkabreytu</td><td>Fjölda eða hlutfall í hverjum flokki</td><td><code>barplot(table(x))</code>, <code>geom_bar()</code></td></tr>
+<tr><td><b>Kökurit</b> (pie chart)</td><td>Eina flokkabreytu</td><td>Hlutföll af heild; erfitt að bera saman sneiðar</td><td><code>pie(table(x))</code></td></tr>
+<tr><td><b>Stuðlarit</b> (histogram)</td><td>Eina talnabreytu</td><td>Lögun dreifingar: samhverf, skökk, einn eða fleiri toppar</td><td><code>hist(x)</code>, <code>geom_histogram()</code></td></tr>
+<tr><td><b>Kassarit</b> (boxplot)</td><td>Talnabreytu, oft eftir hópum</td><td>Miðgildi, fjórðungamörk, útlaga; samanburð hópa</td><td><code>boxplot(y ~ hopur)</code>, <code>geom_boxplot()</code></td></tr>
+<tr><td><b>Punktarit</b> (scatter plot)</td><td>Tvær talnabreytur</td><td>Samband: stefnu, styrk, línuleika, útlaga</td><td><code>plot(x, y)</code>, <code>geom_point()</code></td></tr>
+</tbody></table></div>
+<p>Munurinn á stöplariti og stuðlariti: í stöplariti eru bil á milli stöplanna því flokkarnir eru aðskildir, en í stuðlariti liggja stöplarnir saman því x-ásinn er samfelldur. Lögun stuðlarits breytist eftir breidd bilanna, svo prófaðu nokkrar.</p>
+<pre class="rcode">library(ggplot2)
+ggplot(puls, aes(x = inngrip, y = seinniPuls)) +
+  geom_boxplot() +
+  labs(x = "Inngrip", y = "Púls eftir inngrip (slög/mín)")</pre>
+
+<h2 id="midja">Miðja</h2>
+<ul>
+  <li><b>Meðaltal</b> (mean): $\bar{x} = \dfrac{1}{n}\sum_{i=1}^{n} x_i$. Jafnvægispunktur gagnanna. <code>mean(x)</code></li>
+  <li><b>Miðgildi</b> (median): miðjugildið þegar gögnunum er raðað. Ef $n$ er slétt tala er það meðaltal tveggja miðjugilda. <code>median(x)</code></li>
+  <li><b>Tíðasta gildi</b> (mode): algengasta gildið. Mest notað fyrir flokkabreytur.</li>
+</ul>
+<p>Miðgildið er <b>ónæmt</b> (robust) fyrir útlögum, meðaltalið ekki. Ef einn nemandi í hópi fimm er með púls 160 í stað 80 hækkar meðaltalið um 16 slög, en miðgildið hreyfist ekki.</p>
+
+<h2 id="dreifing">Breytileiki</h2>
+<ul>
+  <li><b>Spönn</b> (range): hæsta gildi − lægsta gildi. Ræðst alfarið af tveimur öfgagildum.</li>
+  <li><b>Dreifni</b> (variance): $s^2 = \dfrac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2$. <code>var(x)</code></li>
+  <li><b>Staðalfrávik</b> (standard deviation): $s = \sqrt{s^2}$, í sömu einingu og gögnin. <code>sd(x)</code></li>
+  <li><b>Fjórðungamörk</b> (quartiles): $Q_1$ (25%), $Q_2$ = miðgildi (50%), $Q_3$ (75%). <code>quantile(x)</code></li>
+  <li><b>Fjórðungaspönn</b> (interquartile range): $IQR = Q_3 - Q_1$, breidd miðju 50% gagnanna. <code>IQR(x)</code></li>
+  <li><b>Frávikshlutfall</b> (coefficient of variation): $CV = s/\bar{x}$. Ber saman breytileika breyta í ólíkum einingum.</li>
+</ul>
+<div class="note warn"><p><b class="t">Af hverju n − 1?</b> Frávikin eru mæld frá $\bar{x}$, sem er reiknað úr sömu gögnum og liggur því nær gögnunum en μ. Ef deilt væri með $n$ yrði dreifnin að jafnaði vanmetin. Með $n-1$ (frígráðurnar) verður matið óbjagað. R notar alltaf $n-1$ í <code>var()</code> og <code>sd()</code>.</p></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Reiknað í höndunum</span></div><div class="ex-body">
+<p>Hvíldarpúls fimm nemenda er 62, 70, 58, 75 og 81 slög/mín. Reiknaðu meðaltal, miðgildi, dreifni og staðalfrávik.</p>
+<details class="reveal"><summary></summary><div class="sol">
+$$\bar{x} = \frac{62 + 70 + 58 + 75 + 81}{5} = \frac{346}{5} = 69.2$$
+<p>Raðað: 58, 62, <b>70</b>, 75, 81, svo miðgildið er 70.</p>
+<p>Frávik frá meðaltali: −7.2, 0.8, −11.2, 5.8, 11.8. Kvaðrötin eru 51.84, 0.64, 125.44, 33.64 og 139.24, samtals 350.8.</p>
+$$s^2 = \frac{350.8}{5 - 1} = 87.7, \qquad s = \sqrt{87.7} = 9.36$$
+<p><span class="ans">x̄ = 69.2, miðgildi 70, s² = 87.7, s = 9.36</span></p>
+<pre class="rcode">x &lt;- c(62, 70, 58, 75, 81)
+mean(x); median(x); var(x); sd(x)
+[1] 69.2
+[1] 70
+[1] 87.7
+[1] 9.364828</pre>
+</div></details>
+</div></div>
+
+<h2 id="summary">Að lesa summary()</h2>
+<p>Á prófinu færðu oft úttak úr <code>summary()</code>. Þetta er úttakið fyrir púlsgögnin:</p>
+<pre class="rcode">summary(puls[, c("aldur", "fyrriPuls", "seinniPuls", "likamsraekt")])
+     aldur         fyrriPuls        seinniPuls      likamsraekt
+ Min.   :19.00   Min.   : 42.00   Min.   : 42.00   Min.   : 0.000
+ 1st Qu.:20.00   1st Qu.: 64.00   1st Qu.: 68.00   1st Qu.: 2.000
+ Median :22.00   Median : 71.50   Median : 77.00   Median : 4.000
+ Mean   :24.24   Mean   : 71.98   Mean   : 82.21   Mean   : 4.492
+ 3rd Qu.:25.00   3rd Qu.: 80.00   3rd Qu.: 93.00   3rd Qu.: 6.000
+ Max.   :70.00   Max.   :120.00   Max.   :162.00   Max.   :25.000
+                 NA's   :17       NA's   :14       NA's   :5</pre>
+<p>Hvað má lesa út?</p>
+<ul>
+  <li><b>Vantandi gildi:</b> 17 vantar hjá <code>fyrriPuls</code>, 14 hjá <code>seinniPuls</code> og 5 hjá <code>likamsraekt</code>.</li>
+  <li><b>Skekkja:</b> hjá <code>aldur</code> er meðaltal (24.24) hærra en miðgildi (22) og hámarkið 70 langt frá $Q_3$ = 25. Dreifingin er <b>hægri-skökk</b>: flestir eru ungir en nokkrir eldri nemendur toga meðaltalið upp. Sama gildir um <code>seinniPuls</code> (82.21 á móti 77): hlaupararnir mynda langan hala upp á við.</li>
+  <li><b>Fjórðungaspönn:</b> fyrir <code>fyrriPuls</code> er $IQR = 80 - 64 = 16$.</li>
+  <li><b>Útlagamörk:</b> $Q_3 + 1.5\cdot IQR = 80 + 24 = 104$ og $Q_1 - 1.5 \cdot IQR = 64 - 24 = 40$. Sex nemendur eru með hvíldarpúls yfir 104 og birtast sem stakir punktar í kassariti.</li>
+</ul>
+<div class="note tip"><p><b class="t">Á prófinu</b> (2024, dæmi 9) var spurt hve marga vantaði og hve margir féllu út í greiningunni. Athugaðu að sami einstaklingur getur vantað bæði fyrri og seinni púls. Þess vegna getur fjöldinn sem dettur út við <code>na.omit()</code> verið minni en summa <code>NA's</code>-talnanna.</p></div>
+
+<h2 id="kassarit">Kassaritið</h2>
+<p>Kassarit (boxplot) er teiknað beint úr fimm tölum. Kassinn nær frá $Q_1$ til $Q_3$, strikið í honum er miðgildið, og „veiðihárin“ ná að ystu mælingu sem er innan 1.5·IQR frá kassanum. Gildi utan þess eru teiknuð sem punktar (útlagar).</p>
+<ul>
+  <li><b>Samhverf dreifing:</b> miðgildið í miðjum kassa, veiðihárin jafnlöng.</li>
+  <li><b>Hægri-skökk:</b> miðgildið nær $Q_1$, efra veiðihárið lengra og útlagar fyrir ofan.</li>
+  <li><b>Samanburður hópa:</b> kassar hlið við hlið sýna mun á miðju (miðgildi) og dreifingu (hæð kassans). Ef kassarnir eru álíka háir bendir það til álíka dreifni, sem skiptir máli í t-prófum og ANOVA.</li>
+</ul>
+
+<h2 id="skekkja">Lögun dreifingar</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Lögun</th><th>Samband meðaltals og miðgildis</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td>Samhverf</td><td>Meðaltal ≈ miðgildi</td><td>Hæð fullorðinna kvenna</td></tr>
+<tr><td>Hægri-skökk (langur hali upp)</td><td>Meðaltal &gt; miðgildi</td><td>Tekjur, aldur nemenda, legutími, betakarótín í blóði</td></tr>
+<tr><td>Vinstri-skökk (langur hali niður)</td><td>Meðaltal &lt; miðgildi</td><td>Meðgöngulengd, aldur við andlát</td></tr>
+</tbody></table></div>
+<p>Fyrir skakkar dreifingar er betra að lýsa miðju með miðgildi og dreifingu með IQR. Fyrir samhverfar dreifingar eru meðaltal og staðalfrávik best. Í töflu 1 í greinum (og í <code>table1()</code> sem kennarinn notar) eru oft bæði gefin: „Mean (SD)“ og „Median [Min, Max]“.</p>
+
+<h2 id="fylgni">Fylgni tveggja talnabreyta</h2>
+<p><b>Fylgnistuðull</b> Pearsons, $r$, mælir styrk og stefnu <b>línulegs</b> sambands tveggja talnabreyta. Hann er alltaf á bilinu −1 til 1:</p>
+<ul>
+  <li>$r$ nálægt 1: sterkt jákvætt línulegt samband (punktarnir liggja nálægt línu sem hallar upp).</li>
+  <li>$r$ nálægt −1: sterkt neikvætt samband.</li>
+  <li>$r$ nálægt 0: ekkert <i>línulegt</i> samband. Samt gæti verið sterkt bogið samband, svo teiknaðu alltaf punktarit.</li>
+</ul>
+<p>Í púlsgögnunum er fylgni hæðar og þyngdar $r = 0.68$ (<code>cor(puls$haed, puls$thyngd, use = "complete.obs")</code>). Það er nokkuð sterkt jákvætt samband: hærri nemendur eru að jafnaði þyngri. Í kafla 9 sérðu að $r^2$ er hlutfall breytileikans sem línulegt aðhvarf skýrir.</p>
+<div class="note warn"><p><b class="t">Fylgni er ekki orsakasamband.</b> Sterk fylgni getur stafað af blöndunarþætti (kafli 1). Fylgnistuðullinn er líka mjög viðkvæmur fyrir útlögum.</p></div>
+
+<h2 id="flokkar">Lýsing á flokkabreytum</h2>
+<p>Fyrir flokkabreytur eru tíðni (fjöldi) og hlutfall einu lýsistærðirnar sem vit er í. <code>table()</code> gefur fjöldann og <code>prop.table(table(x))</code> hlutföllin. Fyrir tvær flokkabreytur er gerð <b>tengslatafla</b> (contingency table) með <code>table(x, y)</code>, sem er grunnurinn að kí-kvaðrat prófinu í kafla 7.</p>
+<pre class="rcode">table(puls$kyn)
+
+  1   2
+307 164
+
+prop.table(table(puls$kyn))
+
+        1         2
+0.6518047 0.3481953</pre>
+<p>Um 65% nemendanna eru konur (kyn = 1) og 35% karlar (kyn = 2).</p>

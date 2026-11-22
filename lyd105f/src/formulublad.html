@@ -1,0 +1,181 @@
+<!--wide-->
+<h1 class="sheet-title">Formúlublað · Líftölfræði I</h1>
+<p class="lede noprint">Allar helstu formúlur og R-föll áfangans á tveimur A4-síðum. Öll hjálpargögn á pappír eru leyfð á lokaprófinu, svo prentaðu blaðið út og bættu við eigin minnispunktum. Til að prófa tölur skaltu nota <a href="dreifingar.html">dreifingaborðið</a>.</p>
+<p class="noprint"><button type="button" class="btn" onclick="window.print()">Prenta blaðið</button></p>
+
+<div class="sheet sheet-1">
+
+<section>
+<h3>1 · Breytur og rannsóknarsnið</h3>
+<p><b>Flokkabreyta</b>: óröðuð (blóðflokkur) eða röðuð (prófgráða). <b>Talnabreyta</b>: strjál (talning) eða samfelld (blóðþrýstingur).</p>
+<p><b>Tilraun</b>: rannsakandi ákveður meðferð (slembival) → orsakasamband. <b>Athugunarrannsókn</b>: aðeins tengsl, hætta á blöndun.</p>
+<p>Bjagi: úrtaksbjagi (sjálfboðaliða-, aðgengisúrtak), rannsakandabjagi, lyfleysuáhrif. Varnir: slembival, blindun (ein-/tvíblind), samanburðarhópur.</p>
+</section>
+
+<section>
+<h3>2 · Lýsandi tölfræði</h3>
+$$\bar x = \frac{1}{n}\sum x_i \qquad s^2 = \frac{1}{n-1}\sum (x_i-\bar x)^2 \qquad s = \sqrt{s^2}$$
+<p>Miðgildi: miðjugildi raðaðra gagna. $IQR = Q_3 - Q_1$. Útlagar: utan $[Q_1 - 1.5\,IQR,\ Q_3 + 1.5\,IQR]$. Frávikshlutfall $CV = s/\bar x$.</p>
+<p>Meðaltal &gt; miðgildi → hægri-skekkt. Skekkt gögn: lýstu með miðgildi og IQR.</p>
+<p>Gröf: stöplarit/kökurit (flokkar), stuðlarit og kassarit (ein talnabreyta, hópar), punktarit (tvær talnabreytur).</p>
+</section>
+
+<section>
+<h3>3 · Tvíkostadreifing $X \sim Bin(n, p)$</h3>
+$$P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}, \qquad E[X] = np, \qquad Var[X] = np(1-p)$$
+<p>Fastur fjöldi $n$ óháðra tilrauna, sömu líkur $p$.</p>
+</section>
+
+<section>
+<h3>3 · Poisson $X \sim Poisson(\lambda)$</h3>
+$$P(X=k) = \frac{e^{-\lambda}\lambda^k}{k!}, \qquad E[X] = Var[X] = \lambda$$
+<p>Fjöldi atburða á tímabili. Tvöfalt tímabil → $2\lambda$.</p>
+</section>
+
+<section>
+<h3>Gildra: strjálar dreifingar í R</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Orðalag</th><th>Þýðir</th><th>R</th></tr></thead>
+<tbody>
+<tr><td>nákvæmlega $k$</td><td>$X = k$</td><td><code>dbinom(k, n, p)</code></td></tr>
+<tr><td>$k$ eða færri</td><td>$X \le k$</td><td><code>pbinom(k, n, p)</code></td></tr>
+<tr><td>færri en $k$</td><td>$X \le k-1$</td><td><code>pbinom(k-1, n, p)</code></td></tr>
+<tr><td>a.m.k. $k$</td><td>$X \ge k$</td><td><code>1 - pbinom(k-1, n, p)</code></td></tr>
+<tr><td>fleiri en $k$</td><td>$X \gt k$</td><td><code>1 - pbinom(k, n, p)</code></td></tr>
+</tbody></table></div>
+<p>Sama með <code>dpois</code>/<code>ppois</code>. <code>lower.tail = FALSE</code> gefur $P(X \gt k)$, ekki $\ge$.</p>
+</section>
+
+<section>
+<h3>4 · Normaldreifing $X \sim N(\mu, \sigma^2)$</h3>
+$$Z = \frac{X-\mu}{\sigma} \sim N(0,1) \qquad x_p = \mu + z_p\,\sigma$$
+<p>68–95–99.7 reglan. $z_{0.90} = 1.282$, $z_{0.95} = 1.645$, $z_{0.975} = 1.960$, $z_{0.995} = 2.576$.</p>
+<p><code>pnorm(x, mu, sd)</code> = $P(X \le x)$; <code>lower.tail = FALSE</code> efri hali; <code>qnorm(p, mu, sd)</code> prósentumark. R tekur <b>staðalfrávik</b>, ekki dreifni. Væntur fjöldi af $n$: $n\cdot P$.</p>
+</section>
+
+<section>
+<h3>4 · Úrtaksdreifing og höfuðsetningin (CLT)</h3>
+$$\bar X \approx N\!\left(\mu, \frac{\sigma^2}{n}\right), \qquad SE(\bar X) = \frac{\sigma}{\sqrt n}$$
+<p>Gildir fyrir stórt $n$ óháð lögun dreifingarinnar. Poisson: $\bar X \approx N(\lambda, \lambda/n)$. Hlutfall: $\hat p \approx N\big(p, p(1-p)/n\big)$. Fjórfalt $n$ → helmingi minni SE.</p>
+</section>
+
+<section>
+<h3>5 · Öryggisbil</h3>
+<p><b>Meðaltal</b> ($\sigma$ óþekkt): $\bar x \pm t_{1-\alpha/2,\,n-1}\cdot \dfrac{s}{\sqrt n}$</p>
+<p><b>Hlutfall</b>: $\hat p \pm z_{1-\alpha/2}\sqrt{\dfrac{\hat p(1-\hat p)}{n}}$</p>
+<p><b>Úrtaksstærð</b>: $n = \left(\dfrac{z\,\sigma}{E}\right)^2$, námundað upp ($E$ = vikmörk).</p>
+<p>Túlkun: í endurteknum úrtökum innihalda 95% bilanna sanna gildið. Af $N$ bilum er von á $N\cdot 0.05$ sem missa. Meira öryggi → breiðara; stærra $n$ → mjórra.</p>
+</section>
+
+<section>
+<h3>6 · Tilgátupróf</h3>
+<ol>
+<li>H₀ og H₁ um <b>stika</b> ($\mu$, $p$, $\beta$), ekki $\bar x$.</li>
+<li>Veldu $\alpha$ (oftast 0.05).</li>
+<li>Reiknaðu prófstærð ($t$, $z$, $\chi^2$, $F$).</li>
+<li>p-gildi = $P$(jafn öfgafullt eða meira $\mid$ H₀ sönn).</li>
+<li>$p \lt \alpha$ → höfnum H₀; annars höfnum ekki. Ályktun á mannamáli.</li>
+</ol>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>H₀ sönn</th><th>H₀ ósönn</th></tr></thead>
+<tbody>
+<tr><th>Höfnum H₀</th><td>Villa af gerð I ($\alpha$)</td><td>Rétt (styrkur $1-\beta$)</td></tr>
+<tr><th>Höfnum ekki</th><td>Rétt</td><td>Villa af gerð II ($\beta$)</td></tr>
+</tbody></table></div>
+<p>Styrkur eykst með stærra $n$, stærri áhrifum, minni breytileika og hærra $\alpha$.</p>
+</section>
+
+<section>
+<h3>6 · t-próf</h3>
+<p><b>Eitt úrtak:</b> $t = \dfrac{\bar x - \mu_0}{s/\sqrt n}$, $df = n-1$. p tvíhliða: <code>2 * pt(-abs(t), df)</code>.</p>
+<p><b>Parað:</b> eins úrtaks próf á $d = $ eftir − fyrir; H₀: $\mu_d = 0$.</p>
+<p><b>Tvö óháð úrtök:</b> H₀: $\mu_1 = \mu_2$. Fyrst <code>var.test</code> (H₀: jöfn dreifni). $p \gt 0.05$ → <code>var.equal = TRUE</code> ($df = n_1+n_2-2$); $p \lt 0.05$ → Welch (<code>var.equal = FALSE</code>, df ekki heiltala).</p>
+<p>t frekar en z: $\sigma$ er metið með $s$, sem bætir við óvissu (þykkari halar, sérstaklega fyrir lítið $n$).</p>
+</section>
+
+</div>
+
+<h1 class="sheet-title sheet-title-2">Formúlublað · síða 2</h1>
+<div class="sheet sheet-2">
+
+<section>
+<h3>7 · Hlutföll og tengslatöflur</h3>
+<p>Vænt tíðni $E = \dfrac{\text{línusumma}\cdot\text{dálksumma}}{\text{heild}}$; $\chi^2 = \sum\dfrac{(O-E)^2}{E}$, $df = (r-1)(c-1)$. Allar $E \ge 5$, annars Fisher.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>D+</th><th>D−</th></tr></thead>
+<tbody><tr><th>Útsett</th><td>$a$</td><td>$b$</td></tr><tr><th>Ekki</th><td>$c$</td><td>$d$</td></tr></tbody></table></div>
+$$OR = \frac{a/b}{c/d} = \frac{ad}{bc} \qquad RR = \frac{a/(a+b)}{c/(c+d)}$$
+<p>Gagnlíkindi $= p/(1-p)$. OR = 1: engin tengsl. Bil inniheldur 1 → ekki marktækt.</p>
+<p><code>prop.test(tafla)</code> gefur hlutfall <b>fyrsta dálks</b> í hverri línu.</p>
+</section>
+
+<section>
+<h3>8 · Fervikagreining (ANOVA)</h3>
+<p>H₀: $\mu_1 = \dots = \mu_k$; H₁: a.m.k. eitt ólíkt.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Df</th><th>Mean Sq</th><th>F</th></tr></thead>
+<tbody>
+<tr><td>hópar</td><td>$k-1$</td><td>$SS_h/(k-1)$</td><td>$MS_h/MS_l$</td></tr>
+<tr><td>leifar</td><td>$N-k$</td><td>$SS_l/(N-k)$</td><td></td></tr>
+</tbody></table></div>
+<p>Stórt F: breytileiki milli hópa mikill miðað við innan hópa. Forsendur: óháð, normaldreifðar leifar, jöfn dreifni (kassarit). Hvaða hópar? <code>TukeyHSD</code>.</p>
+</section>
+
+<section>
+<h3>9 · Línulegt aðhvarf</h3>
+$$y = \alpha + \beta x + \varepsilon \qquad \hat y = \hat\alpha + \hat\beta x$$
+<p>$\hat\beta$: breyting á $y$ fyrir einingu í $x$. H₀: $\beta = 0$, $t = \hat\beta/SE$, $df = n-2$.</p>
+<p>Bil: $\hat\beta \pm t_{0.975,\,n-2}\cdot SE$ (<code>confint</code>). $R^2 = r^2$ = skýrður hluti breytileika.</p>
+<p>Forsendur: línulegt (punktarit), óháðar leifar, normaldreifðar leifar (QQ-rit), jöfn dreifni (leifarit, engin trekt). Utan gagnasviðs = bryggjun.</p>
+</section>
+
+<section>
+<h3>10 · Tvíkosta aðhvarf</h3>
+$$\log\frac{p}{1-p} = \beta_0 + \beta_1 x \qquad p = \frac{1}{1+e^{-(\beta_0+\beta_1 x)}}$$
+<p>$OR = e^{\beta_1}$ fyrir einingu; $e^{k\beta_1}$ fyrir $k$ einingar. OR &lt; 1: lækkun um $(1-OR)\cdot100\%$. „Leiðrétt fyrir“ hinum breytunum.</p>
+</section>
+
+<section>
+<h3>10 · Næmi og sértæki</h3>
+<p>Næmi $= \dfrac{TP}{TP+FN} = P(T+\mid D+)$ · Sértæki $= \dfrac{TN}{TN+FP} = P(T-\mid D-)$</p>
+<p>PPV $= \dfrac{TP}{TP+FP}$ · NPV $= \dfrac{TN}{TN+FN}$</p>
+$$PPV = \frac{\text{næmi}\cdot\pi}{\text{næmi}\cdot\pi + (1-\text{sértæki})(1-\pi)}$$
+<p>$\pi$ = algengi. Lægra algengi → lægra PPV, hærra NPV. ROC: næmi á móti 1 − sértæki; AUC 0.5 = tilviljun, 1 = fullkomið.</p>
+</section>
+
+<section>
+<h3>11 · Lifunargreining</h3>
+<p><b>Skerðing</b>: atburður hafði ekki orðið þegar eftirfylgd lauk. $\hat S(t) = \prod_{t_j\le t}(1 - d_j/n_j)$.</p>
+<p>Miðgildi: $S(t) = 0.5$ (NA ef ferillinn fer ekki svo neðarlega). Log-rank: H₀ sama lifun.</p>
+<p><b>Cox:</b> $h(t\mid x) = h_0(t)\,e^{\beta x}$, $HR = e^{\beta}$; $(HR-1)\cdot100\%$ breyting á áhættu. exp(−coef) = $1/HR$ (hinn hópurinn sem viðmiðun). Forsenda: HR fast yfir tíma.</p>
+</section>
+
+<section>
+<h3>R-föll</h3>
+<div class="tablewrap"><table>
+<tbody>
+<tr><td><code>summary(d)</code>, <code>table(x, y)</code></td><td>lýsing, tengslatafla</td></tr>
+<tr><td><code>d/p/qbinom</code>, <code>d/p/qpois</code></td><td>tvíkosta, Poisson</td></tr>
+<tr><td><code>pnorm</code>, <code>qnorm</code>, <code>pt</code>, <code>qt</code></td><td>normal, t</td></tr>
+<tr><td><code>t.test(x, mu = m)</code></td><td>eitt úrtak</td></tr>
+<tr><td><code>t.test(a, b, paired = TRUE)</code></td><td>parað</td></tr>
+<tr><td><code>var.test(y ~ g)</code>; <code>t.test(y ~ g, var.equal = )</code></td><td>tvö úrtök</td></tr>
+<tr><td><code>prop.test(x, n)</code>, <code>prop.test(tafla)</code></td><td>hlutföll</td></tr>
+<tr><td><code>chisq.test(tafla)</code>, <code>fisher.test(tafla)</code></td><td>óhæði</td></tr>
+<tr><td><code>summary(aov(y ~ g))</code></td><td>ANOVA</td></tr>
+<tr><td><code>lm</code>, <code>confint</code>, <code>predict</code></td><td>línulegt aðhvarf</td></tr>
+<tr><td><code>glm(..., family = "binomial")</code>, <code>exp(coef())</code></td><td>tvíkosta, OR</td></tr>
+<tr><td><code>survfit(Surv(t, s) ~ g)</code>, <code>survdiff</code></td><td>KM, log-rank</td></tr>
+<tr><td><code>coxph(Surv(t, s) ~ x)</code></td><td>Cox, HR</td></tr>
+</tbody></table></div>
+</section>
+
+<section>
+<h3>Svona lestu R-úttak</h3>
+<p><b>t.test</b>: <code>t</code>, <code>df</code>, <code>p-value</code>, bil fyrir mun, hópmeðaltöl. <b>var.test</b>: F = hlutfall dreifna. <b>prop.test</b>: <code>X-squared</code>, p, bil, <code>prop 1/2</code>.</p>
+<p><b>summary(lm)</b>: Estimate, Std. Error, t value = Est/SE, Pr(&gt;|t|); neðst $R^2$ og F alls líkansins; „on df degrees of freedom“.</p>
+<p><b>summary(glm)</b>: stuðlar á logit-kvarða, z og p; <code>exp()</code> → OR. <b>summary(coxph)</b>: coef, <b>exp(coef) = HR</b>, lower/upper .95.</p>
+<p>Stjörnur: *** &lt; 0.001, ** &lt; 0.01, * &lt; 0.05. „(n observations deleted due to missingness)“: draga frá $n$.</p>
+</section>
+
+</div>

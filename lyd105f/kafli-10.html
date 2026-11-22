@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 10: Tvíkosta aðhvarf, næmi og sértæki · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" aria-current="page" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="10" data-topics="tvikosta naemi">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 10: Tvíkosta aðhvarf, næmi og sértæki</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-9.html">kafla 9</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 10 af 11 · Fyrirlestrar k11 · Tölfræði frá grunni kafli 11</p>
+<h1>Tvíkosta aðhvarf, næmi og sértæki</h1>
+<p class="ch-exam"><b>Tengist:</b> Lokapróf: glm, exp(β) sem gagnlíkindahlutfall, næmi, sértæki, PPV og NPV</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Margar svarbreytur í læknisfræði hafa bara tvö gildi: veikur eða heilbrigður, lést eða lifði, reykir eða reykir ekki. Línulegt aðhvarf hentar þá ekki, því það getur spáð líkum undir 0 eða yfir 1. Í staðinn notum við <b>tvíkosta aðhvarfsgreiningu</b> (logistic regression), þar sem stuðlarnir verða að gagnlíkindahlutföllum. Seinni hluti kaflans fjallar um hvernig greiningarpróf eru metin: <b>næmi, sértæki og forspárgildi</b>.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li>Líkanið: $\text{logit}(p) = \log\dfrac{p}{1-p} = \beta_0 + \beta_1 x$. Í R: <code>glm(y ~ x, family = "binomial")</code>.</li>
+  <li>$e^{\beta_1}$ er <b>gagnlíkindahlutfallið</b> (OR) fyrir einnar einingar aukningu í $x$. Fyrir $k$ einingar: $e^{k\beta_1}$.</li>
+  <li>Líkur: $p = \dfrac{1}{1 + e^{-(\beta_0 + \beta_1 x)}}$, í R <code>plogis(b0 + b1 * x)</code>.</li>
+  <li>Næmi $= P(T+\mid D+)$, sértæki $= P(T-\mid D-)$, PPV $= P(D+\mid T+)$, NPV $= P(D-\mid T-)$.</li>
+  <li>Næmi og sértæki eru eiginleikar prófsins. PPV og NPV ráðast líka af <b>algengi</b>.</li>
+</ol>
+</div>
+
+<h2 id="gagnlikindi">Upprifjun: gagnlíkindi</h2>
+<p>Ef líkurnar eru $p$ eru gagnlíkindin (odds) $p/(1-p)$. Dæmi úr fyrirlestrinum: af 90 áfengissjúkum eru 75 með fitulifur, svo $p = 0.83$ og gagnlíkindin $0.83/0.17 = 5$. Af 111 sem ekki eru áfengissjúkir eru 26 með fitulifur, svo $p = 0.23$ og gagnlíkindin $26/85 = 0.31$. Gagnlíkindahlutfallið er $\dfrac{75\cdot 85}{15\cdot 26} = 16.3$ (glærurnar námunda í 17): áfengissjúkir hafa um 16 sinnum hærri gagnlíkindi á fitulifur.</p>
+
+<h2 id="logit">Logit-líkanið</h2>
+<p>Í stað þess að láta líkurnar $p$ vera línulegar í $x$ látum við <b>log-gagnlíkindin</b> vera það. Fallið sem tengir $p$ við línulega hlutann kallast <b>tengifall</b> (link function), og hér er það logit:</p>
+$$\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 x \quad\Longleftrightarrow\quad p = \frac{1}{1+e^{-(\beta_0+\beta_1 x)}}.$$
+<p>Hægri hliðin er alltaf á milli 0 og 1, sama hvað $x$ er. Ef $x$ hækkar um eina einingu hækka log-gagnlíkindin um $\beta_1$, svo gagnlíkindin margfaldast með $e^{\beta_1}$. Þess vegna er</p>
+$$OR = e^{\beta_1}.$$
+<div class="tablewrap"><table>
+<thead><tr><th>$\beta_1$</th><th>$e^{\beta_1}$</th><th>Túlkun</th></tr></thead>
+<tbody>
+<tr><td>$\gt 0$</td><td>$\gt 1$</td><td>Gagnlíkindin hækka með $x$.</td></tr>
+<tr><td>$= 0$</td><td>$= 1$</td><td>Engin tengsl.</td></tr>
+<tr><td>$\lt 0$</td><td>$\lt 1$</td><td>Gagnlíkindin lækka með $x$, um $(1-e^{\beta_1})\cdot100\%$ á einingu.</td></tr>
+</tbody></table></div>
+<p>Í R er tvíkosta aðhvarf keyrt með <code>glm</code> og <code>family = "binomial"</code>. Með <code>family = "gaussian"</code> fengist venjulegt línulegt aðhvarf, sama og <code>lm</code>.</p>
+
+<h2 id="puls">Dæmi 1: líkamsrækt og reykingar (fyrirlestur, púlsgögnin)</h2>
+<pre class="rcode">&gt; glm1 &lt;- glm(reykir == "ja" ~ likamsraekt, data = puls, family = "binomial")
+&gt; summary(glm1)
+&gt; exp(coef(glm1))
+
+Call:
+glm(formula = reykir == "ja" ~ likamsraekt, family = "binomial",
+    data = puls)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)  -1.7428     0.2482  -7.023 2.18e-12 ***
+likamsraekt  -0.1164     0.0547  -2.127   0.0334 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 293.2  on 452  degrees of freedom
+Residual deviance: 287.9  on 451  degrees of freedom
+  (18 observations deleted due to missingness)
+AIC: 291.9
+
+Number of Fisher Scoring iterations: 5
+
+(Intercept) likamsraekt
+  0.1750381   0.8901369</pre>
+<ul>
+  <li><b>Stuðullinn</b> $-0.1164$ er á logit-kvarða. Hann er neikvæður: meiri líkamsrækt tengist minni líkum á að reykja. $p = 0.033 \lt 0.05$, svo tengslin eru marktæk.</li>
+  <li><b>OR</b> $= e^{-0.1164} = 0.89$: fyrir hverja klukkustund til viðbótar af líkamsrækt á viku eru gagnlíkindin á að reykja 0.89 sinnum minni, þ.e. um 11% lægri.</li>
+  <li><b>Fyrir 5 klst.:</b> $e^{5\cdot(-0.1164)} = 0.56$. Gagnlíkindin eru 44% lægri. Athugaðu að það er $e^{5\beta}$, ekki $5e^{\beta}$.</li>
+  <li><b>Líkur:</b> sá sem stundar enga líkamsrækt: $p = 1/(1+e^{1.7428}) = 0.149$. Sá sem stundar 5 klst.: <code>plogis(-1.7428 - 0.1164 * 5)</code> $= 0.089$.</li>
+  <li>Prófið á stuðlinum heitir <b>Wald-próf</b>: $z = \hat\beta/SE = -0.1164/0.0547 = -2.13$, borið saman við staðlaða normaldreifingu.</li>
+</ul>
+
+<h2 id="sykursyki">Dæmi 2: aldur, BMI og sykursýki (fleiri skýribreytur)</h2>
+<p>Í <code>diabetes</code>-gögnunum er sykursýki skilgreind sem <code>glyhb &gt;= 7</code>. Bæði aldur og BMI eru sett í líkanið:</p>
+<pre class="rcode">&gt; fit &lt;- glm(sykursyki ~ age + bmi, data = diabetes, family = "binomial")
+&gt; summary(fit)
+&gt; exp(coef(fit))
+&gt; exp(confint.default(fit))
+
+Call:
+glm(formula = sykursyki ~ age + bmi, family = "binomial", data = diabetes)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept) -6.631840   0.958939  -6.916 4.65e-12 ***
+age          0.055475   0.009859   5.627 1.83e-08 ***
+bmi          0.068679   0.022235   3.089  0.00201 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 326.02  on 383  degrees of freedom
+Residual deviance: 282.20  on 381  degrees of freedom
+  (19 observations deleted due to missingness)
+AIC: 288.2
+
+Number of Fisher Scoring iterations: 5
+
+(Intercept)         age         bmi
+0.001317736 1.057042969 1.071092205
+                   2.5 %      97.5 %
+(Intercept) 0.0002011771 0.008631343
+age         1.0368139654 1.077666655
+bmi         1.0254163163 1.118802670</pre>
+<p><b>Aldur:</b> OR = 1.057 (95% bil 1.037–1.078). Fyrir hvert ár hækka gagnlíkindin á sykursýki um 5.7%, <b>leiðrétt fyrir BMI</b>. Fyrir 10 ár: $e^{10\cdot0.055475} = 1.74$.</p>
+<p><b>BMI:</b> OR = 1.071 (1.025–1.119). Hver BMI-eining hækkar gagnlíkindin um 7.1%, að aldri óbreyttum. Hvorugt bilið inniheldur 1, svo báðar breyturnar eru marktækar.</p>
+<p><b>Líkur fyrir einstakling:</b> 50 ára með BMI 30 fær $\eta = -6.632 + 0.0555\cdot50 + 0.0687\cdot30 = -1.80$ og $p = 1/(1+e^{1.80}) = 0.142$. Í R: <code>predict(fit, data.frame(age = 50, bmi = 30), type = "response")</code>.</p>
+<div class="note warn"><p><b class="t">Algeng mistök:</b> að túlka $e^{\beta}$ sem breytingu á <i>líkum</i> („líkurnar hækka um 7.1 prósentustig“). Það er breyting á <b>gagnlíkindum</b>. Líka að gleyma að taka $\exp()$: stuðullinn 0.0687 er ekki OR. Og skurðpunkturinn (0.0013) er gagnlíkindi við aldur 0 og BMI 0, sem hefur enga merkingu.</p></div>
+<p><b>Flokkaskýribreyta:</b> ef $x$ er flokkabreyta, t.d. kyn, ber $e^{\beta}$ flokkinn sem birtist í úttakinu (t.d. <code>kynFemale</code>) saman við viðmiðunarflokkinn. Með einni 2×2 töflu gefur <code>glm</code> nákvæmlega sama OR og $ad/bc$ úr kafla 7.</p>
+
+<h2 id="naemi">Næmi, sértæki og forspárgildi</h2>
+<p>Greiningarpróf (diagnostic test) flokkar fólk sem jákvætt (T+) eða neikvætt (T−). Við berum það saman við raunverulega stöðu, sjúkdóm (D+) eða ekki (D−):</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>D+ (veik)</th><th>D− (heilbrigð)</th></tr></thead>
+<tbody>
+<tr><th>T+</th><td>Sönn jákvæð (TP)</td><td>Fölsk jákvæð (FP)</td></tr>
+<tr><th>T−</th><td>Fölsk neikvæð (FN)</td><td>Sönn neikvæð (TN)</td></tr>
+</tbody></table></div>
+<div class="tablewrap"><table>
+<thead><tr><th>Mælikvarði</th><th>Skilgreining</th><th>Reiknað</th><th>Spurningin</th></tr></thead>
+<tbody>
+<tr><td><b>Næmi</b> (sensitivity)</td><td>$P(T+\mid D+)$</td><td>$\dfrac{TP}{TP+FN}$</td><td>Hve stór hluti veikra greinist?</td></tr>
+<tr><td><b>Sértæki</b> (specificity)</td><td>$P(T-\mid D-)$</td><td>$\dfrac{TN}{TN+FP}$</td><td>Hve stór hluti heilbrigðra fær neikvætt?</td></tr>
+<tr><td><b>PPV</b></td><td>$P(D+\mid T+)$</td><td>$\dfrac{TP}{TP+FP}$</td><td>Ef ég fæ jákvætt, hve líklega er ég veik(ur)?</td></tr>
+<tr><td><b>NPV</b></td><td>$P(D-\mid T-)$</td><td>$\dfrac{TN}{TN+FN}$</td><td>Ef ég fæ neikvætt, hve líklega er ég heilbrigð(ur)?</td></tr>
+</tbody></table></div>
+
+<h3>Dæmi: fastandi blóðsykur sem greiningarpróf</h3>
+<p>Í <code>diabetes</code>-gögnunum notum við <code>stab.glu &gt;= 126</code> sem próf og <code>glyhb &gt;= 7</code> sem raunverulega stöðu:</p>
+<pre class="rcode">&gt; diabetes$profun &lt;- ifelse(diabetes$stab.glu &gt;= 126, "T+", "T-")
+&gt; diabetes$sjukd &lt;- ifelse(diabetes$sykursyki == 1, "D+", "D-")
+&gt; table(Prof = diabetes$profun, Sjukdomur = diabetes$sjukd)
+
+    Sjukdomur
+Prof  D+  D-
+  T+  43  17
+  T-  17 313</pre>
+<p>Næmi $= 43/60 = 0.717$, sértæki $= 313/330 = 0.948$, PPV $= 43/60 = 0.717$ og NPV $= 313/330 = 0.948$. Algengið í úrtakinu er $60/390 = 0.154$. Prófið missir af um 28% þeirra sem eru með sykursýki.</p>
+
+<h3>Algengi skiptir máli fyrir PPV</h3>
+<p>Með reglu Bayes má reikna PPV út frá næmi, sértæki og algengi:</p>
+$$PPV = \frac{\text{næmi}\cdot\text{algengi}}{\text{næmi}\cdot\text{algengi} + (1-\text{sértæki})(1-\text{algengi})}.$$
+<p>Sama próf með algengi 15% gefur PPV ≈ 0.71, en ef algengið er aðeins 1% (t.d. skimun í almennu þýði) verður PPV ≈ 0.12: tæplega 9 af hverjum 10 jákvæðum niðurstöðum eru þá falskar. NPV hækkar hins vegar í 0.997. Næmi og sértæki breytast ekki.</p>
+
+<h2 id="roc">ROC-ferill</h2>
+<p>Skurðgildið 126 er val. Lægra skurðgildi eykur næmi en minnkar sértæki, og öfugt. <b>ROC-ferillinn</b> sýnir næmi á móti $1 - \text{sértæki}$ fyrir öll möguleg skurðgildi. Því nær efra vinstra horninu sem ferillinn liggur, því betra er prófið. <b>Flatarmálið undir ferlinum</b> (AUC) er heildarmælikvarði: 0.5 er ekki betra en að kasta krónu, 1 er fullkomið próf. Líkurnar úr tvíkosta aðhvarfslíkani má nota sem „próf“ á sama hátt og meta með ROC.</p>
+
+<h2 id="r">R í hnotskurn</h2>
+<pre class="rcode">fit &lt;- glm(y ~ x1 + x2, data = d, family = "binomial")
+summary(fit)                       # stuðlar á logit-kvarða, z og p
+exp(coef(fit))                     # gagnlíkindahlutföll
+exp(confint.default(fit))          # 95% bil fyrir OR
+exp(5 * coef(fit)["x1"])           # OR fyrir 5 einingar
+plogis(b0 + b1 * x)                # líkur út frá logit
+predict(fit, newdata, type = "response")
+table(Prof = d$prof, Sjukdomur = d$sjukd)   # 2×2 tafla greiningarprófs</pre>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: Tvíkosta aðhvarf og greiningarpróf</h2>
+<p><code>glm(..., family = "binomial")</code> úr púls- og sykursýkisgögnunum, gagnlíkindahlutföll og 2×2 tafla greiningarprófs (fastandi blóðsykur ≥ 126 á móti HbA1c ≥ 7).</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu öll verkefnin. Skrefinu lýkur þegar þau eru öll leyst og meðaleinkunnin er a.m.k. 60%. Fyrsta svarið við hverju verkefni gildir, en þú getur alltaf byrjað upp á nýtt.</p></div>
+<div class="lab-root"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 11"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-9.html"><span>Fyrri</span>9. Línulegt aðhvarf</a><a href="kafli-11.html" style="text-align:right"><span>Næsta</span>11. Lifunargreining</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/stat.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/kafli01.js"></script>
+<script src="js/q/kafli02.js"></script>
+<script src="js/q/kafli03.js"></script>
+<script src="js/q/kafli04.js"></script>
+<script src="js/q/kafli05.js"></script>
+<script src="js/q/kafli06.js"></script>
+<script src="js/q/kafli07.js"></script>
+<script src="js/q/kafli08.js"></script>
+<script src="js/q/kafli09.js"></script>
+<script src="js/q/kafli10.js"></script>
+<script src="js/q/lyd.js"></script>
+<script src="js/uttak.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/malin-data.js"></script>
+<script src="js/gagnvirkt.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-10.js"></script>
+</body>
+</html>

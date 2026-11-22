@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hvaða próf á við? · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html" aria-current="page">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<!--wide-->
+<h1>Hvaða próf á við?</h1>
+<p class="lede">Á lokaprófinu þarftu oft fyrst að vita <b>hvaða</b> aðferð á við: parað eða óparað t-próf, kí-kvaðrat eða Fisher, línulegt eða tvíkosta aðhvarf, Kaplan–Meier eða Cox. Lestu dæmið og fetaðu þig gegnum ákvörðunartréð, eitt skref í einu, þar til þú kemur að prófi eða dreifingu. Þá sérðu hvort valið var rétt, af hverju, og hvaða R-skipun á við.</p>
+
+<div class="note tip"><p><b class="t">Svona hugsarðu:</b> (1) Hver er svarbreytan: talnabreyta, flokkabreyta, já/nei eða tími þar til atburður gerist? (2) Hve marga hópa á að bera saman? (3) Eru mælingarnar paraðar, t.d. fyrir og eftir hjá sama einstaklingi? Þessar þrjár spurningar leysa flest dæmi.</p></div>
+
+<div id="pv-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<div class="pager noprint"><a href="dreifingar.html"><span>Fyrri</span>Dreifingaborðið</a><a href="formulublad.html" style="text-align:right"><span>Næsta</span>Formúlublað</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/profval.js"></script>
+</body>
+</html>

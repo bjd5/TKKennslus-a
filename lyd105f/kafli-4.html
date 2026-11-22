@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafli 4: Normaldreifing og höfuðsetningin · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" aria-current="page" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="chapter" data-ch="4" data-topics="normal clt">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 4: Normaldreifing og höfuðsetningin</h1>
+<p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í <a href="kafli-3.html">kafla 3</a> með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="ch-body">
+<header class="ch-head">
+<p class="eyebrow">Kafli 4 af 11 · Fyrirlestrar k5-6 · Tölfræði frá grunni kaflar 5-6</p>
+<h1>Normaldreifing og höfuðsetningin</h1>
+<p class="ch-exam"><b>Tengist:</b> Lokapróf: pnorm, qnorm og dreifing meðaltalsins</p>
+<ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Gagnvirkt</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
+</header>
+<section class="step" data-step="lesa" id="step-lesa">
+<p class="lede">Normaldreifingin er mikilvægasta dreifing tölfræðinnar. Hún lýsir vel mörgum líffræðilegum mælingum, eins og blóðþrýstingi og hjartslætti, og samkvæmt höfuðsetningu tölfræðinnar fylgja <i>meðaltöl</i> henni nánast alltaf. Á lokaprófinu er alltaf dæmi þar sem þú reiknar líkur og prósentumörk í normaldreifingu og segir hvaða dreifingu meðaltal fylgir.</p>
+
+<div class="key">
+<p><b>Kaflinn í hnotskurn.</b></p>
+<ol>
+  <li>$X \sim N(\mu, \sigma^2)$: annar stikinn er <b>dreifnin</b> $\sigma^2$, ekki staðalfrávikið.</li>
+  <li>Stöðlun: $Z = \dfrac{X - \mu}{\sigma} \sim N(0, 1)$. Líkur fást úr töflu eða með <code>pnorm</code>, mörk með <code>qnorm</code>.</li>
+  <li>68–95–99.7 reglan: um 68% innan $\mu \pm \sigma$, 95% innan $\mu \pm 2\sigma$ (nákvæmlega $1.96\sigma$), 99.7% innan $\mu \pm 3\sigma$.</li>
+  <li><b>Höfuðsetningin:</b> $\bar{X} \approx N\!\left(\mu, \dfrac{\sigma^2}{n}\right)$ fyrir stórt $n$, hver sem upphaflega dreifingin er. <b>Staðalskekkjan</b> er $\sigma/\sqrt{n}$.</li>
+</ol>
+</div>
+
+<h2 id="normal">Normaldreifingin</h2>
+<p>Samfelld slembistærð er lýst með <b>þéttifalli</b> (density function). Líkurnar á að $X$ lendi á bili eru flatarmálið undir þéttiferlinum yfir bilinu, og heildarflatarmálið er 1. Þess vegna er $P(X = x) = 0$ fyrir samfellda breytu, og $P(X &lt; x) = P(X \le x)$.</p>
+<p><b>Normaldreifingin</b> $N(\mu, \sigma^2)$ er bjöllulaga og samhverf um $\mu$. Meðaltal, miðgildi og tíðasta gildi eru öll jöfn $\mu$, og $\sigma$ ræður breiddinni.</p>
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\!\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)$$
+<div class="note warn"><p><b class="t">σ eða σ²?</b> Í $N(120, 10^2)$ er staðalfrávikið 10 og dreifnin 100. R-föllin taka hins vegar <b>staðalfrávik</b>: <code>pnorm(x, mean = 120, sd = 10)</code>. Á prófinu 2025 var gefin „dreifni 912.02 kg²“. Þá er $\sigma = \sqrt{912.02} = 30.2$ kg, og það er sú tala sem fer í <code>sd</code>.</p></div>
+
+<h2 id="stodlun">Stöðlun og taflan</h2>
+<p>Staðlaða normaldreifingin $Z \sim N(0, 1)$ hefur meðaltal 0 og staðalfrávik 1. Hvaða normaldreifða breytu sem er má <b>staðla</b>:</p>
+$$Z = \frac{X - \mu}{\sigma}$$
+<p>$z$-gildið segir hve mörgum staðalfrávikum mælingin er frá meðaltalinu. Tafla normaldreifingarinnar (tolfraedi_toflur) gefur $\Phi(z) = P(Z \le z)$, flatarmálið vinstra megin við $z$. Hin tilvikin fást með samhverfu:</p>
+$$P(Z &gt; z) = 1 - \Phi(z), \qquad \Phi(-z) = 1 - \Phi(z), \qquad P(a &lt; Z &lt; b) = \Phi(b) - \Phi(a)$$
+<div class="tablewrap"><table>
+<thead><tr><th>Mikilvæg $z$-gildi</th><th>$\Phi(z)$</th><th>Notað í</th></tr></thead>
+<tbody>
+<tr><td>1.282</td><td>0.90</td><td>80% öryggisbil, efstu 10%</td></tr>
+<tr><td>1.645</td><td>0.95</td><td>90% öryggisbil, efstu 5%, einhliða próf</td></tr>
+<tr><td>1.960</td><td>0.975</td><td>95% öryggisbil, tvíhliða próf með α = 0.05</td></tr>
+<tr><td>2.576</td><td>0.995</td><td>99% öryggisbil</td></tr>
+</tbody></table></div>
+
+<h2 id="r">pnorm og qnorm</h2>
+<ul>
+  <li><code>pnorm(x, mean, sd)</code> gefur líkur $P(X \le x)$. Með <code>lower.tail = FALSE</code> fæst $P(X &gt; x)$.</li>
+  <li><code>qnorm(p, mean, sd)</code> er andhverfan: gildið $x$ þannig að $P(X \le x) = p$ (<b>prósentumark</b>, percentile).</li>
+  <li><code>dnorm(x, mean, sd)</code> er hæð þéttiferilsins, <b>ekki</b> líkur. Það er sjaldan notað í dæmum.</li>
+</ul>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Blóðþrýstingur (lokapróf 2024, dæmi 1)</span></div><div class="ex-body">
+<p>Systólískur blóðþrýstingur fylgir $N(120, 10^2)$ mmHg. (a) Hverjar eru líkurnar á að einstaklingur mælist á milli 115 og 125? (b) Hve stór hluti er yfir 140 (háþrýstingur)? (c) Hvar á að setja mörkin svo aðeins efstu 5% teljist með háþrýsting? (d) Af 200 manns, hve marga má búast við yfir 140?</p>
+<details class="reveal"><summary></summary><div class="sol">
+$$(a)\quad P(115 &lt; X &lt; 125) = \Phi\!\left(\tfrac{125 - 120}{10}\right) - \Phi\!\left(\tfrac{115 - 120}{10}\right) = \Phi(0.5) - \Phi(-0.5) = 0.6915 - 0.3085 = 0.383$$
+$$(b)\quad P(X &gt; 140) = 1 - \Phi(2) = 1 - 0.9772 = 0.0228$$
+$$(c)\quad x_{0.95} = \mu + z_{0.95}\,\sigma = 120 + 1.645 \cdot 10 = 136.4$$
+$$(d)\quad 200 \cdot 0.0228 = 4.55$$
+<pre class="rcode">pnorm(125, 120, 10) - pnorm(115, 120, 10)
+[1] 0.3829249
+pnorm(140, 120, 10, lower.tail = FALSE)
+[1] 0.02275013
+qnorm(0.95, 120, 10)
+[1] 136.4485
+200 * pnorm(140, 120, 10, lower.tail = FALSE)
+[1] 4.550026</pre>
+<p><span class="ans">(a) 0.383 (b) 0.0228 (c) 136.4 mmHg (d) um 4.6 manns</span></p>
+</div></details>
+</div></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Hjartsláttur (lokapróf 2025, krossaspurningar 7–9)</span></div><div class="ex-body">
+<p>Hjartsláttur heilbrigðra kvenna fylgir $N(75, 13^2)$ slög/mín. Yfirsláttur (tachycardia) er hjartsláttur yfir 100. (a) Hverjar eru líkurnar á að kona sé með yfirslátt? (b) Hver þarf hjartslátturinn að vera til að vera í hópi þeirra 10% sem hafa hægastan hjartslátt? (c) Af 150 konum, hve margar má búast við að hafi yfirslátt?</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>(a) $z = (100 - 75)/13 = 1.923$ og $P(X &gt; 100) = 1 - \Phi(1.92) = 0.027$.</p>
+<p>(b) Neðstu 10%: $z_{0.10} = -1.282$, svo $x = 75 - 1.282 \cdot 13 = 58.34$ slög/mín.</p>
+<p>(c) $150 \cdot 0.0272 = 4.1$ konur.</p>
+<pre class="rcode">pnorm(100, 75, 13, lower.tail = FALSE)
+[1] 0.0272352
+qnorm(0.10, 75, 13)
+[1] 58.33983
+150 * pnorm(100, 75, 13, lower.tail = FALSE)
+[1] 4.085279</pre>
+<p><span class="ans">(a) 0.027 (b) 58.34 slög/mín (c) 4.1</span></p>
+</div></details>
+</div></div>
+
+<h2 id="regla">68–95–99.7 reglan</h2>
+<p>Í hvaða normaldreifingu sem er liggja um 68% gilda innan eins staðalfráviks frá meðaltalinu, um 95% innan tveggja og um 99.7% innan þriggja. Nákvæmar tölur eru 0.683, 0.954 og 0.997. Fyrir hjartsláttinn hér að ofan eru því um 95% kvenna með hjartslátt á bilinu $75 \pm 2\cdot 13$, þ.e. 49 til 101 slag/mín. Þetta er góð leið til að athuga hvort svar sé skynsamlegt.</p>
+
+<h2 id="urtaksdreifing">Úrtaksdreifing meðaltalsins</h2>
+<p>Ef við tökum mörg úrtök af stærð $n$ og reiknum meðaltalið í hverju, fáum við ekki alltaf sömu tölu. Meðaltalið $\bar{X}$ er sjálft slembistærð, og dreifing hennar heitir <b>úrtaksdreifing</b> (sampling distribution). Út frá reiknireglunum í kafla 3:</p>
+$$E[\bar{X}] = \mu, \qquad \text{Var}[\bar{X}] = \frac{\sigma^2}{n}, \qquad \text{sd}(\bar{X}) = \frac{\sigma}{\sqrt{n}}$$
+<p>Staðalfrávik meðaltalsins heitir <b>staðalskekkja</b> (standard error, SE). Hún mælir hve nákvæmt meðaltalið er sem mat á μ. Hún minnkar með $\sqrt{n}$: til að helminga hana þarf að fjórfalda úrtakið.</p>
+<div class="note warn"><p><b class="t">Staðalfrávik eða staðalskekkja?</b> Staðalfrávikið $\sigma$ (eða $s$) lýsir breytileika <i>einstakra mælinga</i>. Staðalskekkjan $\sigma/\sqrt{n}$ lýsir breytileika <i>meðaltalsins</i>. Ef spurt er um líkur fyrir einn einstakling notar þú $\sigma$; ef spurt er um meðaltal hóps notar þú $\sigma/\sqrt{n}$.</p></div>
+
+<h2 id="clt">Höfuðsetning tölfræðinnar</h2>
+<p>Ef $X$ er normaldreifð er $\bar{X}$ nákvæmlega normaldreifð. En <b>höfuðsetning tölfræðinnar</b> (central limit theorem, CLT) segir meira: hver sem upphaflega dreifingin er (með endanlega dreifni), nálgast úrtaksdreifing meðaltalsins normaldreifingu þegar $n$ stækkar:</p>
+$$\bar{X} \approx N\!\left(\mu, \frac{\sigma^2}{n}\right)$$
+<p>Þetta gildir líka fyrir skakkar dreifingar og strjálar dreifingar eins og Poisson og tvíkosta. Þumalputtaregla er að $n \ge 30$ dugi oftast, en mjög skakkar dreifingar þurfa stærra $n$. Höfuðsetningin er ástæðan fyrir því að öryggisbil og t-próf virka þótt gögnin séu ekki fullkomlega normaldreifð.</p>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Meðalþyngd sjúklinga (lokapróf 2025, krossaspurning 4)</span></div><div class="ex-body">
+<p>Meðalþyngd sjúklinga er 75.3 kg og dreifnin 912.02 kg². Hvaða dreifingu fylgir meðalþyngd 100 sjúklinga? Hverjar eru líkurnar á að meðalþyngdin sé yfir 80 kg?</p>
+<details class="reveal"><summary></summary><div class="sol">
+$$\bar{X} \approx N\!\left(75.3, \frac{912.02}{100}\right) = N(75.3,\; 9.1202), \qquad SE = \sqrt{9.1202} = 3.02$$
+$$P(\bar{X} &gt; 80) = 1 - \Phi\!\left(\frac{80 - 75.3}{3.02}\right) = 1 - \Phi(1.556) = 0.060$$
+<pre class="rcode">pnorm(80, mean = 75.3, sd = sqrt(912.02 / 100), lower.tail = FALSE)
+[1] 0.05981738</pre>
+<p><span class="ans">X̄ ~ N(75.3, 9.1202) og P(X̄ &gt; 80) = 0.060</span></p>
+</div></details>
+</div></div>
+
+<div class="ex"><div class="ex-head">Dæmi <span>Poisson-meðaltal (lokapróf 2024, dæmi 2c)</span></div><div class="ex-body">
+<p>Fjöldi sjúklinga á klukkutíma fylgir $\text{Poisson}(4)$. Valdir eru 50 klukkutímar af handahófi. Hvaða dreifingu fylgir meðalfjöldinn nálgunarlega? Tilgreindu alla stika.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<p>Fyrir Poisson er $E[X] = \text{Var}[X] = \lambda = 4$. Samkvæmt höfuðsetningunni:</p>
+$$\bar{X} \approx N\!\left(4, \frac{4}{50}\right) = N(4,\; 0.08)$$
+<p><span class="ans">N(4, 0.08)</span></p>
+</div></details>
+</div></div>
+
+<h2 id="mat">Normaldreifingarrit</h2>
+<p>Hvernig veistu hvort gögn séu normaldreifð? Stuðlarit ætti að vera nokkurn veginn bjöllulaga. Betra tól er <b>normaldreifingarrit</b> (normal probability plot, QQ-rit, <code>qqnorm(x); qqline(x)</code>): ef punktarnir liggja nálægt beinni línu eru gögnin u.þ.b. normaldreifð. Ef þeir sveigja upp í efri endanum er dreifingin hægri-skökk. Sama rit er notað til að meta forsendur í aðhvarfsgreiningu (kafli 9).</p>
+<div class="note tip"><p><b class="t">Á prófinu:</b> skrifaðu dreifinguna, stöðluðu z-gildið og töflugildið, og svo lokasvarið. Ef þú notar R, skrifaðu skipunina. Spurningar um „hve marga má búast við“ eru $n \cdot p$, ekki líkurnar sjálfar.</p></div>
+<div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
+</section>
+<section class="step" data-step="aefa" id="step-aefa" hidden>
+<h2>Æfingar</h2>
+<p>Skilningsspurningar úr kaflanum og reiknidæmi með nýjum tölum í hvert skipti. Náðu <b>5 réttum svörum</b> til að ljúka skrefinu. Þú færð skýringu eftir hvert svar og mátt halda áfram eins lengi og þú vilt.</p>
+<div class="practice"></div>
+</section>
+<section class="step" data-step="gagnvirkt" id="step-gagnvirkt" hidden>
+<h2>Gagnvirkt: Normalverkstæðið</h2>
+<p>Líkur, prósentumörk og væntanlegur fjöldi í normaldreifingu, og dreifing meðaltalsins samkvæmt höfuðsetningunni.</p>
+<div class="note tip"><p><b class="t">Verkefni:</b> leystu öll verkefnin. Skrefinu lýkur þegar þau eru öll leyst og meðaleinkunnin er a.m.k. 60%. Fyrsta svarið við hverju verkefni gildir, en þú getur alltaf byrjað upp á nýtt.</p></div>
+<div class="lab-root"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+<p class="w-status" aria-live="polite"></p>
+</section>
+<section class="step" data-step="prof" id="step-prof" hidden>
+<h2>Kaflapróf</h2>
+<div class="ctest" data-next="kafli 5"></div>
+</section>
+</div>
+</div>
+<div class="pager noprint"><a href="kafli-3.html"><span>Fyrri</span>3. Líkur: tvíkosta- og Poisson-dreifing</a><a href="kafli-5.html" style="text-align:right"><span>Næsta</span>5. Öryggisbil</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/stat.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/q/kafli01.js"></script>
+<script src="js/q/kafli02.js"></script>
+<script src="js/q/kafli03.js"></script>
+<script src="js/q/kafli04.js"></script>
+<script src="js/q/kafli05.js"></script>
+<script src="js/q/kafli06.js"></script>
+<script src="js/q/kafli07.js"></script>
+<script src="js/q/kafli08.js"></script>
+<script src="js/q/kafli09.js"></script>
+<script src="js/q/kafli10.js"></script>
+<script src="js/q/lyd.js"></script>
+<script src="js/uttak.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/malin-data.js"></script>
+<script src="js/gagnvirkt.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/w/kafli-4.js"></script>
+</body>
+</html>

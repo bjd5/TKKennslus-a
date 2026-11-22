@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prófhermir: skrifleg dæmi á prófsniði · Líftölfræði I</title>
+<meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html">Líftölfræði I</a><div class="topbar-btns"><button type="button" class="theme-btn">Þema</button><button type="button" id="menu-btn" aria-expanded="false" aria-controls="side">Valmynd</button></div></div>
+<button type="button" class="side-show" id="side-show" aria-controls="side" title="Sýna valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>Valmynd</button>
+<div class="shell">
+<aside class="side" id="side">
+<div class="side-top"><a class="home" href="../index.html">← Allir kennsluvefir</a><button type="button" class="side-hide" id="side-hide" aria-controls="side" aria-label="Fela valmynd" title="Fela valmynd (\)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button></div>
+<a class="brand" href="index.html">Líftölfræði I<small>LÝÐ105F · Ferðalag að lokaprófi</small></a>
+<div class="side-xp" id="side-xp" hidden></div>
+<nav aria-label="Efnisyfirlit">
+<h2>Ferðalagið</h2><ul>
+<li><a class="nav" href="index.html">Kortið</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Rannsóknir, breytur og úrtök</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Lýsandi tölfræði og gröf</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Líkur: tvíkosta- og Poisson-dreifing</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Normaldreifing og höfuðsetningin</a></li>
+<li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Öryggisbil</a></li>
+<li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Tilgátupróf og t-próf</a></li>
+<li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Hlutföll og tengslatöflur</a></li>
+<li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Fervikagreining (ANOVA)</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Línulegt aðhvarf</a></li>
+<li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Tvíkosta aðhvarf, næmi og sértæki</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Lifunargreining</a></li>
+<li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
+</ul>
+<h2>Verðlaun</h2><ul>
+<li><a class="nav" href="profhermir.html" aria-current="page" data-gate="archive">Prófhermir</a></li>
+</ul>
+<h2>Verkfæri</h2><ul>
+<li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="spjold.html">Flashcards</a></li>
+<li><a class="nav" href="dreifingar.html">Dreifingaborðið</a></li>
+<li><a class="nav" href="profval.html">Hvaða próf?</a></li>
+<li><a class="nav" href="formulublad.html">Formúlublað</a></li>
+<li><a class="nav" href="ordasafn.html">Orðasafn</a></li>
+</ul>
+</nav>
+<button type="button" class="theme-btn">Þema</button>
+</aside>
+<main id="main">
+<div class="page wide">
+<div class="gate" data-gate="archive">
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Prófhermirinn er læstur</h1><p>Náðu lokaprófi ferðalagsins (einkunn 6 eða hærra) til að opna skriflegu dæmin á prófsniði.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
+<div class="gated">
+<!--wide-->
+<h1>Prófhermir: skrifleg dæmi á prófsniði</h1>
+<p class="lede">Á lokaprófinu eru skrifleg dæmi 70% af einkunninni. Þar þarftu að lesa R-úttak, setja fram tilgátur, reikna og draga ályktun á mannamáli. Hér eru tíu dæmi á sama sniði, byggð á raunverulegu R-úttaki úr gögnum áfangans. Skrifaðu svarið fyrst, á blað eða í reitinn, opnaðu svo fyrirmyndarsvarið og hakaðu við þau matsatriði sem komu fram hjá þér. Stigin reiknast út frá því.</p>
+
+<div class="note tip"><p><b class="t">Ráð úr gömlu prófunum</b></p>
+<ul>
+  <li>Í skriflegum dæmum fást stig fyrir <b>tilgátur</b> (um μ eða p í þýðinu, ekki x̄), <b>prófstærð</b>, <b>p-gildi</b> og <b>ályktun á mannamáli</b> með stefnu og stærð áhrifa.</li>
+  <li>Áður en tvö óháð úrtök eru borin saman: lestu <code>var.test</code> og veldu <code>var.equal</code> út frá því.</li>
+  <li>Í <code>prop.test(tafla)</code> er hlutfallið reiknað fyrir <b>fyrsta dálkinn</b>, sem er oft „No“.</li>
+  <li>Lestu vel hvort spurt er um P(X ≥ k) eða P(X &gt; k). Það munar einni tölu í <code>pbinom</code> og <code>ppois</code>.</li>
+  <li>Í Cox-líkani er HR = <code>exp(coef)</code>; <code>exp(-coef)</code> er sama samband séð frá hinum hópnum.</li>
+  <li>Spá utan þess bils sem gögnin ná yfir (bryggjun) er varhugaverð, jafnvel þótt sambandið sé marktækt.</li>
+  <li>Leyfilegt er að nota R á posit.cloud og öll hjálpargögn á pappír, en R er ekki nauðsynlegt.</li>
+</ul></div>
+
+<div id="ph-app"><noscript><p>Þessi hluti þarf JavaScript.</p></noscript></div>
+</div>
+</div>
+<div class="pager noprint"><a href="lokaprof-aefing.html"><span>Fyrri</span>Lokapróf</a><a href="aefingar.html" style="text-align:right"><span>Næsta</span>Frjálsar æfingar</a></div>
+</div>
+</main>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/stat.js"></script>
+<script src="js/uttak.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/chapters.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/profhermir.js"></script>
+</body>
+</html>
