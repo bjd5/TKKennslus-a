@@ -21,7 +21,7 @@
     ["Lungnastarfsemin", "Reykingarnar", "Aldur þátttakenda", "Fjöldi þátttakenda"],
     "Svarbreyta (response) er útkoman sem mæld er. Skýribreyta (explanatory) er sú sem talin er hafa áhrif, hér reykingar.");
   M(T, "Hver er munurinn á <b>þýði</b> og <b>úrtaki</b>?",
-    ["Þýðið er allur hópurinn sem við viljum álykta um; úrtakið er sá hluti þess sem við mælum", "Úrtakið er alltaf stærra en þýðið", "Þýði er bara notað í tilraunum, úrtak í athugunarrannsóknum", "Þau eru það sama ef n > 30"],
+    ["Þýðið er allur hópurinn sem við viljum álykta um; úrtakið er sá hluti þess sem við mælum", "Úrtakið er hópurinn sem við viljum álykta um; þýðið er sá hluti hans sem við mælum", "Þýði er bara notað í tilraunum, úrtak í athugunarrannsóknum", "Þýðið eru allar breyturnar, úrtakið eru einstaklingarnir"],
     "Við mælum úrtak og notum ályktunartölfræði til að segja eitthvað um þýðið.");
   M(T, "Hvað er <b>stiki</b> (parameter)?",
     ["Töluleg stærð sem lýsir þýðinu, t.d. μ eða p", "Töluleg stærð reiknuð úr úrtaki, t.d. x̄", "Breyta í gagnasafni", "Gildi sem vantar"],
@@ -54,7 +54,7 @@
     ["Bjagi er kerfisbundin skekkja í ákveðna átt; breytileiki er tilviljanakennd dreifing mælinga", "Bjagi minnkar alltaf þegar úrtakið stækkar", "Breytileiki er alltaf kerfisbundinn", "Þau eru sama hugtakið"],
     "Stærra úrtak minnkar breytileika matsins (staðalskekkju) en lagar ekki bjaga: bjagað úrtak er jafn bjagað þótt það sé stórt.");
   M(T, "Í púlsrannsókninni hlupu færri en búist var við miðað við krónukast. Hver gæti verið skýringin sem varðar rannsóknarsniðið?",
-    ["Sumir fóru ekki eftir krónukastinu (t.d. nenntu ekki að hlaupa), svo slembivalið raskaðist", "Krónan var of stór", "Úrtakið var of stórt", "Púls er strjál breyta"],
+    ["Sumir fóru ekki eftir krónukastinu (t.d. nenntu ekki að hlaupa), svo slembivalið raskaðist", "Tilviljun ein, því krónukast gefur sjaldan nákvæmlega 50%", "Úrtakið var of lítið til að slembival virki", "Púls var mældur á mismunandi tímum dags"],
     "Ef þátttakendur víkja frá úthlutuninni er slembivalið ekki lengur hreint, og hóparnir geta orðið ólíkir í öðrum þáttum.");
   M(T, "Hvað þýðir að gildi vanti (<code>NA</code>) í R?",
     ["Mælingin var ekki skráð; flest föll þurfa <code>na.rm = TRUE</code> eða að línum sé sleppt", "Gildið er 0", "Gildið er óendanlegt", "Breytan er flokkabreyta"],
@@ -65,4 +65,18 @@
   M(T, "Hver er kosturinn við tilraun með <b>samanburðarhóp</b>?",
     ["Hægt er að greina áhrif meðferðar frá öðrum breytingum sem verða með tímanum (t.d. náttúrulegum bata)", "Þá þarf ekki slembival", "Þá eru engin lyfleysuáhrif", "Þá verður úrtakið stærra"],
     "Án samanburðarhóps veistu ekki hvort bati stafar af meðferðinni eða hefði orðið hvort sem er.");
+
+  // ---------- Eftir glærunum „Tilraunir og breytur“ (k1-2) ----------
+  M(T, "Allt sem við notum til að lýsa hverjum einstaklingi í úrtakinu og allt sem við mælum í úrtakinu köllum við:",
+    ["Breytur", "Stika", "Þýði", "Lýsistærðir"],
+    "Breytur eru svör við spurningum og mælingar, t.d. hæð mæld með málbandi. Stikar lýsa þýðinu og lýsistærðir eru reiknaðar úr úrtakinu.");
+  M(T, "Rannsakað er hvernig svifryksmengun í Reykjavík tengist tíðni koma á bráðamóttöku í Fossvogi. Hver er <b>skýribreytan</b>?",
+    ["Svifryksmengunin", "Tíðni koma á bráðamóttöku", "Bráðamóttakan í Fossvogi", "Reykjavík"],
+    "Skýribreyta skýrir svarbreytu. Hér á mengunin að skýra breytingar í komum á bráðamóttöku, sem er svarbreytan.");
+  M(T, "Borinn er saman árangur af opnum og laparoskópískum botnlangatökum. Af hvaða gerð er breytan „tegund aðgerðar“?",
+    ["Óröðuð flokkabreyta", "Röðuð flokkabreyta", "Strjál talnabreyta", "Samfelld talnabreyta"],
+    "Tveir flokkar án náttúrulegrar röðunar. Hún er líka skýribreytan í rannsókninni.");
+  M(T, "Velja á 10 konur og 10 karla af handahófi úr þýðinu. Hvað kallast slík úrtakshögun?",
+    ["Lagskipt slembiúrtak", "Einfalt slembiúrtak", "Aðgengisúrtak", "Sjálfboðaliðaúrtak"],
+    "Í lagskiptu slembiúrtaki er valið af handahófi úr hverjum hópi (lagi) þýðisins. Í einföldu slembiúrtaki er valið af handahófi úr öllu þýðinu í einu.");
 })();

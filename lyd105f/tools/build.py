@@ -13,6 +13,7 @@ Flashcards eru í js/cards/*.js. Lásar, stig og einkunnir eru í js/journey.js;
 kaflarnir og textinn sem er bundinn áfanganum eru skrifaðir í js/chapters.js héðan.
 Valfrjálst: lína í byrjun src-skrár  <!--scripts: js/a.js js/b.js -->  bætir við skriftum.
 """
+import hashlib
 import json
 import re
 import sys
@@ -123,7 +124,7 @@ TEMPLATE = """<!doctype html>
 <title>{title} · Líftölfræði I</title>
 <meta name="description" content="Kennsluvefur fyrir LÝÐ105F Líftölfræði I: breytur, lýsandi tölfræði, líkindadreifingar, öryggisbil, tilgátupróf, t-próf, kí-kvaðrat, ANOVA, aðhvarf, tvíkosta aðhvarf og lifunargreining í R.">
 <link rel="stylesheet" href="vendor/katex/katex.min.css">
-<link rel="stylesheet" href="css/style.css">\n<link rel="stylesheet" href="css/lab.css">
+<link rel="stylesheet" href="css/style.css?v={v_style}">\n<link rel="stylesheet" href="css/lab.css?v={v_lab}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b45c1e'/%3E%3Cpath d='M5 24c4 0 6-15 11-15s7 15 11 15' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <script>try{{var d=document.documentElement,t=localStorage.getItem("tk-theme");if(t)d.setAttribute("data-theme",t);if(localStorage.getItem("tk-side")==="hidden")d.setAttribute("data-side","hidden")}}catch(e){{}}</script>
 </head>
@@ -149,11 +150,18 @@ TEMPLATE = """<!doctype html>
 </div>
 <script src="vendor/katex/katex.min.js"></script>
 <script src="vendor/katex/auto-render.min.js"></script>
-<script src="js/site.js"></script>
+<script src="js/site.js?v={v_site}"></script>
 {scripts}
 </body>
 </html>
 """
+
+
+
+def ver(rel):
+    """Stutt fingrafar skrár, sett aftan á slóðina svo vafrar sæki nýja útgáfu þegar skráin breytist."""
+    f = ROOT / rel
+    return hashlib.md5(f.read_bytes()).hexdigest()[:8] if f.exists() else "0"
 
 
 def nav_html(current):
@@ -314,7 +322,10 @@ def main():
             content=content,
             pager=pager_html(idx),
             pageclass="page wide" if wide else "page",
-            scripts="\n".join(f'<script src="{s}"></script>' for s in scripts),
+            scripts="\n".join(f'<script src="{s}?v={ver(s)}"></script>' for s in scripts),
+            v_style=ver("css/style.css"),
+            v_lab=ver("css/lab.css"),
+            v_site=ver("js/site.js"),
         )
         (ROOT / f"{name}.html").write_text(page, encoding="utf-8")
         print("skrifaði", f"{name}.html")

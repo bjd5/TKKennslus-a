@@ -131,8 +131,28 @@
     if (box) {
       var L = level(S.xp);
       box.hidden = false;
-      box.innerHTML = '<div class="xp-top"><b>Stig ' + L.i + "</b> · " + esc(L.name) + '</div><div class="xp-bar"><i style="width:' + Math.round(L.frac * 100) + '%"></i></div><div class="xp-sub">' + S.xp + " XP" + (L.hi ? " · " + (L.hi - S.xp) + " í næsta stig" : "") + "</div>";
+      box.innerHTML = '<div class="xp-top"><b>Stig ' + L.i + "</b> · " + esc(L.name) + '</div><div class="xp-bar"><i style="width:' + Math.round(L.frac * 100) + '%"></i></div><div class="xp-sub">' + S.xp + " XP" + (L.hi ? " · " + (L.hi - S.xp) + " í næsta stig" : "") + "</div>" + modeSwitch();
+      bindMode(box);
     }
+  }
+
+  /* ---------- Hamur: ferilhamur (kaflar læstir) eða æfingahamur (allt opið) ---------- */
+  function modeSwitch() {
+    var p = !!S.unlockAll;
+    return '<div class="mode-sw" role="group" aria-label="Hamur">' +
+      '<button type="button" data-mode="career" aria-pressed="' + !p + '" title="Kaflarnir opnast einn af öðrum">Ferilhamur</button>' +
+      '<button type="button" data-mode="practice" aria-pressed="' + p + '" title="Allir kaflar og próf eru opin">Æfingahamur</button></div>' +
+      '<div class="xp-sub">' + (p ? "Allt er opið. Framvindan vistast áfram." : "Kaflarnir opnast einn af öðrum.") + "</div>";
+  }
+  function setMode(practice) {
+    if (!!S.unlockAll === practice) return;
+    S.unlockAll = practice; save();
+    location.reload();
+  }
+  function bindMode(root) {
+    root.querySelectorAll("[data-mode]").forEach(function (b) {
+      b.addEventListener("click", function () { setMode(b.getAttribute("data-mode") === "practice"); });
+    });
   }
 
   /* ---------- Læstar síður (lokapróf og prófasafn) ---------- */
@@ -568,19 +588,20 @@
   /* ---------- Stillingar á forsíðu ---------- */
   function initSettings(root) {
     function draw() {
-      root.innerHTML = '<p>Framvindan er geymd í þessum vafra (localStorage). Hún fylgir ekki á milli tækja.</p><p class="row" style="gap:0.6rem">' +
-        '<button type="button" class="btn ghost" data-reset>Byrja upp á nýtt</button>' +
-        '<button type="button" class="btn ghost" data-unlock>' + (S.unlockAll ? "Læsa aftur (venjulegur hamur)" : "Opna allt (yfirferðarhamur)") + "</button></p>" +
-        (S.unlockAll ? '<p class="note warn">Yfirferðarhamur er á: allir kaflar og próf eru opin, en framvindan telst ekki.</p>' : "");
+      var p = !!S.unlockAll;
+      root.innerHTML = '<div class="grid2 mode-cards">' +
+        '<div class="key' + (p ? "" : " mode-on") + '"><p><b>Ferilhamur</b> (career mode)' + (p ? "" : " · <i>valinn</i>") + '</p><p>Kaflarnir opnast einn af öðrum: þú lest, æfir, leysir gagnvirka verkefnið og nærð kaflaprófinu til að opna næsta kafla. Lokaprófið og prófhermirinn opnast í lokin.</p>' +
+        (p ? '<p><button type="button" class="btn" data-mode="career">Skipta í ferilham</button></p>' : "") + "</div>" +
+        '<div class="key' + (p ? " mode-on" : "") + '"><p><b>Æfingahamur</b> (practice mode)' + (p ? " · <i>valinn</i>" : "") + '</p><p>Allt er opið: allir kaflar, öll skref, kaflaprófin, lokaprófið og prófhermirinn. Hentar þegar þú vilt æfa ákveðið efni eða rifja upp fyrir prófið.</p>' +
+        (p ? "" : '<p><button type="button" class="btn" data-mode="practice">Skipta í æfingaham</button></p>') + "</div></div>" +
+        '<p>Framvindan (kaflar, einkunnir og XP) er geymd í þessum vafra og vistast í báðum hömum, svo þú getur skipt fram og til baka. Hún fylgir ekki á milli tækja.</p>' +
+        '<p class="row" style="gap:0.6rem"><button type="button" class="btn ghost" data-reset>Byrja upp á nýtt</button></p>';
       root.querySelector("[data-reset]").addEventListener("click", function () {
         if (!confirm("Eyða allri framvindu (kaflar, einkunnir og XP)? Þetta er ekki hægt að afturkalla.")) return;
         try { localStorage.removeItem(KEY); } catch (e) {}
         S = load(); refreshAll(); draw();
       });
-      root.querySelector("[data-unlock]").addEventListener("click", function () {
-        if (!S.unlockAll && !confirm("Opna alla kafla og prófin án þess að klára þau? Hentar til að skoða efnið, en þá er leikurinn ekki lengur leikur.")) return;
-        S.unlockAll = !S.unlockAll; save(); refreshAll(); draw();
-      });
+      bindMode(root);
     }
     draw();
   }

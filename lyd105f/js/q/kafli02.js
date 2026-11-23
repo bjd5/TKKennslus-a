@@ -5,15 +5,24 @@
   function M(t, q, o, e) { B.MC.push({ topic: t, q: q, o: o, c: 0, e: e }); }
   function f(x, d) { var s = (+x).toFixed(d == null ? 3 : d); return s.indexOf(".") >= 0 ? s.replace(/0+$/, "").replace(/\.$/, "") : s; }
   var T = "lysandi";
-  var SUM = '<pre class="rcode">&gt; summary(puls[, c("aldur", "fyrriPuls", "seinniPuls", "likamsraekt")])\n' +
-    '     aldur         fyrriPuls        seinniPuls      likamsraekt\n' +
-    ' Min.   :19.00   Min.   : 42.00   Min.   : 42.00   Min.   : 0.000\n' +
-    ' 1st Qu.:20.00   1st Qu.: 64.00   1st Qu.: 68.00   1st Qu.: 2.000\n' +
-    ' Median :22.00   Median : 71.50   Median : 77.00   Median : 4.000\n' +
-    ' Mean   :24.24   Mean   : 71.98   Mean   : 82.21   Mean   : 4.492\n' +
-    ' 3rd Qu.:25.00   3rd Qu.: 80.00   3rd Qu.: 93.00   3rd Qu.: 6.000\n' +
-    ' Max.   :70.00   Max.   :120.00   Max.   :162.00   Max.   :25.000\n' +
-    '                 NA\'s   :17       NA\'s   :14       NA\'s   :5</pre>';
+  var SUM = '<pre class="rcode">&gt; summary(puls[, c("aldur", "fyrriPuls")])\n' +
+    '     aldur         fyrriPuls\n' +
+    ' Min.   :19.00   Min.   : 42.00\n' +
+    ' 1st Qu.:20.00   1st Qu.: 64.00\n' +
+    ' Median :22.00   Median : 71.50\n' +
+    ' Mean   :24.24   Mean   : 71.98\n' +
+    ' 3rd Qu.:25.00   3rd Qu.: 80.00\n' +
+    ' Max.   :70.00   Max.   :120.00\n' +
+    '                 NA\'s   :17</pre>';
+  var SUM2 = '<pre class="rcode">&gt; summary(puls[, c("seinniPuls", "likamsraekt")])\n' +
+    '   seinniPuls      likamsraekt\n' +
+    ' Min.   : 42.00   Min.   : 0.000\n' +
+    ' 1st Qu.: 68.00   1st Qu.: 2.000\n' +
+    ' Median : 77.00   Median : 4.000\n' +
+    ' Mean   : 82.21   Mean   : 4.492\n' +
+    ' 3rd Qu.: 93.00   3rd Qu.: 6.000\n' +
+    ' Max.   :162.00   Max.   :25.000\n' +
+    ' NA\'s   :14       NA\'s   :5</pre>';
 
   M(T, SUM + "Hver er fjórðungaspönnin (IQR) fyrir <code>fyrriPuls</code>?",
     ["16 slög/mín", "78 slög/mín", "8.5 slög/mín", "71.5 slög/mín"],
@@ -21,7 +30,7 @@
   M(T, SUM + "Hvað segir úttakið um dreifingu <code>aldur</code>?",
     ["Hún er hægri-skekkt: flestir eru um tvítugt en fáir mun eldri (allt að 70 ára)", "Hún er samhverf", "Hún er vinstri-skekkt", "Hún er normaldreifð"],
     "Miðgildið (22) er lægra en meðaltalið (24.24) og hámarkið (70) er langt frá Q3 (25): langur hali upp á við.");
-  M(T, SUM + "Hve margar mælingar vantar á <code>likamsraekt</code>?",
+  M(T, SUM2 + "Hve margar mælingar vantar á <code>likamsraekt</code>?",
     ["5", "4.492", "25", "Engar"],
     "Línan <code>NA's</code> sýnir fjölda gilda sem vantar.");
   M(T, SUM + "Samkvæmt 1.5·IQR-reglunni, frá hvaða gildi teljast háir hvíldarpúlsar (<code>fyrriPuls</code>) útlagar?",
@@ -84,17 +93,17 @@
     var n = rnd(5, 8), xs = []; for (var i = 0; i < n; i++) xs.push(rnd(55, 98));
     var m = xs.reduce(function (a, b) { return a + b; }, 0) / n;
     return { topic: T, title: "Meðaltal", unit: "slög/mín", tol: 0.002, answer: m,
-      text: "<p>Hvíldarpúls " + n + " nemenda: " + xs.join(", ") + ". Reiknaðu meðaltalið x̄.</p>",
+      text: "<p>Hvíldarpúls " + n + " nemenda: " + xs.join(", ") + ". Reiknið meðaltalið x̄.</p>",
       sol: "<p>x̄ = Σx/n = " + xs.reduce(function (a, b) { return a + b; }, 0) + "/" + n + " = " + f(m, 3) + ".</p><pre class=\"rcode\">mean(c(" + xs.join(", ") + "))</pre>" };
   });
   B.G.push(function lysCv() {
     var m = rnd(650, 850) / 10, s = rnd(80, 160) / 10, cv = s / m * 100;
     return { topic: T, title: "Frávikshlutfall", unit: "%", tol: 0.005, answer: cv,
-      text: "<p>Meðalhvíldarpúls í úrtaki er " + m + " slög/mín og staðalfrávikið " + s + " slög/mín. Reiknaðu frávikshlutfallið (CV) í prósentum.</p>",
+      text: "<p>Meðalhvíldarpúls í úrtaki er " + m + " slög/mín og staðalfrávikið " + s + " slög/mín. Reiknið frávikshlutfallið (CV) í prósentum.</p>",
       sol: "<p>CV = s/x̄ · 100% = " + s + "/" + m + " · 100% = " + f(cv, 2) + "%.</p><pre class=\"rcode\">" + s + " / " + m + " * 100</pre>" };
   });
   B.G.push(function lysZscore() {
-    var mu = rnd(115, 125), sd = rnd(8, 15), x = mu + rnd(-25, 30);
+    var mu = rnd(115, 125), sd = rnd(8, 15), x = mu + (Math.random() < 0.5 ? -1 : 1) * rnd(4, 30);
     var z = (x - mu) / sd;
     return { topic: T, title: "Staðlað gildi (z)", unit: "", tol: 0.002, absTol: 0.005, answer: z,
       text: "<p>Systólískur blóðþrýstingur í hópi hefur meðaltal " + mu + " mmHg og staðalfrávik " + sd + " mmHg. Einstaklingur mælist með " + x + " mmHg. Hve mörgum staðalfrávikum er hann frá meðaltalinu (z-gildi, með formerki)?</p>",
@@ -106,5 +115,37 @@
     return { topic: T, title: "Vegið meðaltal", unit: "slög/mín", tol: 0.001, answer: m,
       text: "<p>Í hópi " + n1 + " kvenna er meðalpúls " + m1 + " og í hópi " + n2 + " karla " + m2 + " slög/mín. Hver er meðalpúls allra " + (n1 + n2) + " þátttakenda?</p>",
       sol: "<p>Vegið meðaltal: (" + n1 + "·" + m1 + " + " + n2 + "·" + m2 + ")/" + (n1 + n2) + " = " + f(m, 3) + ". Einfalt meðaltal tveggja meðaltala (" + f((m1 + m2) / 2, 3) + ") væri rangt nema hóparnir séu jafnstórir.</p><pre class=\"rcode\">(" + n1 + " * " + m1 + " + " + n2 + " * " + m2 + ") / " + (n1 + n2) + "</pre>" };
+  });
+
+  // ---------- Eftir R verkefni 1 og undirbúningi hlutaprófs ----------
+  M(T, "Í R verkefni 1 er breytan <code>kyn</code> í pulsAll heiltölubreyta með gildin 1 (kona) og 2 (karl). Hvernig útbúið þið nýja flokkabreytu með heitunum „Kona“ og „Karl“?",
+    ["<code>mutate(kyn_f = fct_recode(factor(kyn), Kona = \"1\", Karl = \"2\"))</code>", "<code>mutate(kyn_f = as.numeric(kyn))</code>", "<code>mutate(kyn_f = mean(kyn))</code>", "<code>mutate(kyn_f = table(kyn))</code>"],
+    "R kallar flokkabreytur <code>factor</code>. <code>fct_recode</code> gefur flokkunum lýsandi heiti.");
+  M(T, "Hvað gefur <code>prop.table(table(dat$drekkur_f, dat$kyn_f), margin = 2)</code>?",
+    ["Hlutfall þeirra sem drekka og drekka ekki innan hvers kyns (hver dálkur summast í 1)", "Hlutfall hvors kyns innan hvors drykkjuflokks (hver lína summast í 1)", "Hlutfall af öllum þátttakendum (öll taflan summast í 1)", "Fjölda í hverjum reit"],
+    "<code>margin = 2</code> deilir með dálkasummum. Í pulsAll drekka 83% kvenna og 84% karla. <code>margin = 1</code> deilir með línusummum.");
+  M(T, "Hvaða skipun býr til töflu 1 með fjölda, meðaltali, miðgildi, staðalfráviki og spönn fyrir hæð, BMI og þyngd eftir kyni, eins og í R verkefni 1?",
+    ["<code>table1(~ haed + bmi + thyngd | kyn_f, data = dat)</code>", "<code>table(dat$haed, dat$kyn_f)</code>", "<code>summary(dat$kyn_f)</code>", "<code>prop.table(dat$haed)</code>"],
+    "<code>table1</code>-pakkinn setur lýsandi tölfræði fyrir margar breytur upp í eina töflu, skipt eftir hópum á eftir <code>|</code>.");
+  M(T, "Hvaða skipun telur fjölda þátttakenda með BMI yfir 25?",
+    ["<code>dat %>% filter(bmi > 25) %>% nrow()</code>", "<code>dat %>% filter(bmi == 25) %>% nrow()</code>", "<code>dat %>% summarise(mean(bmi > 25))</code>", "<code>dat %>% mutate(bmi > 25)</code>"],
+    "<code>filter</code> heldur eftir línunum sem uppfylla skilyrðið og <code>nrow</code> telur þær. Í pulsAll eru það 123 af 460. <code>mean(bmi > 25)</code> gefur hlutfallið, ekki fjöldann.");
+  M(T, "Í R verkefni 1 átti að reikna meðaltal, miðgildi, staðalfrávik og spönn hæðar. Hvaða skipun gefur <b>spönnina</b>?",
+    ["<code>max(haed) - min(haed)</code>", "<code>range(haed)</code>", "<code>sd(haed)</code>", "<code>IQR(haed)</code>"],
+    "Spönn (range) er hæsta gildi mínus lægsta gildi. <code>range()</code> skilar <b>tveimur</b> tölum, lægsta og hæsta gildinu, svo draga þarf þær hvor frá annarri. IQR er fjórðungaspönnin.");
+
+  // eftir R verkefni 1, hluti 1 (BMI = þyngd/hæð(í m)²)
+  B.G.push(function lysBmi() {
+    var h = rnd(155, 195), w = rnd(50, 110), bmi = w / Math.pow(h / 100, 2);
+    return { topic: T, title: "BMI (R verkefni 1)", unit: "kg/m²", tol: 0.002, absTol: 0.01, answer: bmi,
+      text: "<p>Reiknið BMI (þyngd/hæð(í m)²) fyrir þátttakanda í pulsAll sem er " + h + " cm á hæð og " + w + " kg á þyngd.</p>",
+      sol: "<p>Hæðin í metrum er " + f(h / 100, 2) + ". BMI = " + w + "/" + f(h / 100, 2) + "² = " + f(bmi, 2) + ".</p><pre class=\"rcode\">dat <- dat %>% mutate(bmi = thyngd / (haed / 100)^2)\n" + w + " / (" + h + " / 100)^2</pre>" };
+  });
+  // eftir undirbúningi hlutaprófs (diabetes: hæð í tommum og þyngd í pundum)
+  B.G.push(function lysBmiPund() {
+    var h = rnd(60, 74), w = rnd(120, 260), bmi = 703 * w / (h * h);
+    return { topic: T, title: "BMI í pundum og tommum (hlutapróf)", unit: "kg/m²", tol: 0.002, absTol: 0.01, answer: bmi,
+      text: "<p>Í gagnasettinu <code>diabetes</code> eru hæð og þyngd í tommum og pundum, svo formúlan er BMI = þyngd (lb) ÷ hæð² (in) · 703. Reiknið BMI fyrir einstakling sem er " + h + " tommur á hæð og " + w + " pund.</p>",
+      sol: "<p>BMI = 703·" + w + "/" + h + "² = " + f(bmi, 2) + ".</p><pre class=\"rcode\">diabetes <- diabetes %>% mutate(bmi = 703 * weight / height^2)\n703 * " + w + " / " + h + "^2</pre>" };
   });
 })();
