@@ -4,7 +4,7 @@ window.TK.CHAPTERS = [
  {
   "n": 1,
   "src": "forrit",
-  "title": "Forrit og reiknirit",
+  "title": "Fyrsta Java-forritið",
   "sub": "Vika 1 · Liang kafli 1",
   "topics": [
    "forrit"
@@ -14,7 +14,7 @@ window.TK.CHAPTERS = [
  {
   "n": 2,
   "src": "tolur",
-  "title": "Tölur, breytur og segðir",
+  "title": "Breytur, tölur og inntak",
   "sub": "Vika 2 · Liang kafli 2",
   "topics": [
    "tolur"
@@ -24,7 +24,7 @@ window.TK.CHAPTERS = [
  {
   "n": 3,
   "src": "skilyrdi",
-  "title": "Rökgildi og skilyrði",
+  "title": "Ákvarðanir: if og switch",
   "sub": "Vika 3 · Liang kafli 3",
   "topics": [
    "skilyrdi"
@@ -34,7 +34,7 @@ window.TK.CHAPTERS = [
  {
   "n": 4,
   "src": "strengir",
-  "title": "Stafir og strengir",
+  "title": "Texti: String og char",
   "sub": "Vika 4 · Liang kafli 4",
   "topics": [
    "strengir"
@@ -84,7 +84,7 @@ window.TK.CHAPTERS = [
  {
   "n": 9,
   "src": "tengsl",
-  "title": "Tengsl hluta og UML",
+  "title": "Hlutir sem vinna saman og UML",
   "sub": "Vika 10 · Liang kafli 10",
   "topics": [
    "tengsl"
@@ -104,7 +104,7 @@ window.TK.CHAPTERS = [
  {
   "n": 11,
   "src": "hrein",
-  "title": "Hrein klasar og viðmót",
+  "title": "abstract og interface",
   "sub": "Vika 12 · Liang kafli 13",
   "topics": [
    "hrein"
@@ -114,7 +114,7 @@ window.TK.CHAPTERS = [
  {
   "n": 12,
   "src": "undantekningar",
-  "title": "Undantekningar og pakkar",
+  "title": "Villur: try, catch og throw",
   "sub": "Vikur 12-14 · Liang kafli 12",
   "topics": [
    "undantekningar"

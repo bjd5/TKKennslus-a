@@ -1,0 +1,176 @@
+<!--wide-->
+<h1>Hvað nota ég?</h1>
+<p class="lede">Uppflettiskrá: þú veist hvað þú vilt gera, hér sérðu hvaða skipun gerir það. Skrifaðu í leitina (t.d. „raða“, „texti“, „lesa“) til að sía.</p>
+
+<p><input type="search" id="qref-search" placeholder="Leita… t.d. raða, tala, lykkja" aria-label="Leita í uppflettiskránni" style="width:100%;max-width:28rem"></p>
+<p id="qref-none" class="note" hidden>Ekkert fannst. Prófaðu annað orð.</p>
+
+<div id="qref">
+<h2>Prenta og lesa</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>prenta og fara í nýja línu</td><td><code>System.out.println(x);</code></td><td>1</td></tr>
+<tr><td>prenta án þess að skipta um línu</td><td><code>System.out.print(x);</code></td><td>1</td></tr>
+<tr><td>prenta tölu með 2 aukastöfum</td><td><code>System.out.printf("%.2f%n", x);</code></td><td>2</td></tr>
+<tr><td>setja gildi inn í texta</td><td><code>printf("%s á %d spil%n", name, n)</code> eða <code>String.format(…)</code></td><td>2</td></tr>
+<tr><td>nýja línu / gæsalöpp inni í texta</td><td><code>\n</code> / <code>\"</code></td><td>1</td></tr>
+<tr><td>lesa af lyklaborðinu</td><td><code>Scanner input = new Scanner(System.in);</code> (+ <code>import java.util.Scanner;</code>)</td><td>2</td></tr>
+<tr><td>lesa heiltölu / kommutölu</td><td><code>input.nextInt()</code> / <code>input.nextDouble()</code></td><td>2</td></tr>
+<tr><td>lesa eitt orð / heila línu</td><td><code>input.next()</code> / <code>input.nextLine()</code></td><td>2</td></tr>
+<tr><td>spyrja aftur ef svarið er ólöglegt</td><td><code>do { x = input.nextInt(); } while (x &lt; 1 || x &gt; 6);</code></td><td>5</td></tr>
+<tr><td>lesa tölu án þess að forritið hrynji á „abc“</td><td><code>try { … nextInt() } catch (InputMismatchException e) { input.next(); }</code></td><td>12</td></tr>
+</tbody></table></div>
+
+<h2>Tölur og reikningur</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>geyma heila tölu / kommutölu / já-nei / texta</td><td><code>int</code> / <code>double</code> / <code>boolean</code> / <code>String</code></td><td>2</td></tr>
+<tr><td>fasta sem breytist ekki</td><td><code>final int MAX = 100;</code></td><td>2</td></tr>
+<tr><td>afgang af deilingu</td><td><code>a % b</code></td><td>2</td></tr>
+<tr><td>athuga hvort tala sé slétt</td><td><code>n % 2 == 0</code></td><td>2</td></tr>
+<tr><td>kommusvar úr tveimur heiltölum (meðaltal)</td><td><code>(double) sum / n</code></td><td>2</td></tr>
+<tr><td>klippa aukastafi af</td><td><code>(int) x</code></td><td>2</td></tr>
+<tr><td>námunda</td><td><code>Math.round(x)</code></td><td>2</td></tr>
+<tr><td>veldi / kvaðratrót</td><td><code>Math.pow(a, b)</code> / <code>Math.sqrt(x)</code></td><td>2</td></tr>
+<tr><td>stærri / minni af tveimur</td><td><code>Math.max(a, b)</code> / <code>Math.min(a, b)</code></td><td>2</td></tr>
+<tr><td>tölugildi (fjarlægja mínus)</td><td><code>Math.abs(x)</code></td><td>2</td></tr>
+<tr><td>slembitölu 1-6</td><td><code>(int) (Math.random() * 6) + 1</code></td><td>2</td></tr>
+<tr><td>bæta við / hækka um 1</td><td><code>x += 5;</code> / <code>x++;</code></td><td>2</td></tr>
+<tr><td>síðasta tölustaf / henda honum</td><td><code>n % 10</code> / <code>n / 10</code></td><td>5</td></tr>
+<tr><td>texta í tölu</td><td><code>Integer.parseInt(s)</code>, <code>Double.parseDouble(s)</code></td><td>2</td></tr>
+<tr><td>tölu í texta</td><td><code>"" + n</code> eða <code>String.valueOf(n)</code></td><td>4</td></tr>
+</tbody></table></div>
+
+<h2>Ákvarðanir</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>gera eitthvað aðeins ef…</td><td><code>if (…) { … }</code></td><td>3</td></tr>
+<tr><td>velja á milli tveggja leiða</td><td><code>if (…) { … } else { … }</code></td><td>3</td></tr>
+<tr><td>velja eftir bilum (einkunnir)</td><td><code>if … else if … else</code>, hæsta markið fyrst</td><td>3</td></tr>
+<tr><td>bæði skilyrði / annað hvort / ekki</td><td><code>&amp;&amp;</code> / <code>||</code> / <code>!</code></td><td>3</td></tr>
+<tr><td>athuga hvort x sé á bilinu 1-6</td><td><code>x &gt;= 1 &amp;&amp; x &lt;= 6</code></td><td>3</td></tr>
+<tr><td>velja á milli tveggja gilda í einni línu</td><td><code>max = a &gt; b ? a : b;</code></td><td>3</td></tr>
+<tr><td>bregðast við föstum gildum (valmynd)</td><td><code>switch (x) { case 1: …; break; default: … }</code></td><td>3</td></tr>
+</tbody></table></div>
+
+<h2>Lykkjur</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>endurtaka n sinnum</td><td><code>for (int i = 0; i &lt; n; i++)</code></td><td>5</td></tr>
+<tr><td>endurtaka á meðan eitthvað er satt</td><td><code>while (…) { … }</code></td><td>5</td></tr>
+<tr><td>endurtaka minnst einu sinni</td><td><code>do { … } while (…);</code></td><td>5</td></tr>
+<tr><td>hætta í lykkju</td><td><code>break;</code></td><td>5</td></tr>
+<tr><td>sleppa einni umferð</td><td><code>continue;</code></td><td>5</td></tr>
+<tr><td>fara hringinn 0, 1, 2, 0, 1…</td><td><code>i = (i + 1) % n;</code></td><td>5</td></tr>
+<tr><td>töflu (raðir × dálkar)</td><td>for inni í for</td><td>5</td></tr>
+</tbody></table></div>
+
+<h2>Texti</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>lengd texta</td><td><code>s.length()</code></td><td>4</td></tr>
+<tr><td>staf nr. i / síðasta stafinn</td><td><code>s.charAt(i)</code> / <code>s.charAt(s.length() - 1)</code></td><td>4</td></tr>
+<tr><td>bút úr texta</td><td><code>s.substring(b, e)</code> (e ekki með), <code>s.substring(b)</code></td><td>4</td></tr>
+<tr><td>finna staðsetningu</td><td><code>s.indexOf(x)</code> (−1 = finnst ekki), <code>lastIndexOf</code></td><td>4</td></tr>
+<tr><td>athuga hvort texti innihaldi</td><td><code>s.contains(x)</code>, <code>startsWith</code>, <code>endsWith</code></td><td>4</td></tr>
+<tr><td>bera saman texta</td><td><code>s.equals(t)</code> (aldrei <code>==</code>), <code>equalsIgnoreCase</code></td><td>4</td></tr>
+<tr><td>stafrófsröð</td><td><code>s.compareTo(t)</code> (&lt; 0 = á undan)</td><td>4</td></tr>
+<tr><td>hástafi / lágstafi</td><td><code>s = s.toUpperCase();</code> / <code>toLowerCase()</code></td><td>4</td></tr>
+<tr><td>fjarlægja bil í endum</td><td><code>s = s.trim();</code></td><td>4</td></tr>
+<tr><td>skipta út</td><td><code>s = s.replace(a, b);</code></td><td>4</td></tr>
+<tr><td>skipta texta upp</td><td><code>s.split(",")</code>, <code>s.split(" +")</code></td><td>4, 9</td></tr>
+<tr><td>fara í gegnum alla stafi</td><td><code>for (int i = 0; i &lt; s.length(); i++) { char c = s.charAt(i); }</code></td><td>4</td></tr>
+<tr><td>tölustaf ('7') í tölu (7)</td><td><code>c - '0'</code></td><td>4</td></tr>
+<tr><td>prófa staf</td><td><code>Character.isDigit(c)</code>, <code>isLetter</code>, <code>isUpperCase</code>, <code>toUpperCase</code></td><td>4</td></tr>
+<tr><td>byggja texta í lykkju</td><td><code>StringBuilder sb = new StringBuilder(); sb.append(x);</code></td><td>9</td></tr>
+</tbody></table></div>
+
+<h2>Fylki</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>fylki af n tölum (allar 0)</td><td><code>int[] a = new int[n];</code></td><td>7</td></tr>
+<tr><td>fylki með gildum</td><td><code>int[] a = {1, 2, 3};</code></td><td>7</td></tr>
+<tr><td>fjölda staka</td><td><code>a.length</code> (engir svigar)</td><td>7</td></tr>
+<tr><td>fara í gegnum og breyta</td><td><code>for (int i = 0; i &lt; a.length; i++)</code></td><td>7</td></tr>
+<tr><td>fara í gegnum og lesa</td><td><code>for (int x : a)</code></td><td>7</td></tr>
+<tr><td>prenta fylki</td><td><code>Arrays.toString(a)</code> (+ <code>import java.util.Arrays;</code>)</td><td>7</td></tr>
+<tr><td>raða</td><td><code>Arrays.sort(a);</code></td><td>7</td></tr>
+<tr><td>afrita (sjálfstætt)</td><td><code>Arrays.copyOf(a, a.length)</code> (ekki <code>b = a</code>)</td><td>7</td></tr>
+<tr><td>bera saman innihald</td><td><code>Arrays.equals(a, b)</code></td><td>7</td></tr>
+<tr><td>finna stærsta gildið</td><td>byrja í <code>a[0]</code>, <code>if (a[i] &gt; max) max = a[i];</code></td><td>7</td></tr>
+<tr><td>leita að gildi</td><td><code>found = -1;</code> lykkja, <code>break</code> þegar fundið</td><td>7</td></tr>
+<tr><td>telja tíðni</td><td><code>count[gildi]++</code></td><td>7</td></tr>
+<tr><td>töflu</td><td><code>int[][] m = new int[r][c];</code>, <code>m[r][c]</code>, <code>m.length</code>, <code>m[0].length</code></td><td>7</td></tr>
+</tbody></table></div>
+
+<h2>Aðferðir</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>aðferð sem gerir eitthvað</td><td><code>static void nafn(int x) { … }</code></td><td>6</td></tr>
+<tr><td>aðferð sem skilar svari</td><td><code>static int nafn(int x) { …; return svar; }</code></td><td>6</td></tr>
+<tr><td>skila já/nei</td><td><code>static boolean isX(…) { return skilyrði; }</code></td><td>6</td></tr>
+<tr><td>breyta gildi úti í main</td><td>skila nýja gildinu: <code>x = f(x);</code></td><td>6</td></tr>
+<tr><td>skila fylki</td><td><code>static int[] f(…) { int[] r = new int[n]; …; return r; }</code></td><td>7</td></tr>
+<tr><td>sama nafn fyrir ólíkt inntak</td><td>yfirhleðsla: ólíkar færibreytur</td><td>6</td></tr>
+</tbody></table></div>
+
+<h2>Klasar og hlutir</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>nýtt tag fyrir gögn sem eiga saman</td><td><code>class Card { private int number; … }</code></td><td>8</td></tr>
+<tr><td>setja upphafsgildi</td><td>smiður: <code>public Card(int number) { this.number = number; }</code></td><td>8</td></tr>
+<tr><td>búa til hlut</td><td><code>Card c = new Card(7, 'R');</code></td><td>8</td></tr>
+<tr><td>lesa / breyta eigindi utan frá</td><td><code>getX()</code> / <code>setX(…)</code> með staðfestingu</td><td>8</td></tr>
+<tr><td>ráða hvernig hlutur prentast</td><td><code>public String toString() { … }</code></td><td>8</td></tr>
+<tr><td>teljara sem allir hlutir deila</td><td><code>private static int count;</code></td><td>8</td></tr>
+<tr><td>A hefur mörg B</td><td><code>private B[] items = new B[MAX]; private int count;</code></td><td>9</td></tr>
+<tr><td>B er sérstök gerð af A</td><td><code>class B extends A</code> + <code>super(…)</code></td><td>10</td></tr>
+<tr><td>breyta erfðri aðferð</td><td><code>@Override</code> + sama undirskrift (+ <code>super.f()</code>)</td><td>10</td></tr>
+<tr><td>vita hvort hlutur sé af tagi X</td><td><code>obj instanceof X</code>, svo <code>(X) obj</code></td><td>10</td></tr>
+<tr><td>bera saman hluti eftir innihaldi</td><td><code>public boolean equals(Object o)</code></td><td>10</td></tr>
+<tr><td>aðferð sem undirklasar verða að útfæra</td><td><code>abstract</code> aðferð í <code>abstract class</code></td><td>11</td></tr>
+<tr><td>„getur“ fyrir óskylda klasa</td><td><code>interface</code> + <code>implements</code></td><td>11</td></tr>
+<tr><td>raða mínum hlutum</td><td><code>implements Comparable&lt;T&gt;</code> + <code>compareTo</code>, <code>Arrays.sort</code></td><td>11</td></tr>
+</tbody></table></div>
+
+<h2>Villur</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th><th>Kafli</th></tr></thead>
+<tbody>
+<tr><td>bregðast við villu</td><td><code>try { … } catch (XException e) { … }</code></td><td>12</td></tr>
+<tr><td>kóða sem keyrir alltaf</td><td><code>finally { … }</code></td><td>12</td></tr>
+<tr><td>stöðva ógilt gildi</td><td><code>throw new IllegalArgumentException("…");</code></td><td>12</td></tr>
+<tr><td>mína eigin villu</td><td><code>class MyException extends Exception { … super(msg); }</code></td><td>12</td></tr>
+<tr><td>láta þann sem kallar sjá um villuna</td><td><code>… throws MyException</code></td><td>12</td></tr>
+<tr><td>skilaboð villunnar</td><td><code>e.getMessage()</code></td><td>12</td></tr>
+</tbody></table></div>
+</div>
+
+<script>
+(function () {
+  var inp = document.getElementById("qref-search"), none = document.getElementById("qref-none");
+  if (!inp) return;
+  inp.addEventListener("input", function () {
+    var q = inp.value.trim().toLowerCase(), any = false;
+    document.querySelectorAll("#qref .tablewrap").forEach(function (w) {
+      var shown = 0;
+      w.querySelectorAll("tbody tr").forEach(function (tr) {
+        var ok = !q || tr.textContent.toLowerCase().indexOf(q) !== -1;
+        tr.hidden = !ok; if (ok) shown++;
+      });
+      w.hidden = !shown;
+      var h = w.previousElementSibling; if (h && h.tagName === "H2") h.hidden = !shown;
+      if (shown) any = true;
+    });
+    none.hidden = any;
+  });
+})();
+</script>

@@ -1,118 +1,220 @@
-<h1>Tölur, breytur og segðir</h1>
-<p class="lede">Breytur geyma gildi, tög ákveða hvað þær mega geyma og segðir reikna ný gildi. Hér eru reglurnar sem flestar spurningarnar „hvað prentast?“ byggja á: heiltöludeiling, afgangur, forgangur virkja, <code>++</code> og <code>--</code>, og hvað gerist þegar tög blandast eða eru kastaðar.</p>
+<h1>Breytur, tölur og inntak</h1>
+<p class="lede">Hér lærir þú að geyma gildi í breytum, reikna með þeim, lesa það sem notandinn slær inn og prenta snyrtilegt svar. Í lokin smíðar þú lánareikni.</p>
 
-<h2 id="breytur">Breytur og tög</h2>
-<p><b>Breyta</b> (variable) er nafngreint hólf í minninu. Í Java þarf að <b>lýsa</b> (declare) breytu með <b>tagi</b> (type) áður en hún er notuð, og hún verður að fá gildi (<b>frumstilling</b>, initialization) áður en hún er lesin.</p>
-<pre class="code"><code class="java">int count;              // yfirlýsing
-count = 7;              // gildisveiting (assignment)
-double price = 249.5;   // yfirlýsing og frumstilling í einu
-final int MAX = 100;    // fasti: má ekki breyta eftir þetta
-int a = 1, b = 2;       // tvær breytur í einni yfirlýsingu</code></pre>
-<p><code>=</code> er <b>gildisveiting</b>, ekki jafnaðarmerki: <code>x = x + 1</code> þýðir „reiknaðu hægri hliðina og settu útkomuna í x“. Samanburður er <code>==</code>.</p>
-
-<h3>Frumtög (primitive types)</h3>
-<div class="tablewrap"><table>
-<thead><tr><th>Tag</th><th>Stærð</th><th>Gildi</th><th>Bókstafur (literal)</th></tr></thead>
-<tbody>
-<tr><td><code>byte</code></td><td>8 bitar</td><td>−128 … 127</td><td></td></tr>
-<tr><td><code>short</code></td><td>16 bitar</td><td>−32 768 … 32 767</td><td></td></tr>
-<tr><td><code>int</code></td><td>32 bitar</td><td>um ±2,1 milljarðar (<code>Integer.MAX_VALUE</code> = 2 147 483 647)</td><td><code>42</code></td></tr>
-<tr><td><code>long</code></td><td>64 bitar</td><td>um ±9,2·10<sup>18</sup></td><td><code>42L</code></td></tr>
-<tr><td><code>float</code></td><td>32 bitar</td><td>um 7 marktækir stafir</td><td><code>3.14f</code></td></tr>
-<tr><td><code>double</code></td><td>64 bitar</td><td>um 15-16 marktækir stafir</td><td><code>3.14</code>, <code>1e-3</code></td></tr>
-<tr><td><code>char</code></td><td>16 bitar</td><td>einn stafur (Unicode)</td><td><code>'A'</code></td></tr>
-<tr><td><code>boolean</code></td><td>–</td><td><code>true</code> eða <code>false</code></td><td><code>true</code></td></tr>
-</tbody></table></div>
-<p>Í þessu námskeiði notarðu nánast alltaf <code>int</code> fyrir heiltölur og <code>double</code> fyrir kommutölur. Tala með punkti (<code>2.0</code>) er alltaf <code>double</code>; tala án punkts (<code>2</code>) er <code>int</code>.</p>
-<div class="note warn"><p><b class="t">Yfirflæði:</b> <code>int</code> hefur endanlegt bil. <code>Integer.MAX_VALUE + 1</code> verður <code>-2147483648</code> án nokkurra villuboða. Kommutölur eru <b>nálganir</b>: <code>0.1 + 0.2</code> prentast sem <code>0.30000000000000004</code>, svo berðu aldrei saman double með <code>==</code>.</p></div>
-
-<h2 id="virkjar">Reiknivirkjar</h2>
-<div class="tablewrap"><table>
-<thead><tr><th>Virki</th><th>Merking</th><th>Dæmi</th><th>Útkoma</th></tr></thead>
-<tbody>
-<tr><td><code>+ - *</code></td><td>samlagning, frádráttur, margföldun</td><td><code>3 * 4 - 2</code></td><td><code>10</code></td></tr>
-<tr><td><code>/</code></td><td>deiling: <b>heiltöludeiling</b> ef báðar hliðar eru heiltölur</td><td><code>7 / 2</code><br><code>7.0 / 2</code></td><td><code>3</code><br><code>3.5</code></td></tr>
-<tr><td><code>%</code></td><td>afgangur (modulo)</td><td><code>7 % 3</code><br><code>-7 % 3</code></td><td><code>1</code><br><code>-1</code></td></tr>
-</tbody></table></div>
-<p><b>Heiltöludeiling stýfir að núlli</b>: kommuhlutanum er hent, ekki námundað. <code>7 / 2</code> er <code>3</code>, <code>-7 / 2</code> er <code>-3</code>, <code>1 / 2</code> er <code>0</code>. Afgangurinn hefur sama formerki og deilistofninn (vinstri talan), og alltaf gildir <code>(a / b) * b + a % b == a</code>.</p>
-<p><code>%</code> er ótrúlega gagnlegur:</p>
+<div class="goals"><h3>Í lok kaflans geturðu</h3>
 <ul>
-<li><code>n % 2 == 0</code>: er n slétt tala?</li>
-<li><code>n % 10</code>: síðasti tölustafurinn; <code>n / 10</code>: talan án síðasta tölustafs.</li>
-<li><code>seconds / 60</code> og <code>seconds % 60</code>: mínútur og sekúndur.</li>
-<li><code>player = (player + 1) % PLAYERS</code>: næsti leikmaður, aftur í 0 á eftir þeim síðasta (eins og í Snakes &amp; Ladders).</li>
-</ul>
+<li>valið rétt tag (<code>int</code>, <code>double</code>, <code>String</code>, <code>boolean</code>)</li>
+<li>reiknað, og forðast gildrurnar í deilingu</li>
+<li>lesið inntak með <code>Scanner</code> og prentað með <code>printf</code></li>
+</ul></div>
 
-<h3>Forgangur</h3>
-<p>Eins og í stærðfræði: svigar fyrst, svo <code>* / %</code> (jafn sterk, frá vinstri), svo <code>+ -</code> (frá vinstri). Gildisveiting <code>=</code> kemur síðast.</p>
+<section class="lesson" id="breytur">
+<h2><span class="ls-n">1</span> Breytur</h2>
+<p class="ls-what">Breyta er hólf með nafni sem geymir gildi. Þú segir hvaða <b>tag</b> gildið hefur, gefur nafn og setur gildi með <code>=</code>.</p>
 <div class="vs">
-<div><pre class="code"><code class="java">int r = 2 + 3 * 4 % 5 - 6 / 4;
-// 3 * 4 = 12,  12 % 5 = 2,  6 / 4 = 1
-// 2 + 2 - 1 = 3
-System.out.println(r);</code></pre></div>
-<div><pre class="out">3</pre></div>
+<div><pre class="code" data-run><code class="java">int age = 20;
+age = age + 1;          // nýtt gildi
+String name = "Anna";
+System.out.println(name + " er " + age);</code></pre></div>
+<div><pre class="out">Anna er 21</pre></div>
+</div>
+<p class="ls-when"><b>Regla:</b> <code>=</code> þýðir „settu í“, ekki „er jafnt og“. <code>age = age + 1</code> þýðir „taktu gamla gildið, bættu einum við, settu aftur í age“.</p>
+<p class="ls-oops"><b>Varúð:</b> nafn breytu byrjar á litlum staf og má ekki byrja á tölu: <code>numberOfGuests</code>, ekki <code>2guests</code>.</p>
+</section>
+
+<section class="lesson" id="tog">
+<h2><span class="ls-n">2</span> Hvaða tag á ég að velja?</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil geyma…</th><th>Tag</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td>heila tölu (fjöldi, aldur, vísir)</td><td><code>int</code></td><td><code>int count = 7;</code></td></tr>
+<tr><td>kommutölu (verð, meðaltal, radíus)</td><td><code>double</code></td><td><code>double price = 249.5;</code></td></tr>
+<tr><td>já/nei</td><td><code>boolean</code></td><td><code>boolean done = false;</code></td></tr>
+<tr><td>einn staf</td><td><code>char</code></td><td><code>char grade = 'A';</code></td></tr>
+<tr><td>texta</td><td><code>String</code></td><td><code>String name = "Anna";</code></td></tr>
+<tr><td>mjög stóra heiltölu (yfir 2 milljarða)</td><td><code>long</code></td><td><code>long big = 9000000000L;</code></td></tr>
+</tbody></table></div>
+<p class="ls-oops"><b>Varúð:</b> <code>char</code> notar einfaldar gæsalappir <code>'A'</code>, <code>String</code> tvöfaldar <code>"A"</code>.</p>
+</section>
+
+<section class="lesson" id="fastar">
+<h2><span class="ls-n">3</span> Fastar: final</h2>
+<p class="ls-what"><code>final</code> gerir breytu að fasta sem ekki má breyta. Nafnið er í HÁSTÖFUM.</p>
+<pre class="code"><code class="java">final int MONTHS_IN_YEAR = 12;
+final double CAKE_RADIUS = 10;</code></pre>
+<p class="ls-when"><b>Hvenær?</b> Fyrir „töfratölur“ sem eiga ekki að breytast: fjöldi reita á borði, fjöldi leikmanna, prósentur.</p>
+</section>
+
+<section class="lesson" id="reikningur">
+<h2><span class="ls-n">4</span> Reikningur</h2>
+<p class="ls-what"><code>+ - * /</code> eins og venjulega, og <code>%</code> gefur <b>afganginn</b> af deilingu.</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">System.out.println(10 + 3);
+System.out.println(10 / 3);     // heiltala / heiltala
+System.out.println(10 % 3);     // afgangur
+System.out.println(10.0 / 3);   // ein kommutala → kommusvar</code></pre></div>
+<div><pre class="out">13
+3
+1
+3.3333333333333335</pre></div>
+</div>
+<p class="ls-oops"><b>Stærsta gildran:</b> <code>int / int</code> hendir aukastöfunum. <code>7 / 2</code> er <code>3</code>, ekki 3.5. Ef þú vilt kommusvar þarf önnur talan að vera double: <code>7.0 / 2</code> eða <code>(double) a / b</code>.</p>
+<p class="ls-when"><b>Til hvers er %?</b> Slétt tala: <code>n % 2 == 0</code>. Síðasti tölustafur: <code>n % 10</code>. Mínútur og sekúndur: <code>total / 60</code> og <code>total % 60</code>.</p>
+</section>
+
+<section class="lesson" id="styttingar">
+<h2><span class="ls-n">5</span> Styttingar: +=, ++ og --</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">int x = 10;
+x += 5;      // x = x + 5
+x -= 3;      // x = x - 3
+x *= 2;      // x = x * 2
+x++;         // x = x + 1
+System.out.println(x);</code></pre></div>
+<div><pre class="out">25</pre></div>
+</div>
+<p class="ls-oops"><b>Varúð á prófinu:</b> <code>x++</code> inni í stærri segð notar <b>gamla</b> gildið, <code>++x</code> nýja. <code>int a = 5; int b = a++;</code> gefur b = 5 og a = 6.</p>
+</section>
+
+<section class="lesson" id="rod">
+<h2><span class="ls-n">6</span> Röð aðgerða</h2>
+<p class="ls-what">Eins og í stærðfræði: svigar, svo <code>* / %</code>, svo <code>+ -</code>, frá vinstri til hægri.</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">System.out.println(2 + 3 * 4);
+System.out.println((2 + 3) * 4);
+System.out.println(10 - 4 - 3);</code></pre></div>
+<div><pre class="out">14
+20
+3</pre></div>
+</div>
+</section>
+
+<section class="lesson" id="kast">
+<h2><span class="ls-n">7</span> Breyta á milli taga (cast)</h2>
+<p class="ls-what">int → double gerist sjálfkrafa. double → int þarftu að biðja um með <code>(int)</code>, og þá eru aukastafirnir <b>klipptir af</b> (ekki námundað).</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">double d = 7.9;
+int i = (int) d;
+System.out.println(i);
+int sum = 7, n = 2;
+System.out.println(sum / n);
+System.out.println((double) sum / n);
+System.out.println(Integer.parseInt("42") + 1);</code></pre></div>
+<div><pre class="out">7
+3
+3.5
+43</pre></div>
+</div>
+<p class="ls-when"><b>Hvenær?</b> <code>(double) sum / n</code> fyrir meðaltal. <code>(int)</code> til að fá heila tölu. <code>Integer.parseInt("42")</code> til að breyta texta í tölu.</p>
+</section>
+
+<section class="lesson" id="math">
+<h2><span class="ls-n">8</span> Klasinn Math</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">System.out.println(Math.pow(2, 10));
+System.out.println(Math.sqrt(16));
+System.out.println(Math.max(3, 8));
+System.out.println(Math.abs(-5));
+System.out.println(Math.round(2.6));
+System.out.println(Math.PI);</code></pre></div>
+<div><pre class="out">1024.0
+4.0
+8
+5
+3
+3.141592653589793</pre></div>
+</div>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>veldi (a í b-ta)</td><td><code>Math.pow(a, b)</code></td></tr>
+<tr><td>kvaðratrót</td><td><code>Math.sqrt(x)</code></td></tr>
+<tr><td>stærri / minni af tveimur</td><td><code>Math.max(a, b)</code> / <code>Math.min(a, b)</code></td></tr>
+<tr><td>fjarlægja mínus</td><td><code>Math.abs(x)</code></td></tr>
+<tr><td>námunda</td><td><code>Math.round(x)</code></td></tr>
+<tr><td>slembitala 1-6 (teningur)</td><td><code>(int) (Math.random() * 6) + 1</code></td></tr>
+</tbody></table></div>
+<p class="ls-oops"><b>Varúð:</b> <code>pow</code> og <code>sqrt</code> skila alltaf double, svo þær prentast með <code>.0</code>.</p>
+</section>
+
+<section class="lesson" id="printf">
+<h2><span class="ls-n">9</span> Snyrtilegar tölur: printf</h2>
+<p class="ls-what"><code>printf</code> setur gildi inn í texta á stöðum merktum með <code>%</code>.</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">double price = 1234.5678;
+System.out.printf("Verð: %.2f kr%n", price);
+System.out.printf("%d spil á hendi%n", 7);
+System.out.printf("%s vann!%n", "Anna");
+System.out.println(String.format("%.1f", 2.36));</code></pre></div>
+<div><pre class="out">Verð: 1234.57 kr
+7 spil á hendi
+Anna vann!
+2.4</pre></div>
+</div>
+<p class="ls-when"><b>Muna:</b> <code>%d</code> heiltala, <code>%.2f</code> kommutala með 2 aukastöfum, <code>%s</code> texti, <code>%n</code> ný lína. <code>String.format</code> gerir það sama en <i>skilar</i> textanum í stað þess að prenta.</p>
+</section>
+
+<section class="lesson" id="inntak">
+<h2><span class="ls-n">10</span> Lesa það sem notandinn slær inn</h2>
+<div class="vs">
+<div><pre class="code" data-run data-in="Anna 20 1.75"><code class="java">Scanner input = new Scanner(System.in);
+System.out.print("Nafn: ");
+String name = input.next();
+System.out.print("Aldur: ");
+int age = input.nextInt();
+System.out.print("Hæð: ");
+double height = input.nextDouble();
+System.out.println();
+System.out.println(name + ", " + age + " ára, " + height + " m");</code></pre></div>
+<div><pre class="out">Nafn: Aldur: Hæð:
+Anna, 20 ára, 1.75 m</pre><p style="font-size:0.9rem">(Notandinn sló inn <code>Anna 20 1.75</code>.)</p></div>
+</div>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil lesa…</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>heiltölu</td><td><code>input.nextInt()</code></td></tr>
+<tr><td>kommutölu</td><td><code>input.nextDouble()</code></td></tr>
+<tr><td>eitt orð</td><td><code>input.next()</code></td></tr>
+<tr><td>heila línu (með bilum)</td><td><code>input.nextLine()</code></td></tr>
+</tbody></table></div>
+<p class="ls-oops"><b>Varúð:</b> efst í skránni þarf <code>import java.util.Scanner;</code>. Og eftir <code>nextInt()</code> skilar <code>nextLine()</code> tómum texta: kallaðu einu sinni á <code>input.nextLine()</code> til að hreinsa.</p>
+<p class="ls-when"><b>Á prófinu:</b> ekki prenta „Nafn:“ eða „Enter value:“ nema beðið sé um það.</p>
+</section>
+
+<div class="project" id="lanareiknir">
+<h2>Verkefni: lánareiknir</h2>
+<p>Skrifaðu forrit sem les <b>lánsupphæð</b>, <b>ársvexti í %</b> og <b>lánstíma í árum</b> og prentar mánaðarlega afborgun. Formúlan (jafngreiðslulán):</p>
+<p style="text-align:center"><code>greiðsla = P · r · (1 + r)<sup>n</sup> / ((1 + r)<sup>n</sup> − 1)</code></p>
+<p>þar sem P er upphæðin, r mánaðarvextir (ársvextir / 100 / 12) og n fjöldi mánaða (ár · 12).</p>
+<p class="step">Skref 1: lestu gildin þrjú.</p>
+<p class="step">Skref 2: reiknaðu r og n. Notaðu fasta fyrir 12 og 100.</p>
+<p class="step">Skref 3: reiknaðu greiðsluna með <code>Math.pow</code> og prentaðu með <code>%.0f</code>.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<pre class="code" data-run data-in="30000000 8 25"><code class="java">final int MONTHS_IN_YEAR = 12;
+final int PERCENT = 100;
+Scanner input = new Scanner(System.in);
+int principal = input.nextInt();
+double annualRate = input.nextDouble();
+int years = input.nextInt();
+
+double r = annualRate / PERCENT / MONTHS_IN_YEAR;
+int n = years * MONTHS_IN_YEAR;
+double payment = principal * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+System.out.printf("Mánaðarleg greiðsla: %.0f kr%n", payment);</code></pre>
+<pre class="out">Mánaðarleg greiðsla: 231545 kr</pre>
+<p>(Inntak: <code>30000000 8 25</code>.) Takið eftir að <code>annualRate / PERCENT</code> er kommudeiling því annualRate er double. Ef það væri int fengirðu 0!</p>
+</div></details>
 </div>
 
-<h2 id="stytting">Styttingar: +=, ++ og --</h2>
-<div class="tablewrap"><table>
-<thead><tr><th>Skrifað</th><th>Jafngildir</th></tr></thead>
+<h2>Í hnotskurn</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
 <tbody>
-<tr><td><code>x += 5;</code></td><td><code>x = x + 5;</code></td></tr>
-<tr><td><code>x -= 2;</code> <code>x *= 3;</code> <code>x /= 4;</code> <code>x %= 7;</code></td><td><code>x = x - 2;</code> o.s.frv.</td></tr>
-<tr><td><code>x++;</code> eða <code>++x;</code></td><td><code>x = x + 1;</code></td></tr>
-<tr><td><code>x--;</code> eða <code>--x;</code></td><td><code>x = x - 1;</code></td></tr>
+<tr><td>kommusvar úr tveimur heiltölum</td><td><code>(double) a / b</code></td></tr>
+<tr><td>afgang / sléttar tölur</td><td><code>a % b</code>, <code>n % 2 == 0</code></td></tr>
+<tr><td>bæta við breytu</td><td><code>x += 5;</code>, <code>x++;</code></td></tr>
+<tr><td>klippa aukastafi</td><td><code>(int) d</code></td></tr>
+<tr><td>texta í tölu</td><td><code>Integer.parseInt(s)</code>, <code>Double.parseDouble(s)</code></td></tr>
+<tr><td>prenta með 2 aukastöfum</td><td><code>System.out.printf("%.2f%n", x);</code></td></tr>
+<tr><td>lesa tölu</td><td><code>Scanner input = new Scanner(System.in);</code> og <code>input.nextInt()</code></td></tr>
 </tbody></table></div>
-<p>Munurinn á <code>x++</code> og <code>++x</code> sést bara þegar gildið er notað í sömu segð:</p>
-<div class="vs">
-<div><pre class="code"><code class="java">int x = 5;
-int a = x++;   // a fær GAMLA gildið 5, svo verður x 6
-int b = ++x;   // x verður 7 FYRST, b fær 7
-System.out.println(a + " " + b + " " + x);</code></pre></div>
-<div><pre class="out">5 7 7</pre></div>
-</div>
-<p>Þetta notaði <code>StackOfCards</code> í UNO-spilinu: <code>cards[++top] = card;</code> hækkar <code>top</code> fyrst og geymir svo; <code>return cards[top--];</code> skilar efsta spilinu og lækkar svo.</p>
-
-<h2 id="breytingar">Tagabreytingar og kastanir</h2>
-<p>Þegar <code>int</code> og <code>double</code> blandast í segð er <code>int</code>-gildinu sjálfkrafa breytt í <code>double</code> (<b>víkkun</b>, widening): <code>5 + 2.0</code> er <code>7.0</code>. Sjálfkrafa víkkun fer í þessa átt:</p>
-<p style="text-align:center"><code>byte → short → int → long → float → double</code></p>
-<p>Í hina áttina (<b>þrenging</b>, narrowing) þarftu að <b>kasta</b> (cast) sjálf(ur), því upplýsingar geta tapast:</p>
-<pre class="code"><code class="java">double d = 7.9;
-int i = (int) d;            // 7  (stýft, ekki námundað)
-int j = (int) -7.9;         // -7
-double avg = (double) 7 / 2;   // 3.5: kastið gildir um 7, svo deilingin er double-deiling
-double bad = (double) (7 / 2); // 3.0: heiltöludeilingin er búin áður en kastað er
-int k = 10;
-k += 2.7;                   // leyfilegt! += kastar sjálft: k verður 12
-// int m = 3.5;             // þýðingarvilla: possible lossy conversion</code></pre>
-<p>Kast er sterkara en <code>* / %</code>: <code>(int) 3.7 * 2</code> er <code>3 * 2 = 6</code>, en <code>(int) (3.7 * 2)</code> er <code>(int) 7.4 = 7</code>.</p>
-
-<h2 id="math">Klasinn Math</h2>
-<div class="tablewrap"><table>
-<thead><tr><th>Aðferð</th><th>Skilar</th><th>Dæmi</th></tr></thead>
-<tbody>
-<tr><td><code>Math.pow(a, b)</code></td><td>a<sup>b</sup> sem <code>double</code></td><td><code>Math.pow(2, 10)</code> → <code>1024.0</code></td></tr>
-<tr><td><code>Math.sqrt(x)</code></td><td>kvaðratrót, <code>double</code></td><td><code>Math.sqrt(16)</code> → <code>4.0</code></td></tr>
-<tr><td><code>Math.abs(x)</code></td><td>tölugildi (sama tag)</td><td><code>Math.abs(-5)</code> → <code>5</code></td></tr>
-<tr><td><code>Math.max(a, b)</code>, <code>Math.min(a, b)</code></td><td>stærra / minna</td><td><code>Math.max(3, 8)</code> → <code>8</code></td></tr>
-<tr><td><code>Math.round(x)</code></td><td>næsta heiltala (<code>long</code>), .5 upp</td><td><code>Math.round(2.5)</code> → <code>3</code>, <code>Math.round(-2.5)</code> → <code>-2</code></td></tr>
-<tr><td><code>Math.ceil(x)</code>, <code>Math.floor(x)</code></td><td>upp / niður, <code>double</code></td><td><code>Math.ceil(2.1)</code> → <code>3.0</code></td></tr>
-<tr><td><code>Math.random()</code></td><td><code>double</code> í [0, 1)</td><td><code>(int) (Math.random() * 6) + 1</code> → teningur 1-6</td></tr>
-<tr><td><code>Math.PI</code></td><td>fastinn π</td><td><code>Math.PI * r * r</code></td></tr>
-</tbody></table></div>
-<p>Hvernig Java prentar <code>double</code>: heil tala fær alltaf <code>.0</code> (<code>4.0</code>, ekki <code>4</code>), og annars eins fáir aukastafir og þarf til að lýsa tölunni nákvæmlega (<code>2.5</code>, <code>0.1</code>, <code>3.3333333333333335</code>).</p>
-
-<h2 id="daemi">Fullunnið dæmi: sekúndur í mínútur</h2>
-<pre class="code"><code class="java">int total = 500;
-int min = total / 60;       // 8
-int sec = total % 60;       // 20
-System.out.println(total + " s = " + min + " mín og " + sec + " s");</code></pre>
-<pre class="out">500 s = 8 mín og 20 s</pre>
-
-<h2 id="samantekt">Samantekt</h2>
-<ul class="checklist">
-<li><code>int / int</code> er heiltöludeiling (stýft að núlli); <code>%</code> er afgangur með formerki vinstri hliðar.</li>
-<li>Forgangur: svigar → kast, <code>++</code>/<code>--</code> → <code>* / %</code> → <code>+ -</code> → <code>=</code>.</li>
-<li><code>x++</code> notar gamla gildið, <code>++x</code> nýja.</li>
-<li><code>int</code> víkkar sjálfkrafa í <code>double</code>; <code>(int)</code> stýfir.</li>
-<li>double prentast alltaf með punkti: <code>7.0</code>.</li>
-</ul>

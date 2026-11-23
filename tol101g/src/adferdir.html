@@ -1,114 +1,168 @@
-<h1>Aðferðir</h1>
-<p class="lede">Aðferðir (methods) gefa kóðabút nafn svo hægt sé að nota hann aftur og aftur, og brjóta stórt vandamál í lítil. Hér lærir þú að skilgreina og kalla á aðferðir, hvað gerist við færibreyturnar (gildisfærsla), hvenær <code>return</code> er nauðsynlegt, svið breyta og yfirhleðslu.</p>
+<h1>Aðferðir: búðu til þínar eigin skipanir</h1>
+<p class="lede">Þú hefur notað aðferðir allan tímann: <code>println</code>, <code>Math.max</code>, <code>charAt</code>. Nú býrðu til þínar eigin. Það gerir kóðann styttri, læsilegri og auðveldari að prófa, og á prófinu er oft beðið um „aðferð sem skilar…“.</p>
 
-<h2 id="skilgreining">Að skilgreina aðferð</h2>
-<pre class="code"><code class="java">/**
- * Reiknar base í veldinu exp.
- * @param base grunntalan
- * @param exp  veldisvísirinn (≥ 0)
- * @return base^exp
- */
-public static double pow(double base, int exp) {   // haus (undirskrift)
-    double result = 1;                              // líkami
-    while (exp &gt; 0) {
-        result = result * base;
-        exp--;
-    }
-    return result;                                  // skilagildi
-}</code></pre>
-<div class="tablewrap"><table>
-<thead><tr><th>Hluti</th><th>Hér</th><th>Merking</th></tr></thead>
-<tbody>
-<tr><td>Aðgangur</td><td><code>public</code></td><td>hver má kalla á aðferðina (kafli 8)</td></tr>
-<tr><td><code>static</code></td><td><code>static</code></td><td>tilheyrir klasanum, ekki hlut; kölluð án <code>new</code></td></tr>
-<tr><td>Skilatag</td><td><code>double</code></td><td>tag gildisins sem er skilað; <code>void</code> ef engu er skilað</td></tr>
-<tr><td>Nafn</td><td><code>pow</code></td><td>sögn í mixedCase</td></tr>
-<tr><td>Færibreytur</td><td><code>(double base, int exp)</code></td><td>tag og nafn hverrar, aðskildar með kommu</td></tr>
-</tbody></table></div>
-<p><b>Undirskrift</b> (signature) aðferðar er nafnið og tög færibreytanna: <code>pow(double, int)</code>. Skilatagið er ekki hluti af undirskriftinni.</p>
-
-<h2 id="kall">Að kalla á aðferð</h2>
-<pre class="code"><code class="java">public static double area(double r) {
-    return Math.PI * pow(r, 2);       // aðferð kallar á aðra aðferð
-}
-
-public static void main(String[] args) {
-    double a = area(3.0);             // skilagildið er notað í segð
-    System.out.println(pow(2, 10));   // 1024.0  (2 er víkkað í 2.0)
-    pow(5, 2);                        // leyfilegt, en skilagildinu er hent
-}</code></pre>
-<p>Við kall eru <b>raungildin</b> (arguments) metin og afrituð í <b>færibreyturnar</b> (parameters), í sömu röð. Fjöldi, röð og tög þurfa að passa (með sjálfvirkri víkkun, t.d. int → double). Þegar aðferðin klárast (eða <code>return</code> er keyrt) heldur keyrslan áfram þar sem kallað var.</p>
-<p>Hvert kall fær sinn eigin <b>ramma</b> (frame) á <b>kallhlaðanum</b> (call stack) með færibreytum og staðværum breytum. Ramminn hverfur þegar aðferðin skilar.</p>
-
-<h2 id="return">void og return</h2>
+<div class="goals"><h3>Í lok kaflans geturðu</h3>
 <ul>
-<li>Aðferð með skilatag (t.d. <code>int</code>) <b>verður</b> að skila gildi af því tagi á öllum leiðum. Annars er það þýðingarvilla („missing return statement“).</li>
-<li><code>return</code> hættir í aðferðinni <b>strax</b>; kóði á eftir því í sömu grein keyrir ekki.</li>
-<li><code>void</code>-aðferð skilar engu. Hún getur notað <code>return;</code> (án gildis) til að hætta snemma.</li>
-</ul>
-<pre class="code"><code class="java">public static String sign(int n) {
-    if (n &gt; 0) {
-        return "plús";
-    } else if (n &lt; 0) {
-        return "mínus";
-    }
-    return "núll";              // án þessarar línu: missing return statement
-}
+<li>skrifað aðferð sem tekur inn gildi og skilar svari</li>
+<li>vitað hvenær aðferð á að <b>skila</b> og hvenær <b>prenta</b></li>
+<li>brotið langt forrit í litlar aðferðir</li>
+</ul></div>
 
-public static boolean isEven(int n) {
-    return n % 2 == 0;          // betra en if (…) return true; else return false;
-}</code></pre>
-<div class="note"><p><b class="t">Prenta eða skila?</b> Ef verkefnið segir „skrifaðu aðferð sem <b>skilar</b>…“ á aðferðin að nota <code>return</code>, ekki <code>System.out.println</code>. Sá sem kallar ákveður hvað er gert við gildið.</p></div>
-
-<h2 id="gildisfaersla">Gildisfærsla (pass by value)</h2>
-<p>Java afritar <b>gildi</b> raungildanna í færibreyturnar. Ef aðferðin breytir færibreytu breytist bara afritið; breyta þess sem kallaði er óbreytt:</p>
+<section class="lesson" id="fyrsta">
+<h2><span class="ls-n">1</span> Fyrsta aðferðin</h2>
 <div class="vs">
-<div><pre class="code"><code class="java">public static void twice(int x) {
+<div><pre class="code" data-run><code class="java">static void greet(String name) {
+    System.out.println("Halló " + name + "!");
+}
+// í main:
+greet("Anna");
+greet("Kári");</code></pre></div>
+<div><pre class="out">Halló Anna!
+Halló Kári!</pre></div>
+</div>
+<p class="ls-what">Aðferðin er skrifuð <b>inni í klasanum, utan við main</b>. <code>void</code> þýðir að hún skilar engu; hún bara gerir eitthvað.</p>
+<pre class="code"><code class="java">static   void   greet  (String name)  { … }
+//  ↑      ↑      ↑         ↑
+// static skilar  nafn   færibreytur (tag og nafn)</code></pre>
+</section>
+
+<section class="lesson" id="return">
+<h2><span class="ls-n">2</span> Aðferð sem skilar svari: return</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">static double average(int a, int b) {
+    return (a + b) / 2.0;
+}
+static boolean isEven(int n) {
+    return n % 2 == 0;
+}
+// í main:
+double avg = average(7, 4);
+System.out.println(avg);
+System.out.println(isEven(10) + " " + isEven(7));
+System.out.println(average(1, 2) * 10);</code></pre></div>
+<div><pre class="out">5.5
+true false
+15.0</pre></div>
+</div>
+<p class="ls-what">Í stað <code>void</code> skrifarðu <b>tag svarsins</b> (<code>double</code>, <code>boolean</code>…), og <code>return</code> sendir svarið til baka. Kallið verður þá að gildi sem má geyma, prenta eða nota í reikningi.</p>
+<p class="ls-when"><b>Skila eða prenta?</b> Ef verkefnið segir „skrifaðu aðferð sem <b>skilar</b>…“: <code>return</code>, ekkert <code>println</code>. Sá sem kallar ákveður hvað gert er við svarið. Það er líka betra: þá má nota aðferðina aftur.</p>
+<p class="ls-oops"><b>Varúð:</b> aðferð með skilatag verður að skila á <b>öllum leiðum</b>. Ef if-grein getur endað án return kemur villan „missing return statement“. <code>return</code> hættir líka strax í aðferðinni.</p>
+</section>
+
+<section class="lesson" id="afrit">
+<h2><span class="ls-n">3</span> Aðferðin fær afrit</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">static void twice(int x) {
     x = x * 2;
-    System.out.println("í twice: " + x);
+    System.out.println("inni: " + x);
+}
+// í main:
+int n = 5;
+twice(n);
+System.out.println("úti: " + n);</code></pre></div>
+<div><pre class="out">inni: 10
+úti: 5</pre></div>
+</div>
+<p class="ls-what">Aðferðin fær <b>afrit</b> af gildinu. Það sem hún gerir við afritið breytir ekki breytu þess sem kallaði. Viltu nýja gildið? Láttu aðferðina <b>skila</b> því: <code>n = doubled(n);</code></p>
+<p class="ls-oops"><b>Undantekning:</b> fylki og hlutir. Þá fær aðferðin afrit af <i>tilvísuninni</i> og getur breytt innihaldinu (kafli 7).</p>
+</section>
+
+<section class="lesson" id="yfirhledsla">
+<h2><span class="ls-n">4</span> Sama nafn, ólíkt inntak (yfirhleðsla)</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">static int max(int a, int b) {
+    return a &gt; b ? a : b;
+}
+static int max(int a, int b, int c) {
+    return max(max(a, b), c);
+}
+// í main:
+System.out.println(max(3, 9));
+System.out.println(max(3, 9, 5));</code></pre></div>
+<div><pre class="out">9
+9</pre></div>
+</div>
+<p class="ls-when"><b>Hvenær?</b> Þegar sama aðgerð getur fengið mismunandi inntak. Java velur útgáfuna eftir fjölda og tagi gildanna. (Ólíkt skilatag eitt og sér er ekki nóg.)</p>
+</section>
+
+<section class="lesson" id="hreinn-kodi">
+<h2><span class="ls-n">5</span> Hreinn kóði: brjóttu forritið upp</h2>
+<p class="ls-what">Lánareiknirinn úr köflum 2 og 5 er orðinn langur. Settu hvert verk í sína aðferð; þá les main eins og uppskrift:</p>
+<pre class="code" data-run data-in="30000000 8 25"><code class="java">static final int MONTHS = 12;
+
+static double readNumber(Scanner input, double min, double max) {
+    double value;
+    do {
+        value = input.nextDouble();
+    } while (value &lt; min || value &gt; max);
+    return value;
 }
 
-public static void main(String[] args) {
-    int n = 5;
-    twice(n);
-    System.out.println("í main: " + n);
-}</code></pre></div>
-<div><pre class="out">í twice: 10
-í main: 5</pre></div>
-</div>
-<p>Þess vegna virkar <code>absDiff</code> í Rectangle-dæminu: hún víxlar <code>a</code> og <code>b</code> innan sín án þess að það hafi áhrif á hnitin í main. Og þess vegna er ekki hægt að skrifa <code>swap(int a, int b)</code> sem víxlar breytum þess sem kallar.</p>
-<div class="note warn"><p><b class="t">Fylki og hlutir:</b> þá er <b>tilvísunin</b> afrituð, ekki fylkið sjálft. Aðferðin getur því breytt <i>innihaldi</i> fylkis eða hlutar sem sá sem kallaði sér (kaflar 7 og 9). En ef hún lætur færibreytuna vísa á nýtt fylki sér sá sem kallaði það ekki.</p></div>
+static double payment(double principal, double annualRate, int years) {
+    double r = annualRate / 100 / MONTHS;
+    int n = years * MONTHS;
+    double factor = Math.pow(1 + r, n);
+    return principal * r * factor / (factor - 1);
+}
+// í main:
+Scanner input = new Scanner(System.in);
+double principal = readNumber(input, 1_000_000, 100_000_000);
+double rate = readNumber(input, 0.1, 30);
+int years = (int) readNumber(input, 1, 40);
+System.out.printf("Greiðsla: %.0f kr%n", payment(principal, rate, years));</code></pre>
+<pre class="out">Greiðsla: 231545 kr</pre>
+<p class="ls-when"><b>Reglur:</b> ein aðferð = eitt verk. Nafnið er sögn sem segir hvað hún gerir (<code>readNumber</code>, <code>payment</code>, <code>visualizeBoard</code>). Ef aðferð er lengri en skjárinn, brjóttu hana upp.</p>
+</section>
 
-<h2 id="svid">Svið breyta</h2>
-<p><b>Staðvær breyta</b> (local variable) er til frá yfirlýsingu og til loka blokkarinnar <code>{ }</code> sem hún er í. Færibreytur eru staðværar breytur aðferðarinnar. Tvær aðferðir mega hafa breytur með sama nafni; þær eru óháðar. Ekki má lýsa tveimur breytum með sama nafni í sömu eða hreiðraðri blokk.</p>
-<pre class="code"><code class="java">public static void demo() {
-    int x = 1;
-    for (int i = 0; i &lt; 3; i++) {
-        int y = i * x;      // y er bara til í lykkjunni
+<section class="lesson" id="javadoc">
+<h2><span class="ls-n">6</span> Úr tímanum: Javadoc</h2>
+<p class="ls-what">Í tímunum er hverri aðferð lýst með Javadoc-athugasemd. Það er góð venja og ritillinn sýnir hana þegar þú notar aðferðina:</p>
+<pre class="code"><code class="java">/**
+ * Returns the absolute difference between two integer values.
+ * @param a the first integer
+ * @param b the second integer
+ * @return the difference between the first and second value
+ */
+public static int absDiff(int a, int b) {
+    if (a &gt; b) {
+        int tmp = a;
+        a = b;
+        b = tmp;
     }
-    // System.out.println(y);  // þýðingarvilla: y er ekki til hér
-    // int x = 2;              // þýðingarvilla: x er þegar til
+    return b - a;
 }</code></pre>
+</section>
 
-<h2 id="yfirhledsla">Yfirhleðsla (overloading)</h2>
-<p>Margar aðferðir mega heita sama nafni ef <b>færibreyturnar eru ólíkar</b> (fjöldi eða tög). Þýðandinn velur þá sem passar best við raungildin; nákvæm samsvörun er tekin fram yfir víkkun.</p>
-<pre class="code"><code class="java">static int max(int a, int b)          { return a &gt; b ? a : b; }
-static double max(double a, double b) { return a &gt; b ? a : b; }
-static int max(int a, int b, int c)   { return max(max(a, b), c); }
+<div class="try">
+<p><b>Prófaðu:</b> skrifaðu <code>static boolean isPrime(int n)</code> og notaðu hana til að prenta allar frumtölur upp að 30.</p>
+<details class="reveal"><summary></summary><div class="sol"><pre class="code" data-run><code class="java">static boolean isPrime(int n) {
+    if (n &lt; 2) {
+        return false;
+    }
+    for (int d = 2; d * d &lt;= n; d++) {
+        if (n % d == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+// í main:
+for (int i = 1; i &lt;= 30; i++) {
+    if (isPrime(i)) {
+        System.out.print(i + " ");
+    }
+}</code></pre>
+<pre class="out">2 3 5 7 11 13 17 19 23 29</pre></div></details>
+</div>
 
-max(3, 7)        // int-útgáfan → 7
-max(3, 7.5)      // double-útgáfan (3 víkkað) → 7.5
-max(1, 9, 4)     // þriggja færibreytu útgáfan → 9</code></pre>
-<p>Aðferðir sem eru eins nema skilatagið eru <b>ekki</b> löglegar yfirhleðslur (þýðingarvilla). <code>copy(int[])</code> og <code>copy(int[][])</code> í MultiArrays eru dæmi um yfirhleðslu.</p>
-
-<h2 id="hugsun">Að brjóta vandamál upp</h2>
-<p>Góð aðferð gerir <b>eitt</b> og nafnið segir hvað. Í Snakes &amp; Ladders sér <code>visualizeBoard(offset, square)</code> um að teikna borðið, svo leikjalykkjan í main verður stutt og læsileg. Hönnunin er <b>ofan frá</b> (top-down): skrifaðu aðalreikniritið með köllum á aðferðir sem eru ekki til enn, og útfærðu þær svo eina í einu og prófaðu hverja sér.</p>
-
-<h2 id="samantekt">Samantekt</h2>
-<ul class="checklist">
-<li><code>public static Skilatag nafn(Tag p1, Tag p2) { … return …; }</code></li>
-<li>Aðferð með skilatag þarf <code>return</code> á öllum leiðum; <code>return</code> hættir strax.</li>
-<li>Gildisfærsla: breytingar á færibreytum af frumtagi sjást ekki hjá þeim sem kallaði.</li>
-<li>Staðværar breytur lifa í sinni blokk.</li>
-<li>Yfirhleðsla: sama nafn, ólíkar færibreytur (ekki bara ólíkt skilatag).</li>
-</ul>
+<h2>Í hnotskurn</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>aðferð sem gerir eitthvað</td><td><code>static void nafn(…) { … }</code></td></tr>
+<tr><td>aðferð sem skilar svari</td><td><code>static int nafn(…) { …; return svar; }</code></td></tr>
+<tr><td>skila já/nei</td><td><code>static boolean isX(…) { return skilyrði; }</code></td></tr>
+<tr><td>hætta snemma í aðferð</td><td><code>return;</code> (void) eða <code>return gildi;</code></td></tr>
+<tr><td>breyta gildi úti í main</td><td>skila nýja gildinu: <code>x = f(x);</code></td></tr>
+<tr><td>sama aðgerð, ólíkt inntak</td><td>yfirhleðsla: sama nafn, ólíkar færibreytur</td></tr>
+</tbody></table></div>

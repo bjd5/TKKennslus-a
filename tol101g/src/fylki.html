@@ -1,162 +1,201 @@
-<h1>Fylki</h1>
-<p class="lede">Fylki (arrays) geyma mörg gildi af sama tagi undir einu nafni: borðið í Snakes &amp; Ladders, stöðu leikmannanna, spilin í stokknum. Hér lærir þú að búa til fylki og fara í gegnum þau, hvað <b>tilvísun</b> þýðir (mikilvægasta hugtakið fyrir seinni hluta námskeiðsins), að senda fylki í aðferðir og að vinna með tvívíð fylki.</p>
+<h1>Fylki: mörg gildi í einni breytu</h1>
+<p class="lede">Þegar þú þarft 12 mánuði, 4 leikmenn eða 101 reit á borði býrðu ekki til 101 breytu; þú býrð til eitt <b>fylki</b>. Hér lærir þú að búa til fylki, fara í gegnum þau, nota tilbúnu aðgerðirnar í <code>Arrays</code> og vinna með töflur (tvívíð fylki).</p>
 
-<h2 id="grunnur">Að búa til fylki</h2>
-<pre class="code"><code class="java">int[] square = new int[4];               // 4 hólf, öll 0
-double[] prices = new double[n];         // stærðin má vera breyta
-String[] months = {"Jan", "Feb", "Mar"}; // frumstillt með gildum (stærð 3)
-char[] grades = new char[] {'A', 'B'};   // sama, lengra form</code></pre>
+<div class="goals"><h3>Í lok kaflans geturðu</h3>
 <ul>
-<li>Hólfin eru númeruð <b>frá 0 til <code>length - 1</code></b>. <code>a.length</code> er eigindi, <b>ekki</b> aðferð (engir svigar).</li>
-<li>Stærðin er föst eftir að fylkið er búið til.</li>
-<li>Nýtt fylki fær <b>sjálfgefin gildi</b>: <code>0</code> fyrir tölur, <code>false</code> fyrir boolean, <code>'\u0000'</code> fyrir char og <code>null</code> fyrir hluti (t.d. String).</li>
-<li>Vísir utan bilsins kastar <code>ArrayIndexOutOfBoundsException</code> við keyrslu.</li>
-</ul>
-<div class="note warn"><p><b class="t">Villan í taskA (Arrays.java):</b></p>
-<pre class="code"><code class="java">for (int i = 1; i &lt;= months.length; i++) {
-    System.out.println(months[i]);     // sleppir "Jan" og kastar villu í lokin
-}</code></pre>
-<p>Rétt: <code>for (int i = 0; i &lt; months.length; i++)</code>. Mundu: <code>&lt; length</code>, ekki <code>&lt;= length</code>.</p></div>
+<li>búið til fylki og lesið og skrifað í það</li>
+<li>fundið summu, stærsta gildi og leitað í fylki</li>
+<li>skilið af hverju <code>b = a</code> afritar ekki fylki</li>
+</ul></div>
 
-<h2 id="lykkjur">Að fara í gegnum fylki</h2>
-<div class="code-cols">
-<div><h4>Venjuleg for-lykkja</h4><pre class="code"><code class="java">for (int i = 0; i &lt; a.length; i++) {
-    a[i] = i * 10;       // má skrifa í fylkið
-}</code></pre></div>
-<div><h4>for-each (endurbætt for)</h4><pre class="code"><code class="java">for (int x : a) {        // „fyrir hvert x í a“
-    System.out.println(x);
-}</code></pre></div>
+<section class="lesson" id="buatil">
+<h2><span class="ls-n">1</span> Búa til fylki</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">int[] scores = new int[4];          // 4 hólf, öll 0
+scores[0] = 10;
+scores[3] = 7;
+String[] months = {"Jan", "Feb", "Mar"};   // með gildum
+System.out.println(scores.length);
+System.out.println(months[1]);
+System.out.println(Arrays.toString(scores));</code></pre></div>
+<div><pre class="out">4
+Feb
+[10, 0, 0, 7]</pre></div>
 </div>
-<p><code>for-each</code> er styttri þegar þú þarft bara að <b>lesa</b> gildin. Þú hefur ekki vísinn, og ef þú breytir <code>x</code> breytist bara afrit; fylkið sjálft er óbreytt. Notaðu venjulega for-lykkju til að skrifa í fylki eða þegar þú þarft vísinn.</p>
+<p class="ls-when"><b>Tvær leiðir:</b> <code>new int[n]</code> þegar þú veist stærðina en ekki gildin; <code>{…}</code> þegar þú veist gildin.</p>
+<p class="ls-oops"><b>Varúð:</b> hólfin eru 0 til <code>length - 1</code>. <code>scores[4]</code> hrynur (<code>ArrayIndexOutOfBoundsException</code>). Og <code>length</code> fyrir fylki er <b>án sviga</b> (ólíkt <code>s.length()</code> fyrir texta).</p>
+</section>
 
-<h3>Algeng reiknirit</h3>
-<div class="code-cols">
-<div><h4>Summa og meðaltal</h4><pre class="code"><code class="java">int sum = 0;
-for (int x : a) sum += x;
-double avg = (double) sum / a.length;</code></pre></div>
-<div><h4>Stærsta gildi og vísir þess</h4><pre class="code"><code class="java">int maxIdx = 0;
+<section class="lesson" id="lykkjur">
+<h2><span class="ls-n">2</span> Fara í gegnum fylki</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">int[] a = {4, 8, 15, 16};
+for (int i = 0; i &lt; a.length; i++) {
+    a[i] = a[i] * 2;              // skrifa: þarf i
+}
+for (int x : a) {                 // lesa: for-each
+    System.out.print(x + " ");
+}</code></pre></div>
+<div><pre class="out">8 16 30 32</pre></div>
+</div>
+<p class="ls-when"><b>Hvor?</b> <code>for (int x : a)</code> þegar þú bara <b>lest</b> gildin. Venjuleg <code>for</code> þegar þú þarft að <b>breyta</b> fylkinu eða vita númer hólfsins.</p>
+</section>
+
+<section class="lesson" id="arrays">
+<h2><span class="ls-n">3</span> Tilbúnar aðgerðir: Arrays</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">int[] a = {5, 2, 9, 1};
+System.out.println(Arrays.toString(a));
+Arrays.sort(a);
+System.out.println(Arrays.toString(a));
+int[] b = Arrays.copyOf(a, a.length);
+System.out.println(Arrays.equals(a, b));</code></pre></div>
+<div><pre class="out">[5, 2, 9, 1]
+[1, 2, 5, 9]
+true</pre></div>
+</div>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>prenta fylki</td><td><code>Arrays.toString(a)</code> (ekki bara <code>println(a)</code>, það gefur rugl eins og <code>[I@1b6d</code>)</td></tr>
+<tr><td>raða</td><td><code>Arrays.sort(a);</code></td></tr>
+<tr><td>afrita</td><td><code>Arrays.copyOf(a, a.length)</code></td></tr>
+<tr><td>bera saman innihald</td><td><code>Arrays.equals(a, b)</code></td></tr>
+</tbody></table></div>
+<p class="ls-oops"><b>Muna:</b> <code>import java.util.Arrays;</code> efst.</p>
+</section>
+
+<section class="lesson" id="algeng">
+<h2><span class="ls-n">4</span> Það sem þú gerir oftast við fylki</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">int[] a = {3, 9, 4, 9, 1};
+int sum = 0;
+for (int x : a) {
+    sum += x;
+}
+int maxIdx = 0;
 for (int i = 1; i &lt; a.length; i++) {
     if (a[i] &gt; a[maxIdx]) maxIdx = i;
-}</code></pre></div>
-<div><h4>Línuleg leit</h4><pre class="code"><code class="java">int found = -1;
-for (int i = 0; i &lt; a.length; i++) {
-    if (a[i] == key) { found = i; break; }
-}</code></pre></div>
-<div><h4>Snúa við á staðnum</h4><pre class="code"><code class="java">for (int i = 0; i &lt; a.length / 2; i++) {
-    int t = a[i];
-    a[i] = a[a.length - 1 - i];
-    a[a.length - 1 - i] = t;
-}</code></pre></div>
-<div><h4>Hliðra til vinstri</h4><pre class="code"><code class="java">int first = a[0];
-for (int i = 1; i &lt; a.length; i++) {
-    a[i - 1] = a[i];
 }
-a[a.length - 1] = first;</code></pre></div>
-<div><h4>Stokka (shuffle)</h4><pre class="code"><code class="java">for (int i = 0; i &lt; a.length; i++) {
-    int j = (int) (Math.random() * a.length);
-    int t = a[i]; a[i] = a[j]; a[j] = t;
-}</code></pre></div>
+int found = -1;
+for (int i = 0; i &lt; a.length; i++) {
+    if (a[i] == 4) { found = i; break; }
+}
+System.out.println(sum + " " + (double) sum / a.length);
+System.out.println(a[maxIdx] + " í hólfi " + maxIdx);
+System.out.println("4 í hólfi " + found);</code></pre></div>
+<div><pre class="out">26 5.2
+9 í hólfi 1
+4 í hólfi 2</pre></div>
 </div>
+<p class="ls-when"><b>Mynstrin:</b> summa (byrja í 0), stærsta (byrja í fyrsta stakinu, <i>ekki</i> 0), leit (byrja í −1 = „ekki fundið“, <code>break</code> þegar fundið).</p>
+</section>
 
-<h2 id="tilvisanir">Fylki eru tilvísanir</h2>
-<p>Breyta af tagi <code>int[]</code> geymir ekki tölurnar sjálfar heldur <b>tilvísun</b> (reference): „heimilisfangið“ á fylkinu í minninu. Þetta er taskD í Arrays.java:</p>
+<section class="lesson" id="tilvisun">
+<h2><span class="ls-n">5</span> Gildran: b = a afritar ekki</h2>
 <div class="vs">
-<div><pre class="code"><code class="java">int a = 42;
-int b = a;            // gildið er afritað
-b = b * 2;
-System.out.println("a: " + a);
+<div><pre class="code" data-run><code class="java">int x = 42;
+int y = x;
+y = 0;
+System.out.println(x);        // tala: afritað
 
 int[] c = {42, 32, 12};
-int[] d = c;          // tilvísunin er afrituð
-d[0] = d[0] * 2;      // breytir sameiginlega fylkinu
-System.out.println("c[0]: " + c[0]);</code></pre></div>
-<div><pre class="out">a: 42
-c[0]: 84</pre>
-<p style="font-size:0.92rem">Eftir <code>d = c</code> vísa <code>c</code> og <code>d</code> á <b>sama fylkið</b>. Það er aðeins eitt fylki í minninu.</p></div>
+int[] d = c;                  // SAMA fylkið!
+d[0] = 0;
+System.out.println(c[0]);</code></pre></div>
+<div><pre class="out">42
+0</pre></div>
 </div>
-<p>Til að fá <b>sjálfstætt afrit</b> þarf að búa til nýtt fylki og afrita gildin:</p>
-<pre class="code"><code class="java">int[] copy = new int[c.length];
-for (int i = 0; i &lt; c.length; i++) copy[i] = c[i];
-// eða:
-int[] copy2 = java.util.Arrays.copyOf(c, c.length);
-int[] copy3 = c.clone();
-System.arraycopy(c, 0, copy, 0, c.length);   // (frá, frá-vísir, til, til-vísir, fjöldi)</code></pre>
-<p><code>c == d</code> spyr hvort tilvísanirnar séu eins (sama fylkið), ekki hvort innihaldið sé eins. Fyrir innihald: <code>Arrays.equals(c, d)</code>.</p>
+<p class="ls-what">Fylkisbreyta geymir ekki tölurnar sjálfar heldur <b>vísun</b> á fylkið. <code>d = c</code> afritar vísunina, svo bæði nöfnin benda á <b>sama</b> fylkið. Þetta er dæmið úr tímanum (taskD) og kemur aftur í hlutum (kafli 8).</p>
+<p class="ls-when"><b>Viltu sjálfstætt afrit?</b> <code>int[] d = Arrays.copyOf(c, c.length);</code></p>
+<p class="ls-oops"><b>Sama í aðferðum:</b> ef aðferð fær fylki og breytir hólfi, sést breytingin úti í main.</p>
+</section>
 
-<h3>Fylki í aðferðum</h3>
-<p>Tilvísunin er afrituð í færibreytuna (gildisfærsla á tilvísuninni). Aðferðin sér því <b>sama fylkið</b> og getur breytt innihaldi þess, en ef hún lætur færibreytuna vísa á nýtt fylki hefur það engin áhrif á þann sem kallaði:</p>
+<section class="lesson" id="adferdir">
+<h2><span class="ls-n">6</span> Fylki í og úr aðferðum</h2>
 <div class="vs">
-<div><pre class="code"><code class="java">static void doubleAll(int[] x) {
-    for (int i = 0; i &lt; x.length; i++) x[i] *= 2;
+<div><pre class="code" data-run><code class="java">static int sum(int[] a) {
+    int s = 0;
+    for (int x : a) s += x;
+    return s;
 }
-static void replace(int[] x) {
-    x = new int[] {0, 0, 0};    // bara staðbundið
+static int[] reversed(int[] a) {
+    int[] r = new int[a.length];
+    for (int i = 0; i &lt; a.length; i++) {
+        r[i] = a[a.length - 1 - i];
+    }
+    return r;
 }
-
+// í main:
 int[] a = {1, 2, 3};
-doubleAll(a);
-replace(a);
-System.out.println(Arrays.toString(a));</code></pre></div>
-<div><pre class="out">[2, 4, 6]</pre></div>
+System.out.println(sum(a));
+System.out.println(Arrays.toString(reversed(a)));</code></pre></div>
+<div><pre class="out">6
+[3, 2, 1]</pre></div>
 </div>
-<p>Aðferð getur líka <b>skilað</b> fylki: <code>public static int[] copy(int[] in) { … return out; }</code>.</p>
+</section>
 
-<h3>Klasinn java.util.Arrays</h3>
-<div class="tablewrap"><table>
-<thead><tr><th>Aðferð</th><th>Gerir</th></tr></thead>
-<tbody>
-<tr><td><code>Arrays.toString(a)</code></td><td>strengur eins og <code>[2, 4, 6]</code> (<code>System.out.println(a)</code> prentar bara tilvísun eins og <code>[I@1b6d3586</code>)</td></tr>
-<tr><td><code>Arrays.sort(a)</code></td><td>raðar fylkinu í vaxandi röð (breytir því)</td></tr>
-<tr><td><code>Arrays.copyOf(a, n)</code></td><td>nýtt fylki af lengd n með fyrstu gildunum</td></tr>
-<tr><td><code>Arrays.equals(a, b)</code></td><td>sama innihald?</td></tr>
-<tr><td><code>Arrays.fill(a, v)</code></td><td>setur v í öll hólf</td></tr>
-<tr><td><code>Arrays.binarySearch(a, key)</code></td><td>helmingunarleit í <b>röðuðu</b> fylki</td></tr>
-</tbody></table></div>
-
-<h2 id="tvivid">Tvívíð fylki</h2>
-<p>Tvívítt fylki er <b>fylki af fylkjum</b>: <code>m[r]</code> er röð r (sjálf <code>int[]</code>) og <code>m[r][c]</code> er stak í röð r, dálki c.</p>
-<pre class="code"><code class="java">int[][] m = new int[3][4];       // 3 raðir, 4 dálkar, allt 0
-int[][] t = {{1, 2, 3},
-             {4, 5, 6}};           // 2 raðir, 3 dálkar
-t.length        // 2   (fjöldi raða)
-t[0].length     // 3   (fjöldi dálka í röð 0)
-t[1][2]         // 6
-
-for (int r = 0; r &lt; t.length; r++) {
-    for (int c = 0; c &lt; t[r].length; c++) {
-        System.out.print(t[r][c] + " ");
+<section class="lesson" id="tvivid">
+<h2><span class="ls-n">7</span> Töflur: tvívíð fylki</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">int[][] grid = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+System.out.println(grid.length);       // raðir
+System.out.println(grid[0].length);    // dálkar
+System.out.println(grid[1][2]);        // röð 1, dálkur 2
+for (int r = 0; r &lt; grid.length; r++) {
+    for (int c = 0; c &lt; grid[r].length; c++) {
+        System.out.print(grid[r][c] + " ");
     }
     System.out.println();
-}</code></pre>
-<p><b>Ójöfn fylki</b> (ragged arrays) hafa raðir af mismunandi lengd: <code>int[][] tri = {{1}, {1, 1}, {1, 2, 1}};</code>. Þess vegna er öruggast að nota <code>t[r].length</code> í innri lykkjunni.</p>
-<h3>Fullunnið dæmi: að bylta (transpose)</h3>
-<pre class="code"><code class="java">public static int[][] transpose(int[][] in) {
-    int[][] out = new int[in[0].length][in.length];   // dálkar verða raðir
-    for (int r = 0; r &lt; in.length; r++) {
-        for (int c = 0; c &lt; in[r].length; c++) {
-            out[c][r] = in[r][c];
-        }
-    }
-    return out;
-}</code></pre>
+}</code></pre></div>
+<div><pre class="out">2
+3
+6
+1 2 3
+4 5 6</pre></div>
+</div>
+<p class="ls-when"><b>Hvenær?</b> Leikjaborð, töflur, myndir. <code>new int[raðir][dálkar]</code>; fyrst röð, svo dálkur: <code>grid[r][c]</code>.</p>
+</section>
 
-<h2 id="snakes">Fylki í Snakes &amp; Ladders</h2>
+<section class="lesson" id="snakes">
+<h2><span class="ls-n">8</span> Úr tímanum: borðið í Snakes &amp; Ladders</h2>
 <pre class="code"><code class="java">final int SQUARES = 100;
-int[] offset = new int[SQUARES + 1];   // reitir 0..100; 0 = byrjunarreitur
-offset[16] = -10;                      // snákur frá 16 niður í 6
-offset[1] = 37;                        // stigi frá 1 upp í 38
-int[] square = new int[PLAYERS];       // reitur hvers leikmanns, allir byrja í 0
-…
-square[player] += roll;
-square[player] += offset[square[player]];   // fylgja snáki eða stiga</code></pre>
-<p>Hér er hönnunin þess virði að taka eftir: borðið er líkan (<code>offset</code>), staða leiksins er annað fylki (<code>square</code>), og vísirinn í <code>offset</code> er gildið í <code>square</code>.</p>
+int[] offset = new int[SQUARES + 1];   // reitir 0..100, allir 0
+offset[16] = -10;                      // snákur: 16 → 6
+offset[1] = 37;                        // stigi: 1 → 38
+int[] square = new int[PLAYERS];       // hvar hver leikmaður er (allir í 0)
 
-<h2 id="samantekt">Samantekt</h2>
-<ul class="checklist">
-<li><code>int[] a = new int[n];</code> gefur n núll; vísar 0 … <code>a.length - 1</code>.</li>
-<li><code>for (int i = 0; i &lt; a.length; i++)</code> til að skrifa; <code>for (int x : a)</code> til að lesa.</li>
-<li><code>b = a</code> afritar tilvísunina; bæði nöfnin vísa á sama fylkið.</li>
-<li>Aðferð getur breytt innihaldi fylkis sem hún fær, en ekki tilvísun þess sem kallaði.</li>
-<li><code>Arrays.toString</code>, <code>sort</code>, <code>copyOf</code>, <code>equals</code>.</li>
-<li><code>m.length</code> raðir, <code>m[r].length</code> dálkar; <code>m[r][c]</code>.</li>
-</ul>
+square[player] += roll;
+square[player] += offset[square[player]];   // fylgja snáki/stiga</code></pre>
+<p class="ls-what">Tvö fylki: eitt lýsir <b>borðinu</b>, hitt <b>stöðu leikmannanna</b>. Gildið í öðru er notað sem hólfanúmer í hinu.</p>
+</section>
+
+<div class="try">
+<p><b>Prófaðu:</b> teningi er kastað 60 sinnum. Teldu hve oft hver tala (1-6) kom upp og prentaðu niðurstöðuna. Vísbending: <code>int[] count = new int[7];</code> og <code>count[roll]++</code>.</p>
+<details class="reveal"><summary></summary><div class="sol"><pre class="code"><code class="java">int[] count = new int[7];          // nota hólf 1-6
+for (int i = 0; i &lt; 60; i++) {
+    int roll = (int) (Math.random() * 6) + 1;
+    count[roll]++;
+}
+for (int f = 1; f &lt;= 6; f++) {
+    System.out.println(f + ": " + count[f]);
+}</code></pre></div></details>
+</div>
+
+<h2>Í hnotskurn</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>fylki af n tölum</td><td><code>int[] a = new int[n];</code></td></tr>
+<tr><td>fylki með gildum</td><td><code>int[] a = {1, 2, 3};</code></td></tr>
+<tr><td>fjölda staka</td><td><code>a.length</code></td></tr>
+<tr><td>fyrsta / síðasta</td><td><code>a[0]</code> / <code>a[a.length - 1]</code></td></tr>
+<tr><td>fara í gegnum og breyta</td><td><code>for (int i = 0; i &lt; a.length; i++)</code></td></tr>
+<tr><td>fara í gegnum og lesa</td><td><code>for (int x : a)</code></td></tr>
+<tr><td>prenta / raða / afrita</td><td><code>Arrays.toString(a)</code> / <code>Arrays.sort(a)</code> / <code>Arrays.copyOf(a, n)</code></td></tr>
+<tr><td>töflu</td><td><code>int[][] m = new int[r][c];</code>, <code>m[r][c]</code></td></tr>
+<tr><td>telja tíðni</td><td><code>count[gildi]++</code></td></tr>
+</tbody></table></div>

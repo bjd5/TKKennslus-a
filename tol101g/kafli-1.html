@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kafli 1: Forrit og reiknirit · Tölvunarfræði 1</title>
+<title>Kafli 1: Fyrsta Java-forritið · Tölvunarfræði 1</title>
 <meta name="description" content="Kennsluvefur fyrir TÖL101G Tölvunarfræði 1: Java frá breytum og lykkjum að klösum, erfðum, viðmótum og undantekningum.">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a8461a'/%3E%3Cpath d='M12 9l-6 7 6 7M20 9l6 7-6 7' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -20,18 +20,18 @@
 <nav aria-label="Efnisyfirlit">
 <h2>Ferðalagið</h2><ul>
 <li><a class="nav" href="index.html">Kortið</a></li>
-<li><a class="nav" href="kafli-1.html" aria-current="page" data-gate="ch1">1. Forrit og reiknirit</a></li>
-<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Tölur, breytur og segðir</a></li>
-<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Rökgildi og skilyrði</a></li>
-<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Stafir og strengir</a></li>
+<li><a class="nav" href="kafli-1.html" aria-current="page" data-gate="ch1">1. Fyrsta Java-forritið</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Breytur, tölur og inntak</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Ákvarðanir: if og switch</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Texti: String og char</a></li>
 <li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Lykkjur</a></li>
 <li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Aðferðir</a></li>
 <li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Fylki</a></li>
 <li><a class="nav" href="kafli-8.html" data-gate="ch8">8. Klasar og hlutir</a></li>
-<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Tengsl hluta og UML</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Hlutir sem vinna saman og UML</a></li>
 <li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Erfðir og fjölbrigðni</a></li>
-<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Hrein klasar og viðmót</a></li>
-<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Undantekningar og pakkar</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. abstract og interface</a></li>
+<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Villur: try, catch og throw</a></li>
 <li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
 </ul>
 <h2>Verðlaun</h2><ul>
@@ -39,6 +39,7 @@
 </ul>
 <h2>Verkfæri</h2><ul>
 <li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="uppfletting.html">Hvað nota ég?</a></li>
 <li><a class="nav" href="kodaskrif.html">Kóðaskrif</a></li>
 <li><a class="nav" href="spjold.html">Flashcards</a></li>
 <li><a class="nav" href="minnisblad.html">Minnisblað</a></li>
@@ -49,135 +50,153 @@
 <main id="main">
 <div class="page wide">
 <div class="chapter" data-ch="1" data-topics="forrit">
-<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 1: Forrit og reiknirit</h1>
+<div class="lockscreen" hidden><div class="lock-ico" aria-hidden="true">🔒</div><h1>Kafli 1: Fyrsta Java-forritið</h1>
 <p>Þessi kafli opnast þegar þú hefur náð kaflaprófinu í  með einkunn 6 eða hærra.</p><p><a class="btn" href="index.html">Aftur á kortið</a></p></div>
 <div class="ch-body">
 <header class="ch-head">
 <p class="eyebrow">Kafli 1 af 12 · Vika 1 · Liang kafli 1</p>
-<h1>Forrit og reiknirit</h1>
+<h1>Fyrsta Java-forritið</h1>
 <p class="ch-exam"><b>Tengist:</b> Lokapróf: hugtök, uppbygging Java-forrits og villutegundir</p>
 <ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Verkstæði</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
 </header>
 <section class="step" data-step="lesa" id="step-lesa">
-<p class="lede">Hvað er reiknirit, hvað er forrit og hvað gerist þegar Java-kóði verður að keyrslu? Hér lærir þú uppbyggingu Java-forrits, hvernig það prentar og les inn, og hvaða þrjár tegundir villna þú munt rekast á. Á prófinu er spurt um hugtökin og þú þarft að geta lesið og skrifað einföld forrit án hjálpar frá ritlinum.</p>
+<p class="lede">Engin fræði hér: við setjum upp tól, skrifum fyrsta forritið og lærum að prenta á skjáinn. Hver kennslustund er stutt: hvað þetta gerir, kóði, hvað kemur út og hvenær þú notar það.</p>
 
-<h2 id="reiknirit">Reiknirit og forrit</h2>
-<p>Í fyrsta tímanum bjugguð þið til ykkar eigin reglur fyrir myllu (tic-tac-toe) fyrir fleiri en tvo leikmenn. Leikreglur og forrit eiga margt sameiginlegt: þær þurfa <b>nákvæm fyrirmæli</b> og <b>skýran orðaforða</b>, <b>greiningar</b> eftir skilyrðum („ef reiturinn er tómur…“), <b>endurtekningar</b> („haldið áfram þar til einhver vinnur“), <b>staðlaðar aðferðir</b> fyrir atvik sem endurtaka sig og <b>skipulega framsetningu á stöðu leiksins</b> (borðið, hver á leik) sem breytist.</p>
-<div class="key">
-<p><b>Reiknirit</b> (algorithm): endanleg runa af ótvíræðum skrefum sem leysir verkefni. Það má skrifa á íslensku, sem flæðirit eða sem sauðakóða (pseudocode).</p>
-<p><b>Forrit</b> (program): reiknirit skrifað á forritunarmáli svo tölva geti framkvæmt það.</p>
-</div>
-<p>Reiknirit lýsir <i>hvað</i> á að gera í hvaða röð. Það hefur þrjár grunnstoðir sem öll forritunarmál bjóða upp á: <b>runu</b> (skref hvert á eftir öðru), <b>val</b> (if/else) og <b>endurtekningu</b> (lykkjur). Kaflar 3 og 5 fjalla um seinni tvær.</p>
+<div class="goals"><h3>Í lok kaflans geturðu</h3>
+<ul>
+<li>skrifað og keyrt Java-forrit</li>
+<li>prentað texta og tölur með <code>println</code> og <code>print</code></li>
+<li>lesið villuboð og vitað hvað þau þýða</li>
+</ul></div>
 
-<h2 id="java">Frá kóða til keyrslu</h2>
-<p>Tölvan sjálf skilur aðeins <b>vélarmál</b>: runur af bitum sem örgjörvinn framkvæmir. Fólk skrifar á <b>æðra forritunarmáli</b> (high-level language) eins og Java, og forrit þýða það yfir á eitthvað sem vélin getur keyrt.</p>
-<div class="tablewrap"><table>
-<thead><tr><th>Skref</th><th>Hvað gerist</th><th>Skrá</th></tr></thead>
-<tbody>
-<tr><td>1. Skrifa</td><td>Þú skrifar <b>frumkóða</b> (source code) í ritli eða IDE (NetBeans, IntelliJ, VS Code).</td><td><code>HelloWorld.java</code></td></tr>
-<tr><td>2. Þýða</td><td><b>Þýðandinn</b> (compiler) <code>javac</code> athugar málfræðina og þýðir kóðann í <b>bætikóða</b> (bytecode).</td><td><code>HelloWorld.class</code></td></tr>
-<tr><td>3. Keyra</td><td><b>Java-sýndarvélin</b> (JVM, Java Virtual Machine) les bætikóðann og keyrir hann á þessari tölvu.</td><td><code>java HelloWorld</code></td></tr>
-</tbody></table></div>
-<p>Af því að bætikóðinn er sá sami á öllum stýrikerfum getur sama <code>.class</code>-skráin keyrt á Windows, macOS og Linux: „write once, run anywhere“. Það eina sem þarf er JVM fyrir hvert kerfi. <b>JDK</b> (Java Development Kit) inniheldur þýðandann og tólin; <b>JRE</b> (Java Runtime Environment) er bara það sem þarf til að keyra.</p>
+<section class="lesson" id="setja-upp">
+<h2><span class="ls-n">1</span> Settu upp tólin</h2>
+<p class="ls-what">Þú þarft tvennt: <b>JDK</b> (Java sjálft) og <b>ritil</b> (IDE) til að skrifa kóðann í.</p>
+<ol>
+<li>Sæktu JDK (t.d. „Temurin“ frá adoptium.net) og settu upp.</li>
+<li>Settu upp ritil: <b>NetBeans</b> (notaður í tímunum), IntelliJ IDEA Community eða VS Code með Java-viðbót.</li>
+<li>Búðu til nýtt verkefni (New Project → Java). Ritillinn býr til skrá með <code>main</code> fyrir þig.</li>
+</ol>
+<p class="ls-when"><b>Ath.</b> Á prófinu skrifar þú í Inspera, sem hefur <b>enga</b> sjálfvirka útfyllingu. Æfðu þig því líka að skrifa kóða án hjálpar.</p>
+</section>
 
-<h2 id="uppbygging">Uppbygging Java-forrits</h2>
-<pre class="code"><code class="java">/**
- * Fyrsta forritið mitt.
- */
-public class HelloWorld {                     // klasi: sama nafn og skráin HelloWorld.java
-    public static void main(String[] args) {  // aðalaðferðin: keyrslan byrjar hér
-        System.out.println("Hello World!");   // setning endar á semíkommu
+<section class="lesson" id="uppbygging">
+<h2><span class="ls-n">2</span> Uppbygging forrits</h2>
+<p class="ls-what">Öll Java-forrit líta svona út. Lærðu þennan ramma utan að; þú skrifar hann í hvert skipti.</p>
+<pre class="code"><code class="java">public class Main {                            // klasi: „umbúðirnar“
+    public static void main(String[] args) {   // forritið byrjar HÉR
+        // kóðinn þinn fer hingað
     }
 }</code></pre>
 <ul>
-<li><b>Klasi</b> (class): allt í Java býr í klösum. Klasinn sem er <code>public</code> verður að heita það sama og skráin (<code>HelloWorld</code> → <code>HelloWorld.java</code>). Hástafir skipta máli.</li>
-<li><b>Aðalaðferðin</b> <code>public static void main(String[] args)</code> er staðurinn þar sem JVM byrjar keyrsluna. Forrit án hennar er ekki hægt að keyra beint.</li>
-<li><b>Setningar</b> (statements) enda á <code>;</code>. <b>Blokkir</b> eru afmarkaðar með slaufusvigum <code>{ }</code> sem verða að standast á.</li>
-<li><b>Athugasemdir</b> (comments) hunsar þýðandinn: <code>// út línuna</code>, <code>/* yfir margar línur */</code> og <code>/** Javadoc */</code> sem lýsir klösum og aðferðum.</li>
-<li>Java gerir greinarmun á há- og lágstöfum (<i>case sensitive</i>): <code>Main</code>, <code>main</code> og <code>MAIN</code> eru þrjú ólík nöfn.</li>
+<li><code>public class Main</code>: skráin verður að heita <code>Main.java</code> (sama nafn, sömu hástafir).</li>
+<li><code>public static void main(String[] args)</code>: alltaf nákvæmlega svona. Hér byrjar keyrslan.</li>
+<li><code>{ }</code> afmarka hvað á heima saman. Hver <code>{</code> þarf sinn <code>}</code>.</li>
+<li>Hver skipun endar á <code>;</code>.</li>
 </ul>
-<div class="note"><p><b class="t">Á prófinu (Inspera):</b> ekki skrifa <code>public</code> fyrir framan klasa sem þú skrifar sjálf(ur) í ritilinn (public-aðferðir og -breytur eru í lagi), og þú mátt setja marga klasa í sama glugga.</p></div>
+</section>
 
-<h2 id="uttak">Úttak: print, println og lausnarstafir</h2>
-<p><code>System.out.println(x)</code> prentar <code>x</code> og fer svo í nýja línu. <code>System.out.print(x)</code> prentar án þess að skipta um línu. <code>System.out.println()</code> án gildis prentar bara línuskil.</p>
+<section class="lesson" id="println">
+<h2><span class="ls-n">3</span> Prenta: println og print</h2>
+<p class="ls-what"><code>System.out.println(…)</code> prentar og fer svo í <b>nýja línu</b>. <code>System.out.print(…)</code> prentar og <b>verður kyrr</b> í sömu línu.</p>
 <div class="vs">
-<div><pre class="code"><code class="java">System.out.print("Halló ");
-System.out.print("heimur");
-System.out.println("!");
-System.out.println("Næsta lína");</code></pre></div>
+<div><pre class="code" data-run><code class="java">System.out.println("Halló heimur!");
+System.out.print("Einn ");
+System.out.print("tveir ");
+System.out.println("þrír");
+System.out.println(42);</code></pre></div>
 <div><pre class="out">Halló heimur!
-Næsta lína</pre></div>
+Einn tveir þrír
+42</pre></div>
 </div>
-<p>Inni í streng þýða sum tákn með bakstriki (<b>lausnarstafir</b>, escape sequences) eitthvað sérstakt:</p>
+<p class="ls-when"><b>Hvenær?</b> <code>println</code> nánast alltaf. <code>print</code> þegar þú vilt setja saman eina línu í bútum, t.d. í lykkju.</p>
+<p class="ls-oops"><b>Varúð:</b> texti er alltaf innan <code>"gæsalappa"</code>. Tölur ekki.</p>
+</section>
+
+<section class="lesson" id="samskeyting">
+<h2><span class="ls-n">4</span> Texti og tölur saman með +</h2>
+<p class="ls-what">Plúsinn límir saman texta og gildi. Java les <b>frá vinstri</b>: tölur eru lagðar saman þar til texti birtist, eftir það er allt límt saman.</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">System.out.println("Aldur: " + 20);
+System.out.println(1 + 2 + " spil");
+System.out.println("spil " + 1 + 2);
+System.out.println("spil " + (1 + 2));</code></pre></div>
+<div><pre class="out">Aldur: 20
+3 spil
+spil 12
+spil 3</pre></div>
+</div>
+<p class="ls-when"><b>Hvenær?</b> Alltaf þegar þú prentar útkomu með skýringu. Settu reikninginn í sviga til að vera örugg(ur).</p>
+</section>
+
+<section class="lesson" id="lausnarstafir">
+<h2><span class="ls-n">5</span> Sérstafir: \n, \t og \"</h2>
+<p class="ls-what">Inni í texta byrja sérstafir á bakstriki.</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">System.out.println("Lína 1\nLína 2");
+System.out.println("Hann sagði \"hæ\"");
+System.out.println("C:\\Users");</code></pre></div>
+<div><pre class="out">Lína 1
+Lína 2
+Hann sagði "hæ"
+C:\Users</pre></div>
+</div>
 <div class="tablewrap"><table>
-<thead><tr><th>Tákn</th><th>Merking</th><th>Dæmi</th><th>Prentast</th></tr></thead>
+<thead><tr><th>Skrifar</th><th>Færð</th></tr></thead>
 <tbody>
-<tr><td><code>\n</code></td><td>ný lína</td><td><code>"a\nb"</code></td><td>a og b í sitt hvorri línu</td></tr>
-<tr><td><code>\t</code></td><td>dálkstopp (tab)</td><td><code>"a\tb"</code></td><td>a&nbsp;&nbsp;&nbsp;&nbsp;b</td></tr>
-<tr><td><code>\"</code></td><td>gæsalöpp inni í streng</td><td><code>"Hann sagði \"hæ\""</code></td><td>Hann sagði "hæ"</td></tr>
-<tr><td><code>\\</code></td><td>bakstrik</td><td><code>"C:\\temp"</code></td><td>C:\temp</td></tr>
-<tr><td><code>\'</code></td><td>úrfellingarmerki (í <code>char</code>)</td><td><code>'\''</code></td><td>'</td></tr>
+<tr><td><code>\n</code></td><td>nýja línu</td></tr>
+<tr><td><code>\t</code></td><td>dálkstopp (tab)</td></tr>
+<tr><td><code>\"</code></td><td>gæsalöpp inni í texta</td></tr>
+<tr><td><code>\\</code></td><td>eitt bakstrik</td></tr>
 </tbody></table></div>
-<p>Plúsinn <code>+</code> skeytir saman strengjum: <code>"Svar: " + 42</code> verður <code>"Svar: 42"</code>. Varastu röðina: Java reiknar frá vinstri, svo <code>1 + 2 + "x"</code> er <code>"3x"</code> en <code>"x" + 1 + 2</code> er <code>"x12"</code>. Meira um það í kafla 2.</p>
+</section>
 
-<h2 id="inntak">Inntak með Scanner</h2>
-<p>Til að lesa af lyklaborðinu notarðu klasann <code>Scanner</code> úr pakkanum <code>java.util</code>:</p>
-<pre class="code"><code class="java">import java.util.Scanner;   // efst í skránni
+<section class="lesson" id="athugasemdir">
+<h2><span class="ls-n">6</span> Athugasemdir</h2>
+<p class="ls-what">Texti sem Java hunsar. Til að útskýra kóðann fyrir þér og öðrum.</p>
+<pre class="code"><code class="java">// ein lína
+/* margar
+   línur */
+/** Javadoc: lýsing á klasa eða aðferð */</code></pre>
+</section>
 
-public class PieceOfCake {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        final double CAKE_RADIUS = 10;        // fasti, cm
-        final double CAKE_HEIGHT = 5;
-        double cakeVolume = Math.PI * Math.pow(CAKE_RADIUS, 2) * CAKE_HEIGHT;
-
-        System.out.print("Enter number of guests: ");
-        int numberOfGuests = input.nextInt();             // les heiltölu
-        double pieceVolume = cakeVolume / (numberOfGuests + 1);   // gestir + gestgjafi
-        System.out.println("Serving size: " + pieceVolume + " cm^3/person");
-    }
-}</code></pre>
+<section class="lesson" id="keyrsla">
+<h2><span class="ls-n">7</span> Hvað gerist þegar þú ýtir á Run?</h2>
+<p class="ls-what">Tvö skref, á sekúndubroti:</p>
+<ol>
+<li><b>Þýðing</b> (<code>javac</code>): athugar að kóðinn sé löglegur og breytir <code>Main.java</code> í <code>Main.class</code> (bætikóða).</li>
+<li><b>Keyrsla</b> (<code>java</code>, JVM): keyrir bætikóðann. Hann virkar á Windows, Mac og Linux.</li>
+</ol>
+<p>Þetta skýrir líka villurnar þrjár sem þú munt sjá:</p>
 <div class="tablewrap"><table>
-<thead><tr><th>Aðferð</th><th>Les</th></tr></thead>
+<thead><tr><th>Villa</th><th>Hvenær</th><th>Dæmi</th><th>Hvað gerirðu?</th></tr></thead>
 <tbody>
-<tr><td><code>nextInt()</code></td><td>næstu heiltölu (<code>int</code>)</td></tr>
-<tr><td><code>nextDouble()</code></td><td>næstu kommutölu (<code>double</code>)</td></tr>
-<tr><td><code>next()</code></td><td>næsta orð (fram að bili)</td></tr>
-<tr><td><code>nextLine()</code></td><td>afganginn af línunni, með bilum</td></tr>
-<tr><td><code>nextBoolean()</code></td><td><code>true</code> eða <code>false</code></td></tr>
+<tr><td><b>Þýðingarvilla</b></td><td>Forritið fer ekki einu sinni í gang</td><td>vantar <code>;</code> eða <code>}</code>, stafsetningarvilla</td><td>Lestu villuboðin: þau segja línuna</td></tr>
+<tr><td><b>Keyrsluvilla</b></td><td>Forritið stoppar í miðjum klíðum</td><td>deilt með 0, vísir utan fylkis</td><td>Lestu nafnið á villunni (t.d. <code>ArithmeticException</code>) og línunúmerið</td></tr>
+<tr><td><b>Rökvilla</b></td><td>Forritið keyrir en svarið er rangt</td><td><code>a + b / 2</code> í stað <code>(a + b) / 2</code></td><td>Prófaðu með dæmi þar sem þú veist svarið</td></tr>
 </tbody></table></div>
-<div class="note warn"><p><b class="t">Gildra:</b> <code>nextInt()</code> skilur línuskilin eftir. Ef <code>nextLine()</code> kemur strax á eftir fær hún tóman streng. Lausn: kallaðu einu sinni á <code>input.nextLine()</code> til að „gleypa“ línuskilin.</p>
-<p>Á prófinu: ekki prenta „Enter value:“ ef verkefnið biður ekki um það. Prentaðu bara það sem beðið er um, svo sjálfvirki yfirferðarmaðurinn ruglist ekki.</p></div>
+</section>
 
-<h2 id="nofn">Nöfn og venjur</h2>
-<p><b>Auðkenni</b> (identifiers) eru nöfn á klösum, breytum og aðferðum. Þau mega innihalda bókstafi, tölustafi, <code>_</code> og <code>$</code>, en mega <b>ekki byrja á tölustaf</b> og mega ekki vera <b>frátekin orð</b> (<code>class</code>, <code>int</code>, <code>if</code>, <code>new</code> …).</p>
-<div class="tablewrap"><table>
-<thead><tr><th>Hvað</th><th>Venja</th><th>Dæmi</th></tr></thead>
+<div class="try">
+<p><b>Prófaðu:</b> skrifaðu forrit sem prentar nafnið þitt í einni línu og „Ég er að læra Java“ í næstu, og svo <code>2 + 3 = 5</code> þar sem 5 er reiknað af Java.</p>
+<details class="reveal"><summary></summary><div class="sol"><pre class="code" data-run><code class="java">System.out.println("Anna");
+System.out.println("Ég er að læra Java");
+System.out.println("2 + 3 = " + (2 + 3));</code></pre>
+<pre class="out">Anna
+Ég er að læra Java
+2 + 3 = 5</pre></div></details>
+</div>
+
+<h2>Í hnotskurn</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
 <tbody>
-<tr><td>Klasar</td><td>MixedCase, stór fyrsti stafur, nafnorð í eintölu</td><td><code>DiscardPile</code>, <code>Card</code></td></tr>
-<tr><td>Breytur og aðferðir</td><td>mixedCase, lítill fyrsti stafur</td><td><code>numberOfGuests</code>, <code>getColor()</code></td></tr>
-<tr><td>Fastar</td><td>ALL_CAPS með undirstriki</td><td><code>CAKE_RADIUS</code>, <code>MAX_PLAYERS</code></td></tr>
+<tr><td>prenta og fara í nýja línu</td><td><code>System.out.println(x);</code></td></tr>
+<tr><td>prenta í sömu línu</td><td><code>System.out.print(x);</code></td></tr>
+<tr><td>líma texta og tölu</td><td><code>"Svar: " + x</code></td></tr>
+<tr><td>nýja línu inni í texta</td><td><code>\n</code></td></tr>
+<tr><td>skrifa minnispunkt í kóðann</td><td><code>// …</code></td></tr>
 </tbody></table></div>
-
-<h2 id="villur">Þrjár tegundir villna</h2>
-<div class="tablewrap"><table>
-<thead><tr><th>Tegund</th><th>Hvenær uppgötvast</th><th>Dæmi</th></tr></thead>
-<tbody>
-<tr><td><b>Þýðingarvilla</b> (syntax / compile error)</td><td>Þegar <code>javac</code> þýðir. Forritið keyrir ekki.</td><td>Vantar <code>;</code>, slaufusvig standast ekki á, óskilgreind breyta, rangt tag (<code>int x = "hæ";</code>)</td></tr>
-<tr><td><b>Keyrsluvilla</b> (runtime error)</td><td>Á meðan forritið keyrir; það stöðvast með undantekningu.</td><td>Deilt með 0 í heiltölum (<code>ArithmeticException</code>), vísir utan fylkis, notandi slær inn „abc“ í <code>nextInt()</code></td></tr>
-<tr><td><b>Rökvilla</b> (logic error)</td><td>Aldrei sjálfkrafa: forritið keyrir en gefur <b>rangt svar</b>.</td><td><code>(a + b) / 2</code> skrifað sem <code>a + b / 2</code>; <code>&lt;</code> í stað <code>&lt;=</code></td></tr>
-</tbody></table></div>
-<p>Rökvillur eru hættulegastar því ekkert kerfi bendir á þær. Þess vegna þarftu að <b>prófa</b> forritið með inntaki þar sem þú veist rétta svarið, og hugsa reikniritið í heild áður en þú byrjar að kóða.</p>
-
-<h2 id="samantekt">Samantekt</h2>
-<ul class="checklist">
-<li>Reiknirit = ótvíræð skref; forrit = reiknirit á forritunarmáli.</li>
-<li><code>.java</code> → <code>javac</code> → <code>.class</code> (bætikóði) → JVM keyrir.</li>
-<li>Public klasi heitir það sama og skráin; keyrsla byrjar í <code>main</code>.</li>
-<li><code>print</code> skiptir ekki um línu, <code>println</code> gerir það; <code>\n</code>, <code>\t</code>, <code>\"</code>, <code>\\</code>.</li>
-<li><code>Scanner input = new Scanner(System.in);</code> og <code>nextInt</code>, <code>nextDouble</code>, <code>next</code>, <code>nextLine</code>.</li>
-<li>Þýðingarvilla, keyrsluvilla, rökvilla.</li>
-</ul>
 <div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
 </section>
 <section class="step" data-step="aefa" id="step-aefa" hidden>
@@ -197,7 +216,7 @@ public class PieceOfCake {
 </section>
 </div>
 </div>
-<div class="pager noprint"><a href="index.html"><span>Fyrri</span>Kortið</a><a href="kafli-2.html" style="text-align:right"><span>Næsta</span>2. Tölur, breytur og segðir</a></div>
+<div class="pager noprint"><a href="index.html"><span>Fyrri</span>Kortið</a><a href="kafli-2.html" style="text-align:right"><span>Næsta</span>2. Breytur, tölur og inntak</a></div>
 </div>
 </main>
 </div>

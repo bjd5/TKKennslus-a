@@ -553,3 +553,26 @@ textarea.sk-code { font-family: var(--mono); font-size: 0.88rem; line-height: 1.
 section.sk-done > .ex-head { border-left: 3px solid var(--good); }
 .ws-btns { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
 @media (max-width: 1100px) { .sk-sol .grid2 { grid-template-columns: 1fr; } }
+
+/* ---------- Einfaldar kennslustundir (lesefni) ---------- */
+.goals { background: var(--key-bg); border: 1px solid var(--key-line); border-radius: var(--radius); padding: 0.9rem 1.1rem; margin: 0 0 2rem; }
+.goals h3 { margin: 0 0 0.4rem; font-size: 0.95rem; }
+.goals ul { margin: 0; }
+.lesson { border-top: 1px solid var(--rule); padding-top: 1.4rem; margin-top: 2rem; }
+.lesson > h2 { display: flex; align-items: baseline; gap: 0.6rem; margin-top: 0; }
+.lesson > h2 .ls-n { font: 700 0.8rem/1 var(--sans); color: var(--raised); background: var(--mag); border-radius: 999px; padding: 0.3rem 0.55rem; flex: none; position: relative; top: -0.15rem; }
+.ls-what { font-size: 1.05rem; }
+.ls-when, .ls-oops { font: 0.95rem/1.5 var(--sans); border-radius: 8px; padding: 0.55rem 0.8rem; margin: 0.6rem 0; }
+.ls-when { background: color-mix(in srgb, var(--good) 10%, var(--raised)); border-left: 3px solid var(--good); }
+.ls-oops { background: color-mix(in srgb, var(--bad) 8%, var(--raised)); border-left: 3px solid var(--bad); }
+.ls-when b, .ls-oops b { margin-right: 0.3rem; }
+.try { border: 1px dashed var(--key-line); border-radius: var(--radius); padding: 0.8rem 1rem; margin: 1rem 0 1.4rem; }
+.try > p:first-child::before { content: "✍ "; }
+.try details.reveal { margin-bottom: 0; }
+.project { border: 2px solid var(--mag); border-radius: var(--radius); padding: 1rem 1.2rem; margin: 2rem 0; }
+.project > h2 { margin-top: 0; }
+.project .step { font-family: var(--sans); font-weight: 650; margin: 1rem 0 0.3rem; }
+.qref td:first-child { font-family: var(--sans); }
+.qref td code { white-space: nowrap; }
+input[type="search"] { font: 1rem var(--sans); padding: 0.5rem 0.7rem; border: 1px solid var(--rule-2); border-radius: 8px; background: var(--raised); color: var(--ink); }
+input[type="search"]:focus { border-color: var(--focus); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent); }

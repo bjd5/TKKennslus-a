@@ -162,7 +162,7 @@
     var P = pool(topics);
     var cur = null, answered = false, last = null;
     function next() {
-      var kind = P.gens.length && (!P.mcs.length || Math.random() < 0.6) ? "num" : "mc";
+      var kind = P.gens.length && (!P.mcs.length || Math.random() < 0.75) ? "num" : "mc";
       for (var t = 0; t < 8; t++) {
         cur = kind === "num" ? { kind: "num", d: B().pick(P.gens)() } : { kind: "mc", d: B().pick(P.mcs) };
         var key = cur.kind === "num" ? cur.d.title : cur.d.q;

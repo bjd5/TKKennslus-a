@@ -1,122 +1,148 @@
-<h1>Rökgildi og skilyrði</h1>
-<p class="lede">Forrit þurfa að velja: ef reiturinn er stigi, farðu upp; ef spilið passar, leggðu það niður. Hér lærir þú rökgildi (<code>boolean</code>), samanburðar- og rökvirkja, <code>if</code>/<code>else</code>, <code>switch</code> og skilyrðisvirkjann <code>?:</code>, og algengustu gildrurnar sem spurt er um á prófinu.</p>
+<h1>Ákvarðanir: if, else og switch</h1>
+<p class="lede">Forritið þarf að velja: ef notandinn er 18+, ef spilið passar, ef talan er slétt. Hér lærir þú að bera saman, sameina skilyrði og láta forritið velja leið. Í lokin leysir þú FizzBuzz, klassíska forritunarþraut.</p>
 
-<h2 id="boolean">Rökgildi og samanburður</h2>
-<p>Tagið <code>boolean</code> hefur tvö gildi: <code>true</code> og <code>false</code>. Samanburðarvirkjar skila boolean:</p>
-<div class="tablewrap"><table>
-<thead><tr><th>Virki</th><th>Merking</th><th>Dæmi (x = 5)</th></tr></thead>
-<tbody>
-<tr><td><code>==</code></td><td>jafnt og</td><td><code>x == 5</code> → true</td></tr>
-<tr><td><code>!=</code></td><td>ekki jafnt og</td><td><code>x != 5</code> → false</td></tr>
-<tr><td><code>&lt; &lt;= &gt; &gt;=</code></td><td>minna, minna eða jafnt, …</td><td><code>x &gt;= 5</code> → true</td></tr>
-</tbody></table></div>
-<div class="note warn"><p><b class="t">Þrjár gildrur:</b> (1) <code>=</code> er gildisveiting, <code>==</code> samanburður. (2) Berðu ekki saman <code>double</code> með <code>==</code>; notaðu <code>Math.abs(a - b) &lt; 1e-9</code>. (3) Berðu ekki saman <b>strengi</b> með <code>==</code>; notaðu <code>s.equals(t)</code> (kafli 4).</p></div>
+<div class="goals"><h3>Í lok kaflans geturðu</h3>
+<ul>
+<li>skrifað skilyrði með <code>== != &lt; &gt; &amp;&amp; || !</code></li>
+<li>notað <code>if</code> / <code>else if</code> / <code>else</code>, <code>?:</code> og <code>switch</code></li>
+<li>forðast algengustu if-villurnar</li>
+</ul></div>
 
-<h3>Rökvirkjar</h3>
-<div class="tablewrap"><table>
-<thead><tr><th>Virki</th><th>Heiti</th><th>Satt þegar</th></tr></thead>
-<tbody>
-<tr><td><code>!a</code></td><td>neitun (not)</td><td>a er ósatt</td></tr>
-<tr><td><code>a &amp;&amp; b</code></td><td>og (and)</td><td>bæði eru sönn</td></tr>
-<tr><td><code>a || b</code></td><td>eða (or)</td><td>að minnsta kosti annað er satt</td></tr>
-<tr><td><code>a ^ b</code></td><td>annaðhvort-eða (xor)</td><td>nákvæmlega annað er satt</td></tr>
-</tbody></table></div>
-<p>Forgangur: <code>!</code> sterkast, svo reiknivirkjar, svo samanburður (<code>&lt; &gt;</code>, svo <code>== !=</code>), svo <code>&amp;&amp;</code> og síðast <code>||</code>. Þess vegna er <code>a || b &amp;&amp; c</code> það sama og <code>a || (b &amp;&amp; c)</code>. Notaðu sviga ef þú ert í vafa.</p>
-<p><b>Skammhlaup</b> (short-circuit): <code>&amp;&amp;</code> metur hægri hliðina ekki ef vinstri er ósönn, og <code>||</code> ekki ef vinstri er sönn. Það er gagnlegt til að verjast villum: <code>if (n != 0 &amp;&amp; total / n &gt; 10)</code> deilir aldrei með núlli.</p>
-<p><b>De Morgan:</b> <code>!(a &amp;&amp; b)</code> er <code>!a || !b</code> og <code>!(a || b)</code> er <code>!a &amp;&amp; !b</code>. „Ekki á bilinu 1-6“ er <code>!(roll &gt;= 1 &amp;&amp; roll &lt;= 6)</code> = <code>roll &lt; 1 || roll &gt; 6</code>, eins og í Snakes &amp; Ladders.</p>
-<div class="note"><p><b class="t">Bil:</b> stærðfræðin skrifar 1 ≤ x ≤ 6, en í Java verður það <code>1 &lt;= x &amp;&amp; x &lt;= 6</code>. <code>1 &lt;= x &lt;= 6</code> er þýðingarvilla (boolean &lt;= int).</p></div>
-
-<h2 id="if">if, else og else if</h2>
-<pre class="code"><code class="java">if (score &gt;= 90) {
-    grade = 'A';
-} else if (score &gt;= 80) {
-    grade = 'B';          // hingað kemst aðeins score sem er &lt; 90
-} else if (score &gt;= 70) {
-    grade = 'C';
-} else {
-    grade = 'F';
-}</code></pre>
-<p>Í keðju af <code>else if</code> er <b>aðeins fyrsta sanna greinin</b> keyrð; hinar eru hunsaðar. Röðin skiptir því máli: ef <code>score &gt;= 70</code> væri prófað fyrst fengju allir yfir 70 C.</p>
-<p>Án slaufusviga tilheyrir aðeins <b>næsta setning</b> if-inu, sama hvernig inndrátturinn lítur út:</p>
+<section class="lesson" id="samanburdur">
+<h2><span class="ls-n">1</span> Samanburður gefur true eða false</h2>
 <div class="vs">
-<div><pre class="code"><code class="java">int x = 3;
-if (x &gt; 5)
-    System.out.println("stórt");
-    System.out.println("búið");</code></pre></div>
-<div><pre class="out">búið</pre></div>
+<div><pre class="code" data-run><code class="java">int x = 5;
+System.out.println(x == 5);   // jafnt
+System.out.println(x != 5);   // ekki jafnt
+System.out.println(x &gt; 3);
+System.out.println(x &lt;= 4);</code></pre></div>
+<div><pre class="out">true
+false
+true
+false</pre></div>
 </div>
-<p>Og <b>hangandi else</b> (dangling else) tilheyrir alltaf <b>næsta if-i á undan</b> sem ekki á else:</p>
+<p class="ls-oops"><b>Varúð:</b> <code>==</code> ber saman, <code>=</code> setur gildi. Og <b>texta</b> berðu saman með <code>s.equals("já")</code>, aldrei <code>==</code>.</p>
+</section>
+
+<section class="lesson" id="rokvirkjar">
+<h2><span class="ls-n">2</span> Og, eða, ekki</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Skrifar</th><th>Þýðir</th><th>Dæmi</th></tr></thead>
+<tbody>
+<tr><td><code>a &amp;&amp; b</code></td><td>bæði</td><td><code>age &gt;= 18 &amp;&amp; hasTicket</code></td></tr>
+<tr><td><code>a || b</code></td><td>annað hvort (eða bæði)</td><td><code>day == 6 || day == 7</code></td></tr>
+<tr><td><code>!a</code></td><td>ekki</td><td><code>!isEmpty</code></td></tr>
+</tbody></table></div>
 <div class="vs">
-<div><pre class="code"><code class="java">int a = 1, b = 5;
-if (a &gt; 2)
-    if (b &gt; 2)
-        System.out.println("X");
-else                        // tilheyrir if (b &gt; 2)!
-    System.out.println("Y");</code></pre></div>
-<div><pre class="out">(ekkert prentast)</pre><p style="font-size:0.9rem">a &gt; 2 er ósatt, og else-ið tilheyrir innra if-inu, svo ekkert er keyrt.</p></div>
+<div><pre class="code" data-run><code class="java">int roll = 7;
+boolean valid = roll &gt;= 1 &amp;&amp; roll &lt;= 6;
+System.out.println(valid);
+System.out.println(!valid);
+System.out.println(roll &lt; 1 || roll &gt; 6);</code></pre></div>
+<div><pre class="out">false
+true
+true</pre></div>
 </div>
-<div class="note warn"><p><b class="t">Semíkomma á röngum stað:</b> <code>if (x &gt; 5);</code> er if með tómri setningu. Blokkin á eftir keyrir alltaf. Notaðu alltaf slaufusviga og settu aldrei <code>;</code> beint á eftir svigunum.</p></div>
+<p class="ls-oops"><b>Varúð:</b> „milli 1 og 6“ er <code>roll &gt;= 1 &amp;&amp; roll &lt;= 6</code>. Að skrifa <code>1 &lt;= roll &lt;= 6</code> virkar ekki í Java.</p>
+</section>
 
-<h3>Fullunnið dæmi: sérhljóð eða samhljóð (vika 6)</h3>
-<pre class="code"><code class="java">char c = input.nextLine().charAt(0);
-final String VOWELS = "AEIOUaeiou";
-if (c &lt; 'A' || (c &gt; 'Z' &amp;&amp; c &lt; 'a') || c &gt; 'z') {
-    System.out.println("other");
-} else if (VOWELS.indexOf(c) &gt;= 0) {
-    System.out.println("vowel");
+<section class="lesson" id="if">
+<h2><span class="ls-n">3</span> if og else</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">int temp = 3;
+if (temp &gt; 20) {
+    System.out.println("Heitt");
+} else if (temp &gt; 5) {
+    System.out.println("Fínt");
 } else {
-    System.out.println("consonant");
-}</code></pre>
-<p>Fyrsta skilyrðið grípur allt sem er ekki enskur bókstafur (char eru tölur, svo <code>&lt;</code> og <code>&gt;</code> virka á þá). Annað skilyrðið leitar að stafnum í strengnum af sérhljóðum.</p>
+    System.out.println("Kalt");
+}</code></pre></div>
+<div><pre class="out">Kalt</pre></div>
+</div>
+<p class="ls-what">Java prófar skilyrðin <b>að ofan og niður</b> og keyrir <b>aðeins fyrstu</b> greinina sem er sönn. <code>else</code> grípur allt hitt.</p>
+<p class="ls-when"><b>Hvenær?</b> <code>if</code> eitt og sér: „gerðu þetta ef…“. <code>if/else</code>: tvær leiðir. <code>else if</code>-keðja: margar leiðir, t.d. einkunnir.</p>
+<p class="ls-oops"><b>Tvær gildrur:</b> (1) Engin <code>;</code> á eftir <code>if (…)</code>: <code>if (x &gt; 5);</code> gerir ekkert og blokkin keyrir alltaf. (2) Notaðu alltaf <code>{ }</code>; án þeirra tilheyrir aðeins <b>ein</b> lína if-inu.</p>
+</section>
 
-<h3>Fullunnið dæmi: er punktur í rétthyrningi?</h3>
-<pre class="code"><code class="java">if (px &gt;= Math.min(r1x, r2x) &amp;&amp; px &lt;= Math.max(r1x, r2x) &amp;&amp;
-    py &gt;= Math.min(r1y, r2y) &amp;&amp; py &lt;= Math.max(r1y, r2y)) {
-    System.out.println("P is inside R");
+<section class="lesson" id="einfalda">
+<h2><span class="ls-n">4</span> Einfaldaðu if-setningar</h2>
+<p class="ls-what">Samanburður er sjálfur <code>true</code>/<code>false</code>, svo oft þarftu ekkert if:</p>
+<div class="vs">
+<div><h4>Langt</h4><pre class="code"><code class="java">boolean isAdult;
+if (age &gt;= 18) {
+    isAdult = true;
 } else {
-    System.out.println("P is outside R");
-}</code></pre>
-<p><code>Math.min</code> og <code>Math.max</code> sjá um að hornin geti komið í hvaða röð sem er.</p>
+    isAdult = false;
+}</code></pre></div>
+<div><h4>Stutt</h4><pre class="code"><code class="java">boolean isAdult = age &gt;= 18;</code></pre></div>
+</div>
+</section>
 
-<h2 id="switch">switch</h2>
-<p><code>switch</code> velur grein eftir gildi á <code>int</code>, <code>char</code>, <code>String</code> eða enum (ekki double eða boolean):</p>
-<pre class="code"><code class="java">switch (day) {
-    case 1:
-        System.out.println("mánudagur");
+<section class="lesson" id="ternary">
+<h2><span class="ls-n">5</span> Stutta if-ið: ? :</h2>
+<p class="ls-what"><code>skilyrði ? gildiEfSatt : gildiEfÓsatt</code> velur annað af tveimur <b>gildum</b>.</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">int a = 4, b = 9;
+int max = a &gt; b ? a : b;
+String type = max % 2 == 0 ? "slétt" : "odda";
+System.out.println(max + " er " + type);</code></pre></div>
+<div><pre class="out">9 er odda</pre></div>
+</div>
+<p class="ls-when"><b>Hvenær?</b> Þegar þú velur á milli tveggja gilda í einni línu. Fyrir meira en það, notaðu venjulegt if.</p>
+</section>
+
+<section class="lesson" id="switch">
+<h2><span class="ls-n">6</span> switch</h2>
+<p class="ls-what">Velur grein eftir <b>nákvæmu gildi</b> (int, char eða String).</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">String role = "admin";
+switch (role) {
+    case "admin":
+        System.out.println("Allur aðgangur");
         break;
-    case 6:
-    case 7:                         // tvö gildi sameinuð
-        System.out.println("helgi");
+    case "user":
+    case "guest":
+        System.out.println("Takmarkaður");
         break;
     default:
-        System.out.println("virkur dagur");
-}</code></pre>
-<p><b>Mikilvægt:</b> án <code>break</code> heldur keyrslan áfram í <b>næstu case-grein</b> (fall-through), óháð gildi hennar, þar til <code>break</code> eða endir switch-ins kemur. <code>default</code> er keyrt ef engin case passar.</p>
-<div class="vs">
-<div><pre class="code"><code class="java">int n = 2;
-switch (n) {
-    case 1: System.out.print("a");
-    case 2: System.out.print("b");
-    case 3: System.out.print("c");
-        break;
-    case 4: System.out.print("d");
+        System.out.println("Óþekkt");
 }</code></pre></div>
-<div><pre class="out">bc</pre></div>
+<div><pre class="out">Allur aðgangur</pre></div>
 </div>
-<p>Nýrri Java (14+) leyfir líka örvaform sem hefur ekkert fall-through: <code>case 6, 7 -&gt; System.out.println("helgi");</code></p>
+<p class="ls-oops"><b>Varúð:</b> gleymdu ekki <code>break</code>. Án þess heldur keyrslan áfram niður í næstu <code>case</code>, sama hvert gildið er. Það er algeng prófspurning.</p>
+<p class="ls-when"><b>switch eða if?</b> switch þegar þú berð <b>eina</b> breytu saman við föst gildi (dagar, valmynd). if þegar þú þarft <code>&lt;</code>, <code>&gt;</code> eða sameinuð skilyrði.</p>
+</section>
 
-<h2 id="ternary">Skilyrðisvirkinn ?:</h2>
-<p><code>skilyrði ? gildiEfSatt : gildiEfÓsatt</code> er segð (ekki setning) sem skilar öðru af tveimur gildum:</p>
-<pre class="code"><code class="java">int max = (a &gt; b) ? a : b;
-System.out.println(n + (n == 1 ? " spil" : " spil á hendi"));
-String parity = (n % 2 == 0) ? "slétt" : "odda";</code></pre>
+<div class="project" id="fizzbuzz">
+<h2>Verkefni: FizzBuzz</h2>
+<p>Lestu tölu. Ef hún deilist með 5 prentaðu <code>Fizz</code>, ef hún deilist með 3 prentaðu <code>Buzz</code>, ef hún deilist með báðum prentaðu <code>FizzBuzz</code>, annars töluna sjálfa.</p>
+<p class="step">Vísbending: „deilist með 5“ er <code>n % 5 == 0</code>. Hugsaðu um í hvaða röð þú prófar.</p>
+<details class="reveal"><summary></summary><div class="sol">
+<pre class="code" data-run data-in="15"><code class="java">Scanner input = new Scanner(System.in);
+int n = input.nextInt();
+if (n % 5 == 0 &amp;&amp; n % 3 == 0) {
+    System.out.println("FizzBuzz");
+} else if (n % 5 == 0) {
+    System.out.println("Fizz");
+} else if (n % 3 == 0) {
+    System.out.println("Buzz");
+} else {
+    System.out.println(n);
+}</code></pre>
+<pre class="out">FizzBuzz</pre>
+<p>Sértækasta tilvikið (bæði) verður að koma <b>fyrst</b>. Ef <code>n % 5 == 0</code> væri prófað fyrst fengi 15 bara „Fizz“.</p>
+</div></details>
+</div>
 
-<h2 id="samantekt">Samantekt</h2>
-<ul class="checklist">
-<li><code>==</code> ber saman, <code>=</code> gefur gildi. Strengir með <code>equals</code>, double með skekkjumörkum.</li>
-<li><code>!</code> → <code>&amp;&amp;</code> → <code>||</code>; skammhlaup ver gegn villum.</li>
-<li>Í else-if-keðju keyrir aðeins fyrsta sanna greinin.</li>
-<li>Án slaufusviga á bara næsta setning við if; else tilheyrir næsta if-i á undan.</li>
-<li>switch án <code>break</code> fellur í gegn í næstu case.</li>
-<li><code>a ? b : c</code> er segð sem skilar b eða c.</li>
-</ul>
+<h2>Í hnotskurn</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>gera eitthvað aðeins stundum</td><td><code>if (…) { … }</code></td></tr>
+<tr><td>velja á milli tveggja leiða</td><td><code>if (…) { … } else { … }</code></td></tr>
+<tr><td>velja á milli margra bila (einkunnir)</td><td><code>if … else if … else</code>, hæsta markið fyrst</td></tr>
+<tr><td>velja á milli tveggja gilda</td><td><code>x = cond ? a : b;</code></td></tr>
+<tr><td>bregðast við föstum gildum (valmynd)</td><td><code>switch</code> með <code>break</code></td></tr>
+<tr><td>bera saman texta</td><td><code>s.equals("já")</code></td></tr>
+<tr><td>athuga bil</td><td><code>x &gt;= 1 &amp;&amp; x &lt;= 6</code></td></tr>
+</tbody></table></div>

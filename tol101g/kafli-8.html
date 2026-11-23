@@ -20,18 +20,18 @@
 <nav aria-label="Efnisyfirlit">
 <h2>Ferðalagið</h2><ul>
 <li><a class="nav" href="index.html">Kortið</a></li>
-<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Forrit og reiknirit</a></li>
-<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Tölur, breytur og segðir</a></li>
-<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Rökgildi og skilyrði</a></li>
-<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Stafir og strengir</a></li>
+<li><a class="nav" href="kafli-1.html" data-gate="ch1">1. Fyrsta Java-forritið</a></li>
+<li><a class="nav" href="kafli-2.html" data-gate="ch2">2. Breytur, tölur og inntak</a></li>
+<li><a class="nav" href="kafli-3.html" data-gate="ch3">3. Ákvarðanir: if og switch</a></li>
+<li><a class="nav" href="kafli-4.html" data-gate="ch4">4. Texti: String og char</a></li>
 <li><a class="nav" href="kafli-5.html" data-gate="ch5">5. Lykkjur</a></li>
 <li><a class="nav" href="kafli-6.html" data-gate="ch6">6. Aðferðir</a></li>
 <li><a class="nav" href="kafli-7.html" data-gate="ch7">7. Fylki</a></li>
 <li><a class="nav" href="kafli-8.html" aria-current="page" data-gate="ch8">8. Klasar og hlutir</a></li>
-<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Tengsl hluta og UML</a></li>
+<li><a class="nav" href="kafli-9.html" data-gate="ch9">9. Hlutir sem vinna saman og UML</a></li>
 <li><a class="nav" href="kafli-10.html" data-gate="ch10">10. Erfðir og fjölbrigðni</a></li>
-<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. Hrein klasar og viðmót</a></li>
-<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Undantekningar og pakkar</a></li>
+<li><a class="nav" href="kafli-11.html" data-gate="ch11">11. abstract og interface</a></li>
+<li><a class="nav" href="kafli-12.html" data-gate="ch12">12. Villur: try, catch og throw</a></li>
 <li><a class="nav" href="lokaprof-aefing.html" data-gate="final">Lokapróf</a></li>
 </ul>
 <h2>Verðlaun</h2><ul>
@@ -39,6 +39,7 @@
 </ul>
 <h2>Verkfæri</h2><ul>
 <li><a class="nav" href="aefingar.html">Frjálsar æfingar</a></li>
+<li><a class="nav" href="uppfletting.html">Hvað nota ég?</a></li>
 <li><a class="nav" href="kodaskrif.html">Kóðaskrif</a></li>
 <li><a class="nav" href="spjold.html">Flashcards</a></li>
 <li><a class="nav" href="minnisblad.html">Minnisblað</a></li>
@@ -59,178 +60,194 @@
 <ol class="stepper" aria-label="Skref kaflans"><li><button type="button" class="st" data-step="lesa" aria-controls="step-lesa"><span class="st-n">1</span><span class="st-l">Lesa</span><small class="st-s" data-status="lesa"></small></button></li><li><button type="button" class="st" data-step="aefa" aria-controls="step-aefa"><span class="st-n">2</span><span class="st-l">Æfa</span><small class="st-s" data-status="aefa"></small></button></li><li><button type="button" class="st" data-step="gagnvirkt" aria-controls="step-gagnvirkt"><span class="st-n">3</span><span class="st-l">Verkstæði</span><small class="st-s" data-status="gagnvirkt"></small></button></li><li><button type="button" class="st" data-step="prof" aria-controls="step-prof"><span class="st-n">4</span><span class="st-l">Kaflapróf</span><small class="st-s" data-status="prof"></small></button></li></ol>
 </header>
 <section class="step" data-step="lesa" id="step-lesa">
-<p class="lede">Hlutbundin forritun lítur á forritið sem kerfi af hlutum sem vinna saman og kalla á aðferðir hvers annars. Hér lærir þú að skilgreina eigin klasa með eigindum, smiðum og aðferðum, búa til hluti með <code>new</code>, hjúpa ástand með <code>private</code> og get/set-aðferðum, og muninn á <code>static</code> og hlutbundnu. Dæmin koma úr UNO-spilinu og Circle-æfingunni.</p>
+<p class="lede">Hingað til hefur þú notað tög sem Java á (<code>int</code>, <code>String</code>, <code>Scanner</code>). Nú býrðu til þín eigin: <code>Card</code>, <code>Player</code>, <code>Circle</code>. Héðan í frá færumst við nær áfanganum og notum UNO-spilið úr tímunum.</p>
 
-<h2 id="hugtok">Klasi og hlutur</h2>
+<div class="goals"><h3>Í lok kaflans geturðu</h3>
+<ul>
+<li>skrifað klasa með eigindum, smið, get/set og <code>toString</code></li>
+<li>búið til hluti með <code>new</code> og kallað á aðferðir þeirra</li>
+<li>vitað hvenær á að nota <code>this</code>, <code>private</code> og <code>static</code></li>
+</ul></div>
+
+<section class="lesson" id="af-hverju">
+<h2><span class="ls-n">1</span> Hvenær býrðu til klasa?</h2>
+<p class="ls-what">Þegar mörg gildi eiga saman. Spil hefur <b>tölu</b> og <b>lit</b>. Í stað tveggja fylkja (<code>int[] numbers</code>, <code>char[] colors</code>) býrðu til eitt tag, <code>Card</code>, og hvert spil verður einn <b>hlutur</b>.</p>
 <div class="grid2">
-<div class="key"><p><b>Klasi</b> (class): skilgreining á sameiginlegum einkennum safns hluta: heiti og tög <b>eiginda</b> og undirskriftir og útfærslur <b>aðferða</b>. Skilgreindur þegar forritið er hannað. „Teikningin“.</p></div>
-<div class="key"><p><b>Hlutur</b> (object, instance): einstakt eintak af klasa með sín eigin gildi á eigindunum. Búinn til (og eytt) á meðan forritið keyrir. „Bíllinn sem smíðaður er eftir teikningunni“.</p></div>
+<div class="key"><p><b>Klasi</b> = uppskriftin (hvaða gögn og aðgerðir spil hefur).</p></div>
+<div class="key"><p><b>Hlutur</b> = eitt raunverulegt spil, búið til með <code>new</code>.</p></div>
 </div>
-<p>Hver hlutur hefur <b>ástand</b> (state), sem eigindin skilgreina, og <b>hegðun</b> (behavior), sem aðferðirnar skilgreina. Ástandið er venjulega <b>hjúpað</b> (encapsulated): aðeins aðferðir hlutarins sjálfs mega breyta því, svo þær geti tryggt að það sé alltaf gilt.</p>
+</section>
 
-<h2 id="card">Klasinn Card</h2>
-<pre class="code"><code class="java">public class Card {
-    private int number;        // eigindi (attributes, instance variables)
+<section class="lesson" id="card">
+<h2><span class="ls-n">2</span> Klasinn Card</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">class Card {
+    private int number;            // eigindi: gögn hvers spils
     private char color;
 
-    public Card(int number, char color) {   // smiður (constructor)
-        this.number = number;  // this.number er eigindið, number færibreytan
+    public Card(int number, char color) {   // smiður
+        this.number = number;
         this.color = color;
     }
-
-    public int getNumber() { return number; }   // get-aðferð (getter)
+    public int getNumber() { return number; }   // getter
     public char getColor() { return color; }
 
-    public boolean matches(Card other) {         // „business“-aðferð
+    public boolean matches(Card other) {        // aðgerð
         return number == other.number || color == other.color;
     }
-
     public String toString() {
-        return "" + color + number;             // t.d. "R7"
+        return "" + color + number;
     }
-}</code></pre>
-<pre class="code"><code class="java">Card c = new Card(7, 'R');     // new býr til hlut og kallar á smiðinn
-Card d = new Card(7, 'G');
-System.out.println(c);          // R7   (println kallar á toString)
-System.out.println(c.matches(d) + " " + d.getColor());   // true G</code></pre>
-
-<h2 id="smidir">Smiðir</h2>
-<ul>
-<li>Smiður heitir <b>nákvæmlega það sama og klasinn</b> og hefur <b>ekkert skilatag</b> (ekki einu sinni void).</li>
-<li>Hann er kallaður sjálfkrafa með <code>new</code> og á að koma hlutnum í gilt upphafsástand.</li>
-<li>Ef klasinn hefur <b>engan</b> smið býr Java til <b>sjálfgefinn smið</b> (default constructor) án færibreyta. Um leið og þú skrifar einhvern smið hverfur sá sjálfgefni: <code>new Card()</code> verður þá þýðingarvilla nema þú skrifir hann sjálf(ur).</li>
-<li>Smiðir má yfirhlaða, og einn smiður getur kallað á annan með <code>this(…)</code> í <b>fyrstu línu</b>.</li>
-</ul>
-<pre class="code"><code class="java">public Circle(double x, double y, double r) {
-    this.x = x;
-    this.y = y;
-    setR(r);              // notar setterinn svo staðfestingin gildi líka hér
 }
-public Circle(double r) {
-    this(0, 0, r);        // kallar á hinn smiðinn
-}</code></pre>
-<p>Eigindi sem smiðurinn setur ekki fá sjálfgefin gildi: <code>0</code>, <code>false</code> eða <code>null</code> (ólíkt staðværum breytum, sem verður að frumstilla).</p>
-
-<h2 id="this">Lykilorðið this</h2>
-<p><code>this</code> er tilvísun á <b>hlutinn sjálfan</b>, þann sem aðferðin var kölluð á. Það þarf þegar færibreyta <b>skyggir á</b> (shadows) eigindi með sama nafni: <code>this.r = r;</code>. Án <code>this</code> væri <code>r = r;</code> gildisveiting færibreytunnar í sjálfa sig, og eigindið yrði 0.</p>
-
-<h2 id="hjupun">Hjúpun: private, get og set</h2>
-<div class="tablewrap"><table>
-<thead><tr><th>Aðgangur</th><th>UML</th><th>Sýnilegt</th></tr></thead>
-<tbody>
-<tr><td><code>public</code></td><td><code>+</code></td><td>öllum klösum</td></tr>
-<tr><td><code>protected</code></td><td><code>#</code></td><td>undirklösum og klösum í sama pakka (kafli 10)</td></tr>
-<tr><td>(ekkert, pakkaaðgangur)</td><td><code>~</code></td><td>klösum í sama pakka</td></tr>
-<tr><td><code>private</code></td><td><code>-</code></td><td>bara klasanum sjálfum</td></tr>
-</tbody></table></div>
-<p>Reglan í námskeiðinu: <b>eigindi eru private</b>; aðgangur fer í gegnum <b>public aðferðir</b>: smið, <b>get-aðferðir</b> (lesa, mögulega með umbreytingu), <b>set-aðferðir</b> (skrifa, mögulega með staðfestingu) og aðrar aðferðir sem vinna með eigindin. Setter getur hafnað eða lagað ógild gildi:</p>
-<pre class="code"><code class="java">public void setR(double r) {
-    if (r &lt; 0) { r = r * -1; }   // neikvæður radíus verður jákvæður
-    this.r = r;
-}</code></pre>
-<p>Ekki þurfa öll eigindi get- og set-aðferðir. Spil (Card) breytir ekki um lit, svo það hefur bara getters: það er <b>óbreytanlegt</b> (immutable), eins og String.</p>
-
-<h2 id="tilvisanir">Hlutir eru tilvísanir</h2>
-<p>Eins og fylki: breyta af tagi <code>Card</code> geymir <b>tilvísun</b> á hlut. <code>Card c2 = c1;</code> býr ekki til nýtt spil; bæði nöfnin vísa á sama hlutinn. Þegar hlutur er sendur í aðferð er tilvísunin afrituð, svo aðferðin getur breytt ástandi hans:</p>
-<div class="vs">
-<div><pre class="code"><code class="java">public static void check(Card card) {
-    card.setNumber(card.getNumber() + 1);
-    System.out.println(card.getNumber());
-}
-
-Card c = new Card(5, 'G');
-System.out.println(c.getNumber());
-check(c);
-System.out.println(c.getNumber());</code></pre></div>
-<div><pre class="out">5
-6
-6</pre><p style="font-size:0.92rem">(Hér hefur Card fengið <code>setNumber</code>.)</p></div>
+// í main:
+Card a = new Card(7, 'R');
+Card b = new Card(7, 'G');
+Card c = new Card(2, 'Y');
+System.out.println(a);
+System.out.println(a.matches(b) + " " + a.matches(c));
+System.out.println(b.getColor());</code></pre></div>
+<div><pre class="out">R7
+true false
+G</pre></div>
 </div>
-<p><code>null</code> þýðir „vísar ekki á neinn hlut“. Kall á aðferð í gegnum <code>null</code>-tilvísun kastar <code>NullPointerException</code>. <code>==</code> á hlutum ber saman tilvísanir; til að bera saman innihald þarf klasinn sína eigin <code>equals</code>-aðferð.</p>
-<p>Hlutur sem engin tilvísun bendir lengur á er <b>ruslasafnaður</b> (garbage collected) sjálfkrafa.</p>
-
-<h2 id="static">static og hlutbundið</h2>
-<div class="tablewrap"><table>
-<thead><tr><th></th><th>Hlutbundið (instance)</th><th>static (klasa-)</th></tr></thead>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Hluti</th><th>Til hvers</th></tr></thead>
 <tbody>
-<tr><td>Eigindi</td><td>hver hlutur hefur sitt eintak</td><td><b>eitt</b> eintak sem allir hlutir deila</td></tr>
-<tr><td>Aðferð</td><td>kölluð á hlut: <code>c.getNumber()</code>; hefur <code>this</code></td><td>kölluð á klasann: <code>Math.max(…)</code>; hefur ekkert <code>this</code></td></tr>
-<tr><td>Má nota</td><td>öll eigindi og aðferðir</td><td>aðeins static eigindi og aðferðir (beint)</td></tr>
+<tr><td><code>private int number;</code></td><td><b>Eigindi</b>: gögn sem hver hlutur hefur. Alltaf <code>private</code>.</td></tr>
+<tr><td><code>public Card(…)</code></td><td><b>Smiður</b>: keyrir við <code>new</code> og setur upphafsgildin. Sama nafn og klasinn, <b>ekkert</b> skilatag.</td></tr>
+<tr><td><code>getNumber()</code></td><td><b>Getter</b>: leyfir öðrum að lesa eigindi.</td></tr>
+<tr><td><code>matches(…)</code></td><td>Aðgerð sem notar gögn hlutarins.</td></tr>
+<tr><td><code>toString()</code></td><td>Það sem prentast þegar hluturinn er prentaður.</td></tr>
 </tbody></table></div>
-<pre class="code"><code class="java">public class Player {
-    private static int count = 0;   // sameiginlegt
-    private int id;                 // eitt á hvern leikmann
+</section>
 
-    public Player() {
+<section class="lesson" id="this">
+<h2><span class="ls-n">3</span> this</h2>
+<p class="ls-what"><code>this</code> = „þessi hlutur“. Þú þarft það þegar færibreytan heitir það sama og eigindið:</p>
+<pre class="code"><code class="java">public Card(int number, char color) {
+    this.number = number;   // eigindið = færibreytan
+}</code></pre>
+<p class="ls-oops"><b>Algeng villa:</b> <code>number = number;</code> án this gerir ekkert; eigindið verður 0. (Prófspurning!)</p>
+</section>
+
+<section class="lesson" id="set">
+<h2><span class="ls-n">4</span> Setter sem passar upp á gildið</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">class Circle {
+    private double r;
+    public Circle(double r) {
+        setR(r);
+    }
+    public void setR(double r) {
+        if (r &lt; 0) {
+            r = -r;            // enginn neikvæður radíus
+        }
+        this.r = r;
+    }
+    public double getR() { return r; }
+    public double area() { return Math.PI * r * r; }
+}
+// í main:
+Circle c = new Circle(-2);
+System.out.println(c.getR());
+c.setR(1);
+System.out.printf("%.2f%n", c.area());</code></pre></div>
+<div><pre class="out">2.0
+3.14</pre></div>
+</div>
+<p class="ls-when"><b>Af hverju private + setter?</b> Svo enginn geti sett rugl í hlutinn. Setterinn ákveður hvað er löglegt. Ef gildi á aldrei að breytast (eins og litur spils): enginn setter.</p>
+</section>
+
+<section class="lesson" id="tilvisun">
+<h2><span class="ls-n">5</span> Hlutir eru vísanir (eins og fylki)</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">class Counter {
+    private int value;
+    public void inc() { value++; }
+    public int get() { return value; }
+}
+// í main:
+Counter a = new Counter();
+Counter b = a;          // sami hluturinn!
+b.inc();
+b.inc();
+System.out.println(a.get());
+Counter c = null;
+System.out.println(c == null);</code></pre></div>
+<div><pre class="out">2
+true</pre></div>
+</div>
+<p class="ls-oops"><b>Varúð:</b> að kalla á aðferð á <code>null</code> (t.d. <code>c.inc()</code>) hrynur með <code>NullPointerException</code>. <code>new Card[7]</code> býr til 7 <b>tóm</b> hólf (null), ekki 7 spil.</p>
+</section>
+
+<section class="lesson" id="static">
+<h2><span class="ls-n">6</span> static: tilheyrir klasanum, ekki hlutnum</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">class Player {
+    private static int count = 0;   // EITT fyrir alla
+    private String name;            // eitt á hvern leikmann
+    public Player(String name) {
+        this.name = name;
         count++;
-        id = count;
     }
     public static int getCount() { return count; }
-}</code></pre>
-<p>Algeng þýðingarvilla: að nota hlutbundið eigindi eða aðferð beint inni í <code>static main</code> („non-static variable cannot be referenced from a static context“). main tilheyrir klasanum, ekki neinum hlut, svo þú þarft fyrst að búa til hlut með <code>new</code>.</p>
-
-<h2 id="stack">Fullunnið dæmi: StackOfCards</h2>
-<p>Hlaði (stack) er „síðast inn, fyrst út“ (LIFO), eins og bunki af spilum. Hann er útfærður með fylki og vísi á efsta spilið:</p>
-<pre class="code"><code class="java">public class StackOfCards {
-    private Card[] cards;
-    private int top;                 // vísir efsta spils; -1 ef tómur
-
-    public StackOfCards() {
-        cards = new Card[112];
-        top = -1;
-    }
-    public void push(Card card) { cards[++top] = card; }   // hækka fyrst, svo geyma
-    public Card peek()          { return cards[top]; }
-    public Card pop()           { return cards[top--]; }   // skila, svo lækka
-    public boolean isEmpty()    { return top == -1; }
-
-    public String toString() {
-        String result = "";
-        for (int i = 0; i &lt;= top; i++) {     // bara notuðu hólfin
-            result += cards[i] + ", ";
-        }
-        return result;
-    }
-}</code></pre>
-
-<h2 id="uml">Klasar í UML</h2>
-<p>UML-klasarit sýnir klasann sem kassa með þremur hólfum: <b>nafn</b>, <b>eigindi</b> og <b>aðferðir</b>. Tag kemur á eftir nafni með tvípunkti og aðgangur er táknaður með <code>+ - # ~</code>. static er undirstrikað.</p>
-<div class="vs">
-<div><pre class="code" style="font-family:var(--mono)">┌─────────────────────────────┐
-│ Card                        │
-├─────────────────────────────┤
-│ - number : int              │
-│ - color : char              │
-├─────────────────────────────┤
-│ + Card(number : int,        │
-│        color : char)        │
-│ + getNumber() : int         │
-│ + getColor() : char         │
-│ + matches(other : Card)     │
-│        : boolean            │
-│ + toString() : String       │
-└─────────────────────────────┘</pre></div>
-<div><pre class="code"><code class="java">public class Card {
-    private int number;
-    private char color;
-    public Card(int number, char color) {…}
-    public int getNumber() {…}
-    public char getColor() {…}
-    public boolean matches(Card other) {…}
-    public String toString() {…}
-}</code></pre></div>
+}
+// í main:
+new Player("Anna");
+new Player("Kári");
+System.out.println(Player.getCount());</code></pre></div>
+<div><pre class="out">2</pre></div>
 </div>
-<p>Nafnavenjur: klasar í <b>eintölu</b> með stórum staf (<code>DiscardPile</code>), eigindi og aðferðir með litlum staf (<code>getColor</code>), fastar í hástöfum (<code>MAX_CARDS</code>).</p>
+<p class="ls-when"><b>Hvenær static?</b> Fyrir það sem er sameiginlegt öllum (teljari, fasti) og hjálparaðferðir sem þurfa engan hlut (eins og <code>Math.max</code>). Annars: ekki static.</p>
+<p class="ls-oops"><b>Algeng villa:</b> að kalla á aðferð án static beint úr <code>main</code> („non-static … cannot be referenced from a static context“). Búðu fyrst til hlut með <code>new</code>.</p>
+</section>
 
-<h2 id="samantekt">Samantekt</h2>
-<ul class="checklist">
-<li>Klasi = teikning; hlutur = eintak búið til með <code>new</code>.</li>
-<li>Smiður: sama nafn og klasinn, ekkert skilatag; sjálfgefinn smiður aðeins ef enginn annar er til.</li>
-<li><code>this.x = x;</code> þegar færibreyta skyggir á eigindi; <code>this(…)</code> kallar á annan smið.</li>
-<li>Eigindi private; get/set public, setter getur staðfest.</li>
-<li>Hlutbreytur geyma tilvísanir; <code>null</code> → NullPointerException.</li>
-<li>static: eitt eintak á klasa; ekkert <code>this</code>.</li>
-</ul>
+<section class="lesson" id="stack">
+<h2><span class="ls-n">7</span> Úr tímanum: StackOfCards</h2>
+<p class="ls-what">Bunki af spilum: síðasta spilið sem fer á er það fyrsta sem kemur af (eins og raunverulegur bunki). Fylki + vísir á efsta spilið:</p>
+<pre class="code"><code class="java">class StackOfCards {
+    private Card[] cards = new Card[112];
+    private int top = -1;                   // -1 = tómur
+
+    public void push(Card card) { cards[++top] = card; }   // hækka, svo setja
+    public Card pop()           { return cards[top--]; }   // taka, svo lækka
+    public Card peek()          { return cards[top]; }
+    public boolean isEmpty()    { return top == -1; }
+}</code></pre>
+</section>
+
+<section class="lesson" id="uml">
+<h2><span class="ls-n">8</span> Klasi í UML (á prófinu)</h2>
+<div class="vs">
+<div><pre class="code" style="font-family:var(--mono)">Card
+──────────────────────────
+- number : int
+- color : char
+──────────────────────────
++ Card(number : int, color : char)
++ getNumber() : int
++ matches(other : Card) : boolean
++ toString() : String</pre></div>
+<div><p><code>-</code> = private, <code>+</code> = public. Tagið kemur <b>á eftir</b> nafninu með tvípunkti. Á prófinu þarftu að geta breytt þessu í Java og öfugt: <code>- number : int</code> → <code>private int number;</code>, <code>+ getNumber() : int</code> → <code>public int getNumber()</code>.</p></div>
+</div>
+</section>
+
+<div class="try">
+<p><b>Prófaðu:</b> skrifaðu klasann <code>BankAccount</code> með private <code>balance</code>, <code>deposit(double)</code>, <code>withdraw(double)</code> sem skilar false ef innistæðan dugar ekki, og <code>getBalance()</code>. (Lausnin er í <a href="kodaskrif.html">kóðaskrifunum</a>.)</p>
+</div>
+
+<h2>Í hnotskurn</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>nýtt tag fyrir gögn sem eiga saman</td><td><code>class Card { … }</code></td></tr>
+<tr><td>gögn hvers hlutar</td><td><code>private int number;</code></td></tr>
+<tr><td>setja upphafsgildi</td><td>smiður: <code>public Card(int number) { this.number = number; }</code></td></tr>
+<tr><td>búa til hlut</td><td><code>Card c = new Card(7, 'R');</code></td></tr>
+<tr><td>lesa / breyta eigindi utan frá</td><td><code>getX()</code> / <code>setX(…)</code> (með staðfestingu)</td></tr>
+<tr><td>stjórna því hvernig hlutur prentast</td><td><code>public String toString()</code></td></tr>
+<tr><td>eitthvað sameiginlegt öllum hlutum</td><td><code>static</code></td></tr>
+</tbody></table></div>
 <div class="step-next"><button type="button" class="btn" data-act="read">Ég hef lesið kaflann · áfram í æfingar →</button></div>
 </section>
 <section class="step" data-step="aefa" id="step-aefa" hidden>
@@ -250,7 +267,7 @@ System.out.println(c.getNumber());</code></pre></div>
 </section>
 </div>
 </div>
-<div class="pager noprint"><a href="kafli-7.html"><span>Fyrri</span>7. Fylki</a><a href="kafli-9.html" style="text-align:right"><span>Næsta</span>9. Tengsl hluta og UML</a></div>
+<div class="pager noprint"><a href="kafli-7.html"><span>Fyrri</span>7. Fylki</a><a href="kafli-9.html" style="text-align:right"><span>Næsta</span>9. Hlutir sem vinna saman og UML</a></div>
 </div>
 </main>
 </div>

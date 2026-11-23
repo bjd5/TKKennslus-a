@@ -1,32 +1,75 @@
-<h1>Tengsl hluta og UML</h1>
-<p class="lede">Hlutir standa sjaldnast einir: leikmaður heldur á spilum, UNO-leikur hefur dráttarbunka og kastbunka, þríhyrningur hefur þrjá punkta. Hér lærir þú tengslategundirnar (samband, safntengsl, samsetning, háð), hvernig þær eru teiknaðar í UML-klasariti og þýddar í Java, söfn af hlutum í fylkjum, og meira um String-klasann (óbreytanleika, internering, split og StringBuilder).</p>
+<h1>Hlutir sem vinna saman (og UML)</h1>
+<p class="lede">Í alvöru forriti vinna margir klasar saman: UNO-leikur hefur bunka og leikmenn, leikmaður hefur spil á hendi. Hér lærir þú að tengja klasa saman, lesa og teikna það í UML (prófið!) og nokkur gagnleg verkfæri fyrir texta.</p>
 
-<h2 id="tengsl">Tegundir tengsla</h2>
-<div class="tablewrap"><table>
-<thead><tr><th>Tengsl</th><th>Merking</th><th>UML</th><th>Í Java</th></tr></thead>
+<div class="goals"><h3>Í lok kaflans geturðu</h3>
+<ul>
+<li>látið klasa geyma aðra hluti, einn eða mörg</li>
+<li>lesið UML-örvarnar og þýtt þær í Java</li>
+<li>notað <code>split</code> og <code>StringBuilder</code></li>
+</ul></div>
+
+<section class="lesson" id="hefur">
+<h2><span class="ls-n">1</span> „Hefur“: hlutur sem eigindi</h2>
+<p class="ls-what">Ef A <b>hefur</b> B, verður B eigindi í A. Eitt B: venjulegt eigindi. Mörg B: fylki og teljari.</p>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">class Card {
+    private int number;
+    private char color;
+    public Card(int n, char c) { number = n; color = c; }
+    public int getNumber() { return number; }
+    public String toString() { return "" + color + number; }
+}
+class Hand {
+    private Card[] cards = new Card[10];
+    private int count = 0;
+    public void add(Card c) {
+        cards[count] = c;
+        count++;
+    }
+    public int points() {
+        int sum = 0;
+        for (int i = 0; i &lt; count; i++) {
+            sum += cards[i].getNumber();
+        }
+        return sum;
+    }
+    public String toString() {
+        String s = "";
+        for (int i = 0; i &lt; count; i++) s += cards[i] + " ";
+        return s;
+    }
+}
+// í main:
+Hand h = new Hand();
+h.add(new Card(7, 'R'));
+h.add(new Card(2, 'G'));
+System.out.println(h + "= " + h.points());</code></pre></div>
+<div><pre class="out">R7 G2 = 9</pre></div>
+</div>
+<p class="ls-when"><b>Mynstrið:</b> fylki + <code>count</code>. Lykkjan fer aðeins upp í <code>count</code>, því hin hólfin eru <code>null</code> (þá kæmi NullPointerException).</p>
+</section>
+
+<section class="lesson" id="deilt">
+<h2><span class="ls-n">2</span> Geyma vísun eða afrit?</h2>
+<p class="ls-what">Ef smiður geymir hlut sem hann fékk, <b>deila</b> báðir sama hlutnum. Breyting utan frá sést inni. Viltu að klasinn eigi sinn eigin hlut? Afritaðu.</p>
+<pre class="code"><code class="java">this.center = p;                               // deilt: p.shift(…) færir líka rétthyrninginn
+this.center = new Point(p.getX(), p.getY());   // afrit: rétthyrningurinn á sinn eigin punkt</code></pre>
+<p class="ls-when"><b>Úr tímanum:</b> Triangle í geometry-dæminu afritar punktana sem hann fær; „independent“-útgáfan geymir vísanirnar.</p>
+</section>
+
+<section class="lesson" id="uml">
+<h2><span class="ls-n">3</span> UML-örvar (kemur á prófinu)</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Teikning</th><th>Þýðir</th><th>Í Java</th></tr></thead>
 <tbody>
-<tr><td><b>Samband</b> (association)</td><td>Hlutir af klösunum tengjast; „notar“, „þekkir“. T.d. nemandi <i>tekur</i> námskeið.</td><td>heil lína; opin ör sýnir í hvora átt er hægt að rata (navigability)</td><td>eigindi sem vísar á hinn klasann</td></tr>
-<tr><td><b>Safntengsl</b> (aggregation)</td><td>„hefur“: heild og hlutar, en hlutarnir geta lifað án heildarinnar og tilheyrt fleirum. T.d. námskeið hefur nemendur.</td><td>lína með <b>holum tígli</b> við heildina</td><td>eigindi (oft fylki) með tilvísunum sem koma <b>utan frá</b></td></tr>
-<tr><td><b>Samsetning</b> (composition)</td><td>Sterkari „samanstendur af“: hlutarnir tilheyra aðeins þessari heild og lifa og deyja með henni. T.d. þríhyrningur og hornpunktar hans.</td><td>lína með <b>fylltum tígli</b> við heildina</td><td>heildin <b>býr til</b> hlutana sjálf (eða afritar þá) og deilir þeim ekki</td></tr>
-<tr><td><b>Háð</b> (dependency)</td><td>Veikt, tímabundið: klasi notar annan t.d. sem færibreytu eða staðværa breytu.</td><td><b>brotin</b> lína með opinni ör</td><td>færibreyta eða staðvær breyta, ekki eigindi</td></tr>
-<tr><td><b>Erfðir</b> (generalization)</td><td>„er“: undirklasi er sérhæfing yfirklasa (kafli 10).</td><td>heil lína með <b>holum þríhyrningi</b> við yfirklasann</td><td><code>extends</code></td></tr>
-<tr><td><b>Útfærsla</b> (realization)</td><td>Klasi útfærir viðmót (kafli 11).</td><td><b>brotin</b> lína með holum þríhyrningi</td><td><code>implements</code></td></tr>
+<tr><td>heil lína, holur þríhyrningur ▷</td><td><b>er</b> (erfðir)</td><td><code>class DrawPile extends StackOfCards</code></td></tr>
+<tr><td>brotin lína, holur þríhyrningur ▷</td><td><b>útfærir</b> viðmót</td><td><code>class Card implements Comparable&lt;Card&gt;</code></td></tr>
+<tr><td>fylltur tígull ◆</td><td><b>samanstendur af</b> (hlutarnir deyja með heildinni)</td><td>heildin býr til hlutana: <code>new Point(…)</code> í smiðnum</td></tr>
+<tr><td>holur tígull ◇</td><td><b>hefur</b> (hlutarnir lifa sjálfstætt)</td><td>eigindi sem fær hlutina utan frá</td></tr>
+<tr><td>heil lína / opin ör →</td><td><b>þekkir</b></td><td>eigindi af hinu taginu</td></tr>
+<tr><td>brotin lína, opin ör ⇢</td><td><b>notar</b> tímabundið</td><td>færibreyta eða staðvær breyta</td></tr>
 </tbody></table></div>
-<div class="note tip"><p><b class="t">Minnisregla fyrir örvarnar:</b> <b>þríhyrningur</b> = „er“ (erfðir/útfærsla), <b>tígull</b> = „hefur“ (holur: getur lifað sjálfur; fylltur: deyr með heildinni), <b>opin ör</b> = „þekkir/notar“. <b>Brotin</b> lína = veikara (viðmót eða háð).</p></div>
-
-<h3>Fjöldatölur (multiplicity)</h3>
-<p>Við hvorn enda línunnar stendur hversu margir hlutir taka þátt:</p>
-<div class="tablewrap"><table>
-<thead><tr><th>Tákn</th><th>Merking</th><th>Java</th></tr></thead>
-<tbody>
-<tr><td><code>1</code></td><td>nákvæmlega einn</td><td><code>private DrawPile drawPile;</code></td></tr>
-<tr><td><code>0..1</code></td><td>enginn eða einn</td><td>eigindi sem getur verið <code>null</code></td></tr>
-<tr><td><code>*</code> eða <code>0..*</code></td><td>hve margir sem er</td><td><code>private Card[] hand;</code> (eða ArrayList)</td></tr>
-<tr><td><code>1..*</code></td><td>einn eða fleiri</td><td>fylki sem er aldrei tómt</td></tr>
-<tr><td><code>2..4</code></td><td>2 til 4</td><td><code>new Player[n]</code> með 2 ≤ n ≤ 4</td></tr>
-</tbody></table></div>
-
-<h3>UNO-spilið sem klasarit</h3>
+<p>Tölurnar á línunum segja <b>hve margir</b>: <code>1</code>, <code>0..1</code> (má vanta), <code>*</code> (hve margir sem er), <code>1..*</code>. Einn → eigindi; margir → fylki.</p>
 <figure class="uml-fig">
 <svg viewBox="0 0 640 330" role="img" aria-label="UML-klasarit fyrir UNO: UnoGame er samsett úr DrawPile, DiscardPile og 2 til 4 Player; Player hefur 0 eða fleiri Card; DrawPile og DiscardPile erfa frá StackOfCards sem geymir Card.">
 <defs>
@@ -51,113 +94,63 @@
 </svg>
 <figcaption>◆ samsetning (leikurinn býr til bunkana og leikmennina) · ◇ safntengsl (spil á hendi og í bunka lifa áfram þegar þau færast) · ▷ erfðir (bæði DrawPile og DiscardPile <i>eru</i> StackOfCards).</figcaption>
 </figure>
-<p>Leikurinn <b>býr til</b> bunkana og leikmennina (samsetning). Leikmaður <b>hefur</b> spil á hendi sem koma úr dráttarbunkanum og fara í kastbunkann, svo þau lifa áfram þó þau fari af hendinni (safntengsl). Bæði DrawPile og DiscardPile <b>eru</b> StackOfCards (erfðir, kafli 10).</p>
+</section>
 
-<h2 id="java">Tengsl í Java</h2>
-<div class="code-cols">
-<div><h4>Safntengsl: tilvísanir utan frá</h4><pre class="code"><code class="java">public class Course {
-    private String name;
-    private Student[] students = new Student[100];
-    private int count = 0;
-
-    public void addStudent(Student s) {
-        students[count++] = s;   // geymir tilvísunina
-    }
-    public int getNumberOfStudents() {
-        return count;
-    }
-}</code></pre></div>
-<div><h4>Samsetning: heildin býr til hlutana</h4><pre class="code"><code class="java">public class Triangle {
-    private Point[] corners = new Point[3];
-
-    public Triangle(Point p, Point q, Point r) {
-        corners[0] = new Point(p.getX(), p.getY());
-        corners[1] = new Point(q.getX(), q.getY());
-        corners[2] = new Point(r.getX(), r.getY());
-    }
-}</code></pre></div>
-</div>
-<p>Munurinn sést þegar punkturinn er færður <b>eftir</b> að þríhyrningurinn er búinn til. Óháða útgáfan af Triangle í geometry-dæminu geymir <i>tilvísanirnar</i> (<code>corners[0] = p;</code>), svo <code>p.shift(3, 1)</code> færir líka horn þríhyrningsins, jafnvel þótt enginn hafi kallað á aðferð þríhyrningsins. Útgáfan sem erfir frá Polygon <i>afritar</i> punktana, svo hún er óháð.</p>
-<div class="vs">
-<div><pre class="code"><code class="java">Point p = new Point(1, 1);
-Point[] shared = {p, new Point(4, 1), new Point(1, 5)};
-Triangle t = new Triangle(shared);   // geymir fylkið sjálft
-p.shift(10, 0);
-System.out.println(t);</code></pre></div>
-<div><pre class="out">Triangle with points (11.0,1.0) (4.0,1.0) (1.0,5.0)</pre></div>
-</div>
-<p>Þetta er sama tilvísanahugtakið og í kafla 7, bara með hlutum: <b>eigindi sem vísar á hlut deilir hlutnum</b> með öllum öðrum sem hafa tilvísun á hann.</p>
-
-<h3>Fylki af hlutum</h3>
-<p><code>Card[] hand = new Card[7];</code> býr til <b>fylki af 7 null-tilvísunum</b>, ekki sjö spil. Hvert spil þarf að búa til með <code>new</code> (eða fá utan frá):</p>
-<pre class="code"><code class="java">Card[] hand = new Card[7];
-hand[0] = new Card(5, 'R');
-for (Card c : hand) {
-    if (c != null) {                 // annars NullPointerException
-        System.out.print(c + " ");
-    }
-}</code></pre>
-
-<h2 id="verkefni">Verkefni með mörgum klösum</h2>
+<section class="lesson" id="pakkar">
+<h2><span class="ls-n">4</span> Margir klasar í verkefni</h2>
 <ul>
-<li>Hver public klasi er í sinni <code>.java</code>-skrá með sama nafni; skrárnar eru í möppu sem heitir eins og <b>pakkinn</b> (<code>package unogame;</code> efst í öllum skránum).</li>
-<li>Aðeins aðalklasinn hefur <code>main</code>.</li>
-<li>Á prófinu í Inspera máttu (og þarft stundum að) skrifa marga klasa í sama glugga; þá eru þeir <b>ekki</b> <code>public</code>.</li>
-<li><b>Sveigjanleg innri útfærsla, föst ytri viðmót:</b> þú getur breytt því hvernig StackOfCards geymir spilin (fylki, lista) án þess að neinn annar klasi þurfi að breytast, svo lengi sem public aðferðirnar eru þær sömu.</li>
+<li>Hver public klasi í sinni skrá: <code>Card.java</code>, <code>Hand.java</code>…</li>
+<li>Allar skrárnar byrja á sama <code>package unogame;</code> og eru í möppunni <code>unogame/</code>.</li>
+<li>Aðeins einn klasi hefur <code>main</code>.</li>
+<li><b>Á prófinu (Inspera):</b> allir klasarnir í sama glugga, og þá <b>ekki</b> <code>public</code> fyrir framan <code>class</code>.</li>
 </ul>
+</section>
 
-<h2 id="string">Meira um String</h2>
-<h3>Óbreytanleiki og internering</h3>
-<p>Strengjabókstafir (literals) með sama innihaldi eru <b>interneraðir</b>: JVM geymir aðeins eitt eintak og allar tilvísanir á <code>"uno"</code> vísa á sama hlutinn. <code>new String("uno")</code> og strengir sem verða til við keyrslu (samskeyting með breytu, <code>nextLine()</code>, <code>substring</code>) eru <b>nýir</b> hlutir:</p>
+<section class="lesson" id="split">
+<h2><span class="ls-n">5</span> Verkfæri: split, toCharArray, StringBuilder</h2>
 <div class="vs">
-<div><pre class="code"><code class="java">String a = "uno";
+<div><pre class="code" data-run><code class="java">String[] parts = "R7 G2  B9".split(" +");   // eitt eða fleiri bil
+System.out.println(parts.length + " " + parts[2]);
+char[] letters = "uno".toCharArray();
+System.out.println(letters[0]);
+StringBuilder sb = new StringBuilder();
+for (int i = 1; i &lt;= 3; i++) {
+    sb.append(i).append(",");
+}
+sb.reverse();
+System.out.println(sb.toString());</code></pre></div>
+<div><pre class="out">3 B9
+u
+,3,2,1</pre></div>
+</div>
+<p class="ls-when"><b>StringBuilder</b> þegar þú byggir upp texta í lykkju (hann breytist á staðnum; venjulegur String býr til nýjan texta í hverri umferð).</p>
+</section>
+
+<section class="lesson" id="equals">
+<h2><span class="ls-n">6</span> Enn og aftur: equals, ekki ==</h2>
+<div class="vs">
+<div><pre class="code" data-run><code class="java">String a = "uno";
 String b = "uno";
 String c = new String("uno");
-String d = "u";
-String e = d + "no";       // búinn til við keyrslu
 System.out.println(a == b);
 System.out.println(a == c);
-System.out.println(a == e);
-System.out.println(a.equals(e));</code></pre></div>
+System.out.println(a.equals(c));</code></pre></div>
 <div><pre class="out">true
-false
 false
 true</pre></div>
 </div>
-<p>Þess vegna virðist <code>==</code> stundum virka á strengi og stundum ekki. Reglan er einföld: <b>alltaf equals</b>.</p>
+<p class="ls-oops"><b>Þess vegna ruglar == fólk:</b> stundum virkar það (sami fasti texti er geymdur einu sinni), stundum ekki (nýr texti). <code>equals</code> virkar alltaf.</p>
+</section>
 
-<h3>split, replace og umbreytingar</h3>
-<div class="tablewrap"><table>
-<thead><tr><th>Kóði</th><th>Útkoma</th></tr></thead>
+<h2>Í hnotskurn</h2>
+<div class="tablewrap qref"><table>
+<thead><tr><th>Ég vil…</th><th>Nota</th></tr></thead>
 <tbody>
-<tr><td><code>"R7,G2,B9".split(",")</code></td><td>fylkið <code>{"R7", "G2", "B9"}</code></td></tr>
-<tr><td><code>"a  b c".split(" ")</code></td><td><code>{"a", "", "b", "c"}</code> (tómur strengur milli tveggja bila)</td></tr>
-<tr><td><code>"a  b c".split(" +")</code></td><td><code>{"a", "b", "c"}</code> (<code>" +"</code> er reglusegð: eitt eða fleiri bil)</td></tr>
-<tr><td><code>"a,b,,".split(",")</code></td><td><code>{"a", "b"}</code> (tómir strengir aftast hverfa)</td></tr>
-<tr><td><code>"uno".toCharArray()</code></td><td><code>{'u', 'n', 'o'}</code></td></tr>
-<tr><td><code>new String(chars)</code> / <code>String.valueOf(chars)</code></td><td>char-fylki aftur í streng</td></tr>
-<tr><td><code>String.join("-", "a", "b")</code></td><td><code>"a-b"</code></td></tr>
-<tr><td><code>"banana".replace("an", "AN")</code></td><td><code>"bANANa"</code></td></tr>
+<tr><td>A hefur eitt B</td><td><code>private B b;</code> í A</td></tr>
+<tr><td>A hefur mörg B</td><td><code>private B[] items = new B[MAX]; private int count;</code></td></tr>
+<tr><td>A á sinn eigin B (samsetning)</td><td><code>new B(…)</code> inni í A</td></tr>
+<tr><td>UML ▷ heil / brotin</td><td><code>extends</code> / <code>implements</code></td></tr>
+<tr><td>UML ◆ / ◇</td><td>samsetning / safntengsl (bæði eigindi)</td></tr>
+<tr><td>skipta texta upp</td><td><code>s.split(",")</code>, <code>s.split(" +")</code></td></tr>
+<tr><td>byggja texta í lykkju</td><td><code>StringBuilder</code> og <code>append</code></td></tr>
 </tbody></table></div>
-
-<h3>StringBuilder</h3>
-<p>Af því að strengir breytast aldrei býr <code>result += x</code> í lykkju til nýjan streng í hverri umferð. <code>StringBuilder</code> er <b>breytanlegur</b> strengur sem er hagkvæmari til að byggja upp texta:</p>
-<pre class="code"><code class="java">StringBuilder sb = new StringBuilder("uno");
-sb.append("!").append(7);    // "uno!7"  (append skilar sama hlutnum)
-sb.insert(0, "[");            // "[uno!7"
-sb.reverse();                 // "7!onu["
-sb.setCharAt(0, '8');         // "8!onu["
-String s = sb.toString();</code></pre>
-
-<h3>Umbúðaklasar (wrapper classes)</h3>
-<p>Hvert frumtag á sér klasa: <code>Integer</code>, <code>Double</code>, <code>Character</code>, <code>Boolean</code>… Java breytir sjálfkrafa á milli (<b>autoboxing</b> og <b>unboxing</b>): <code>Integer x = 5;</code> og <code>int y = x;</code>. Þeir hafa líka gagnlegar static aðferðir og fasta: <code>Integer.parseInt</code>, <code>Integer.MAX_VALUE</code>, <code>Double.parseDouble</code>, <code>Character.isDigit</code>.</p>
-
-<h2 id="samantekt">Samantekt</h2>
-<ul class="checklist">
-<li>Samband (lína/ör), safntengsl (◇), samsetning (◆), háð (brotin ör), erfðir (▷ heil lína), útfærsla (▷ brotin lína).</li>
-<li>Fjöldatölur: 1, 0..1, *, 1..*.</li>
-<li>Eigindi sem vísar á hlut deilir honum; afritaðu ef heildin á að eiga hlutinn sjálf.</li>
-<li><code>new Card[7]</code> er sjö <code>null</code>.</li>
-<li>Strengjabókstafir eru interneraðir; strengir búnir til við keyrslu eru nýir hlutir. Alltaf <code>equals</code>.</li>
-<li><code>split</code>, <code>toCharArray</code>, <code>StringBuilder</code>, autoboxing.</li>
-</ul>

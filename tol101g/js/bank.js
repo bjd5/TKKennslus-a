@@ -101,18 +101,18 @@
   }
 
   var TOPICS = [
-    { id: "forrit", label: "Forrit og reiknirit" },
-    { id: "tolur", label: "Tölur, breytur og segðir" },
-    { id: "skilyrdi", label: "Rökgildi og skilyrði" },
-    { id: "strengir", label: "Stafir og strengir" },
+    { id: "forrit", label: "Fyrsta forritið" },
+    { id: "tolur", label: "Breytur, tölur og inntak" },
+    { id: "skilyrdi", label: "if og switch" },
+    { id: "strengir", label: "Texti" },
     { id: "lykkjur", label: "Lykkjur" },
     { id: "adferdir", label: "Aðferðir" },
     { id: "fylki", label: "Fylki" },
     { id: "klasar", label: "Klasar og hlutir" },
-    { id: "tengsl", label: "Tengsl hluta og UML" },
+    { id: "tengsl", label: "Hlutir saman og UML" },
     { id: "erfdir", label: "Erfðir og fjölbrigðni" },
-    { id: "hrein", label: "Hrein klasar og viðmót" },
-    { id: "undantekningar", label: "Undantekningar og pakkar" },
+    { id: "hrein", label: "abstract og interface" },
+    { id: "undantekningar", label: "Villur (try/catch)" },
   ];
 
   window.TK = window.TK || {};

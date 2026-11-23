@@ -12,20 +12,22 @@ Hver kafli (`kafli-N.html`) hefur fjögur skref: **Lesa → Æfa → Kóðaverks
 
 | Kafli | Lesefni (`src/`) | Efni í bankanum | Bók |
 |---|---|---|---|
-| 1 Forrit og reiknirit | `forrit.html` | `forrit` | 1 |
-| 2 Tölur, breytur og segðir | `tolur.html` | `tolur` | 2 |
-| 3 Rökgildi og skilyrði | `skilyrdi.html` | `skilyrdi` | 3 |
-| 4 Stafir og strengir | `strengir.html` | `strengir` | 4 |
+| 1 Fyrsta Java-forritið | `forrit.html` | `forrit` | 1 |
+| 2 Breytur, tölur og inntak | `tolur.html` | `tolur` | 2 |
+| 3 Ákvarðanir: if og switch | `skilyrdi.html` | `skilyrdi` | 3 |
+| 4 Texti: String og char | `strengir.html` | `strengir` | 4 |
 | 5 Lykkjur | `lykkjur.html` | `lykkjur` | 5 |
 | 6 Aðferðir | `adferdir.html` | `adferdir` | 6 |
 | 7 Fylki | `fylki.html` | `fylki` | 7-8 |
 | 8 Klasar og hlutir | `klasar.html` | `klasar` | 9 |
-| 9 Tengsl hluta og UML | `tengsl.html` | `tengsl` | 10 |
+| 9 Hlutir sem vinna saman og UML | `tengsl.html` | `tengsl` | 10 |
 | 10 Erfðir og fjölbrigðni | `erfdir.html` | `erfdir` | 11 |
-| 11 Hrein klasar og viðmót | `hrein.html` | `hrein` | 13 |
-| 12 Undantekningar og pakkar | `undantekningar.html` | `undantekningar` | 12 |
+| 11 abstract og interface | `hrein.html` | `hrein` | 13 |
+| 12 Villur: try, catch og throw | `undantekningar.html` | `undantekningar` | 12 |
 
-Alltaf opið: `aefingar.html` (frjálsar æfingar), `kodaskrif.html` (skrifa kóða frá grunni og bera saman við fyrirmyndarlausn og matsblað), `spjold.html` (flashcards) og `minnisblad.html` (Java á einu blaði, fyrirmynd að A4-blaðinu sem má hafa í prófinu).
+Lesefnið er stuttar, verklegar kennslustundir (hvað gerir þetta, kóði og úttak, hvenær á að nota það, algeng mistök). Fyrstu kaflarnir fylgja röð byrjendanámskeiðs (breytur → inntak → lánareiknir → skilyrði → FizzBuzz → lykkjur) og seinni kaflarnir færast nær áfanganum.
+
+Alltaf opið: `uppfletting.html` (uppflettiskrá: „ég vil… → notaðu…“, með leit), `aefingar.html` (frjálsar æfingar), `kodaskrif.html` (skrifa kóða frá grunni og bera saman við fyrirmyndarlausn og matsblað), `spjold.html` (flashcards) og `minnisblad.html` (Java á einu blaði, fyrirmynd að A4-blaðinu sem má hafa í prófinu).
 
 ## Uppbygging
 
@@ -45,6 +47,7 @@ python3 tools/build.py       # setur síðurnar saman
 node tools/check.js          # lögun bankans, spjaldanna og verkstæðanna
 node tools/javacheck.js 20   # keyrir hvert kóðadæmi 20 sinnum í Java og ber úttakið saman við svarið
 node tools/skrifcheck.js     # þýðir og prófar fyrirmyndarlausnir kóðaskrifanna og prófhermisins
+node tools/lesacheck.js      # keyrir kóðadæmin í lesefninu (merkt data-run) og ber saman við sýnt úttak
 ```
 
 `javacheck.js` og `skrifcheck.js` þurfa JDK 17 eða nýrra (`javac` og `java`).

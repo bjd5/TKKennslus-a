@@ -27,13 +27,13 @@ TEST_N = 10         # spurningar í kaflaprófi
 
 # (n, lesefni í src/, titill, undirtitill, efni í bankanum, tenging við próf)
 CHAPTERS = [
-    (1, "forrit", "Forrit og reiknirit", "Vika 1 · Liang kafli 1", ["forrit"],
+    (1, "forrit", "Fyrsta Java-forritið", "Vika 1 · Liang kafli 1", ["forrit"],
      "Lokapróf: hugtök, uppbygging Java-forrits og villutegundir"),
-    (2, "tolur", "Tölur, breytur og segðir", "Vika 2 · Liang kafli 2", ["tolur"],
+    (2, "tolur", "Breytur, tölur og inntak", "Vika 2 · Liang kafli 2", ["tolur"],
      "Miðannarpróf 1 og lokapróf: rekja segðir, heiltöludeiling, kastanir"),
-    (3, "skilyrdi", "Rökgildi og skilyrði", "Vika 3 · Liang kafli 3", ["skilyrdi"],
+    (3, "skilyrdi", "Ákvarðanir: if og switch", "Vika 3 · Liang kafli 3", ["skilyrdi"],
      "Miðannarpróf 1 og lokapróf: if/else, switch, rökvirkjar"),
-    (4, "strengir", "Stafir og strengir", "Vika 4 · Liang kafli 4", ["strengir"],
+    (4, "strengir", "Texti: String og char", "Vika 4 · Liang kafli 4", ["strengir"],
      "Miðannarpróf 1 og lokapróf: char-reikningur og String-aðferðir"),
     (5, "lykkjur", "Lykkjur", "Vika 5 · Liang kafli 5", ["lykkjur"],
      "Miðannarpróf 1 og lokapróf: rekja lykkjur og skrifa þær"),
@@ -43,13 +43,13 @@ CHAPTERS = [
      "Miðannarpróf 1 og lokapróf: fylki, tilvísanir og tvívíð fylki"),
     (8, "klasar", "Klasar og hlutir", "Vika 9 · Liang kafli 9", ["klasar"],
      "Miðannarpróf 2 og lokapróf: smiðir, get/set, static, UNO-spilið"),
-    (9, "tengsl", "Tengsl hluta og UML", "Vika 10 · Liang kafli 10", ["tengsl"],
+    (9, "tengsl", "Hlutir sem vinna saman og UML", "Vika 10 · Liang kafli 10", ["tengsl"],
      "Miðannarpróf 2 og lokapróf: UML-klasarit og tilvísanir"),
     (10, "erfdir", "Erfðir og fjölbrigðni", "Vika 11 · Liang kafli 11", ["erfdir"],
      "Miðannarpróf 2 og lokapróf: extends, super, yfirskrifun, fjölbrigðni"),
-    (11, "hrein", "Hrein klasar og viðmót", "Vika 12 · Liang kafli 13", ["hrein"],
+    (11, "hrein", "abstract og interface", "Vika 12 · Liang kafli 13", ["hrein"],
      "Miðannarpróf 2 og lokapróf: abstract, interface, Comparable"),
-    (12, "undantekningar", "Undantekningar og pakkar", "Vikur 12-14 · Liang kafli 12", ["undantekningar"],
+    (12, "undantekningar", "Villur: try, catch og throw", "Vikur 12-14 · Liang kafli 12", ["undantekningar"],
      "Lokapróf: try/catch/finally, throw, throws, pakkar og aðgangur"),
 ]
 
@@ -94,6 +94,7 @@ PAGES += [
     ("lokaprof-aefing", "Lokapróf", "Ferðalagið", "Lokapróf ferðalagsins", "final"),
     ("profhermir", "Prófhermir", "Verðlaun", "Prófhermir: stór kóðaverkefni á prófsniði", "archive"),
     ("aefingar", "Frjálsar æfingar", "Verkfæri", "Frjálsar æfingar", None),
+    ("uppfletting", "Hvað nota ég?", "Verkfæri", "Hvað nota ég? Uppflettiskrá", None),
     ("kodaskrif", "Kóðaskrif", "Verkfæri", "Kóðaskrif: skrifaðu kóðann sjálf(ur)", None),
     ("spjold", "Flashcards", "Verkfæri", "Flashcards", None),
     ("minnisblad", "Minnisblað", "Verkfæri", "Minnisblað: Java á einu blaði", None),
