@@ -10,7 +10,7 @@ Hver kafli (`kafli-N.html`) hefur fjögur skref: **Lesa → Æfa → Gagnvirkt �
 - Þegar öll kaflapróf eru staðin opnast **lokapróf ferðalagsins** (`lokaprof-aefing.html`): sex hlutar á sniði lokaprófanna 2024 og 2025.
 - Þegar það næst opnast **prófhermirinn** (`profhermir.html`): skrifleg dæmi með R-úttaki, fyrirmyndarsvörum og matsblaði.
 
-Tveir hamir: í **ferilham** (career mode) opnast kaflarnir einn af öðrum, en í **æfingaham** (practice mode) er allt opið. Skipt er um ham í hliðarvalmyndinni eða á forsíðunni, og framvindan vistast í báðum. Hún er í localStorage undir `lyd105f-ferd-v1`.
+Tveir hamir: í **career mode** opnast kaflarnir einn af öðrum, en í **practice mode** er allt opið. Skipt er um ham í hliðarvalmyndinni eða á forsíðunni, og framvindan vistast í báðum. Hún er í localStorage undir `lyd105f-ferd-v1`.
 
 | Kafli | Lesefni (`src/`) | Efni í bankanum |
 |---|---|---|
