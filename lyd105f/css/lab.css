@@ -140,3 +140,11 @@ pre.mini { font-family: ui-monospace, Menlo, monospace; font-size: 0.82rem; back
 .ph-lbl { font: 700 1rem var(--sans); color: var(--mag); padding-top: 0.05rem; }
 .ph-result { border-left: 4px solid var(--good); }
 @media (max-width: 600px) { .ph-part { grid-template-columns: 1fr; } }
+
+/* Hamaskipti: ferilhamur og æfingahamur */
+.mode-sw { display: flex; margin-top: 0.6rem; border: 1px solid var(--rule-2); border-radius: 8px; overflow: hidden; }
+.mode-sw button { flex: 1; border: 0; background: var(--raised); color: var(--muted); font: 600 0.78rem var(--sans); padding: 0.4rem 0.3rem; cursor: pointer; }
+.mode-sw button + button { border-left: 1px solid var(--rule-2); }
+.mode-sw button[aria-pressed="true"] { background: var(--key-bg); color: var(--mag); }
+.mode-cards .key { opacity: 0.85; }
+.mode-cards .key.mode-on { opacity: 1; border-color: var(--mag); box-shadow: inset 4px 0 0 var(--mag); }

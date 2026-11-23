@@ -47,7 +47,7 @@
   gen("normal", "between", function () {
     var mu = rnd(115, 125), sd = rnd(8, 12), w = rnd(3, 8), lo = mu - w, hi = mu + w;
     var a = S.pnorm(hi, mu, sd) - S.pnorm(lo, mu, sd);
-    return { q: "Systólískur blóðþrýstingur í þýði fylgir N(" + mu + ", " + sd + "²). Hverjar eru líkurnar á að einstaklingur valinn af handahófi mælist á milli " + lo + " og " + hi + " mmHg?",
+    return { q: "Gerum ráð fyrir að systólískur blóðþrýstingur í ákveðnu þýði fylgi normaldreifingu með meðaltal " + mu + " mmHg og staðalfrávik " + sd + " mmHg. Reiknið líkurnar á að einstaklingur valinn af handahófi úr þýðinu mælist með blóðþrýsting á milli " + lo + " og " + hi + " mmHg.",
       a: r4(a), d: 4, wrong: [S.pnorm(hi, mu, sd), 1 - a, S.pnorm(hi, mu, sd * sd) - S.pnorm(lo, mu, sd * sd)],
       ex: "<p>P(" + lo + " < X < " + hi + ") = Φ(" + f(w / sd, 3) + ") − Φ(" + f(-w / sd, 3) + ") = " + f(a, 4) + ".</p>",
       r: "pnorm(" + hi + ", " + mu + ", " + sd + ") - pnorm(" + lo + ", " + mu + ", " + sd + ")" };
@@ -56,7 +56,7 @@
     var c = pick(NORM), mu = rnd(c.mu[0], c.mu[1]), sd = rnd(c.sd[0], c.sd[1]);
     var low = Math.random() < 0.5, pct = pick([1, 2.5, 5, 10, 20]);
     var p = low ? pct / 100 : 1 - pct / 100, a = S.qnorm(p, mu, sd), z = S.qnorm(p);
-    return { q: "Gerum ráð fyrir að " + c.what + " fylgi N(" + mu + ", " + sd + "²) (" + c.u + "). Hvert þarf gildið að vera til að einstaklingur sé í hópi þeirra " + pct + "% sem eru með " + (low ? "lægstu" : "hæstu") + " gildin?",
+    return { q: "Gerum ráð fyrir að " + c.what + " (" + c.u + ") fylgi N(" + mu + ", " + sd + "²), þ.e. meðaltal " + mu + " og staðalfrávik " + sd + ". Hvert þarf gildið að vera til að einstaklingur sé í hópi þeirra " + pct + "% sem eru með " + (low ? "lægstu" : "hæstu") + " gildin?",
       a: Math.round(a * 1000) / 1000, d: 2, tol: { abs: Math.max(0.05, sd * 0.004) }, unit: c.u,
       wrong: [S.qnorm(1 - p, mu, sd), mu + z * sd * sd / 10, mu + (low ? -1 : 1) * 1.96 * sd],
       ex: "<p>Finnum z með P(Z &lt; z) = " + f(p, 3) + ": z = " + f(z, 3) + ". Þá er x = μ + zσ = " + mu + " + (" + f(z, 3) + ")·" + sd + " = " + f(a, 2) + ".</p>",
@@ -65,7 +65,7 @@
   gen("normal", "expected", function () {
     var mu = 75, sd = 13, x = 100, n = pick([100, 150, 200, 300, 500]);
     mu = rnd(72, 78); sd = rnd(11, 14); var p = S.pnorm(x, mu, sd, false), a = n * p;
-    return { q: "Hjartsláttur heilbrigðra kvenna fylgir N(" + mu + ", " + sd + "²). Yfirsláttur er hjartsláttur yfir 100 slög/mín. Í slembiúrtaki " + n + " kvenna, hve margar má búast við að hafi yfirslátt?",
+    return { q: "Við gerum ráð fyrir að hjartsláttur heilbrigðra íslenskra kvenna fylgi normaldreifingu með meðaltal " + mu + " slög/mínútu og staðalfrávik " + sd + " slög/mínútu. Þegar hjartsláttur mælist hærri en 100 slög/mínútu er talað um yfirslátt. Nú hafið þið slembiúrtak af " + n + " íslenskum konum. Hve margar þeirra má búast við að hafi yfirslátt?",
       a: Math.round(a * 100) / 100, d: 2, tol: { abs: 0.06 }, wrong: [p, n - a, n * S.pnorm(x, mu, sd)],
       ex: "<p>Fyrst P(X &gt; 100) = " + f(p, 4) + ". Væntanlegur fjöldi er n·p = " + n + " · " + f(p, 4) + " = " + f(a, 2) + ".</p>",
       r: n + " * pnorm(100, " + mu + ", " + sd + ", lower.tail = FALSE)" };
@@ -87,7 +87,8 @@
       r: "1 - pbinom(" + (k - 1) + ", size = " + n + ", prob = " + p + ")\nsum(dbinom(" + k + ":" + n + ", " + n + ", " + p + "))" };
   });
   gen("binom", "fewer", function () {
-    var c = pick(BIN), p = rnd(c.p[0], c.p[1]) / 100, n = rnd(c.n[0], c.n[1]), k = rnd(1, 3);
+    var c = pick(BIN), p = rnd(c.p[0], c.p[1]) / 100, n = rnd(c.n[0], c.n[1]);
+    var k = rnd(Math.max(1, Math.round(n * p) - 1), Math.min(n, Math.round(n * p) + 2));
     var a = S.pbinom(k - 1, n, p);
     return { q: "Um " + Math.round(p * 100) + "% " + c.s + ". Séu " + n + " einstaklingar valdir af handahófi, hverjar eru líkurnar á að <b>færri en " + k + "</b> þeirra " + c.t + "?",
       a: r4(a), d: 4, wrong: [S.pbinom(k, n, p), 1 - a, S.dbinom(k, n, p)],
@@ -95,7 +96,8 @@
       r: "pbinom(" + (k - 1) + ", size = " + n + ", prob = " + p + ")" };
   });
   gen("binom", "exact", function () {
-    var c = pick(BIN), p = rnd(c.p[0], c.p[1]) / 100, n = rnd(c.n[0], c.n[1]), k = rnd(1, n - 1);
+    var c = pick(BIN), p = rnd(c.p[0], c.p[1]) / 100, n = rnd(c.n[0], c.n[1]);
+    var k = rnd(Math.max(1, Math.round(n * p) - 2), Math.min(n - 1, Math.round(n * p) + 2));
     var a = S.dbinom(k, n, p);
     return { q: "Um " + Math.round(p * 100) + "% " + c.s + ". Séu " + n + " einstaklingar valdir af handahófi, hverjar eru líkurnar á að <b>nákvæmlega " + k + "</b> þeirra " + c.t + "?",
       a: r4(a), d: 4, wrong: [S.pbinom(k, n, p), Math.pow(p, k) * Math.pow(1 - p, n - k), S.pbinom(k - 1, n, p, false)],
@@ -105,7 +107,7 @@
   gen("binom", "mean", function () {
     var n = pick([20, 40, 50, 80, 120, 200]), p = pick([0.05, 0.1, 0.15, 0.2, 0.25, 0.3]);
     var sdq = Math.random() < 0.5, a = sdq ? Math.sqrt(n * p * (1 - p)) : n * p * (1 - p);
-    return { q: "X ~ Bin(n = " + n + ", p = " + p + "). Hver er " + (sdq ? "staðalfrávik" : "dreifni") + " X?",
+    return { q: "X ~ Bin(n = " + n + ", p = " + p + "). " + (sdq ? "Hvert er staðalfrávik" : "Hver er dreifni") + " X?",
       a: r4(a), d: 3, wrong: [n * p, Math.sqrt(n * p), n * p * (1 - p) * (sdq ? 1 : 0.5)],
       ex: "<p>E[X] = np = " + f(n * p) + " og Var[X] = np(1 − p) = " + f(n * p * (1 - p), 3) + "; staðalfrávikið er kvaðratrótin, " + f(Math.sqrt(n * p * (1 - p)), 3) + ".</p>",
       r: sdq ? "sqrt(" + n + " * " + p + " * (1 - " + p + "))" : n + " * " + p + " * (1 - " + p + ")" };
@@ -113,22 +115,22 @@
 
   // ---------- Poisson ----------
   var POI = [
-    { s: "sjúklinga sem koma á bráðamóttöku", per: "klukkutíma", per2: "tveimur klukkutímum" },
-    { s: "nýrra inflúensulíkra tilfella sem tilkynnt eru í þorpi", per: "degi", per2: "tveimur dögum" },
-    { s: "sjúkrabílaútkalla", per: "klukkutíma", per2: "tveimur klukkutímum" }
+    { s: "sjúklinga sem koma á bráðamóttöku", per: "klukkutíma", rate: "á klukkutíma", per2: "tveimur klukkutímum" },
+    { s: "nýrra inflúensulíkra tilfella sem tilkynnt eru í þorpi", per: "degi", rate: "á dag", per2: "tveimur dögum" },
+    { s: "sjúkrabílaútkalla", per: "klukkutíma", rate: "á klukkutíma", per2: "tveimur klukkutímum" }
   ];
   gen("poisson", "atmost", function () {
     var c = pick(POI), l = rnd(2, 7), k = rnd(1, l);
     var a = S.ppois(k, l);
-    return { q: "Að meðaltali er fjöldi " + c.s + " " + l + " á " + c.per + ". Hverjar eru líkurnar á að á einum " + c.per + " verði fjöldinn <b>" + k + " eða minni</b>?",
+    return { q: "Gerum ráð fyrir að meðalfjöldi " + c.s + " sé " + l + " " + c.rate + ". Hverjar eru líkurnar á að á einum " + c.per + " verði fjöldinn <b>" + k + " eða minni</b>?",
       a: r4(a), d: 4, wrong: [S.dpois(k, l), S.ppois(k - 1, l), 1 - a],
       ex: "<p>X ~ Poisson(λ = " + l + "). P(X ≤ " + k + ") = Σ e<sup>−λ</sup>λ<sup>x</sup>/x! fyrir x = 0,…," + k + " = " + f(a, 4) + ".</p>",
       r: "ppois(" + k + ", lambda = " + l + ")\nsum(dpois(0:" + k + ", " + l + "))" };
   });
   gen("poisson", "exact", function () {
-    var c = pick(POI), l = rnd(2, 7), k = rnd(0, l + 3);
+    var c = pick(POI), l = rnd(2, 7), k = rnd(Math.max(0, l - 3), l + 3);
     var a = S.dpois(k, l);
-    return { q: "Að meðaltali er fjöldi " + c.s + " " + l + " á " + c.per + ". Hverjar eru líkurnar á að fjöldinn verði <b>nákvæmlega " + k + "</b> á einum " + c.per + "?",
+    return { q: "Gerum ráð fyrir að meðalfjöldi " + c.s + " sé " + l + " " + c.rate + ". Hverjar eru líkurnar á að á einum " + c.per + " verði fjöldinn <b>nákvæmlega " + k + "</b>?",
       a: r4(a), d: 4, wrong: [S.ppois(k, l), S.dpois(k, l + 1), S.ppois(k - 1, l, false)],
       ex: "<p>P(X = " + k + ") = e<sup>−" + l + "</sup> · " + l + "<sup>" + k + "</sup> / " + k + "! = " + f(a, 4) + ".</p>",
       r: "dpois(" + k + ", lambda = " + l + ")" };
@@ -136,7 +138,7 @@
   gen("poisson", "twoperiod", function () {
     var c = pick(POI), l = rnd(2, 5), k = rnd(3, 6);
     var a = S.ppois(k - 1, 2 * l, false);
-    return { q: "Að meðaltali er fjöldi " + c.s + " " + l + " á " + c.per + ". Hverjar eru líkurnar á að á <b>" + c.per2 + "</b> verði fjöldinn a.m.k. " + k + "?",
+    return { q: "Gerum ráð fyrir að meðalfjöldi " + c.s + " sé " + l + " " + c.rate + ". Hverjar eru líkurnar á að á <b>" + c.per2 + "</b> verði fjöldinn a.m.k. " + k + "?",
       a: r4(a), d: 4, wrong: [S.ppois(k - 1, l, false), S.ppois(k, 2 * l, false), Math.pow(S.ppois(k - 1, l, false), 2)],
       ex: "<p>Yfir tvöfalt tímabil er λ tvöfalt stærra: X ~ Poisson(" + 2 * l + "). P(X ≥ " + k + ") = 1 − P(X ≤ " + (k - 1) + ") = " + f(a, 4) + ".</p>",
       r: "1 - ppois(" + (k - 1) + ", lambda = " + 2 * l + ")" };
@@ -146,22 +148,23 @@
   gen("clt", "se", function () {
     var mu = rnd(70, 80), v = pick([400, 625, 900, 912.02, 144, 225]), n = pick([25, 36, 50, 100, 144]);
     var a = Math.sqrt(v / n);
-    return { q: "Þyngd sjúklinga hefur meðaltal " + mu + " kg og dreifni " + v + " kg². Tekið er slembiúrtak " + n + " sjúklinga. Hvert er staðalfrávik (staðalskekkja) meðaltalsins X̄?",
+    return { q: "Meðalþyngd sjúklinga er " + mu + " kg með dreifnina " + v + " kg². Tekið er slembiúrtak " + n + " sjúklinga. Hvert er staðalfrávik (staðalskekkja) meðaltalsins X̄?",
       a: r4(a), d: 3, unit: "kg", wrong: [Math.sqrt(v) / n, v / n, Math.sqrt(v)],
       ex: "<p>SE = σ/√n = √" + v + " / √" + n + " = " + f(Math.sqrt(v), 3) + " / " + f(Math.sqrt(n), 3) + " = " + f(a, 3) + ". Dreifni X̄ er σ²/n = " + f(v / n, 3) + ".</p>",
       r: "sqrt(" + v + " / " + n + ")" };
   });
   gen("clt", "pbar", function () {
-    var mu = rnd(115, 125), sd = rnd(9, 15), n = pick([16, 25, 36, 49, 64]), c = mu + pick([2, 3, 4, 5]);
+    var mu = rnd(115, 125), sd = rnd(9, 15), n = pick([16, 25, 36, 49, 64]);
+    var c = mu + Math.max(1, Math.round(sd / Math.sqrt(n) * rnd(6, 20) / 10));
     var a = S.pnorm(c, mu, sd / Math.sqrt(n), false);
-    return { q: "Blóðþrýstingur fylgir N(" + mu + ", " + sd + "²). Hverjar eru líkurnar á að <b>meðaltal</b> " + n + " einstaklinga valinna af handahófi sé hærra en " + c + " mmHg?",
+    return { q: "Gerum ráð fyrir að systólískur blóðþrýstingur fylgi normaldreifingu með meðaltal " + mu + " mmHg og staðalfrávik " + sd + " mmHg. Ef " + n + " einstaklingar eru valdir af handahófi úr þýðinu, hverjar eru líkurnar á að <b>meðalblóðþrýstingur</b> þeirra sé hærri en " + c + " mmHg?",
       a: r4(a), d: 4, wrong: [S.pnorm(c, mu, sd, false), S.pnorm(c, mu, sd / n, false), S.pnorm(c, mu, sd / Math.sqrt(n))],
       ex: "<p>X̄ ~ N(" + mu + ", " + sd + "²/" + n + "), svo SE = " + sd + "/√" + n + " = " + f(sd / Math.sqrt(n), 3) + ". z = (" + c + " − " + mu + ")/" + f(sd / Math.sqrt(n), 3) + " = " + f((c - mu) / (sd / Math.sqrt(n)), 3) + " og P = " + f(a, 4) + ".</p>",
       r: "pnorm(" + c + ", mean = " + mu + ", sd = " + sd + " / sqrt(" + n + "), lower.tail = FALSE)" };
   });
   gen("clt", "poismean", function () {
     var l = rnd(3, 6), n = pick([50, 100, 200]);
-    return { q: "Fjöldi sjúklinga á klukkutíma fylgir Poisson(λ = " + l + "). Skoðaðir eru " + n + " klukkutímar valdir af handahófi. Samkvæmt höfuðsetningu tölfræðinnar fylgir meðalfjöldinn X̄ nálgunarlega N(μ, σ²/n). Hver er <b>dreifni</b> X̄?",
+    return { q: "Sjúklingar koma á bráðamóttöku samkvæmt Poisson dreifingu með meðalfjölda " + l + " sjúklinga á klukkutíma. Ef " + n + " klukkutímar eru valdir af handahófi, má samkvæmt höfuðsetningu tölfræðinnar nálga dreifingu meðalfjöldans X̄ með N(μ, σ²/n). Hver er <b>dreifni</b> X̄?",
       a: r4(l / n), d: 4, wrong: [l / Math.sqrt(n), Math.sqrt(l / n), l],
       ex: "<p>Fyrir Poisson er E[X] = Var[X] = λ = " + l + ". Þá X̄ ≈ N(" + l + ", " + l + "/" + n + ") = N(" + l + ", " + f(l / n, 4) + ").</p>", r: l + " / " + n };
   });
@@ -170,16 +173,16 @@
   gen("oryggisbil", "prop", function () {
     var n = pick([200, 300, 400, 500, 800]), x = rnd(Math.round(n * 0.12), Math.round(n * 0.35)), up = Math.random() < 0.5;
     var p = x / n, se = Math.sqrt(p * (1 - p) / n), a = p + (up ? 1 : -1) * 1.96 * se;
-    return { q: "Í slembiúrtaki " + n + " manns reynast " + x + " vera með háþrýsting. Reiknaðu " + (up ? "<b>efri</b>" : "<b>neðri</b>") + " mörk 95% öryggisbils fyrir hlutfallið (normalnálgun).",
+    return { q: "Í þýði er verið að skoða algengi háþrýstings. Úrtak af " + n + " manns er tekið og " + x + " reynast hafa háþrýsting. Reiknið " + (up ? "<b>efri</b>" : "<b>neðri</b>") + " mörk 95% öryggisbils fyrir hlutfallið (normalnálgun).",
       a: r4(a), d: 4, tol: { abs: 0.0015 }, wrong: [p + (up ? 1 : -1) * 1.96 * Math.sqrt(p * (1 - p)), p + (up ? 1 : -1) * 1.645 * se, p],
       ex: "<p>p̂ = " + x + "/" + n + " = " + f(p, 4) + ", SE = √(p̂(1 − p̂)/n) = " + f(se, 4) + ". Bilið er p̂ ± 1.96·SE = [" + f(p - 1.96 * se, 4) + ", " + f(p + 1.96 * se, 4) + "]. <code>prop.test</code> gefur aðeins annað bil (samfelluleiðrétting og Wilson-bil).</p>",
       r: "p <- " + x + " / " + n + "\np + c(-1, 1) * qnorm(0.975) * sqrt(p * (1 - p) / " + n + ")" };
   });
-  gen("oryggisbil", "mean", function () {
+  gen("oryggisbil", "cimean", function () {
     var n = pick([10, 15, 20, 25, 30, 50]), xb = rnd(1180, 1350) / 10, s = rnd(80, 180) / 10, conf = pick([0.95, 0.95, 0.9, 0.99]), up = Math.random() < 0.5;
     var t = S.qt(1 - (1 - conf) / 2, n - 1), se = s / Math.sqrt(n), a = xb + (up ? 1 : -1) * t * se;
     var z = S.qnorm(1 - (1 - conf) / 2);
-    return { q: "Mældur er blóðþrýstingur hjá " + n + " manns: x̄ = " + xb + " mmHg og s = " + s + " mmHg. Reiknaðu " + (up ? "<b>efri</b>" : "<b>neðri</b>") + " mörk " + Math.round(conf * 100) + "% öryggisbils fyrir meðaltalið (t-dreifing).",
+    return { q: "Systólískur blóðþrýstingur var mældur hjá " + n + " einstaklingum. Meðaltalið var " + xb + " mmHg og staðalfrávikið " + s + " mmHg. Gera má ráð fyrir að blóðþrýstingur fylgi normaldreifingu. Hver eru " + (up ? "<b>efri</b>" : "<b>neðri</b>") + " mörk " + Math.round(conf * 100) + "% öryggisbils fyrir meðaltalið (t-dreifing).",
       a: r3(a), d: 2, tol: { abs: 0.03 }, unit: "mmHg", wrong: [xb + (up ? 1 : -1) * z * se, xb + (up ? 1 : -1) * t * s, xb + (up ? 1 : -1) * t * s / n],
       ex: "<p>SE = s/√n = " + f(se, 3) + ", t<sub>" + f(1 - (1 - conf) / 2, 3) + ", " + (n - 1) + "</sub> = " + f(t, 3) + ". Bilið er " + xb + " ± " + f(t, 3) + "·" + f(se, 3) + " = [" + f(xb - t * se, 2) + ", " + f(xb + t * se, 2) + "].</p>",
       r: xb + " + c(-1, 1) * qt(" + f(1 - (1 - conf) / 2, 3) + ", df = " + (n - 1) + ") * " + s + " / sqrt(" + n + ")" };
@@ -187,7 +190,7 @@
   gen("oryggisbil", "coverage", function () {
     var N = pick([100, 200, 400, 500, 1000]), conf = pick([90, 95, 99]), contain = Math.random() < 0.5;
     var a = contain ? N * conf / 100 : N * (100 - conf) / 100;
-    return { q: "Raunverulegt meðaltal í þýði er þekkt. " + N + " nemendur taka hver sitt slembiúrtak og reikna " + conf + "% öryggisbil fyrir meðaltalið. Hve mörg bil má búast við að " + (contain ? "<b>innihaldi</b>" : "<b>innihaldi ekki</b>") + " rétta meðaltalið?",
+    return { q: "Gerum ráð fyrir að meðalsystólískur blóðþrýstingur karla á Íslandi sé 115 mmHg. " + N + " læknanemar taka, hver og einn, slembiúrtak af íslenskum körlum, mæla blóðþrýstinginn og reikna " + conf + "% öryggisbil fyrir meðalblóðþrýsting. Hve mörg bil má búast við að " + (contain ? "<b>innihaldi</b>" : "<b>innihaldi ekki</b>") + " töluna 115?",
       a: a, d: 1, tol: { abs: 0.01 }, wrong: [N - a, N * 0.05, N * conf / 100 / 2],
       ex: "<p>Í endurteknum úrtökum innihalda " + conf + "% bilanna sanna gildið að jafnaði: " + N + " · " + (contain ? conf : 100 - conf) + "% = " + f(a, 1) + ".</p>" };
   });
@@ -203,7 +206,7 @@
   gen("ttest", "onesample", function () {
     var n = pick([16, 20, 25, 36, 49]), mu0 = 120, xb = rnd(1210, 1290) / 10, s = rnd(80, 160) / 10;
     var t = (xb - mu0) / (s / Math.sqrt(n));
-    return { q: "Kannað er hvort meðalblóðþrýstingur sé frábrugðinn " + mu0 + " mmHg. Í úrtaki " + n + " manns er x̄ = " + xb + " og s = " + s + ". Reiknaðu prófstærðina t.",
+    return { q: "Kanna á með viðeigandi tilgátuprófi hvort meðalblóðþrýstingur sé frábrugðinn " + mu0 + " mmHg. Í úrtaki " + n + " manna var meðaltalið " + xb + " mmHg og staðalfrávikið " + s + " mmHg. Hvert er gildið á prófstærðinni?",
       a: r3(t), d: 3, tol: { abs: 0.01 }, wrong: [(xb - mu0) / s, (xb - mu0) / (s / n), (xb - mu0) * Math.sqrt(n)],
       ex: "<p>t = (x̄ − μ₀)/(s/√n) = (" + xb + " − " + mu0 + ")/(" + s + "/√" + n + ") = " + f(t, 3) + " með " + (n - 1) + " frígráður. Tvíhliða p-gildi er " + f(2 * S.pt(-Math.abs(t), n - 1), 4) + ".</p>",
       r: "t <- (" + xb + " - " + mu0 + ") / (" + s + " / sqrt(" + n + "))\n2 * pt(-abs(t), df = " + (n - 1) + ")" };
@@ -211,7 +214,7 @@
   gen("ttest", "pvalue", function () {
     var df = pick([9, 14, 19, 29, 49, 99]), t = rnd(150, 320) / 100 * (Math.random() < 0.5 ? -1 : 1);
     var a = 2 * S.pt(-Math.abs(t), df);
-    return { q: "t-próf gefur prófstærð t = " + t + " með " + df + " frígráður. Hvert er <b>tvíhliða</b> p-gildið?",
+    return { q: "t-próf gefur prófstærð t = " + t + " með " + df + " frígráðum. Hvert er <b>tvíhliða</b> p-gildið?",
       a: r4(a), d: 4, tol: { abs: 0.0008 }, wrong: [a / 2, 2 * S.pnorm(-Math.abs(t)), 1 - a],
       ex: "<p>p = 2·P(T<sub>" + df + "</sub> &gt; |" + t + "|) = " + f(a, 4) + ". " + (a < 0.05 ? "Minna en 0.05: höfnum H₀ við 5% marktektarkröfu." : "Stærra en 0.05: höfnum ekki H₀.") + "</p>",
       r: "2 * pt(-abs(" + t + "), df = " + df + ")" };
@@ -220,7 +223,7 @@
     var p = pick([0.0003, 0.012, 0.21, 0.56, 0.0418, 0.0729]);
     var unequal = p < 0.05;
     return { type: "mc", q: "Áður en tvö óháð úrtök eru borin saman með t-prófi er <code>var.test()</code> keyrt og gefur p-gildið " + p + ". Hvaða t-próf á að nota?",
-      opts: ["<code>t.test(..., var.equal = TRUE)</code>: dreifnin er talin jöfn", "<code>t.test(..., var.equal = FALSE)</code> (Welch): dreifnin er talin ólík", "Parað t-próf, því dreifnin skiptir ekki máli þar", "Kí-kvaðrat próf", "Ekkert að ofan er rétt"],
+      opts: ["<code>t.test(..., var.equal = TRUE)</code>: dreifnin er talin jöfn", "<code>t.test(..., var.equal = FALSE)</code> (Welch): dreifnin er talin ólík", "Parað t-próf, því dreifnin skiptir ekki máli þar", "Hvort sem er, því var.test skiptir ekki máli fyrir t-próf", "Ekkert að ofan er rétt"],
       a: unequal ? 1 : 0, keep: true,
       ex: "<p>H₀ í <code>var.test</code> er að dreifnin sé jöfn (hlutfall dreifna = 1). p = " + p + (unequal ? " &lt; 0.05: höfnum jafnri dreifni og notum Welch-prófið (var.equal = FALSE)." : " &gt; 0.05: höfnum ekki jafnri dreifni og notum því var.equal = TRUE (vegin dreifni).") + "</p>" };
   });
@@ -229,7 +232,7 @@
   gen("hlutfoll", "or", function () {
     var a = rnd(30, 90), b = rnd(10, 40), c = rnd(10, 40), d = rnd(40, 110);
     var or = (a * d) / (b * c);
-    return { q: "<table class='tt'><tr><th></th><th>Sjúkdómur</th><th>Ekki sjúkdómur</th></tr><tr><th>Útsett</th><td>" + a + "</td><td>" + b + "</td></tr><tr><th>Ekki útsett</th><td>" + c + "</td><td>" + d + "</td></tr></table>Reiknaðu gagnlíkindahlutfallið (OR) fyrir sjúkdóm, útsettir á móti óútsettum.",
+    return { q: "<table class='tt'><tr><th></th><th>Sjúkdómur</th><th>Ekki sjúkdómur</th></tr><tr><th>Útsett</th><td>" + a + "</td><td>" + b + "</td></tr><tr><th>Ekki útsett</th><td>" + c + "</td><td>" + d + "</td></tr></table>Reiknið gagnlíkindahlutfallið fyrir sjúkdóm, útsettir á móti óútsettum.",
       a: r3(or), d: 3, tol: { rel: 0.01 }, wrong: [(a / (a + b)) / (c / (c + d)), (b * c) / (a * d), a / c],
       ex: "<p>Gagnlíkindi útsettra: " + a + "/" + b + " = " + f(a / b, 3) + ". Gagnlíkindi óútsettra: " + c + "/" + d + " = " + f(c / d, 3) + ". OR = " + f(a / b, 3) + "/" + f(c / d, 3) + " = (" + a + "·" + d + ")/(" + b + "·" + c + ") = " + f(or, 3) + ". (Áhættuhlutfallið RR væri " + f((a / (a + b)) / (c / (c + d)), 3) + ".)</p>",
       r: "(" + a + " * " + d + ") / (" + b + " * " + c + ")" };
@@ -253,9 +256,9 @@
   gen("anova", "F", function () {
     var k = rnd(3, 5), N = rnd(60, 400), ssg = rnd(800, 9000), sse = rnd(15000, 90000);
     var df1 = k - 1, df2 = N - k, F = (ssg / df1) / (sse / df2);
-    return { q: "<pre class='mini'>            Df  Sum Sq Mean Sq F value\ngroup       " + df1 + "   " + ssg + "       ?       ?\nResiduals " + df2 + "   " + sse + "       ?</pre>Hvert á F-gildið að vera?",
+    return { q: "<pre class='mini'>            Df  Sum Sq Mean Sq F value\ngroup       " + df1 + "   " + ssg + "       ?       ?\nResiduals " + df2 + "   " + sse + "       ?</pre>Hvert ætti F-gildið í töflunni að vera?",
       a: r3(F), d: 3, tol: { rel: 0.01 }, wrong: [ssg / sse, (ssg / df1) / sse, (sse / df2) / (ssg / df1)],
-      ex: "<p>MS<sub>hópa</sub> = " + ssg + "/" + df1 + " = " + f(ssg / df1, 2) + ", MS<sub>leifa</sub> = " + sse + "/" + df2 + " = " + f(sse / df2, 3) + ". F = " + f(F, 3) + ". p-gildi: " + f(S.pf(F, df1, df2, false), 4) + ".</p>",
+      ex: "<p>MS<sub>hópa</sub> = " + ssg + "/" + df1 + " = " + f(ssg / df1, 2) + ", MS<sub>leifa</sub> = " + sse + "/" + df2 + " = " + f(sse / df2, 3) + ". F = " + f(F, 3) + ". p-gildi: " + (S.pf(F, df1, df2, false) < 0.0001 ? "&lt; 0.0001" : f(S.pf(F, df1, df2, false), 4)) + ".</p>",
       r: "(" + ssg + " / " + df1 + ") / (" + sse + " / " + df2 + ")\npf(" + f(F, 3) + ", " + df1 + ", " + df2 + ", lower.tail = FALSE)" };
   });
   gen("anova", "df", function () {
@@ -276,13 +279,13 @@
   }
   gen("adhvarf", "predict", function () {
     var m = pick(LMS), x = pick(m.xs), yh = m.a + m.b * x;
-    return { q: lmOut(m) + "Notaðu líkanið <code>lm(" + m.y + " ~ " + m.x + ")</code> til að spá fyrir um " + m.yl + " hjá einstaklingi með " + m.xl + " = " + x + ".",
+    return { q: lmOut(m) + "Notið líkanið <code>lm(" + m.y + " ~ " + m.x + ")</code> til að spá fyrir um " + m.yl + " hjá einstaklingi með " + m.xl + " = " + x + ".",
       a: r3(yh), d: 2, tol: { abs: 0.05 }, wrong: [m.b * x, m.a + m.b, m.a * x + m.b],
       ex: "<p>ŷ = " + m.a + " + " + m.b + "·" + x + " = " + f(yh, 2) + ". Spá er aðeins áreiðanleg innan þess bils sem x-gildin í gögnunum ná yfir (annars er það bryggjun).</p>", r: m.a + " + " + m.b + " * " + x };
   });
   gen("adhvarf", "ci", function () {
     var m = pick(LMS), up = Math.random() < 0.5, t = S.qt(0.975, m.df), a = m.b + (up ? 1 : -1) * t * m.se;
-    return { q: lmOut(m) + "Reiknaðu " + (up ? "<b>efri</b>" : "<b>neðri</b>") + " mörk 95% öryggisbils fyrir hallatölu " + m.x + ".",
+    return { q: lmOut(m) + "Hvert er 95% öryggisbilið fyrir matið á hallatölunni? Gefið " + (up ? "<b>efri</b>" : "<b>neðri</b>") + " mörk þess.",
       a: r4(a), d: 4, tol: { abs: 0.0015 }, wrong: [m.b + (up ? 1 : -1) * m.se, m.b + (up ? 1 : -1) * 1.645 * m.se, m.a + (up ? 1 : -1) * t * m.se],
       ex: "<p>β̂ ± t<sub>0.975, " + m.df + "</sub>·SE = " + m.b + " ± " + f(t, 4) + "·" + m.se + " = [" + f(m.b - t * m.se, 4) + ", " + f(m.b + t * m.se, 4) + "]. Sama og <code>confint(fit)</code>.</p>",
       r: m.b + " + c(-1, 1) * qt(0.975, df = " + m.df + ") * " + m.se };
@@ -318,7 +321,7 @@
     return { q: "Líkanið <code>glm(reykir == \"ja\" ~ likamsraekt, family = \"binomial\")</code> gaf skurðpunkt " + m.a + " og hallatölu " + m.b + ". Hverjar eru metnar líkur á að einstaklingur sem stundar " + x + " klst. líkamsrækt á viku reyki?",
       a: r4(p), d: 4, tol: { abs: 0.0012 }, wrong: [Math.exp(eta), eta, Math.exp(eta) / 2],
       ex: "<p>logit(p) = " + m.a + " + (" + m.b + ")·" + x + " = " + f(eta, 4) + ". Gagnlíkindi = e<sup>" + f(eta, 4) + "</sup> = " + f(Math.exp(eta), 4) + ", og p = gagnlíkindi/(1 + gagnlíkindi) = " + f(p, 4) + ".</p>",
-      r: "plogis(" + m.a + " + " + m.b + " * " + x + ")\n# eða: predict(glm1, data.frame(likamsraekt = " + x + "), type = \"response\")" };
+      r: "plogis(" + m.a + (m.b < 0 ? " - " + (-m.b) : " + " + m.b) + " * " + x + ")\n# eða: predict(glm1, data.frame(likamsraekt = " + x + "), type = \"response\")" };
   });
 
   // ---------- Næmi og sértæki ----------
@@ -336,7 +339,7 @@
   gen("naemi", "table", function () {
     var t = naemiTable(), key = pick(Object.keys(NM)), v = NM[key](t);
     var others = Object.keys(NM).filter(function (k) { return k !== key; }).map(function (k) { return NM[k](t)[0]; });
-    return { q: t.html + "Reiknaðu <b>" + key + "</b> greiningarprófsins.", a: r4(v[0]), d: 4, tol: { abs: 0.0012 }, wrong: others,
+    return { q: t.html + "Notið töfluna til að reikna <b>" + key + "</b> greiningarprófsins.", a: r4(v[0]), d: 4, tol: { abs: 0.0012 }, wrong: others,
       ex: "<p>" + key.charAt(0).toUpperCase() + key.slice(1) + " = " + v[1] + " = " + f(v[0], 4) + ".</p>" };
   });
   gen("naemi", "bayes", function () {
@@ -351,7 +354,7 @@
   gen("lifun", "hr", function () {
     var b = pick([0.54099, -0.37086, 1.32399, 0.2231, -0.6931, 0.0953]);
     var hr = Math.exp(b);
-    return { q: "Í Cox-líkani er <code>coef</code> fyrir breytu " + b + ". Um hve mörg <b>prósent</b> breytist áhættan (hazard) í hópnum miðað við viðmiðunarhópinn? (Svaraðu með formerki: hækkun +, lækkun −.)",
+    return { q: "Í Cox-líkani er <code>coef</code> fyrir tvíkosta skýribreytu (hópur á móti viðmiðunarhópi) " + b + ". Um hve mörg <b>prósent</b> breytist áhættan (hazard) í hópnum miðað við viðmiðunarhópinn? (Svarið með formerki: hækkun +, lækkun −.)",
       a: r3((hr - 1) * 100), d: 1, tol: { abs: 0.15 }, unit: "%", wrong: [b * 100, (1 - hr) * 100, hr * 100],
       ex: "<p>HR = exp(coef) = e<sup>" + b + "</sup> = " + f(hr, 4) + ", sem jafngildir " + f((hr - 1) * 100, 1) + "% breytingu á áhættu (" + (hr > 1 ? "meiri" : "minni") + " áhætta).</p>", r: "(exp(" + b + ") - 1) * 100" };
   });
@@ -369,7 +372,7 @@
     var n = 5, xs = []; for (var i = 0; i < n; i++) xs.push(rnd(60, 90));
     var m = xs.reduce(function (a, b) { return a + b; }, 0) / n, ss = xs.reduce(function (a, b) { return a + (b - m) * (b - m); }, 0);
     var sd = Math.sqrt(ss / (n - 1));
-    return { q: "Púls fimm einstaklinga: " + xs.join(", ") + ". Reiknaðu úrtaksstaðalfrávikið s.", a: r3(sd), d: 3, tol: { abs: 0.01 }, wrong: [Math.sqrt(ss / n), ss / (n - 1), ss / n],
+    return { q: "Púls fimm einstaklinga: " + xs.join(", ") + ". Reiknið úrtaksstaðalfrávikið s.", a: r3(sd), d: 3, tol: { abs: 0.01 }, wrong: [Math.sqrt(ss / n), ss / (n - 1), ss / n],
       ex: "<p>x̄ = " + f(m, 2) + ", Σ(x − x̄)² = " + f(ss, 2) + ", s² = " + f(ss, 2) + "/(n − 1) = " + f(ss / (n - 1), 3) + " og s = " + f(sd, 3) + ". Deilt er með n − 1, ekki n.</p>", r: "sd(c(" + xs.join(", ") + "))" };
   });
   gen("lysandi", "iqr", function () {
@@ -405,7 +408,7 @@
     ["binom", "Hvaða skilyrði þurfa að gilda til að fjöldi „árangra“ fylgi tvíkostadreifingu?", ["Fastur fjöldi óháðra tilrauna með sömu líkur á árangri", "Atburðir gerast á samfelldum tíma með föstum meðalhraða", "Breytan er samfelld og samhverf", "Fjöldi tilrauna er óendanlegur", N], 0, "Bin(n, p): n óháðar Bernoulli-tilraunir, hver með líkur p. Seinni lýsingin á við Poisson."],
     ["binom", "Hver er munurinn á <code>pbinom(3, 5, 0.24, lower.tail = FALSE)</code> og P(X ≥ 3)?", ["Enginn munur", "Skipunin gefur P(X &gt; 3) = P(X ≥ 4), ekki P(X ≥ 3)", "Skipunin gefur P(X = 3)", "Skipunin gefur P(X ≤ 3)", N], 1, "Fyrir strjálar dreifingar gefur <code>lower.tail = FALSE</code> P(X &gt; k). P(X ≥ 3) fæst með <code>pbinom(2, …, lower.tail = FALSE)</code>."],
     ["poisson", "Hvaða dreifing er eðlilegt líkan fyrir fjölda nýrra inflúensutilfella sem tilkynnt eru á dag?", ["Normaldreifing", "Poisson-dreifing", "Tvíkostadreifing", "t-dreifing", N], 1, "Talning atburða á föstu tímabili með föstum meðalhraða: <b>Poisson(λ)</b>."],
-    ["poisson", "Ef X ~ Poisson(λ = 4), hver er dreifni X?", ["2", "4", "16", "√4", N], 1, "Í Poisson er E[X] = Var[X] = λ."],
+    ["poisson", "Ef X ~ Poisson(λ = 4), hver er dreifni X?", ["2", "4", "16", "8", N], 1, "Í Poisson er E[X] = Var[X] = λ."],
     ["clt", "Meðalþyngd 100 sjúklinga (μ = 75.3 kg, σ² = 912.02 kg²). Hvaða dreifingu fylgir meðaltalið X̄ nálgunarlega?", ["N(75.3, 912.02)", "N(75.3, 9.1202)", "N(75.3, 30.2)", "Poisson(75.3)", N], 1, "Höfuðsetning tölfræðinnar: X̄ ≈ N(μ, σ²/n) = N(75.3, 912.02/100) = N(75.3, 9.1202)."],
     ["clt", "Hvað segir höfuðsetning tölfræðinnar (CLT)?", ["Að öll gögn séu normaldreifð ef úrtakið er stórt", "Að úrtaksdreifing meðaltalsins nálgist normaldreifingu þegar n stækkar, óháð lögun upphaflegu dreifingarinnar (með endanlega dreifni)", "Að meðaltalið sé alltaf jafnt μ", "Að staðalfrávikið minnki ekki með n", N], 1, "CLT fjallar um dreifingu <b>meðaltalsins</b>, ekki einstakra mælinga."],
     ["clt", "Hvað gerist við staðalskekkju meðaltalsins ef úrtaksstærðin er fjórfölduð?", ["Hún helmingast", "Hún fjórfaldast", "Hún minnkar um fjórðung", "Ekkert", N], 0, "SE = σ/√n; √4 = 2, svo SE helmingast."],
@@ -419,7 +422,7 @@
     ["tilgatur", "Lyf lækkar í raun blóðþrýsting, en tilgátupróf gefur p = 0.059 (α = 0.05). Hvað gerðist?", ["Villa af gerð I", "Villa af gerð II", "Engin villa", "Bæði villa af gerð I og II", N], 1, "H₀ er ósönn (lyfið virkar) en við höfnum henni ekki: <b>villa af gerð II</b>."],
     ["tilgatur", "Styrkur (power) tilgátuprófs er:", ["P(hafna H₀ | H₀ sönn)", "P(hafna H₀ | H₀ ósönn) = 1 − β", "p-gildið", "1 − α", N], 1, "Styrkur eru líkurnar á að greina raunverulegan mun. Hann eykst með stærra úrtaki, stærri áhrifum og minni breytileika."],
     ["tilgatur", "Hvað er p-gildi?", ["Líkurnar á að H₀ sé sönn", "Líkurnar á að fá jafn öfgafulla eða öfgafyllri prófstærð en þá sem sást, ef H₀ er sönn", "Líkurnar á villu af gerð II", "Marktektarkrafan α", N], 1, "p-gildið er reiknað <b>miðað við að H₀ sé sönn</b>. Það eru ekki líkurnar á að H₀ sé sönn."],
-    ["tilgatur", "Ef tvíhliða p-gildi er 0.03, hvað má segja um 95% öryggisbilið fyrir sama stika?", ["Það inniheldur gildið í H₀", "Það inniheldur ekki gildið í H₀", "Það er ekki hægt að segja", "Það er 97% bil", N], 1, "Tvíhliða próf við α hafnar H₀ nákvæmlega þegar (1 − α) öryggisbilið inniheldur ekki H₀-gildið."],
+    ["tilgatur", "Ef tvíhliða p-gildi er 0.03, hvað má segja um 95% öryggisbilið fyrir sama stika?", ["Það inniheldur gildið í H₀", "Það inniheldur ekki gildið í H₀", "Það er ekki hægt að segja", "Það inniheldur gildið í H₀ nema n sé stórt", N], 1, "Tvíhliða próf við α hafnar H₀ nákvæmlega þegar (1 − α) öryggisbilið inniheldur ekki H₀-gildið."],
     ["tilgatur", "Blóðþrýstingur er mældur hjá 50 manns, fyrir og eftir 6 mánuði á lyfi. Villa af gerð I átti sér stað. Hvað gerðist?", ["Ekki var ályktað um mun þótt munur sé í raun", "Ályktað var að munur væri á meðalblóðþrýstingi fyrir og eftir, þótt í raun sé ekki munur", "p-gildið var hærra en α", "Gögnin voru ekki pöruð", N], 1, "Gerð I = hafna sannri H₀ (finna „mun“ sem er ekki til)."],
     ["tilgatur", "Hvað eykur styrk prófs (annað óbreytt)?", ["Minna úrtak", "Lægra α (t.d. 0.01 í stað 0.05)", "Stærra úrtak", "Meiri breytileiki í gögnum", N], 2, "Stærra n minnkar staðalskekkjuna og eykur styrk. Lægra α minnkar styrk."],
     // --- t-próf
@@ -430,32 +433,32 @@
     ["ttest", "Hver er forsenda t-prófs fyrir tvö óháð úrtök með <code>var.equal = TRUE</code>?", ["Úrtökin séu pöruð", "Dreifnin sé sú sama í báðum þýðum (og mælingar u.þ.b. normaldreifðar eða n stórt)", "Hlutföllin séu jöfn", "Úrtaksstærðin sé sú sama", N], 1, "Vegin dreifni (pooled variance) gerir ráð fyrir jafnri dreifni. Annars Welch-próf."],
     // --- hlutföll
     ["hlutfoll", "Hvaða próf hentar til að kanna hvort tengsl séu á milli reykinga (já/nei) og kyns?", ["Óparað t-próf", "Kí-kvaðrat próf á tengslatöflu (eða prop.test)", "ANOVA", "Línulegt aðhvarf", N], 1, "Tvær flokkabreytur → tengslatafla og kí-kvaðrat próf. <code>prop.test</code> á 2×2 töflu gefur sama χ²."],
-    ["hlutfoll", "Hvenær ætti að nota Fisher-próf í stað kí-kvaðrat prófs?", ["Þegar n er mjög stórt", "Þegar væntar tíðnir eru litlar (t.d. undir 5)", "Þegar breyturnar eru samfelldar", "Aldrei", N], 1, "Kí-kvaðrat nálgunin verður ónákvæm með litlar væntar tíðnir; R varar við: „Chi-squared approximation may be incorrect“."],
-    ["hlutfoll", "Gagnlíkindahlutfall (OR) = 1 þýðir:", ["Engin tengsl milli útsetningar og útkomu", "Útsettir eru tvöfalt líklegri", "Allir fengu sjúkdóminn", "Líkurnar eru 100%", N], 0, "OR = 1: gagnlíkindin eru þau sömu í báðum hópum. Öryggisbil sem inniheldur 1 → ekki marktæk tengsl."],
+    ["hlutfoll", "Hvenær ætti að nota Fisher-próf í stað kí-kvaðrat prófs?", ["Þegar n er mjög stórt", "Þegar væntar tíðnir eru litlar (t.d. undir 5)", "Þegar breyturnar eru samfelldar", "Þegar taflan er stærri en 2×2", N], 1, "Kí-kvaðrat nálgunin verður ónákvæm með litlar væntar tíðnir; R varar við: „Chi-squared approximation may be incorrect“."],
+    ["hlutfoll", "Gagnlíkindahlutfall (OR) = 1 þýðir:", ["Engin tengsl milli útsetningar og útkomu", "Útsettir eru tvöfalt líklegri", "Líkurnar á sjúkdómi eru 50% í báðum hópum", "Tengslin eru marktæk", N], 0, "OR = 1: gagnlíkindin eru þau sömu í báðum hópum. Öryggisbil sem inniheldur 1 → ekki marktæk tengsl."],
     ["hlutfoll", "Ef líkur eru p = 0.2, hver eru gagnlíkindin (odds)?", ["0.2", "0.25", "0.8", "4", N], 1, "Gagnlíkindi = p/(1 − p) = 0.2/0.8 = 0.25."],
     // --- ANOVA
-    ["anova", "Hver er núlltilgátan í ANOVA með þremur hópum?", ["H₀: μ₁ = μ₂ = μ₃", "H₀: a.m.k. eitt meðaltal er ólíkt", "H₀: dreifnin er ólík", "H₀: μ₁ ≠ μ₂ ≠ μ₃", N], 0, "Gagntilgátan er að a.m.k. eitt meðaltal sé frábrugðið hinum, ekki að öll séu ólík."],
+    ["anova", "Hver er núlltilgátan í fervikagreiningu (ANOVA) með þremur hópum?", ["H₀: μ₁ = μ₂ = μ₃", "H₀: a.m.k. eitt meðaltal er ólíkt", "H₀: dreifnin er ólík", "H₀: μ₁ ≠ μ₂ ≠ μ₃", N], 0, "Gagntilgátan er að a.m.k. eitt meðaltal sé frábrugðið hinum, ekki að öll séu ólík."],
     ["anova", "Á hverju byggir F-prófstærðin í ANOVA?", ["Hlutfalli breytileika <b>milli</b> hópa og breytileika <b>innan</b> hópa", "Mun á miðgildum", "Fjölda hópa", "Fylgni milli hópa", N], 0, "F = MS<sub>milli</sub>/MS<sub>innan</sub>. Ef meðaltölin eru ólík verður breytileikinn milli hópa mikill miðað við suðið innan hópa, og F verður stórt."],
-    ["anova", "Hverjar eru forsendur ANOVA?", ["Óháðar mælingar, normaldreifðar leifar og jöfn dreifni milli hópa", "Að hóparnir séu jafnstórir", "Að svarbreytan sé flokkabreyta", "Að n &gt; 1000", N], 0, "Kassarit hjálpa til við að meta jafna dreifni og skekkju; normaldreifingarrit (QQ) fyrir leifar."],
-    ["anova", "ANOVA gefur p &lt; 0.05 fyrir fjóra aldurshópa. Hvað má álykta?", ["Öll meðaltölin eru ólík", "A.m.k. eitt meðaltal er frábrugðið hinum. Til að vita hvaða þarf eftirápróf (t.d. Tukey)", "Elsti hópurinn hefur hæsta meðaltalið", "Dreifnin er ólík", N], 1, "ANOVA segir aðeins að munur sé til staðar einhvers staðar."],
+    ["anova", "Hverjar eru forsendur ANOVA?", ["Óháðar mælingar, normaldreifðar leifar og jöfn dreifni milli hópa", "Að hóparnir séu jafnstórir", "Að svarbreytan sé flokkabreyta", "Að skýribreytan sé normaldreifð", N], 0, "Kassarit hjálpa til við að meta jafna dreifni og skekkju; normaldreifingarrit (QQ) fyrir leifar."],
+    ["anova", "ANOVA gefur p &lt; 0.05 fyrir fjóra aldurshópa. Hvað má álykta?", ["Öll meðaltölin eru ólík hvert öðru", "A.m.k. eitt meðaltal er frábrugðið hinum", "Elsti hópurinn hefur hæsta meðaltalið", "Dreifnin er ólík milli hópanna", N], 1, "ANOVA segir aðeins að munur sé til staðar einhvers staðar. Til að vita hvaða hópar eru ólíkir þarf eftirápróf (t.d. Tukey)."],
     // --- aðhvarf
     ["adhvarf", "Hverjar eru forsendur einfalds línulegs aðhvarfs?", ["Línulegt samband, óháðar leifar, normaldreifðar leifar og jöfn dreifni leifa", "Að x og y séu normaldreifðar", "Að R² sé hærra en 0.5", "Að skurðpunkturinn sé 0", N], 0, "Metið með punktariti (línulegt?), leifariti (mynstur? jöfn dreifing?) og QQ-riti leifa (normaldreifðar?)."],
-    ["adhvarf", "Hvernig túlkar þú hallatöluna 1.79 í <code>lm(SYSBP ~ BMI)</code>?", ["Fyrir hverja einingu sem BMI hækkar hækkar meðalblóðþrýstingur um 1.79 mmHg", "BMI skýrir 1.79% af breytileika", "Blóðþrýstingur er 1.79 sinnum hærri", "Fylgnin er 1.79", N], 0, "Hallatalan er vænt breyting á y fyrir einnar einingar aukningu í x."],
-    ["adhvarf", "Líkan var metið á gögnum með BMI frá 15.5 til 56.8. Er spá fyrir BMI = 60 áreiðanleg?", ["Já, alltaf", "Nei, það er bryggjun (utan gagnasviðs), sambandið gæti verið annað þar", "Já, ef R² er hátt", "Nei, því 60 er slétt tala", N], 1, "Spá utan sviðs gagnanna (extrapolation) byggir á ósannreyndri forsendu."],
+    ["adhvarf", "Hvaða ályktun er dregin um BMI-stikann (1.79) í <code>lm(SYSBP ~ BMI)</code>? Túlkið stikann.", ["Fyrir hverja einingu sem BMI hækkar hækkar meðalblóðþrýstingur um 1.79 mmHg", "BMI skýrir 1.79% af breytileika", "Blóðþrýstingur er 1.79 sinnum hærri", "Fylgnin er 1.79", N], 0, "Hallatalan er vænt breyting á y fyrir einnar einingar aukningu í x."],
+    ["adhvarf", "Líkan var metið á gögnum með BMI frá 15.5 til 56.8. Er spá fyrir BMI = 60 áreiðanleg?", ["Já, því sambandið er mjög marktækt", "Nei, því BMI = 60 er utan gagnasviðsins (bryggjun)", "Já, ef R² er nógu hátt", "Nei, því skurðpunkturinn hefur enga túlkun", N], 1, "Spá utan sviðs gagnanna (bryggjun, extrapolation) byggir á þeirri ósannreyndu forsendu að sambandið haldist línulegt þar."],
     ["adhvarf", "Hvað segir R² = 0.1076 í <code>lm(SYSBP ~ BMI)</code>?", ["Um 10.8% breytileikans í SYSBP skýrist af BMI", "Sambandið er ekki marktækt", "Hallatalan er 0.1076", "Fylgnin er 0.1076", N], 0, "Samband getur verið mjög marktækt (p &lt; 2e-16 með n = 4415) en samt skýrt lítinn hluta breytileikans."],
-    ["adhvarf", "Leifarit (residuals vs fitted) sýnir trektlaga mynstur: leifar dreifast meira fyrir há spágildi. Hvaða forsenda bregst?", ["Línulegt samband", "Jöfn dreifni leifa", "Óháðar mælingar", "Engin", N], 1, "Trekt bendir til ójafnrar dreifni (heteroscedasticity). Umbreyting (t.d. log y) getur hjálpað."],
+    ["adhvarf", "Leifarit (residuals vs fitted) sýnir trektlaga mynstur: leifar dreifast meira fyrir há spágildi. Hvaða forsenda bregst?", ["Línulegt samband", "Jöfn dreifni leifa", "Óháðar mælingar", "Normaldreifðar leifar", N], 1, "Trekt bendir til ójafnrar dreifni (heteroscedasticity). Umbreyting (t.d. log y) getur hjálpað."],
     // --- tvíkosta
     ["tvikosta", "Hvaða tengifall er notað í tvíkosta aðhvarfsgreiningu?", ["Logit: log(p/(1 − p))", "Auðkennisfall: y = p", "Log: log(y)", "Kvaðratrót", N], 0, "logit(p) = β₀ + β₁x, og p = 1/(1 + e<sup>−(β₀ + β₁x)</sup>)."],
     ["tvikosta", "Stuðull <code>bmi</code> í <code>glm(sykursyki ~ age + bmi, family = \"binomial\")</code> er 0.0687 (p = 0.002). Hvað þýðir exp(0.0687) = 1.071?", ["Líkur á sykursýki hækka um 1.071 prósentustig fyrir hverja BMI-einingu", "Gagnlíkindi sykursýki hækka um u.þ.b. 7.1% fyrir hverja BMI-einingu, leiðrétt fyrir aldri", "7.1% hafa sykursýki", "BMI skýrir 7.1% breytileikans", N], 1, "exp(β) er gagnlíkindahlutfall (OR) fyrir einnar einingar aukningu, að öðrum breytum óbreyttum."],
-    ["tvikosta", "Hvað skrifar þú í R til að fá tvíkosta aðhvarf?", ["<code>lm(y ~ x)</code>", "<code>glm(y ~ x, family = \"binomial\")</code>", "<code>glm(y ~ x, family = \"gaussian\")</code>", "<code>coxph(y ~ x)</code>", N], 1, "<code>family = \"gaussian\"</code> gefur sama og <code>lm</code>."],
+    ["tvikosta", "Hvaða skipun notið þið í R til að framkvæma tvíkosta aðhvarfsgreiningu?", ["<code>lm(y ~ x)</code>", "<code>glm(y ~ x, family = \"binomial\")</code>", "<code>glm(y ~ x, family = \"gaussian\")</code>", "<code>coxph(y ~ x)</code>", N], 1, "<code>family = \"gaussian\"</code> gefur sama og <code>lm</code>."],
     // --- næmi
     ["naemi", "Næmi (sensitivity) greiningarprófs er:", ["P(T+ | D+)", "P(T− | D−)", "P(D+ | T+)", "P(D− | T−)", N], 0, "Næmi = hlutfall veikra sem prófið greinir jákvæða. Sértæki = P(T− | D−). PPV = P(D+ | T+). NPV = P(D− | T−)."],
     ["naemi", "Sama greiningarpróf er notað í hópi þar sem sjúkdómurinn er sjaldgæfari. Hvað gerist?", ["Næmi lækkar", "Sértæki lækkar", "PPV lækkar en NPV hækkar", "Ekkert breytist", N], 2, "Næmi og sértæki eru eiginleikar prófsins. Forspárgildin ráðast líka af algengi: færri sannir jákvæðir → lægra PPV."],
     ["naemi", "Hvað sýnir ROC-ferill?", ["Næmi á móti 1 − sértæki fyrir öll möguleg skurðgildi", "PPV á móti NPV", "Lifun á móti tíma", "Leifar á móti spágildum", N], 0, "Flatarmál undir ferlinum (AUC) mælir greiningarhæfni: 0.5 = tilviljun, 1 = fullkomið."],
     // --- lifun
-    ["lifun", "Hvað er skerðing (censoring) í lifunargreiningu?", ["Þátttakandi sem lést", "Þátttakandi sem við vitum aðeins að lifði a.m.k. til ákveðins tíma (t.d. rannsókn lauk eða hann týndist)", "Útlagi í gögnunum", "Þátttakandi sem fékk lyfleysu", N], 1, "Skertar mælingar gefa hlutaupplýsingar: atburður hefur ekki átt sér stað þegar eftirfylgd lýkur. Kaplan–Meier nýtir þær."],
-    ["lifun", "Cox-líkan gefur exp(coef) = 1.88 fyrir hjartasjúkdóm (p &lt; 0.001). Hvaða túlkun er rétt?", ["Þeir sem eru með hjartasjúkdóm eru í 1.88 sinnum meiri áhættu (hazard) á að deyja en þeir sem ekki eru með hann, og tengslin eru marktæk", "Þeir sem eru ekki með hjartasjúkdóm eru í 1.88 sinnum meiri áhættu", "88% þeirra með hjartasjúkdóm deyja", "Tengslin eru ekki marktæk", N], 0, "exp(coef) er áhættuhlutfall (HR) miðað við viðmiðunarflokkinn. p &lt; 0.05 → marktækt."],
-    ["lifun", "Hvernig lestu miðgildi lifunartíma af Kaplan–Meier grafi?", ["Þar sem ferillinn sker y = 0.5, lestu tímann af x-ás", "Þar sem ferillinn endar", "Meðaltal allra tíma", "Þar sem ferillinn sker y = 0", N], 0, "Miðgildið er tíminn þegar metin lifun fer niður í 50%. Ef ferillinn fer aldrei niður fyrir 0.5 er það ekki skilgreint (NA í R)."],
+    ["lifun", "Hvað er skerðing (censoring) í lifunargreiningu?", ["Þátttakandi sem lést á meðan á rannsókn stóð", "Þátttakandi sem var á lífi án atburðar þegar eftirfylgd lauk", "Þátttakandi með óvenju langan lifunartíma", "Þátttakandi sem fékk lyfleysu í stað lyfs", N], 1, "Við vitum aðeins að hann lifði a.m.k. til ákveðins tíma (t.d. rannsókn lauk eða hann týndist). Skertar mælingar gefa hlutaupplýsingar: atburður hefur ekki átt sér stað þegar eftirfylgd lýkur. Kaplan–Meier nýtir þær."],
+    ["lifun", "Cox-líkan gefur exp(coef) = 1.88 fyrir hjartasjúkdóm (p &lt; 0.001). Hvaða túlkun er rétt?", ["Þeir með hjartasjúkdóm eru í 1.88 sinnum meiri áhættu á að deyja; marktækt", "Þeir án hjartasjúkdóms eru í 1.88 sinnum meiri áhættu á að deyja; marktækt", "88% þeirra með hjartasjúkdóm deyja á tímabilinu", "Þeir með hjartasjúkdóm eru í 1.88 sinnum meiri áhættu; ekki marktækt", N], 0, "exp(coef) er áhættuhlutfall (HR) miðað við viðmiðunarflokkinn. p &lt; 0.05 → marktækt."],
+    ["lifun", "Hvernig lesið þið miðgildi lifunar af Kaplan–Meier grafi?", ["Þar sem ferillinn sker y = 0.5; tíminn er lesinn af x-ásnum", "Þar sem ferillinn endar", "Meðaltal allra tíma", "Þar sem ferillinn sker y = 0", N], 0, "Miðgildið er tíminn þegar metin lifun fer niður í 50%. Ef ferillinn fer aldrei niður fyrir 0.5 er það ekki skilgreint (NA í R)."],
     ["lifun", "Hvaða forsenda liggur að baki Cox-líkaninu?", ["Hlutfallsleg áhætta (proportional hazards): HR er fast yfir tíma", "Lifunartími er normaldreifður", "Engin skerðing", "Að allir deyi", N], 0, "Cox-líkanið gerir ekki ráð fyrir lögun grunnáhættunnar, aðeins að hlutfallið milli hópa sé fast."],
     ["lifun", "Hvaða próf ber saman Kaplan–Meier feril tveggja hópa?", ["t-próf", "Log-rank próf", "F-próf", "Kí-kvaðrat mátgæðapróf", N], 1, "Log-rank (<code>survdiff</code>) ber saman lifun yfir allan tímann; í <code>summary(coxph)</code> heitir það „Score (logrank) test“."]
   ];
@@ -509,7 +512,7 @@
     atleast: "Að minnsta kosti k", fewer: "Færri en k", exact: "Nákvæmlega k", mean: "Dreifni og staðalfrávik",
     atmost: "k eða færri", twoperiod: "Tvöfalt tímabil", se: "Staðalskekkja meðaltals", pbar: "Líkur fyrir meðaltal",
     poismean: "Dreifing meðaltals (CLT)", prop: "Öryggisbil fyrir hlutfall", coverage: "Hve mörg bil hitta?",
-    nfromwidth: "Úrtaksstærð", onesample: "Prófstærð t", pvalue: "p-gildi úr t", or: "Gagnlíkindahlutfall",
+    nfromwidth: "Úrtaksstærð", cimean: "Öryggisbil fyrir meðaltal", onesample: "Prófstærð t", pvalue: "p-gildi úr t", or: "Gagnlíkindahlutfall",
     rr: "Áhættuhlutfall", F: "F-gildi úr ANOVA-töflu", df: "Frígráður í ANOVA", predict: "Spá úr aðhvarfslíkani",
     ci: "Öryggisbil hallatölu", tval: "t-gildi í summary(lm)", r2: "Skýrður breytileiki", prob: "Líkur úr tvíkosta líkani",
     table: "Úr 2×2 töflu greiningarprófs", bayes: "PPV út frá algengi", hr: "Áhættuhlutfall í Cox", median: "Miðgildi",
@@ -531,7 +534,7 @@
     }
     var fn = function () {
       var t = make(g), tol = t.tol == null ? { rel: 0.012, abs: 0.0006 } : typeof t.tol === "number" ? { abs: t.tol } : t.tol;
-      return { topic: g.skill, title: TITLE[g.name] || LABEL[g.skill], text: "<p>" + t.q + "</p>", answer: t.a, unit: t.unit || "",
+      return { topic: g.skill, title: TITLE[g.name] || LABEL[g.skill], text: /<(table|pre|div|p)\b/.test(t.q) ? t.q : "<p>" + t.q + "</p>", answer: t.a, unit: t.unit || "",
         tol: tol.rel || 1e-9, absTol: Math.max(tol.abs || 0, t.a ? 0.51 * Math.pow(10, Math.floor(Math.log10(Math.abs(t.a))) - 3) : 0),
         sol: (t.ex || "") + (t.r ? '<pre class="rcode">' + esc(t.r) + "</pre>" : "") };
     };
