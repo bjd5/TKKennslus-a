@@ -56,27 +56,30 @@ COURSE = {
         [1100, "Sóunarveiðari"], [1500, "Biðraðameistari"], [2000, "Ferlahönnuður"], [2600, "Kerfishugsuður"],
         [3300, "Meistari ferla og kerfa"],
     ],
-    "finalSub": "Sex hlutar úr öllum köflunum · nýjar spurningar og tölur í hvert skipti",
-    "finalOpenText": "Nú er komið að lokaprófi ferðalagsins: sex hlutar úr öllu námsefninu.",
-    "finalIntro": ("<p><b>Sex hlutar úr öllu námsefninu.</b> Hver hluti hefur nokkra liði sem vega jafnt innan hlutans. "
-                   "Megindlegi hlutinn er reiknidæmi; hinir eru skilnings- og atburðarásarspurningar.</p>"
-                   "<p>Alvöru lokaprófið gildir 30 % og nær yfir alla fyrirlestra og öll verkefni. "
-                   "Hafðu <a href=\"formulublad.html\">formúlublaðið</a> og vasareikni við höndina.</p>"),
+    "finalMinutes": 180,
+    "finalSub": "Um 80 spurningar á 3 klst. eins og alvöru prófið · nýjar spurningar og tölur í hvert skipti",
+    "finalOpenText": "Nú er komið að lokaprófi ferðalagsins: um 80 spurningar á 3 klst. í sama sniði og alvöru prófið.",
+    "finalIntro": ("<p><b>Um 80 spurningar á 3 klst.</b> Eins og alvöru prófið í Inspera: val, rétt/rangt, fjölsvar, pörun og drag-and-drop, "
+                   "auk fárra einfaldra útreikninga. Engar ritgerðarspurningar. Hver spurning gildir jafnt og ekki er dregið niður fyrir röng svör, "
+                   "svo svaraðu öllu.</p>"
+                   "<p><b>Engin hjálpargögn</b> eru leyfð á alvöru prófinu, aðeins vasareiknir. Reyndu því að taka þetta próf án formúlublaðs og glósa.</p>"),
     "finalPlan": [
-        {"title": "Ferlar, ferlaskráning og BPMN", "weight": 20, "topics": ["ferlar", "bpmn", "bpmn2"], "nNum": 0, "nMc": 6},
-        {"title": "Ferlauppgötvun og eigindleg greining", "weight": 15, "topics": ["uppgotvun", "eigindleg"], "nNum": 0, "nMc": 5},
-        {"title": "Megindleg ferlagreining", "weight": 20, "topics": ["megindleg"], "nNum": 4, "nMc": 1},
-        {"title": "Endurhönnun, ferlahugbúnaður og ferlaframkvæmd", "weight": 15, "topics": ["endurhonnun"], "nNum": 0, "nMc": 5},
-        {"title": "Kerfishugsun og orsakalykkjur", "weight": 15, "topics": ["kerfi"], "nNum": 1, "nMc": 4},
-        {"title": "Stjórnun ferla og BPM í starfseminni", "weight": 15, "topics": ["stjornun"], "nNum": 0, "nMc": 5},
+        {"title": "Ferlar og ferlaskráning", "topics": ["ferlar"], "n": 9, "nNum": 1},
+        {"title": "Ferlalíkön í BPMN (grunn og þróuð)", "topics": ["bpmn", "bpmn2"], "n": 14, "nNum": 0},
+        {"title": "Ferlauppgötvun", "topics": ["uppgotvun"], "n": 7, "nNum": 0},
+        {"title": "Eigindleg ferlagreining", "topics": ["eigindleg"], "n": 8, "nNum": 0},
+        {"title": "Megindleg ferlagreining", "topics": ["megindleg"], "n": 10, "nNum": 4},
+        {"title": "Endurhönnun, ferlahugbúnaður og ferlaframkvæmd", "topics": ["endurhonnun"], "n": 10, "nNum": 0},
+        {"title": "Stjórnun ferla, BPM í starfseminni og stafrænt vinnuafl", "topics": ["stjornun"], "n": 10, "nNum": 1},
+        {"title": "Kerfishugsun og orsakalykkjur", "topics": ["kerfi"], "n": 12, "nNum": 1},
     ],
     "rewardTitle": "Lokaupprifjunin",
     "rewardHref": "upprifjun.html",
-    "rewardLabel": "Lokaupprifjun: ritgerðarspurningar og munnlega prófið",
-    "rewardLocked": "Ritgerðarspurningar með svörum, undirbúningur fyrir munnlega prófið og ótakmörkuð ný lokapróf. Opnast þegar þú nærð lokaprófi ferðalagsins.",
-    "rewardWon": "Lokaupprifjunin er opin: ritgerðarspurningar með svörum, undirbúningur fyrir munnlega prófið og ótakmörkuð ný lokapróf.",
+    "rewardLabel": "Lokaupprifjun: dýpri spurningar og munnlega prófið",
+    "rewardLocked": "Dýpri skýringarspurningar með fyrirmyndarsvörum, undirbúningur fyrir munnlega prófið og ótakmörkuð ný lokapróf. Opnast þegar þú nærð lokaprófi ferðalagsins.",
+    "rewardWon": "Lokaupprifjunin er opin: dýpri skýringarspurningar, undirbúningur fyrir munnlega prófið og ótakmörkuð ný lokapróf.",
     "rewardLinks": [
-        ["upprifjun.html", "Ritgerðarspurningar með svörum"],
+        ["upprifjun.html", "Dýpri spurningar með svörum"],
         ["upprifjun.html#munnlegt", "Munnlega prófið"],
         ["lokaprof-aefing.html", "Ný æfingalokapróf"],
     ],
@@ -87,7 +90,7 @@ PAGES = [("index", "Kortið", "Ferðalagið", "Ferðalagið að lokaprófinu", N
 PAGES += [(f"kafli-{n}", f"{n}. {t}", "Ferðalagið", f"Kafli {n}: {t}", f"ch{n}") for n, _, t, *_ in CHAPTERS]
 PAGES += [
     ("lokaprof-aefing", "Lokapróf", "Ferðalagið", "Lokapróf ferðalagsins", "final"),
-    ("upprifjun", "Lokaupprifjun", "Verðlaun", "Lokaupprifjun: ritgerðarspurningar og munnlega prófið", "archive"),
+    ("upprifjun", "Lokaupprifjun", "Verðlaun", "Lokaupprifjun: dýpri spurningar og munnlega prófið", "archive"),
     ("aefingar", "Frjálsar æfingar", "Verkfæri", "Frjálsar æfingar", None),
     ("spjold", "Flashcards", "Verkfæri", "Flashcards", None),
     ("ordasafn", "Orðasafn", "Verkfæri", "Orðasafn: íslensk og ensk hugtök", None),
@@ -98,15 +101,16 @@ PAGES += [
 
 BANK = ["js/bank.js"] + sorted(f"js/q/{p.name}" for p in (ROOT / "js" / "q").glob("*.js"))
 CARDS = ["js/bank.js"] + sorted(f"js/cards/{p.name}" for p in (ROOT / "js" / "cards").glob("*.js"))
+# (js/qui.js er sameiginleg birting spurninga)
 # Skriftur sem bætast sjálfkrafa við tilteknar síður (auk þeirra sem src-skráin biður um)
 PAGE_SCRIPTS = {
-    "aefingar": BANK + ["js/quiz.js"],
+    "aefingar": BANK + ["js/qui.js", "js/quiz.js"],
     "spjold": CARDS + ["js/cards.js"],
     "lokaprof-aefing": BANK + ["js/examgen.js"],
 }
 
 # Röð skrifta: grunnsöfn fyrst, svo ferðalagsvélin, svo síðusértækar skriftur
-SCRIPT_ORDER = BANK + ["js/cards/"] + ["js/examgen.js", "js/chapters.js", "js/journey.js"]
+SCRIPT_ORDER = BANK + ["js/cards/"] + ["js/qui.js", "js/examgen.js", "js/chapters.js", "js/journey.js"]
 
 TEMPLATE = """<!doctype html>
 <html lang="is">
@@ -185,7 +189,7 @@ def read_src(path):
 
 GATE_TEXT = {
     "final": ("Lokaprófið er læst", f"Kláraðu kaflapróf allra {len(CHAPTERS)} kaflanna með einkunn 6 eða hærra til að opna lokaprófið."),
-    "archive": ("Lokaupprifjunin er læst", "Náðu lokaprófi ferðalagsins (einkunn 6 eða hærra) til að opna ritgerðarspurningarnar og undirbúninginn fyrir munnlega prófið."),
+    "archive": ("Lokaupprifjunin er læst", "Náðu lokaprófi ferðalagsins (einkunn 6 eða hærra) til að opna dýpri spurningarnar og undirbúninginn fyrir munnlega prófið."),
 }
 
 
@@ -300,7 +304,7 @@ def main():
         missing = [s for s in scripts if not (ROOT / s).exists()]
         for s in missing:
             print(f"vantar skriftu {s} ({name}.html)", file=sys.stderr)
-        scripts = order_scripts([s for s in scripts if s not in missing] + ["js/chapters.js", "js/journey.js"])
+        scripts = order_scripts([s for s in scripts if s not in missing] + ["js/qui.js", "js/chapters.js", "js/journey.js"])
         page = TEMPLATE.format(
             title=title,
             nav=nav_html(name),
