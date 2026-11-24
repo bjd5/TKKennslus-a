@@ -2,7 +2,7 @@
 (function () {
   "use strict";
   if (!window.TK || !window.TK.bank) return;
-  var B = window.TK.bank, G = B.G, MC = B.MC, pick = B.pick, is = B.is, parseAnswer = B.parseAnswer;
+  var TK = window.TK, B = window.TK.bank, G = B.G, MC = B.MC, pick = B.pick, is = B.is, parseAnswer = B.parseAnswer;
 
   /* ---------- Viðmót ---------- */
   var TOPICS = [{ id: "allt", label: "Allt" }].concat(B.TOPICS);
@@ -70,7 +70,7 @@
     if (kind === "skilja" && !mcs.length) kind = "reikna";
     var q = null;
     if (kind === "reikna" && gens.length) q = { kind: "num", d: pick(gens)() };
-    else if (mcs.length) q = { kind: "mc", d: pick(mcs) };
+    else if (mcs.length) { var m = pick(mcs); q = { kind: (m.kind || "mc") === "mc" ? "mc" : "x", d: m }; }
     state.cur = q;
     state.answered = false;
     showQuestion();
@@ -86,8 +86,11 @@
     var area = document.getElementById("q-area");
     var q = state.cur;
     if (!q) { area.innerHTML = "<p>Engin spurning fannst fyrir þetta val.</p>"; return; }
-    var h = '<div class="qcard"><div class="qmeta">' + topicLabel(q.d.topic) + (q.kind === "num" ? " · " + q.d.title : " · Skilningur") + "</div>";
-    if (q.kind === "num") {
+    var h = '<div class="qcard"><div class="qmeta">' + topicLabel(q.d.topic) + (q.kind === "num" ? " · " + q.d.title : " · " + (q.kind === "x" ? TK.qui.KIND_NAME[q.d.kind] : "Skilningur")) + "</div>";
+    if (q.kind === "x") {
+      q.part = TK.qui.toPart(q.d); q.pid = "fq" + Date.now().toString(36);
+      h += TK.qui.partHtml(q.pid, q.part) + '<div class="p-act"><button type="button" class="btn" id="q-check">Athuga</button></div>';
+    } else if (q.kind === "num") {
       h += '<div class="qtext">' + q.d.text + "</div>";
       h += '<form id="q-form" class="row" style="margin-top:1rem" autocomplete="off"><div><label class="f" for="q-in">Svar' + (q.d.unit ? " (" + q.d.unit + ")" : "") + '</label><input id="q-in" type="text" inputmode="decimal" autocapitalize="off" spellcheck="false" placeholder="t.d. 2,5 eða 2/51"></div><div class="fixed"><button class="btn" type="submit">Athuga</button></div><div class="fixed"><button class="btn ghost" type="button" id="q-show">Sýna lausn</button></div></form><p class="qhint">Tala með kommu eða punkti (2,5) eða brot (2/51). Skekkjumörk um 2 %. „Sýna lausn“ telst sem rangt svar.</p>';
     } else {
@@ -102,7 +105,15 @@
     area.innerHTML = h;
     window.renderMath(area);
     document.getElementById("q-next").addEventListener("click", next);
-    if (q.kind === "num") {
+    if (q.kind === "x") {
+      document.getElementById("q-check").addEventListener("click", function () {
+        if (state.answered) return;
+        state.answered = true;
+        var ok = TK.qui.gradePart(area, q.pid, q.part);
+        document.getElementById("q-check").disabled = true;
+        record(ok);
+      });
+    } else if (q.kind === "num") {
       var inp = document.getElementById("q-in");
       inp.focus({ preventScroll: true });
       document.getElementById("q-form").addEventListener("submit", function (ev) { ev.preventDefault(); checkNum(); });

@@ -515,3 +515,27 @@ a.fm-card:hover { border-color: var(--mag); }
 @keyframes fall { to { transform: translateY(105vh) rotate(720deg); } }
 @media (prefers-reduced-motion: reduce) { .cel-card, .toast { animation: none; } }
 @media print { .toasts, .celebrate, .stepper, .step-next, .side-xp { display: none !important; } }
+
+/* ---------- Prófsnið: fjölsvar, pörun og flokkun (js/qui.js) ---------- */
+.thint { margin: 0.5rem 0 0; font: 500 0.85rem var(--sans); color: var(--muted); }
+.tpart .p-act { margin-top: 0.7rem; }
+.tmatch { display: grid; gap: 0.5rem; margin-top: 0.7rem; }
+.mrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.7rem; align-items: center; padding: 0.5rem 0.8rem; border: 1px solid var(--rule); border-radius: 8px; background: var(--raised); }
+.mrow select { width: 100%; font: 500 0.95rem var(--sans); padding: 0.4rem 0.5rem; border: 1px solid var(--rule-2); border-radius: 6px; background: var(--paper); color: var(--ink); }
+.mrow.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--raised)); }
+.mrow.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--raised)); }
+.tdrag { margin-top: 0.7rem; display: grid; gap: 0.7rem; }
+.dpool, .dz-b { display: flex; flex-wrap: wrap; gap: 0.4rem; min-height: 2.6rem; }
+.dpool { padding: 0.5rem; border: 1px dashed var(--rule-2); border-radius: 8px; background: var(--paper-2); }
+.dzones { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.6rem; }
+.dzone { border: 1px solid var(--rule-2); border-radius: 8px; padding: 0.5rem 0.6rem 0.6rem; background: var(--raised); cursor: pointer; }
+.dzone:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.dz-h { font: 650 0.9rem var(--sans); margin-bottom: 0.4rem; }
+.dzone.over, .dpool.over { border-color: var(--mag); background: color-mix(in srgb, var(--mag) 10%, var(--raised)); }
+.dchip { font: 500 0.9rem var(--sans); text-align: left; padding: 0.35rem 0.65rem; border: 1px solid var(--rule-2); border-radius: 999px; background: var(--paper); color: var(--ink); cursor: grab; max-width: 100%; }
+.dchip.sel { outline: 2px solid var(--mag); background: color-mix(in srgb, var(--mag) 14%, var(--paper)); }
+.dchip.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--raised)); }
+.dchip.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--raised)); }
+ul.plain { margin: 0.3rem 0; padding-left: 1.1rem; }
+.exam-clock.low { color: var(--bad); font-weight: 700; }
+@media (max-width: 560px) { .mrow { grid-template-columns: 1fr; } }

@@ -4,7 +4,7 @@ Kennslu- og æfingavefur á íslensku fyrir IÐN301G Greining ferla og kerfa, se
 
 ## Ferðalagið
 
-Hver kafli (`kafli-N.html`) hefur fjögur skref: **Lesa → Æfa → Gagnvirkt → Kaflapróf**. Næsti kafli opnast við einkunn 6 eða hærra í kaflaprófinu (10 spurningar; 8 gefur ★★, 9,5 gefur ★★★). Þegar allir kaflar eru búnir opnast **lokapróf ferðalagsins** (`lokaprof-aefing.html`, sex hlutar úr öllu efninu, nýjar spurningar og tölur í hvert skipti) og þegar það næst opnast **lokaupprifjunin** (`upprifjun.html`: ritgerðarspurningar með fyrirmyndarsvörum og undirbúningur fyrir munnlega prófið). Nemandinn safnar XP-stigum og hækkar í stigum. Framvindan er geymd í localStorage vafrans (lykillinn `gfk-ferd-v1`, aðskilinn frá IÐN303G); á forsíðunni er hægt að byrja upp á nýtt eða opna allt (yfirferðarhamur).
+Hver kafli (`kafli-N.html`) hefur fjögur skref: **Lesa → Æfa → Gagnvirkt → Kaflapróf**. Næsti kafli opnast við einkunn 6 eða hærra í kaflaprófinu (10 spurningar; 8 gefur ★★, 9,5 gefur ★★★). Þegar allir kaflar eru búnir opnast **lokapróf ferðalagsins** (`lokaprof-aefing.html`, um 80 spurningar á 3 klst. í sama sniði og alvöru prófið: val, rétt/rangt, fjölsvar, pörun og drag-and-drop, auk fárra útreikninga; nýjar spurningar og tölur í hvert skipti) og þegar það næst opnast **lokaupprifjunin** (`upprifjun.html`: dýpri skýringarspurningar með fyrirmyndarsvörum og undirbúningur fyrir munnlega prófið). Nemandinn safnar XP-stigum og hækkar í stigum. Framvindan er geymd í localStorage vafrans (lykillinn `gfk-ferd-v1`, aðskilinn frá IÐN303G); á forsíðunni er hægt að byrja upp á nýtt eða opna allt (yfirferðarhamur).
 
 | Kafli | Lesefni (`src/`) | Efni í bankanum | Glærur |
 |---|---|---|---|
@@ -26,7 +26,7 @@ Alltaf opið: `aefingar.html` (frjálsar æfingar), `spjold.html` (flashcards), 
 - `tools/build.py` setur síðurnar saman. Þar eru `CHAPTERS` (kaflarnir), `COURSE` (texti sem er bundinn áfanganum: stig, lokaprófsplan, verðlaun), `PASS` (6), `PRACTICE_GOAL` (5) og `TEST_N` (10). Hún skrifar `js/chapters.js`.
 - `tools/check.js` yfirfer spurningabankann og spjöldin í node (lögun, tvítekningar, að hvert reiknidæmi skili endanlegri tölu) og telur spurningar eftir efni.
 - `src/*.html` er lesefnið og aðrar síður; `src/gagnvirkt/kafli-N.html` er gagnvirka skrefið og `js/w/kafli-N.js` skriftan á bak við það. Hún skráir sig með `TK.widget("kafli-N", function (root, api) {...})` og kallar á `api.done()` þegar verkefninu er lokið.
-- `js/bank.js` er kjarni spurningabankans; spurningarnar eru í `js/q/<efni>.js` (skilningsspurningar `MC` og reiknidæmi `G` með slembitölum). `js/quiz.js` er viðmót frjálsu æfinganna.
+- `js/bank.js` er kjarni spurningabankans; spurningarnar eru í `js/q/<efni>.js` (skilningsspurningar `MC` og reiknidæmi `G` með slembitölum). `MC` hefur fimm gerðir: `mc` (val), `tf` (rétt/rangt), `multi` (fjölsvar), `match` (pörun) og `drag` (flokkun/drag-and-drop); sniðið er skráð efst í `js/qui.js`, sem sér um birtingu og einkunnagjöf í æfingum, kaflaprófum og lokaprófi. `js/q/<efni>-x.js` hafa nýju gerðirnar. `js/quiz.js` er viðmót frjálsu æfinganna.
 - `js/cards/<efni>.js` eru flashcards og `js/cards.js` viðmótið.
 - `js/journey.js` er ferðalagsvélin (sama vél og í `idn303g/`, stillt með `TK.COURSE`) og `js/examgen.js` býr til lokaprófið eftir `COURSE["finalPlan"]`.
 - `vendor/katex/` er KaTeX og leturgerðirnar eru í `../assets/fonts/`, svo ekkert er sótt af netinu.

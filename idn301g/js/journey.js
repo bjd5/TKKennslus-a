@@ -154,7 +154,8 @@
       mcs: b.MC.filter(function (m) { return topics.indexOf(m.topic) !== -1; }),
     };
   }
-  function numAnswer(d) { return B().is(d.answer, 4) + (d.unit ? " " + d.unit : ""); }
+  var Q = function () { return TK.qui; };
+  function numAnswer(d) { return Q().numAnswer(d); }
 
   /* ---------- Skref 2: Æfingar ---------- */
   function mountPractice(n, root, onProgress) {
@@ -162,9 +163,10 @@
     var P = pool(topics);
     var cur = null, answered = false, last = null;
     function next() {
-      var kind = P.gens.length && (!P.mcs.length || Math.random() < 0.6) ? "num" : "mc";
+      var kind = P.gens.length && (!P.mcs.length || Math.random() < 0.4) ? "num" : "mc";
       for (var t = 0; t < 8; t++) {
         cur = kind === "num" ? { kind: "num", d: B().pick(P.gens)() } : { kind: "mc", d: B().pick(P.mcs) };
+        if (cur.kind === "mc") cur.k = cur.d.kind || "mc";
         var key = cur.kind === "num" ? cur.d.title : cur.d.q;
         if (key !== last) { last = key; break; }
       }
@@ -176,8 +178,11 @@
       return '<div class="p-head"><span>Rétt svör: <b>' + c.practice + "</b>" + (c.practice < GOAL ? " af " + GOAL : " · skrefinu lokið ✓") + '</span><span class="pips">' + new Array(GOAL + 1).join("·").split("").map(function (_, i) { return '<i class="' + (i < k ? "on" : "") + '"></i>'; }).join("") + "</span></div>";
     }
     function show() {
-      var d = cur.d, h = head() + '<div class="qcard"><div class="qmeta">' + (cur.kind === "num" ? esc(d.title) : "Skilningur") + "</div>";
-      if (cur.kind === "num") {
+      var d = cur.d, h = head() + '<div class="qcard"><div class="qmeta">' + (cur.kind === "num" ? esc(d.title) : Q().KIND_NAME[cur.k]) + "</div>";
+      if (cur.kind === "mc" && cur.k !== "mc") {
+        cur.part = Q().toPart(d); cur.pid = "pr" + n + "-" + Date.now().toString(36);
+        h += Q().partHtml(cur.pid, cur.part).replace('<div class="tfb"></div></div>', '<div class="tfb"></div></div><div class="p-act"><button type="button" class="btn" data-check>Athuga</button></div>');
+      } else if (cur.kind === "num") {
         h += '<div class="qtext">' + d.text + '</div><form class="row p-form" style="margin-top:1rem" autocomplete="off"><div><label class="f" for="p-in-' + n + '">Svar' + (d.unit ? " (" + esc(d.unit) + ")" : "") + '</label><input id="p-in-' + n + '" type="text" inputmode="decimal" spellcheck="false" placeholder="t.d. 2,5"></div><div class="fixed"><button class="btn" type="submit">Athuga</button></div><div class="fixed"><button class="btn ghost" type="button" data-show>Sýna lausn</button></div></form>';
       } else {
         h += '<div class="qtext">' + d.q + '</div><div class="opts">' + shuffle(d.o.map(function (_, i) { return i; })).map(function (i) { return '<button type="button" class="opt" data-i="' + i + '">' + d.o[i] + "</button>"; }).join("") + "</div>";
@@ -186,7 +191,16 @@
       root.innerHTML = h;
       math(root);
       root.querySelector("[data-next]").addEventListener("click", next);
-      if (cur.kind === "num") {
+      if (cur.part) {
+        root.querySelector("[data-check]").addEventListener("click", function () {
+          if (answered) return;
+          answered = true;
+          var ok = Q().gradePart(root, cur.pid, cur.part);
+          root.querySelector("[data-check]").disabled = true;
+          if (ok) { var c = ch(n); c.practice++; save(); addXP(10); if (c.practice === GOAL) toast("Æfingum lokið · kaflaprófið nálgast"); root.querySelector(".p-head").outerHTML = head(); onProgress(); }
+          root.querySelector("[data-next]").focus();
+        });
+      } else if (cur.kind === "num") {
         root.querySelector(".p-form").addEventListener("submit", function (e) {
           e.preventDefault();
           var ok = B().isRight(d, root.querySelector("input").value);
@@ -230,63 +244,30 @@
     next();
   }
 
-  /* ---------- Próf: sameiginleg birting og einkunnagjöf ---------- */
-  function partHtml(id, p) {
-    var h = '<div class="tpart" data-pid="' + id + '">' + (p.label ? '<b class="tlab">' + esc(p.label) + "</b> " : "") + '<div class="ttext">' + p.text + "</div>";
-    if (p.kind === "num") {
-      h += '<div class="row tin"><div><label class="f" for="' + id + '">Svar' + (p.unit ? " (" + esc(p.unit) + ")" : "") + '</label><input id="' + id + '" type="text" inputmode="decimal" spellcheck="false" autocomplete="off"></div></div>';
-    } else {
-      p._order = p._order || shuffle(p.o.map(function (_, i) { return i; }));
-      h += '<div class="topts" role="radiogroup">' + p._order.map(function (i) { return '<label class="topt"><input type="radio" name="' + id + '" value="' + i + '"> <span>' + p.o[i] + "</span></label>"; }).join("") + "</div>";
-    }
-    return h + '<div class="tfb"></div></div>';
-  }
-  function gradePart(root, id, p) {
-    var box = root.querySelector('[data-pid="' + id + '"]'), ok, given;
-    if (p.kind === "num") {
-      var v = box.querySelector("input").value.trim();
-      given = v;
-      ok = v ? !!B().isRight(p, v) : false;
-    } else {
-      var r = box.querySelector("input:checked");
-      given = r ? +r.value : null;
-      ok = given === p.c;
-      box.querySelectorAll(".topt").forEach(function (l) {
-        var i = +l.querySelector("input").value;
-        if (i === p.c) l.classList.add("right"); else if (i === given) l.classList.add("wrong");
-      });
-    }
-    box.querySelectorAll("input").forEach(function (x) { x.disabled = true; });
-    box.classList.add(ok ? "ok" : "no");
-    var fb = box.querySelector(".tfb");
-    fb.innerHTML = '<p class="result ' + (ok ? "ok" : "no") + '">' + (ok ? "✓ Rétt" : given === "" || given === null ? "✗ Ósvarað" : "✗ Rangt") + "</p>" +
-      '<details class="reveal tsol"><summary></summary><div class="sol">' + (p.kind === "num" ? '<p><b>Rétt svar:</b> <span class="ans">' + numAnswer(p) + "</span></p>" + p.sol : "<p>" + p.e + "</p>") + "</div></details>";
-    math(fb);
-    return ok;
-  }
-  function unanswered(root) {
-    var k = 0;
-    root.querySelectorAll(".tpart").forEach(function (b) {
-      var i = b.querySelector("input[type=text]");
-      if (i ? !i.value.trim() : !b.querySelector("input:checked")) k++;
-    });
-    return k;
-  }
+  /* ---------- Próf: sameiginleg birting og einkunnagjöf (js/qui.js) ---------- */
+  function partHtml(id, p) { return Q().partHtml(id, p); }
+  function gradePart(root, id, p) { return Q().gradePart(root, id, p); }
+  function unanswered(root) { return Q().unansweredIn(root); }
 
   /* ---------- Skref 4: Kaflapróf ---------- */
   var TEST_N = C.testN || 10;
+  /* Raðar svo fjölbreyttar spurningagerðir (rétt/rangt, fjölsvar, pörun, flokkun) komi snemma og blandist */
+  function mixKinds(list) {
+    var by = {}, order = [];
+    list.forEach(function (m) { var k = m.kind || "mc"; if (!by[k]) { by[k] = []; order.push(k); } by[k].push(m); });
+    var out = [];
+    while (out.length < list.length) order.forEach(function (k) { if (by[k].length) out.push(by[k].shift()); });
+    return out;
+  }
   function buildTest(n) {
     var P = pool((CH[n - 1] || {}).topics || []);
     var nNum = P.gens.length ? Math.min(P.mcs.length ? Math.max(2, Math.ceil(TEST_N / 2)) : TEST_N, P.mcs.length ? 2 * P.gens.length : TEST_N) : 0;
-    var gens = shuffle(P.gens.slice()), mcs = shuffle(P.mcs.slice()), parts = [];
+    var gens = shuffle(P.gens.slice()), mcs = mixKinds(shuffle(P.mcs.slice())), parts = [];
     for (var i = 0; i < nNum; i++) {
       var d = gens[i % gens.length]();
       parts.push({ kind: "num", text: d.text, answer: d.answer, unit: d.unit, tol: d.tol, absTol: d.absTol, sol: d.sol, title: d.title });
     }
-    for (var j = 0; parts.length < TEST_N && mcs.length; j++) {
-      var m = mcs[j % mcs.length];
-      parts.push({ kind: "mc", text: m.q, o: m.o, c: m.c, e: m.e, title: "Skilningur" });
-    }
+    for (var j = 0; parts.length < TEST_N && mcs.length; j++) parts.push(Q().toPart(mcs[j % mcs.length]));
     return parts;
   }
 
@@ -507,10 +488,10 @@
     function start() {
       if (!TK.examgen) { root.innerHTML = '<p class="note warn">Prófarafallinn (js/examgen.js) fannst ekki.</p>'; return; }
       var uid = "lp" + Date.now().toString(36), exam = TK.examgen(uid), t0 = Date.now();
-      var h = '<div class="exam-bar"><span>Lokapróf ferðalagsins</span><span class="exam-clock" aria-live="off">0:00:00</span></div><form class="exam-form" novalidate>';
+      var h = '<div class="exam-bar"><span>Lokapróf ferðalagsins</span><span class="exam-clock" aria-live="off"></span></div><form class="exam-form" novalidate>';
       exam.questions.forEach(function (q, qi) {
-        h += '<section class="ex exam-q" data-q="' + qi + '"><div class="ex-head">Spurning ' + q.n + " (" + q.weight + " %) <span>" + esc(q.title || "") + '</span><span class="q-score"></span></div><div class="ex-body"><div class="q-intro">' + (q.html || "") + "</div>";
-        q.parts.forEach(function (p, pi) { h += partHtml(uid + "-" + qi + "-" + pi, p); });
+        h += '<section class="ex exam-q" data-q="' + qi + '"><div class="ex-head">Hluti ' + q.n + " · " + q.parts.length + " spurningar <span>" + esc(q.title || "") + '</span><span class="q-score"></span></div><div class="ex-body"><div class="q-intro">' + (q.html || "") + "</div>";
+        q.parts.forEach(function (p, pi) { p.label = q.first + pi + "."; h += partHtml(uid + "-" + qi + "-" + pi, p); });
         h += "</div></section>";
       });
       h += '<div class="t-submit"><button type="submit" class="btn">Skila prófinu</button> <button type="button" class="btn ghost" data-cancel>Hætta við</button></div></form>';
@@ -519,24 +500,29 @@
       exam.questions.forEach(function (q, qi) {
         if (typeof q.setup === "function") { try { q.setup(root.querySelector('[data-q="' + qi + '"]')); } catch (e) { if (window.console) console.error(e); } }
       });
-      var clock = root.querySelector(".exam-clock");
-      timer = setInterval(function () {
-        var s = Math.floor((Date.now() - t0) / 1000);
-        clock.textContent = Math.floor(s / 3600) + ":" + ("0" + Math.floor((s % 3600) / 60)).slice(-2) + ":" + ("0" + (s % 60)).slice(-2);
-      }, 1000);
+      var clock = root.querySelector(".exam-clock"), limit = (C.finalMinutes || 180) * 60;
+      var tick = function () {
+        var el = Math.floor((Date.now() - t0) / 1000), left = Math.max(0, limit - el);
+        clock.textContent = "Tími eftir " + Math.floor(left / 3600) + ":" + ("0" + Math.floor((left % 3600) / 60)).slice(-2) + ":" + ("0" + (left % 60)).slice(-2);
+        clock.classList.toggle("low", left <= 600);
+        if (left === 0 && timer) { clearInterval(timer); timer = null; toast("Tíminn er búinn · prófinu er skilað"); var f = root.querySelector("form"); if (f) { skipConfirm = true; f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event("submit", { cancelable: true })); } }
+      };
+      var skipConfirm = false;
+      tick();
+      timer = setInterval(tick, 1000);
       root.querySelector("[data-cancel]").addEventListener("click", function () { if (confirm("Hætta við lokaprófið? Svörin glatast.")) intro(); });
       root.querySelector("form").addEventListener("submit", function (e) {
         e.preventDefault();
         var u = unanswered(root);
-        if (u && !confirm(u + (u === 1 ? " lið" : " liðum") + " er ósvarað. Skila samt?")) return;
+        if (u && !skipConfirm && !confirm(u + (u === 1 ? " spurningu" : " spurningum") + " er ósvarað (ósvarað telst rangt, en ekki er dregið niður). Skila samt?")) return;
         clearInterval(timer); timer = null;
         var pts = 0, tot = 0;
         exam.questions.forEach(function (q, qi) {
           var r = 0;
           q.parts.forEach(function (p, pi) { if (gradePart(root, uid + "-" + qi + "-" + pi, p)) r++; });
-          var got = q.parts.length ? (q.weight * r) / q.parts.length : 0;
-          pts += got; tot += q.weight;
-          root.querySelector('[data-q="' + qi + '"] .q-score').textContent = fmt(got) + " / " + q.weight;
+          var got = r;
+          pts += got; tot += q.parts.length;
+          root.querySelector('[data-q="' + qi + '"] .q-score').textContent = r + " / " + q.parts.length;
         });
         finish(Math.round((100 * pts) / tot) / 10, Math.round((Date.now() - t0) / 60000));
       });

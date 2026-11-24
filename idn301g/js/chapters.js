@@ -133,77 +133,86 @@ window.TK.COURSE = {
    "Meistari ferla og kerfa"
   ]
  ],
- "finalSub": "Sex hlutar úr öllum köflunum · nýjar spurningar og tölur í hvert skipti",
- "finalOpenText": "Nú er komið að lokaprófi ferðalagsins: sex hlutar úr öllu námsefninu.",
- "finalIntro": "<p><b>Sex hlutar úr öllu námsefninu.</b> Hver hluti hefur nokkra liði sem vega jafnt innan hlutans. Megindlegi hlutinn er reiknidæmi; hinir eru skilnings- og atburðarásarspurningar.</p><p>Alvöru lokaprófið gildir 30 % og nær yfir alla fyrirlestra og öll verkefni. Hafðu <a href=\"formulublad.html\">formúlublaðið</a> og vasareikni við höndina.</p>",
+ "finalMinutes": 180,
+ "finalSub": "Um 80 spurningar á 3 klst. eins og alvöru prófið · nýjar spurningar og tölur í hvert skipti",
+ "finalOpenText": "Nú er komið að lokaprófi ferðalagsins: um 80 spurningar á 3 klst. í sama sniði og alvöru prófið.",
+ "finalIntro": "<p><b>Um 80 spurningar á 3 klst.</b> Eins og alvöru prófið í Inspera: val, rétt/rangt, fjölsvar, pörun og drag-and-drop, auk fárra einfaldra útreikninga. Engar ritgerðarspurningar. Hver spurning gildir jafnt og ekki er dregið niður fyrir röng svör, svo svaraðu öllu.</p><p><b>Engin hjálpargögn</b> eru leyfð á alvöru prófinu, aðeins vasareiknir. Reyndu því að taka þetta próf án formúlublaðs og glósa.</p>",
  "finalPlan": [
   {
-   "title": "Ferlar, ferlaskráning og BPMN",
-   "weight": 20,
+   "title": "Ferlar og ferlaskráning",
    "topics": [
-    "ferlar",
+    "ferlar"
+   ],
+   "n": 9,
+   "nNum": 1
+  },
+  {
+   "title": "Ferlalíkön í BPMN (grunn og þróuð)",
+   "topics": [
     "bpmn",
     "bpmn2"
    ],
-   "nNum": 0,
-   "nMc": 6
+   "n": 14,
+   "nNum": 0
   },
   {
-   "title": "Ferlauppgötvun og eigindleg greining",
-   "weight": 15,
+   "title": "Ferlauppgötvun",
    "topics": [
-    "uppgotvun",
+    "uppgotvun"
+   ],
+   "n": 7,
+   "nNum": 0
+  },
+  {
+   "title": "Eigindleg ferlagreining",
+   "topics": [
     "eigindleg"
    ],
-   "nNum": 0,
-   "nMc": 5
+   "n": 8,
+   "nNum": 0
   },
   {
    "title": "Megindleg ferlagreining",
-   "weight": 20,
    "topics": [
     "megindleg"
    ],
-   "nNum": 4,
-   "nMc": 1
+   "n": 10,
+   "nNum": 4
   },
   {
    "title": "Endurhönnun, ferlahugbúnaður og ferlaframkvæmd",
-   "weight": 15,
    "topics": [
     "endurhonnun"
    ],
-   "nNum": 0,
-   "nMc": 5
+   "n": 10,
+   "nNum": 0
   },
   {
-   "title": "Kerfishugsun og orsakalykkjur",
-   "weight": 15,
-   "topics": [
-    "kerfi"
-   ],
-   "nNum": 1,
-   "nMc": 4
-  },
-  {
-   "title": "Stjórnun ferla og BPM í starfseminni",
-   "weight": 15,
+   "title": "Stjórnun ferla, BPM í starfseminni og stafrænt vinnuafl",
    "topics": [
     "stjornun"
    ],
-   "nNum": 0,
-   "nMc": 5
+   "n": 10,
+   "nNum": 1
+  },
+  {
+   "title": "Kerfishugsun og orsakalykkjur",
+   "topics": [
+    "kerfi"
+   ],
+   "n": 12,
+   "nNum": 1
   }
  ],
  "rewardTitle": "Lokaupprifjunin",
  "rewardHref": "upprifjun.html",
- "rewardLabel": "Lokaupprifjun: ritgerðarspurningar og munnlega prófið",
- "rewardLocked": "Ritgerðarspurningar með svörum, undirbúningur fyrir munnlega prófið og ótakmörkuð ný lokapróf. Opnast þegar þú nærð lokaprófi ferðalagsins.",
- "rewardWon": "Lokaupprifjunin er opin: ritgerðarspurningar með svörum, undirbúningur fyrir munnlega prófið og ótakmörkuð ný lokapróf.",
+ "rewardLabel": "Lokaupprifjun: dýpri spurningar og munnlega prófið",
+ "rewardLocked": "Dýpri skýringarspurningar með fyrirmyndarsvörum, undirbúningur fyrir munnlega prófið og ótakmörkuð ný lokapróf. Opnast þegar þú nærð lokaprófi ferðalagsins.",
+ "rewardWon": "Lokaupprifjunin er opin: dýpri skýringarspurningar, undirbúningur fyrir munnlega prófið og ótakmörkuð ný lokapróf.",
  "rewardLinks": [
   [
    "upprifjun.html",
-   "Ritgerðarspurningar með svörum"
+   "Dýpri spurningar með svörum"
   ],
   [
    "upprifjun.html#munnlegt",
